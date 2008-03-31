@@ -1,5 +1,4 @@
-/*
- * ontologyTestingJDialog.java
+/* ontologyTestingJDialog.java
  *
  * Created on 27 de marzo de 2008, 12:03
  */
@@ -7,6 +6,8 @@
 package ontologytestinggui;
 
 import java.awt.CardLayout;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +17,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
     private int currentDisplayNum = 1;
     private int currentDetailNum = 1;
+    private int actual = 1;
+    private boolean test=false,query=false,instances=false;
     
     /** Creates new form ontologyTestingJDialog */
     public ontologyTestingJDialog(java.awt.Frame parent, boolean modal) {
@@ -50,6 +53,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         instancesRadioButton = new javax.swing.JRadioButton();
         fileCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         instancesPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -85,8 +90,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         jLabel23 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
-        chekpartitionsPanel = new javax.swing.JPanel();
         endPanel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -114,7 +119,10 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
 
+        mainPanel.setName(""); // NOI18N
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        optionsPanel.setToolTipText("");
 
         jLabel1.setText("Seleccione la ontología sobre la que va a trabajar:");
 
@@ -159,46 +167,54 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Introduzca la URI de la ontología (terminada en #):");
 
+        jLabel6.setText("¡BIENVENIDO AL EVALUADOR DE ONTOLOGÍAS!");
+
+        jLabel7.setText("Por favor, complete los siguientes campos:");
+
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(SPARQLRadioButton)
-                .addContainerGap())
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(testsRadioButton)
-                .addContainerGap())
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(instancesRadioButton)
-                .addContainerGap())
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(fileCheckBox)
-                .addContainerGap())
-            .addGroup(optionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(optionsPanelLayout.createSequentialGroup()
-                        .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(ontoURITextField, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE))
-                        .addGap(41, 41, 41))
+                        .addComponent(fileCheckBox)
+                        .addContainerGap())
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(SPARQLRadioButton)
+                        .addContainerGap())
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(testsRadioButton)
+                        .addContainerGap())
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(instancesRadioButton)
+                        .addContainerGap())
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                        .addGap(222, 222, 222))
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                        .addGap(222, 222, 222))
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(ontoURITextField, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                        .addGap(458, 458, 458))
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(568, Short.MAX_VALUE))
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(574, Short.MAX_VALUE))
                     .addGroup(optionsPanelLayout.createSequentialGroup()
                         .addComponent(fisicalOntoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(182, 182, 182)))
-                .addGap(181, 181, 181))
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(568, Short.MAX_VALUE))
+                        .addContainerGap(363, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                        .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                        .addGap(458, 458, 458))))
         );
 
         optionsPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fisicalOntoTextField, ontoURITextField});
@@ -206,29 +222,34 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fisicalOntoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(49, 49, 49)
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(fisicalOntoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(ontoURITextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel3)
-                .addGap(10, 10, 10)
-                .addComponent(SPARQLRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SPARQLRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(testsRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(instancesRadioButton)
-                .addGap(57, 57, 57)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fileCheckBox)
-                .addGap(151, 151, 151))
+                .addGap(74, 74, 74))
         );
 
         optionsPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {fisicalOntoTextField, ontoURITextField});
@@ -320,27 +341,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addGroup(instancesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(instancesPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         instancesPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, jScrollPane2});
 
         instancesPanelLayout.setVerticalGroup(
             instancesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(instancesPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, instancesPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(instancesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(instancesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        mainPanel.add(instancesPanel, "2_1");
+        mainPanel.add(instancesPanel, "2");
 
         jLabel8.setText("Por favor, introduzca las pruebas que desee realizar para cada test:");
 
@@ -386,6 +407,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane3.setViewportView(jTable2);
+        jTable2.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -400,8 +422,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Instanciación", jPanel1);
@@ -448,6 +470,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane4.setViewportView(jTable3);
+        jTable3.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -464,8 +487,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Recuperación", jPanel2);
@@ -512,6 +535,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane5.setViewportView(jTable4);
+        jTable4.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -530,8 +554,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Comprensión", jPanel3);
@@ -578,6 +602,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane6.setViewportView(jTable5);
+        jTable5.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -598,8 +623,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Retrieval", jPanel4);
@@ -646,6 +671,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane7.setViewportView(jTable6);
+        jTable6.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -668,8 +694,8 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Clasificación", jPanel5);
@@ -716,11 +742,13 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane8.setViewportView(jTable7);
+        jTable7.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
@@ -738,10 +766,11 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Nuevo individuo/rol", jPanel7);
@@ -788,11 +817,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             }
         });
         jScrollPane9.setViewportView(jTable8);
+        jTable8.getColumnModel().getColumn(1).setHeaderValue("Resultado esperado");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 819, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
+            .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
@@ -812,10 +845,13 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         testsTabbedPane.addTab("Satisfactibilidad", jPanel6);
@@ -890,13 +926,20 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 {null},
                 {null},
                 {null},
-                {null},
                 {null}
             },
             new String [] {
                 "Consulta SPARQL"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane10.setViewportView(jTable10);
 
         javax.swing.GroupLayout querysPanelLayout = new javax.swing.GroupLayout(querysPanel);
@@ -905,48 +948,49 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(querysPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
-                    .addComponent(jLabel23))
-                .addContainerGap())
+                .addComponent(jLabel23)
+                .addContainerGap(546, Short.MAX_VALUE))
+            .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(querysPanelLayout.createSequentialGroup()
+                    .addGap(24, 24, 24)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(25, Short.MAX_VALUE)))
         );
         querysPanelLayout.setVerticalGroup(
             querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(querysPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
+            .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(querysPanelLayout.createSequentialGroup()
+                    .addGap(74, 74, 74)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(42, Short.MAX_VALUE)))
         );
 
-        mainPanel.add(querysPanel, "3");
+        mainPanel.add(querysPanel, "4");
 
-        javax.swing.GroupLayout chekpartitionsPanelLayout = new javax.swing.GroupLayout(chekpartitionsPanel);
-        chekpartitionsPanel.setLayout(chekpartitionsPanelLayout);
-        chekpartitionsPanelLayout.setHorizontalGroup(
-            chekpartitionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
-        );
-        chekpartitionsPanelLayout.setVerticalGroup(
-            chekpartitionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
-        );
-
-        mainPanel.add(chekpartitionsPanel, "5");
+        jLabel9.setText("FIN!!");
 
         javax.swing.GroupLayout endPanelLayout = new javax.swing.GroupLayout(endPanel);
         endPanel.setLayout(endPanelLayout);
         endPanelLayout.setHorizontalGroup(
             endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 824, Short.MAX_VALUE)
+            .addGroup(endPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(360, Short.MAX_VALUE))
         );
         endPanelLayout.setVerticalGroup(
             endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGroup(endPanelLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addContainerGap(499, Short.MAX_VALUE))
         );
 
-        mainPanel.add(endPanel, "card7");
+        mainPanel.add(endPanel, "5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -993,48 +1037,160 @@ private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 // TODO add your handling code here:
     //determine previous card to display
     CardLayout cl = (CardLayout)(mainPanel.getLayout());
-    String card = String.valueOf(currentDisplayNum - 1);
-    if(currentDisplayNum == 3) {
-        //need to show second screen
-        card = card + "_" +String.valueOf(currentDetailNum);
-        //change next button text
-        nextButton.setText("Next");
-    }else if(currentDisplayNum == 2) {
-        //need to show first screen - disable back button
+    String card = "";
+    if(currentDisplayNum == 1 ) {
+        
+    }else if(currentDisplayNum == 2){
+        card = String.valueOf(currentDisplayNum - 1);
         backButton.setEnabled(false);
-    }else if(currentDisplayNum == 1) {
-        //we are on first screen, nothing to do
+        currentDisplayNum=1;
+        backButton.setEnabled(false);
+    }else if(currentDisplayNum == 3){
+        backButton.setEnabled(true);
+        if(instances==false){
+          card = String.valueOf(currentDisplayNum - 2);
+          currentDisplayNum=1;
+          backButton.setEnabled(false);
+        }else{
+          card = String.valueOf(currentDisplayNum - 1);
+          currentDisplayNum = 2;
+        }
+    }else if(currentDisplayNum == 4){
+        backButton.setEnabled(true);
+        if(test==false && instances==false){
+          card = String.valueOf(currentDisplayNum - 3);
+          currentDisplayNum=1;
+          backButton.setEnabled(false);
+        }else if(test==false && instances==true){
+          card = String.valueOf(currentDisplayNum - 2);
+          currentDisplayNum=2;
+        }else if(test==true){
+          card = String.valueOf(currentDisplayNum - 1);
+          currentDisplayNum = 3;
+        }
+    }else if(currentDisplayNum == 5){
+        backButton.setEnabled(true);
+        if(test==false && instances==false && query==false){
+          card = String.valueOf(currentDisplayNum - 4);
+          currentDisplayNum=1;
+          backButton.setEnabled(false);
+        }else if(test==false && instances==true && query==false){
+          card = String.valueOf(currentDisplayNum - 3);
+          currentDisplayNum=2;
+        }else if(test==true && instances==false && query==false){
+          card = String.valueOf(currentDisplayNum - 2);
+          currentDisplayNum = 3;
+        }else if(test==true && instances==true && query==false){
+          card = String.valueOf(currentDisplayNum - 2);
+          currentDisplayNum = 3;
+        }else if(query==true){
+          card = String.valueOf(currentDisplayNum - 1);
+          currentDisplayNum = 4;        
+        }
+        nextButton.setText("Siguiente");
     }
     //show card
     cl.show(mainPanel, card);
-    //update display number for non-1 numbers
-    currentDisplayNum = currentDisplayNum > 1?(--currentDisplayNum):1;
+    //update display number
 }//GEN-LAST:event_backButtonActionPerformed
 
 private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
 // TODO add your handling code here:
        //determine next card to display
     CardLayout cl = (CardLayout)(mainPanel.getLayout());
-    String card = String.valueOf(currentDisplayNum + 1);
-    if(currentDisplayNum == 1) {
-       //need to show second screen
-       card = card + "_" +String.valueOf(currentDetailNum);
-       //enable back button
-       backButton.setEnabled(true);
-    }else if(currentDisplayNum == 2) {
+    String card="";
+    if(currentDisplayNum == 1 ) {
+        backButton.setEnabled(true);
+        if(SPARQLRadioButton.isSelected() && testsRadioButton.isSelected() 
+                && instancesRadioButton.isSelected())
+        {
+            card = String.valueOf(currentDisplayNum + 1);
+            test=true;
+            query=true;
+            instances=true;
+            currentDisplayNum++;
+        }else if(SPARQLRadioButton.isSelected() && testsRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 2);
+            test=true;
+            query=true;
+            instances=false; 
+            currentDisplayNum+=2;
+        }else if(SPARQLRadioButton.isSelected() && instancesRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 1);
+            test=false;
+            query=true;
+            instances=true;  
+            currentDisplayNum++;
+        }else if(instancesRadioButton.isSelected() && testsRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 1);
+            test=true;
+            query=false;
+            instances=true;    
+            currentDisplayNum++;
+        }else if(instancesRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 1);
+            test=false;
+            query=false;
+            instances=true;    
+            currentDisplayNum++;
+        }else if(testsRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 2);
+            test=true;
+            query=false;
+            instances=false; 
+            currentDisplayNum+=2;
+        }else if(SPARQLRadioButton.isSelected()){
+            card = String.valueOf(currentDisplayNum + 3);
+            test=false;
+            query=true;
+            instances=false;       
+            currentDisplayNum+=3;
+        }else{
+            JOptionPane.showMessageDialog(null,"Debe seleccionar una acción", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }else if(currentDisplayNum == 2){
+        backButton.setEnabled(true);
+            if(test==true && query==true){
+                card = String.valueOf(currentDisplayNum + 1);
+                currentDisplayNum++;
+            }else if(test==false && query==false){
+                card = String.valueOf(currentDisplayNum + 3);
+                currentDisplayNum++;
+            }else if(test==true && query==false){
+                card = String.valueOf(currentDisplayNum + 1);
+                currentDisplayNum+=2;
+            }else if(test==false && query==true){
+                card = String.valueOf(currentDisplayNum + 2);
+                currentDisplayNum+=2;
+            }
+    }else if(currentDisplayNum == 3){
+        backButton.setEnabled(true);
+            if(query==true){
+                card = String.valueOf(currentDisplayNum + 1);
+                currentDisplayNum++;
+            }else if(query==false){
+                card = String.valueOf(currentDisplayNum + 2);
+                currentDisplayNum+=2;
+            }
+    }else if(currentDisplayNum == 4){
+        backButton.setEnabled(true);
        //need to show last screen - update summary
        //updateSummary();
-       nextButton.setText("Finish");
-    }else if(currentDisplayNum == 3) {
-       //time to finish the task - perform actual scheduling logic
-
+       card = String.valueOf(currentDisplayNum + 1);
+       currentDisplayNum++;  
+    }else if(currentDisplayNum == 5){
+        backButton.setEnabled(true);
+        //time to finish the task - perform actual scheduling logic
        //dispose
-       dispose();
+       dispose(); 
+       currentDisplayNum++;
     }
     //show card
+    if(currentDisplayNum==5){
+        nextButton.setText("Finish");
+    }
     cl.show(mainPanel, card);
     //update display number
-    currentDisplayNum++;
 }//GEN-LAST:event_nextButtonActionPerformed
 
 private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1064,12 +1220,15 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ontologyTestingJDialog dialog = new ontologyTestingJDialog(new javax.swing.JFrame(), true);
+                ontologyTestingJDialog dialog = new ontologyTestingJDialog
+                        (new JFrame(),true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
+                dialog.setTitle("Evaluador de Ontologías");
                 dialog.setVisible(true);
             }
         });
@@ -1079,7 +1238,6 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JRadioButton SPARQLRadioButton;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JPanel chekpartitionsPanel;
     private javax.swing.JPanel endPanel;
     private javax.swing.JCheckBox fileCheckBox;
     private javax.swing.JTextField fisicalOntoTextField;
@@ -1092,7 +1250,10 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
