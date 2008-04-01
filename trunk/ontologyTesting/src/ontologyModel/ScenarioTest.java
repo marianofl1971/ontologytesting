@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class ScenarioTest {
     
-    private ArrayList<String> classInstances = new ArrayList<String>();
-    private ArrayList<String> propertyInstances = new ArrayList<String>();
-    private ArrayList<QueryOntology> tests = new ArrayList<QueryOntology>();
+    public ArrayList<String> classInstances = new ArrayList<String>();
+    public ArrayList<String> propertyInstances = new ArrayList<String>();
+    public ArrayList<QueryOntology> tests = new ArrayList<QueryOntology>();
     
     public ScenarioTest(List<String> classInstances, List<String> 
             propertyInstances, List<QueryOntology> tests){
@@ -39,23 +39,23 @@ public class ScenarioTest {
     }    
     
     public List<String> getClassInstances(){
-        return this.classInstances;
+        return classInstances;
     }
     
     public List<String> getPropertyInstances(){
-        return this.propertyInstances;
+        return propertyInstances;
     }    
     
     public List<QueryOntology> getTests(){
-        return this.tests;
+        return tests;
     }
     
     public void setClassInstances(List<String> classInstances){
-        this.classInstances.addAll(classInstances);
+        classInstances.addAll(classInstances);
     }
     
     public void setPropertyInstances(List<String> propertyInstances){
-        this.propertyInstances.addAll(propertyInstances);
+        propertyInstances.addAll(propertyInstances);
     }    
     
     public void setOntologyQuerys(List<QueryOntology> tests){

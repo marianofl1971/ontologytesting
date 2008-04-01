@@ -14,6 +14,10 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -34,11 +38,21 @@ public class OntologyTestCase implements OntologyTest{
     private OntClass nameclass;
     private Individual classValue, hasprop;
     private Property nameprop;
-    
+    private XMLDecoder decoder,dec;
+    private ScenarioTest scenarioTest;
+    private CollectionTest collectionTest;
+                    
     public OntologyTestCase(){
     }
 
     protected void setUpOntology(ScenarioTest st, String ont, String ns){
+        
+    try{
+         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("instances.xml")));
+         scenarioTest = (ScenarioTest)decoder.readObject();
+         decoder.close();           
+    }catch(FileNotFoundException e){
+    }         
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];    
@@ -46,9 +60,11 @@ public class OntologyTestCase implements OntologyTest{
     model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
     model.read(ont);  
     model.prepare();
- 
-    List<String> classInstances = st.getClassInstances();
-    List<String> propertyInstances = st.getPropertyInstances();
+   
+    List<String> classInstances = scenarioTest.getClassInstances();
+    List<String> propertyInstances = scenarioTest.getPropertyInstances();
+    //List<String> classInstances = st.getClassInstances();
+    //List<String> propertyInstances = st.getPropertyInstances();
   
     liClass = classInstances.listIterator();
     liProperties = propertyInstances.listIterator();
@@ -76,8 +92,9 @@ public class OntologyTestCase implements OntologyTest{
         hasprop.remove();    
     }
     
-    private void runOntologyTest(OntologyTestResult testresult, String ns, ScenarioTest scenariotest){
-        
+    private void runOntologyTest(OntologyTestResult testresult, String ns, 
+            ScenarioTest scenariotest){
+           
         ListIterator liQuery;
         String res[],clasF,indF;
         List<QueryOntology> queryTest = scenariotest.getTests();
@@ -100,10 +117,10 @@ public class OntologyTestCase implements OntologyTest{
         }
     } 
 
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) {
-     
+    public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
+
         String ont = baterytest.getOntology();
-        String ns = baterytest.getNamespace();        
+        String ns = baterytest.getNamespace();
        
         ListIterator liScenario;
         ScenarioTest scenariotest;

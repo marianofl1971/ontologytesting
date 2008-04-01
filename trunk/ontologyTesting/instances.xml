@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="ontologyModel.ScenarioTest"> 
+  <void property="classInstances"> 
+   <void method="add"> 
+    <string>Male(john)</string> 
+   </void> 
+   <void method="add"> 
+    <string>Male(tom)</string> 
+   </void> 
+   <void method="add"> 
+    <string>Female(marry)</string> 
+   </void> 
+   <void method="add"> 
+    <string>Wife(lee)</string> 
+   </void> 
+  </void> 
+  <void property="propertyInstances"> 
+   <void method="add"> 
+    <string>hasChild(lee,tom)</string> 
+   </void> 
+   <void method="add"> 
+    <string>hasChild(marry,john)</string> 
+   </void> 
+  </void> 
+ </object> 
+</java> 

@@ -15,9 +15,9 @@ package ontologyModel;
  */
 public class QueryOntology {
     
-    private String query;
-    private String resultexpected;
-    private String comment;
+    public String query;
+    public String resultexpected;
+    public String comment;
 
     
     public QueryOntology(String query, String resultexpected,String comment){

@@ -1,3 +1,4 @@
+
 /*
  * Main.java
  * 
@@ -9,7 +10,17 @@
 
 package ontologytesting;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ontologyClasses.OntologyTestCase;
 import ontologyClasses.OntologyTestResult;
 import ontologyModel.CollectionTest;
@@ -25,7 +36,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
         
      String ontologyFisical="",ontologyURI="";
 
@@ -52,7 +63,7 @@ public class Main {
                 "query_2");
         
         querys.add(queryontology1);
-        querys.add(queryontology2);       
+        querys.add(queryontology2); 
         
         ScenarioTest scenariotest = new ScenarioTest(myClassInstances,
                 myPropertyInstances, querys);
@@ -64,6 +75,14 @@ public class Main {
         OntologyTestResult testresult = new OntologyTestResult();
         OntologyTestCase testcase = new OntologyTestCase();       
         
+        try {
+            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("instances.xml")));
+            e.writeObject(scenariotest); 
+            e.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+
         testcase.run(testresult, test);
         
       }catch (faltaPropiedadException e){
