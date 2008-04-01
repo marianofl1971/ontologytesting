@@ -6,7 +6,6 @@
 package ontologytestinggui;
 
 import java.awt.CardLayout;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -1208,25 +1207,6 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
 }//GEN-LAST:event_fileCheckBoxActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ontologyTestingJDialog dialog = new ontologyTestingJDialog
-                        (new JFrame(),true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setTitle("Evaluador de Ontologías");
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton SPARQLRadioButton;
