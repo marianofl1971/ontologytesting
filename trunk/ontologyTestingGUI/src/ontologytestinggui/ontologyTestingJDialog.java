@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 public class ontologyTestingJDialog extends javax.swing.JDialog {
 
     private int currentDisplayNum = 1;
-    private int currentDetailNum = 1;
-    private int actual = 1;
     private boolean test=false,query=false,instances=false;
     
     /** Creates new form ontologyTestingJDialog */
@@ -91,7 +89,9 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
         endPanel = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        yesCheckBox = new javax.swing.JCheckBox();
+        noCheckBox = new javax.swing.JCheckBox();
 
         jTextField1.setText("jTextField1");
 
@@ -476,7 +476,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,7 +483,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,7 +540,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 819, Short.MAX_VALUE)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -550,7 +547,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -610,7 +606,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -618,7 +613,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -680,7 +674,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -688,7 +681,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
@@ -753,7 +745,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -761,7 +752,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
@@ -831,7 +821,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
             .addGap(0, 819, Short.MAX_VALUE)
-            .addGap(0, 819, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -839,7 +828,6 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
             .addGap(0, 452, Short.MAX_VALUE)
@@ -971,7 +959,11 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         mainPanel.add(querysPanel, "4");
 
-        jLabel9.setText("FIN!!");
+        jLabel10.setText("¿Quiere repetir el proceso para un nuevo conjunto de pruebas?");
+
+        yesCheckBox.setText("Si");
+
+        noCheckBox.setText("No");
 
         javax.swing.GroupLayout endPanelLayout = new javax.swing.GroupLayout(endPanel);
         endPanel.setLayout(endPanelLayout);
@@ -979,15 +971,22 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addGroup(endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(noCheckBox)
+                    .addComponent(yesCheckBox)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         endPanelLayout.setVerticalGroup(
             endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(endPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel9)
-                .addContainerGap(499, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(yesCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(noCheckBox)
+                .addContainerGap(437, Short.MAX_VALUE))
         );
 
         mainPanel.add(endPanel, "5");
@@ -1035,11 +1034,9 @@ private void testsRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
 // TODO add your handling code here:
-    //determine previous card to display
     CardLayout cl = (CardLayout)(mainPanel.getLayout());
     String card = "";
     if(currentDisplayNum == 1 ) {
-        
     }else if(currentDisplayNum == 2){
         card = String.valueOf(currentDisplayNum - 1);
         backButton.setEnabled(false);
@@ -1089,14 +1086,11 @@ private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
         nextButton.setText("Siguiente");
     }
-    //show card
     cl.show(mainPanel, card);
-    //update display number
 }//GEN-LAST:event_backButtonActionPerformed
 
 private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
 // TODO add your handling code here:
-       //determine next card to display
     CardLayout cl = (CardLayout)(mainPanel.getLayout());
     String card="";
     if(currentDisplayNum == 1 ) {
@@ -1156,6 +1150,7 @@ private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }else if(test==false && query==false){
                 card = String.valueOf(currentDisplayNum + 3);
                 currentDisplayNum++;
+                nextButton.setText("Finalizar");
             }else if(test==true && query==false){
                 card = String.valueOf(currentDisplayNum + 1);
                 currentDisplayNum+=2;
@@ -1171,26 +1166,25 @@ private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }else if(query==false){
                 card = String.valueOf(currentDisplayNum + 2);
                 currentDisplayNum+=2;
+                nextButton.setText("Finalizar");
             }
     }else if(currentDisplayNum == 4){
         backButton.setEnabled(true);
-       //need to show last screen - update summary
-       //updateSummary();
-       card = String.valueOf(currentDisplayNum + 1);
-       currentDisplayNum++;  
+        card = String.valueOf(currentDisplayNum + 1);
+        nextButton.setText("Finalizar");
+        currentDisplayNum++; 
     }else if(currentDisplayNum == 5){
-        backButton.setEnabled(true);
-        //time to finish the task - perform actual scheduling logic
-       //dispose
-       dispose(); 
-       currentDisplayNum++;
-    }
-    //show card
-    if(currentDisplayNum==5){
-        nextButton.setText("Finish");
+        backButton.setEnabled(true);   
+        nextButton.setText("Siguiente");
+            if(yesCheckBox.isSelected()){
+                card = String.valueOf(currentDisplayNum - 4);
+                currentDisplayNum=1;  
+            }else{
+                dispose(); 
+            }
+       yesCheckBox.setSelected(false);
     }
     cl.show(mainPanel, card);
-    //update display number
 }//GEN-LAST:event_nextButtonActionPerformed
 
 private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -1245,6 +1239,7 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JRadioButton instancesRadioButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
@@ -1253,7 +1248,6 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1286,12 +1280,14 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton nextButton;
+    private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JTextField ontoURITextField;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel querysPanel;
     private javax.swing.JPanel testsPanel;
     private javax.swing.JRadioButton testsRadioButton;
     private javax.swing.JTabbedPane testsTabbedPane;
+    private javax.swing.JCheckBox yesCheckBox;
     // End of variables declaration//GEN-END:variables
 
 
