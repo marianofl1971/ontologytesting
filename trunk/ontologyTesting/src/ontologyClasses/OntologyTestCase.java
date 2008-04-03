@@ -82,7 +82,7 @@ public class OntologyTestCase implements OntologyTest{
             piInd = piClas[1].split("\\)");
             addInstanceProperty(ns,piClas[0],piInd[0]);
     }
-    
+       
     }
     
     protected void tearDownOntology(){
@@ -129,7 +129,7 @@ public class OntologyTestCase implements OntologyTest{
  
         while(liScenario.hasNext()){
             scenariotest = (ScenarioTest) liScenario.next();
-            setUpOntology(scenariotest,ont,ns);
+            setUpOntology(scenariotest, ont, ns);
             runOntologyTest(testresult,ns,scenariotest);
             tearDownOntology(); 
         }

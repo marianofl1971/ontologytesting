@@ -10,15 +10,13 @@
 
 package ontologytesting;
 
-import java.beans.XMLDecoder;
+
 import java.beans.XMLEncoder;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ontologyClasses.OntologyTestCase;
@@ -26,6 +24,21 @@ import ontologyClasses.OntologyTestResult;
 import ontologyModel.CollectionTest;
 import ontologyModel.QueryOntology;
 import ontologyModel.ScenarioTest;
+/*
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import java.io.File;
+import java.io.InputStream; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.io.IOException;
+ */
 
 /**
  *
@@ -36,14 +49,14 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException, IOException{
         
      String ontologyFisical="",ontologyURI="";
 
      try {
 
-      ontologyFisical = almacenPropiedades.getPropiedad("ontologyFisical");
-      ontologyURI = almacenPropiedades.getPropiedad("ontologyURI");      
+        ontologyFisical = almacenPropiedades.getPropiedad("ontologyFisical");
+        ontologyURI = almacenPropiedades.getPropiedad("ontologyURI");      
         
         ArrayList<String> myClassInstances = new ArrayList<String>();
         ArrayList<String> myPropertyInstances = new ArrayList<String>();
@@ -81,9 +94,37 @@ public class Main {
             e.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }         
+        }
+        
+       testcase.run(testresult, test);
+       
+       /*Añado el ppio de las querys
+        // Open the bloggers RDF graph from the filesystem
+        InputStream in = new FileInputStream(new File("data/family.owl"));
 
-        testcase.run(testresult, test);
+        // Create an empty in-memory model and populate it from the graph
+        Model model_q = ModelFactory.createMemModelMaker().createModel("");
+        model_q.read(in,null); // null base URI, since model URIs are absolute
+        in.close();
+
+        String queryString = 
+	"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
+	"SELECT ?subject ?object " +
+                "WHERE { ?subject rdfs:subClassOf ?object }";
+        
+        Query query = QueryFactory.create(queryString);
+
+        // Execute the query and obtain results
+        QueryExecution qe = QueryExecutionFactory.create(query, model);
+        ResultSet results = qe.execSelect();
+
+        // Output query results	
+        ResultSetFormatter.out(System.out, results, query);
+
+        // Important - free up resources used running the query
+        qe.close();
+        
+*/
         
       }catch (faltaPropiedadException e){
             System.out.println(e);
