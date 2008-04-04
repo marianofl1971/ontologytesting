@@ -9,21 +9,34 @@
 
 package ontologyClasses;
 
+import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ontologyModel.CollectionTest;
 import ontologyModel.QueryOntology;
 import ontologyModel.ScenarioTest;
+import ontologyModel.SparqlQueryOntology;
 import ontologyTests.ontologyTests;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 
@@ -35,12 +48,16 @@ public class OntologyTestCase implements OntologyTest{
     
     public String ontologyname;
     private OntModel model;
+    private Model model_q;
     private OntClass nameclass;
     private Individual classValue, hasprop;
     private Property nameprop;
     private XMLDecoder decoder,dec;
     private ScenarioTest scenarioTest;
     private CollectionTest collectionTest;
+    private ResultSet results;
+    private Query sparql_q;
+    QueryExecution qe;
                     
     public OntologyTestCase(){
     }
@@ -53,6 +70,23 @@ public class OntologyTestCase implements OntologyTest{
          decoder.close();           
     }catch(FileNotFoundException e){
     }         
+        
+    // Open the bloggers RDF graph from the filesystem
+    InputStream in = null;
+    // Create an empty in-memory model and populate it from the graph
+    model_q = ModelFactory.createMemModelMaker().createModel("");
+        try {
+            in = new FileInputStream(new File("data/family.owl"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(OntologyTestCase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    model_q.read(in,null); // null base URI, since model URIs are absolute
+    try {
+        // null base URI, since model URIs are absolute
+        in.close();
+    } catch (IOException ex) {
+        Logger.getLogger(OntologyTestCase.class.getName()).log(Level.SEVERE, null, ex);
+    }
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];    
@@ -90,31 +124,53 @@ public class OntologyTestCase implements OntologyTest{
         nameprop.removeProperties();
         classValue.remove();
         hasprop.remove();    
+        // Important - free up resources used running the query
+        qe.close();
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
             ScenarioTest scenariotest){
            
-        ListIterator liQuery;
+        ListIterator liQuery,liSparqlQuery,liSparqlQueryRes;
         String res[],clasF,indF;
         List<QueryOntology> queryTest = scenariotest.getTests();
+        List<SparqlQueryOntology> sparqlQueryTest = scenariotest.getSparqlTests();
         ontologyTests tests = new ontologyTests();
         liQuery = queryTest.listIterator();
+        liSparqlQuery = sparqlQueryTest.listIterator();
+
         
-        while(liQuery.hasNext()){
+        while((liQuery.hasNext()) || (liSparqlQuery.hasNext())){
             QueryOntology qo = (QueryOntology) liQuery.next();
+            SparqlQueryOntology sparql_qo = (SparqlQueryOntology) liSparqlQuery.next();
+            
             String query = qo.getQuery();
+            String sparql_query = sparql_qo.getSparqlQuery();
             String resQueryExpected = qo.getResultExpected();
+            List<String> resSparqlExpected = sparql_qo.getResultExpected();
+            
             res = query.split(",");
             clasF = res[0];
             indF = res[1];
+            
+            sparql_q = QueryFactory.create(sparql_query);
+            qe = QueryExecutionFactory.create(sparql_q, model_q);
+            results = qe.execSelect();
+            
             String resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
             //String resObtenidoRet = tests.retieval(ns, clasF, model);
-            //String resObtenidoReal = tests.realization(ns, indF, model);
-            if(!resObtenidoInst.equals(resQueryExpected)){
-                testresult.addOntologyFailure(qo, resObtenidoInst);
+            //String resObtenidoReal = tests.realization(ns, indF, model);            
+            
+            List res_sparql_q = results.getResultVars();
+            liSparqlQueryRes = res_sparql_q.listIterator();
+            while(liSparqlQueryRes.hasNext()){
+                if((!resSparqlExpected.contains(liSparqlQueryRes.next())) || 
+                        (!resObtenidoInst.equals(resQueryExpected))){
+                    testresult.addOntologyFailure(qo, sparql_qo, resObtenidoInst);
+                }
             }
         }
+        
     } 
 
     public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
@@ -152,6 +208,9 @@ public class OntologyTestCase implements OntologyTest{
         ListIterator liFailures;
         ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailure();
         liFailures = failures.listIterator();
+        
+        // Output query results	
+        ResultSetFormatter.out(System.out, results, sparql_q);
         
         if(liFailures.hasNext()){
           System.out.println("De las pruebas introducidas han fallado las siguientes:");

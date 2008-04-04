@@ -39,6 +39,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.IOException;
  */
+import ontologyModel.SparqlQueryOntology;
 
 /**
  *
@@ -60,7 +61,9 @@ public class Main {
         
         ArrayList<String> myClassInstances = new ArrayList<String>();
         ArrayList<String> myPropertyInstances = new ArrayList<String>();
+        ArrayList<String> sparql_Res = new ArrayList<String>();
         ArrayList<QueryOntology> querys = new ArrayList<QueryOntology>();
+        ArrayList<SparqlQueryOntology> sparql_querys = new ArrayList<SparqlQueryOntology>();
         ArrayList<ScenarioTest> scenario = new ArrayList<ScenarioTest>();
 
         myClassInstances.add("Male(john)");
@@ -69,7 +72,15 @@ public class Main {
         myClassInstances.add("Wife(lee)");
         myPropertyInstances.add("hasChild(lee,tom)");
         myPropertyInstances.add("hasChild(marry,john)");
-
+        String sparql_query = 
+	"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
+	"SELECT ?subject ?object " +
+                "WHERE { ?subject rdfs:subClassOf ?object }";
+        sparql_Res.add("Wife");
+        sparql_Res.add("Lee");
+       
+        SparqlQueryOntology sparql_q = new SparqlQueryOntology(sparql_query, 
+                sparql_Res);
         QueryOntology queryontology1 = new QueryOntology("Wife,marry","true",
                 "query 1");
         QueryOntology queryontology2 = new QueryOntology("Wife,tom","true",
@@ -77,9 +88,10 @@ public class Main {
         
         querys.add(queryontology1);
         querys.add(queryontology2); 
+        sparql_querys.add(sparql_q);
         
         ScenarioTest scenariotest = new ScenarioTest(myClassInstances,
-                myPropertyInstances, querys);
+                myPropertyInstances, querys, sparql_querys);
         
         scenario.add(scenariotest);
         

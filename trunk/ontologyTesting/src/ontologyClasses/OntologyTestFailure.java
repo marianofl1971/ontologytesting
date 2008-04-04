@@ -9,7 +9,10 @@
 
 package ontologyClasses;
 
+import java.util.ArrayList;
+import java.util.List;
 import ontologyModel.QueryOntology;
+import ontologyModel.SparqlQueryOntology;
 
 /**
  *
@@ -20,13 +23,18 @@ public class OntologyTestFailure extends Object{
     protected String fresobtenido;
     protected String fquery;
     protected String fcomment;
+    protected ArrayList<String> fsparql_resultexpected;
     protected String fresultexpected;
+    protected String fsparql_query;
     
-    public OntologyTestFailure(QueryOntology query, String resObte){
+    public OntologyTestFailure(QueryOntology query, SparqlQueryOntology sparql_query, 
+            String resObte){
         this.fquery = query.getQuery();
         this.fcomment = query.getComment();
         this.fresultexpected = query.getResultExpected();
         this.fresobtenido = resObte;
+        this.fsparql_query = sparql_query.getSparqlQuery();
+        this.fsparql_resultexpected.addAll(sparql_query.getResultExpected());
     }
     
     public String getResultObtenido() {    
@@ -44,5 +52,13 @@ public class OntologyTestFailure extends Object{
     
     public String getfResultExpected(){
         return this.fresultexpected;
+    }
+    
+    public String getfSparqlQuery(){
+        return this.fsparql_query;
+    }
+    
+    public List<String> getfSparqlResultExpected(){
+        return this.fsparql_resultexpected;
     }
 }

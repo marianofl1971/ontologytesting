@@ -11,6 +11,7 @@ package ontologyClasses;
 
 import java.util.ArrayList;
 import ontologyModel.QueryOntology;
+import ontologyModel.SparqlQueryOntology;
 
 /**
  *
@@ -24,9 +25,11 @@ public class OntologyTestResult extends Object{
         ontologyfailures = new ArrayList<OntologyTestFailure>();
     }
     
-    public void addOntologyFailure(QueryOntology query, String resObte){
+    public void addOntologyFailure(QueryOntology query, SparqlQueryOntology 
+            sparql_query,String resObte){
     
-    OntologyTestFailure ontologytestfailure = new OntologyTestFailure(query, resObte);
+    OntologyTestFailure ontologytestfailure = new OntologyTestFailure(query, 
+            sparql_query, resObte);
     ontologyfailures.add(ontologytestfailure);
     }
     
