@@ -18,7 +18,6 @@ public class QueryOntology {
     public String query;
     public String resultexpected;
     public String comment;
-    public String query_sparql;
 
     
     public QueryOntology(String query, String resultexpected,String comment){

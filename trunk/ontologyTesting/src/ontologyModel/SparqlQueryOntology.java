@@ -22,6 +22,9 @@ public class SparqlQueryOntology {
         this.resultexpected.addAll(resultexpected);
     }
     
+    public SparqlQueryOntology(){
+    }
+    
     public String getSparqlQuery(){
         return this.query_sparql;
     }
@@ -31,7 +34,7 @@ public class SparqlQueryOntology {
     }
     
     public List<String> getResultExpected(){
-        return this.resultexpected;
+        return resultexpected;
     }
     
     public void setResultExpected(List<String> resultexpected){

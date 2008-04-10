@@ -57,7 +57,7 @@ public class OntologyTestCase implements OntologyTest{
     private CollectionTest collectionTest;
     private ResultSet results;
     private Query sparql_q;
-    QueryExecution qe;
+    private QueryExecution qe;
                     
     public OntologyTestCase(){
     }
@@ -131,43 +131,54 @@ public class OntologyTestCase implements OntologyTest{
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
             ScenarioTest scenariotest){
            
-        ListIterator liQuery,liSparqlQuery,liSparqlQueryRes;
+        ListIterator liQuery,liSparqlQuery,liSparqlQueryRes = null;
         String res[],clasF,indF;
         List<QueryOntology> queryTest = scenariotest.getTests();
         List<SparqlQueryOntology> sparqlQueryTest = scenariotest.getSparqlTests();
+        List<String> resSparqlExpected = null;
+        String resObtenidoInst="",resQueryExpected="";
+        SparqlQueryOntology sparql_qo = null;
+        QueryOntology qo = null;
+        ArrayList<String> res_sparql_q = new ArrayList<String>();
+        boolean sparql_correct=true;
+                
         ontologyTests tests = new ontologyTests();
         liQuery = queryTest.listIterator();
         liSparqlQuery = sparqlQueryTest.listIterator();
 
         
         while((liQuery.hasNext()) || (liSparqlQuery.hasNext())){
-            QueryOntology qo = (QueryOntology) liQuery.next();
-            SparqlQueryOntology sparql_qo = (SparqlQueryOntology) liSparqlQuery.next();
             
-            String query = qo.getQuery();
-            String sparql_query = sparql_qo.getSparqlQuery();
-            String resQueryExpected = qo.getResultExpected();
-            List<String> resSparqlExpected = sparql_qo.getResultExpected();
+            if(liQuery.hasNext()){
+                qo = (QueryOntology) liQuery.next();
+                String query = qo.getQuery();
+                resQueryExpected = qo.getResultExpected();
+                res = query.split(",");
+                clasF = res[0];
+                indF = res[1];
+                resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
+                //String resObtenidoRet = tests.retieval(ns, clasF, model);
+                //String resObtenidoReal = tests.realization(ns, indF, model); 
+            }
+            if(liSparqlQuery.hasNext()){
+                sparql_qo = (SparqlQueryOntology) liSparqlQuery.next();
+                String sparql_query = sparql_qo.getSparqlQuery();
+                resSparqlExpected = sparql_qo.getResultExpected();
+                sparql_q = QueryFactory.create(sparql_query);
+                qe = QueryExecutionFactory.create(sparql_q, model_q);
+                results = qe.execSelect();
+                res_sparql_q = (ArrayList<String>) results.getResultVars();
+                liSparqlQueryRes = res_sparql_q.listIterator();
+            }           
             
-            res = query.split(",");
-            clasF = res[0];
-            indF = res[1];
-            
-            sparql_q = QueryFactory.create(sparql_query);
-            qe = QueryExecutionFactory.create(sparql_q, model_q);
-            results = qe.execSelect();
-            
-            String resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
-            //String resObtenidoRet = tests.retieval(ns, clasF, model);
-            //String resObtenidoReal = tests.realization(ns, indF, model);            
-            
-            List res_sparql_q = results.getResultVars();
-            liSparqlQueryRes = res_sparql_q.listIterator();
             while(liSparqlQueryRes.hasNext()){
-                if((!resSparqlExpected.contains(liSparqlQueryRes.next())) || 
-                        (!resObtenidoInst.equals(resQueryExpected))){
-                    testresult.addOntologyFailure(qo, sparql_qo, resObtenidoInst);
+                if(!resSparqlExpected.contains(liSparqlQueryRes.next())){
+                    sparql_correct=false;
                 }
+            }
+            
+            if(!resObtenidoInst.equals(resQueryExpected)){
+                  testresult.addOntologyFailure(qo, sparql_qo, resObtenidoInst, res_sparql_q);
             }
         }
         
@@ -218,7 +229,7 @@ public class OntologyTestCase implements OntologyTest{
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();
             System.out.println("De la query introducida " +otf.getfQuery());
             System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
-            System.out.println("Pero se obtuvo: " +otf.getResultObtenido());
+            System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());
             }
         }else{
             System.out.println("No se han producido errores.");

@@ -20,27 +20,32 @@ import ontologyModel.SparqlQueryOntology;
  */
 public class OntologyTestFailure extends Object{
 
-    protected String fresobtenido;
+    protected String fresqueryobtenido;
+    protected ArrayList<String> fressparqlobtenido = new ArrayList<String>();
     protected String fquery;
     protected String fcomment;
-    protected ArrayList<String> fsparql_resultexpected;
+    protected ArrayList<String> fsparql_resultexpected = new ArrayList<String>();
     protected String fresultexpected;
     protected String fsparql_query;
     
     public OntologyTestFailure(QueryOntology query, SparqlQueryOntology sparql_query, 
-            String resObte){
+            String resQueryObte, ArrayList<String> resSparqlObte){
         this.fquery = query.getQuery();
         this.fcomment = query.getComment();
         this.fresultexpected = query.getResultExpected();
-        this.fresobtenido = resObte;
-        this.fsparql_query = sparql_query.getSparqlQuery();
+        this.fresqueryobtenido = resQueryObte;
         this.fsparql_resultexpected.addAll(sparql_query.getResultExpected());
+        this.fsparql_query = sparql_query.getSparqlQuery();
+        this.fressparqlobtenido.addAll(resSparqlObte);
     }
     
-    public String getResultObtenido() {    
-         return this.fresobtenido;
-         
+    public String getResultQueryObtenido() {    
+         return this.fresqueryobtenido;    
      }  
+    
+     public List<String> getResultSparqlObtenido() {    
+         return this.fressparqlobtenido;    
+     }
     
     public String getfComment(){
         return this.fcomment;
