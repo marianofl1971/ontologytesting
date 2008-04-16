@@ -1505,7 +1505,12 @@ private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
 // TODO add your handling code here:
+    int n = JOptionPane.showConfirmDialog(frame, "¿Seguro que desea finalizar?", "Finalizar",
+    JOptionPane.YES_NO_OPTION);
+    if (n == JOptionPane.YES_OPTION) {
     dispose();
+    System.exit(0);
+    }
 }//GEN-LAST:event_cancelButtonActionPerformed
 
 private void ontoExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ontoExaminarActionPerformed

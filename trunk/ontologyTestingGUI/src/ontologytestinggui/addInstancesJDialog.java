@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author  sara_garcia
  */
 public class addInstancesJDialog extends javax.swing.JDialog {
+    
     public Component frame;
     public JFileChooser filechooser = new JFileChooser();
 
@@ -232,14 +233,19 @@ private void asociarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     } else {
         //log.append("Save command cancelled by user.");
     }
-    } else if (n == JOptionPane.NO_OPTION) {     
+    } else if (n == JOptionPane.NO_OPTION) {
+        dispose();
     } else {    
     }
 }//GEN-LAST:event_asociarInstActionPerformed
 
 private void cancelarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstActionPerformed
 // TODO add your handling code here:
+    int n = JOptionPane.showConfirmDialog(frame, "¿Seguro que desea cancelar?", "Cancelar",
+    JOptionPane.YES_NO_OPTION);
+    if (n == JOptionPane.YES_OPTION) {
     dispose();
+    }
 }//GEN-LAST:event_cancelarInstActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
