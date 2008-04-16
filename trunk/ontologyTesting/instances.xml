@@ -23,5 +23,8 @@
     <string>hasChild(marry,john)</string> 
    </void> 
   </void> 
+  <void property="testName"> 
+   <string>instantiation</string> 
+  </void> 
  </object> 
 </java> 

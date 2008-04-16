@@ -26,7 +26,7 @@ public class SparqlQueryOntology {
     }
     
     public String getSparqlQuery(){
-        return this.query_sparql;
+        return query_sparql;
     }
     
     public void setSparqlQuery(String query_sparql){

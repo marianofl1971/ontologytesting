@@ -33,7 +33,7 @@ public class QueryOntology {
     }
     
     public String getQuery(){
-        return this.query;
+        return query;
     }
     
     public void setQuery(String query){
@@ -41,7 +41,7 @@ public class QueryOntology {
     }
     
     public String getResultExpected(){
-        return this.resultexpected;
+        return resultexpected;
     }
     
     public void setResultExpected(String resultexpected){
@@ -49,7 +49,7 @@ public class QueryOntology {
     }
 
     public String getComment(){
-        return this.comment;
+        return comment;
     }
     
     public void setComment(String comment){

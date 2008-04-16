@@ -70,23 +70,21 @@ public class OntologyTestCase implements OntologyTest{
          decoder.close();           
     }catch(FileNotFoundException e){
     }         
-        
-    // Open the bloggers RDF graph from the filesystem
+      
+    /* SPARQL Query
     InputStream in = null;
-    // Create an empty in-memory model and populate it from the graph
     model_q = ModelFactory.createMemModelMaker().createModel("");
         try {
             in = new FileInputStream(new File("data/family.owl"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(OntologyTestCase.class.getName()).log(Level.SEVERE, null, ex);
         }
-    model_q.read(in,null); // null base URI, since model URIs are absolute
+    model_q.read(in,null); 
     try {
-        // null base URI, since model URIs are absolute
         in.close();
     } catch (IOException ex) {
         Logger.getLogger(OntologyTestCase.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    }*/
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];    
@@ -125,7 +123,7 @@ public class OntologyTestCase implements OntologyTest{
         classValue.remove();
         hasprop.remove();    
         // Important - free up resources used running the query
-        qe.close();
+        //qe.close();
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
@@ -134,20 +132,21 @@ public class OntologyTestCase implements OntologyTest{
         ListIterator liQuery,liSparqlQuery,liSparqlQueryRes = null;
         String res[],clasF,indF;
         List<QueryOntology> queryTest = scenariotest.getTests();
-        List<SparqlQueryOntology> sparqlQueryTest = scenariotest.getSparqlTests();
-        List<String> resSparqlExpected = null;
+        //List<SparqlQueryOntology> sparqlQueryTest = scenariotest.getSparqlTests();
+        //List<String> resSparqlExpected = null;
         String resObtenidoInst="",resQueryExpected="";
-        SparqlQueryOntology sparql_qo = null;
+        //SparqlQueryOntology sparql_qo = null;
         QueryOntology qo = null;
-        ArrayList<String> res_sparql_q = new ArrayList<String>();
-        boolean sparql_correct=true;
+        //ArrayList<String> res_sparql_q = new ArrayList<String>();
+        //boolean sparql_correct=true;
                 
         ontologyTests tests = new ontologyTests();
         liQuery = queryTest.listIterator();
-        liSparqlQuery = sparqlQueryTest.listIterator();
+        //liSparqlQuery = sparqlQueryTest.listIterator();
 
         
-        while((liQuery.hasNext()) || (liSparqlQuery.hasNext())){
+        //while((liQuery.hasNext()) || (liSparqlQuery.hasNext())){
+        while(liQuery.hasNext()){
             
             if(liQuery.hasNext()){
                 qo = (QueryOntology) liQuery.next();
@@ -160,7 +159,7 @@ public class OntologyTestCase implements OntologyTest{
                 //String resObtenidoRet = tests.retieval(ns, clasF, model);
                 //String resObtenidoReal = tests.realization(ns, indF, model); 
             }
-            if(liSparqlQuery.hasNext()){
+            /*if(liSparqlQuery.hasNext()){
                 sparql_qo = (SparqlQueryOntology) liSparqlQuery.next();
                 String sparql_query = sparql_qo.getSparqlQuery();
                 resSparqlExpected = sparql_qo.getResultExpected();
@@ -175,10 +174,10 @@ public class OntologyTestCase implements OntologyTest{
                 if(!resSparqlExpected.contains(liSparqlQueryRes.next())){
                     sparql_correct=false;
                 }
-            }
+            }*/
             
             if(!resObtenidoInst.equals(resQueryExpected)){
-                  testresult.addOntologyFailure(qo, sparql_qo, resObtenidoInst, res_sparql_q);
+                  testresult.addOntologyFailure(qo, resObtenidoInst);
             }
         }
         
@@ -221,7 +220,7 @@ public class OntologyTestCase implements OntologyTest{
         liFailures = failures.listIterator();
         
         // Output query results	
-        ResultSetFormatter.out(System.out, results, sparql_q);
+        //ResultSetFormatter.out(System.out, results, sparql_q);
         
         if(liFailures.hasNext()){
           System.out.println("De las pruebas introducidas han fallado las siguientes:");

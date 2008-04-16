@@ -38,11 +38,11 @@ public class CollectionTest {
     }    
     
     public String getOntology(){
-        return this.ontology;
+        return ontology;
     }
     
     public String getNamespace(){
-        return this.namespace;
+        return namespace;
     }
     
     public void setOntology(String ontology){
@@ -54,7 +54,7 @@ public class CollectionTest {
     }
     
     public ArrayList<ScenarioTest> getScenarioTest(){
-        return this.scenariotest;
+        return scenariotest;
     }      
    
     

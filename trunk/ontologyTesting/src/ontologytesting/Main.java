@@ -50,6 +50,7 @@ public class Main {
         ArrayList<QueryOntology> querys = new ArrayList<QueryOntology>();
         ArrayList<SparqlQueryOntology> sparql_querys = new ArrayList<SparqlQueryOntology>();
         ArrayList<ScenarioTest> scenario = new ArrayList<ScenarioTest>();
+        String testname = "instantiation";
 
         myClassInstances.add("Male(john)");
         myClassInstances.add("Male(tom)");
@@ -76,7 +77,7 @@ public class Main {
         sparql_querys.add(sparql_q);
         
         ScenarioTest scenariotest = new ScenarioTest(myClassInstances,
-                myPropertyInstances, querys, sparql_querys);
+                myPropertyInstances, querys, testname);
         
         scenario.add(scenariotest);
         
