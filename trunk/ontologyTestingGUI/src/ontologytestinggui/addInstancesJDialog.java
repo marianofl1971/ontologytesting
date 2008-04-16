@@ -132,6 +132,11 @@ public class addInstancesJDialog extends javax.swing.JDialog {
         });
 
         cancelarInst.setText("Cancelar");
+        cancelarInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarInstActionPerformed(evt);
+            }
+        });
 
         limpiarInst.setText("Limpiar");
 
@@ -203,8 +208,9 @@ public class addInstancesJDialog extends javax.swing.JDialog {
 
 private void asociarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstActionPerformed
 // TODO add your handling code here:
-   int n = JOptionPane.showConfirmDialog(frame, "¿Quiere guardar las instancias para futuras pruebas?",
-    "Guardar Instancias",JOptionPane.YES_NO_OPTION);
+   int n = JOptionPane.showConfirmDialog(frame, "¿Quiere guardar este conjunto de" +
+           " instancias para futuras pruebas?", "Guardar Instancias",
+           JOptionPane.YES_NO_OPTION);
     
    if (n == JOptionPane.YES_OPTION) {  
     int returnVal = filechooser.showSaveDialog(frame);
@@ -215,7 +221,8 @@ private void asociarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         {
             FileWriter fichero = new FileWriter(file.getPath());
             PrintWriter pw = new PrintWriter(fichero);
-            pw.println("Linea ");
+            //Escribir las instancias
+            //pw.println("Linea ");
             pw.close();
         } catch (Exception e)
         {
@@ -230,22 +237,10 @@ private void asociarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }
 }//GEN-LAST:event_asociarInstActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                addInstancesJDialog dialog = new addInstancesJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+private void cancelarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstActionPerformed
+// TODO add your handling code here:
+    dispose();
+}//GEN-LAST:event_cancelarInstActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton asociarInst;

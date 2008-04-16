@@ -135,7 +135,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="fisicalOntoTextField" linkSize="4" min="-2" pref="356" max="-2" attributes="1"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ontoExaminar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="363" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -169,7 +169,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="fisicalOntoTextField" linkSize="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="ontoExaminar" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -198,12 +198,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="fisicalOntoTextField">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="ontoExaminar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Examinar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ontoExaminarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="ontoURITextField">
@@ -284,7 +284,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="553" max="32767" attributes="0"/>
+                      <EmptySpace pref="564" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -328,10 +328,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel9" alignment="0" pref="799" max="32767" attributes="1"/>
                                           <Component id="jLabel11" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton9" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane3" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane3" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -346,9 +343,9 @@
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField22" pref="322" max="32767" attributes="1"/>
+                                              <Component id="instTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar27" min="-2" max="-2" attributes="0"/>
+                                              <Component id="instExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstInst" min="-2" max="-2" attributes="0"/>
@@ -356,6 +353,10 @@
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -378,8 +379,8 @@
                               <Component id="jLabel53" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar27" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="instTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="instExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton9" min="-2" max="-2" attributes="0"/>
@@ -458,12 +459,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField22">
+                    <Component class="javax.swing.JTextField" name="instTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar27">
+                    <Component class="javax.swing.JButton" name="instExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="instExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -490,33 +494,34 @@
                                       <EmptySpace pref="135" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jButton8" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane4" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                      </Group>
+                                      <Component id="jScrollPane4" min="-2" pref="775" max="-2" attributes="1"/>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel50" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel50" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel51" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel51" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField21" pref="379" max="32767" attributes="1"/>
+                                              <Component id="recTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar25" min="-2" max="-2" attributes="0"/>
+                                              <Component id="recExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstRec" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="353" max="-2" attributes="0"/>
+                                              <EmptySpace pref="296" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -539,8 +544,8 @@
                               <Component id="jLabel51" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar25" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="recTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="recExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton8" min="-2" max="-2" attributes="0"/>
@@ -619,12 +624,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField21">
+                    <Component class="javax.swing.JTextField" name="recTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar25">
+                    <Component class="javax.swing.JButton" name="recExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="recExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -647,34 +655,35 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel21" alignment="0" min="-2" pref="676" max="-2" attributes="0"/>
                                           <Component id="jLabel12" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton10" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane5" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane5" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel48" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel48" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel49" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel49" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField20" pref="379" max="32767" attributes="1"/>
+                                              <Component id="comTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar23" min="-2" max="-2" attributes="0"/>
+                                              <Component id="comExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstComp" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="353" max="-2" attributes="0"/>
+                                              <EmptySpace pref="296" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -697,8 +706,8 @@
                               <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar23" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton10" min="-2" max="-2" attributes="0"/>
@@ -777,12 +786,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField20">
+                    <Component class="javax.swing.JTextField" name="comTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar23">
+                    <Component class="javax.swing.JButton" name="comExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -805,34 +817,35 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel25" alignment="0" min="-2" pref="676" max="-2" attributes="0"/>
                                           <Component id="jLabel13" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton11" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane6" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane6" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel46" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel46" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel47" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel47" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField19" pref="379" max="32767" attributes="1"/>
+                                              <Component id="retTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar21" min="-2" max="-2" attributes="0"/>
+                                              <Component id="retExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstRet" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="353" max="-2" attributes="0"/>
+                                              <EmptySpace pref="296" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -855,8 +868,8 @@
                               <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField19" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar21" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="retTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="retExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton11" min="-2" max="-2" attributes="0"/>
@@ -935,12 +948,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField19">
+                    <Component class="javax.swing.JTextField" name="retTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar21">
+                    <Component class="javax.swing.JButton" name="retExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="retExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -963,34 +979,35 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel28" alignment="0" min="-2" pref="676" max="-2" attributes="0"/>
                                           <Component id="jLabel29" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton12" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane7" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane7" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel44" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel44" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel45" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel45" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField18" pref="379" max="32767" attributes="1"/>
+                                              <Component id="clasTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar19" min="-2" max="-2" attributes="0"/>
+                                              <Component id="clasExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstClas" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="353" max="-2" attributes="0"/>
+                                              <EmptySpace pref="296" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton12" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1013,8 +1030,8 @@
                               <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar19" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="clasTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="clasExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton12" min="-2" max="-2" attributes="0"/>
@@ -1093,12 +1110,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField18">
+                    <Component class="javax.swing.JTextField" name="clasTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar19">
+                    <Component class="javax.swing.JButton" name="clasExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clasExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1121,34 +1141,35 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel32" min="-2" pref="676" max="-2" attributes="0"/>
                                           <Component id="jLabel33" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton13" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane8" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane8" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel42" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel42" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel43" pref="375" max="32767" attributes="1"/>
+                                              <Component id="jLabel43" pref="318" max="32767" attributes="1"/>
                                               <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jTextField17" pref="379" max="32767" attributes="1"/>
+                                              <Component id="newTextField" pref="322" max="32767" attributes="1"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Examinar17" min="-2" max="-2" attributes="0"/>
+                                              <Component id="newExaminar" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="createInstNewRol" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="353" max="-2" attributes="0"/>
+                                              <EmptySpace pref="296" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton13" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1171,8 +1192,8 @@
                               <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField17" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Examinar17" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="newTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="newExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="jButton13" min="-2" max="-2" attributes="0"/>
@@ -1251,12 +1272,15 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField17">
+                    <Component class="javax.swing.JTextField" name="newTextField">
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar17">
+                    <Component class="javax.swing.JButton" name="newExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1279,30 +1303,31 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel36" alignment="0" min="-2" pref="676" max="-2" attributes="0"/>
                                           <Component id="jLabel37" alignment="0" min="-2" pref="427" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                              <Component id="jButton14" alignment="1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jScrollPane9" alignment="1" min="-2" pref="775" max="-2" attributes="1"/>
-                                          </Group>
+                                          <Component id="jScrollPane9" alignment="0" min="-2" pref="775" max="-2" attributes="1"/>
                                       </Group>
                                       <EmptySpace pref="34" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel38" pref="375" max="32767" attributes="1"/>
+                                      <Component id="jLabel38" pref="318" max="32767" attributes="1"/>
                                       <EmptySpace min="-2" pref="491" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel39" pref="375" max="32767" attributes="1"/>
+                                      <Component id="jLabel39" pref="318" max="32767" attributes="1"/>
                                       <EmptySpace min="-2" pref="491" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jTextField16" pref="375" max="32767" attributes="1"/>
+                                      <Component id="satTextField" pref="318" max="32767" attributes="1"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="Examinar12" min="-2" max="-2" attributes="0"/>
+                                      <Component id="satExaminar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="createInstSat" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="700" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButton14" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="744" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1317,27 +1342,20 @@
                               <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jScrollPane9" min="-2" pref="262" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="createInstSat" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jTextField16" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Examinar12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="67" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="createInstSat" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel39" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="satTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="satExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="33" max="32767" attributes="0"/>
+                              <Component id="jButton14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1399,7 +1417,7 @@
                         <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField16">
+                    <Component class="javax.swing.JTextField" name="satTextField">
                     </Component>
                     <Component class="javax.swing.JButton" name="createInstSat">
                       <Properties>
@@ -1409,10 +1427,13 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createInstSatActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="Examinar12">
+                    <Component class="javax.swing.JButton" name="satExaminar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Examinar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="satExaminarActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton14">
                       <Properties>
@@ -1460,33 +1481,73 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="546" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane1" alignment="1" min="-2" pref="726" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel54" pref="318" max="32767" attributes="1"/>
+                                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel55" pref="318" max="32767" attributes="1"/>
+                                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="instSparqlTextField" pref="322" max="32767" attributes="1"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="instSparqlExaminar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="createInstSparql" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="296" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="409" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" alignment="1" min="-2" pref="726" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel54" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="createInstSparql" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel55" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="instSparqlTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="instSparqlExaminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="126" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="176" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="320" max="32767" attributes="0"/>
+                      <EmptySpace pref="172" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1521,6 +1582,34 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel54">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Asociar nuevas instancias sobre las que realizar las consultas:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="createInstSparql">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear instancias"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createInstSparqlActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel55">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Asociar instancias existentes"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="instSparqlTextField">
+            </Component>
+            <Component class="javax.swing.JButton" name="instSparqlExaminar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Examinar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="instSparqlExaminarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
