@@ -19,13 +19,17 @@ import java.util.List;
 public class CollectionTest {
 
     private ArrayList<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
-    String ontology;
-    String namespace;
+    private ArrayList<SparqlQueryOntology> sparqlquerys = new 
+            ArrayList<SparqlQueryOntology>();
+    private String ontology;
+    private String namespace;
     
-    public CollectionTest(List<ScenarioTest> scenariotest, String ontology,
+    public CollectionTest(List<ScenarioTest> scenariotest, 
+            List<SparqlQueryOntology> sparqlquerys, String ontology, 
             String namespace){
         
         this.scenariotest.addAll(scenariotest);
+        this.sparqlquerys.addAll(sparqlquerys);
         this.ontology = ontology;
         this.namespace = namespace;
     }
@@ -33,6 +37,7 @@ public class CollectionTest {
     public CollectionTest(){
         
         this.scenariotest = new ArrayList<ScenarioTest>();
+        this.sparqlquerys = new ArrayList<SparqlQueryOntology>();
         this.ontology = "";
         this.namespace = "";
     }    
@@ -55,7 +60,18 @@ public class CollectionTest {
     
     public ArrayList<ScenarioTest> getScenarioTest(){
         return scenariotest;
-    }      
+    }   
+    
+    public void setScenarioTest(List<ScenarioTest> scenariotest){
+        this.scenariotest.addAll(scenariotest);
+    }    
    
+    public ArrayList<SparqlQueryOntology> getSparqlQueryOntologys(){
+        return sparqlquerys;
+    } 
+    
+    public void setSparqlQueryOntologys(List<SparqlQueryOntology> sparqlquerys){
+        this.sparqlquerys.addAll(sparqlquerys);
+    }
     
 }

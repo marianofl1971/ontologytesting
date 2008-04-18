@@ -27,4 +27,41 @@
    <string>instantiation</string> 
   </void> 
  </object> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="ontologyModel.QueryOntology"> 
+    <void property="comment"> 
+     <string>query 1</string> 
+    </void> 
+    <void property="query"> 
+     <string>Wife,marry</string> 
+    </void> 
+    <void property="resultExpected"> 
+     <string>false</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="ontologyModel.QueryOntology"> 
+    <void property="comment"> 
+     <string>query_2</string> 
+    </void> 
+    <void property="query"> 
+     <string>Wife,tom</string> 
+    </void> 
+    <void property="resultExpected"> 
+     <string>true</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+ <object class="java.util.ArrayList"/> 
+ <object class="ontologyModel.CollectionTest"> 
+  <void property="namespace"> 
+   <string>http://www.owl-ontologies.com/family.owl#</string> 
+  </void> 
+  <void property="ontology"> 
+   <string>file:data/family.owl</string> 
+  </void> 
+ </object> 
 </java> 

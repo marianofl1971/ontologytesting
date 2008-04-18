@@ -48,7 +48,8 @@ public class Main {
         ArrayList<String> myPropertyInstances = new ArrayList<String>();
         ArrayList<String> sparql_Res = new ArrayList<String>();
         ArrayList<QueryOntology> querys = new ArrayList<QueryOntology>();
-        ArrayList<SparqlQueryOntology> sparql_querys = new ArrayList<SparqlQueryOntology>();
+        ArrayList<SparqlQueryOntology> sparql_querys = new 
+                ArrayList<SparqlQueryOntology>();
         ArrayList<ScenarioTest> scenario = new ArrayList<ScenarioTest>();
         String testname = "instantiation";
 
@@ -58,37 +59,36 @@ public class Main {
         myClassInstances.add("Wife(lee)");
         myPropertyInstances.add("hasChild(lee,tom)");
         myPropertyInstances.add("hasChild(marry,john)");
-        String sparql_query = 
-	"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-	"SELECT ?subject ?object " +
-                "WHERE { ?subject rdfs:subClassOf ?object }";
         
         sparql_Res.add("Wife");
         sparql_Res.add("Lee");
       
-        SparqlQueryOntology sparql_q = new SparqlQueryOntology(sparql_query,sparql_Res);
-        QueryOntology queryontology1 = new QueryOntology("Wife,marry","true",
+        QueryOntology queryontology1 = new QueryOntology("Wife,marry","false",
                 "query 1");
         QueryOntology queryontology2 = new QueryOntology("Wife,tom","true",
                 "query_2");
         
         querys.add(queryontology1);
-        querys.add(queryontology2); 
-        sparql_querys.add(sparql_q);
+        querys.add(queryontology2); ;
         
         ScenarioTest scenariotest = new ScenarioTest(myClassInstances,
                 myPropertyInstances, querys, testname);
         
         scenario.add(scenariotest);
         
-        CollectionTest test = new CollectionTest(scenario, ontologyFisical, ontologyURI);
+        CollectionTest test = new CollectionTest(scenario, sparql_querys, 
+                ontologyFisical, ontologyURI);
         
         OntologyTestResult testresult = new OntologyTestResult();
         OntologyTestCase testcase = new OntologyTestCase();       
         
         try {
-            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("instances.xml")));
-            e.writeObject(scenariotest); 
+            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                    FileOutputStream("instances.xml")));
+            e.writeObject(scenariotest);
+            e.writeObject(querys);
+            e.writeObject(sparql_querys);
+            e.writeObject(test);
             e.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

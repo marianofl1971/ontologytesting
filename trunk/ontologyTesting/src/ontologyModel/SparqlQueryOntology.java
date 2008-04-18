@@ -5,21 +5,21 @@
 
 package ontologyModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author sara_garcia
  */
 public class SparqlQueryOntology {
 
-    public ArrayList<String> resultexpected = new ArrayList<String>();
-    public String query_sparql;
+    private String resultexpected;
+    private String query_sparql;
+    private String comment;
     
-    public SparqlQueryOntology(String query_sparql, List<String> resultexpected){
+    public SparqlQueryOntology(String query_sparql, String resultexpected,
+            String comment){
         this.query_sparql=query_sparql;
-        this.resultexpected.addAll(resultexpected);
+        this.resultexpected = resultexpected;
+        this.comment = comment;
     }
     
     public SparqlQueryOntology(){
@@ -33,11 +33,19 @@ public class SparqlQueryOntology {
         this.query_sparql=query_sparql;
     }
     
-    public List<String> getResultExpected(){
+    public String getResultExpected(){
         return resultexpected;
     }
     
-    public void setResultExpected(List<String> resultexpected){
-        this.resultexpected.addAll(resultexpected);
+    public void setResultExpected(String resultexpected){
+        this.resultexpected=resultexpected;
     }
+
+    public String getComment(){
+        return comment;
+    }
+    
+    public void setComment(String comment){
+        this.comment=comment;
+    }    
 }

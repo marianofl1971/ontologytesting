@@ -11,6 +11,7 @@ package ontologyClasses;
 
 import java.util.ArrayList;
 import ontologyModel.QueryOntology;
+import ontologyModel.SparqlQueryOntology;
 
 /**
  *
@@ -18,30 +19,54 @@ import ontologyModel.QueryOntology;
  */
 public class OntologyTestResult extends Object{
 
-    protected ArrayList<OntologyTestFailure> ontologyfailures;
+    protected ArrayList<OntologyTestFailure> ontologyfailuresquerys;
+    protected ArrayList<OntologyTestFailure> ontologyfailuressparql;
     
     public OntologyTestResult(){
-        ontologyfailures = new ArrayList<OntologyTestFailure>();
+        ontologyfailuresquerys = new ArrayList<OntologyTestFailure>();
+        ontologyfailuressparql = new ArrayList<OntologyTestFailure>();
     }
     
-    public void addOntologyFailure(QueryOntology query, String resObte){
+    public void addOntologyFailureQuery(QueryOntology query, String resObte){
     
-    OntologyTestFailure ontologytestfailure = new OntologyTestFailure(query, resObte);
-    ontologyfailures.add(ontologytestfailure);
+        OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
+        ontologytestfailure.addOntologyTestFailureQuery(query, resObte);
+        ontologyfailuresquerys.add(ontologytestfailure);
     }
     
-    public ArrayList<OntologyTestFailure> getOntologyTestFailure(){
-        return this.ontologyfailures;
+    public void addOntologyFailureSparql(SparqlQueryOntology sparqlquery, String resObte){
+    
+        OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
+        ontologytestfailure.addOntologyTestFailureSparql(sparqlquery, resObte);
+        ontologyfailuressparql.add(ontologytestfailure);
     }
     
-    public int ontologyFailuresCount() {
+    public ArrayList<OntologyTestFailure> getOntologyTestFailureQuery(){
+        return this.ontologyfailuresquerys;
+    }
+   
+    public ArrayList<OntologyTestFailure> getOntologyTestFailureSparql(){
+        return this.ontologyfailuressparql;
+    }
     
-         return ontologyfailures.size();
+    public int ontologyFailuresCountQuery() {
+    
+         return ontologyfailuresquerys.size();
+    }
+    
+     public int ontologyFailuresCountSparql() {
+    
+         return ontologyfailuressparql.size();
     }
 
-    public boolean wasSuccessfulOntology() {
+    public boolean wasSuccessfulOntologyQuery() {
     
-         return ontologyFailuresCount() == 0;
+         return ontologyFailuresCountQuery() == 0;
+    }
+    
+    public boolean wasSuccessfulOntologySparql() {
+    
+         return ontologyFailuresCountSparql() == 0;
     }
     
     public void createFileResults(ArrayList<OntologyTestFailure> ontologyfailures){

@@ -17,11 +17,10 @@ import java.util.List;
  */
 public class ScenarioTest {
     
-    public String test_name;
-    public ArrayList<String> classInstances = new ArrayList<String>();
-    public ArrayList<String> propertyInstances = new ArrayList<String>();
-    public ArrayList<QueryOntology> tests = new ArrayList<QueryOntology>();
-    //public ArrayList<SparqlQueryOntology> sparql_test = new ArrayList<SparqlQueryOntology>();
+    private String test_name;
+    private ArrayList<String> classInstances = new ArrayList<String>();
+    private ArrayList<String> propertyInstances = new ArrayList<String>();
+    private ArrayList<QueryOntology> tests = new ArrayList<QueryOntology>();
     
     public ScenarioTest(List<String> classInstances, List<String> 
             propertyInstances, List<QueryOntology> tests, String test_name){
@@ -30,7 +29,6 @@ public class ScenarioTest {
         this.propertyInstances.addAll(propertyInstances);
         this.tests.addAll(tests);   
         this.test_name=test_name;
-        //this.sparql_test.addAll(sparql_test);
     
     }
     
@@ -40,7 +38,6 @@ public class ScenarioTest {
         this.propertyInstances = new ArrayList<String>();
         this.tests = new ArrayList<QueryOntology>();
         this.test_name=null;
-        //this.sparql_test = new ArrayList<SparqlQueryOntology>();
     
     }    
     
@@ -59,9 +56,6 @@ public class ScenarioTest {
     public String getTestName(){
         return test_name;
     }    
-    /*public List<SparqlQueryOntology> getSparqlTests(){
-        return sparql_test;
-    }*/
     
     public void setClassInstances(List<String> classInstances){
         classInstances.addAll(classInstances);
@@ -78,9 +72,5 @@ public class ScenarioTest {
     public void setTestName(String test_name){
         this.test_name=test_name;
     }
-    
-    /*public void setSparqlOntologyQuerys(List<SparqlQueryOntology> sparql_test){
-        this.sparql_test.addAll(sparql_test);
-    }*/  
 
 }
