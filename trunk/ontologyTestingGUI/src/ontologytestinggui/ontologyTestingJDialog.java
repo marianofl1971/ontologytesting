@@ -65,94 +65,107 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         testsTabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jLabel52 = new javax.swing.JLabel();
-        createInstInst = new javax.swing.JButton();
-        jLabel53 = new javax.swing.JLabel();
-        instTextField = new javax.swing.JTextField();
-        instExaminar = new javax.swing.JButton();
+        addInstancesJPanel1 = new ontologytestinggui.addInstancesJPanel();
+        jButton1 = new javax.swing.JButton();
+        addInstancesTFJPanel1 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel2 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel3 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel4 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel5 = new ontologytestinggui.addInstancesTFJPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jButton8 = new javax.swing.JButton();
-        jLabel50 = new javax.swing.JLabel();
-        createInstRec = new javax.swing.JButton();
-        jLabel51 = new javax.swing.JLabel();
-        recTextField = new javax.swing.JTextField();
-        recExaminar = new javax.swing.JButton();
+        addInstancesJPanel2 = new ontologytestinggui.addInstancesJPanel();
+        jButton3 = new javax.swing.JButton();
+        addQueryStringJPanel1 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel2 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel3 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel4 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel5 = new ontologytestinggui.addQueryStringJPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
-        jLabel48 = new javax.swing.JLabel();
-        createInstComp = new javax.swing.JButton();
-        jLabel49 = new javax.swing.JLabel();
-        comTextField = new javax.swing.JTextField();
-        comExaminar = new javax.swing.JButton();
+        addInstancesJPanel3 = new ontologytestinggui.addInstancesJPanel();
+        jButton5 = new javax.swing.JButton();
+        addQueryStringJPanel6 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel7 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel8 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel9 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel10 = new ontologytestinggui.addQueryStringJPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
         jButton11 = new javax.swing.JButton();
-        jLabel46 = new javax.swing.JLabel();
-        createInstRet = new javax.swing.JButton();
-        jLabel47 = new javax.swing.JLabel();
-        retTextField = new javax.swing.JTextField();
-        retExaminar = new javax.swing.JButton();
+        addInstancesJPanel4 = new ontologytestinggui.addInstancesJPanel();
+        jButton6 = new javax.swing.JButton();
+        addQueryStringJPanel11 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel12 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel13 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel14 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel15 = new ontologytestinggui.addQueryStringJPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
         jButton12 = new javax.swing.JButton();
-        jLabel44 = new javax.swing.JLabel();
-        createInstClas = new javax.swing.JButton();
-        jLabel45 = new javax.swing.JLabel();
-        clasTextField = new javax.swing.JTextField();
-        clasExaminar = new javax.swing.JButton();
+        addInstancesJPanel5 = new ontologytestinggui.addInstancesJPanel();
+        jButton7 = new javax.swing.JButton();
+        addQueryStringJPanel16 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel17 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel18 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel19 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel20 = new ontologytestinggui.addQueryStringJPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
         jButton13 = new javax.swing.JButton();
+        addInstancesJPanel6 = new ontologytestinggui.addInstancesJPanel();
+        jButton15 = new javax.swing.JButton();
+        addInstancesTFJPanel6 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel7 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel8 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel9 = new ontologytestinggui.addInstancesTFJPanel();
+        addInstancesTFJPanel10 = new ontologytestinggui.addInstancesTFJPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        createInstNewRol = new javax.swing.JButton();
-        jLabel43 = new javax.swing.JLabel();
-        newTextField = new javax.swing.JTextField();
-        newExaminar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        satTextField = new javax.swing.JTextField();
-        createInstSat = new javax.swing.JButton();
-        satExaminar = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        addInstancesJPanel7 = new ontologytestinggui.addInstancesJPanel();
+        jButton16 = new javax.swing.JButton();
+        addQueryStringJPanel21 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel22 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel23 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel24 = new ontologytestinggui.addQueryStringJPanel();
+        addQueryStringJPanel25 = new ontologytestinggui.addQueryStringJPanel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         querysPanel = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel54 = new javax.swing.JLabel();
-        createInstSparql = new javax.swing.JButton();
-        jLabel55 = new javax.swing.JLabel();
-        instSparqlTextField = new javax.swing.JTextField();
-        instSparqlExaminar = new javax.swing.JButton();
+        addInstancesJPanel8 = new ontologytestinggui.addInstancesJPanel();
+        addQuerySPARQLJPanel1 = new ontologytestinggui.addQuerySPARQLJPanel();
         endPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         yesCheckBox = new javax.swing.JCheckBox();
@@ -311,72 +324,19 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel8.setText("Por favor, introduzca las pruebas que desee realizar para cada test:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTable2);
-
         jLabel9.setText("Test que consiste en deducir si dado un indivíduo, éste pertenece o no a una clase dada.");
 
         jLabel11.setText("Ejemplo: Consulta: Mujer(María)?    Resultado: True/False");
 
         jButton9.setText("Limpiar");
 
-        jLabel52.setText("Asociar nuevas instancias al test");
+        jButton1.setText("Borrar");
 
-        createInstInst.setText("Crear instancias");
-        createInstInst.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstInstActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Consultas:");
 
-        jLabel53.setText("Asociar instancias existentes");
+        jLabel14.setText("Resultado:");
 
-        instExaminar.setText("Examinar");
-        instExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instExaminarActionPerformed(evt);
-            }
-        });
+        jLabel23.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -385,31 +345,26 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel52, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel53, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(instTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(instExaminar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(createInstInst)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton9)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addComponent(addInstancesJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel23)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,20 +373,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel52)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstInst)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel53)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(instTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(instExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton9)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -441,68 +403,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel18.setText("Ejemplo:  Consulta: Mujer?  Maria,Sara   Resultado: True/False");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable3);
-
         jButton8.setText("Limpiar");
 
-        jLabel50.setText("Asociar nuevas instancias al test");
+        jButton3.setText("Borrar");
 
-        createInstRec.setText("Crear instancias");
-        createInstRec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstRecActionPerformed(evt);
-            }
-        });
+        jLabel15.setText("Consultas:");
 
-        jLabel51.setText("Asociar instancias existentes");
+        jLabel17.setText("Resultado:");
 
-        recExaminar.setText("Examinar");
-        recExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recExaminarActionPerformed(evt);
-            }
-        });
+        jLabel38.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -511,33 +420,28 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(135, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel50, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel51, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(recTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(recExaminar))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(createInstRec)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton8)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addComponent(addInstancesJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel38))
+                        .addComponent(addQueryStringJPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,20 +450,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel50)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstRec)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel51)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(recTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(recExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton8)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -569,75 +480,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel12.setText("Ejemplo: Consulta: María? Mujer  Resultado: True/False");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane5.setViewportView(jTable4);
-
         jButton10.setText("Limpiar");
 
-        jLabel48.setText("Asociar nuevas instancias al test");
+        jButton5.setText("Borrar");
 
-        createInstComp.setText("Crear instancias");
-        createInstComp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstCompActionPerformed(evt);
-            }
-        });
+        jLabel19.setText("Consultas:");
 
-        jLabel49.setText("Asociar instancias existentes");
+        jLabel20.setText("Resultado:");
 
-        comExaminar.setText("Examinar");
-        comExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comExaminarActionPerformed(evt);
-            }
-        });
+        jLabel39.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -646,31 +497,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel48, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(comTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comExaminar))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(createInstComp)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton10)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5))
+                    .addComponent(addInstancesJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel39))
+                        .addComponent(addQueryStringJPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -679,20 +526,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel48)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstComp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel49)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton10)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel39))
+                .addGap(8, 8, 8)
+                .addComponent(addQueryStringJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(addInstancesJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton10)
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -702,68 +556,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel13.setText("Ejemplo: Consulta: Mujer? María  Resultado: True/False");
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(jTable5);
-
         jButton11.setText("Limpiar");
 
-        jLabel46.setText("Asociar nuevas instancias al test");
+        jButton6.setText("Borrar");
 
-        createInstRet.setText("Crear instancias");
-        createInstRet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstRetActionPerformed(evt);
-            }
-        });
+        jLabel22.setText("Consultas:");
 
-        jLabel47.setText("Asociar instancias existentes");
+        jLabel24.setText("Resultado:");
 
-        retExaminar.setText("Examinar");
-        retExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                retExaminarActionPerformed(evt);
-            }
-        });
+        jLabel40.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -772,31 +573,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(retTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(retExaminar))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(createInstRet)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton11)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton6))
+                    .addComponent(addInstancesJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel40))
+                        .addComponent(addQueryStringJPanel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -805,20 +602,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel46)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstRet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel47)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(retTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(retExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton11)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(addInstancesJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 
@@ -828,68 +632,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel29.setText("Ejemplo: Consulta: María? Mujer, Esposa  Resultado: True/False");
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(jTable6);
-
         jButton12.setText("Limpiar");
 
-        jLabel44.setText("Asociar nuevas instancias al test");
+        jButton7.setText("Borrar");
 
-        createInstClas.setText("Crear instancias");
-        createInstClas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstClasActionPerformed(evt);
-            }
-        });
+        jLabel26.setText("Consultas:");
 
-        jLabel45.setText("Asociar instancias existentes");
+        jLabel27.setText("Resultado:");
 
-        clasExaminar.setText("Examinar");
-        clasExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clasExaminarActionPerformed(evt);
-            }
-        });
+        jLabel41.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -898,31 +649,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel45, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(clasTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clasExaminar))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(createInstClas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton12)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7))
+                    .addComponent(addInstancesJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel41))
+                        .addComponent(addQueryStringJPanel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -931,20 +678,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel44)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstClas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel45)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clasExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton12)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel41))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(addInstancesJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton12)
+                    .addComponent(jButton7))
                 .addContainerGap())
         );
 
@@ -954,68 +708,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel33.setText("Ejemplo: Consulta: Mujer(Sara)?  Resultado: True/false ");
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane8.setViewportView(jTable7);
-
         jButton13.setText("Limpiar");
 
-        jLabel42.setText("Asociar nuevas instancias al test");
+        jButton15.setText("Borrar");
 
-        createInstNewRol.setText("Crear instancias");
-        createInstNewRol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstNewRolActionPerformed(evt);
-            }
-        });
+        jLabel30.setText("Consultas:");
 
-        jLabel43.setText("Asociar instancias existentes");
+        jLabel31.setText("Resultado:");
 
-        newExaminar.setText("Examinar");
-        newExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newExaminarActionPerformed(evt);
-            }
-        });
+        jLabel42.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1024,31 +725,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel43, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(newTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(newExaminar))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(createInstNewRol)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(404, 404, 404))
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jButton13)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton15))
+                    .addComponent(addInstancesJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addInstancesTFJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(31, 31, 31)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel42))
+                        .addComponent(addInstancesTFJPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1057,20 +754,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel42)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstNewRol)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel43)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newExaminar))
-                .addGap(33, 33, 33)
-                .addComponent(jButton13)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel42))
+                .addGap(3, 3, 3)
+                .addComponent(addInstancesTFJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addInstancesTFJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(addInstancesJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton13)
+                    .addComponent(jButton15))
                 .addContainerGap())
         );
 
@@ -1080,68 +784,15 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jLabel37.setText("Ejemplo: Consulta: Male  Person?  Resultado: True/False");
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Consultas", "Resultado esperado", "Comentarios"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane9.setViewportView(jTable8);
-
-        jLabel38.setText("Asociar nuevas instancias al test");
-
-        jLabel39.setText("Asociar instancias existentes");
-
-        createInstSat.setText("Crear instancias");
-        createInstSat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstSatActionPerformed(evt);
-            }
-        });
-
-        satExaminar.setText("Examinar");
-        satExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                satExaminarActionPerformed(evt);
-            }
-        });
-
         jButton14.setText("Limpiar");
+
+        jButton16.setText("Borrar");
+
+        jLabel34.setText("Consultas:");
+
+        jLabel35.setText("Resultado:");
+
+        jLabel43.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1150,29 +801,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                        .addGap(491, 491, 491))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                        .addGap(491, 491, 491))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(satTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(satExaminar)
-                        .addGap(404, 404, 404))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(createInstSat)
-                        .addContainerGap(700, Short.MAX_VALUE))
+                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jButton14)
-                        .addContainerGap(744, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton16))
+                    .addComponent(addInstancesJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQueryStringJPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel43))
+                        .addComponent(addQueryStringJPanel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1181,20 +830,27 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel37)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstSat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel39)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(satTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(satExaminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jButton14)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel43))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addQueryStringJPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(addQueryStringJPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addInstancesJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton14)
+                    .addComponent(jButton16))
                 .addContainerGap())
         );
 
@@ -1233,41 +889,13 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(testsPanelLayout.createSequentialGroup()
                     .addGap(48, 48, 48)
-                    .addComponent(testsTabbedPane)
+                    .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
         testsTabbedPane.getAccessibleContext().setAccessibleName("Instanciación");
 
         mainPanel.add(testsPanel, "3");
-
-        jLabel23.setText("Introduzca las consultas en SPARQL que desee realizar:");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton2.setText("Ejecutar");
-
-        jButton4.setText("Limpiar");
-
-        jLabel54.setText("Asociar nuevas instancias sobre las que realizar las consultas:");
-
-        createInstSparql.setText("Crear instancias");
-        createInstSparql.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createInstSparqlActionPerformed(evt);
-            }
-        });
-
-        jLabel55.setText("Asociar instancias existentes");
-
-        instSparqlExaminar.setText("Examinar");
-        instSparqlExaminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instSparqlExaminarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout querysPanelLayout = new javax.swing.GroupLayout(querysPanel);
         querysPanel.setLayout(querysPanelLayout);
@@ -1276,57 +904,18 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             .addGroup(querysPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(querysPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel23)
-                            .addContainerGap(546, Short.MAX_VALUE))
-                        .addGroup(querysPanelLayout.createSequentialGroup()
-                            .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(querysPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                    .addGap(87, 87, 87))
-                                .addGroup(querysPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                    .addGap(87, 87, 87))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, querysPanelLayout.createSequentialGroup()
-                                    .addComponent(instSparqlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(instSparqlExaminar))
-                                .addGroup(querysPanelLayout.createSequentialGroup()
-                                    .addComponent(createInstSparql)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(409, 409, 409)))
-                    .addGroup(querysPanelLayout.createSequentialGroup()
-                        .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(querysPanelLayout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                    .addComponent(addInstancesJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQuerySPARQLJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         querysPanelLayout.setVerticalGroup(
             querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(querysPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel54)
+                .addComponent(addInstancesJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstSparql)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel55)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(instSparqlTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(instSparqlExaminar))
-                .addGap(15, 15, 15)
-                .addComponent(jLabel23)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(querysPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(addQuerySPARQLJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         mainPanel.add(querysPanel, "4");
@@ -1526,41 +1115,6 @@ private void fileCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
 }//GEN-LAST:event_fileCheckBoxActionPerformed
 
-private void createInstInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstInstActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstInstActionPerformed
-
-private void createInstRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstRecActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstRecActionPerformed
-
-private void createInstCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstCompActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstCompActionPerformed
-
-private void createInstRetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstRetActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstRetActionPerformed
-
-private void createInstClasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstClasActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstClasActionPerformed
-
-private void createInstNewRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstNewRolActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstNewRolActionPerformed
-
-private void createInstSatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstSatActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstSatActionPerformed
-
 private void openFile(JTextField textfield){
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
@@ -1576,81 +1130,69 @@ private void openFile(JTextField textfield){
       }
 }
 
-private void retExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(retTextField);
-}//GEN-LAST:event_retExaminarActionPerformed
-
-private void instExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(instTextField);
-}//GEN-LAST:event_instExaminarActionPerformed
-
-private void recExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(recTextField);
-}//GEN-LAST:event_recExaminarActionPerformed
-
-private void comExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(comTextField);
-}//GEN-LAST:event_comExaminarActionPerformed
-
-private void clasExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clasExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(clasTextField);
-}//GEN-LAST:event_clasExaminarActionPerformed
-
-private void newExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(newTextField);
-}//GEN-LAST:event_newExaminarActionPerformed
-
-private void satExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_satExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(satTextField);
-}//GEN-LAST:event_satExaminarActionPerformed
-
-private void createInstSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstSparqlActionPerformed
-// TODO add your handling code here:
-    addinstances.setVisible(true);
-}//GEN-LAST:event_createInstSparqlActionPerformed
-
-private void instSparqlExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instSparqlExaminarActionPerformed
-// TODO add your handling code here:
-    openFile(instSparqlTextField);
-}//GEN-LAST:event_instSparqlExaminarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton SPARQLRadioButton;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel1;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel2;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel3;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel4;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel5;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel6;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel7;
+    private ontologytestinggui.addInstancesJPanel addInstancesJPanel8;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel1;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel10;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel2;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel3;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel4;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel5;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel6;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel7;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel8;
+    private ontologytestinggui.addInstancesTFJPanel addInstancesTFJPanel9;
+    private ontologytestinggui.addQuerySPARQLJPanel addQuerySPARQLJPanel1;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel1;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel10;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel11;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel12;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel13;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel14;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel15;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel16;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel17;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel18;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel19;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel2;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel20;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel21;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel22;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel23;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel24;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel25;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel3;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel4;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel5;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel6;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel7;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel8;
+    private ontologytestinggui.addQueryStringJPanel addQueryStringJPanel9;
     private javax.swing.JButton backButton;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton clasExaminar;
-    private javax.swing.JTextField clasTextField;
-    private javax.swing.JButton comExaminar;
-    private javax.swing.JTextField comTextField;
-    private javax.swing.JButton createInstClas;
-    private javax.swing.JButton createInstComp;
-    private javax.swing.JButton createInstInst;
-    private javax.swing.JButton createInstNewRol;
-    private javax.swing.JButton createInstRec;
-    private javax.swing.JButton createInstRet;
-    private javax.swing.JButton createInstSat;
-    private javax.swing.JButton createInstSparql;
     private javax.swing.JPanel endPanel;
     private javax.swing.JCheckBox fileCheckBox;
     private javax.swing.JTextField fisicalOntoTextField;
-    private javax.swing.JButton instExaminar;
-    private javax.swing.JButton instSparqlExaminar;
-    private javax.swing.JTextField instSparqlTextField;
-    private javax.swing.JTextField instTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -1658,36 +1200,40 @@ private void instSparqlExaminarActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1700,38 +1246,14 @@ private void instSparqlExaminarActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton newExaminar;
-    private javax.swing.JTextField newTextField;
     private javax.swing.JButton nextButton;
     private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JButton ontoExaminar;
     private javax.swing.JTextField ontoURITextField;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel querysPanel;
-    private javax.swing.JButton recExaminar;
-    private javax.swing.JTextField recTextField;
-    private javax.swing.JButton retExaminar;
-    private javax.swing.JTextField retTextField;
-    private javax.swing.JButton satExaminar;
-    private javax.swing.JTextField satTextField;
     private javax.swing.JPanel testsPanel;
     private javax.swing.JRadioButton testsRadioButton;
     private javax.swing.JTabbedPane testsTabbedPane;
