@@ -35,6 +35,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    @SuppressWarnings("empty-statement")
     public static void main(String[] args) throws FileNotFoundException, IOException{
         
      String ontologyFisical="",ontologyURI="";
@@ -56,7 +57,7 @@ public class Main {
         myClassInstances.add("Male(john)");
         myClassInstances.add("Male(tom)");
         myClassInstances.add("Female(marry)");
-        myClassInstances.add("Wife(lee)");
+        myClassInstances.add("Wife(tom)");
         myPropertyInstances.add("hasChild(lee,tom)");
         myPropertyInstances.add("hasChild(marry,john)");
         

@@ -12,7 +12,7 @@
     <string>Female(marry)</string> 
    </void> 
    <void method="add"> 
-    <string>Wife(lee)</string> 
+    <string>Wife(tom)</string> 
    </void> 
   </void> 
   <void property="propertyInstances"> 

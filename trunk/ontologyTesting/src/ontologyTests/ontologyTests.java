@@ -13,6 +13,7 @@ import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.Resource;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -44,8 +45,8 @@ public class ontologyTests {
         return "false";
     } 
     
-    //Saber los individuos que pertenecen a una clase
-    //Todos los individuos que son instancias de un concepto    
+    //Saber TODOS los individuos que pertenecen a una clase
+    //TODOS los individuos que son instancias de un concepto    
     public String retieval(String ns, String className, OntModel model){
         
         String rval="";
@@ -76,6 +77,36 @@ public class ontologyTests {
         String className = resource.toString().substring(resource.toString().indexOf("#")+1);
         
         return className;
-    }    
+    }  
+    
+    //Saber si un concepto (concepto) está incluido en otro (loIncluye)
+    public String satisfactibility(String ns, OntModel model, String concepto, 
+            String loIncluye){
+                
+        OntClass male = model.getOntClass(ns + loIncluye);
+        for(Iterator i = male.listSubClasses(); i.hasNext();){
+            OntClass c = (OntClass) i.next();
+            if(c.getLocalName().equals(concepto))
+                return "true";
+        }
+        return "false";
+    }
+    
+    //Dado un individuo, deducir todas las clases a las que pertenece
+    public ArrayList classification(String ns, OntModel model, String individuo){
+        
+        String pertenece;
+        ArrayList clases = new ArrayList();
+        Iterator it = model.listClasses();
+
+        while(it.hasNext()){
+            String[] instanceName = it.next().toString().split("#");
+            pertenece = instantiation(ns, instanceName[1].toString(), individuo, model);
+            if(pertenece.equals("true")){
+                clases.add(instanceName[1]);
+            }
+        }       
+        return clases;
+    }
     
 }

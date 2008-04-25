@@ -39,7 +39,9 @@ public class OntologyTestCase implements OntologyTest{
     private Individual classValue, hasprop;
     private Property nameprop;
     private XMLDecoder decoder;
-    private ScenarioTest scenarioTest;
+    private ArrayList al;
+    private QueryOntology qo;
+    private ScenarioTest scenarioTest,qoo;
                     
     public OntologyTestCase(){
     }
@@ -48,14 +50,22 @@ public class OntologyTestCase implements OntologyTest{
         
     try{
          decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("instances.xml")));
-         scenarioTest = (ScenarioTest)decoder.readObject();
+         qoo = (ScenarioTest)decoder.readObject();
+         al = (ArrayList)decoder.readObject();
+         ListIterator li;
+         li = al.listIterator();
+         while(li.hasNext()){
+            qo = (QueryOntology) li.next();
+            System.out.println("sss"+qo.getQuery());
+            System.out.println("ppp"+qo.getResultExpected());
+         }
          decoder.close();           
     }catch(FileNotFoundException e){
     }         
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];    
-    
+        
     model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
     model.read(ont);  
     model.prepare();
@@ -96,7 +106,7 @@ public class OntologyTestCase implements OntologyTest{
         String res[],clasF,indF;
         List<QueryOntology> queryTest = scenariotest.getTests();
         
-        String resObtenidoInst="",resQueryExpected="";
+        String resObtenidoInst="",resQueryExpected="",resObtenidoSat="";
         QueryOntology qo = null;
                 
         ontologyTests tests = new ontologyTests();
@@ -111,9 +121,16 @@ public class OntologyTestCase implements OntologyTest{
                 res = query.split(",");
                 clasF = res[0];
                 indF = res[1];
-                resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
+                //resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
                 //String resObtenidoRet = tests.retieval(ns, clasF, model);
                 //String resObtenidoReal = tests.realization(ns, indF, model); 
+                //resObtenidoSat = tests.satisfactibility(ns,model,"Male","Person");
+                //ArrayList result = tests.classification(ns,model,"tom");
+                /*ListIterator l;
+                l = result.listIterator();
+                while(l.hasNext()){
+                    System.out.println(l.next());
+                }*/
             }
             
             if(!resObtenidoInst.equals(resQueryExpected)){
