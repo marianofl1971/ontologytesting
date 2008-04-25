@@ -30,6 +30,7 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
         resQueryTextField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
 
         queryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -38,6 +39,9 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
         });
 
         jButton1.setText("Duplicar");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/comment.png"))); // NOI18N
+        jButton2.setText("Comentario");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,9 +52,11 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
                 .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(resQueryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(selectCheckBox)
                 .addGap(17, 17, 17))
         );
@@ -65,7 +71,8 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(resQueryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addComponent(jButton2))
                     .addComponent(selectCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -81,6 +88,7 @@ private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JTextField resQueryTextField;
     private javax.swing.JCheckBox selectCheckBox;
@@ -109,5 +117,7 @@ private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GE
     public void setSelectCheckBox(javax.swing.JCheckBox selectCheckBox) {
         this.selectCheckBox = selectCheckBox;
     }
+
+
 
 }

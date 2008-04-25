@@ -31,6 +31,7 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
         selectCheckBox = new javax.swing.JCheckBox();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        comentButton = new javax.swing.JButton();
 
         queryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -44,6 +45,14 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
 
         jRadioButton2.setText("False");
 
+        comentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/comment.png"))); // NOI18N
+        comentButton.setText("Comentario");
+        comentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comentButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -51,11 +60,13 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(comentButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(64, 64, 64)
                 .addComponent(selectCheckBox)
@@ -68,9 +79,10 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)
                         .addComponent(jRadioButton1)
                         .addComponent(jRadioButton2)
-                        .addComponent(jButton1))
+                        .addComponent(comentButton))
                     .addComponent(selectCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -80,8 +92,13 @@ private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
 }//GEN-LAST:event_queryTextFieldActionPerformed
 
+private void comentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentButtonActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_comentButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton comentButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -120,6 +137,5 @@ private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GE
     public void setSelectCheckBox(javax.swing.JCheckBox selectCheckBox) {
         this.selectCheckBox = selectCheckBox;
     }
-
 
 }
