@@ -6,12 +6,24 @@
 
 package ontologytestinggui;
 
+import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
 /**
  *
  * @author  sara_garcia
  */
 public class addInstancesJPanel extends javax.swing.JPanel {
 
+    public addInstancesJDialog addinstances= new addInstancesJDialog(new JFrame(),true);
+    public JFileChooser filechooser = new JFileChooser();
+    public Component frame;
+    
     /** Creates new form addInstancesJPanel */
     public addInstancesJPanel() {
         initComponents();
@@ -91,12 +103,28 @@ public class addInstancesJPanel extends javax.swing.JPanel {
 
 private void createInstInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstInstActionPerformed
 // TODO add your handling code here:
+    addinstances.setVisible(true);
 }//GEN-LAST:event_createInstInstActionPerformed
 
 private void instExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instExaminarActionPerformed
 // TODO add your handling code here:
+    openFile(instTextField);  
 }//GEN-LAST:event_instExaminarActionPerformed
 
+private void openFile(JTextField textfield){
+      int option = filechooser.showOpenDialog(frame);
+      if (option == JFileChooser.APPROVE_OPTION) {
+          File selectedFile = filechooser.getSelectedFile();
+          textfield.setText(selectedFile.getPath());
+         try {
+             FileReader textReader = new FileReader( selectedFile );
+             System.out.println(textReader+"sara");
+         }
+         catch (FileNotFoundException e) {
+            // Handle the error.
+         }
+      }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createInstInst;

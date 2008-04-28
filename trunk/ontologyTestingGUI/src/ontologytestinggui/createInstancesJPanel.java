@@ -27,13 +27,8 @@ public class createInstancesJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         classTextField = new javax.swing.JTextField();
-        propertyTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         selClassCheckBox = new javax.swing.JCheckBox();
-        selPropCheckBox = new javax.swing.JCheckBox();
-
-        jButton1.setText("Duplicar");
 
         jButton2.setText("Duplicar");
 
@@ -48,26 +43,16 @@ public class createInstancesJPanel extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addGap(35, 35, 35)
                 .addComponent(selClassCheckBox)
-                .addGap(45, 45, 45)
-                .addComponent(propertyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(35, 35, 35)
-                .addComponent(selPropCheckBox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2)
-                        .addComponent(selClassCheckBox)
-                        .addComponent(propertyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
-                    .addComponent(selPropCheckBox))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(classTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(selClassCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -75,11 +60,8 @@ public class createInstancesJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField classTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField propertyTextField;
     private javax.swing.JCheckBox selClassCheckBox;
-    private javax.swing.JCheckBox selPropCheckBox;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JTextField getClassTextField() {
@@ -90,28 +72,12 @@ public class createInstancesJPanel extends javax.swing.JPanel {
         this.classTextField = classTextField;
     }
 
-    public javax.swing.JTextField getPropertyTextField() {
-        return propertyTextField;
-    }
-
-    public void setPropertyTextField(javax.swing.JTextField propertyTextField) {
-        this.propertyTextField = propertyTextField;
-    }
-
     public javax.swing.JCheckBox getSelClassCheckBox() {
         return selClassCheckBox;
     }
 
     public void setSelClassCheckBox(javax.swing.JCheckBox selClassCheckBox) {
         this.selClassCheckBox = selClassCheckBox;
-    }
-
-    public javax.swing.JCheckBox getSelPropCheckBox() {
-        return selPropCheckBox;
-    }
-
-    public void setSelPropCheckBox(javax.swing.JCheckBox selPropCheckBox) {
-        this.selPropCheckBox = selPropCheckBox;
     }
 
 }

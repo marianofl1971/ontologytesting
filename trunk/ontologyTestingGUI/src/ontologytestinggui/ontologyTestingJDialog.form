@@ -22,31 +22,34 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="547" max="32767" attributes="0"/>
+              <EmptySpace pref="516" max="32767" attributes="0"/>
               <Component id="backButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="nextButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="cancelButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="847" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="mainPanel" pref="1620" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="mainPanel" alignment="0" pref="824" max="32767" attributes="0"/>
-          <Component id="jSeparator1" alignment="0" pref="824" max="32767" attributes="0"/>
+          <Component id="jSeparator1" alignment="0" pref="1630" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="mainPanel" pref="539" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="mainPanel" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="backButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nextButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -108,47 +111,53 @@
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
+                                  <Component id="testsRadioButton2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="testsRadioButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="fileCheckBox" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel3" pref="1388" max="32767" attributes="1"/>
+                                  <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel3" pref="592" max="32767" attributes="1"/>
-                                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="ontoURITextField" linkSize="4" pref="356" max="32767" attributes="1"/>
+                                  <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1364" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace pref="1370" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="fisicalOntoTextField" linkSize="4" min="-2" pref="356" max="-2" attributes="1"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="ontoExaminar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1159" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel7" alignment="0" pref="1152" max="32767" attributes="0"/>
+                                      <Component id="jLabel6" alignment="1" pref="1152" max="32767" attributes="1"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="ontoURITextField" linkSize="4" pref="356" max="32767" attributes="1"/>
-                                      <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="568" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="1"/>
-                                      <EmptySpace pref="574" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="fisicalOntoTextField" linkSize="4" min="-2" pref="356" max="-2" attributes="1"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="ontoExaminar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="363" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel7" alignment="0" pref="356" max="32767" attributes="0"/>
-                                          <Component id="jLabel6" alignment="1" pref="356" max="32767" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel4" pref="592" max="32767" attributes="1"/>
-                                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="458" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="fileCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1421" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel4" pref="1388" max="32767" attributes="1"/>
+                                  <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="testsRadioButton1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="1507" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -179,13 +188,17 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="testsRadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="testsRadioButton2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="testsRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="SPARQLRadioButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="fileCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -215,7 +228,7 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="SPARQLRadioButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consultas SPARQL"/>
+                <Property name="text" type="java.lang.String" value="Probar test existentes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SPARQLRadioButtonActionPerformed"/>
@@ -223,7 +236,7 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="testsRadioButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Test de pruebas"/>
+                <Property name="text" type="java.lang.String" value="Crear nuevos test de pruebas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testsRadioButtonActionPerformed"/>
@@ -257,6 +270,22 @@
                 <Property name="text" type="java.lang.String" value="Por favor, complete los siguientes campos:"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JRadioButton" name="testsRadioButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear instancias"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testsRadioButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="testsRadioButton2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear consultas SPARQL"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testsRadioButton2ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="testsPanel">
@@ -271,13 +300,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel8" pref="820" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="852" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="testsTabbedPane" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <Component id="testsTabbedPane" min="-2" pref="862" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -287,12 +316,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="799" max="32767" attributes="0"/>
+                      <EmptySpace pref="795" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="testsTabbedPane" pref="776" max="32767" attributes="0"/>
+                          <Component id="testsTabbedPane" pref="772" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -311,7 +340,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel1">
+                <Container class="javax.swing.JPanel" name="instanciacionPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Instanciaci&#xf3;n">
@@ -326,112 +355,85 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="addInstancesJPanel1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace pref="201" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jButton22" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="saveCommentJPanel1" linkSize="40" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="650" max="-2" attributes="0"/>
+                                              <Component id="infInstButton" linkSize="40" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jScrollPane8" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
                                       </Group>
-                                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane7" alignment="0" pref="812" max="32767" attributes="0"/>
+                                  <Component id="addInstancesJPanel9" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton22" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="saveCommentJPanel1" linkSize="41" min="-2" max="-2" attributes="0"/>
+                                  <Component id="infInstButton" linkSize="41" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane8" pref="23" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="15" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="addInstancesJPanel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton9">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel9">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel1">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton2">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton22">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane8">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel13">
+                        <Container class="javax.swing.JPanel" name="jPanel20">
 
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addInstancesTFJPanel24" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel23" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel22" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel19" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="addInstancesTFJPanel36" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel35" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel34" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel32" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel31" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                              <Component id="jLabel41" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                              <Component id="jLabel42" min="-2" pref="115" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="addInstancesTFJPanel33" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace pref="151" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="jLabel27" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jLabel28" min="-2" pref="115" max="-2" attributes="0"/>
-                                      <EmptySpace pref="464" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -440,28 +442,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="10" max="32767" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel19" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel31" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel20" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel32" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel21" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel33" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel22" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel34" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel23" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel35" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel24" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel36" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel27">
+                            <Component class="javax.swing.JLabel" name="jLabel41">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -469,7 +471,7 @@
                                 <Property name="text" type="java.lang.String" value="Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel28">
+                            <Component class="javax.swing.JLabel" name="jLabel42">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -477,25 +479,47 @@
                                 <Property name="text" type="java.lang.String" value="     Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel19">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel31">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel20">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel32">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel21">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel33">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel22">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel34">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel23">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel35">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel24">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel36">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="infInstButton">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infInstButtonActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton1">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel1">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel2">
+                <Container class="javax.swing.JPanel" name="recuperacionPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Recuperaci&#xf3;n">
@@ -507,28 +531,22 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" alignment="1" pref="802" max="32767" attributes="0"/>
+                                  <Component id="addInstancesJPanel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="addInstancesJPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace pref="201" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jButton23" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="saveCommentJPanel2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                                      <Component id="jButton42" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane7" pref="544" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -538,58 +556,34 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton23" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jButton42" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveCommentJPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" pref="534" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane7" min="-2" pref="472" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addInstancesJPanel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton8">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel10">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel2">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton3">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton4">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton23">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane7">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel14">
+                        <Container class="javax.swing.JPanel" name="jPanel21">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -597,19 +591,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addQueryStringJPanel42" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel41" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel40" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel39" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel38" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel37" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel72" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel71" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel70" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel69" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel68" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel67" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel29" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <Component id="jLabel43" min="-2" pref="175" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel30" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jLabel44" min="-2" pref="115" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -618,28 +612,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel37" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel67" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel38" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel68" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel39" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel69" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel40" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel70" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel41" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel71" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel42" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="addQueryStringJPanel72" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel29">
+                            <Component class="javax.swing.JLabel" name="jLabel43">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -647,7 +641,7 @@
                                 <Property name="text" type="java.lang.String" value="   Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel30">
+                            <Component class="javax.swing.JLabel" name="jLabel44">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -655,25 +649,47 @@
                                 <Property name="text" type="java.lang.String" value="Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel37">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel67">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel38">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel68">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel39">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel69">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel40">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel70">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel41">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel71">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel42">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel72">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton42">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton42ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton3">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton4">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel2">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel3">
+                <Container class="javax.swing.JPanel" name="comprensionPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Comprensi&#xf3;n">
@@ -686,20 +702,23 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="addInstancesJPanel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButton10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="addInstancesJPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton24" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton17" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="saveCommentJPanel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                                      <Component id="jButton47" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane2" alignment="0" pref="802" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane10" pref="544" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -707,58 +726,34 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton24" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton47" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveCommentJPanel3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane10" min="-2" pref="490" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addInstancesJPanel12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton10">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel12">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel3">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton5">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton17">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton24">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane10">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel15">
+                        <Container class="javax.swing.JPanel" name="jPanel23">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -766,19 +761,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addQueryStringJPanel48" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel47" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel46" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel45" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel44" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel43" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel78" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel77" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel76" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel75" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel74" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel73" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel31" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <Component id="jLabel47" min="-2" pref="175" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel32" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jLabel48" min="-2" pref="115" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -787,28 +782,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel43" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel73" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel44" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel74" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel45" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel75" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel46" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel76" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel47" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel77" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel48" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="addQueryStringJPanel78" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel31">
+                            <Component class="javax.swing.JLabel" name="jLabel47">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -816,7 +811,7 @@
                                 <Property name="text" type="java.lang.String" value="   Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel32">
+                            <Component class="javax.swing.JLabel" name="jLabel48">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -824,25 +819,44 @@
                                 <Property name="text" type="java.lang.String" value="Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel43">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel73">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel44">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel74">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel45">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel75">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel46">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel76">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel47">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel77">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel48">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel78">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton47">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton7">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton8">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel3">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel4">
+                <Container class="javax.swing.JPanel" name="retievalPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Retrieval">
@@ -855,20 +869,23 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton25" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton18" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addInstancesJPanel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButton11" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                                      <Component id="saveCommentJPanel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                                      <Component id="jButton49" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="addInstancesJPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" alignment="0" pref="802" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane11" pref="544" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -876,58 +893,34 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton18" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton25" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton49" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveCommentJPanel4" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="534" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane11" min="-2" pref="490" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addInstancesJPanel13" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton11">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel13">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel4">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton6">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton18">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton25">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane11">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel16">
+                        <Container class="javax.swing.JPanel" name="jPanel24">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -935,19 +928,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addQueryStringJPanel54" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel53" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel52" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel51" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel50" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel49" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel84" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel83" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel82" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel81" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel80" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel79" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel33" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <Component id="jLabel49" min="-2" pref="175" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel34" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jLabel50" min="-2" pref="115" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -956,28 +949,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel50" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel49" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel79" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel50" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel80" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel51" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel81" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel52" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel82" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel53" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel83" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel54" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="addQueryStringJPanel84" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel33">
+                            <Component class="javax.swing.JLabel" name="jLabel49">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -985,7 +978,7 @@
                                 <Property name="text" type="java.lang.String" value="   Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel34">
+                            <Component class="javax.swing.JLabel" name="jLabel50">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -993,25 +986,44 @@
                                 <Property name="text" type="java.lang.String" value="Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel49">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel79">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel50">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel80">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel51">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel81">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel52">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel82">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel53">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel83">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel54">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel84">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton49">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton9">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton10">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel4">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel5">
+                <Container class="javax.swing.JPanel" name="clasificacionPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Clasificaci&#xf3;n">
@@ -1024,29 +1036,26 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jButton12" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="addInstancesJPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jButton26" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="jButton19" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addInstancesJPanel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton12" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane4" alignment="0" pref="802" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="saveClasButton" linkSize="38" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="addComClasButton" linkSize="38" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                                      <Component id="jButton51" linkSize="38" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane12" pref="544" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1055,57 +1064,34 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton19" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton26" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="saveClasButton" linkSize="39" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addComClasButton" linkSize="39" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton51" linkSize="39" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" pref="534" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane12" min="-2" pref="490" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jButton11" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addInstancesJPanel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton12">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel14">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel5">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton7">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton19">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton26">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane12">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel17">
+                        <Container class="javax.swing.JPanel" name="jPanel25">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -1113,19 +1099,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addQueryStringJPanel60" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel59" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel58" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel57" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel56" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel55" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel90" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel89" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel88" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel87" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel86" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel85" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel35" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <Component id="jLabel51" min="-2" pref="175" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel36" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jLabel52" min="-2" pref="115" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1134,28 +1120,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel52" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel55" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel85" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel56" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel86" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel57" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel87" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel58" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel88" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel59" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel89" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel60" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="addQueryStringJPanel90" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel35">
+                            <Component class="javax.swing.JLabel" name="jLabel51">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1163,7 +1149,7 @@
                                 <Property name="text" type="java.lang.String" value="   Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel36">
+                            <Component class="javax.swing.JLabel" name="jLabel52">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1171,25 +1157,56 @@
                                 <Property name="text" type="java.lang.String" value="Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel55">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel85">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel56">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel86">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel57">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel87">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel58">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel88">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel59">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel89">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel60">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel90">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="saveClasButton">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/save.png"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="addComClasButton">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/comment.png"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton51">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton11">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton12">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel7">
+                <Container class="javax.swing.JPanel" name="newIndivPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Nuevo individuo/rol">
@@ -1201,21 +1218,28 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jButton13" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton15" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane9" pref="544" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="addInstancesJPanel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton27" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton20" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="saveCommentJPanel5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="357" max="32767" attributes="0"/>
+                                              <Component id="jButton45" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <Component id="jScrollPane5" alignment="1" pref="802" max="32767" attributes="0"/>
+                                  <Component id="addInstancesJPanel11" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1225,78 +1249,57 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton20" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jButton45" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveCommentJPanel5" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" pref="532" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton15" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane9" pref="23" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="addInstancesJPanel11" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton13">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel11">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel6">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton15">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton20">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton27">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane9">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel18">
+                        <Container class="javax.swing.JPanel" name="jPanel22">
 
                           <Layout>
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addInstancesTFJPanel30" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel29" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel26" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addInstancesTFJPanel25" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="addInstancesTFJPanel42" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel41" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel40" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel39" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="addInstancesTFJPanel37" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                              <Component id="jLabel45" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                              <Component id="jLabel46" min="-2" pref="115" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace pref="141" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="jLabel37" min="-2" pref="175" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="jLabel38" min="-2" pref="115" max="-2" attributes="0"/>
-                                      <EmptySpace pref="454" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1305,28 +1308,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="10" max="32767" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel25" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel37" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel26" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel38" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel27" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel39" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel28" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel40" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel29" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel41" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel30" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addInstancesTFJPanel42" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel37">
+                            <Component class="javax.swing.JLabel" name="jLabel45">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1334,7 +1337,7 @@
                                 <Property name="text" type="java.lang.String" value="Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel38">
+                            <Component class="javax.swing.JLabel" name="jLabel46">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1342,25 +1345,44 @@
                                 <Property name="text" type="java.lang.String" value="     Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel25">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel37">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel26">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel38">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel27">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel39">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel28">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel40">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel29">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel41">
                             </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel30">
+                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel42">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton45">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton5">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton6">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel5">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel6">
+                <Container class="javax.swing.JPanel" name="satisfactibilidadPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Satisfactibilidad">
@@ -1373,20 +1395,23 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="addInstancesJPanel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton13" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jButton16" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="addInstancesJPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton28" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton21" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="saveCommentJPanel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                                      <Component id="jButton53" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane6" alignment="0" pref="802" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jScrollPane13" pref="544" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1397,55 +1422,31 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton21" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton28" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton53" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveCommentJPanel6" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" pref="530" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="addInstancesJPanel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane13" min="-2" pref="490" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jButton13" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton14" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton16" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="addInstancesJPanel15" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JButton" name="jButton14">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Limpiar"/>
-                      </Properties>
+                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel15">
                     </Component>
-                    <Component class="ontologytestinggui.addInstancesJPanel" name="addInstancesJPanel7">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton16">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Borrar"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton21">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton28">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/comment.png"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane13">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel19">
+                        <Container class="javax.swing.JPanel" name="jPanel26">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -1453,19 +1454,19 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="addQueryStringJPanel66" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel65" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel64" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel63" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel62" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="addQueryStringJPanel61" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel96" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel95" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel94" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel93" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel92" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addQueryStringJPanel91" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="1">
-                                              <Component id="jLabel39" min="-2" pref="175" max="-2" attributes="0"/>
+                                              <Component id="jLabel53" min="-2" pref="175" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel40" min="-2" pref="115" max="-2" attributes="0"/>
+                                              <Component id="jLabel54" min="-2" pref="115" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1474,28 +1475,28 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel61" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel91" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel62" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel92" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel63" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel93" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel64" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel94" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel65" min="-2" max="-2" attributes="0"/>
+                                      <Component id="addQueryStringJPanel95" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel66" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="addQueryStringJPanel96" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel39">
+                            <Component class="javax.swing.JLabel" name="jLabel53">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1503,7 +1504,7 @@
                                 <Property name="text" type="java.lang.String" value="   Consultas"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel40">
+                            <Component class="javax.swing.JLabel" name="jLabel54">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Arial Black" size="12" style="0"/>
@@ -1511,25 +1512,44 @@
                                 <Property name="text" type="java.lang.String" value="Resultado"/>
                               </Properties>
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel61">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel91">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel62">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel92">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel63">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel93">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel64">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel94">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel65">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel95">
                             </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel66">
+                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel96">
                             </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JButton" name="jButton53">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton13">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Limpiar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton14">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Borrar"/>
+                      </Properties>
+                    </Component>
+                    <Component class="ontologytestinggui.saveCommentJPanel" name="saveCommentJPanel6">
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel8">
+                <Container class="javax.swing.JPanel" name="partitionsPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Comprobar particiones">
@@ -1541,12 +1561,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="822" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="748" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1568,10 +1588,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="addInstancesJPanel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="addInstancesJPanel8" min="-2" max="-2" attributes="0"/>
                           <Component id="addQuerySPARQLJPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1582,7 +1602,7 @@
                       <Component id="addInstancesJPanel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="addQuerySPARQLJPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1611,7 +1631,7 @@
                           <Component id="yesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="0" min="-2" pref="618" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1624,7 +1644,7 @@
                       <Component id="yesCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="noCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="437" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1646,6 +1666,26 @@
               </Properties>
             </Component>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card6"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
       </SubComponents>
     </Container>

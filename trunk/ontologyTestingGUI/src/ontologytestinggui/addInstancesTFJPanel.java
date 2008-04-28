@@ -6,11 +6,15 @@
 
 package ontologytestinggui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author  sara_garcia
  */
 public class addInstancesTFJPanel extends javax.swing.JPanel {    
+    
+    public saveCommentJDialog addcomment= new saveCommentJDialog(new JFrame(),true);
     
     /** Creates new form addInstancesTFJPanel */
     public addInstancesTFJPanel() {
@@ -90,10 +94,13 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
 
 private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryTextFieldActionPerformed
 // TODO add your handling code here:
+    
 }//GEN-LAST:event_queryTextFieldActionPerformed
 
 private void comentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentButtonActionPerformed
 // TODO add your handling code here:
+    addcomment.setTitle("Comentar query");
+    addcomment.setVisible(true);
 }//GEN-LAST:event_comentButtonActionPerformed
 
 
