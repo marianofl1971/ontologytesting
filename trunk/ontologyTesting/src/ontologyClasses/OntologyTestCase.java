@@ -41,7 +41,7 @@ public class OntologyTestCase implements OntologyTest{
     private XMLDecoder decoder;
     private ArrayList al;
     private QueryOntology qo;
-    private ScenarioTest scenarioTest,qoo;
+    private ScenarioTest scenarioTest;
                     
     public OntologyTestCase(){
     }
@@ -50,14 +50,14 @@ public class OntologyTestCase implements OntologyTest{
         
     try{
          decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("instances.xml")));
-         qoo = (ScenarioTest)decoder.readObject();
+         scenarioTest = (ScenarioTest)decoder.readObject();
          al = (ArrayList)decoder.readObject();
          ListIterator li;
          li = al.listIterator();
          while(li.hasNext()){
             qo = (QueryOntology) li.next();
-            System.out.println("sss"+qo.getQuery());
-            System.out.println("ppp"+qo.getResultExpected());
+            System.out.println("Query con xmldecoder: "+qo.getQuery());
+            System.out.println("Result con xmldecoder: "+qo.getResultExpected());
          }
          decoder.close();           
     }catch(FileNotFoundException e){
@@ -70,8 +70,8 @@ public class OntologyTestCase implements OntologyTest{
     model.read(ont);  
     model.prepare();
    
-    List<String> classInstances = scenarioTest.getClassInstances();
-    List<String> propertyInstances = scenarioTest.getPropertyInstances();
+    List<String> classInstances = st.getClassInstances();
+    List<String> propertyInstances = st.getPropertyInstances();
   
     liClass = classInstances.listIterator();
     liProperties = propertyInstances.listIterator();
@@ -121,8 +121,8 @@ public class OntologyTestCase implements OntologyTest{
                 res = query.split(",");
                 clasF = res[0];
                 indF = res[1];
-                //resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
-                //String resObtenidoRet = tests.retieval(ns, clasF, model);
+                resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
+                //StringBuilder resObtenidoRet = tests.retieval(ns, clasF, model);
                 //String resObtenidoReal = tests.realization(ns, indF, model); 
                 //resObtenidoSat = tests.satisfactibility(ns,model,"Male","Person");
                 //ArrayList result = tests.classification(ns,model,"tom");

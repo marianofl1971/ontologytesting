@@ -47,9 +47,10 @@ public class ontologyTests {
     
     //Saber TODOS los individuos que pertenecen a una clase
     //TODOS los individuos que son instancias de un concepto    
-    public String retieval(String ns, String className, OntModel model){
+    public StringBuilder retieval(String ns, String className, OntModel model){
         
-        String rval="";
+        int cont=0;
+        StringBuilder rval = new StringBuilder();
         OntClass ontClass = model.getOntClass(ns + className);         
         Iterator it = ontClass.listInstances();
         
@@ -58,9 +59,14 @@ public class ontologyTests {
             String instanceName=it.next().toString();
             instanceName=instanceName.substring(instanceName.indexOf("#")+1);
             
-            if(!rval.equals(""))
-                rval+=",";
-            rval+=instanceName;
+            if(!rval.equals("")){
+                if(cont==0){
+                    rval.append(instanceName);
+                    cont=1;
+                }else{
+                    rval.append(","+instanceName);
+                }
+            }
         }
         return rval;
     }    
