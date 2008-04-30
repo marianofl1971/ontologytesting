@@ -6,6 +6,8 @@
 
 package ontologytestinggui;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author  sara.garcia
@@ -126,5 +128,13 @@ public class saveCommentJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    public JTextArea getComentTextArea() {
+        return comentTextArea;
+    }
+    
+    public void setCommentTextArea(String comment){
+        comentTextArea.setText(comment);
+    }
 
 }

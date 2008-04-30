@@ -182,8 +182,8 @@ private void saveToFile(){
         return queryTextArea;
     }
 
-    public void setJTextArea1(javax.swing.JTextArea jTextArea1) {
-        this.queryTextArea = jTextArea1;
+    public void setQuerySPARQLTextField(String querySPARQL){
+        queryTextArea.setText(querySPARQL);
     }
 
 }

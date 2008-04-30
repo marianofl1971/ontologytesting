@@ -6,6 +6,8 @@
 
 package ontologytestinggui;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author  sara_garcia
@@ -31,6 +33,7 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         queryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +46,9 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/comment.png"))); // NOI18N
         jButton2.setText("Comentario");
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/Delete.png"))); // NOI18N
+        jButton3.setText("Borrar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,9 +58,11 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
                 .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(resQueryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
                 .addGap(39, 39, 39)
                 .addComponent(selectCheckBox)
@@ -62,6 +70,8 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {queryTextField, resQueryTextField});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton3});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,12 +82,15 @@ public class addQueryStringJPanel extends javax.swing.JPanel {
                         .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(resQueryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addComponent(jButton3))
                     .addComponent(selectCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {queryTextField, resQueryTextField});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -89,33 +102,26 @@ private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GE
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JTextField resQueryTextField;
     private javax.swing.JCheckBox selectCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JTextField getQueryTextField() {
+    public JTextField getQueryTextField() {
         return queryTextField;
     }
 
-    public void setQueryTextField(javax.swing.JTextField queryTextField) {
-        this.queryTextField = queryTextField;
-    }
-
-    public javax.swing.JTextField getResQueryTextField() {
+    public JTextField getResQueryTextField() {
         return resQueryTextField;
     }
 
-    public void setResQueryTextField(javax.swing.JTextField resQueryTextField) {
-        this.resQueryTextField = resQueryTextField;
+    public void setResultQueryTextField(String resQuery){
+        resQueryTextField.setText(resQuery);
     }
-
-    public javax.swing.JCheckBox getSelectCheckBox() {
-        return selectCheckBox;
-    }
-
-    public void setSelectCheckBox(javax.swing.JCheckBox selectCheckBox) {
-        this.selectCheckBox = selectCheckBox;
+    
+    public void setQueryTextField(String query){
+        queryTextField.setText(query);
     }
 
 

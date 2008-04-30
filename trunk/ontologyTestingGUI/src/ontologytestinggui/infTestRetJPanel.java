@@ -10,10 +10,10 @@ package ontologytestinggui;
  *
  * @author  sara_garcia
  */
-public class intTestRetJPanel extends javax.swing.JPanel {
+public class infTestRetJPanel extends javax.swing.JPanel {
 
     /** Creates new form intTestRetJPanel */
-    public intTestRetJPanel() {
+    public infTestRetJPanel() {
         initComponents();
     }
 

@@ -6,6 +6,8 @@
 
 package ontologytestinggui;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author  sara_garcia
@@ -64,20 +66,12 @@ public class createInstancesJPanel extends javax.swing.JPanel {
     private javax.swing.JCheckBox selClassCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JTextField getClassTextField() {
+    public JTextField getClassTextField() {
         return classTextField;
     }
 
-    public void setClassTextField(javax.swing.JTextField classTextField) {
-        this.classTextField = classTextField;
-    }
-
-    public javax.swing.JCheckBox getSelClassCheckBox() {
-        return selClassCheckBox;
-    }
-
-    public void setSelClassCheckBox(javax.swing.JCheckBox selClassCheckBox) {
-        this.selClassCheckBox = selClassCheckBox;
+    public void setClassTextField(String inst){
+        classTextField.setText(inst);
     }
 
 }

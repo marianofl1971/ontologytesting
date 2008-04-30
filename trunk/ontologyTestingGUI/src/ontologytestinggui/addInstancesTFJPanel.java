@@ -7,6 +7,7 @@
 package ontologytestinggui;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 /**
  *
@@ -36,6 +37,7 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         comentButton = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         queryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,9 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/Delete.png"))); // NOI18N
+        jButton3.setText("Borrar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,11 +76,16 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(comentButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addGap(64, 64, 64)
+                .addGap(48, 48, 48)
                 .addComponent(selectCheckBox)
-                .addGap(21, 21, 21))
+                .addGap(31, 31, 31))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comentButton, jButton3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -83,13 +93,17 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)
                         .addComponent(jRadioButton1)
                         .addComponent(jRadioButton2)
-                        .addComponent(comentButton))
+                        .addComponent(jButton1)
+                        .addComponent(comentButton)
+                        .addComponent(jButton3))
                     .addComponent(selectCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comentButton, jButton3});
+
     }// </editor-fold>//GEN-END:initComponents
 
 private void queryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryTextFieldActionPerformed
@@ -107,42 +121,19 @@ private void comentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton comentButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JCheckBox selectCheckBox;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JRadioButton getJRadioButton1() {
-        return jRadioButton1;
-    }
-
-    public void setJRadioButton1(javax.swing.JRadioButton jRadioButton1) {
-        this.jRadioButton1 = jRadioButton1;
-    }
-
-    public javax.swing.JRadioButton getJRadioButton2() {
-        return jRadioButton2;
-    }
-
-    public void setJRadioButton2(javax.swing.JRadioButton jRadioButton2) {
-        this.jRadioButton2 = jRadioButton2;
-    }
-
-    public javax.swing.JTextField getQueryTextField() {
+    public JTextField getQueryTextField() {
         return queryTextField;
     }
-
-    public void setQueryTextField(javax.swing.JTextField queryTextField) {
-        this.queryTextField = queryTextField;
-    }
-
-    public javax.swing.JCheckBox getSelectCheckBox() {
-        return selectCheckBox;
-    }
-
-    public void setSelectCheckBox(javax.swing.JCheckBox selectCheckBox) {
-        this.selectCheckBox = selectCheckBox;
+    
+    public void setQueryTextField(String query){
+        queryTextField.setText(query);
     }
 
 }
