@@ -300,12 +300,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel8" pref="935" max="32767" attributes="0"/>
+                      <Component id="jLabel8" pref="852" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="testsTabbedPane" pref="945" max="32767" attributes="0"/>
+                          <Component id="testsTabbedPane" pref="862" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -363,11 +363,11 @@
                                   <Component id="addInstancesJPanel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane8" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane8" pref="837" max="32767" attributes="1"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -523,7 +523,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -567,12 +567,12 @@
                                   <Component id="addInstancesJPanel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane9" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane9" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -726,7 +726,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton1">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -763,7 +763,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton2" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -775,7 +775,7 @@
                                   <Component id="addInstancesJPanel11" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane10" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane10" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -930,7 +930,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton2">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -967,7 +967,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -979,7 +979,7 @@
                                   <Component id="addInstancesJPanel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane11" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane11" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1134,7 +1134,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton3">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1171,7 +1171,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1183,7 +1183,7 @@
                                   <Component id="addInstancesJPanel13" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane12" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane12" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1338,7 +1338,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton4">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1382,12 +1382,12 @@
                                   <Component id="addInstancesJPanel14" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton5" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane13" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane13" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1541,7 +1541,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton5">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1578,7 +1578,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="saveCommentJPanel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="743" max="32767" attributes="0"/>
+                                      <EmptySpace pref="660" max="32767" attributes="0"/>
                                       <Component id="infInstButton6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -1590,7 +1590,7 @@
                                   <Component id="addInstancesJPanel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                                      <Component id="jScrollPane14" pref="920" max="32767" attributes="1"/>
+                                      <Component id="jScrollPane14" pref="837" max="32767" attributes="1"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1745,7 +1745,7 @@
                     <Component class="javax.swing.JButton" name="infInstButton6">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/imagesgui/log.gif"/>
+                          <Image iconType="3" name="/imagesgui/help.gif"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -1778,7 +1778,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="940" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="857" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">

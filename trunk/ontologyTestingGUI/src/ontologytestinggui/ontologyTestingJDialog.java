@@ -452,7 +452,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane8.setViewportView(jPanel20);
 
-        infInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButtonActionPerformed(evt);
@@ -477,10 +477,10 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE))
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE))
                     .addGroup(instanciacionPanelLayout.createSequentialGroup()
                         .addComponent(saveCommentJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton)))
                 .addContainerGap())
         );
@@ -574,7 +574,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane9.setViewportView(jPanel21);
 
-        infInstButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton1ActionPerformed(evt);
@@ -599,11 +599,11 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel1Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton1))
                     .addGroup(instanciacionPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel1Layout.setVerticalGroup(
@@ -697,7 +697,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane10.setViewportView(jPanel22);
 
-        infInstButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton2ActionPerformed(evt);
@@ -716,7 +716,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addGroup(instanciacionPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(instanciacionPanel2Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton2))
                     .addGroup(instanciacionPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -726,7 +726,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel2Layout.setVerticalGroup(
@@ -820,7 +820,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane11.setViewportView(jPanel23);
 
-        infInstButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton3ActionPerformed(evt);
@@ -839,7 +839,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addGroup(instanciacionPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(instanciacionPanel3Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton3))
                     .addGroup(instanciacionPanel3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -849,7 +849,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel3Layout.setVerticalGroup(
@@ -943,7 +943,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane12.setViewportView(jPanel24);
 
-        infInstButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton4ActionPerformed(evt);
@@ -962,7 +962,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addGroup(instanciacionPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(instanciacionPanel4Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton4))
                     .addGroup(instanciacionPanel4Layout.createSequentialGroup()
                         .addContainerGap()
@@ -972,7 +972,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel4Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel4Layout.setVerticalGroup(
@@ -1065,7 +1065,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane13.setViewportView(jPanel25);
 
-        infInstButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton5ActionPerformed(evt);
@@ -1090,11 +1090,11 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel5Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton5))
                     .addGroup(instanciacionPanel5Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel5Layout.setVerticalGroup(
@@ -1188,7 +1188,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
 
         jScrollPane14.setViewportView(jPanel26);
 
-        infInstButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        infInstButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         infInstButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infInstButton6ActionPerformed(evt);
@@ -1207,7 +1207,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                 .addGroup(instanciacionPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(instanciacionPanel6Layout.createSequentialGroup()
                         .addComponent(saveCommentJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 743, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 660, Short.MAX_VALUE)
                         .addComponent(infInstButton6))
                     .addGroup(instanciacionPanel6Layout.createSequentialGroup()
                         .addContainerGap()
@@ -1217,7 +1217,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
                     .addComponent(addInstancesJPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(instanciacionPanel6Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         instanciacionPanel6Layout.setVerticalGroup(
@@ -1244,7 +1244,7 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
         partitionsPanel.setLayout(partitionsPanelLayout);
         partitionsPanelLayout.setHorizontalGroup(
             partitionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+            .addGap(0, 857, Short.MAX_VALUE)
         );
         partitionsPanelLayout.setVerticalGroup(
             partitionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1259,11 +1259,11 @@ public class ontologyTestingJDialog extends javax.swing.JDialog {
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(testsPanelLayout.createSequentialGroup()
-                    .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
+                    .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         testsPanelLayout.setVerticalGroup(

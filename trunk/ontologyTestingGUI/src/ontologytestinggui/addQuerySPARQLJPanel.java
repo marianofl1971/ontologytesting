@@ -56,7 +56,7 @@ public class addQuerySPARQLJPanel extends javax.swing.JPanel {
 
         jButton2.setText("Ejecutar");
 
-        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/log.gif"))); // NOI18N
+        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/help.gif"))); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
