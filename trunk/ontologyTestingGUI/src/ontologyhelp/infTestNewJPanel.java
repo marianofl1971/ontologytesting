@@ -1,19 +1,19 @@
 /*
- * infTestSatJPanel.java
+ * infTestNewJPanel.java
  *
  * Created on 25 de abril de 2008, 10:09
  */
 
-package ontologytestinggui;
+package ontologyhelp;
 
 /**
  *
  * @author  sara_garcia
  */
-public class infTestSatJPanel extends javax.swing.JPanel {
+public class infTestNewJPanel extends javax.swing.JPanel {
 
-    /** Creates new form infTestSatJPanel */
-    public infTestSatJPanel() {
+    /** Creates new form infTestNewJPanel */
+    public infTestNewJPanel() {
         initComponents();
     }
 
@@ -26,15 +26,15 @@ public class infTestSatJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel36.setText("Test que deduce si un concepto está incluido en otro.");
+        jLabel32.setText("Test que deduce si se podría introducir un nuevo individuo o rol sin que sea contradictorio.");
 
-        jLabel37.setText("Ejemplo: Consulta: Male  Person?  Resultado: True/False");
+        jLabel33.setText("Ejemplo: Consulta: Mujer(Sara)?  Resultado: True/false ");
 
-        jLabel1.setText("TEST SATISFACTIBILIDAD:");
+        jLabel1.setText("TEST NUEVO INDIVIDUO O ROL:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -43,13 +43,10 @@ public class infTestSatJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(132, Short.MAX_VALUE))
-                    .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel37)
-                        .addContainerGap(24, Short.MAX_VALUE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -57,9 +54,9 @@ public class infTestSatJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel36)
+                .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel37)
+                .addComponent(jLabel33)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -67,8 +64,8 @@ public class infTestSatJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     // End of variables declaration//GEN-END:variables
 
 }

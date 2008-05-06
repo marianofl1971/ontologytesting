@@ -5,6 +5,7 @@
 
 package ontologytestinggui;
 
+import ontologyhelp.infTestInstJDialog;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.io.File;

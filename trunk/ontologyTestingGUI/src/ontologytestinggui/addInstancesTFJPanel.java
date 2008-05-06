@@ -32,12 +32,12 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         queryTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        duplexButton = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
         jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        falseButton = new javax.swing.JRadioButton();
         comentButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         queryTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,11 +45,16 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Duplicar");
+        duplexButton.setText("Duplicar");
+        duplexButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                duplexButtonActionPerformed(evt);
+            }
+        });
 
         jRadioButton1.setText("True");
 
-        jRadioButton2.setText("False");
+        falseButton.setText("False");
 
         comentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/comment.png"))); // NOI18N
         comentButton.setText("Comentario");
@@ -59,8 +64,13 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/Delete.png"))); // NOI18N
-        jButton3.setText("Borrar");
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagesgui/Delete.png"))); // NOI18N
+        deleteButton.setText("Borrar");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,19 +82,19 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(falseButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(comentButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addComponent(duplexButton)
                 .addGap(48, 48, 48)
                 .addComponent(selectCheckBox)
                 .addGap(31, 31, 31))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comentButton, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comentButton, deleteButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,15 +104,15 @@ public class addInstancesTFJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jRadioButton1)
-                        .addComponent(jRadioButton2)
-                        .addComponent(jButton1)
+                        .addComponent(falseButton)
+                        .addComponent(duplexButton)
                         .addComponent(comentButton)
-                        .addComponent(jButton3))
+                        .addComponent(deleteButton))
                     .addComponent(selectCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comentButton, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {comentButton, deleteButton});
 
     }// </editor-fold>//GEN-END:initComponents
 
@@ -115,15 +125,27 @@ private void comentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     addcomment.setTitle("Comentar query");
     addcomment.setVisible(true);
+    String comment="";
+    addcomment.setCommentTextArea(comment);
 }//GEN-LAST:event_comentButtonActionPerformed
+
+private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);
+}//GEN-LAST:event_deleteButtonActionPerformed
+
+private void duplexButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplexButtonActionPerformed
+// TODO add your handling code here:
+
+}//GEN-LAST:event_duplexButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton comentButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton duplexButton;
+    private javax.swing.JRadioButton falseButton;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JCheckBox selectCheckBox;
     // End of variables declaration//GEN-END:variables
@@ -134,6 +156,10 @@ private void comentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     
     public void setQueryTextField(String query){
         queryTextField.setText(query);
+    }
+    
+    public void setFalseButon(){
+        falseButton.setSelected(false);
     }
 
 }

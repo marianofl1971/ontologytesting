@@ -1,19 +1,19 @@
 /*
- * infTestNewJPanel.java
+ * intTestRetJPanel.java
  *
- * Created on 25 de abril de 2008, 10:09
+ * Created on 25 de abril de 2008, 10:08
  */
 
-package ontologytestinggui;
+package ontologyhelp;
 
 /**
  *
  * @author  sara_garcia
  */
-public class infTestNewJPanel extends javax.swing.JPanel {
+public class infTestRetJPanel extends javax.swing.JPanel {
 
-    /** Creates new form infTestNewJPanel */
-    public infTestNewJPanel() {
+    /** Creates new form intTestRetJPanel */
+    public infTestRetJPanel() {
         initComponents();
     }
 
@@ -26,15 +26,15 @@ public class infTestNewJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        jLabel32.setText("Test que deduce si se podría introducir un nuevo individuo o rol sin que sea contradictorio.");
+        jLabel25.setText("Test que deduce, dada una clase, si le pertenecen  uno, dos... o todos los indiviuos que se especifican.");
 
-        jLabel33.setText("Ejemplo: Consulta: Mujer(Sara)?  Resultado: True/false ");
+        jLabel13.setText("Ejemplo: Consulta: Mujer? María  Resultado: True/False");
 
-        jLabel1.setText("TEST NUEVO INDIVIDUO O ROL:");
+        jLabel1.setText("TEST RETRIEVAL:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -43,29 +43,29 @@ public class infTestNewJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel33)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel25;
     // End of variables declaration//GEN-END:variables
 
 }
