@@ -19,12 +19,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ontologyClasses.OntologyTestCase;
-import ontologyClasses.OntologyTestResult;
-import ontologyModel.CollectionTest;
-import ontologyModel.QueryOntology;
-import ontologyModel.ScenarioTest;
-import ontologyModel.SparqlQueryOntology;
+import ontologyclasses.OntologyTestCase;
+import ontologyclasses.OntologyTestResult;
+import ontologymodel.CollectionTest;
+import ontologymodel.QueryOntology;
+import ontologymodel.ScenarioTest;
+import ontologymodel.SparqlQueryOntology;
 
 /**
  *
