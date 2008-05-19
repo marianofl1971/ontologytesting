@@ -404,7 +404,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel20">
+                        <Container class="javax.swing.JPanel" name="testPanel">
 
                           <Layout>
                             <DimensionLayout dim="0">
@@ -437,18 +437,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addInstancesTFJPanel5" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel6" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel7" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel16" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="108" max="32767" attributes="0"/>
                                   </Group>
@@ -472,13 +460,7 @@
                                       <Component id="addInstancesTFJPanel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addInstancesTFJPanel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel16" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                                      <EmptySpace pref="247" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -509,12 +491,6 @@
                             <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel4">
                             </Component>
                             <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel5">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel6">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel7">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel16">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -641,18 +617,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addQueryStringJPanel5" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel6" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel7" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel36" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
                                   </Group>
@@ -676,12 +640,7 @@
                                       <Component id="addQueryStringJPanel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addQueryStringJPanel5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="addQueryStringJPanel36" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="159" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -712,12 +671,6 @@
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel4">
                             </Component>
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel5">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel6">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel7">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel36">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -844,18 +797,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addQueryStringJPanel12" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel13" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel14" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel37" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
                                   </Group>
@@ -879,13 +820,7 @@
                                       <Component id="addQueryStringJPanel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addQueryStringJPanel12" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel13" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel37" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="170" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -916,12 +851,6 @@
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel11">
                             </Component>
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel12">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel13">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel14">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel37">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1048,18 +977,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addQueryStringJPanel19" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel20" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel21" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel38" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
                                   </Group>
@@ -1083,13 +1000,7 @@
                                       <Component id="addQueryStringJPanel18" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addQueryStringJPanel19" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel20" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel21" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel38" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="170" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1120,12 +1031,6 @@
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel18">
                             </Component>
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel19">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel20">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel21">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel38">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1252,18 +1157,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addQueryStringJPanel26" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel27" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel28" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel39" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
                                   </Group>
@@ -1287,13 +1180,7 @@
                                       <Component id="addQueryStringJPanel25" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addQueryStringJPanel26" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel27" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel28" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel39" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="170" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1324,12 +1211,6 @@
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel25">
                             </Component>
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel26">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel27">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel28">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel39">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1456,18 +1337,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addInstancesTFJPanel12" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel13" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel14" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addInstancesTFJPanel15" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="108" max="32767" attributes="0"/>
                                   </Group>
@@ -1491,12 +1360,7 @@
                                       <Component id="addInstancesTFJPanel11" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addInstancesTFJPanel12" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel13" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="addInstancesTFJPanel15" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="159" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1527,12 +1391,6 @@
                             <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel11">
                             </Component>
                             <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel12">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel13">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel14">
-                            </Component>
-                            <Component class="ontologytestinggui.addInstancesTFJPanel" name="addInstancesTFJPanel15">
                             </Component>
                           </SubComponents>
                         </Container>
@@ -1659,18 +1517,6 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="addQueryStringJPanel33" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel34" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel35" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="addQueryStringJPanel40" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                       </Group>
                                       <EmptySpace pref="78" max="32767" attributes="0"/>
                                   </Group>
@@ -1694,13 +1540,7 @@
                                       <Component id="addQueryStringJPanel32" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="addQueryStringJPanel33" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel34" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel35" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="addQueryStringJPanel40" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="170" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -1731,12 +1571,6 @@
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel32">
                             </Component>
                             <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel33">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel34">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel35">
-                            </Component>
-                            <Component class="ontologytestinggui.addQueryStringJPanel" name="addQueryStringJPanel40">
                             </Component>
                           </SubComponents>
                         </Container>

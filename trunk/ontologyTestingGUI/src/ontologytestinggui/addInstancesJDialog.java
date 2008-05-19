@@ -50,14 +50,12 @@ public class addInstancesJDialog extends javax.swing.JDialog {
         createInstancesJPanel2 = new ontologytestinggui.createInstancesJPanel();
         createInstancesJPanel3 = new ontologytestinggui.createInstancesJPanel();
         createInstancesJPanel4 = new ontologytestinggui.createInstancesJPanel();
-        createInstancesJPanel5 = new ontologytestinggui.createInstancesJPanel();
         propertyInstancesScrollPane = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         createInstancesJPanel6 = new ontologytestinggui.createInstancesJPanel();
         createInstancesJPanel7 = new ontologytestinggui.createInstancesJPanel();
         createInstancesJPanel8 = new ontologytestinggui.createInstancesJPanel();
         createInstancesJPanel9 = new ontologytestinggui.createInstancesJPanel();
-        createInstancesJPanel10 = new ontologytestinggui.createInstancesJPanel();
         limpiarInst1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -96,8 +94,7 @@ public class addInstancesJDialog extends javax.swing.JDialog {
                     .addComponent(createInstancesJPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createInstancesJPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createInstancesJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createInstancesJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createInstancesJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createInstancesJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -111,9 +108,7 @@ public class addInstancesJDialog extends javax.swing.JDialog {
                 .addComponent(createInstancesJPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createInstancesJPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createInstancesJPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         classInstancesScrollPane.setViewportView(jPanel2);
@@ -128,8 +123,7 @@ public class addInstancesJDialog extends javax.swing.JDialog {
                     .addComponent(createInstancesJPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createInstancesJPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createInstancesJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createInstancesJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createInstancesJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(createInstancesJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -143,9 +137,7 @@ public class addInstancesJDialog extends javax.swing.JDialog {
                 .addComponent(createInstancesJPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createInstancesJPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createInstancesJPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         propertyInstancesScrollPane.setViewportView(jPanel3);
@@ -228,6 +220,11 @@ public class addInstancesJDialog extends javax.swing.JDialog {
 
 private void asociarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstActionPerformed
 // TODO add your handling code here:
+
+   /*createInstancesJPanel panel = this.getCreateInstancesJPanel1();
+   String texto = panel.getClassTextField();
+   System.out.println(nombre);*/
+   
    int n = JOptionPane.showConfirmDialog(frame, "¿Quiere guardar este conjunto de" +
            " instancias para futuras pruebas?", "Guardar Instancias",
            JOptionPane.YES_NO_OPTION);
@@ -272,11 +269,9 @@ private void cancelarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JButton cancelarInst;
     private javax.swing.JScrollPane classInstancesScrollPane;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel1;
-    private ontologytestinggui.createInstancesJPanel createInstancesJPanel10;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel2;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel3;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel4;
-    private ontologytestinggui.createInstancesJPanel createInstancesJPanel5;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel6;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel7;
     private ontologytestinggui.createInstancesJPanel createInstancesJPanel8;
@@ -291,5 +286,13 @@ private void cancelarInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JScrollPane propertyInstancesScrollPane;
     private javax.swing.JLabel textLabel;
     // End of variables declaration//GEN-END:variables
+
+    public createInstancesJPanel getCreateInstancesJPanel2() {
+        return createInstancesJPanel2;
+    }
+
+    public createInstancesJPanel getCreateInstancesJPanel1() {
+        return createInstancesJPanel1;
+    }
 
 }

@@ -162,7 +162,6 @@
                               <Component id="createInstancesJPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="createInstancesJPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="createInstancesJPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="createInstancesJPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="62" max="32767" attributes="0"/>
                       </Group>
@@ -179,9 +178,7 @@
                           <Component id="createInstancesJPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="createInstancesJPanel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="createInstancesJPanel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="62" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -194,8 +191,6 @@
                 <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel3">
                 </Component>
                 <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel4">
-                </Component>
-                <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel5">
                 </Component>
               </SubComponents>
             </Container>
@@ -217,7 +212,6 @@
                               <Component id="createInstancesJPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="createInstancesJPanel8" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="createInstancesJPanel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="createInstancesJPanel10" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="54" max="32767" attributes="0"/>
                       </Group>
@@ -234,9 +228,7 @@
                           <Component id="createInstancesJPanel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="createInstancesJPanel9" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="createInstancesJPanel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="16" max="32767" attributes="0"/>
+                          <EmptySpace pref="67" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -249,8 +241,6 @@
                 <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel8">
                 </Component>
                 <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel9">
-                </Component>
-                <Component class="ontologytestinggui.createInstancesJPanel" name="createInstancesJPanel10">
                 </Component>
               </SubComponents>
             </Container>

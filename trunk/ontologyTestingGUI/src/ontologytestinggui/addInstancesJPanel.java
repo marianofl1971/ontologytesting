@@ -104,6 +104,7 @@ public class addInstancesJPanel extends javax.swing.JPanel {
 private void createInstInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createInstInstActionPerformed
 // TODO add your handling code here:
     addinstances.setVisible(true);
+    
 }//GEN-LAST:event_createInstInstActionPerformed
 
 private void instExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instExaminarActionPerformed

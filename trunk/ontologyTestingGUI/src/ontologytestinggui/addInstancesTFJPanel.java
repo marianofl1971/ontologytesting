@@ -136,7 +136,8 @@ private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void duplexButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplexButtonActionPerformed
 // TODO add your handling code here:
-
+    addInstancesTFJPanel addInstTF = new addInstancesTFJPanel();
+    addInstTF.setVisible(true);
 }//GEN-LAST:event_duplexButtonActionPerformed
 
 
