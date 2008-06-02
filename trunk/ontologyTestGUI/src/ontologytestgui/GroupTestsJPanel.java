@@ -29,7 +29,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
         
-        test1Panel.setLayout(new BoxLayout(test1Panel, BoxLayout.Y_AXIS));
+        test1Panel.setLayout(new BoxLayout(getTest1Panel(), BoxLayout.Y_AXIS));
         test2Panel.setLayout(new BoxLayout(test2Panel, BoxLayout.Y_AXIS));
         test3Panel.setLayout(new BoxLayout(test3Panel, BoxLayout.Y_AXIS));
         test4Panel.setLayout(new BoxLayout(test4Panel, BoxLayout.Y_AXIS));
@@ -49,7 +49,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.setPreferredSize(new Dimension(800, 700));
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
         contentPanel.add(addInstances,BorderLayout.SOUTH);
-        
         
     }
 
@@ -88,7 +87,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test1ScrollPane.setViewportView(test1Panel);
 
-        testsTabbedPane.addTab("tab1", test1ScrollPane);
+        testsTabbedPane.addTab("Instanciación", test1ScrollPane);
 
         javax.swing.GroupLayout test2PanelLayout = new javax.swing.GroupLayout(test2Panel);
         test2Panel.setLayout(test2PanelLayout);
@@ -103,7 +102,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test2ScrollPane.setViewportView(test2Panel);
 
-        testsTabbedPane.addTab("tab2", test2ScrollPane);
+        testsTabbedPane.addTab("Retrieval", test2ScrollPane);
 
         javax.swing.GroupLayout test3PanelLayout = new javax.swing.GroupLayout(test3Panel);
         test3Panel.setLayout(test3PanelLayout);
@@ -118,7 +117,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test3ScrollPane.setViewportView(test3Panel);
 
-        testsTabbedPane.addTab("tab3", test3ScrollPane);
+        testsTabbedPane.addTab("Realización", test3ScrollPane);
 
         javax.swing.GroupLayout test4PanelLayout = new javax.swing.GroupLayout(test4Panel);
         test4Panel.setLayout(test4PanelLayout);
@@ -133,7 +132,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test4ScrollPane.setViewportView(test4Panel);
 
-        testsTabbedPane.addTab("tab4", test4ScrollPane);
+        testsTabbedPane.addTab("Satisfactibilidad", test4ScrollPane);
 
         javax.swing.GroupLayout test5PanelLayout = new javax.swing.GroupLayout(test5Panel);
         test5Panel.setLayout(test5PanelLayout);
@@ -148,7 +147,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test5ScrollPane.setViewportView(test5Panel);
 
-        testsTabbedPane.addTab("tab5", test5ScrollPane);
+        testsTabbedPane.addTab("Clasificación", test5ScrollPane);
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -220,5 +219,9 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                 createAndShowGUI();
             }
         });
+    }
+
+    public javax.swing.JPanel getTest1Panel() {
+        return test1Panel;
     }
 }

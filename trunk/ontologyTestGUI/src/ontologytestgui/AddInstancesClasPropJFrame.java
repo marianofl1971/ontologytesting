@@ -51,6 +51,7 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
             clasPanel.add(new CreateInstancesJPanel());
             propPanel.add(new CreateInstancesJPanel());
         }
+        
     }    
     
     public AddInstancesClasPropJFrame(String textName) {
@@ -158,6 +159,7 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asociar Instancias");
+        setAlwaysOnTop(true);
 
         javax.swing.GroupLayout clasPanelLayout = new javax.swing.GroupLayout(clasPanel);
         clasPanel.setLayout(clasPanelLayout);
@@ -358,9 +360,8 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
      }
     this.setVisible(false);
-    //System.exit(0);
    }else{
-    
+        
    }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
@@ -385,7 +386,6 @@ private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {
         propInst.add(pI);
     } 
    this.setVisible(false);
-   //System.exit(0);
 }//GEN-LAST:event_cancelarInstButtonActionPerformed
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
@@ -412,6 +412,7 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void newClasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newClasButtonActionPerformed
 // TODO add your handling code here:
+    clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
     clasPanel.add(new CreateInstancesJPanel());
 }//GEN-LAST:event_newClasButtonActionPerformed
 
@@ -425,7 +426,7 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
      * this method should be invoked from the
      * event-dispatching thread.
      */
-    private static void createAndShowGUI() {
+    /*private static void createAndShowGUI() {
         //JFrame.setDefaultLookAndFeelDecorated(true);
         //Create and set up the window.
         frame = new JFrame("Asociar Instancias");
@@ -446,7 +447,7 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 createAndShowGUI();
             }
         });
-    }    
+    }*/    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel;

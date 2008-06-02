@@ -144,4 +144,12 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         selectCheckBox.setSelected(selecion);
     }
     
+    public AddComentJFrame getComment() {
+        return frameComent;
+    }
+
+    public void setComment(AddComentJFrame comment) {
+        this.frameComent = comment;
+    }
+    
 }
