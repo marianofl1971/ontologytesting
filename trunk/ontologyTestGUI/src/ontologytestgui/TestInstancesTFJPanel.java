@@ -138,12 +138,20 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         return queryTextField.getText();
     }
 
-    public boolean isTestTrue() {
-        return trueRadioButton.isSelected();
+    public String isTestTrue() {
+        if(trueRadioButton.isSelected()){
+            return "true";
+        }else{
+            return "false";
+        }
     }
     
-    public boolean isTestFalse() {
-        return falseRadioButton.isSelected();
+    public String isTestFalse() {
+        if(falseRadioButton.isSelected()){
+            return "true";
+        }else{
+            return "false";
+        }
     }    
 
     public void setTrueTest(boolean testT) {

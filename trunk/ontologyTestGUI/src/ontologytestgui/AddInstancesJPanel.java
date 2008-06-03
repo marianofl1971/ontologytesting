@@ -8,9 +8,12 @@ package ontologytestgui;
 
 import java.awt.Component;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import model.ClassInstances;
+import model.PropertyInstances;
 
 /**
  *
@@ -95,7 +98,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 
 private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJFrame(5);
+    ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
+    ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
+    addInst = new AddInstancesClasPropJFrame(15);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
 }//GEN-LAST:event_asociarButtonActionPerformed

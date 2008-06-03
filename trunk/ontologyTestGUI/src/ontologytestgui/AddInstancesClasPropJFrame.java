@@ -15,7 +15,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,13 +31,13 @@ import model.PropertyInstances;
 public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
 
     static final int desktopWidth = 980;
-    static final int desktopHeight = 730;
+    static final int desktopHeight = 740;
     static JFrame frame;
     private XMLDecoder decoder;
     private CollectionTest collectionTest;
     private AddComentJFrame commentPane;
     private ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-    private List<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
+    private ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
     
     /** Creates new form AddInstancesClasPropJFrame */
     public AddInstancesClasPropJFrame(int num) {
@@ -236,35 +235,31 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(JPanelLayout.createSequentialGroup()
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(JPanelLayout.createSequentialGroup()
-                                .addComponent(limpiarInstButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(newClasButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(newPropButton)))
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(JPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE))
-                            .addGroup(JPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelarInstButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(guardarInstButton))
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addComponent(classScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(propScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(limpiarInstButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newClasButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newPropButton))
+                    .addComponent(classScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(JPanelLayout.createSequentialGroup()
+                            .addComponent(cancelarInstButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(guardarInstButton))
+                        .addComponent(propScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40))
         );
 
         JPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {classScrollPane, propScrollPane});
+
+        JPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cancelarInstButton, guardarInstButton});
 
         JPanelLayout.setVerticalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,37 +272,39 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addComponent(classScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(limpiarInstButton)
-                            .addComponent(newClasButton)
-                            .addComponent(newPropButton)))
-                    .addGroup(JPanelLayout.createSequentialGroup()
-                        .addComponent(propScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(guardarInstButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cancelarInstButton))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(classScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(propScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLayout.createSequentialGroup()
+                .addContainerGap(681, Short.MAX_VALUE)
+                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limpiarInstButton)
+                    .addComponent(newClasButton)
+                    .addComponent(newPropButton))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLayout.createSequentialGroup()
+                .addContainerGap(681, Short.MAX_VALUE)
+                .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(guardarInstButton)
+                    .addComponent(cancelarInstButton))
+                .addContainerGap())
         );
 
         JPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {classScrollPane, propScrollPane});
+
+        JPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cancelarInstButton, guardarInstButton, limpiarInstButton, newClasButton, newPropButton});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 964, Short.MAX_VALUE)
+            .addGap(0, 992, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -327,7 +324,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             ClassInstances cI = new ClassInstances(query,coment);
             clasInst.add(cI);
     }
-    int totalProp = clasPanel.getComponentCount();
+    int totalProp = propPanel.getComponentCount();
     for(int i=0; i< totalProp; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) propPanel.getComponent(i);
         String query = panelInst.getQuery();
@@ -366,7 +363,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
      }
     this.setVisible(false);
    }else{
-        
+        this.setVisible(false);
    }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
@@ -426,6 +423,35 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     propPanel.add(new CreateInstancesJPanel());
 }//GEN-LAST:event_newPropButtonActionPerformed
 
+    public ArrayList<ClassInstances> getClassInstances(){
+        
+        int totalClas = clasPanel.getComponentCount();
+        for(int i=0; i<totalClas; i++){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) clasPanel.getComponent(i);
+            String query = panelInst.getQuery();
+            AddComentJFrame comentPane = panelInst.getComment();
+            String coment = comentPane.getComent();
+            ClassInstances cI = new ClassInstances(query,coment);
+            clasInst.add(cI);
+        }
+        return clasInst;
+    }
+    
+    public ArrayList<PropertyInstances> getPropertyInstances(){
+        
+        int totalProp = propPanel.getComponentCount();
+        for(int i=0; i< totalProp; i++){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) propPanel.getComponent(i);
+            String query = panelInst.getQuery();
+            AddComentJFrame comentPane = panelInst.getComment();
+            String coment = comentPane.getComent();
+            PropertyInstances pI = new PropertyInstances(query,coment);
+            propInst.add(pI);
+        }
+        return propInst;
+    }
+    
+    
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the

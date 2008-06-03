@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ScenarioTest {
     
-    private String test_name;
+    private String testName;
     private ArrayList<ClassInstances> classInstances = new ArrayList<ClassInstances>();
     private ArrayList<PropertyInstances> propertyInstances = new ArrayList<PropertyInstances>();
     private ArrayList<QueryOntology> queryTest = new ArrayList<QueryOntology>();
@@ -32,7 +32,7 @@ public class ScenarioTest {
         this.propertyInstances.addAll(propertyInstances);
         this.sparqlQuerys.addAll(sparqlquerys);
         this.queryTest.addAll(tests);   
-        this.test_name=test_name;   
+        this.testName=test_name;   
     }
     
     public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
@@ -41,7 +41,7 @@ public class ScenarioTest {
         this.classInstances.addAll(classInstances);
         this.propertyInstances.addAll(propertyInstances);
         this.queryTest.addAll(tests);   
-        this.test_name=test_name;   
+        this.testName=test_name;   
     }    
     
     public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
@@ -51,7 +51,7 @@ public class ScenarioTest {
         this.classInstances.addAll(classInstances);
         this.propertyInstances.addAll(propertyInstances);
         this.sparqlQuerys.addAll(sparqlquerys);   
-        this.test_name=test_name;  
+        this.testName=test_name;  
     }    
     
     public ScenarioTest(){
@@ -59,17 +59,17 @@ public class ScenarioTest {
         this.classInstances = new ArrayList<ClassInstances>();
         this.propertyInstances = new ArrayList<PropertyInstances>();
         this.queryTest = new ArrayList<QueryOntology>();
-        this.test_name=null;
+        this.testName=null;
         this.sparqlQuerys=new ArrayList<SparqlQueryOntology>();
     
     }
 
-    public String getTest_name() {
-        return test_name;
+    public String getTestName() {
+        return testName;
     }
 
-    public void setTest_name(String test_name) {
-        this.test_name = test_name;
+    public void setTestName(String test_name) {
+        this.testName = test_name;
     }
 
     public ArrayList<ClassInstances> getClassInstances() {

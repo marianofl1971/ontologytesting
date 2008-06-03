@@ -15,7 +15,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="970" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="808" max="32767" attributes="0"/>
+              <Component id="cancelarButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Component id="jSeparator1" alignment="0" pref="970" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="contentPanel" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -23,9 +30,21 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="714" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="599" max="32767" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="guardarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cancelarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="contentPanel" alignment="1" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="contentPanel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -46,9 +65,9 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="testsTabbedPane" min="-2" pref="562" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,7 +88,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="test1Panel">
+                <Container class="javax.swing.JPanel" name="testInstPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -97,7 +116,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="test2Panel">
+                <Container class="javax.swing.JPanel" name="testRetPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -125,7 +144,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="test3Panel">
+                <Container class="javax.swing.JPanel" name="testRealPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -153,7 +172,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="test4Panel">
+                <Container class="javax.swing.JPanel" name="testSatPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -181,7 +200,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="test5Panel">
+                <Container class="javax.swing.JPanel" name="testClasPanel">
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -202,5 +221,23 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="guardarButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Component class="javax.swing.JButton" name="cancelarButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
