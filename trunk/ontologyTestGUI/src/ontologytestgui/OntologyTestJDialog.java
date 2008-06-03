@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 public class OntologyTestJDialog extends javax.swing.JDialog {
 
     public GroupTestsJPanel groupTest = new GroupTestsJPanel(25);
-    static final int desktopWidth = 1250;
-    static final int desktopHeight = 900;
+    static final int desktopWidth = 1000;
+    static final int desktopHeight = 800;
     
     /** Creates new form OntologyTestJDialog */
     public OntologyTestJDialog(java.awt.Frame parent, boolean modal) {

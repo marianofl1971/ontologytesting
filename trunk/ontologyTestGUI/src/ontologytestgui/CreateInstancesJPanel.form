@@ -56,7 +56,6 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/comment.gif"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Comentario"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comentarioButtonActionPerformed"/>
@@ -67,7 +66,6 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/cancel.gif"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Borrar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarButtonActionPerformed"/>

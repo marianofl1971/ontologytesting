@@ -40,7 +40,6 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         selectCheckBox = new javax.swing.JCheckBox();
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/comment.gif"))); // NOI18N
-        comentarioButton.setText("Comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comentarioButtonActionPerformed(evt);
@@ -48,7 +47,6 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         });
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
-        borrarButton.setText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarButtonActionPerformed(evt);

@@ -18,8 +18,8 @@ import javax.swing.JLabel;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
-    static final int desktopWidth = 1250;
-    static final int desktopHeight = 750;
+    static final int desktopWidth = 800;
+    static final int desktopHeight = 500;
     static JFrame frame;
     
     /** Creates new form GroupTestQueryJPanel */
