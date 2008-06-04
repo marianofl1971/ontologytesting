@@ -57,7 +57,7 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
     public AddInstancesClasPropJFrame(String textName) {
         
         initComponents();
-        JPanel.setSize(desktopWidth,desktopHeight);
+        this.setSize(desktopWidth,desktopHeight);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
         
@@ -194,7 +194,7 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12));
         jLabel3.setText("Instancias de Propiedad:");
 
-        guardarInstButton.setText("Guardar");
+        guardarInstButton.setText("Asociar");
         guardarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarInstButtonActionPerformed(evt);
@@ -300,7 +300,7 @@ public class AddInstancesClasPropJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 992, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 992, Short.MAX_VALUE))
+                .addComponent(JPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,7 +414,6 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void newClasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newClasButtonActionPerformed
 // TODO add your handling code here:
-    clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
     clasPanel.add(new CreateInstancesJPanel());
 }//GEN-LAST:event_newClasButtonActionPerformed
 

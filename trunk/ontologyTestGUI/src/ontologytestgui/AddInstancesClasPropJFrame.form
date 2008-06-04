@@ -24,7 +24,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <EmptySpace min="0" pref="992" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="JPanel" alignment="0" pref="992" max="32767" attributes="0"/>
+              <Component id="JPanel" alignment="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -176,7 +176,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="guardarInstButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="text" type="java.lang.String" value="Asociar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarInstButtonActionPerformed"/>
@@ -203,6 +203,7 @@
             <Property name="text" type="java.lang.String" value="Nueva clase"/>
           </Properties>
           <Events>
+            <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="newClasButtonComponentAdded"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newClasButtonActionPerformed"/>
           </Events>
         </Component>

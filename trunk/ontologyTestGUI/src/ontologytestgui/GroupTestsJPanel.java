@@ -49,8 +49,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
         
         AddInstancesJPanel addInstances = new AddInstancesJPanel();
-        contentPanel.add(new JLabel("Rellene los tests que desee realizar sobre " +
-                "su ontología:"),BorderLayout.NORTH);
+        AddTestsJPanel addTests = new AddTestsJPanel();
+        contentPanel.add(addTests,BorderLayout.NORTH);
         testsTabbedPane.setPreferredSize(new Dimension(900, 800));
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
         contentPanel.add(addInstances,BorderLayout.SOUTH);
