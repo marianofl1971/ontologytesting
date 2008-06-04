@@ -23,14 +23,13 @@ import model.ScenarioTest;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
-    static final int desktopWidth = 900;
-    static final int desktopHeight = 800;
+    static final int desktopWidth = 700;
+    static final int desktopHeight = 600;
     static JFrame frame;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
         initComponents(); 
-        
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
         
@@ -51,7 +50,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         AddInstancesJPanel addInstances = new AddInstancesJPanel();
         AddTestsJPanel addTests = new AddTestsJPanel();
         contentPanel.add(addTests,BorderLayout.NORTH);
-        testsTabbedPane.setPreferredSize(new Dimension(900, 800));
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
         contentPanel.add(addInstances,BorderLayout.SOUTH);
         
@@ -313,8 +311,7 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         //JFrame.setDefaultLookAndFeelDecorated(true);
         //Create and set up the window.
         frame = new JFrame("Test de Prueba");
-        frame.getContentPane().add(new GroupTestsJPanel(25));
-        frame.setSize(desktopWidth,desktopHeight); 
+        frame.getContentPane().add(new GroupTestsJPanel(25)); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Display the window.

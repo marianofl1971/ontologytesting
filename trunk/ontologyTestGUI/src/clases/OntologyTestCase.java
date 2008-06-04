@@ -113,7 +113,7 @@ public class OntologyTestCase implements OntologyTest{
             ScenarioTest scenariotest){
            
         ListIterator liQuery;
-        String res[],clasF,indF;
+        String res[],clasF="",indF="";
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         
         String resObtenidoInst="",resQueryExpected="",resObtenidoSat="";

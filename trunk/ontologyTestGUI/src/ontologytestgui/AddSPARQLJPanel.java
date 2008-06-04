@@ -6,12 +6,37 @@
 
 package ontologytestgui;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import ontologytest.almacenPropiedades;
+import ontologytest.faltaPropiedadException;
+import org.mindswap.pellet.jena.PelletReasonerFactory;
+
 /**
  *
  * @author  Saruskas
  */
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
+    private OntModel model;
+    static final int desktopWidth = 700;
+    static final int desktopHeight = 600;
+    static JFrame frame;
+    
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
@@ -40,10 +65,15 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(sparqlTextArea);
 
         ejecutarButton.setText("Ejecutar");
+        ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ejecutarButtonActionPerformed(evt);
+            }
+        });
 
         limpiarButton.setText("Limpiar");
 
-        borrarButton.setText("Borrar");
+        borrarButton.setText("Cancelar");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -56,7 +86,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                     .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(limpiarButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 492, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 480, Short.MAX_VALUE)
                         .add(borrarButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ejecutarButton)))
@@ -78,6 +108,57 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
+// TODO add your handling code here:
+        InputStream in = null;
+        try {
+            in = new FileInputStream(new File("data/family.owl"));
+            model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
+            model.read(in,null);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        String queryString = this.getSPARQLQuery();
+        /*
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+        SELECT ?subject ?object WHERE { ?subject rdfs:subClassOf ?object }
+        */
+        Query query = QueryFactory.create(queryString);
+        QueryExecution qe = QueryExecutionFactory.create(query, model);
+        
+        ResultSet results = qe.execSelect();
+        ResultSetFormatter.out(System.out, results, query);
+        qe.close();
+    
+}//GEN-LAST:event_ejecutarButtonActionPerformed
+
+    private static void createAndShowGUI() {
+        //JFrame.setDefaultLookAndFeelDecorated(true);
+        //Create and set up the window.
+        frame = new JFrame("Test de Prueba");
+        frame.getContentPane().add(new AddSPARQLJPanel()); 
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
