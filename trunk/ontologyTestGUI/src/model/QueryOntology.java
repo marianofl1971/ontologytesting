@@ -31,6 +31,11 @@ public class QueryOntology {
         this.resultexpected=null;
         this.comment=null;
     }
+    
+    public QueryOntology(String query, String resultexpected){
+        this.query=query;
+        this.resultexpected=resultexpected;
+    }
 
     public String getQuery() {
         return query;

@@ -103,5 +103,13 @@ public class ScenarioTest {
     public void setSparqlQuerys(ArrayList<SparqlQueryOntology> sparqlQuerys) {
         this.sparqlQuerys = sparqlQuerys;
     } 
+    
+    public void clearClasInstances(){
+        this.classInstances.clear();
+    }
+    
+    public void clearPropInstances(){
+        this.classInstances.clear();
+    }
 
 }
