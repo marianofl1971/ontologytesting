@@ -9,22 +9,25 @@ package ontologytestgui;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import com.hp.hpl.jena.rdf.model.RDFNode;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import ontologytest.almacenPropiedades;
-import ontologytest.faltaPropiedadException;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
+import org.mindswap.pellet.jena.NodeFormatter;
+import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
+import org.mindswap.pellet.output.TableData;
 
 /**
  *
@@ -40,6 +43,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
+        //this.setLayout(new BorderLayout());
     }
 
     /** This method is called from within the constructor to
@@ -86,7 +90,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                     .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(limpiarButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 480, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 486, Short.MAX_VALUE)
                         .add(borrarButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ejecutarButton)))
@@ -99,20 +103,29 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 220, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 15, Short.MAX_VALUE)
+                .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(ejecutarButton)
-                    .add(limpiarButton)
-                    .add(borrarButton))
-                .addContainerGap())
+                    .add(borrarButton)
+                    .add(limpiarButton))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
 // TODO add your handling code here:
-        InputStream in = null;
+    try{
+         this.run(this.getSPARQLQuery(), false);
+       } catch (Exception ex) {
+            Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    JScrollPane scroll = new JScrollPane();
+    JTextArea area = new JTextArea();
+    this.add(scroll,BorderLayout.SOUTH);
+    
+        /*InputStream in = null;
         try {
-            in = new FileInputStream(new File("data/family.owl"));
+            in = new FileInputStream(new File("data/newspaper.owl"));
             model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
             model.read(in,null);
         } catch (FileNotFoundException ex) {
@@ -125,19 +138,61 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
         }
         String queryString = this.getSPARQLQuery();
-        /*
+        
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-        SELECT ?subject ?object WHERE { ?subject rdfs:subClassOf ?object }
-        */
+        SELECT ?subject ?object 
+        FROM <data/family.owl> 
+        WHERE { ?subject rdfs:subClassOf ?object }
+        
         Query query = QueryFactory.create(queryString);
         QueryExecution qe = QueryExecutionFactory.create(query, model);
         
         ResultSet results = qe.execSelect();
         ResultSetFormatter.out(System.out, results, query);
-        qe.close();
+        qe.close();*/
     
 }//GEN-LAST:event_ejecutarButtonActionPerformed
 
+    public void run(String queryStr, boolean formatHTML) throws Exception {
+        
+        Query query = QueryFactory.create(queryStr);
+        if (!query.isSelectType()) {
+        	throw new UnsupportedFeatureException("Only SELECT supported for this example");
+        }
+        // create an empty ontology model using Pellet spec
+        model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );        
+        model.setStrictMode(false);
+       
+        if(query.getGraphURIs().size()==0)
+            throw new UnsupportedFeatureException("SPARQL query must have a FROM clause for this example");
+        for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
+        	String sourceURI = (String) iter.next();
+        	model.read( sourceURI );
+        }
+        
+	QueryExecution qexec = new PelletQueryExecution(query, model);
+        ResultSet results = qexec.execSelect();
+        // create a node formatter
+        NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
+        // variables used in select
+        List resultVars = query.getResultVars();
+        
+        // store the formatted results an a table 
+        TableData table = new TableData( resultVars );
+        while( results.hasNext() ) {
+            QuerySolution binding = results.nextSolution();
+            List formattedBinding = new ArrayList();
+            for(int i = 0; i < resultVars.size(); i++) {
+                String var = (String) resultVars.get(i);
+                RDFNode result = binding.get(var);
+                                
+                formattedBinding.add(formatter.format(result));                
+            }
+            table.add(formattedBinding);
+        }
+        table.print(System.out, formatHTML);
+    }
+    
     private static void createAndShowGUI() {
         //JFrame.setDefaultLookAndFeelDecorated(true);
         //Create and set up the window.
@@ -154,6 +209,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 createAndShowGUI();
             }

@@ -6,6 +6,7 @@
 
 package ontologytestgui;
 
+import java.awt.Frame;
 import javax.swing.WindowConstants;
 
 /**
@@ -14,11 +15,13 @@ import javax.swing.WindowConstants;
  */
 public class TestInstancesQueryJPanel extends javax.swing.JPanel {
 
-    private AddComentJFrame frameComent;
+    private AddComentJDialog frameComent;
+    private Frame frame;
+    
     /** Creates new form TestInstancesQueryJPanel */
     public TestInstancesQueryJPanel() {
         initComponents();
-        frameComent = new AddComentJFrame(); 
+        frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
@@ -38,8 +41,11 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         selectCheckBox = new javax.swing.JCheckBox();
         resultTextField = new javax.swing.JTextField();
 
+        queryTextField.setToolTipText("Consulta");
+
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/comment.gif"))); // NOI18N
         comentarioButton.setText("Comentario");
+        comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comentarioButtonActionPerformed(evt);
@@ -48,6 +54,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
         borrarButton.setText("Borrar");
+        borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarButtonActionPerformed(evt);
@@ -60,6 +67,8 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
                 duplicarButtonActionPerformed(evt);
             }
         });
+
+        resultTextField.setToolTipText("Resultado esperado");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -144,11 +153,11 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         selectCheckBox.setSelected(selecion);
     }
     
-    public AddComentJFrame getComment() {
+    public AddComentJDialog getComment() {
         return frameComent;
     }
 
-    public void setComment(AddComentJFrame comment) {
+    public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
     }
     

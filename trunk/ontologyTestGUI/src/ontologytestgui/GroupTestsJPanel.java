@@ -9,13 +9,17 @@ package ontologytestgui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.CollectionTest;
+import model.PropertyInstances;
+import model.ClassInstances;
 import model.QueryOntology;
 import model.ScenarioTest;
+import model.SparqlQueryOntology;
 
 /**
  *
@@ -26,6 +30,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     static final int desktopWidth = 700;
     static final int desktopHeight = 600;
     static JFrame frame;
+    public static ArrayList<ScenarioTest> getScenarioTestCollection() {
+        return scenarioTestCollection;
+    }
+    public static void setScenarioTestCollection(ArrayList<ScenarioTest> aScenarioTestCollection) {
+        scenarioTestCollection = aScenarioTestCollection;
+    }
+    private AddInstancesJPanel addInstances;
+    private static ArrayList<ScenarioTest> scenarioTestCollection;
+    private int aux=0;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -46,8 +59,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testSatPanel.add(new TestInstancesQueryJPanel());
             testClasPanel.add(new TestInstancesTFJPanel());
         }
-        
-        AddInstancesJPanel addInstances = new AddInstancesJPanel();
+
+        scenarioTestCollection = new ArrayList<ScenarioTest>(4);
+        for(int i=0;i<5;i++){
+            scenarioTestCollection.add(new ScenarioTest());
+        }
+        addInstances = new AddInstancesJPanel(this);
         AddTestsJPanel addTests = new AddTestsJPanel();
         contentPanel.add(addTests,BorderLayout.NORTH);
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
@@ -80,11 +97,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         cancelarButton = new javax.swing.JButton();
 
+        setName("GroupTestsJPanel"); // NOI18N
+
         javax.swing.GroupLayout testInstPanelLayout = new javax.swing.GroupLayout(testInstPanel);
         testInstPanel.setLayout(testInstPanelLayout);
         testInstPanelLayout.setHorizontalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
         );
         testInstPanelLayout.setVerticalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,6 +111,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         );
 
         test1ScrollPane.setViewportView(testInstPanel);
+        testInstPanel.getAccessibleContext().setAccessibleName("0");
 
         testsTabbedPane.addTab("Instanciación", test1ScrollPane);
 
@@ -99,7 +119,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testRetPanel.setLayout(testRetPanelLayout);
         testRetPanelLayout.setHorizontalGroup(
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
         );
         testRetPanelLayout.setVerticalGroup(
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,6 +127,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         );
 
         test2ScrollPane.setViewportView(testRetPanel);
+        testRetPanel.getAccessibleContext().setAccessibleName("1");
 
         testsTabbedPane.addTab("Retrieval", test2ScrollPane);
 
@@ -114,7 +135,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testRealPanel.setLayout(testRealPanelLayout);
         testRealPanelLayout.setHorizontalGroup(
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
         );
         testRealPanelLayout.setVerticalGroup(
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +150,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testSatPanel.setLayout(testSatPanelLayout);
         testSatPanelLayout.setHorizontalGroup(
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
         );
         testSatPanelLayout.setVerticalGroup(
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +165,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testClasPanel.setLayout(testClasPanelLayout);
         testClasPanelLayout.setHorizontalGroup(
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 926, Short.MAX_VALUE)
+            .addGap(0, 934, Short.MAX_VALUE)
         );
         testClasPanelLayout.setVerticalGroup(
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +182,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
+                .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -191,12 +212,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(808, Short.MAX_VALUE)
+                .addContainerGap(816, Short.MAX_VALUE)
                 .addComponent(cancelarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(guardarButton)
                 .addContainerGap())
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -215,70 +236,77 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                     .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(65, Short.MAX_VALUE)))
         );
+
+        getAccessibleContext().setAccessibleName("GroupTestsJPanel");
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
-// TODO add your handling code here:
-    ArrayList<QueryOntology> queryTest1 = new ArrayList<QueryOntology>();
-    ArrayList<QueryOntology> queryTest2 = new ArrayList<QueryOntology>();
-    ArrayList<ScenarioTest> collectScenario = new ArrayList<ScenarioTest>();
-    CollectionTest collectionTest = new CollectionTest();
-    ScenarioTest scenario1 = new ScenarioTest();
-    ScenarioTest scenario2 = new ScenarioTest();
+// TODO add your handling code here
+
+    this.asociarInstancias();
     
-    JPanel panelInst = this.getTestInstPanel();
-    int totalInst = panelInst.getComponentCount();
-    JPanel panelClas = this.getTestClasPanel();
-    int totalClas = panelClas.getComponentCount();
-    JPanel panelReal = this.getTestRealPanel();
-    int totalReal = panelReal.getComponentCount();
-    JPanel panelRet = this.getTestRetPanel();
-    int totalRet = panelRet.getComponentCount();
-    JPanel panelSat = this.getTestSatPanel();
-    int totalSat = panelSat.getComponentCount();
+    scenarioTestCollection.get(0).setTestName("Instanciación");
+    scenarioTestCollection.get(1).setTestName("Retrieval");
+    scenarioTestCollection.get(2).setTestName("Realización");
+    scenarioTestCollection.get(3).setTestName("Satisfactibilidad");
+    scenarioTestCollection.get(4).setTestName("Clasificación");
     
-    for(int i=0;i<totalInst;i++){
-        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelInst.getComponent(i);
-        String query = test.getQuery();
-        String resExp = test.isTestTrue();
-        AddComentJFrame comentPane = test.getComment();
-        String coment = comentPane.getComent();
-        QueryOntology testQuery = new QueryOntology(query,resExp,coment);
-        queryTest1.add(testQuery);
-    }
-    scenario1.setQueryTest(queryTest1);
-    scenario1.setTestName("instanciacion");
-    collectScenario.add(scenario1);
+    if(aux==1){
+        JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                "son obligatorios. No puede dejar sólo uno de ellos en blanco",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else{
+        CollectionTest collectionTest = new CollectionTest();
     
-    for(int i=0;i<totalClas;i++){
-        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelRet.getComponent(i);
-        String query = test.getQuery();
-        String queryExp = test.getQueryResult();
-        AddComentJFrame comentPane = test.getComment();
-        String coment = comentPane.getComent();
-        QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-        queryTest2.add(testQuery);
-    }
-    scenario2.setQueryTest(queryTest2);
-    scenario2.setTestName("retrieval");
-    collectScenario.add(scenario2);
-    
-    collectionTest.setScenariotest(collectScenario);
-    
-    ArrayList<ScenarioTest> st = collectionTest.getScenariotest();
-    for(int i=0; i<st.size(); i++){
-        String nombre = st.get(i).getTestName();
-        System.out.println("Nombre del test: " +nombre);
-        ArrayList<QueryOntology> qo = st.get(i).getQueryTest();
-        for(int j=0;j<qo.size();j++){
-            String q = qo.get(j).getQuery();
-            String res = qo.get(j).getResultexpected();
-            String com = qo.get(j).getComment();
-            System.out.println("Query: "+q);
-            System.out.println("Result: "+res);
-            System.out.println("Comentario: "+com);
+        collectionTest.setScenariotest(scenarioTestCollection);
+        ArrayList<ScenarioTest> st = collectionTest.getScenariotest();
+        ScenarioTest scenario = new ScenarioTest();
+        QueryOntology query = new QueryOntology();
+        ClassInstances clasinstances = new ClassInstances();
+        PropertyInstances propinstances = new PropertyInstances();
+        ListIterator lscenario,larrayclas,larrayprop,lquery;
+        lscenario = st.listIterator();
+        while(lscenario.hasNext()){
+            scenario = (ScenarioTest) lscenario.next();
+            if(!this.isScenarioEmpty(scenario)){
+                String nombre = scenario.getTestName();
+                System.out.println("Nombre del test: " +nombre);
+                ArrayList<QueryOntology> qo = scenario.getQueryTest();
+                ArrayList<ClassInstances> clin = scenario.getClassInstances();
+                ArrayList<PropertyInstances> prin = scenario.getPropertyInstances();
+                larrayclas = clin.listIterator();
+                larrayprop = prin.listIterator();
+                lquery = qo.listIterator();
+                while(lquery.hasNext()){
+                    query = (QueryOntology) lquery.next();
+                    if(query!=null){
+                        String q = query.getQuery();
+                        String res = query.getResultexpected();
+                        String com = query.getComment();
+                        System.out.println("Query: "+q);
+                        System.out.println("Result: "+res);
+                        System.out.println("Comentario: "+com);
+                    }
+                }
+                while(larrayclas.hasNext()){
+                    clasinstances = (ClassInstances) larrayclas.next();
+                    if(clasinstances!=null){
+                        System.out.println("Query clase: " +clasinstances.getClassInstance());
+                        System.out.println("Coment clase: " +clasinstances.getComment());
+                    }
+                }
+                while(larrayprop.hasNext()){
+                    propinstances = (PropertyInstances) larrayprop.next();
+                    if(propinstances!=null){
+                        System.out.println("Query prop: " +propinstances.getPropertyInstance());
+                        System.out.println("Coment prop: " +propinstances.getComment());
+                    }
+                }
+            System.out.println("--------");
+            }
         }
-        System.out.println("--------");
+    this.setVisible(false);
+    System.exit(0);
     }
 }//GEN-LAST:event_guardarButtonActionPerformed
 
@@ -309,44 +337,152 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     private static void createAndShowGUI() {
         //JFrame.setDefaultLookAndFeelDecorated(true);
-        //Create and set up the window.
         frame = new JFrame("Test de Prueba");
         frame.getContentPane().add(new GroupTestsJPanel(25)); 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 createAndShowGUI();
             }
         });
     }
 
-    public javax.swing.JPanel getTestClasPanel() {
+    public JPanel getTestClasPanel() {
         return testClasPanel;
     }
 
-    public javax.swing.JPanel getTestInstPanel() {
+    public JPanel getTestInstPanel() {
         return testInstPanel;
     }
 
-    public javax.swing.JPanel getTestRealPanel() {
+    public JPanel getTestRealPanel() {
         return testRealPanel;
     }
 
-    public javax.swing.JPanel getTestRetPanel() {
+    public JPanel getTestRetPanel() {
         return testRetPanel;
     }
 
-    public javax.swing.JPanel getTestSatPanel() {
+    public JPanel getTestSatPanel() {
         return testSatPanel;
     }
+    
+    public int getSelectedTabed(){
+        return testsTabbedPane.getSelectedIndex();
+    }
+    
+    public boolean isScenarioEmpty(ScenarioTest scenarioTest){
+            ArrayList<ClassInstances> classInstances = scenarioTest.getClassInstances();
+            ArrayList<PropertyInstances> propertyInstances = scenarioTest.getPropertyInstances();
+            ArrayList<QueryOntology> queryTest = scenarioTest.getQueryTest();
+            ArrayList<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
+            if(classInstances.isEmpty() && propertyInstances.isEmpty() && 
+                    queryTest.isEmpty() && sparqlQuerys.isEmpty()){
+                    return true;
+            }else{
+                return false;
+            }
+    }
+    
+    public void asociarInstancias(){
+       
+    aux=0;
+    ArrayList<QueryOntology> queryTest1 = new ArrayList<QueryOntology>();
+    ArrayList<QueryOntology> queryTest2 = new ArrayList<QueryOntology>();
+    ArrayList<QueryOntology> queryTest3 = new ArrayList<QueryOntology>();
+    ArrayList<QueryOntology> queryTest4 = new ArrayList<QueryOntology>();
+    ArrayList<QueryOntology> queryTest5 = new ArrayList<QueryOntology>();
+    
+    JPanel panelInst = this.getTestInstPanel();
+    int totalInst = panelInst.getComponentCount();
+    JPanel panelClas = this.getTestClasPanel();
+    int totalClas = panelClas.getComponentCount();
+    JPanel panelReal = this.getTestRealPanel();
+    int totalReal = panelReal.getComponentCount();
+    JPanel panelRet = this.getTestRetPanel();
+    int totalRet = panelRet.getComponentCount();
+    JPanel panelSat = this.getTestSatPanel();
+    int totalSat = panelSat.getComponentCount();
 
+    for(int i=0;i<totalInst;i++){
+        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelInst.getComponent(i);
+        String query = test.getQuery();
+        String resExpT = test.isTestTrue();
+        String resExpF = test.isTestFalse();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !resExpT.equals(resExpF)){
+            QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+            queryTest1.add(testQuery);
+            scenarioTestCollection.get(0).setQueryTest(queryTest1);
+        }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
+            aux=1;
+        }
+    }
+
+    for(int i=0;i<totalRet;i++){
+        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelRet.getComponent(i);
+        String query = test.getQuery();
+        String queryExp = test.getQueryResult();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !queryExp.equals("")){
+            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+            queryTest2.add(testQuery);
+            scenarioTestCollection.get(1).setQueryTest(queryTest2);
+        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
+            aux=1;
+        }
+    }
+
+    for(int i=0;i<totalReal;i++){
+        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelReal.getComponent(i);
+        String query = test.getQuery();
+        String queryExp = test.getQueryResult();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !queryExp.equals("")){
+            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+            queryTest3.add(testQuery);
+            scenarioTestCollection.get(2).setQueryTest(queryTest3);
+        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
+            aux=1;
+        }
+    }
+    for(int i=0;i<totalSat;i++){
+        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelSat.getComponent(i);
+        String query = test.getQuery();
+        String queryExp = test.getQueryResult();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !queryExp.equals("")){
+            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+            queryTest4.add(testQuery);
+            scenarioTestCollection.get(3).setQueryTest(queryTest4);
+        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
+            aux=1;
+        }
+    }
+    for(int i=0;i<totalClas;i++){
+        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelClas.getComponent(i);
+        String query = test.getQuery();
+        String resExpT = test.isTestTrue();
+        String resExpF = test.isTestFalse();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !resExpT.equals(resExpF)){
+            QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+            queryTest5.add(testQuery);
+            scenarioTestCollection.get(4).setQueryTest(queryTest5);
+        }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
+            aux=1;
+        }
+    }
+  }
 }

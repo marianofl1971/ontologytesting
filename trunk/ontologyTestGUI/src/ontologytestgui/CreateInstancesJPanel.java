@@ -6,6 +6,7 @@
 
 package ontologytestgui;
 
+import java.awt.Frame;
 import javax.swing.WindowConstants;
 
 
@@ -15,12 +16,14 @@ import javax.swing.WindowConstants;
  */
 public class CreateInstancesJPanel extends javax.swing.JPanel {
 
-    private AddComentJFrame frameComent; 
+    private AddComentJDialog frameComent; 
+    private String identifier="";
+    private Frame frame;
     
     /** Creates new form CreateInstancesJPanel */
     public CreateInstancesJPanel() {
         initComponents();
-        frameComent = new AddComentJFrame(); 
+        frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
@@ -39,7 +42,10 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         duplicarButton = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
 
+        setName("instances"); // NOI18N
+
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/comment.gif"))); // NOI18N
+        comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comentarioButtonActionPerformed(evt);
@@ -47,6 +53,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         });
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
+        borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarButtonActionPerformed(evt);
@@ -89,6 +96,8 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
                     .add(instanciaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("instances");
     }// </editor-fold>//GEN-END:initComponents
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
@@ -124,12 +133,16 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         return instanciaTextField.getText();
     }
 
-    public AddComentJFrame getComment() {
+    public AddComentJDialog getComment() {
         return frameComent;
     }
 
-    public void setComment(AddComentJFrame comment) {
+    public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
+    }
+
+    public String getIdentifier() {
+        return identifier;
     }
     
 }

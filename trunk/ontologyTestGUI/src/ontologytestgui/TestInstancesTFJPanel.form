@@ -56,6 +56,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="queryTextField">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Consulta"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="trueRadioButton">
       <Properties>
@@ -73,6 +76,7 @@
           <Image iconType="3" name="/images/comment.gif"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Comentario"/>
+        <Property name="toolTipText" type="java.lang.String" value="A&#xf1;adir comentario"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comentarioButtonActionPerformed"/>
@@ -84,6 +88,7 @@
           <Image iconType="3" name="/images/cancel.gif"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Borrar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarButtonActionPerformed"/>

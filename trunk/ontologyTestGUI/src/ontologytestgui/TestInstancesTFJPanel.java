@@ -6,6 +6,8 @@
 
 package ontologytestgui;
 
+import java.awt.Frame;
+import javax.swing.ButtonGroup;
 import javax.swing.WindowConstants;
 
 /**
@@ -14,11 +16,16 @@ import javax.swing.WindowConstants;
  */
 public class TestInstancesTFJPanel extends javax.swing.JPanel {
 
-    private AddComentJFrame frameComent;
+    private AddComentJDialog frameComent;
+    private Frame frame;
+    
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
         initComponents();
-        frameComent = new AddComentJFrame(); 
+        ButtonGroup group = new ButtonGroup();
+        group.add(trueRadioButton);
+        group.add(falseRadioButton);
+        frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
@@ -39,12 +46,15 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel {
         duplicarButton = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
 
+        queryTextField.setToolTipText("Consulta");
+
         trueRadioButton.setText("True");
 
         falseRadioButton.setText("False");
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/comment.gif"))); // NOI18N
         comentarioButton.setText("Comentario");
+        comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comentarioButtonActionPerformed(evt);
@@ -53,6 +63,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel {
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.gif"))); // NOI18N
         borrarButton.setText("Borrar");
+        borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarButtonActionPerformed(evt);
@@ -170,11 +181,11 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         selectCheckBox.setSelected(selecion);
     }
     
-    public AddComentJFrame getComment() {
+    public AddComentJDialog getComment() {
         return frameComent;
     }
 
-    public void setComment(AddComentJFrame comment) {
+    public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
     }
 }

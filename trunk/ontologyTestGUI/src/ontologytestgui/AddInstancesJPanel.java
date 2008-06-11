@@ -10,10 +10,12 @@ import java.awt.Component;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import model.ClassInstances;
 import model.PropertyInstances;
+import model.ScenarioTest;
 
 /**
  *
@@ -21,15 +23,20 @@ import model.PropertyInstances;
  */
 public class AddInstancesJPanel extends javax.swing.JPanel {
 
-    private AddInstancesClasPropJFrame addInst; 
+    public AddInstancesClasPropJDialog addInst;  
     private JFileChooser filechooser;
     private Component frame;
+    private JFrame parent;
+    private int index;
+    private GroupTestsJPanel jpanel;
+    static ArrayList<ScenarioTest> scte;
     
     /** Creates new form AddInstancesJPanel */
-    public AddInstancesJPanel() {
+    public AddInstancesJPanel(GroupTestsJPanel panel) {
+        this.setGroupPanel(panel);
         initComponents();
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -44,6 +51,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
         examinarButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         asociarButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione las instancias que desea asociar:");
 
@@ -63,20 +71,24 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Ver instancias asociadas");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(layout.createSequentialGroup()
-                        .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 259, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(examinarButton))
-                    .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(asociarButton)
-                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(layout.createSequentialGroup()
+                            .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 259, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(18, 18, 18)
+                            .add(examinarButton))
+                        .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(asociarButton)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jButton1))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,17 +104,39 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(examinarButton))
+                .add(18, 18, 18)
+                .add(jButton1)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleParent(this);
     }// </editor-fold>//GEN-END:initComponents
 
 private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarButtonActionPerformed
 // TODO add your handling code here:
+    int var=0;
+    int i = jpanel.getSelectedTabed();
+    ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getScenarioTestCollection();
+    ScenarioTest sT = scenarioTest.get(i);
+    
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-    addInst = new AddInstancesClasPropJFrame(15);
-    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    addInst.setVisible(true);
+    clasInst = sT.getClassInstances();
+    propInst = sT.getPropertyInstances();
+    if(!clasInst.isEmpty() || !propInst.isEmpty()){
+        var=1;
+    }
+
+    if(var==0){
+        addInst = new AddInstancesClasPropJDialog(parent,true,7,i);
+        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        addInst.setVisible(true);
+    }else{
+        addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
+        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        addInst.setVisible(true);
+    }
+    System.out.println(var);
 }//GEN-LAST:event_asociarButtonActionPerformed
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
@@ -117,15 +151,28 @@ private void openFile(JTextField textfield){
           File selectedFile = filechooser.getSelectedFile();
           textfield.setText(selectedFile.getPath());
           String nameFile = selectedFile.getName();
-          addInst = new AddInstancesClasPropJFrame(nameFile);
+          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
           addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
           addInst.setVisible(true);
       }
 }
 
+public void setSelectedTabbed(int index){
+    this.index = index;
+}
+
+public int getSelectedTabbed(){
+    return this.index;
+}
+
+public void setGroupPanel(GroupTestsJPanel jpanel){
+    this.jpanel=jpanel;
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton asociarButton;
     private javax.swing.JButton examinarButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField pathTextField;
