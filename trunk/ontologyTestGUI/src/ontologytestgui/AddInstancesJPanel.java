@@ -23,6 +23,18 @@ import model.ScenarioTest;
  */
 public class AddInstancesJPanel extends javax.swing.JPanel {
 
+    public static boolean isStateAsociar() {
+        return stateAsociar;
+    }
+    public static void setStateAsociar(boolean aStateAsociar) {
+        stateAsociar = aStateAsociar;
+    }
+    public static boolean isStateExaminar() {
+        return stateExaminar;
+    }
+    public static void setStateExaminar(boolean aStateExaminar) {
+        stateExaminar = aStateExaminar;
+    }
     public AddInstancesClasPropJDialog addInst;  
     private JFileChooser filechooser;
     private Component frame;
@@ -30,6 +42,8 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private int index;
     private GroupTestsJPanel jpanel;
     static ArrayList<ScenarioTest> scte;
+    private static boolean stateAsociar;
+    private static boolean stateExaminar;
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -80,31 +94,35 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(layout.createSequentialGroup()
-                            .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 259, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(18, 18, 18)
-                            .add(examinarButton))
-                        .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(asociarButton)
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(jButton1))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jButton1)
+                            .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(asociarButton))
+                        .addContainerGap(159, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(178, 178, 178))
+                    .add(layout.createSequentialGroup()
+                        .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 259, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(examinarButton)
+                        .addContainerGap(42, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jLabel2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(asociarButton)
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel1)
-                .add(14, 14, 14)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(pathTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(examinarButton))
-                .add(18, 18, 18)
+                .add(5, 5, 5)
                 .add(jButton1)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -114,6 +132,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 
 private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarButtonActionPerformed
 // TODO add your handling code here:
+    AddInstancesJPanel.setStateAsociar(true);
     int var=0;
     int i = jpanel.getSelectedTabed();
     ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getScenarioTestCollection();
@@ -136,11 +155,11 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }
-    System.out.println(var);
 }//GEN-LAST:event_asociarButtonActionPerformed
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
+    AddInstancesJPanel.setStateExaminar(true);
     openFile(pathTextField);  
 }//GEN-LAST:event_examinarButtonActionPerformed
 
