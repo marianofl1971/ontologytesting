@@ -37,34 +37,31 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" pref="432" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="classScrollPane" linkSize="4" alignment="0" min="-2" pref="383" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="newClasButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="newPropButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="1">
+                          <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="newClasButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="newPropButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cancelarInstButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel2" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="classScrollPane" linkSize="7" min="-2" pref="446" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="cancelarInstButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel3" min="-2" pref="192" max="-2" attributes="0"/>
-                              <Component id="propScrollPane" linkSize="4" alignment="0" min="-2" pref="387" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="propScrollPane" linkSize="7" alignment="0" min="-2" pref="387" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jLabel1" alignment="0" min="-2" pref="344" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -73,23 +70,27 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="classScrollPane" linkSize="2" min="-2" pref="422" max="-2" attributes="1"/>
                       <Component id="propScrollPane" linkSize="2" min="0" pref="422" max="32767" attributes="1"/>
+                      <Component id="classScrollPane" linkSize="2" min="-2" pref="422" max="-2" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="limpiarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="newClasButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="newPropButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="guardarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cancelarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="guardarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cancelarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="limpiarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="newClasButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="newPropButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

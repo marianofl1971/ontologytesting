@@ -133,6 +133,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarButtonActionPerformed
 // TODO add your handling code here:
     AddInstancesJPanel.setStateAsociar(true);
+    AddInstancesJPanel.setStateExaminar(false);
     int var=0;
     int i = jpanel.getSelectedTabed();
     ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getScenarioTestCollection();
@@ -151,6 +152,8 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }else{
+        AddInstancesJPanel.setStateAsociar(false);
+        AddInstancesJPanel.setStateExaminar(true);
         addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
@@ -160,6 +163,7 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
     AddInstancesJPanel.setStateExaminar(true);
+    AddInstancesJPanel.setStateAsociar(false);
     openFile(pathTextField);  
 }//GEN-LAST:event_examinarButtonActionPerformed
 

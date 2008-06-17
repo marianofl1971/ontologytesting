@@ -11,8 +11,8 @@ package model;
  */
 public class PropertyInstances {
     
-    private String propertyInstance;
-    private String comment;
+    private String propertyInstance="";
+    private String comment="";
 
     public PropertyInstances(String propertyInstance, String comment){
         this.propertyInstance=propertyInstance;
@@ -24,8 +24,8 @@ public class PropertyInstances {
     }
     
    public PropertyInstances(){
-        this.propertyInstance=null;
-        this.comment=null;
+        this.propertyInstance="";
+        this.comment="";
     }
     
     public String getPropertyInstance() {

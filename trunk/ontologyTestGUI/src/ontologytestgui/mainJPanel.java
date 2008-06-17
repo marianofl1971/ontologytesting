@@ -6,6 +6,11 @@
 
 package ontologytestgui;
 
+import java.awt.Component;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+
 /**
  *
  * @author  sara.garcia
@@ -30,10 +35,13 @@ public class mainJPanel extends javax.swing.JPanel {
     public static String getNamespaceOntologyTextField() {
         return namespaceOntologyTextField.getText();
     }
+    private JFileChooser filechooser;
+    private Component frame;
 
     /** Creates new form mainJPanel */
     public mainJPanel() {
         initComponents();
+        namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
     }
 
     /** This method is called from within the constructor to
@@ -58,7 +66,7 @@ public class mainJPanel extends javax.swing.JPanel {
         newInstancesCheckBox = new javax.swing.JCheckBox();
         existsTestsCheckBox = new javax.swing.JCheckBox();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("¡¡BIENVENIDO AL EVALUADOR DE ONTOLOGÍAS!!");
 
         jLabel2.setText("Por favor, rellene los siguientes campos:");
@@ -155,12 +163,24 @@ public class mainJPanel extends javax.swing.JPanel {
                 .addComponent(sparqlCheckBox)
                 .addContainerGap(178, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("firstpanel");
     }// </editor-fold>//GEN-END:initComponents
 
 private void examinarFisicalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarFisicalButtonActionPerformed
 // TODO add your handling code here:
+    openFile(fisicalOntologyTextField);  
 }//GEN-LAST:event_examinarFisicalButtonActionPerformed
   
+private void openFile(JTextField textfield){
+      filechooser = new JFileChooser("./");
+      int option = filechooser.showOpenDialog(frame);
+      if (option == JFileChooser.APPROVE_OPTION) {
+          File selectedFile = filechooser.getSelectedFile();
+          textfield.setText(selectedFile.getPath());
+          String nameFile = selectedFile.getName();
+      }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton examinarFisicalButton;

@@ -11,8 +11,8 @@ package model;
  */
 public class ClassInstances {
     
-    private String classInstance;
-    private String comment;
+    private String classInstance="";
+    private String comment="";
 
     public ClassInstances(String classInstance, String comment){
         this.classInstance=classInstance;
@@ -24,8 +24,8 @@ public class ClassInstances {
     }
     
     public ClassInstances(){
-        this.classInstance=null;
-        this.comment=null;
+        this.classInstance="";
+        this.comment="";
     }
     
     public String getClassInstance() {

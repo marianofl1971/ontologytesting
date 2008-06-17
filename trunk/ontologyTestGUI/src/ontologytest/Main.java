@@ -79,7 +79,7 @@ public class Main {
       
         QueryOntology queryontology1 = new QueryOntology("Wife,marry","false",
                 "query 1");
-        QueryOntology queryontology2 = new QueryOntology("Wife,tom","true",
+        QueryOntology queryontology2 = new QueryOntology("Wife,tom","false",
                 "query_2");
         
         querys.add(queryontology1);

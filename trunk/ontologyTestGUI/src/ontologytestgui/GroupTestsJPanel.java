@@ -6,6 +6,8 @@
 
 package ontologytestgui;
 
+import clases.OntologyTestCase;
+import clases.OntologyTestResult;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -36,6 +38,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
     static final int desktopWidth = 750;
     static final int desktopHeight = 600;
+    private static boolean instanciacion=false, retrieval=false,realizacion=false,
+            satisfactibilidad=false,clasificacion=false;
     static JFrame frame;
     public static boolean isState() {
         return state;
@@ -55,11 +59,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     public static void setDatosGuardados(boolean aDatosGuardados) {
         datosGuardados = aDatosGuardados;
     }
+    public static OntologyTestResult getTestresult() {
+        return testresult;
+    }
     private AddInstancesJPanel addInstances;
     private static ArrayList<ScenarioTest> scenarioTestCollection;
     private int aux=0;
     private static boolean state;
     private static boolean datosGuardados;
+    private static OntologyTestResult testresult;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -67,7 +75,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         setState(true);
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
-        //testsTabbedPane.setSize(new Dimension(1200,500));
         testInstPanel.setLayout(new BoxLayout(testInstPanel, BoxLayout.Y_AXIS));
         testRetPanel.setLayout(new BoxLayout(testRetPanel, BoxLayout.Y_AXIS));
         testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
@@ -242,17 +249,37 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
 public void guardarDatos(){
         
+    OntologyTestCase testcase = new OntologyTestCase();
+    testresult = new OntologyTestResult();
     CollectionTest collectionTest = new CollectionTest();
-    collectionTest.setOntology(mainJPanel.getFisicalOntologyTextField());
-    collectionTest.setNamespace(mainJPanel.getNamespaceOntologyTextField());
+
+    String ontologyFisical=mainJPanel.getFisicalOntologyTextField();
+    String ontologyURI = mainJPanel.getNamespaceOntologyTextField();
     
+    collectionTest.setOntology("file:".concat(ontologyFisical));
+    if(ontologyURI.endsWith("#")){
+        collectionTest.setNamespace(ontologyURI);
+    }else{
+        collectionTest.setNamespace(ontologyURI.concat("#"));
+    }
+
     this.asociarInstancias();
     
-    getScenarioTestCollection().get(0).setTestName("Instanciación");
-    getScenarioTestCollection().get(1).setTestName("Retrieval");
-    getScenarioTestCollection().get(2).setTestName("Realización");
-    getScenarioTestCollection().get(3).setTestName("Satisfactibilidad");
-    getScenarioTestCollection().get(4).setTestName("Clasificación");
+    if(instanciacion==true){
+        getScenarioTestCollection().get(0).setTestName("Instanciación");
+    }
+    if(retrieval==true){
+        getScenarioTestCollection().get(1).setTestName("Retrieval");
+    }
+    if(realizacion==true){
+        getScenarioTestCollection().get(2).setTestName("Realización");
+    }
+    if(satisfactibilidad==true){
+        getScenarioTestCollection().get(3).setTestName("Satisfactibilidad");
+    }
+    if(clasificacion==true){
+        getScenarioTestCollection().get(4).setTestName("Clasificación");
+    }
     
     if(aux==1){
         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
@@ -260,9 +287,9 @@ public void guardarDatos(){
                 "Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
         Component comp = null;
-        int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar este conjunto de" +
-            " instancias para futuras pruebas?", "Guardar Instancias",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.YES_OPTION) {
+        int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
+                "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
             String nombreArch=null;
             String nameInstances=null;
     
@@ -276,37 +303,40 @@ public void guardarDatos(){
                 nameInstances=nombreArch.concat(".xml");
             }
             collectionTest.setScenariotest(getScenarioTestCollection());
-        try{
-            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+            try{    
+                XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(nameInstances)));
-            e.writeObject(collectionTest);
-            e.close();
-        }catch (FileNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            this.setVisible(false);
+                e.writeObject(collectionTest);
+                e.close();
+            }catch (FileNotFoundException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            collectionTest.setScenariotest(getScenarioTestCollection());
+            testcase.run(testresult, collectionTest);
             GroupTestsJPanel.setDatosGuardados(true);
         }else{
             collectionTest.setScenariotest(getScenarioTestCollection());
-            GroupTestsJPanel.setDatosGuardados(true);
-        }
-  }    
+            testcase.run(testresult, collectionTest);
+            GroupTestsJPanel.setDatosGuardados(true); 
+        }        
+    }    
 }
     
-    public boolean isScenarioEmpty(ScenarioTest scenarioTest){
-            ArrayList<ClassInstances> classInstances = scenarioTest.getClassInstances();
-            ArrayList<PropertyInstances> propertyInstances = scenarioTest.getPropertyInstances();
-            ArrayList<QueryOntology> queryTest = scenarioTest.getQueryTest();
-            ArrayList<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
-            if(classInstances.isEmpty() && propertyInstances.isEmpty() && 
-                    queryTest.isEmpty() && sparqlQuerys.isEmpty()){
-                    return true;
-            }else{
-                return false;
-            }
-    }
+public boolean isScenarioEmpty(ScenarioTest scenarioTest){
     
-    public void asociarInstancias(){
+    ArrayList<ClassInstances> classInstances = scenarioTest.getClassInstances();
+    ArrayList<PropertyInstances> propertyInstances = scenarioTest.getPropertyInstances();
+    ArrayList<QueryOntology> queryTest = scenarioTest.getQueryTest();
+    ArrayList<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
+    if(classInstances.isEmpty() && propertyInstances.isEmpty() && 
+        queryTest.isEmpty() && sparqlQuerys.isEmpty()){
+        return true;
+     }else{
+        return false;
+     }
+}
+    
+public void asociarInstancias(){
        
     aux=0;
     ArrayList<QueryOntology> queryTest1 = new ArrayList<QueryOntology>();
@@ -336,7 +366,8 @@ public void guardarDatos(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest1.add(testQuery);
-                getScenarioTestCollection().get(0).setQueryTest(queryTest1);
+            getScenarioTestCollection().get(0).setQueryTest(queryTest1);
+            instanciacion=true;
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
         }
@@ -351,7 +382,8 @@ public void guardarDatos(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest2.add(testQuery);
-                getScenarioTestCollection().get(1).setQueryTest(queryTest2);
+            getScenarioTestCollection().get(1).setQueryTest(queryTest2);
+            retrieval=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
@@ -366,11 +398,13 @@ public void guardarDatos(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest3.add(testQuery);
-                getScenarioTestCollection().get(2).setQueryTest(queryTest3);
+            getScenarioTestCollection().get(2).setQueryTest(queryTest3);
+            realizacion=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }
+    
     for(int i=0;i<totalSat;i++){
         TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelSat.getComponent(i);
         String query = test.getQuery();
@@ -380,11 +414,13 @@ public void guardarDatos(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest4.add(testQuery);
-                getScenarioTestCollection().get(3).setQueryTest(queryTest4);
+            getScenarioTestCollection().get(3).setQueryTest(queryTest4);
+            satisfactibilidad=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }
+    
     for(int i=0;i<totalClas;i++){
         TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelClas.getComponent(i);
         String query = test.getQuery();
@@ -395,34 +431,36 @@ public void guardarDatos(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest5.add(testQuery);
-                getScenarioTestCollection().get(4).setQueryTest(queryTest5);
+            getScenarioTestCollection().get(4).setQueryTest(queryTest5);
+            clasificacion=true;
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
         }
     }
   }
     
-        public JPanel getTestClasPanel() {
-        return testClasPanel;
-    }
+public JPanel getTestClasPanel() {
+    return testClasPanel;
+}
 
-    public JPanel getTestInstPanel() {
-        return testInstPanel;
-    }
+public JPanel getTestInstPanel() {
+    return testInstPanel;
+}
 
-    public JPanel getTestRealPanel() {
-        return testRealPanel;
-    }
+public JPanel getTestRealPanel() {
+    return testRealPanel;
+}
 
-    public JPanel getTestRetPanel() {
-        return testRetPanel;
-    }
+public JPanel getTestRetPanel() {
+    return testRetPanel;
+}
 
-    public JPanel getTestSatPanel() {
-        return testSatPanel;
-    }
+public JPanel getTestSatPanel() {
+    return testSatPanel;
+}
     
-    public int getSelectedTabed(){
-        return testsTabbedPane.getSelectedIndex();
-    }
+public int getSelectedTabed(){
+    return testsTabbedPane.getSelectedIndex();
+}
+
 }

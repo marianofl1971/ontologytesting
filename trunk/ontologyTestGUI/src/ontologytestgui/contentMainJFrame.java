@@ -8,6 +8,7 @@ package ontologytestgui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -18,13 +19,22 @@ public class contentMainJFrame extends javax.swing.JFrame {
 
     private mainJPanel mainJPanel = new mainJPanel();
     private GroupTestsJPanel groupTests = new GroupTestsJPanel(25);
-    
+    private JFrame frame;
+    private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8);
+    private JLabel label = new JLabel("RESULTADO DE SUS PRUEBAS");
+    private static int panel=0;
+    public static void setPanel(int apanel) {
+        panel=apanel;
+    }
+    public static int getPanel() {
+        return panel;
+    }
     /** Creates new form contentMainJFrame */
     public contentMainJFrame() {
         initComponents();
-        this.setTitle("EVALUADOR DE ONTOLOGÍAS");
-        this.setSize(new Dimension(800,700));
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setTitle("EVALUADOR DE ONTOLOGÍAS");
+        this.setSize(new Dimension(950,700));
         contentPanel.add(mainJPanel);
     }
 
@@ -48,11 +58,11 @@ public class contentMainJFrame extends javax.swing.JFrame {
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
+            .addGap(0, 913, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
 
         siguienteButton.setText("Siguiente");
@@ -64,27 +74,30 @@ public class contentMainJFrame extends javax.swing.JFrame {
 
         anteriorButton.setText("Anterior");
         anteriorButton.setEnabled(false);
+        anteriorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(611, 611, 611)
+                .addGap(741, 741, 741)
                 .addComponent(anteriorButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(siguienteButton)
-                .addGap(119, 119, 119))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(118, Short.MAX_VALUE)))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(615, Short.MAX_VALUE)
+                .addContainerGap(535, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -94,7 +107,7 @@ public class contentMainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(64, Short.MAX_VALUE)))
+                    .addContainerGap(66, Short.MAX_VALUE)))
         );
 
         pack();
@@ -102,21 +115,50 @@ public class contentMainJFrame extends javax.swing.JFrame {
 
 private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
 // TODO add your handling code here:
+    JLabel l = new JLabel();
     if(mainJPanel.getNewTestState()==true){
         contentPanel.remove(mainJPanel);
         contentPanel.add(groupTests);
+        anteriorButton.setEnabled(true);
         this.validate();
         mainJPanel.setNewTestCheckBox(false);
-    }else if(GroupTestsJPanel.isState()==true){
+        contentMainJFrame.setPanel(1);
+    }else if(contentMainJFrame.getPanel()==1){
         groupTests.guardarDatos();
         if(GroupTestsJPanel.isDatosGuardados()==true){
-            GroupTestsJPanel.setState(false);
+            contentMainJFrame.setPanel(2);
             contentPanel.remove(groupTests);
-            contentPanel.add(new JLabel("DATOS GUARDADOS PARA CONTINUAR."));
+            contentPanel.add(label);
             this.validate();
         }
+    }else if(mainJPanel.getNewInstancesState()==true){
+        contentPanel.remove(mainJPanel);
+        contentPanel.add(addInstances.getContentPanel());
+        anteriorButton.setEnabled(true);
+        this.validate();
+        mainJPanel.setNewInstancesCheckBox(false);
+        contentMainJFrame.setPanel(3);
     }
 }//GEN-LAST:event_siguienteButtonActionPerformed
+
+private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
+// TODO add your handling code here:
+    if(contentMainJFrame.getPanel()==1){
+        contentPanel.remove(groupTests);
+        contentPanel.add(mainJPanel);
+        anteriorButton.setEnabled(false);
+        contentMainJFrame.setPanel(0);
+        this.validate();
+    }else if(contentMainJFrame.getPanel()==2){
+        contentPanel.remove(label);
+        contentPanel.add(groupTests);
+        contentMainJFrame.setPanel(1);
+        this.validate();
+    }else if(contentMainJFrame.getPanel()==3){
+        contentPanel.remove(addInstances.getContentPanel());
+        this.validate();
+    }
+}//GEN-LAST:event_anteriorButtonActionPerformed
 
     /**
     * @param args the command line arguments

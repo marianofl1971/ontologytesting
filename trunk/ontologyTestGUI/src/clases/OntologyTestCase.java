@@ -14,10 +14,6 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -40,36 +36,13 @@ public class OntologyTestCase implements OntologyTest{
     private OntClass nameclass;
     private Individual classValue, hasprop;
     private Property nameprop;
-    private XMLDecoder decoder;
-    private ArrayList al;
-    private ScenarioTest qo;
-    private CollectionTest collectionTest;
+    boolean namepropIsUsed=false;
+    boolean nameclasIsUsed=false;
                     
     public OntologyTestCase(){
     }
 
-    protected void setUpOntology(ScenarioTest st, String ont, String ns){
-        
-    try{
-         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("instances.xml")));
-         collectionTest = (CollectionTest)decoder.readObject();
-         ArrayList<ScenarioTest> scenarioTest = collectionTest.getScenariotest();
-         QueryOntology query;
-         ListIterator li,lq;
-         li = scenarioTest.listIterator();
-         while(li.hasNext()){
-            qo = (ScenarioTest) li.next();
-            ArrayList<QueryOntology> q = qo.getQueryTest();
-            lq = q.listIterator();
-            while(lq.hasNext()){
-                query = (QueryOntology) lq.next();
-            System.out.println("Query con xmldecoder: "+query.getQuery());
-            System.out.println("Result con xmldecoder: "+query.getResultexpected());
-            }
-         }
-         decoder.close();           
-    }catch(FileNotFoundException e){
-    }       
+    protected void setUpOntology(ScenarioTest st, String ont, String ns){  
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];    
@@ -103,10 +76,14 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     protected void tearDownOntology(){
-        nameclass.remove();
-        nameprop.removeProperties();
-        classValue.remove();
-        hasprop.remove();    
+        if(nameclasIsUsed==true){
+            nameclass.remove();
+            classValue.remove();
+        }
+        if(namepropIsUsed==true){
+            nameprop.removeProperties();
+            hasprop.remove();
+        }    
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
@@ -114,9 +91,10 @@ public class OntologyTestCase implements OntologyTest{
            
         ListIterator liQuery;
         String res[],clasF="",indF="";
+        String testName = scenariotest.getTestName();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         
-        String resObtenidoInst="",resQueryExpected="",resObtenidoSat="";
+        String resObtenidoInst="",resQueryExpected="",resObtenidoSat="",resObtenidoRet="";
         QueryOntology qo = null;
                 
         OntologyTests tests = new OntologyTests();
@@ -128,28 +106,34 @@ public class OntologyTestCase implements OntologyTest{
                 qo = (QueryOntology) liQuery.next();
                 String query = qo.getQuery();
                 resQueryExpected = qo.getResultexpected();
-                res = query.split(",");
-                clasF = res[0];
-                indF = res[1];
-                resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
-                //StringBuilder resObtenidoRet = tests.retieval(ns, clasF, model);
-                //String resObtenidoReal = tests.realization(ns, indF, model); 
-                //resObtenidoSat = tests.satisfactibility(ns,model,"Male","Person");
-                //ArrayList result = tests.classification(ns,model,"tom");
-                /*ListIterator l;
-                l = result.listIterator();
-                while(l.hasNext()){
-                    System.out.println(l.next());
-                }*/
+                if(testName.equals("Instanciación")){
+                    res = query.split(",");
+                    clasF = res[0];
+                    indF = res[1];
+                    resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
+                    if(!resObtenidoInst.equals(resQueryExpected)){
+                        testresult.addOntologyFailureQuery(qo, resObtenidoInst);
+                    }
+                }else if(testName.equals("Retrieval")){
+                    resObtenidoRet = tests.retieval(ns, query, model);
+                    if(!resObtenidoRet.equals(resQueryExpected)){
+                        testresult.addOntologyFailureQuery(qo, resObtenidoRet);
+                    }
+                }else if(testName.equals("Realización")){
+                
+                }else if(testName.equals("Satisfactibilidad")){
+                
+                }else if(testName.equals("Clasificación")){
+                
+                }
             }
             
-            if(!resObtenidoInst.equals(resQueryExpected)){
-                testresult.addOntologyFailureQuery(qo, resObtenidoInst);
-            }
+            
         }
         
     } 
 
+    @Override
     public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
 
         String ont = baterytest.getOntology();
@@ -173,11 +157,13 @@ public class OntologyTestCase implements OntologyTest{
     public void addInstanceClass(String ns,String nameClass, String value){
         nameclass = model.createClass(ns + nameClass);
         classValue = model.createIndividual(ns + value,nameclass);
+        nameclasIsUsed=true;
     }
     
     public void addInstanceProperty(String ns,String nameProperty, String value){
         nameprop = model.createProperty(ns + nameProperty);
         hasprop = model.createIndividual(ns + value,nameprop);
+        namepropIsUsed=true;
     }
 
     public void showResultTests(OntologyTestResult testresult){
