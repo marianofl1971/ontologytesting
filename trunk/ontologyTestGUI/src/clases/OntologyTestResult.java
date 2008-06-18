@@ -27,10 +27,10 @@ public class OntologyTestResult extends Object{
         ontologyfailuressparql = new ArrayList<OntologyTestFailure>();
     }
     
-    public void addOntologyFailureQuery(QueryOntology query, String resObte){
+    public void addOntologyFailureQuery(String testName,QueryOntology query, String resObte){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
-        ontologytestfailure.addOntologyTestFailureQuery(query, resObte);
+        ontologytestfailure.addOntologyTestFailureQuery(testName,query, resObte);
         ontologyfailuresquerys.add(ontologytestfailure);
     }
     

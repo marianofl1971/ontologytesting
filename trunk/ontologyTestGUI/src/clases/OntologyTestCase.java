@@ -112,12 +112,12 @@ public class OntologyTestCase implements OntologyTest{
                     indF = res[1];
                     resObtenidoInst = tests.instantiation(ns, clasF, indF, model);
                     if(!resObtenidoInst.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(qo, resObtenidoInst);
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoInst);
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = tests.retieval(ns, query, model);
                     if(!resObtenidoRet.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(qo, resObtenidoRet);
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoRet);
                     }
                 }else if(testName.equals("Realización")){
                 
@@ -176,6 +176,12 @@ public class OntologyTestCase implements OntologyTest{
           System.out.println("De las pruebas introducidas han fallado las siguientes:");
         while(liFailures.hasNext()){
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();
+            
+            if(otf.getTestName().equals("Instanciación")){
+                System.out.println("HAN FALLADO DE LOS TEST DE INSTANCIACION:");
+            }else if(otf.getTestName().equals("Retrieval")){
+                System.out.println("HAN FALLADO DE LOS TEST RETRIEVAL:");
+            }
             System.out.println("De la query introducida " +otf.getfQuery());
             System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
             System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());

@@ -136,13 +136,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         }
     }  
     
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName) {
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName,int i) {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
         setNombreFichero(textName);
         initComponents();
         int contP=0,contC=0;
+        this.setIndexVect(i);
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));

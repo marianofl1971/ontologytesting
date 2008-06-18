@@ -168,13 +168,14 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_examinarButtonActionPerformed
 
 private void openFile(JTextField textfield){
+      int i = jpanel.getSelectedTabed();
       filechooser = new JFileChooser("./");
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           textfield.setText(selectedFile.getPath());
           String nameFile = selectedFile.getName();
-          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
+          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile,i);
           addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
           addInst.setVisible(true);
       }
