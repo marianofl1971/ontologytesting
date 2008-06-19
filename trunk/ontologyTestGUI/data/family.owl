@@ -8,16 +8,20 @@
   xml:base="http://www.owl-ontologies.com/family.owl">
   <owl:Ontology rdf:about=""/>
   <owl:Class rdf:ID="Male">
+    <owl:disjointWith>
+      <owl:Class rdf:ID="Female"/>
+    </owl:disjointWith>
     <rdfs:subClassOf>
       <owl:Class rdf:ID="Person"/>
     </rdfs:subClassOf>
   </owl:Class>
   <owl:Class rdf:ID="Wife">
     <owl:equivalentClass>
-      <owl:Class rdf:ID="Female"/>
+      <owl:Class rdf:about="#Female"/>
     </owl:equivalentClass>
   </owl:Class>
   <owl:Class rdf:about="#Female">
+    <owl:disjointWith rdf:resource="#Male"/>
     <owl:equivalentClass rdf:resource="#Wife"/>
     <rdfs:subClassOf rdf:resource="#Person"/>
   </owl:Class>

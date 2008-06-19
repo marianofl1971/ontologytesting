@@ -85,8 +85,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testInstPanel.add(new TestInstancesTFJPanel());
             testRetPanel.add(new TestInstancesQueryJPanel());
             testRealPanel.add(new TestInstancesQueryJPanel());
-            testSatPanel.add(new TestInstancesQueryJPanel());
-            testClasPanel.add(new TestInstancesTFJPanel());
+            testSatPanel.add(new TestInstancesTFJPanel());
+            testClasPanel.add(new TestInstancesQueryJPanel());
         }
 
         scenarioTestCollection = new ArrayList<ScenarioTest>(4);
@@ -406,23 +406,7 @@ public void asociarInstancias(){
     }
     
     for(int i=0;i<totalSat;i++){
-        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelSat.getComponent(i);
-        String query = test.getQuery();
-        String queryExp = test.getQueryResult();
-        AddComentJDialog comentPane = test.getComment();
-        String coment = comentPane.getComent();
-        if(!query.equals("") && !queryExp.equals("")){
-            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-            queryTest4.add(testQuery);
-            getScenarioTestCollection().get(3).setQueryTest(queryTest4);
-            satisfactibilidad=true;
-        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
-            aux=1;
-        }
-    }
-    
-    for(int i=0;i<totalClas;i++){
-        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelClas.getComponent(i);
+        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelSat.getComponent(i);
         String query = test.getQuery();
         String resExpT = test.isTestTrue();
         String resExpF = test.isTestFalse();
@@ -430,10 +414,26 @@ public void asociarInstancias(){
         String coment = comentPane.getComent();
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+            queryTest4.add(testQuery);
+            getScenarioTestCollection().get(3).setQueryTest(queryTest4);
+            satisfactibilidad=true;
+        }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
+            aux=1;
+        }
+    }
+    
+    for(int i=0;i<totalClas;i++){
+        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelClas.getComponent(i);
+        String query = test.getQuery();
+        String queryExp = test.getQueryResult();
+        AddComentJDialog comentPane = test.getComment();
+        String coment = comentPane.getComent();
+        if(!query.equals("") && !queryExp.equals("")){
+            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest5.add(testQuery);
             getScenarioTestCollection().get(4).setQueryTest(queryTest5);
             clasificacion=true;
-        }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
+        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }

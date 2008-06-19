@@ -90,11 +90,12 @@ public class OntologyTestCase implements OntologyTest{
             ScenarioTest scenariotest){
            
         ListIterator liQuery;
-        String res[],clasF="",indF="";
+        String res[],clasF="",indF="",concepto="",loincluye="";
         String testName = scenariotest.getTestName();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         
-        String resObtenidoInst="",resQueryExpected="",resObtenidoSat="",resObtenidoRet="";
+        String resObtenidoInst="",resQueryExpected="",resObtenidoClas="",resObtenidoRet="",
+                resObtenidoRealiz="",resObtenidoSatisf="";
         QueryOntology qo = null;
                 
         OntologyTests tests = new OntologyTests();
@@ -120,11 +121,23 @@ public class OntologyTestCase implements OntologyTest{
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoRet);
                     }
                 }else if(testName.equals("Realización")){
-                
-                }else if(testName.equals("Satisfactibilidad")){
-                
-                }else if(testName.equals("Clasificación")){
-                
+                    resObtenidoRealiz = tests.realization(ns, query, model);
+                    if(!resObtenidoRealiz.equals(resQueryExpected)){
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoRealiz);
+                    }
+                }/*else if(testName.equals("Satisfactibilidad")){
+                    res = query.split(",");
+                    concepto = res[0];
+                    loincluye = res[1];
+                    resObtenidoSatisf = tests.satisfactibility(ns, model, concepto, loincluye);
+                    if(!resObtenidoSatisf.equals(resQueryExpected)){
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
+                    }
+                }*/else if(testName.equals("Clasificación")){
+                    resObtenidoClas = tests.classification(ns, model, query);
+                    if(!resObtenidoClas.equals(resQueryExpected)){
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoClas);
+                    }
                 }
             }
             
@@ -181,6 +194,12 @@ public class OntologyTestCase implements OntologyTest{
                 System.out.println("HAN FALLADO DE LOS TEST DE INSTANCIACION:");
             }else if(otf.getTestName().equals("Retrieval")){
                 System.out.println("HAN FALLADO DE LOS TEST RETRIEVAL:");
+            }else if(otf.getTestName().equals("Realización")){
+                System.out.println("HAN FALLADO DE LOS TESTS DE REALIZACIÓN:");
+            }else if(otf.getTestName().equals("Clasificación")){
+                System.out.println("HAN FALLADO DE LOS TESTS DE CLASIFICACIÓN:");
+            }else if(otf.getTestName().equals("Satisfactibilidad")){
+                System.out.println("HAN FALLADO DE LOS TESTS DE SATISFACTIBILIDAD:");
             }
             System.out.println("De la query introducida " +otf.getfQuery());
             System.out.println("Se esperaba obtener : " +otf.getfResultExpected());

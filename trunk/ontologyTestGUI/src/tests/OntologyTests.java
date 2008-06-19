@@ -30,7 +30,7 @@ public class OntologyTests {
 
         if(ontClass==null) 
         {
-            return "false";
+            return "El individuo introducido no es una instancia para el modelo";
         }
       
         Iterator it = ontClass.listInstances();       
@@ -71,7 +71,7 @@ public class OntologyTests {
          
         Individual individual = model.getIndividual(ns + individualName);
         
-        if(individual==null) return "FAILED";
+        if(individual==null) return "El individuo introducido no es una instancia para el modelo";
         
         Resource resource = individual.getRDFType(true); 
         String className = resource.toString().substring(resource.toString().indexOf("#")+1);
@@ -79,31 +79,50 @@ public class OntologyTests {
         return className;
     }  
     
-    //Saber si un concepto (concepto) está incluido en otro (loIncluye)
-    public String satisfactibility(String ns, OntModel model, String concepto, 
-            String loIncluye){
-                
-        OntClass male = model.getOntClass(ns + loIncluye);
-        for(Iterator i = male.listSubClasses(); i.hasNext();){
-            OntClass c = (OntClass) i.next();
-            if(c.getLocalName().equals(concepto))
-                return "true";
+    //Saber si se puede añadir un concepto
+    /*public String satisfactibility(String ns, OntModel model, String concepto, 
+            String clase){
+
+       String clasesPertenece = classification(ns,model,concepto);
+       String[] clas = clasesPertenece.split(",");
+       int tam = clas.length;
+       OntClass ontClass = model.getOntClass(ns+clase);
+       if(ontClass==null){
+        return "true";
+       }
+       
+       Iterator it = ontClass.listDisjointWith();
+        while(it.hasNext()){
+            String instanceName = it.next().toString();
+            System.out.println("aaa "+instanceName.toString());
+            instanceName = instanceName.substring(instanceName.indexOf("#")+1);
+            System.out.println("disjunta: "+instanceName);
+            for(int i=0; i<tam;i++){
+                ontClass.isDisjointWith(clas[i]);
+            if(instanceName.equals(clas[i]))
+                return "false";
+            }
+            System.out.println("FIN");
         }
-        return "false";
-    }
+       return "true";
+    }*/
     
     //Dado un individuo, deducir todas las clases a las que pertenece
-    public ArrayList classification(String ns, OntModel model, String individuo){
+    public String classification(String ns, OntModel model, String individuo){
         
         String pertenece;
-        ArrayList clases = new ArrayList();
-        Iterator it = model.listClasses();
+        String clases="";
+        Iterator it = model.listNamedClasses();
 
         while(it.hasNext()){
             String[] instanceName = it.next().toString().split("#");
             pertenece = instantiation(ns, instanceName[1].toString(), individuo, model);
             if(pertenece.equals("true")){
-                clases.add(instanceName[1]);
+                if(!clases.equals("")){
+                    clases+=","+instanceName[1].toString();
+                }else{
+                clases=instanceName[1].toString();
+                }
             }
         }       
         return clases;
