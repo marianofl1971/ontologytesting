@@ -11,11 +11,15 @@ import clases.OntologyTestResult;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
@@ -23,9 +27,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.CollectionTest;
 import model.PropertyInstances;
 import model.ClassInstances;
+import model.CollectionTest;
 import model.QueryOntology;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
@@ -42,16 +46,16 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             satisfactibilidad=false,clasificacion=false;
     static JFrame frame;
     public static boolean isState() {
-        return state;
+        return seleccionado;
     }
     public static void setState(boolean aState) {
-        state = aState;
+        seleccionado = aState;
     }
-    public static ArrayList<ScenarioTest> getScenarioTestCollection() {
-        return scenarioTestCollection;
+    public static boolean isNewState() {
+        return seleccionado;
     }
-    public static void setScenarioTestCollection(ArrayList<ScenarioTest> aScenarioTestCollection) {
-        scenarioTestCollection = aScenarioTestCollection;
+    public static void setNewState(boolean aState) {
+        seleccionado = aState;
     }
     public static boolean isDatosGuardados() {
         return datosGuardados;
@@ -62,12 +66,20 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     public static OntologyTestResult getTestresult() {
         return testresult;
     }
+    public static CollectionTest getCollectionTest() {
+        return collectionTest;
+    }
+    public static void setCollectionTest(CollectionTest aCollectionTest) {
+        collectionTest = aCollectionTest;
+    }
     private AddInstancesJPanel addInstances;
-    private static ArrayList<ScenarioTest> scenarioTestCollection;
+    private static CollectionTest collectionTest;
     private int aux=0;
-    private static boolean state;
+    public static boolean seleccionado;
     private static boolean datosGuardados;
     private static OntologyTestResult testresult;
+    private XMLDecoder decoder;
+    private AddComentJDialog commentPane;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -88,16 +100,112 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testSatPanel.add(new TestInstancesTFJPanel());
             testClasPanel.add(new TestInstancesQueryJPanel());
         }
-
-        scenarioTestCollection = new ArrayList<ScenarioTest>(4);
+        collectionTest = new CollectionTest();
+        ArrayList<ScenarioTest> scenarioTestCollection = new ArrayList<ScenarioTest>(4);
         for(int i=0;i<5;i++){
             scenarioTestCollection.add(new ScenarioTest());
+        }
+        collectionTest.setScenariotest(scenarioTestCollection);
+        
+        contentPanel.add(new JLabel("Complete los tests que desee realizar"),BorderLayout.NORTH);
+        addInstances = new AddInstancesJPanel(this);
+        contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
+        contentPanel.add(addInstances,BorderLayout.SOUTH);  
+    }
+    
+    public GroupTestsJPanel(String path) {
+        
+        initComponents(); 
+        setNewState(true);
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
+        testInstPanel.setLayout(new BoxLayout(testInstPanel, BoxLayout.Y_AXIS));
+        testRetPanel.setLayout(new BoxLayout(testRetPanel, BoxLayout.Y_AXIS));
+        testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
+        testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
+        testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));
+
+        try{
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
+        CollectionTest cT = (CollectionTest) decoder.readObject();
+        setCollectionTest(cT);
+        ArrayList<ScenarioTest> scenario = getCollectionTest().getScenariotest();
+        ListIterator it;
+        it = scenario.listIterator();
+        while(it.hasNext()){
+                ScenarioTest s = (ScenarioTest) it.next();
+                ArrayList<QueryOntology> qO = s.getQueryTest();
+                
+                ListIterator qi;
+                qi = qO.listIterator();
+                while(qi.hasNext()){   
+                    QueryOntology cI = (QueryOntology) qi.next();
+                    TestInstancesTFJPanel testTF = new TestInstancesTFJPanel();
+                    TestInstancesQueryJPanel testQuery = new TestInstancesQueryJPanel();
+                    if(s.getTestName().equals("Instanciación") || s.getTestName().equals("Satisfactibilidad")){   
+                        testTF.setQuery(cI.getQuery());
+                        String resultExp = cI.getResultexpected();
+                        if(resultExp.equals("true")){
+                            testTF.setTrueTest(true);
+                        }else{
+                            testTF.setFalseTest(true);
+                        }
+                        commentPane = testTF.getComment();
+                        commentPane.setComent(cI.getComment());
+                        testTF.setComment(commentPane);
+                    }else{
+                        testQuery.setQuery(cI.getQuery());
+                        testQuery.setQueryResult(cI.getResultexpected());
+                        commentPane = testQuery.getComment();
+                        commentPane.setComent(cI.getComment());
+                        testQuery.setComment(commentPane);
+                    }
+                    if(s.getTestName().equals("Instanciación")){
+                        testInstPanel.add(testTF);
+                    }else if(s.getTestName().equals("Retrieval")){
+                        testRetPanel.add(testQuery);
+                    }else if(s.getTestName().equals("Realización")){
+                        testRealPanel.add(testQuery);
+                    }else if(s.getTestName().equals("Satisfactibilidad")){
+                        testSatPanel.add(testTF);
+                    }else if(s.getTestName().equals("Clasificación")){
+                        testClasPanel.add(testQuery);
+                    }
+                }           
+        }
+            decoder.close();    
+        }catch(FileNotFoundException e){
+        } 
+
+        if(testInstPanel.getComponentCount()<8){
+            while(testInstPanel.getComponentCount()<8){
+                testInstPanel.add(new TestInstancesTFJPanel());
+            }
+        }
+        if(testRetPanel.getComponentCount()<8){
+            while(testRetPanel.getComponentCount()<8){
+                testRetPanel.add(new TestInstancesQueryJPanel());
+            }
+        }
+        if(testRealPanel.getComponentCount()<8){
+            while(testRealPanel.getComponentCount()<8){
+                testRealPanel.add(new TestInstancesQueryJPanel());
+            }
+        }
+        if(testSatPanel.getComponentCount()<8){
+            while(testSatPanel.getComponentCount()<8){
+                testSatPanel.add(new TestInstancesTFJPanel());
+            }
+        }
+        if(testClasPanel.getComponentCount()<8){
+            while(testClasPanel.getComponentCount()<8){
+                testClasPanel.add(new TestInstancesQueryJPanel());
+            }
         }
         contentPanel.add(new JLabel("Complete los tests que desee realizar"),BorderLayout.NORTH);
         addInstances = new AddInstancesJPanel(this);
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
-        contentPanel.add(addInstances,BorderLayout.SOUTH);
-        
+        contentPanel.add(addInstances,BorderLayout.SOUTH);  
     }
 
     /** This method is called from within the constructor to
@@ -128,7 +236,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testInstPanel.setLayout(testInstPanelLayout);
         testInstPanelLayout.setHorizontalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1004, Short.MAX_VALUE)
+            .addGap(0, 1036, Short.MAX_VALUE)
         );
         testInstPanelLayout.setVerticalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,10 +359,9 @@ public void guardarDatos(){
         
     OntologyTestCase testcase = new OntologyTestCase();
     testresult = new OntologyTestResult();
-    CollectionTest collectionTest = new CollectionTest();
 
-    String ontologyFisical=mainJPanel.getFisicalOntologyTextField();
-    String ontologyURI = mainJPanel.getNamespaceOntologyTextField();
+    String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
+    String ontologyURI = MainJPanel.getNamespaceOntologyTextField();
     
     collectionTest.setOntology("file:".concat(ontologyFisical));
     if(ontologyURI.endsWith("#")){
@@ -264,21 +371,20 @@ public void guardarDatos(){
     }
 
     this.asociarInstancias();
-    
     if(instanciacion==true){
-        getScenarioTestCollection().get(0).setTestName("Instanciación");
+        collectionTest.getScenariotest().get(0).setTestName("Instanciación");
     }
     if(retrieval==true){
-        getScenarioTestCollection().get(1).setTestName("Retrieval");
+        collectionTest.getScenariotest().get(1).setTestName("Retrieval");
     }
     if(realizacion==true){
-        getScenarioTestCollection().get(2).setTestName("Realización");
+        collectionTest.getScenariotest().get(2).setTestName("Realización");
     }
     if(satisfactibilidad==true){
-        getScenarioTestCollection().get(3).setTestName("Satisfactibilidad");
+        collectionTest.getScenariotest().get(3).setTestName("Satisfactibilidad");
     }
     if(clasificacion==true){
-        getScenarioTestCollection().get(4).setTestName("Clasificación");
+        collectionTest.getScenariotest().get(4).setTestName("Clasificación");
     }
     
     if(aux==1){
@@ -302,7 +408,6 @@ public void guardarDatos(){
             }else{
                 nameInstances=nombreArch.concat(".xml");
             }
-            collectionTest.setScenariotest(getScenarioTestCollection());
             try{    
                 XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(nameInstances)));
@@ -311,11 +416,9 @@ public void guardarDatos(){
             }catch (FileNotFoundException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
-            collectionTest.setScenariotest(getScenarioTestCollection());
             testcase.run(testresult, collectionTest);
             GroupTestsJPanel.setDatosGuardados(true);
         }else{
-            collectionTest.setScenariotest(getScenarioTestCollection());
             testcase.run(testresult, collectionTest);
             GroupTestsJPanel.setDatosGuardados(true); 
         }        
@@ -366,7 +469,7 @@ public void asociarInstancias(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest1.add(testQuery);
-            getScenarioTestCollection().get(0).setQueryTest(queryTest1);
+            collectionTest.getScenariotest().get(0).setQueryTest(queryTest1);
             instanciacion=true;
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
@@ -382,7 +485,7 @@ public void asociarInstancias(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest2.add(testQuery);
-            getScenarioTestCollection().get(1).setQueryTest(queryTest2);
+            collectionTest.getScenariotest().get(1).setQueryTest(queryTest2);
             retrieval=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
@@ -398,7 +501,7 @@ public void asociarInstancias(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest3.add(testQuery);
-            getScenarioTestCollection().get(2).setQueryTest(queryTest3);
+            collectionTest.getScenariotest().get(2).setQueryTest(queryTest3);
             realizacion=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
@@ -415,7 +518,7 @@ public void asociarInstancias(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest4.add(testQuery);
-            getScenarioTestCollection().get(3).setQueryTest(queryTest4);
+            collectionTest.getScenariotest().get(3).setQueryTest(queryTest4);
             satisfactibilidad=true;
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
@@ -431,7 +534,7 @@ public void asociarInstancias(){
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest5.add(testQuery);
-            getScenarioTestCollection().get(4).setQueryTest(queryTest5);
+            collectionTest.getScenariotest().get(4).setQueryTest(queryTest5);
             clasificacion=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;

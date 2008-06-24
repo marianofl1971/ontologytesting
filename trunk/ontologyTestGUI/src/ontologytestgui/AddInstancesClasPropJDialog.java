@@ -41,6 +41,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private ArrayList<PropertyInstances> propInst,propFinal;
     private int indexVect;
     private String nombreFichero;
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
+    }
+    public static boolean seleccionado;
     
     /** Creates new form AddInstancesClasPropJDialog */
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num,
@@ -49,6 +56,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.setTitle("Asociar Instancias");
         this.setIndexVect(index);
+        setSeleccionado(true);
         initComponents();
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
@@ -70,6 +78,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.setTitle("Asociar Instancias");
         initComponents();
+        setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
         
@@ -95,9 +104,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         int contI=0,contP=0;
         this.setIndexVect(index);
         initComponents();
+        setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
 
+        if(AddInstancesJPanel.isStateSeeInst()==true){
+            setNombreFichero(MainJPanel.getPath());
+        }
         ListIterator ci,pi;
         ScenarioTest sT = scenarioT.get(this.indexVect);
         clasInst = sT.getClassInstances();
@@ -141,6 +154,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.setTitle("Asociar Instancias");
         setNombreFichero(textName);
+        setSeleccionado(true);
         initComponents();
         int contP=0,contC=0;
         this.setIndexVect(i);
@@ -428,7 +442,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 this.setInstances(clasInst, propInst);
                 this.setVisible(false);
             }
-      }else if(AddInstancesJPanel.isStateExaminar()==true){  
+      }else if(AddInstancesJPanel.isStateExaminar()==true || AddInstancesJPanel.isStateSeeInst()==true){  
           if(this.compararListaClase(clasInst, clasFinal) && 
                   this.compararListaPropiedad(propInst, propFinal)){
               
@@ -441,9 +455,15 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                 if (n == JOptionPane.YES_OPTION) {
-                    crearArchivoDeInstancias(getNombreFichero()); 
-                    this.setInstances(clasInst, propInst);
-                    this.setVisible(false);
+                    if(AddInstancesJPanel.isStateExaminar()==true){
+                        this.setInstances(clasInst, propInst);
+                        crearArchivoDeInstancias(getNombreFichero());
+                        this.setVisible(false);
+                    }else if(AddInstancesJPanel.isStateSeeInst()==true){ 
+                        this.setInstances(clasInst, propInst);
+                        crearArchivoDeTests(getNombreFichero());
+                        this.setVisible(false);            
+                    }
                 }else if (n == JOptionPane.NO_OPTION) {
                      crearArchivoDeInstancias(); 
                      this.setInstances(clasInst, propInst);
@@ -458,6 +478,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
 public void crearArchivoDeInstancias(){
+    
     String nombreArch=null;
     String nameInstances=null;
     
@@ -483,19 +504,24 @@ public void crearArchivoDeInstancias(){
 }
 
 public void crearArchivoDeInstancias(String nombreFichero){
-    String nameInstances=null;
-            
-    if(nombreFichero.endsWith(".xml")){
-        nameInstances=nombreFichero;
-    }else{
-        nameInstances=nombreFichero.concat(".xml");
-    }
             
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(nameInstances)));
+                            FileOutputStream(nombreFichero)));
         e.writeObject(clasInst);
         e.writeObject(propInst);
+        e.close();
+    }catch (FileNotFoundException ex) {
+        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+     }
+}
+
+public void crearArchivoDeTests(String nombreFichero){
+    
+    try{
+        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                            FileOutputStream(nombreFichero)));
+        e.writeObject(GroupTestsJPanel.getCollectionTest());
         e.close();
     }catch (FileNotFoundException ex) {
         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -587,13 +613,8 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {
-    ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getScenarioTestCollection();
-    ScenarioTest sT = scenarioTest.get(this.getIndexVect());
-    sT.clearClasInstances();
-    sT.clearPropInstances();
-    sT.setClassInstances(clasinst);
-    sT.setPropertyInstances(propinst);
-    GroupTestsJPanel.setScenarioTestCollection(scenarioTest);
+    GroupTestsJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
+    GroupTestsJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

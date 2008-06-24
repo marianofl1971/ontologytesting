@@ -39,9 +39,16 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     static final int desktopWidth = 700;
     static final int desktopHeight = 600;
     static JFrame frame;
-    
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
+    }
+    public static boolean seleccionado;
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
+        setSeleccionado(true);
         initComponents();
         //this.setLayout(new BorderLayout());
     }

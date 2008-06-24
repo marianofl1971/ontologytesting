@@ -7,6 +7,7 @@
 package ontologytestgui;
 
 import java.awt.Frame;
+import java.awt.event.TextListener;
 import javax.swing.ButtonGroup;
 import javax.swing.WindowConstants;
 
@@ -14,10 +15,11 @@ import javax.swing.WindowConstants;
  *
  * @author  Saruskas
  */
-public class TestInstancesTFJPanel extends javax.swing.JPanel {
+public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
     private AddComentJDialog frameComent;
     private Frame frame;
+    private TextListener tl;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
@@ -128,7 +130,6 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_duplicarButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;

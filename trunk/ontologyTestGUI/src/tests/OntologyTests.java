@@ -80,32 +80,39 @@ public class OntologyTests {
     }  
     
     //Saber si se puede añadir un concepto
-    /*public String satisfactibility(String ns, OntModel model, String concepto, 
+    public String satisfactibility(String ns, OntModel model, String concepto, 
             String clase){
-
-       String clasesPertenece = classification(ns,model,concepto);
-       String[] clas = clasesPertenece.split(",");
-       int tam = clas.length;
+      
        OntClass ontClass = model.getOntClass(ns+clase);
-       if(ontClass==null){
-        return "true";
-       }
-       
        Iterator it = ontClass.listDisjointWith();
-        while(it.hasNext()){
-            String instanceName = it.next().toString();
-            System.out.println("aaa "+instanceName.toString());
-            instanceName = instanceName.substring(instanceName.indexOf("#")+1);
-            System.out.println("disjunta: "+instanceName);
-            for(int i=0; i<tam;i++){
-                ontClass.isDisjointWith(clas[i]);
-            if(instanceName.equals(clas[i]))
-                return "false";
-            }
-            System.out.println("FIN");
+       ArrayList<String> conjuntoDisj = new ArrayList<String>();
+       
+       while(it.hasNext()){
+            String disjunta = it.next().toString();
+            disjunta = disjunta.substring(disjunta.indexOf("#")+1);
+            conjuntoDisj.add(disjunta);
         }
+       
+       String clasesConcepto = classification(ns,model,concepto);
+       String[] clas = clasesConcepto.split(",");
+       int tam = clas.length;
+       ArrayList<String> listaInicial = new ArrayList<String>();
+       for(int j=0;j<tam;j++){
+            listaInicial.add(clas[j]);
+       }
+       if(clasesConcepto.equals("")){
+            return "true";
+       }else{
+           for(int i=0;i<listaInicial.size();i++){
+            for(int k=0;k<conjuntoDisj.size();k++){
+                if(listaInicial.get(i).equals(conjuntoDisj.get(k))){
+                    return "false";
+                }
+            }
+           }
+       }
        return "true";
-    }*/
+    }
     
     //Dado un individuo, deducir todas las clases a las que pertenece
     public String classification(String ns, OntModel model, String individuo){

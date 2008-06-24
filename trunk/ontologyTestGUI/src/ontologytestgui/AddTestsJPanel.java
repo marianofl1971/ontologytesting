@@ -17,12 +17,20 @@ import javax.swing.JTextField;
  */
 public class AddTestsJPanel extends javax.swing.JPanel {
 
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
+    }
     private JFileChooser filechooser;
     private Component frame;
+    private static boolean seleccionado;
     
     /** Creates new form AddTestsJPanel */
     public AddTestsJPanel() {
         initComponents();
+        setSeleccionado(true);
     }
 
     /** This method is called from within the constructor to
@@ -89,9 +97,12 @@ private void openFile(JTextField textfield){
       }
 }
 
+public static String getPathTest(){
+    return examinarTextField.getText();
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton examinarButton;
-    private javax.swing.JTextField examinarTextField;
+    private static javax.swing.JTextField examinarTextField;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 

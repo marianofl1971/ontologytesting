@@ -125,7 +125,7 @@ public class OntologyTestCase implements OntologyTest{
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoRealiz);
                     }
-                }/*else if(testName.equals("Satisfactibilidad")){
+                }else if(testName.equals("Satisfactibilidad")){
                     res = query.split(",");
                     concepto = res[0];
                     loincluye = res[1];
@@ -133,17 +133,14 @@ public class OntologyTestCase implements OntologyTest{
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
                     }
-                }*/else if(testName.equals("Clasificación")){
+                }else if(testName.equals("Clasificación")){
                     resObtenidoClas = tests.classification(ns, model, query);
                     if(!resObtenidoClas.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoClas);
                     }
                 }
-            }
-            
-            
+            }    
         }
-        
     } 
 
     @Override
