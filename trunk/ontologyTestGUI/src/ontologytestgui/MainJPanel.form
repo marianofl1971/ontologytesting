@@ -18,29 +18,43 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="sparqlCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="newInstancesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="addTestPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="existsTestsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="newTestChekBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="0" min="-2" pref="265" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="namespaceOntologyTextField" alignment="0" max="32767" attributes="1"/>
-                          <Component id="jLabel2" alignment="0" pref="355" max="32767" attributes="1"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="newTestChekBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="existsTestsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sparqlCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" pref="337" max="-2" attributes="0"/>
-                          <Component id="fisicalOntologyTextField" alignment="0" max="32767" attributes="1"/>
+                          <Component id="newInstancesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="addTestPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="146" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel2" min="-2" pref="250" max="-2" attributes="1"/>
+                      <EmptySpace pref="403" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel3" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel4" min="-2" pref="265" max="-2" attributes="0"/>
+                      <EmptySpace pref="388" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="namespaceOntologyTextField" alignment="0" pref="336" max="32767" attributes="1"/>
+                          <Component id="fisicalOntologyTextField" alignment="1" pref="336" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="examinarFisicalButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel5" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="146" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,20 +63,20 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fisicalOntologyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="examinarFisicalButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fisicalOntologyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="namespaceOntologyTextField" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace pref="81" max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="newTestChekBox" min="-2" max="-2" attributes="0"/>
@@ -74,7 +88,7 @@
               <Component id="newInstancesCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="sparqlCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,6 +96,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&#xa1;&#xa1;BIENVENIDO AL EVALUADOR DE ONTOLOG&#xcd;AS!!"/>
       </Properties>
     </Component>
@@ -92,7 +109,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca la ubicaci&#xf3;n de la ontolog&#xed;a a evaluar."/>
+        <Property name="text" type="java.lang.String" value="Introduzca la ubicaci&#xf3;n de la ontolog&#xed;a a evaluar:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fisicalOntologyTextField">
@@ -142,14 +159,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="abrirTestLabel" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="pathTestTextField" min="-2" pref="336" max="-2" attributes="0"/>
+                          <Component id="pathTestTextField" min="-2" pref="327" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="examinarTestButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="abrirTestLabel" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="52" max="32767" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,8 +177,8 @@
                   <Component id="abrirTestLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="pathTestTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="examinarTestButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pathTestTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>

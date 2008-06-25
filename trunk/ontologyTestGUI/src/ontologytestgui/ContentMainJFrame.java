@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,33 +130,44 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     completarArrayOrden();
     GroupTestsJPanel testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
     if(ContentMainJFrame.getActual()==0){
-    if(paginas.get(0).equals(1)){   
-        contentPanel.remove(mainPanel);
-        contentPanel.add(groupTests);
-        anteriorButton.setEnabled(true);
-        ContentMainJFrame.setActual(1);
-        this.validate();
-    }else if(paginas.get(1).equals(1)){
-        contentPanel.remove(mainPanel);
-        contentPanel.add(testsExistentes);
-        anteriorButton.setEnabled(true);
-        ContentMainJFrame.setActual(2);
-        this.validate();
-    }else if(paginas.get(2).equals(1)){
-        contentPanel.remove(mainPanel);
-        contentPanel.add(addInstances.getContentPanel());
-        anteriorButton.setEnabled(true);
-        ContentMainJFrame.setActual(3);
-        this.validate();
-    }else if(paginas.get(3).equals(1)){
-        contentPanel.remove(mainPanel);
-        contentPanel.add(sparql);
-        anteriorButton.setEnabled(true);
-        ContentMainJFrame.setActual(4);
-        this.validate();
-    }else{
-        System.out.println("Debe seleccionar una opción para continuar");
-    }
+        if(!paginas.get(2).equals(1)){
+            if(MainJPanel.getFisicalOntologyTextField().equals("") || 
+                    MainJPanel.getNamespaceOntologyTextField().equals("")){
+                
+                JOptionPane.showMessageDialog(frame,"Ambos campos ubicación " +
+                        "física y namespace son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
+
+            }else{
+            if(paginas.get(0).equals(1)){   
+                contentPanel.remove(mainPanel);
+                contentPanel.add(groupTests);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(1);
+                this.validate();
+            }else if(paginas.get(1).equals(1)){
+                contentPanel.remove(mainPanel);
+                contentPanel.add(testsExistentes);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(2);
+                this.validate();
+            }else if(paginas.get(3).equals(1)){
+                contentPanel.remove(mainPanel);
+                contentPanel.add(sparql);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(4);
+                this.validate();
+            }else{
+                JOptionPane.showMessageDialog(frame,"Debe seleccionar alguna " +
+                        "opción para continuar","Warning Message",JOptionPane.WARNING_MESSAGE);
+            }
+            }
+        }else{
+            contentPanel.remove(mainPanel);
+            contentPanel.add(addInstances.getContentPanel());
+            anteriorButton.setEnabled(true);
+            ContentMainJFrame.setActual(3);
+            this.validate();
+        }
     }else{
         if(ContentMainJFrame.getActual()==1){
             if(paginas.get(1).equals(1)){
