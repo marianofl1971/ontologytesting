@@ -708,7 +708,7 @@ public void asociarInstancias(){
     JPanel panelSat = this.getTestSatPanel();
     int totalSat = panelSat.getComponentCount();
 
-    for(int i=0;i<totalInst;i++){
+    for(int i=1;i<totalInst;i++){
         TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelInst.getComponent(i);
         String query = test.getQuery();
         String resExpT = test.isTestTrue();
@@ -725,7 +725,7 @@ public void asociarInstancias(){
         }
     }
 
-    for(int i=0;i<totalRet;i++){
+    for(int i=1;i<totalRet;i++){
         TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelRet.getComponent(i);
         String query = test.getQuery();
         String queryExp = test.getQueryResult();
@@ -741,7 +741,7 @@ public void asociarInstancias(){
         }
     }
 
-    for(int i=0;i<totalReal;i++){
+    for(int i=1;i<totalReal;i++){
         TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelReal.getComponent(i);
         String query = test.getQuery();
         String queryExp = test.getQueryResult();
@@ -757,7 +757,7 @@ public void asociarInstancias(){
         }
     }
     
-    for(int i=0;i<totalSat;i++){
+    for(int i=1;i<totalSat;i++){
         TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelSat.getComponent(i);
         String query = test.getQuery();
         String resExpT = test.isTestTrue();
@@ -774,7 +774,7 @@ public void asociarInstancias(){
         }
     }
     
-    for(int i=0;i<totalClas;i++){
+    for(int i=1;i<totalClas;i++){
         TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelClas.getComponent(i);
         String query = test.getQuery();
         String queryExp = test.getQueryResult();
