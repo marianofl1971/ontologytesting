@@ -130,7 +130,6 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     completarArrayOrden();
     GroupTestsJPanel testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
     if(ContentMainJFrame.getActual()==0){
-        if(!paginas.get(2).equals(1)){
             if(MainJPanel.getFisicalOntologyTextField().equals("") || 
                     MainJPanel.getNamespaceOntologyTextField().equals("")){
                 
@@ -141,18 +140,27 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             if(paginas.get(0).equals(1)){   
                 contentPanel.remove(mainPanel);
                 contentPanel.add(groupTests);
+                AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
                 contentPanel.remove(mainPanel);
                 contentPanel.add(testsExistentes);
+                AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
+                this.validate();
+            }else if(paginas.get(2).equals(1)){
+                contentPanel.remove(mainPanel);
+                contentPanel.add(addInstances.getContentPanel());
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(3).equals(1)){
                 contentPanel.remove(mainPanel);
                 contentPanel.add(sparql);
+                AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
                 this.validate();
@@ -161,18 +169,12 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                         "opción para continuar","Warning Message",JOptionPane.WARNING_MESSAGE);
             }
             }
-        }else{
-            contentPanel.remove(mainPanel);
-            contentPanel.add(addInstances.getContentPanel());
-            anteriorButton.setEnabled(true);
-            ContentMainJFrame.setActual(3);
-            this.validate();
-        }
     }else{
         if(ContentMainJFrame.getActual()==1){
             if(paginas.get(1).equals(1)){
                 contentPanel.remove(groupTests);
                 contentPanel.add(testsExistentes);
+                AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
@@ -185,11 +187,18 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }else if(paginas.get(3).equals(1)){
                 contentPanel.remove(groupTests);
                 contentPanel.add(sparql);
+                AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
                 this.validate();
+            }else{
+                contentPanel.remove(groupTests);
+                contentPanel.add(label);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(5);
+                this.validate();
             }
-        }else if(ContentMainJFrame.getActual()==2){            
+        }else if(ContentMainJFrame.getActual()==2){     
             if(paginas.get(2).equals(1)){
                 contentPanel.remove(testsExistentes);
                 contentPanel.add(addInstances.getContentPanel());
@@ -199,6 +208,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }else if(paginas.get(3).equals(1)){
                 contentPanel.remove(testsExistentes);
                 contentPanel.add(sparql);
+                AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
                 this.validate();
@@ -214,8 +224,15 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             if(paginas.get(3).equals(1)){
                 contentPanel.remove(addInstances.getContentPanel());
                 contentPanel.add(sparql);
+                AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
+                this.validate();
+            }else{
+                contentPanel.remove(addInstances.getContentPanel());
+                contentPanel.add(label);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(5);
                 this.validate();
             }
         }else if(ContentMainJFrame.getActual()==4){
@@ -254,7 +271,119 @@ public void completarArrayOrden(){
 
 private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
 // TODO add your handling code here:
-
+    completarArrayOrden();
+    GroupTestsJPanel testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
+    if(ContentMainJFrame.getActual()==0){
+        anteriorButton.setEnabled(false);
+    }else{
+        if(ContentMainJFrame.getActual()==1){
+                contentPanel.remove(groupTests);
+                contentPanel.add(mainPanel);
+                anteriorButton.setEnabled(false);
+                ContentMainJFrame.setActual(0);
+                this.validate();
+        }else if(ContentMainJFrame.getActual()==2){            
+            if(paginas.get(0).equals(1)){
+                contentPanel.remove(testsExistentes);
+                contentPanel.add(groupTests);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(1);
+                this.validate();
+            }else {
+                contentPanel.remove(testsExistentes);
+                contentPanel.add(mainPanel);
+                anteriorButton.setEnabled(false);
+                ContentMainJFrame.setActual(0);
+                this.validate();
+            }
+        }else if(ContentMainJFrame.getActual()==3){
+            if(paginas.get(1).equals(1)){
+                contentPanel.remove(addInstances.getContentPanel());
+                contentPanel.add(testsExistentes);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(2);
+                this.validate();
+            }else if(paginas.get(0).equals(1)){
+                contentPanel.remove(addInstances.getContentPanel());
+                contentPanel.add(groupTests);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(1);
+                this.validate();
+            }else{
+                contentPanel.remove(testsExistentes);
+                contentPanel.add(mainPanel);
+                anteriorButton.setEnabled(false);
+                ContentMainJFrame.setActual(0);
+                this.validate();
+            }
+        }else if(ContentMainJFrame.getActual()==4){
+            if(paginas.get(2).equals(1)){
+                contentPanel.remove(sparql);
+                contentPanel.add(addInstances.getContentPanel());
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(3);
+                this.validate();
+            }else if(paginas.get(1).equals(1)){
+                contentPanel.remove(sparql);
+                contentPanel.add(testsExistentes);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(2);
+                this.validate();
+            }else if(paginas.get(0).equals(1)){
+                contentPanel.remove(sparql);
+                contentPanel.add(groupTests);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(1);
+                this.validate();
+            }else{
+                contentPanel.remove(sparql);
+                contentPanel.add(mainPanel);
+                anteriorButton.setEnabled(false);
+                ContentMainJFrame.setActual(0);
+                this.validate();
+            }
+        }else if(ContentMainJFrame.getActual()==5){
+            if(paginas.get(3).equals(1)){
+                contentPanel.remove(label);
+                contentPanel.add(sparql);
+                AddSPARQLJPanel.setSeleccionado(true);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(4);
+                this.validate();
+            }else if(paginas.get(2).equals(1)){
+                contentPanel.remove(label);
+                contentPanel.add(addInstances.getContentPanel());
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(3);
+                this.validate();
+            }else if(paginas.get(1).equals(1)){
+                contentPanel.remove(label);
+                contentPanel.add(testsExistentes);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(2);
+                this.validate();
+            }else if(paginas.get(0).equals(1)){
+                contentPanel.remove(label);
+                contentPanel.add(groupTests);
+                AddSPARQLJPanel.setSeleccionado(false);
+                anteriorButton.setEnabled(true);
+                ContentMainJFrame.setActual(1);
+                this.validate();
+            }else{
+                contentPanel.remove(label);
+                contentPanel.add(mainPanel);
+                anteriorButton.setEnabled(false);
+                ContentMainJFrame.setActual(0);
+                this.validate();
+            }
+        }
+    }
 }//GEN-LAST:event_anteriorButtonActionPerformed
 
     /**

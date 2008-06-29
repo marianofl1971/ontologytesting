@@ -58,6 +58,10 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
         initComponents();
     }
     
+    public AddInstancesJPanel() {
+        initComponents();
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -144,6 +148,8 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateSeeInst(false);
     int var=0;
+  
+   if(AddSPARQLJPanel.isSeleccionado()==false) {     
     int i = jpanel.getSelectedTabed();
     ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getCollectionTest().getScenariotest();
     ScenarioTest sT = scenarioTest.get(i);
@@ -167,6 +173,9 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
+    }
+    }else{
+    
     }
 }//GEN-LAST:event_asociarButtonActionPerformed
 

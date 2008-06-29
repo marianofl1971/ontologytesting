@@ -107,7 +107,6 @@ public class MainJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Seleccione las acciones que desea realizar:");
 
-        newTestChekBox.setSelected(true);
         newTestChekBox.setText("Crear tests");
         newTestChekBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

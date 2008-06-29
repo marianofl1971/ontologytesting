@@ -136,7 +136,6 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="newTestChekBox">
       <Properties>
-        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Crear tests"/>
       </Properties>
       <Events>

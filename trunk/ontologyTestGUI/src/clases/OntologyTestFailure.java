@@ -35,8 +35,7 @@ public class OntologyTestFailure extends Object{
         this.fcommentquery = query.getComment();
         this.fresultexpected = query.getResultexpected();
         this.fresqueryobtenido = resQueryObte;
-        this.fquerysparql = querysparql.getQuery_sparql();
-        this.fressparqlobtenido = querysparql.getComment();
+        this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resSparqlQueryObte;
     }
@@ -53,8 +52,7 @@ public class OntologyTestFailure extends Object{
     }
     
     void addOntologyTestFailureSparql(SparqlQueryOntology querysparql, String resQueryObte){
-        this.fquerysparql = querysparql.getQuery_sparql();
-        this.fressparqlobtenido = querysparql.getComment();
+        this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
     }

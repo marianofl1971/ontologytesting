@@ -12,20 +12,17 @@ package model;
 public class SparqlQueryOntology {
 
     private String resultexpected;
-    private String query_sparql;
-    private String comment;
+    private String querySparql;
+
     
-    public SparqlQueryOntology(String query_sparql, String resultexpected,
-            String comment){
-        this.query_sparql=query_sparql;
+    public SparqlQueryOntology(String querySparql, String resultexpected){
+        this.querySparql=querySparql;
         this.resultexpected = resultexpected;
-        this.comment = comment;
     }
     
     public SparqlQueryOntology(){
-        this.query_sparql=null;
+        this.querySparql=null;
         this.resultexpected = null;
-        this.comment = null;
     }
 
     public String getResultexpected() {
@@ -36,21 +33,11 @@ public class SparqlQueryOntology {
         this.resultexpected = resultexpected;
     }
 
-    public String getQuery_sparql() {
-        return query_sparql;
+    public String getQuerySparql() {
+        return querySparql;
     }
 
-    public void setQuery_sparql(String query_sparql) {
-        this.query_sparql = query_sparql;
+    public void setQuerySparql(String querySparql) {
+        this.querySparql = querySparql;
     }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-    
-    
 }

@@ -18,6 +18,8 @@ import java.util.List;
 public class ScenarioTest {
     
     private String testName;
+    private String nombre;
+    private String descripcion;
     private ArrayList<ClassInstances> classInstances = new ArrayList<ClassInstances>();
     private ArrayList<PropertyInstances> propertyInstances = new ArrayList<PropertyInstances>();
     private ArrayList<QueryOntology> queryTest = new ArrayList<QueryOntology>();
@@ -25,33 +27,37 @@ public class ScenarioTest {
             ArrayList<SparqlQueryOntology>();
     
     public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, List<QueryOntology> tests, String test_name,
-            List<SparqlQueryOntology> sparqlquerys){
+            propertyInstances, List<QueryOntology> tests, String testName,
+            List<SparqlQueryOntology> sparqlquerys,String nombre,String descripcion){
         
         this.classInstances.addAll(classInstances);
         this.propertyInstances.addAll(propertyInstances);
         this.sparqlQuerys.addAll(sparqlquerys);
         this.queryTest.addAll(tests);   
-        this.testName=test_name;   
+        this.testName=testName;   
+        this.nombre=nombre;
+        this.descripcion=descripcion;
     }
     
     public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, List<QueryOntology> tests, String test_name){
+            propertyInstances, List<QueryOntology> tests, String testName){
         
         this.classInstances.addAll(classInstances);
         this.propertyInstances.addAll(propertyInstances);
         this.queryTest.addAll(tests);   
-        this.testName=test_name;   
+        this.testName=testName;  
     }    
     
     public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, String test_name, List<SparqlQueryOntology> 
-            sparqlquerys){
+            propertyInstances, String testName, List<SparqlQueryOntology> 
+            sparqlquerys,String nombre,String descripcion){
         
         this.classInstances.addAll(classInstances);
         this.propertyInstances.addAll(propertyInstances);
         this.sparqlQuerys.addAll(sparqlquerys);   
-        this.testName=test_name;  
+        this.testName=testName; 
+        this.nombre=nombre;
+        this.descripcion=descripcion;
     }    
     
     public ScenarioTest(){
@@ -61,6 +67,8 @@ public class ScenarioTest {
         this.queryTest = new ArrayList<QueryOntology>();
         this.testName=null;
         this.sparqlQuerys=new ArrayList<SparqlQueryOntology>();
+        this.nombre=null;
+        this.descripcion=null;
     
     }
 
@@ -110,6 +118,22 @@ public class ScenarioTest {
     
     public void clearPropInstances(){
         this.classInstances.clear();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }
