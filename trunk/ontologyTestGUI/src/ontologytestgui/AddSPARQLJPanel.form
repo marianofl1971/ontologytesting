@@ -27,9 +27,9 @@
                                   <Group type="102" alignment="0" attributes="1">
                                       <Component id="limpiarButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="ejecutarButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nuevaConsultaButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="añadirConsultaButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="503" max="-2" attributes="0"/>
                               </Group>
@@ -48,7 +48,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="instancesPanel" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="267" max="-2" attributes="1"/>
+                      <Component id="testNameTextField" min="-2" pref="267" max="-2" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <Component id="testNameTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -92,8 +92,8 @@
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ejecutarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="añadirConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="8" max="32767" attributes="0"/>
                       <Component id="instancesPanel" min="-2" max="-2" attributes="0"/>
@@ -101,7 +101,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -115,12 +115,12 @@
         <Property name="text" type="java.lang.String" value="Introduzca la consulta en SPARQL:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="ejecutarButton">
+    <Component class="javax.swing.JButton" name="nuevaConsultaButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nueva Consulta"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ejecutarButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaConsultaButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="limpiarButton">
@@ -133,7 +133,7 @@
         <Property name="text" type="java.lang.String" value="Introduzca el nombre del test:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="testNameTextField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -147,7 +147,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="testDescTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -167,7 +167,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea2">
+        <Component class="javax.swing.JTextArea" name="resultTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -175,7 +175,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="a&#xf1;adirConsultaButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir existente"/>
       </Properties>
@@ -210,7 +210,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="guardarButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar y Crear Nuevo Test"/>
       </Properties>

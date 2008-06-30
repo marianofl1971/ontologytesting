@@ -151,7 +151,7 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
   
    if(AddSPARQLJPanel.isSeleccionado()==false) {     
     int i = jpanel.getSelectedTabed();
-    ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getCollectionTest().getScenariotest();
+    ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
     ScenarioTest sT = scenarioTest.get(i);
     
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
@@ -167,9 +167,9 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }else{
-        AddInstancesJPanel.setStateAsociar(false);
-        AddInstancesJPanel.setStateSeeInst(false);
-        AddInstancesJPanel.setStateExaminar(true);
+        //AddInstancesJPanel.setStateAsociar(false);
+        //AddInstancesJPanel.setStateSeeInst(false);
+        //AddInstancesJPanel.setStateExaminar(true);
         addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
@@ -207,7 +207,7 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    ArrayList<ScenarioTest> scenarioTest = GroupTestsJPanel.getCollectionTest().getScenariotest();
+    ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
     int i = jpanel.getSelectedTabed(); 
     ScenarioTest sT = scenarioTest.get(i);
     

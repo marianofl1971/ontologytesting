@@ -108,9 +108,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
 
-        if(AddInstancesJPanel.isStateSeeInst()==true){
+        //if(AddInstancesJPanel.isStateSeeInst()==true){
             setNombreFichero(MainJPanel.getPath());
-        }
+        //}
         ListIterator ci,pi;
         ScenarioTest sT = scenarioT.get(this.indexVect);
         clasInst = sT.getClassInstances();
@@ -429,7 +429,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
                 "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
-        if(AddInstancesJPanel.isStateAsociar()==true){
+        if(AddInstancesJPanel.isStateAsociar()==true && MainJPanel.getExistsTestsState()==false){
             Component comp = null;
             int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar este conjunto de" +
             " instancias para futuras pruebas?", "Guardar Instancias",
@@ -442,7 +442,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 this.setInstances(clasInst, propInst);
                 this.setVisible(false);
             }
-      }else if(AddInstancesJPanel.isStateExaminar()==true || AddInstancesJPanel.isStateSeeInst()==true){  
+      }else{  
           if(this.compararListaClase(clasInst, clasFinal) && 
                   this.compararListaPropiedad(propInst, propFinal)){
               
@@ -455,11 +455,11 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                 if (n == JOptionPane.YES_OPTION) {
-                    if(AddInstancesJPanel.isStateExaminar()==true){
+                    if(MainJPanel.getExistsTestsState()==false){
                         this.setInstances(clasInst, propInst);
                         crearArchivoDeInstancias(getNombreFichero());
                         this.setVisible(false);
-                    }else if(AddInstancesJPanel.isStateSeeInst()==true){ 
+                    }else { 
                         this.setInstances(clasInst, propInst);
                         crearArchivoDeTests(getNombreFichero());
                         this.setVisible(false);            
@@ -504,7 +504,7 @@ public void crearArchivoDeInstancias(){
 }
 
 public void crearArchivoDeInstancias(String nombreFichero){
-            
+        
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(nombreFichero)));
@@ -521,7 +521,7 @@ public void crearArchivoDeTests(String nombreFichero){
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(nombreFichero)));
-        e.writeObject(GroupTestsJPanel.getCollectionTest());
+        e.writeObject(MainJPanel.getCollectionTest());
         e.close();
     }catch (FileNotFoundException ex) {
         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -613,8 +613,8 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {
-    GroupTestsJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
-    GroupTestsJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
+    MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
+    MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

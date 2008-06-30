@@ -11,6 +11,7 @@ import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
+import model.CollectionTest;
 
 /**
  *
@@ -48,6 +49,13 @@ public class MainJPanel extends javax.swing.JPanel {
     public static String getPath(){
         return pathTestTextField.getText();
     }
+        public static CollectionTest getCollectionTest() {
+        return collectionTest;
+    }
+    public static void setCollectionTest(CollectionTest aCollectionTest) {
+        collectionTest = aCollectionTest;
+    }
+    private static CollectionTest collectionTest;
     private JFileChooser filechooser;
     private Component frame;
     public static boolean seleccionado;
@@ -61,6 +69,7 @@ public class MainJPanel extends javax.swing.JPanel {
         group.add(existsTestsCheckBox);
         addTestPanel.setEnabled(false);
         namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
+        collectionTest = new CollectionTest();
     }
 
     /** This method is called from within the constructor to

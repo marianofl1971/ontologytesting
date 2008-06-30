@@ -67,28 +67,28 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        ejecutarButton = new javax.swing.JButton();
+        nuevaConsultaButton = new javax.swing.JButton();
         limpiarButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        testNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        testDescTextArea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        resultTextArea = new javax.swing.JTextArea();
+        añadirConsultaButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sparqlTextArea = new javax.swing.JTextArea();
         instancesPanel = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        guardarButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
-        ejecutarButton.setText("Nueva Consulta");
-        ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
+        nuevaConsultaButton.setText("Nueva Consulta");
+        nuevaConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ejecutarButtonActionPerformed(evt);
+                nuevaConsultaButtonActionPerformed(evt);
             }
         });
 
@@ -98,17 +98,17 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Añada una descripción para el test:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        testDescTextArea.setColumns(20);
+        testDescTextArea.setRows(5);
+        jScrollPane2.setViewportView(testDescTextArea);
 
         jLabel4.setText("Introduzca el resultado que espera obtener para dicha consulta:");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane3.setViewportView(jTextArea2);
+        resultTextArea.setColumns(20);
+        resultTextArea.setRows(5);
+        jScrollPane3.setViewportView(resultTextArea);
 
-        jButton1.setText("Añadir existente");
+        añadirConsultaButton.setText("Añadir existente");
 
         sparqlTextArea.setColumns(20);
         sparqlTextArea.setRows(5);
@@ -125,7 +125,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             .add(0, 153, Short.MAX_VALUE)
         );
 
-        jButton2.setText("Guardar y Crear Nuevo Test");
+        guardarButton.setText("Guardar y Crear Nuevo Test");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -143,9 +143,9 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(ejecutarButton)
+                                        .add(nuevaConsultaButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(jButton1))
+                                        .add(añadirConsultaButton))
                                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 503, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -157,13 +157,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                     .add(layout.createSequentialGroup()
                         .add(instancesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(191, 191, 191)
-                        .add(jButton2))
+                        .add(guardarButton))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 495, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(10, 10, 10)
-                        .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,7 +172,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(jLabel2)
                 .add(11, 11, 11)
-                .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel3)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -192,19 +192,19 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .add(6, 6, 6)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(limpiarButton)
-                            .add(jButton1)
-                            .add(ejecutarButton))
+                            .add(añadirConsultaButton)
+                            .add(nuevaConsultaButton))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
                         .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton2)
+                        .add(guardarButton)
                         .add(23, 23, 23))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
+private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaConsultaButtonActionPerformed
 // TODO add your handling code here:
     try{
          this.run(this.getSPARQLQuery(), false);
@@ -243,7 +243,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         ResultSetFormatter.out(System.out, results, query);
         qe.close();*/
     
-}//GEN-LAST:event_ejecutarButtonActionPerformed
+}//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
     public void run(String queryStr, boolean formatHTML) throws Exception {
         
@@ -309,10 +309,9 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ejecutarButton;
+    private javax.swing.JButton añadirConsultaButton;
+    private javax.swing.JButton guardarButton;
     private javax.swing.JPanel instancesPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,11 +319,12 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton limpiarButton;
+    private javax.swing.JButton nuevaConsultaButton;
+    private javax.swing.JTextArea resultTextArea;
     private javax.swing.JTextArea sparqlTextArea;
+    private javax.swing.JTextArea testDescTextArea;
+    private javax.swing.JTextField testNameTextField;
     // End of variables declaration//GEN-END:variables
 
     public void setSPARQLQuery(String sparql){
@@ -333,5 +333,29 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     
     public String getSPARQLQuery(){
         return sparqlTextArea.getText();
+    }
+
+    public String getResultTextArea() {
+        return resultTextArea.getText();
+    }
+
+    public void setResultTextArea(String resultTextArea) {
+        this.resultTextArea.setText(resultTextArea);
+    }
+
+    public String getTestDescTextArea() {
+        return testDescTextArea.getText();
+    }
+
+    public void setTestDescTextArea(String testDescTextArea) {
+        this.testDescTextArea.setText(testDescTextArea);
+    }
+
+    public String getTestNameTextField() {
+        return testNameTextField.getText();
+    }
+
+    public void setTestNameTextField(String testNameTextField) {
+        this.testNameTextField.setText(testNameTextField);
     }
 }
