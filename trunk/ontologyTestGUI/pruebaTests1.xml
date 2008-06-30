@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <object class="model.CollectionTest"> 
   <void property="namespace"> 
    <string>http://www.owl-ontologies.com/family.owl#</string> 
@@ -35,6 +35,13 @@
        <object class="model.ClassInstances"> 
         <void property="classInstance"> 
          <string>Male(joseluis)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(sarita)</string> 
         </void> 
        </object> 
       </void> 

@@ -24,6 +24,10 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import model.ClassInstances;
+import model.PropertyInstances;
+import model.ScenarioTest;
+import model.SparqlQueryOntology;
 import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
 import org.mindswap.pellet.jena.NodeFormatter;
 import org.mindswap.pellet.jena.PelletQueryExecution;
@@ -47,6 +51,10 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         seleccionado = aSeleccionado;
     }
     public static boolean seleccionado;
+    private ScenarioTest scenarioTestQuery;
+    private ArrayList<SparqlQueryOntology> listSparqlQuerys = new ArrayList<SparqlQueryOntology>();
+    private ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
+    private ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
@@ -55,6 +63,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         setSeleccionado(true);
         GroupTestsJPanel.setState(false);
         GroupTestsJPanel.setNewState(false);
+ 
     }
 
     /** This method is called from within the constructor to
@@ -93,6 +102,11 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         limpiarButton.setText("Limpiar");
+        limpiarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Introduzca el nombre del test:");
 
@@ -109,6 +123,11 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(resultTextArea);
 
         añadirConsultaButton.setText("Añadir existente");
+        añadirConsultaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                añadirConsultaButtonActionPerformed(evt);
+            }
+        });
 
         sparqlTextArea.setColumns(20);
         sparqlTextArea.setRows(5);
@@ -126,6 +145,11 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         );
 
         guardarButton.setText("Guardar y Crear Nuevo Test");
+        guardarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -206,44 +230,36 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
 private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaConsultaButtonActionPerformed
 // TODO add your handling code here:
-    try{
-         this.run(this.getSPARQLQuery(), false);
-       } catch (Exception ex) {
-            Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    JScrollPane scroll = new JScrollPane();
-    JTextArea area = new JTextArea();
-    this.add(scroll,BorderLayout.SOUTH);
-    
-        /*InputStream in = null;
-        try {
-            in = new FileInputStream(new File("data/newspaper.owl"));
-            model = ModelFactory.createOntologyModel(PelletReasonerFactory.THE_SPEC);
-            model.read(in,null);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                in.close();
-            } catch (IOException ex) {
-                Logger.getLogger(AddSPARQLJPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        String queryString = this.getSPARQLQuery();
-        
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-        SELECT ?subject ?object 
-        FROM <data/family.owl> 
-        WHERE { ?subject rdfs:subClassOf ?object }
-        
-        Query query = QueryFactory.create(queryString);
-        QueryExecution qe = QueryExecutionFactory.create(query, model);
-        
-        ResultSet results = qe.execSelect();
-        ResultSetFormatter.out(System.out, results, query);
-        qe.close();*/
-    
+    SparqlQueryOntology query = new SparqlQueryOntology();
+    query.setQuerySparql(this.getSPARQLQuery());
+    query.setResultexpected(this.getResultTextArea());
+    listSparqlQuerys.add(query);
+    this.setResultTextArea("");
+    this.setSPARQLQuery("");
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
+
+private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
+// TODO add your handling code here:
+    scenarioTestQuery = new ScenarioTest(clasInst,propInst,"sparql",listSparqlQuerys,
+            this.getTestNameTextField(),this.getTestDescTextArea());
+    MainJPanel.getCollectionTest().getScenariotest().add(scenarioTestQuery);
+    this.setTestDescTextArea("");
+    this.setTestNameTextField("");
+    this.setSPARQLQuery("");
+    this.setResultTextArea("");
+
+}//GEN-LAST:event_guardarButtonActionPerformed
+
+private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
+// TODO add your handling code here:
+    this.setSPARQLQuery("");
+    this.setResultTextArea("");
+}//GEN-LAST:event_limpiarButtonActionPerformed
+
+private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
+// TODO add your handling code here:
+    
+}//GEN-LAST:event_añadirConsultaButtonActionPerformed
 
     public void run(String queryStr, boolean formatHTML) throws Exception {
         
