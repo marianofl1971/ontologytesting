@@ -46,11 +46,6 @@
                       <Component id="jLabel1" min="-2" pref="224" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="instancesPanel" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
-                      <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="495" max="-2" attributes="1"/>
                   </Group>
@@ -58,6 +53,7 @@
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="testNameTextField" min="-2" pref="267" max="-2" attributes="1"/>
                   </Group>
+                  <Component id="instancesPanel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -87,24 +83,15 @@
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="187" max="32767" attributes="1"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="añadirConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
-                      <Component id="instancesPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="añadirConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <Component id="instancesPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -206,7 +193,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="551" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="523" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -216,13 +203,5 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="guardarButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Guardar y Crear Nuevo Test"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarButtonActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

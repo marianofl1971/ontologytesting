@@ -22,9 +22,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.ClassInstances;
+import model.CollectionTest;
 import model.PropertyInstances;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
@@ -51,13 +53,18 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         seleccionado = aSeleccionado;
     }
     public static boolean seleccionado;
-    private ScenarioTest scenarioTestQuery;
-    private ArrayList<SparqlQueryOntology> listSparqlQuerys = new ArrayList<SparqlQueryOntology>();
-    private ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-    private ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
+    public static ScenarioTest scenarioTestQuery;
+    private ArrayList<SparqlQueryOntology> listSparqlQuerys;
+    
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
+        listSparqlQuerys = new ArrayList<SparqlQueryOntology>();
+        scenarioTestQuery = new ScenarioTest();
+        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+        scenarioT.add(scenarioTestQuery);
+        MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+        
         instancesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         instancesPanel.add(new AddInstancesJPanel());
         setSeleccionado(true);
@@ -90,7 +97,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         sparqlTextArea = new javax.swing.JTextArea();
         instancesPanel = new javax.swing.JPanel();
-        guardarButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -137,19 +143,12 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         instancesPanel.setLayout(instancesPanelLayout);
         instancesPanelLayout.setHorizontalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 551, Short.MAX_VALUE)
+            .add(0, 523, Short.MAX_VALUE)
         );
         instancesPanelLayout.setVerticalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 153, Short.MAX_VALUE)
         );
-
-        guardarButton.setText("Guardar y Crear Nuevo Test");
-        guardarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarButtonActionPerformed(evt);
-            }
-        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -179,15 +178,12 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
-                        .add(instancesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(191, 191, 191)
-                        .add(guardarButton))
-                    .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 495, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .add(10, 10, 10)
-                        .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -211,49 +207,37 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .add(6, 6, 6)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(limpiarButton)
-                            .add(añadirConsultaButton)
-                            .add(nuevaConsultaButton))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
-                        .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(guardarButton)
-                        .add(23, 23, 23))))
+                .add(6, 6, 6)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(limpiarButton)
+                    .add(añadirConsultaButton)
+                    .add(nuevaConsultaButton))
+                .add(8, 8, 8)
+                .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaConsultaButtonActionPerformed
 // TODO add your handling code here:
     SparqlQueryOntology query = new SparqlQueryOntology();
-    query.setQuerySparql(this.getSPARQLQuery());
-    query.setResultexpected(this.getResultTextArea());
-    listSparqlQuerys.add(query);
-    this.setResultTextArea("");
-    this.setSPARQLQuery("");
+    if(!this.getSPARQLQuery().equals("") && !this.getResultTextArea().equals("")){
+        query.setQuerySparql(this.getSPARQLQuery());
+        query.setResultexpected(this.getResultTextArea());
+        listSparqlQuerys.add(query);
+        this.setResultTextArea("");
+        this.setSPARQLQuery("");
+    }else if(this.getSPARQLQuery().equals("") || this.getResultTextArea().equals("")){
+        JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
-
-private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
-// TODO add your handling code here:
-    scenarioTestQuery = new ScenarioTest(clasInst,propInst,"sparql",listSparqlQuerys,
-            this.getTestNameTextField(),this.getTestDescTextArea());
-    MainJPanel.getCollectionTest().getScenariotest().add(scenarioTestQuery);
-    this.setTestDescTextArea("");
-    this.setTestNameTextField("");
-    this.setSPARQLQuery("");
-    this.setResultTextArea("");
-
-}//GEN-LAST:event_guardarButtonActionPerformed
 
 private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
 // TODO add your handling code here:
     this.setSPARQLQuery("");
     this.setResultTextArea("");
+    CollectionTest t = MainJPanel.getCollectionTest();
 }//GEN-LAST:event_limpiarButtonActionPerformed
 
 private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
@@ -261,7 +245,7 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     
 }//GEN-LAST:event_añadirConsultaButtonActionPerformed
 
-    public void run(String queryStr, boolean formatHTML) throws Exception {
+ public void run(String queryStr, boolean formatHTML) throws Exception {
         
         Query query = QueryFactory.create(queryStr);
         if (!query.isSelectType()) {
@@ -326,7 +310,6 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton añadirConsultaButton;
-    private javax.swing.JButton guardarButton;
     private javax.swing.JPanel instancesPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -373,5 +356,13 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
 
     public void setTestNameTextField(String testNameTextField) {
         this.testNameTextField.setText(testNameTextField);
+    }
+
+    public static ScenarioTest getScenarioTestQuery() {
+        return scenarioTestQuery;
+    }
+
+    public static void setScenarioTestQuery(ScenarioTest ascenarioTestQuery) {
+       scenarioTestQuery = ascenarioTestQuery;
     }
 }

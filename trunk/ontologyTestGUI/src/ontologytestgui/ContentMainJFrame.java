@@ -32,10 +32,11 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         actual = aActual;
     }
     private MainJPanel mainPanel = new MainJPanel();
-    private GroupTestsJPanel groupTests = new GroupTestsJPanel(25);;
+    private GroupTestsJPanel groupTests;
+    private GroupTestsJPanel testsExistentes;
     private JFrame frame;
     private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8);
-    private AddSPARQLJPanel sparql = new AddSPARQLJPanel();
+    private AddSPARQLJPanel sparql;
     private JLabel label = new JLabel("RESULTADO DE SUS PRUEBAS");
     private static ArrayList paginas = new ArrayList();
     private static int actual=0;
@@ -43,7 +44,6 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     /** Creates new form ContentMainJFrame */
     public ContentMainJFrame() {
         initComponents();
-        groupTests = new GroupTestsJPanel(25);
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
         this.setSize(new Dimension(950,700));
@@ -128,7 +128,6 @@ public class ContentMainJFrame extends javax.swing.JFrame {
 private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
 // TODO add your handling code here:
     completarArrayOrden();
-    GroupTestsJPanel testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
     if(ContentMainJFrame.getActual()==0){
             if(MainJPanel.getFisicalOntologyTextField().equals("") || 
                     MainJPanel.getNamespaceOntologyTextField().equals("")){
@@ -137,7 +136,8 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                         "física y namespace son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
 
             }else{
-            if(paginas.get(0).equals(1)){   
+            if(paginas.get(0).equals(1)){
+                groupTests = new GroupTestsJPanel(25);
                 contentPanel.remove(mainPanel);
                 contentPanel.add(groupTests);
                 AddSPARQLJPanel.setSeleccionado(false);
@@ -145,6 +145,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(1);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
+                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
                 contentPanel.remove(mainPanel);
                 contentPanel.add(testsExistentes);
                 AddSPARQLJPanel.setSeleccionado(false);
@@ -158,6 +159,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(3).equals(1)){
+                sparql = new AddSPARQLJPanel();
                 contentPanel.remove(mainPanel);
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
@@ -172,6 +174,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }else{
         if(ContentMainJFrame.getActual()==1){
             if(paginas.get(1).equals(1)){
+                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
                 contentPanel.remove(groupTests);
                 contentPanel.add(testsExistentes);
                 AddSPARQLJPanel.setSeleccionado(false);
@@ -185,6 +188,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(3).equals(1)){
+                sparql = new AddSPARQLJPanel();
                 contentPanel.remove(groupTests);
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
@@ -206,6 +210,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(3).equals(1)){
+                sparql = new AddSPARQLJPanel();
                 contentPanel.remove(testsExistentes);
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
@@ -222,6 +227,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         }else if(ContentMainJFrame.getActual()==3){
             if(paginas.get(3).equals(1)){
+                sparql = new AddSPARQLJPanel();
                 contentPanel.remove(addInstances.getContentPanel());
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
@@ -272,7 +278,6 @@ public void completarArrayOrden(){
 private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
 // TODO add your handling code here:
     completarArrayOrden();
-    GroupTestsJPanel testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
     if(ContentMainJFrame.getActual()==0){
         anteriorButton.setEnabled(false);
     }else{
@@ -370,7 +375,7 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 this.validate();
             }else if(paginas.get(0).equals(1)){
                 contentPanel.remove(label);
-                contentPanel.add(groupTests);
+                groupTests = new GroupTestsJPanel(25);
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);

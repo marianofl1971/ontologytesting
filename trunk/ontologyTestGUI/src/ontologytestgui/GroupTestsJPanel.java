@@ -630,8 +630,7 @@ public void guardarDatos(){
     
     if(aux==1){
         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                "son obligatorios. No puede dejar sólo uno de ellos en blanco",
-                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
         Component comp = null;
         int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
