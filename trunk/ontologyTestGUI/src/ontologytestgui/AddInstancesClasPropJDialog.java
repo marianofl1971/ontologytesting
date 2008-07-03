@@ -666,11 +666,13 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {
     if(AddSPARQLJPanel.isSeleccionado()==false) {     
-        MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
-        MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
+        GroupTestsJPanel.getScenarioTest().setClassInstances(clasinst);
+        GroupTestsJPanel.getScenarioTest().setPropertyInstances(propinst);
+        //MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
+        //MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
     }else{
-        AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasInst);
-        AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propInst);
+        AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasinst);
+        AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propinst);
     }
 }
 

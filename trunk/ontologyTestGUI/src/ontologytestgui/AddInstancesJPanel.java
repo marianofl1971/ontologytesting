@@ -11,11 +11,14 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import model.ClassInstances;
+import model.CollectionTest;
 import model.PropertyInstances;
 import model.ScenarioTest;
+import model.SparqlQueryOntology;
 
 /**
  *
@@ -274,32 +277,43 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed
 // TODO add your handling code here:
-    /*if(AddSPARQLJPanel.isSeleccionado()==true){
+    if(AddSPARQLJPanel.isSeleccionado()==true){
+        ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
         SparqlQueryOntology query = new SparqlQueryOntology();
-        if(!this.getSPARQLQuery().equals("") && !this.getResultTextArea().equals("")){
-            query.setQuerySparql(this.getSPARQLQuery());
-            query.setResultexpected(this.getResultTextArea());
+        if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+            query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+            query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
             listSparqlQuerys.add(query);
-            getScenarioTestQuery().setNombre(this.getTestNameTextField());
-            getScenarioTestQuery().setTestName("sparql");
-            getScenarioTestQuery().setDescripcion(this.getTestDescTextArea());
-            getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);
+            AddSPARQLJPanel.getScenarioTestQuery().setNombre(AddSPARQLJPanel.getTestNameTextField());
+            AddSPARQLJPanel.getScenarioTestQuery().setTestName("sparql");
+            AddSPARQLJPanel.getScenarioTestQuery().setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+            AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);
     
-            this.setTestDescTextArea("");
-            this.setTestNameTextField("");
-            this.setSPARQLQuery("");
-            this.setResultTextArea("");
+            AddSPARQLJPanel.setTestDescTextArea("");
+            AddSPARQLJPanel.setTestNameTextField("");
+            AddSPARQLJPanel.setSPARQLQuery("");
+            AddSPARQLJPanel.setResultTextArea("");
         
-            scenarioTestQuery = new ScenarioTest();
+            ScenarioTest scenario = new ScenarioTest();
+            AddSPARQLJPanel.setScenarioTestQuery(scenario);
             ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-            scenarioT.add(scenarioTestQuery);
+            scenarioT.add(AddSPARQLJPanel.getScenarioTestQuery());
             MainJPanel.getCollectionTest().setScenariotest(scenarioT);
             listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
-        }else if(this.getSPARQLQuery().equals("") || this.getResultTextArea().equals("")){
+            AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
+        }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
         }
-    }*/
+    }else{
+        GroupTestsJPanel.asociarInstancias(jpanel.getSelectedTabed());
+        ScenarioTest scenario = new ScenarioTest();
+        GroupTestsJPanel.setScenarioTest(scenario);
+        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+        scenarioT.add(GroupTestsJPanel.getScenarioTest());
+        MainJPanel.getCollectionTest().setScenariotest(scenarioT);   
+        CollectionTest t = MainJPanel.getCollectionTest();
+    }
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
 private void openFile(JTextField textfield){

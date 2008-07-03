@@ -14,20 +14,13 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import model.ClassInstances;
 import model.CollectionTest;
-import model.PropertyInstances;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
 import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
@@ -54,7 +47,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     }
     public static boolean seleccionado;
     public static ScenarioTest scenarioTestQuery;
-    private ArrayList<SparqlQueryOntology> listSparqlQuerys;
+    private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
@@ -221,13 +214,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaConsultaButtonActionPerformed
 // TODO add your handling code here:
     SparqlQueryOntology query = new SparqlQueryOntology();
-    if(!this.getSPARQLQuery().equals("") && !this.getResultTextArea().equals("")){
-        query.setQuerySparql(this.getSPARQLQuery());
-        query.setResultexpected(this.getResultTextArea());
-        listSparqlQuerys.add(query);
-        this.setResultTextArea("");
-        this.setSPARQLQuery("");
-    }else if(this.getSPARQLQuery().equals("") || this.getResultTextArea().equals("")){
+    if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+        query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+        query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+        getListSparqlQuerys().add(query);
+        AddSPARQLJPanel.setResultTextArea("");
+        AddSPARQLJPanel.setSPARQLQuery("");
+    }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
     }
@@ -235,8 +228,8 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
 
 private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
 // TODO add your handling code here:
-    this.setSPARQLQuery("");
-    this.setResultTextArea("");
+    AddSPARQLJPanel.setSPARQLQuery("");
+    AddSPARQLJPanel.setResultTextArea("");
     CollectionTest t = MainJPanel.getCollectionTest();
 }//GEN-LAST:event_limpiarButtonActionPerformed
 
@@ -320,42 +313,42 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton limpiarButton;
     private javax.swing.JButton nuevaConsultaButton;
-    private javax.swing.JTextArea resultTextArea;
-    private javax.swing.JTextArea sparqlTextArea;
-    private javax.swing.JTextArea testDescTextArea;
-    private javax.swing.JTextField testNameTextField;
+    private static javax.swing.JTextArea resultTextArea;
+    private static javax.swing.JTextArea sparqlTextArea;
+    private static javax.swing.JTextArea testDescTextArea;
+    private static javax.swing.JTextField testNameTextField;
     // End of variables declaration//GEN-END:variables
-
-    public void setSPARQLQuery(String sparql){
-        sparqlTextArea.setText(sparql);
-    }
     
-    public String getSPARQLQuery(){
-        return sparqlTextArea.getText();
-    }
-
-    public String getResultTextArea() {
+    public static String getResultTextArea() {
         return resultTextArea.getText();
     }
 
-    public void setResultTextArea(String resultTextArea) {
-        this.resultTextArea.setText(resultTextArea);
+    public static void setResultTextArea(String aResultTextArea) {
+        resultTextArea.setText(aResultTextArea);
     }
 
-    public String getTestDescTextArea() {
+    public static String getSPARQLQuery() {
+        return sparqlTextArea.getText();
+    }
+
+    public static void setSPARQLQuery(String aSparqlTextArea) {
+        sparqlTextArea.setText(aSparqlTextArea);
+    }
+
+    public static String getTestDescTextArea() {
         return testDescTextArea.getText();
     }
 
-    public void setTestDescTextArea(String testDescTextArea) {
-        this.testDescTextArea.setText(testDescTextArea);
+    public static void setTestDescTextArea(String aTestDescTextArea) {
+        testDescTextArea.setText(aTestDescTextArea);
     }
 
-    public String getTestNameTextField() {
+    public static String getTestNameTextField() {
         return testNameTextField.getText();
     }
 
-    public void setTestNameTextField(String testNameTextField) {
-        this.testNameTextField.setText(testNameTextField);
+    public static void setTestNameTextField(String aTestNameTextField) {
+        testNameTextField.setText(aTestNameTextField);
     }
 
     public static ScenarioTest getScenarioTestQuery() {
@@ -364,5 +357,13 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
 
     public static void setScenarioTestQuery(ScenarioTest ascenarioTestQuery) {
        scenarioTestQuery = ascenarioTestQuery;
+    }
+    
+    public static ArrayList<SparqlQueryOntology> getListSparqlQuerys() {
+        return listSparqlQuerys;
+    }
+
+    public static void setListSparqlQuerys(ArrayList<SparqlQueryOntology> aListSparqlQuerys) {
+        listSparqlQuerys = aListSparqlQuerys;
     }
 }

@@ -45,6 +45,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static boolean instanciacion=false, retrieval=false,realizacion=false,
             satisfactibilidad=false,clasificacion=false;
     static JFrame frame;
+
+    public static ScenarioTest getScenarioTest() {
+        return scenarioTest;
+    }
+    public static void setScenarioTest(ScenarioTest aScenarioTest) {
+        scenarioTest = aScenarioTest;
+    }
     private HelpJDialog frameHelp;
     public static boolean isState() {
         return seleccionado;
@@ -75,12 +82,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     }*/
     private AddInstancesJPanel addInstances;
     //private static CollectionTest collectionTest;
-    private int aux=0;
+    private static int aux=0;
     public static boolean seleccionado;
     private static boolean datosGuardados;
     private static OntologyTestResult testresult;
     private XMLDecoder decoder;
     private AddComentJDialog commentPane;
+    private static ScenarioTest scenarioTest;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -118,16 +126,19 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testSatPanel.add(new TestInstancesTFJPanel());
             testClasPanel.add(new TestInstancesQueryJPanel());
         }
-        //collectionTest = new CollectionTest();
-        ArrayList<ScenarioTest> scenarioTestCollection = new ArrayList<ScenarioTest>(4);
+        
+        /*ArrayList<ScenarioTest> scenarioTestCollection = new ArrayList<ScenarioTest>(4);
         for(int i=0;i<5;i++){
             scenarioTestCollection.add(new ScenarioTest());
         }
-        MainJPanel.getCollectionTest().setScenariotest(scenarioTestCollection);
-        
+        MainJPanel.getCollectionTest().setScenariotest(scenarioTestCollection);*/
+        scenarioTest = new ScenarioTest();
+        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+        scenarioT.add(scenarioTest);
+        MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+                
         contentPanel.add(introduccionPanel,BorderLayout.NORTH);
         addInstances = new AddInstancesJPanel(this);
-        //test1ScrollPane.setSize(new Dimension(700,550));
         contentPanel.add(testsTabbedPane,BorderLayout.CENTER);
         contentPanel.add(addInstances,BorderLayout.SOUTH);
     }
@@ -588,17 +599,18 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JScrollPane test3ScrollPane;
     private javax.swing.JScrollPane test4ScrollPane;
     private javax.swing.JScrollPane test5ScrollPane;
-    private javax.swing.JPanel testClasPanel;
-    private javax.swing.JPanel testInstPanel;
-    private javax.swing.JPanel testRealPanel;
-    private javax.swing.JPanel testRetPanel;
-    private javax.swing.JPanel testSatPanel;
+    private static javax.swing.JPanel testClasPanel;
+    private static javax.swing.JPanel testInstPanel;
+    private static javax.swing.JPanel testRealPanel;
+    private static javax.swing.JPanel testRetPanel;
+    private static javax.swing.JPanel testSatPanel;
     private javax.swing.JTabbedPane testsTabbedPane;
     // End of variables declaration//GEN-END:variables
 
 public void guardarDatos(){
-        
-    OntologyTestCase testcase = new OntologyTestCase();
+      
+    CollectionTest t = MainJPanel.getCollectionTest();
+    /*OntologyTestCase testcase = new OntologyTestCase();
     testresult = new OntologyTestResult();
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
@@ -611,7 +623,7 @@ public void guardarDatos(){
         MainJPanel.getCollectionTest().setNamespace(ontologyURI.concat("#"));
     }
 
-    this.asociarInstancias();
+    //this.asociarInstancias();
     if(instanciacion==true){
         MainJPanel.getCollectionTest().getScenariotest().get(0).setTestName("Instanciación");
     }
@@ -662,7 +674,7 @@ public void guardarDatos(){
             testcase.run(testresult, MainJPanel.getCollectionTest());
             GroupTestsJPanel.setDatosGuardados(true); 
         }        
-    }    
+    }*/    
 }
     
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
@@ -679,7 +691,7 @@ public boolean isScenarioEmpty(ScenarioTest scenarioTest){
      }
 }
     
-public void asociarInstancias(){
+public static void asociarInstancias(int sel){
        
     aux=0;
     String nombreTest = "",descTest = "";
@@ -689,19 +701,23 @@ public void asociarInstancias(){
     ArrayList<QueryOntology> queryTest4 = new ArrayList<QueryOntology>();
     ArrayList<QueryOntology> queryTest5 = new ArrayList<QueryOntology>();
     
-    JPanel panelInst = this.getTestInstPanel();
+    TestInstancesTFJPanel test = null;
+    TestInstancesQueryJPanel test1 = null;
+    
+    JPanel panelInst = getTestInstPanel();
     int totalInst = panelInst.getComponentCount();
-    JPanel panelClas = this.getTestClasPanel();
+    JPanel panelClas = getTestClasPanel();
     int totalClas = panelClas.getComponentCount();
-    JPanel panelReal = this.getTestRealPanel();
+    JPanel panelReal = getTestRealPanel();
     int totalReal = panelReal.getComponentCount();
-    JPanel panelRet = this.getTestRetPanel();
+    JPanel panelRet = getTestRetPanel();
     int totalRet = panelRet.getComponentCount();
-    JPanel panelSat = this.getTestSatPanel();
+    JPanel panelSat = getTestSatPanel();
     int totalSat = panelSat.getComponentCount();
 
+    if(sel==0){
     for(int i=2;i<totalInst;i++){
-        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelInst.getComponent(i);
+        test = (TestInstancesTFJPanel) panelInst.getComponent(i);
         DescripcionJPanel descPanel = (DescripcionJPanel) panelInst.getComponent(0);
         nombreTest = descPanel.getNombreTextField();
         descTest = descPanel.getDescTextArea();
@@ -713,60 +729,69 @@ public void asociarInstancias(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest1.add(testQuery);
-            MainJPanel.getCollectionTest().getScenariotest().get(0).setQueryTest(queryTest1);
+            //MainJPanel.getCollectionTest().getScenariotest().get(0).setQueryTest(queryTest1);
+            getScenarioTest().setQueryTest(queryTest1);
             instanciacion=true;
+            test.setQuery("");
+            test.setTrueTest(false);
+            test.setFalseTest(false);
+            test.getComment().setComent("");
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
         }
     }
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
-    
-
+    getScenarioTest().setTestName("Instanciación");
+    //MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
+    //MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
+    }else if(sel==1){
     for(int i=2;i<totalRet;i++){
-        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelRet.getComponent(i);
+        test1 = (TestInstancesQueryJPanel) panelRet.getComponent(i);
         DescripcionJPanel descPanel = (DescripcionJPanel) panelRet.getComponent(0);
         nombreTest = descPanel.getNombreTextField();
         descTest = descPanel.getDescTextArea();
-        String query = test.getQuery();
-        String queryExp = test.getQueryResult();
-        AddComentJDialog comentPane = test.getComment();
+        String query = test1.getQuery();
+        String queryExp = test1.getQueryResult();
+        AddComentJDialog comentPane = test1.getComment();
         String coment = comentPane.getComent();
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest2.add(testQuery);
-            MainJPanel.getCollectionTest().getScenariotest().get(1).setQueryTest(queryTest2);
+            getScenarioTest().setQueryTest(queryTest2);
             retrieval=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
-
+    getScenarioTest().setTestName("Retrieval");
+    test1.setQuery("");
+    test1.setQueryResult("");
+    test1.getComment().setComent("");
+    }else if(sel==2){
     for(int i=2;i<totalReal;i++){
-        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelReal.getComponent(i);
+        test1 = (TestInstancesQueryJPanel) panelReal.getComponent(i);
         DescripcionJPanel descPanel = (DescripcionJPanel) panelReal.getComponent(0);
         nombreTest = descPanel.getNombreTextField();
         descTest = descPanel.getDescTextArea();
-        String query = test.getQuery();
-        String queryExp = test.getQueryResult();
-        AddComentJDialog comentPane = test.getComment();
+        String query = test1.getQuery();
+        String queryExp = test1.getQueryResult();
+        AddComentJDialog comentPane = test1.getComment();
         String coment = comentPane.getComent();
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest3.add(testQuery);
-            MainJPanel.getCollectionTest().getScenariotest().get(2).setQueryTest(queryTest3);
+            getScenarioTest().setQueryTest(queryTest3);
             realizacion=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
-    
+    getScenarioTest().setTestName("Realización");
+    test1.setQuery("");
+    test1.setQueryResult("");
+    test1.getComment().setComent("");
+    }else if(sel==3){
     for(int i=2;i<totalSat;i++){
-        TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelSat.getComponent(i);
+        test = (TestInstancesTFJPanel) panelSat.getComponent(i);
         DescripcionJPanel descPanel = (DescripcionJPanel) panelSat.getComponent(0);
         nombreTest = descPanel.getNombreTextField();
         descTest = descPanel.getDescTextArea();
@@ -778,54 +803,62 @@ public void asociarInstancias(){
         if(!query.equals("") && !resExpT.equals(resExpF)){
             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
             queryTest4.add(testQuery);
-            MainJPanel.getCollectionTest().getScenariotest().get(3).setQueryTest(queryTest4);
+            getScenarioTest().setQueryTest(queryTest4);
             satisfactibilidad=true;
         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
             aux=1;
         }
     }
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
-    
+    getScenarioTest().setTestName("Satisfactibilidad");
+    test.setQuery("");
+    test.setTrueTest(false);
+    test.setFalseTest(false);
+    test.getComment().setComent("");
+    }else{
     for(int i=2;i<totalClas;i++){
-        TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelClas.getComponent(i);
+        test1 = (TestInstancesQueryJPanel) panelClas.getComponent(i);
         DescripcionJPanel descPanel = (DescripcionJPanel) panelClas.getComponent(0);
         nombreTest = descPanel.getNombreTextField();
         descTest = descPanel.getDescTextArea();
-        String query = test.getQuery();
-        String queryExp = test.getQueryResult();
-        AddComentJDialog comentPane = test.getComment();
+        String query = test1.getQuery();
+        String queryExp = test1.getQueryResult();
+        AddComentJDialog comentPane = test1.getComment();
         String coment = comentPane.getComent();
         if(!query.equals("") && !queryExp.equals("")){
             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
             queryTest5.add(testQuery);
-            MainJPanel.getCollectionTest().getScenariotest().get(4).setQueryTest(queryTest5);
+            getScenarioTest().setQueryTest(queryTest5);
             clasificacion=true;
         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
             aux=1;
         }
     }
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setNombre(nombreTest);
-    MainJPanel.getCollectionTest().getScenariotest().get(0).setDescripcion(descTest);
-  }
+    getScenarioTest().setTestName("Clasificación");
+    test1.setQuery("");
+    test1.setQueryResult("");
+    test1.getComment().setComent("");
+    }
+    getScenarioTest().setDescripcion(descTest);
+    getScenarioTest().setNombre(nombreTest);
+}
     
-public JPanel getTestClasPanel() {
+public static JPanel getTestClasPanel() {
     return testClasPanel;
 }
 
-public JPanel getTestInstPanel() {
+public static JPanel getTestInstPanel() {
     return testInstPanel;
 }
 
-public JPanel getTestRealPanel() {
+public static JPanel getTestRealPanel() {
     return testRealPanel;
 }
 
-public JPanel getTestRetPanel() {
+public static JPanel getTestRetPanel() {
     return testRetPanel;
 }
 
-public JPanel getTestSatPanel() {
+public static JPanel getTestSatPanel() {
     return testSatPanel;
 }
     
@@ -833,8 +866,8 @@ public int getSelectedTabed(){
     return testsTabbedPane.getSelectedIndex();
 }
 
-    public javax.swing.JPanel getContentPanel() {
-        return contentPanel;
-    }
+public javax.swing.JPanel getContentPanel() {
+    return contentPanel;
+}
 
 }
