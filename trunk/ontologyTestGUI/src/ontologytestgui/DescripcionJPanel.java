@@ -83,16 +83,16 @@ public class DescripcionJPanel extends javax.swing.JPanel {
         return descTextArea.getText();
     }
 
-    public void setDescTextArea(String descTextArea) {
-        this.descTextArea.setText(descTextArea);
+    public void setDescTextArea(String adescTextArea) {
+        descTextArea.setText(adescTextArea);
     }
 
     public String getNombreTextField() {
         return nombreTextField.getText();
     }
 
-    public void setNombreTextField(String nombreTextField) {
-        this.nombreTextField.setText(nombreTextField);
+    public void setNombreTextField(String anombreTextField) {
+        nombreTextField.setText(anombreTextField);
     }
 
 }

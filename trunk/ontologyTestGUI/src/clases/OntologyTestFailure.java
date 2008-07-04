@@ -9,6 +9,7 @@
 
 package clases;
 
+import java.util.ArrayList;
 import model.QueryOntology;
 import model.SparqlQueryOntology;
 
@@ -23,13 +24,13 @@ public class OntologyTestFailure extends Object{
     protected String fcommentquery;
     protected String fresultexpected;
     protected String fresultsparqlexpected;
-    protected String fressparqlobtenido;
+    protected ArrayList<String> fressparqlobtenido;
     protected String fcommentsparqlquery;
     protected String fquerysparql;
     protected String testName;
     
     public OntologyTestFailure(String testName,QueryOntology query, String resQueryObte, 
-            SparqlQueryOntology querysparql, String resSparqlQueryObte){
+            SparqlQueryOntology querysparql, ArrayList<String> resSparqlQueryObte){
         this.testName=testName;
         this.fquery = query.getQuery();
         this.fcommentquery = query.getComment();
@@ -51,7 +52,9 @@ public class OntologyTestFailure extends Object{
         this.fresqueryobtenido = resQueryObte;
     }
     
-    void addOntologyTestFailureSparql(SparqlQueryOntology querysparql, String resQueryObte){
+    void addOntologyTestFailureSparql(String testName, SparqlQueryOntology querysparql, 
+            ArrayList<String> resQueryObte){
+        this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
@@ -61,7 +64,7 @@ public class OntologyTestFailure extends Object{
          return this.fresqueryobtenido;    
      }  
     
-    public String getResultSparqlQueryObtenido() {    
+    public ArrayList<String> getResultSparqlQueryObtenido() {    
          return this.fressparqlobtenido;    
      }
     

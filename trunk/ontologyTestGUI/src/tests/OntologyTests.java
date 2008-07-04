@@ -9,12 +9,25 @@
 
 package tests;
 
+import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
+import org.mindswap.pellet.jena.NodeFormatter;
+import org.mindswap.pellet.jena.PelletQueryExecution;
+import org.mindswap.pellet.jena.PelletReasonerFactory;
+import org.mindswap.pellet.output.TableData;
 
 /**
  *
@@ -47,20 +60,16 @@ public class OntologyTests {
     
     //Saber TODOS los individuos que pertenecen a una clase
     //TODOS los individuos que son instancias de un concepto    
-    public String retieval(String ns, String className, OntModel model){
+    public ArrayList<String> retieval(String ns, String className, OntModel model){
         
-        String rval="";
         OntClass ontClass = model.getOntClass(ns + className);         
         Iterator it = ontClass.listInstances();
-        
+        ArrayList<String> rval = new ArrayList<String>();
         while(it.hasNext())
         {
             String instanceName=it.next().toString();
             instanceName=instanceName.substring(instanceName.indexOf("#")+1);
-            
-            if(!rval.equals(""))
-                rval+=",";
-            rval+=instanceName;
+            rval.add(instanceName);
         }
         return rval;
     }    
@@ -93,46 +102,76 @@ public class OntologyTests {
             conjuntoDisj.add(disjunta);
         }
        
-       String clasesConcepto = classification(ns,model,concepto);
-       String[] clas = clasesConcepto.split(",");
-       int tam = clas.length;
-       ArrayList<String> listaInicial = new ArrayList<String>();
-       for(int j=0;j<tam;j++){
-            listaInicial.add(clas[j]);
-       }
+       ArrayList<String> clasesConcepto = classification(ns,model,concepto);
+
        if(clasesConcepto.equals("")){
             return "true";
        }else{
-           for(int i=0;i<listaInicial.size();i++){
+           for(int i=0;i<clasesConcepto.size();i++){
             for(int k=0;k<conjuntoDisj.size();k++){
-                if(listaInicial.get(i).equals(conjuntoDisj.get(k))){
+                if(clasesConcepto.contains(conjuntoDisj.get(k)))
                     return "false";
                 }
             }
            }
-       }
        return "true";
     }
     
     //Dado un individuo, deducir todas las clases a las que pertenece
-    public String classification(String ns, OntModel model, String individuo){
+    public ArrayList<String> classification(String ns, OntModel model, String individuo){
         
         String pertenece;
-        String clases="";
+        ArrayList<String> clases = new ArrayList<String>();
         Iterator it = model.listNamedClasses();
 
         while(it.hasNext()){
             String[] instanceName = it.next().toString().split("#");
             pertenece = instantiation(ns, instanceName[1].toString(), individuo, model);
             if(pertenece.equals("true")){
-                if(!clases.equals("")){
-                    clases+=","+instanceName[1].toString();
-                }else{
-                clases=instanceName[1].toString();
-                }
+                clases.add(instanceName[1].toString());
             }
         }       
         return clases;
+    }
+    
+    public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML, OntModel model){
+        
+        Query query = QueryFactory.create(queryStr);
+        if (!query.isSelectType()) {
+        	throw new UnsupportedFeatureException("Only SELECT supported for this example");
+        }
+        // create an empty ontology model using Pellet spec
+        model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );        
+        model.setStrictMode(false);
+       
+        if(query.getGraphURIs().size()==0)
+            throw new UnsupportedFeatureException("SPARQL query must have a FROM clause for this example");
+        for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
+        	String sourceURI = (String) iter.next();
+        	model.read( sourceURI );
+        }
+        
+	QueryExecution qexec = new PelletQueryExecution(query, model);
+        ResultSet results = qexec.execSelect();
+        // create a node formatter
+        NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
+        // variables used in select
+        ArrayList<String> resultVars = (ArrayList<String>) query.getResultVars();
+        return resultVars;
+        // store the formatted results an a table 
+        /*TableData table = new TableData( resultVars );
+        while( results.hasNext() ) {
+            QuerySolution binding = results.nextSolution();
+            List formattedBinding = new ArrayList();
+            for(int i = 0; i < resultVars.size(); i++) {
+                String var = (String) resultVars.get(i);
+                RDFNode result = binding.get(var);
+                                
+                formattedBinding.add(formatter.format(result));                
+            }
+            table.add(formattedBinding);
+        }
+        table.print(System.out, formatHTML);*/
     }
     
 }

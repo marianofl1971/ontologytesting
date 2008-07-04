@@ -95,14 +95,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }
     
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num,
-            int index,ArrayList<ScenarioTest> scenarioT) {
+            ArrayList<ScenarioTest> scenarioT) {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         int contI=0,contP=0;
-        this.setIndexVect(index);
         initComponents();
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
@@ -200,7 +199,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         }
     }
     
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName,int i) {
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName) {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
@@ -208,7 +207,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setSeleccionado(true);
         initComponents();
         int contP=0,contC=0;
-        this.setIndexVect(i);
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));

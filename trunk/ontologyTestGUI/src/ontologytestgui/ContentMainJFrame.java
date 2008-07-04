@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import model.CollectionTest;
 
 /**
  *
@@ -198,6 +199,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }else{
                 contentPanel.remove(groupTests);
                 contentPanel.add(label);
+                groupTests.guardarDatos();
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(5);
                 this.validate();
@@ -242,6 +244,8 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 this.validate();
             }
         }else if(ContentMainJFrame.getActual()==4){
+                CollectionTest t = MainJPanel.getCollectionTest();
+                testsExistentes.guardarDatos();
                 contentPanel.remove(sparql);
                 contentPanel.add(label);
                 anteriorButton.setEnabled(true);

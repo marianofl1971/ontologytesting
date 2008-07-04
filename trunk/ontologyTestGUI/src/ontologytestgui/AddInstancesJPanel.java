@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import model.ClassInstances;
-import model.CollectionTest;
 import model.PropertyInstances;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
@@ -165,13 +164,9 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    AddInstancesJPanel.setStateExaminar(false);
    AddInstancesJPanel.setStateSeeInst(false);
    int var=0;
-   int i=0;
-   
+   ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
    if(AddSPARQLJPanel.isSeleccionado()==false) {     
-       ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
-        i = jpanel.getSelectedTabed();
-        ScenarioTest sT = scenarioTest.get(i);
-    
+        ScenarioTest sT = GroupTestsJPanel.getScenarioTest();
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
         clasInst = sT.getClassInstances();
@@ -184,7 +179,7 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
+            addInst = new AddInstancesClasPropJDialog(parent,true,7,scenarioTest);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -216,20 +211,13 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     AddInstancesJPanel.setStateExaminar(true);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(false);
-    ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
-    int i=0;
-    
-    if(AddSPARQLJPanel.isSeleccionado()==false){
-        i = jpanel.getSelectedTabed();
-    }else{
-        i = scenarioTest.size()-1;
-    }
+ 
         filechooser = new JFileChooser("./");
         int option = filechooser.showOpenDialog(frame);
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             String nameFile = selectedFile.getName();
-            addInst = new AddInstancesClasPropJDialog(parent,true,nameFile,i);
+            addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -242,21 +230,18 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
-    int i=0;
+    ScenarioTest scenarioTest;
     
     if(AddSPARQLJPanel.isSeleccionado()==false){
-        i = jpanel.getSelectedTabed();
+        scenarioTest = GroupTestsJPanel.getScenarioTest();
     }else{
-        i = scenarioTest.size()-1;
+        scenarioTest = AddSPARQLJPanel.getScenarioTestQuery();
     }
-    
-    ScenarioTest sT = scenarioTest.get(i);
-    
+      
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-    clasInst = sT.getClassInstances();
-    propInst = sT.getPropertyInstances();
+    clasInst = scenarioTest.getClassInstances();
+    propInst = scenarioTest.getPropertyInstances();
     if(!clasInst.isEmpty() || !propInst.isEmpty()){
         var=1;
     }
@@ -269,7 +254,7 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
         AddInstancesJPanel.setStateAsociar(false);
         AddInstancesJPanel.setStateSeeInst(true);
         AddInstancesJPanel.setStateExaminar(false);
-        addInst = new AddInstancesClasPropJDialog(parent,true,7,i,scenarioTest);
+        addInst = new AddInstancesClasPropJDialog(parent,true,7,scenarioTest);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }
@@ -312,26 +297,18 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
         ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
         scenarioT.add(GroupTestsJPanel.getScenarioTest());
         MainJPanel.getCollectionTest().setScenariotest(scenarioT);   
-        CollectionTest t = MainJPanel.getCollectionTest();
     }
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
 private void openFile(JTextField textfield){
-    
-    ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
-    int i=0;
-      if(AddSPARQLJPanel.isSeleccionado()==false) {     
-            i = jpanel.getSelectedTabed();
-      }else{
-            i = scenarioTest.size()-1;
-      }
+
       filechooser = new JFileChooser("./");
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           textfield.setText(selectedFile.getPath());
           String nameFile = selectedFile.getName();
-          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile,i);
+          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
           addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
           addInst.setVisible(true);
       }

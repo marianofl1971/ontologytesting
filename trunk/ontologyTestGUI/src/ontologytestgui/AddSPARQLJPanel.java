@@ -6,28 +6,13 @@
 
 package ontologytestgui;
 
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.CollectionTest;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
-import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
-import org.mindswap.pellet.jena.NodeFormatter;
-import org.mindswap.pellet.jena.PelletQueryExecution;
-import org.mindswap.pellet.jena.PelletReasonerFactory;
-import org.mindswap.pellet.output.TableData;
 
 /**
  *
@@ -35,7 +20,6 @@ import org.mindswap.pellet.output.TableData;
  */
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
-    private OntModel model;
     static final int desktopWidth = 700;
     static final int desktopHeight = 600;
     static JFrame frame;
@@ -238,47 +222,7 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     
 }//GEN-LAST:event_añadirConsultaButtonActionPerformed
 
- public void run(String queryStr, boolean formatHTML) throws Exception {
-        
-        Query query = QueryFactory.create(queryStr);
-        if (!query.isSelectType()) {
-        	throw new UnsupportedFeatureException("Only SELECT supported for this example");
-        }
-        // create an empty ontology model using Pellet spec
-        model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );        
-        model.setStrictMode(false);
-       
-        if(query.getGraphURIs().size()==0)
-            throw new UnsupportedFeatureException("SPARQL query must have a FROM clause for this example");
-        for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
-        	String sourceURI = (String) iter.next();
-        	model.read( sourceURI );
-        }
-        
-	QueryExecution qexec = new PelletQueryExecution(query, model);
-        ResultSet results = qexec.execSelect();
-        // create a node formatter
-        NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
-        // variables used in select
-        List resultVars = query.getResultVars();
-        
-        // store the formatted results an a table 
-        TableData table = new TableData( resultVars );
-        while( results.hasNext() ) {
-            QuerySolution binding = results.nextSolution();
-            List formattedBinding = new ArrayList();
-            for(int i = 0; i < resultVars.size(); i++) {
-                String var = (String) resultVars.get(i);
-                RDFNode result = binding.get(var);
-                                
-                formattedBinding.add(formatter.format(result));                
-            }
-            table.add(formattedBinding);
-        }
-        table.print(System.out, formatHTML);
-    }
-    
-    private static void createAndShowGUI() {
+  private static void createAndShowGUI() {
         //JFrame.setDefaultLookAndFeelDecorated(true);
         //Create and set up the window.
         frame = new JFrame("Test de Prueba");

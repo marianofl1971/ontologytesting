@@ -15,6 +15,7 @@ import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import model.ClassInstances;
@@ -22,6 +23,7 @@ import model.CollectionTest;
 import model.PropertyInstances;
 import model.QueryOntology;
 import model.ScenarioTest;
+import model.SparqlQueryOntology;
 import tests.OntologyTests;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 
@@ -89,20 +91,26 @@ public class OntologyTestCase implements OntologyTest{
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
             ScenarioTest scenariotest){
            
-        ListIterator liQuery;
+        ListIterator liQuery,liSparql;
         String res[],clasF="",indF="",concepto="",loincluye="";
         String testName = scenariotest.getTestName();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
+        List<SparqlQueryOntology> sparqlTest = scenariotest.getSparqlQuerys();
         
-        String resObtenidoInst="",resQueryExpected="",resObtenidoClas="",resObtenidoRet="",
+        String resObtenidoInst="",resQueryExpected="",
                 resObtenidoRealiz="",resObtenidoSatisf="";
+        ArrayList<String> resObtenidoRet = new ArrayList<String>();
+        ArrayList<String> resObtenidoClas = new ArrayList<String>();
+        ArrayList<String> sparqlExp = new ArrayList<String>();
+        ArrayList<String> resSparql = new ArrayList<String>();
         QueryOntology qo = null;
+        SparqlQueryOntology sparqlquery = null;
                 
         OntologyTests tests = new OntologyTests();
         liQuery = queryTest.listIterator();
+        liSparql = sparqlTest.listIterator();
         
-        while(liQuery.hasNext()){
-            
+        while(liQuery.hasNext()){         
             if(liQuery.hasNext()){
                 qo = (QueryOntology) liQuery.next();
                 String query = qo.getQuery();
@@ -117,8 +125,15 @@ public class OntologyTestCase implements OntologyTest{
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = tests.retieval(ns, query, model);
-                    if(!resObtenidoRet.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoRet);
+                    String[] queryMod = query.split(",");
+                    ArrayList<String> queryRet = new ArrayList<String>();
+                    for(int k=0;k<queryMod.length;k++){
+                        queryRet.add(queryMod[k]);
+                    }
+                    Collections.sort(resObtenidoRet);
+                    Collections.sort(queryRet);
+                    if(!this.comparaArray(resObtenidoRet, queryRet)){
+                        testresult.addOntologyFailureQuery(testName,qo,resObtenidoRet.toString());
                     }
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = tests.realization(ns, query, model);
@@ -134,14 +149,39 @@ public class OntologyTestCase implements OntologyTest{
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
                     }
                 }else if(testName.equals("Clasificación")){
+                    String[] queryMod = query.split(",");
+                    ArrayList<String> querySat = new ArrayList<String>();
+                    for(int k=0;k<queryMod.length;k++){
+                        querySat.add(queryMod[k]);
+                    }
                     resObtenidoClas = tests.classification(ns, model, query);
-                    if(!resObtenidoClas.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoClas);
+                    Collections.sort(resObtenidoClas);
+                    Collections.sort(querySat);
+                    if(!this.comparaArray(querySat, resObtenidoClas)){
+                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoClas.toString());
                     }
                 }
             }    
         }
-    } 
+        
+    while(liSparql.hasNext()){    
+        if(liSparql.hasNext()){
+            sparqlquery = (SparqlQueryOntology) liSparql.next();
+            String sparqlQuery = sparqlquery.getQuerySparql();
+            resQueryExpected = sparqlquery.getResultexpected();
+            res = sparqlQuery.split("\n");
+            for(int k=0; k<res.length;k++){
+                sparqlExp.add(res[k]);
+            }
+            resSparql = tests.testSPARQL(sparqlQuery, true, model);
+            Collections.sort(sparqlExp);
+            Collections.sort(resSparql);
+            if(!this.comparaArray(sparqlExp, resSparql)){
+                testresult.addOntologyFailureSparql(testName,sparqlquery,resSparql);
+            }
+        }    
+    }
+} 
 
     @Override
     public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
@@ -175,6 +215,19 @@ public class OntologyTestCase implements OntologyTest{
         hasprop = model.createIndividual(ns + value,nameprop);
         namepropIsUsed=true;
     }
+    
+    public boolean comparaArray(ArrayList<String> array1, ArrayList<String> array2){
+        if(array1.size() == array2.size()){
+            for(int i=0;i<array1.size();i++){
+                if(!array1.get(i).equals(array2.get(i))){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+        return true;
+    }
 
     public void showResultTests(OntologyTestResult testresult){
         
@@ -197,11 +250,19 @@ public class OntologyTestCase implements OntologyTest{
                 System.out.println("HAN FALLADO DE LOS TESTS DE CLASIFICACIÓN:");
             }else if(otf.getTestName().equals("Satisfactibilidad")){
                 System.out.println("HAN FALLADO DE LOS TESTS DE SATISFACTIBILIDAD:");
+            }else if(otf.getTestName().equals("sparql")){
+                System.out.println("HAN FALLADO DE LAS CONSULTAS SPARQL:");
             }
-            System.out.println("De la query introducida " +otf.getfQuery());
-            System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
-            System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());
+            if(!otf.getTestName().equals("sparql")){
+                System.out.println("De la query introducida " +otf.getfQuery());
+                System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
+                System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());
+            }else{
+                System.out.println("De la query introducida " +otf.getfSparqlQuery());
+                System.out.println("Se esperaba obtener : " +otf.getfResultSparqlExpected());
+                System.out.println("Pero se obtuvo: " +otf.getResultSparqlQueryObtenido());      
             }
+        }
         }else{
             System.out.println("No se han producido errores.");
         }
