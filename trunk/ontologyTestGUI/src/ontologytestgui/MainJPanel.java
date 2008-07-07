@@ -275,7 +275,6 @@ private void openFile(JTextField textfield){
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           textfield.setText(selectedFile.getPath());
-          String nameFile = selectedFile.getName();
       }
 }
 

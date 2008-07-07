@@ -138,7 +138,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
 
             }else{
             if(paginas.get(0).equals(1)){
-                groupTests = new GroupTestsJPanel(25);
+                groupTests = new GroupTestsJPanel(8);
                 contentPanel.remove(mainPanel);
                 contentPanel.add(groupTests);
                 AddSPARQLJPanel.setSeleccionado(false);
@@ -379,7 +379,7 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 this.validate();
             }else if(paginas.get(0).equals(1)){
                 contentPanel.remove(label);
-                groupTests = new GroupTestsJPanel(25);
+                groupTests = new GroupTestsJPanel(8);
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);

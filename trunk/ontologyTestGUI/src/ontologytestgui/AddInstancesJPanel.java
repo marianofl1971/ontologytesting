@@ -7,15 +7,21 @@
 package ontologytestgui;
 
 import java.awt.Component;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import model.ClassInstances;
 import model.PropertyInstances;
+import model.QueryOntology;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
 
@@ -53,6 +59,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private static boolean stateAsociar;
     private static boolean stateExaminar;
     private static boolean stateSeeInst;
+    private XMLDecoder decoder;
+    private AddComentJDialog commentPane;
+    private DescripcionJPanel desc = new DescripcionJPanel();
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -79,6 +88,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
         asociarButton = new javax.swing.JButton();
         seeAsociadasButton = new javax.swing.JButton();
         SaveAndNewButton = new javax.swing.JButton();
+        addTestExistButton = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione las instancias que desea asociar:");
 
@@ -105,10 +115,17 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
-        SaveAndNewButton.setText("Guardar y crear nuevo");
+        SaveAndNewButton.setText("Añadir y Crear Nuevo");
         SaveAndNewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveAndNewButtonActionPerformed(evt);
+            }
+        });
+
+        addTestExistButton.setText("Abrir Test Existente");
+        addTestExistButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTestExistButtonActionPerformed(evt);
             }
         });
 
@@ -123,15 +140,17 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(asociarButton))
-                        .addContainerGap(320, Short.MAX_VALUE))
+                        .addContainerGap(364, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                         .add(339, 339, 339))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(seeAsociadasButton)
-                                .add(159, 159, 159)
+                                .add(152, 152, 152)
+                                .add(addTestExistButton)
+                                .add(6, 6, 6)
                                 .add(SaveAndNewButton))
                             .add(examinarButton))
                         .addContainerGap())))
@@ -150,6 +169,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(5, 5, 5)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(seeAsociadasButton)
+                    .add(addTestExistButton)
                     .add(SaveAndNewButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -300,19 +320,111 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     }
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
-private void openFile(JTextField textfield){
-
-      filechooser = new JFileChooser("./");
+private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
+// TODO add your handling code here:
+    filechooser = new JFileChooser("./");
+    String nameFile="";
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
-          textfield.setText(selectedFile.getPath());
-          String nameFile = selectedFile.getName();
-          addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
-          addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-          addInst.setVisible(true);
-      }
-}
+          nameFile = selectedFile.getName();
+      }   
+
+    DescripcionJPanel descPanel = null;
+    TestInstancesTFJPanel test = null;
+    TestInstancesQueryJPanel test1 = null;
+    
+    JPanel panelInst = GroupTestsJPanel.getTestInstPanel();
+    JPanel panelClas = GroupTestsJPanel.getTestClasPanel();
+    JPanel panelReal = GroupTestsJPanel.getTestRealPanel();
+    JPanel panelRet = GroupTestsJPanel.getTestRetPanel();
+    JPanel panelSat = GroupTestsJPanel.getTestSatPanel();
+
+    int cont=2;
+    try{
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+        ScenarioTest s = (ScenarioTest) decoder.readObject();
+        String nombre = s.getNombre();
+        String descrip = s.getDescripcion();  
+        String tab = s.getTestName();
+        ArrayList<QueryOntology> qO = s.getQueryTest(); 
+        ListIterator qi;
+        qi = qO.listIterator();
+        while(qi.hasNext()){   
+            QueryOntology cI = (QueryOntology) qi.next();
+            if(tab.equals("Instanciación")){
+                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                descPanel.setNombreTextField(nombre);
+                descPanel.setDescTextArea(descrip);
+                test = (TestInstancesTFJPanel) panelInst.getComponent(cont);
+                AddComentJDialog comentPane = test.getComment();
+                comentPane.setComent(cI.getComment());
+                test.setComment(comentPane);
+                test.setQuery(cI.getQuery());
+                String res = cI.getResultexpected();
+                if(res.equals("true")){
+                    test.setTrueTest(true);
+                }else{
+                    test.setFalseTest(true);
+                }
+                cont++;
+            }else if(tab.equals("Retrieval")){
+                descPanel = (DescripcionJPanel) panelRet.getComponent(0);
+                descPanel.setNombreTextField(nombre);
+                descPanel.setDescTextArea(descrip);
+                test1 = (TestInstancesQueryJPanel) panelRet.getComponent(cont);
+                AddComentJDialog comentPane = test1.getComment();
+                comentPane.setComent(cI.getComment());
+                test1.setComment(comentPane);
+                test1.setQuery(cI.getQuery());
+                test1.setQueryResult(cI.getResultexpected());
+                cont++;
+            }else if(tab.equals("Realización")){
+                descPanel = (DescripcionJPanel) panelReal.getComponent(0);
+                descPanel.setNombreTextField(nombre);
+                descPanel.setDescTextArea(descrip);
+                test1 = (TestInstancesQueryJPanel) panelReal.getComponent(cont);
+                AddComentJDialog comentPane = test1.getComment();
+                comentPane.setComent(cI.getComment());
+                test1.setComment(comentPane);
+                test1.setQuery(cI.getQuery());
+                test1.setQueryResult(cI.getResultexpected());
+                cont++;
+            }else if(tab.equals("Satisfactibilidad")){
+                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                descPanel.setNombreTextField(nombre);
+                descPanel.setDescTextArea(descrip);
+                test = (TestInstancesTFJPanel) panelSat.getComponent(cont);
+                AddComentJDialog comentPane = test.getComment();
+                comentPane.setComent(cI.getComment());
+                test.setComment(comentPane);
+                test.setQuery(cI.getQuery());
+                String res = cI.getResultexpected();
+                if(res.equals("true")){
+                    test.setTrueTest(true);
+                }else{
+                    test.setFalseTest(true);
+                }
+                cont++;
+            }else if(tab.equals("Clasificación")){
+                descPanel = (DescripcionJPanel) panelClas.getComponent(0);
+                descPanel.setNombreTextField(nombre);
+                descPanel.setDescTextArea(descrip);
+                test1 = (TestInstancesQueryJPanel) panelClas.getComponent(cont);
+                AddComentJDialog comentPane = test1.getComment();
+                comentPane.setComent(cI.getComment());
+                test1.setComment(comentPane);
+                test1.setQuery(cI.getQuery());
+                test1.setQueryResult(cI.getResultexpected());
+                cont++;
+            }
+        }   
+    //MainJPanel.getCollectionTest().getScenariotest().add(s);
+    decoder.close();    
+    }catch(FileNotFoundException e){
+    }
+
+}//GEN-LAST:event_addTestExistButtonActionPerformed
 
 public void setSelectedTabbed(int index){
     this.index = index;
@@ -328,6 +440,7 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton SaveAndNewButton;
+    private javax.swing.JButton addTestExistButton;
     private javax.swing.JButton asociarButton;
     private javax.swing.JButton examinarButton;
     private javax.swing.JLabel jLabel1;

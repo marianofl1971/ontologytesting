@@ -15,19 +15,15 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
 import org.mindswap.pellet.jena.NodeFormatter;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
-import org.mindswap.pellet.output.TableData;
 
 /**
  *

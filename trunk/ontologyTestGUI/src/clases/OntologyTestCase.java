@@ -125,7 +125,7 @@ public class OntologyTestCase implements OntologyTest{
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = tests.retieval(ns, query, model);
-                    String[] queryMod = query.split(",");
+                    String[] queryMod = resQueryExpected.split(",");
                     ArrayList<String> queryRet = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
                         queryRet.add(queryMod[k]);
@@ -149,7 +149,7 @@ public class OntologyTestCase implements OntologyTest{
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
                     }
                 }else if(testName.equals("Clasificación")){
-                    String[] queryMod = query.split(",");
+                    String[] queryMod = resQueryExpected.split(",");
                     ArrayList<String> querySat = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
                         querySat.add(queryMod[k]);

@@ -7,7 +7,6 @@
 package ontologytestgui;
 
 import java.awt.Frame;
-import java.awt.event.TextListener;
 import javax.swing.ButtonGroup;
 import javax.swing.WindowConstants;
 
@@ -19,7 +18,6 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
     private AddComentJDialog frameComent;
     private Frame frame;
-    private TextListener tl;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
@@ -169,7 +167,7 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     public void setTrueTest(boolean testT) {
         trueRadioButton.setSelected(testT);
     }
-    
+
     public void setFalseTest(boolean testF) {
         falseRadioButton.setSelected(testF);
     }

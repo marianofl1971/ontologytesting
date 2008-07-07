@@ -49,7 +49,6 @@ public class HelpJDialog extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -73,24 +72,24 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 11));
         jLabel1.setText("ESPECIFICACIÓN SOBRE LOS TESTS");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel3.setText("TEST INSTANCIACIÓN");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel4.setText("TEST RETRIEVAL:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel5.setText("TEST REALIZACIÓN:");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel6.setText("TEST SATISFACTIBILIDAD:");
 
         jLabel8.setText("   Deduce si dados una clase y un individuo, éste pertenece a dicha clase.");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel9.setText("   Ejemplo:");
 
         jLabel10.setText("                  Consulta:    Wife,marry");
@@ -103,7 +102,7 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         jLabel14.setText("   Deduce dada una clase y uno o varios individuos, si éstos forman el conjunto total de individuos que ");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel15.setText("   Ejemplo:");
 
         jLabel16.setText("                  Consulta:    Wife");
@@ -116,11 +115,9 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         jLabel21.setText("el resultado del test será PASSED, en caso contrario será FAILED.");
 
-        jLabel19.setText("   Deduce dada una clase y uno o varios individuos, si éstos forman el conjunto total de individuos que ");
+        jLabel19.setText("   Deduce dado un individuo, cual es la clase más específica a la que pertenece ");
 
-        jLabel22.setText("pertenecen a dicha clase. ");
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel23.setText("   Ejemplo:");
 
         jLabel24.setText("                  Consulta:    Wife");
@@ -129,14 +126,14 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         jLabel26.setText("   Si ejectivamente marry,lee forman el conjunto TOTAL de individuos que pertenecen a la clase Wife,");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel7.setText("TEST CLASIFICACIÓN:");
 
         jLabel28.setText("   Deduce si dado un individuo y un conjunto de clases, el conjunto de clases especificado es el total para ");
 
         jLabel29.setText("ese individuo. Deduce todas las clases a las que pertenece un individuo.");
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel30.setText("   Ejemplo:");
 
         jLabel31.setText("                  Consulta:    marry");
@@ -153,7 +150,7 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         jLabel37.setText("especificada al conjunto de instancias. Deduce si una nueva instancia de clase sería contradictorio con la ");
 
-        jLabel38.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Tahoma", 2, 11));
         jLabel38.setText("   Ejemplo:");
 
         jLabel39.setText("                  Consulta:    ana,Female");
@@ -174,15 +171,6 @@ public class HelpJDialog extends javax.swing.JDialog {
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1247, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGap(750, 750, 750))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
@@ -227,9 +215,6 @@ public class HelpJDialog extends javax.swing.JDialog {
                         .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                         .addGap(750, 750, 750))
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
-                        .addGap(750, 750, 750))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                             .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
@@ -238,15 +223,10 @@ public class HelpJDialog extends javax.swing.JDialog {
                             .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE))
                         .addGap(700, 700, 700))
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
-                        .addContainerGap(735, Short.MAX_VALUE))
+                        .addComponent(jLabel28)
+                        .addContainerGap(752, Short.MAX_VALUE))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
-                        .addGap(700, 700, 700))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                         .addGap(700, 700, 700))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,7 +250,25 @@ public class HelpJDialog extends javax.swing.JDialog {
                         .addGap(700, 700, 700))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(700, 700, 700))))
+                        .addGap(700, 700, 700))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                        .addGap(750, 750, 750))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                        .addGap(750, 750, 750))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                        .addGap(750, 750, 750))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(764, Short.MAX_VALUE))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                        .addGap(700, 700, 700))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                        .addGap(735, 735, 735))))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,20 +310,18 @@ public class HelpJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel35)
-                .addGap(14, 14, 14)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel29)
@@ -390,7 +386,6 @@ public class HelpJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
