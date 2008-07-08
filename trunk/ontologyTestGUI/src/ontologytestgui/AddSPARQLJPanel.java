@@ -7,7 +7,13 @@
 package ontologytestgui;
 
 import java.awt.FlowLayout;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.CollectionTest;
@@ -32,6 +38,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     public static boolean seleccionado;
     public static ScenarioTest scenarioTestQuery;
     private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
+    private JFileChooser filechooser;
+    private XMLDecoder decoder;
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
@@ -99,7 +107,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         testDescTextArea.setRows(5);
         jScrollPane2.setViewportView(testDescTextArea);
 
-        jLabel4.setText("Introduzca el resultado que espera obtener para dicha consulta:");
+        jLabel4.setText("Resultado esperado:");
 
         resultTextArea.setColumns(20);
         resultTextArea.setRows(5);
@@ -120,7 +128,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         instancesPanel.setLayout(instancesPanelLayout);
         instancesPanelLayout.setHorizontalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 523, Short.MAX_VALUE)
+            .add(0, 743, Short.MAX_VALUE)
         );
         instancesPanelLayout.setVerticalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -135,6 +143,15 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 495, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .add(10, 10, 10)
+                        .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(layout.createSequentialGroup()
@@ -146,22 +163,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                         .add(nuevaConsultaButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(añadirConsultaButton))
-                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 503, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 563, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(18, 18, 18)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel4)
-                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 388, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 495, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
-                        .add(10, 10, 10)
-                        .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 303, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jLabel4)))))
                     .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -180,9 +188,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                     .add(jLabel4))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                 .add(6, 6, 6)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -219,7 +225,21 @@ private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
 // TODO add your handling code here:
-    
+    filechooser = new JFileChooser("./");
+    String nameFile="";
+      int option = filechooser.showOpenDialog(frame);
+      if (option == JFileChooser.APPROVE_OPTION) {
+          File selectedFile = filechooser.getSelectedFile();
+          nameFile = selectedFile.getName();
+      }   
+
+    try{
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+        SparqlQueryOntology qo = (SparqlQueryOntology) decoder.readObject();
+        AddSPARQLJPanel.setSPARQLQuery(qo.getQuerySparql());
+        decoder.close();    
+    }catch(FileNotFoundException e){
+    }
 }//GEN-LAST:event_añadirConsultaButtonActionPerformed
 
   private static void createAndShowGUI() {

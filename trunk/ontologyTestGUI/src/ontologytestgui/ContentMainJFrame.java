@@ -161,6 +161,12 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 this.validate();
             }else if(paginas.get(3).equals(1)){
                 sparql = new AddSPARQLJPanel();
+                AddSPARQLJPanel.setSPARQLQuery("" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "SELECT ?subject ?object " +
+                        "FROM <data/family.owl>" +
+                        "WHERE " +
+                        "{?subject rdfs:subClassOf ?object }");
                 contentPanel.remove(mainPanel);
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
@@ -245,6 +251,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         }else if(ContentMainJFrame.getActual()==4){
                 CollectionTest t = MainJPanel.getCollectionTest();
+                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
                 testsExistentes.guardarDatos();
                 contentPanel.remove(sparql);
                 contentPanel.add(label);

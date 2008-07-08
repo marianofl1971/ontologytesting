@@ -495,7 +495,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
       }else{  
           if(this.compararListaClase(clasInst, clasFinal) && 
                   this.compararListaPropiedad(propInst, propFinal)){
-              
                 this.setInstances(clasInst, propInst);
                 this.setVisible(false);
             }else{
@@ -666,8 +665,6 @@ private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyI
     if(AddSPARQLJPanel.isSeleccionado()==false) {     
         GroupTestsJPanel.getScenarioTest().setClassInstances(clasinst);
         GroupTestsJPanel.getScenarioTest().setPropertyInstances(propinst);
-        //MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setClassInstances(clasinst);
-        //MainJPanel.getCollectionTest().getScenariotest().get(this.getIndexVect()).setPropertyInstances(propinst);
     }else{
         AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasinst);
         AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propinst);

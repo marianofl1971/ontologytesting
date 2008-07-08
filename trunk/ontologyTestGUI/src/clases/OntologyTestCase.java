@@ -169,10 +169,11 @@ public class OntologyTestCase implements OntologyTest{
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
-            res = sparqlQuery.split("\n");
+            res = resQueryExpected.split("\n");
             for(int k=0; k<res.length;k++){
                 sparqlExp.add(res[k]);
             }
+            //tests.testSPARQL(sparqlQuery, false, model);
             resSparql = tests.testSPARQL(sparqlQuery, true, model);
             Collections.sort(sparqlExp);
             Collections.sort(resSparql);
@@ -231,10 +232,11 @@ public class OntologyTestCase implements OntologyTest{
 
     public void showResultTests(OntologyTestResult testresult){
         
-        ListIterator liFailures;
+        ListIterator liFailures,liSparql;
         ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
+        ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
         liFailures = failures.listIterator();
-        
+        liSparql = failuresSparql.listIterator();
         if(liFailures.hasNext()){
           System.out.println("De las pruebas introducidas han fallado las siguientes:");
         while(liFailures.hasNext()){
@@ -253,19 +255,26 @@ public class OntologyTestCase implements OntologyTest{
             }else if(otf.getTestName().equals("sparql")){
                 System.out.println("HAN FALLADO DE LAS CONSULTAS SPARQL:");
             }
-            if(!otf.getTestName().equals("sparql")){
                 System.out.println("De la query introducida " +otf.getfQuery());
                 System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
                 System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());
-            }else{
-                System.out.println("De la query introducida " +otf.getfSparqlQuery());
-                System.out.println("Se esperaba obtener : " +otf.getfResultSparqlExpected());
-                System.out.println("Pero se obtuvo: " +otf.getResultSparqlQueryObtenido());      
-            }
         }
         }else{
             System.out.println("No se han producido errores.");
         }
+        
+        if(liSparql.hasNext()){
+          System.out.println("De las pruebas introducidas han fallado las siguientes:");
+        while(liSparql.hasNext()){
+                OntologyTestFailure otf = (OntologyTestFailure) liSparql.next();
+                System.out.println("De la query introducida " +otf.getfSparqlQuery());
+                System.out.println("Se esperaba obtener : " +otf.getfResultSparqlExpected());
+                System.out.println("Pero se obtuvo: " +otf.getResultSparqlQueryObtenido());      
+            }
+        }else{
+            System.out.println("No se han producido errores.");
+        }
+        
     }
         
 }

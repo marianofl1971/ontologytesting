@@ -18,8 +18,8 @@ import java.util.List;
 public class ScenarioTest {
     
     private String testName;
-    private String nombre;
-    private String descripcion;
+    private String nombre="";
+    private String descripcion="";
     private ArrayList<ClassInstances> classInstances = new ArrayList<ClassInstances>();
     private ArrayList<PropertyInstances> propertyInstances = new ArrayList<PropertyInstances>();
     private ArrayList<QueryOntology> queryTest = new ArrayList<QueryOntology>();
@@ -67,8 +67,8 @@ public class ScenarioTest {
         this.queryTest = new ArrayList<QueryOntology>();
         this.testName=null;
         this.sparqlQuerys=new ArrayList<SparqlQueryOntology>();
-        this.nombre=null;
-        this.descripcion=null;
+        this.nombre="";
+        this.descripcion="";
     
     }
 

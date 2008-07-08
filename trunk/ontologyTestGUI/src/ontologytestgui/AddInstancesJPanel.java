@@ -311,12 +311,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
         }
     }else{
-        GroupTestsJPanel.asociarInstancias(jpanel.getSelectedTabed());
-        ScenarioTest scenario = new ScenarioTest();
-        GroupTestsJPanel.setScenarioTest(scenario);
-        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-        scenarioT.add(GroupTestsJPanel.getScenarioTest());
-        MainJPanel.getCollectionTest().setScenariotest(scenarioT);   
+        GroupTestsJPanel.asociarInstancias(jpanel.getSelectedTabed());   
     }
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
