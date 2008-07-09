@@ -16,6 +16,7 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -612,24 +613,46 @@ public void guardarDatos(){
         }
     }else{
         if(!AddSPARQLJPanel.getTestNameTextField().equals("")){
-            ScenarioTest t = AddSPARQLJPanel.getScenarioTestQuery();
-            t.setTestName("sparql");
-            t.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-            t.setNombre(AddSPARQLJPanel.getTestNameTextField());
-            SparqlQueryOntology qo = new SparqlQueryOntology(AddSPARQLJPanel.getSPARQLQuery(),
-                    AddSPARQLJPanel.getResultTextArea());
-            t.getSparqlQuerys().add(qo);  
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
+                int s = scT.size();
+                ScenarioTest t = scT.get(s-1);
+                t.setTestName("sparql");
+                t.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+                t.setNombre(AddSPARQLJPanel.getTestNameTextField());
+                ArrayList<SparqlQueryOntology> listQuerys = AddSPARQLJPanel.getListSparqlQuerys();
+                SparqlQueryOntology qo = new SparqlQueryOntology();
+                qo.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+                qo.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+                listQuerys.add(qo);
+                t.setSparqlQuerys(listQuerys);
+                AddInstancesJPanel.setStateNuevo(false);
+            }else{
+                ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
+                SparqlQueryOntology query = new SparqlQueryOntology();
+                if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+                    query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+                    query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+                    listSparqlQuerys.add(query);
+                    AddSPARQLJPanel.getScenarioTestQuery().setNombre(AddSPARQLJPanel.getTestNameTextField());
+                    AddSPARQLJPanel.getScenarioTestQuery().setTestName("sparql");
+                    AddSPARQLJPanel.getScenarioTestQuery().setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+                    AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);
+            }
+        }
         }
     }
     
     Component comp = null;
-    int val=1;
     int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
             "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
     if (n == JOptionPane.YES_OPTION){
+        /*  JFileChooser fileChooser = new JFileChooser();
+            int seleccion = fileChooser.showSaveDialog(areaTexto);*/
         ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
         try{ 
             for(int i=0;i<scenarioT.size();i++){
+                int val=1;
                 if(AddSPARQLJPanel.isSeleccionado()==false){
                     if(!scenarioT.get(i).getNombre().equals("")){
                         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
@@ -638,11 +661,15 @@ public void guardarDatos(){
                         e.close();
                     }
                 }else{
+                    File dir = new File("./Sparql Tests/"+scenarioT.get(i).getNombre());
+                    dir.mkdir();
                     if(!scenarioT.get(i).getNombre().equals("")){
                         ArrayList<SparqlQueryOntology> sp = scenarioT.get(i).getSparqlQuerys();
                         for(int s=0;s<sp.size();s++){
                             XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                                FileOutputStream(scenarioT.get(i).getNombre().concat("_"+val))));
+                                    FileOutputStream("./Sparql Tests/"
+                                    +scenarioT.get(i).getNombre()+
+                                    "/"+scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
                             val++;
                             e.writeObject(sp.get(s));
                             e.close();

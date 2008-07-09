@@ -48,31 +48,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         seleccionado = aSeleccionado;
     }
     public static boolean seleccionado;
-    
-    /** Creates new form AddInstancesClasPropJDialog */
-    /*public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num,
-            int index) {
-        
-        super(parent, modal);
-        this.setTitle("Asociar Instancias");
-        this.setIndexVect(index);
-        setSeleccionado(true);
-        initComponents();
-        clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
-        propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
-        
-        clasPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        propPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        classScrollPane.setMaximumSize(new Dimension(455,422));
-        clasPanel.setMaximumSize(new Dimension(455,422));
-
-        for (int i = 0; i <= num; i++) {
-            clasPanel.add(new CreateInstancesJPanel());
-            propPanel.add(new CreateInstancesJPanel());
-        } 
-    }*/  
-    
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num) {
         
         super(parent, modal);
@@ -543,7 +519,7 @@ public void crearArchivoDeInstancias(){
             
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(nameInstances)));
+                            FileOutputStream("./Instances/"+nameInstances)));
         e.writeObject(clasInst);
         e.writeObject(propInst);
         e.close();
@@ -556,7 +532,7 @@ public void crearArchivoDeInstancias(String nombreFichero){
         
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(nombreFichero)));
+                            FileOutputStream("./Instances/"+nombreFichero)));
         e.writeObject(clasInst);
         e.writeObject(propInst);
         e.close();

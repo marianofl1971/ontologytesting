@@ -225,12 +225,12 @@ private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
 // TODO add your handling code here:
-    filechooser = new JFileChooser("./");
+    filechooser = new JFileChooser("./Sparql Tests/");
     String nameFile="";
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
-          nameFile = selectedFile.getName();
+          nameFile = selectedFile.getAbsolutePath();
       }   
 
     try{

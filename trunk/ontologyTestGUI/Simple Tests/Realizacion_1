@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="model.ScenarioTest"> 
+  <void property="descripcion"> 
+   <string>Desc reali</string> 
+  </void> 
+  <void property="nombre"> 
+   <string>Realizacion_1</string> 
+  </void> 
+  <void property="queryTest"> 
+   <void method="add"> 
+    <object class="model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>marry</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>Wife</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>lee</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>Male</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+  <void property="testName"> 
+   <string>Realización</string> 
+  </void> 
+ </object> 
+</java> 

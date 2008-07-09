@@ -49,6 +49,14 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     public static void setStateSeeInst(boolean aStateSeeInst) {
         stateSeeInst = aStateSeeInst;
     }
+    private static boolean stateNuevo;
+
+    public static boolean isStateNuevo() {
+        return stateNuevo;
+    }
+    public static void setStateNuevo(boolean aStateNuevo) {
+        stateNuevo = aStateNuevo;
+    }
     public AddInstancesClasPropJDialog addInst;  
     private JFileChooser filechooser;
     private Component frame;
@@ -60,8 +68,6 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private static boolean stateExaminar;
     private static boolean stateSeeInst;
     private XMLDecoder decoder;
-    private AddComentJDialog commentPane;
-    private DescripcionJPanel desc = new DescripcionJPanel();
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -313,6 +319,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     }else{
         GroupTestsJPanel.asociarInstancias(jpanel.getSelectedTabed());   
     }
+    AddInstancesJPanel.setStateNuevo(true);
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed

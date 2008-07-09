@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <object class="model.CollectionTest"> 
+  <void property="namespace"> 
+   <string>http://www.owl-ontologies.com/family.owl#</string> 
+  </void> 
+  <void property="ontology"> 
+   <string>file:C:\Documents and Settings\sara_garcia\Escritorio\Saruskas\PFC\Implementacion\nuevo\ontologyTestGUI\data\family.owl</string> 
+  </void> 
+  <void property="scenariotest"> 
+   <void method="add"> 
+    <object class="model.ScenarioTest"> 
+     <void property="classInstances"> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Wife(sara)</string> 
+        </void> 
+        <void property="comment"> 
+         <string>garcia</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(ana)</string> 
+        </void> 
+        <void property="comment"> 
+         <string>cristina</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(joseluis)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(sarita)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="propertyInstances"> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="comment"> 
+         <string>ramos</string> 
+        </void> 
+        <void property="propertyInstance"> 
+         <string>hasChild(sara,floren)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="queryTest"> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Wife,joseluis</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>true</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Male,ana</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>true</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Wife,ana</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>false</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Wife,sara</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>true</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="testName"> 
+      <string>Instanciación</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.ScenarioTest"> 
+     <void property="classInstances"> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(johon)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(marry)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Wife(lee)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="propertyInstances"> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(lee,tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(marry,john)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="queryTest"> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Male</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>tom,johon</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Male</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>tom</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Wife</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>lee</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>Female</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>johon</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="testName"> 
+      <string>Retrieval</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.ScenarioTest"> 
+     <void property="classInstances"> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(johon)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(marry)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Wife(lee)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="propertyInstances"> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(lee,tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(marry,john)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="queryTest"> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>johon</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Female</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>johon</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Male</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>marry</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Wife</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>marry</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Female</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>lee</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Male</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="testName"> 
+      <string>Realización</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.ScenarioTest"> 
+     <void property="classInstances"> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Wife(sara)</string> 
+        </void> 
+        <void property="comment"> 
+         <string>garcia</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(ana)</string> 
+        </void> 
+        <void property="comment"> 
+         <string>cristina</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(joseluis)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="propertyInstances"> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="comment"> 
+         <string>ramos</string> 
+        </void> 
+        <void property="propertyInstance"> 
+         <string>hasChild(sara,floren)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="queryTest"> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>alberto,Female</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>false</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>johon,Wife</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>true</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>tom,Female</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>true</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="testName"> 
+      <string>Satisfactibilidad</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.ScenarioTest"> 
+     <void property="classInstances"> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(johon)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Male(tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Female(marry)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.ClassInstances"> 
+        <void property="classInstance"> 
+         <string>Wife(lee)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="propertyInstances"> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(lee,tom)</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.PropertyInstances"> 
+        <void property="propertyInstance"> 
+         <string>hasChild(marry,john)</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="queryTest"> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>johon</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Male,Wife</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>marry</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Wife,Female</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>lee</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Male,Female</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>lee</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Male</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="model.QueryOntology"> 
+        <void property="comment"> 
+         <string></string> 
+        </void> 
+        <void property="query"> 
+         <string>sara</string> 
+        </void> 
+        <void property="resultexpected"> 
+         <string>Wife</string> 
+        </void> 
+       </object> 
+      </void> 
+     </void> 
+     <void property="testName"> 
+      <string>Clasificación</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+ </object> 
+</java> 
