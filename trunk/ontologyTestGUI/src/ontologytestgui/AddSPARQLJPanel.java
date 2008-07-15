@@ -96,7 +96,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         resultTextArea = new javax.swing.JTextArea();
-        añadirConsultaButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sparqlTextArea = new javax.swing.JTextArea();
         instancesPanel = new javax.swing.JPanel();
@@ -132,13 +131,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         resultTextArea.setColumns(20);
         resultTextArea.setRows(5);
         jScrollPane3.setViewportView(resultTextArea);
-
-        añadirConsultaButton.setText("Añadir existente");
-        añadirConsultaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                añadirConsultaButtonActionPerformed(evt);
-            }
-        });
 
         sparqlTextArea.setColumns(20);
         sparqlTextArea.setRows(5);
@@ -189,18 +181,16 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 279, Short.MAX_VALUE)
                                         .add(antQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(nuevaConsultaButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(añadirConsultaButton))
+                                        .add(nuevaConsultaButton))
                                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 563, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(18, 18, 18)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -231,7 +221,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(6, 6, 6)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(limpiarButton)
-                    .add(añadirConsultaButton)
                     .add(nuevaConsultaButton)
                     .add(sigQueryButton)
                     .add(antQueryButton))
@@ -269,25 +258,6 @@ private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     AddSPARQLJPanel.setSPARQLQuery("");
     AddSPARQLJPanel.setResultTextArea("");
 }//GEN-LAST:event_limpiarButtonActionPerformed
-
-private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
-// TODO add your handling code here:
-    filechooser = new JFileChooser("./Sparql Tests/");
-    String nameFile="";
-      int option = filechooser.showOpenDialog(frame);
-      if (option == JFileChooser.APPROVE_OPTION) {
-          File selectedFile = filechooser.getSelectedFile();
-          nameFile = selectedFile.getAbsolutePath();
-      }   
-
-    try{
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-        SparqlQueryOntology qo = (SparqlQueryOntology) decoder.readObject();
-        AddSPARQLJPanel.setSPARQLQuery(qo.getQuerySparql());
-        decoder.close();    
-    }catch(FileNotFoundException e){
-    }
-}//GEN-LAST:event_añadirConsultaButtonActionPerformed
 
 private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antQueryButtonActionPerformed
 // TODO add your handling code here:
@@ -358,7 +328,6 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton antQueryButton;
-    private javax.swing.JButton añadirConsultaButton;
     private javax.swing.JPanel instancesPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -34,18 +34,16 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" pref="251" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel2" alignment="0" pref="313" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" alignment="0" pref="563" max="32767" attributes="1"/>
                                   <Group type="102" alignment="0" attributes="1">
                                       <Component id="limpiarButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace pref="279" max="32767" attributes="0"/>
                                       <Component id="antQueryButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="sigQueryButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="nuevaConsultaButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="añadirConsultaButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="563" max="-2" attributes="0"/>
                               </Group>
@@ -87,7 +85,6 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="añadirConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="sigQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="antQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -168,14 +165,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="a&#xf1;adirConsultaButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="A&#xf1;adir existente"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="a&#xf1;adirConsultaButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>

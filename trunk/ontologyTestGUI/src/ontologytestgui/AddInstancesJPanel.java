@@ -354,6 +354,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
+    if(AddSPARQLJPanel.isSeleccionado()==false){
     filechooser = new JFileChooser("./");
     setStateAbrirTest(true);
     
@@ -461,6 +462,9 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         }  
     decoder.close();    
     }catch(FileNotFoundException e){
+    }
+    }else{
+        System.out.println("No implementado todavía");
     }
 }//GEN-LAST:event_addTestExistButtonActionPerformed
 
