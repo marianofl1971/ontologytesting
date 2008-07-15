@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.CollectionTest;
 import model.ScenarioTest;
 import model.SparqlQueryOntology;
 
@@ -38,12 +37,32 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     public static boolean seleccionado;
     public static ScenarioTest scenarioTestQuery;
     private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
+    public static int getContadorAnt() {
+        return contadorAnt;
+    }
+    public static void setContadorAnt(int aContadorAnt) {
+        contadorAnt = aContadorAnt;
+    }
+    public static int getContadorSig() {
+        return contadorSig;
+    }
+    public static void setContadorSig(int aContadorSig) {
+        contadorSig = aContadorSig;
+    }
+    public static void setAntQueryButton(boolean state) {
+        antQueryButton.setEnabled(state);
+    }
     private JFileChooser filechooser;
     private XMLDecoder decoder;
+    private static int contadorAnt = -1;
+    private static int contadorSig = 1;
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
+        
+        antQueryButton.setEnabled(false);
+        sigQueryButton.setEnabled(false);
         listSparqlQuerys = new ArrayList<SparqlQueryOntology>();
         scenarioTestQuery = new ScenarioTest();
         ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
@@ -54,8 +73,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         instancesPanel.add(new AddInstancesJPanel());
         setSeleccionado(true);
         GroupTestsJPanel.setState(false);
-        GroupTestsJPanel.setNewState(false);
- 
+        GroupTestsJPanel.setNewState(false); 
     }
 
     /** This method is called from within the constructor to
@@ -82,6 +100,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         sparqlTextArea = new javax.swing.JTextArea();
         instancesPanel = new javax.swing.JPanel();
+        sigQueryButton = new javax.swing.JButton();
+        antQueryButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -135,6 +155,20 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             .add(0, 153, Short.MAX_VALUE)
         );
 
+        sigQueryButton.setText(">>");
+        sigQueryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sigQueryButtonActionPerformed(evt);
+            }
+        });
+
+        antQueryButton.setText("<<");
+        antQueryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                antQueryButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,6 +194,10 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(antQueryButton)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(sigQueryButton)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(nuevaConsultaButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(añadirConsultaButton))
@@ -194,7 +232,9 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(limpiarButton)
                     .add(añadirConsultaButton)
-                    .add(nuevaConsultaButton))
+                    .add(nuevaConsultaButton)
+                    .add(sigQueryButton)
+                    .add(antQueryButton))
                 .add(8, 8, 8)
                 .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -214,13 +254,20 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
     }
+    int contadorQ = AddSPARQLJPanel.getContadorAnt();
+    int contadorS = AddSPARQLJPanel.getContadorSig();
+    int cont = contadorQ+1;
+    int contS = contadorS+1;
+    antQueryButton.setEnabled(true);
+    sigQueryButton.setEnabled(false);
+    setContadorAnt(cont);
+    setContadorSig(contS);
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
 private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
 // TODO add your handling code here:
     AddSPARQLJPanel.setSPARQLQuery("");
     AddSPARQLJPanel.setResultTextArea("");
-    CollectionTest t = MainJPanel.getCollectionTest();
 }//GEN-LAST:event_limpiarButtonActionPerformed
 
 private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_añadirConsultaButtonActionPerformed
@@ -241,6 +288,50 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     }catch(FileNotFoundException e){
     }
 }//GEN-LAST:event_añadirConsultaButtonActionPerformed
+
+private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antQueryButtonActionPerformed
+// TODO add your handling code here:
+    
+    SparqlQueryOntology sparql;
+    
+    sparql = getListSparqlQuerys().get(AddSPARQLJPanel.getContadorAnt());
+    AddSPARQLJPanel.setSPARQLQuery(sparql.getQuerySparql());
+    AddSPARQLJPanel.setResultTextArea(sparql.getResultexpected());  
+    int cont = AddSPARQLJPanel.getContadorAnt();
+    int c = cont-1;
+    if(c == -1){
+        antQueryButton.setEnabled(false);
+        AddSPARQLJPanel.setContadorSig(1);
+        AddSPARQLJPanel.setContadorAnt(c);
+        sigQueryButton.setEnabled(true);
+    }else{
+        AddSPARQLJPanel.setContadorAnt(c);
+        AddSPARQLJPanel.setContadorSig(c+2);
+        sigQueryButton.setEnabled(true);
+    }
+}//GEN-LAST:event_antQueryButtonActionPerformed
+
+private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigQueryButtonActionPerformed
+// TODO add your handling code here:
+    int cont;
+    cont = AddSPARQLJPanel.getContadorSig();
+
+    int size = getListSparqlQuerys().size();
+    if(size <= cont){
+        AddSPARQLJPanel.setSPARQLQuery("");
+        AddSPARQLJPanel.setResultTextArea("");
+        sigQueryButton.setEnabled(false);
+        AddSPARQLJPanel.setContadorAnt(cont-1);
+    }else{
+        SparqlQueryOntology sparql = getListSparqlQuerys().get(cont);
+        AddSPARQLJPanel.setSPARQLQuery(sparql.getQuerySparql());
+        AddSPARQLJPanel.setResultTextArea(sparql.getResultexpected());  
+        int var = AddSPARQLJPanel.getContadorSig()+1;
+        AddSPARQLJPanel.setContadorSig(var);
+        AddSPARQLJPanel.setContadorAnt(var-2);
+    }
+        antQueryButton.setEnabled(true);
+}//GEN-LAST:event_sigQueryButtonActionPerformed
 
   private static void createAndShowGUI() {
         //JFrame.setDefaultLookAndFeelDecorated(true);
@@ -266,6 +357,7 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JButton antQueryButton;
     private javax.swing.JButton añadirConsultaButton;
     private javax.swing.JPanel instancesPanel;
     private javax.swing.JLabel jLabel1;
@@ -278,6 +370,7 @@ private void añadirConsultaButtonActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JButton limpiarButton;
     private javax.swing.JButton nuevaConsultaButton;
     private static javax.swing.JTextArea resultTextArea;
+    private javax.swing.JButton sigQueryButton;
     private static javax.swing.JTextArea sparqlTextArea;
     private static javax.swing.JTextArea testDescTextArea;
     private static javax.swing.JTextField testNameTextField;

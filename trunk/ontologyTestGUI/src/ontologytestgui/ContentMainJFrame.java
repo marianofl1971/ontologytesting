@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import model.CollectionTest;
+import model.ClassInstances;
+import model.PropertyInstances;
 
 /**
  *
@@ -32,11 +33,24 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     public static void setActual(int aActual) {
         actual = aActual;
     }
+    public static ArrayList<ArrayList<ClassInstances>> getConjuntoClassInstances() {
+        return conjuntoClassInstances;
+    }
+    public static void setConjuntoClassInstances(ArrayList<ClassInstances> aConjuntoClassInstances, int pos) {
+        conjuntoClassInstances.add(pos, aConjuntoClassInstances);
+    }
+    public static ArrayList<ArrayList<PropertyInstances>> getConjuntoPropInstances() {
+        return conjuntoPropInstances;
+    }
+    public static void setConjuntoPropInstances(ArrayList<PropertyInstances> aConjuntoPropInstances, int pos) {
+        conjuntoPropInstances.add(pos,aConjuntoPropInstances);
+    }
+    private static ArrayList conjuntoClassInstances = new ArrayList<ClassInstances>();
+    private static ArrayList conjuntoPropInstances = new ArrayList<PropertyInstances>();
     private MainJPanel mainPanel = new MainJPanel();
     private GroupTestsJPanel groupTests;
-    private GroupTestsJPanel testsExistentes;
     private JFrame frame;
-    private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8);
+    private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8,0);
     private AddSPARQLJPanel sparql;
     private JLabel label = new JLabel("RESULTADO DE SUS PRUEBAS");
     private static ArrayList paginas = new ArrayList();
@@ -45,9 +59,13 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     /** Creates new form ContentMainJFrame */
     public ContentMainJFrame() {
         initComponents();
+        for (int i = 0; i <= 4; i++) {
+            conjuntoClassInstances.add(new ArrayList<ClassInstances>());
+            conjuntoPropInstances.add(new ArrayList<PropertyInstances>());
+        }
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
-        this.setSize(new Dimension(950,700));
+        this.setSize(new Dimension(980,700));
         contentPanel.add(mainPanel);
     }
 
@@ -146,20 +164,12 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(1);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
-                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
                 contentPanel.remove(mainPanel);
-                contentPanel.add(testsExistentes);
-                AddSPARQLJPanel.setSeleccionado(false);
+                contentPanel.add(addInstances.getContentPanel());
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(2).equals(1)){
-                contentPanel.remove(mainPanel);
-                contentPanel.add(addInstances.getContentPanel());
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(3);
-                this.validate();
-            }else if(paginas.get(3).equals(1)){
                 sparql = new AddSPARQLJPanel();
                 AddSPARQLJPanel.setSPARQLQuery("" +
                         "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
@@ -171,7 +181,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(4);
+                ContentMainJFrame.setActual(3);
                 this.validate();
             }else{
                 JOptionPane.showMessageDialog(frame,"Debe seleccionar alguna " +
@@ -181,83 +191,60 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }else{
         if(ContentMainJFrame.getActual()==1){
             if(paginas.get(1).equals(1)){
-                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
                 contentPanel.remove(groupTests);
-                contentPanel.add(testsExistentes);
-                AddSPARQLJPanel.setSeleccionado(false);
+                contentPanel.add(addInstances.getContentPanel());
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(2).equals(1)){
-                contentPanel.remove(groupTests);
-                contentPanel.add(addInstances.getContentPanel());
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(3);
-                this.validate();
-            }else if(paginas.get(3).equals(1)){
                 sparql = new AddSPARQLJPanel();
+                AddSPARQLJPanel.setSPARQLQuery("" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "SELECT ?subject ?object " +
+                        "FROM <data/family.owl>" +
+                        "WHERE " +
+                        "{?subject rdfs:subClassOf ?object }");
                 contentPanel.remove(groupTests);
                 contentPanel.add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(4);
+                ContentMainJFrame.setActual(3);
                 this.validate();
             }else{
+                groupTests = new GroupTestsJPanel(8);
                 contentPanel.remove(groupTests);
                 contentPanel.add(label);
                 groupTests.guardarDatos();
                 anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(5);
+                ContentMainJFrame.setActual(4);
                 this.validate();
             }
         }else if(ContentMainJFrame.getActual()==2){     
             if(paginas.get(2).equals(1)){
-                contentPanel.remove(testsExistentes);
-                contentPanel.add(addInstances.getContentPanel());
+                sparql = new AddSPARQLJPanel();
+                AddSPARQLJPanel.setSPARQLQuery("" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "SELECT ?subject ?object " +
+                        "FROM <data/family.owl>" +
+                        "WHERE " +
+                        "{?subject rdfs:subClassOf ?object }");
+                contentPanel.remove(addInstances.getContentPanel());
+                contentPanel.add(sparql);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(3);
                 this.validate();
-            }else if(paginas.get(3).equals(1)){
-                sparql = new AddSPARQLJPanel();
-                contentPanel.remove(testsExistentes);
-                contentPanel.add(sparql);
-                AddSPARQLJPanel.setSeleccionado(true);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(4);
-                this.validate();
             }else{
-                testsExistentes.guardarDatos();
-                if(GroupTestsJPanel.isDatosGuardados()==true){
-                    System.out.println("ok");
-                }else{
-                    System.out.println("fail");
-                }
             }
         }else if(ContentMainJFrame.getActual()==3){
-            if(paginas.get(3).equals(1)){
-                sparql = new AddSPARQLJPanel();
-                contentPanel.remove(addInstances.getContentPanel());
-                contentPanel.add(sparql);
+                groupTests = new GroupTestsJPanel(8);
+                groupTests.guardarDatos();
+                contentPanel.remove(sparql);
+                contentPanel.add(label);
                 AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
                 this.validate();
-            }else{
-                contentPanel.remove(addInstances.getContentPanel());
-                contentPanel.add(label);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(5);
-                this.validate();
-            }
         }else if(ContentMainJFrame.getActual()==4){
-                CollectionTest t = MainJPanel.getCollectionTest();
-                testsExistentes = new GroupTestsJPanel(MainJPanel.getPath());
-                testsExistentes.guardarDatos();
-                contentPanel.remove(sparql);
-                contentPanel.add(label);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(5);
-                this.validate();
         }
     }
 }//GEN-LAST:event_siguienteButtonActionPerformed
@@ -269,20 +256,15 @@ public void completarArrayOrden(){
     }else{
         paginas.add(0, 0);
     }
-    if(MainJPanel.getExistsTestsState()==true){
+    if(MainJPanel.getNewInstancesState()==true){
         paginas.add(1, 1);
     }else{
         paginas.add(1, 0);
     }
-    if(MainJPanel.getNewInstancesState()==true){
+    if(MainJPanel.getSparqlState()==true){
         paginas.add(2, 1);
     }else{
         paginas.add(2, 0);
-    }
-    if(MainJPanel.getSparqlState()==true){
-        paginas.add(3, 1);
-    }else{
-        paginas.add(3, 0);
     }
 }
 
@@ -300,14 +282,14 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 this.validate();
         }else if(ContentMainJFrame.getActual()==2){            
             if(paginas.get(0).equals(1)){
-                contentPanel.remove(testsExistentes);
+                contentPanel.remove(addInstances.getContentPanel());
                 contentPanel.add(groupTests);
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);
                 this.validate();
-            }else {
-                contentPanel.remove(testsExistentes);
+            }else{
+                contentPanel.remove(addInstances.getContentPanel());
                 contentPanel.add(mainPanel);
                 anteriorButton.setEnabled(false);
                 ContentMainJFrame.setActual(0);
@@ -315,21 +297,21 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
         }else if(ContentMainJFrame.getActual()==3){
             if(paginas.get(1).equals(1)){
-                contentPanel.remove(addInstances.getContentPanel());
-                contentPanel.add(testsExistentes);
+                contentPanel.remove(sparql);
+                contentPanel.add(addInstances.getContentPanel());
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(0).equals(1)){
-                contentPanel.remove(addInstances.getContentPanel());
+                contentPanel.remove(sparql);
                 contentPanel.add(groupTests);
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);
                 this.validate();
             }else{
-                contentPanel.remove(testsExistentes);
+                contentPanel.remove(sparql);
                 contentPanel.add(mainPanel);
                 anteriorButton.setEnabled(false);
                 ContentMainJFrame.setActual(0);
@@ -337,56 +319,21 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
         }else if(ContentMainJFrame.getActual()==4){
             if(paginas.get(2).equals(1)){
-                contentPanel.remove(sparql);
-                contentPanel.add(addInstances.getContentPanel());
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(3);
-                this.validate();
-            }else if(paginas.get(1).equals(1)){
-                contentPanel.remove(sparql);
-                contentPanel.add(testsExistentes);
-                AddSPARQLJPanel.setSeleccionado(false);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(2);
-                this.validate();
-            }else if(paginas.get(0).equals(1)){
-                contentPanel.remove(sparql);
-                contentPanel.add(groupTests);
-                AddSPARQLJPanel.setSeleccionado(false);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(1);
-                this.validate();
-            }else{
-                contentPanel.remove(sparql);
-                contentPanel.add(mainPanel);
-                anteriorButton.setEnabled(false);
-                ContentMainJFrame.setActual(0);
-                this.validate();
-            }
-        }else if(ContentMainJFrame.getActual()==5){
-            if(paginas.get(3).equals(1)){
                 contentPanel.remove(label);
                 contentPanel.add(sparql);
-                AddSPARQLJPanel.setSeleccionado(true);
-                anteriorButton.setEnabled(true);
-                ContentMainJFrame.setActual(4);
-                this.validate();
-            }else if(paginas.get(2).equals(1)){
-                contentPanel.remove(label);
-                contentPanel.add(addInstances.getContentPanel());
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
                 contentPanel.remove(label);
-                contentPanel.add(testsExistentes);
+                contentPanel.add(addInstances.getContentPanel());
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(0).equals(1)){
                 contentPanel.remove(label);
-                groupTests = new GroupTestsJPanel(8);
+                contentPanel.add(groupTests);
                 AddSPARQLJPanel.setSeleccionado(false);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(1);

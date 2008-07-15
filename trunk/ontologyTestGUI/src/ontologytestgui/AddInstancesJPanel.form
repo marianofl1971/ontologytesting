@@ -24,28 +24,31 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2" alignment="0" min="-2" pref="229" max="-2" attributes="0"/>
-                          <Component id="asociarButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="364" max="32767" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="229" max="-2" attributes="0"/>
+                      <EmptySpace pref="507" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" pref="254" max="32767" attributes="1"/>
+                      <Component id="jLabel1" pref="397" max="32767" attributes="1"/>
                       <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="seeAsociadasButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
                               <Component id="addTestExistButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="SaveAndNewButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="seeTestButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="examinarButton" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="asociarButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -65,8 +68,9 @@
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="seeAsociadasButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="addTestExistButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="seeTestButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SaveAndNewButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addTestExistButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -122,6 +126,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTestExistButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="seeTestButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Test"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seeTestButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

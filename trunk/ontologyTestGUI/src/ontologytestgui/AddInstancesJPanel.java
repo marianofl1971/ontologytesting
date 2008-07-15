@@ -57,6 +57,21 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     public static void setStateNuevo(boolean aStateNuevo) {
         stateNuevo = aStateNuevo;
     }
+    private static String[] ficheros;
+    private static String pathFichero;
+    public static String[] getFicheros() {
+        return ficheros;
+    }
+    public static void setFicheros(String[] aFicheros) {
+        ficheros = aFicheros;
+    }
+    public static String getPathFichero() {
+        return pathFichero;
+    }
+    public static void setPathFichero(String aPathFichero) {
+        pathFichero = aPathFichero;
+    }
+    private static boolean stateAbrirTest;
     public AddInstancesClasPropJDialog addInst;  
     private JFileChooser filechooser;
     private Component frame;
@@ -68,6 +83,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private static boolean stateExaminar;
     private static boolean stateSeeInst;
     private XMLDecoder decoder;
+    private String nameFile="";
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -95,6 +111,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
         seeAsociadasButton = new javax.swing.JButton();
         SaveAndNewButton = new javax.swing.JButton();
         addTestExistButton = new javax.swing.JButton();
+        seeTestButton = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione las instancias que desea asociar:");
 
@@ -135,6 +152,13 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        seeTestButton.setText("Ver Test");
+        seeTestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeTestButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,22 +167,25 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(asociarButton))
-                        .addContainerGap(364, Short.MAX_VALUE))
+                        .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(507, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                         .add(339, 339, 339))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(seeAsociadasButton)
-                                .add(152, 152, 152)
+                                .add(228, 228, 228)
                                 .add(addTestExistButton)
-                                .add(6, 6, 6)
-                                .add(SaveAndNewButton))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(SaveAndNewButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(seeTestButton))
                             .add(examinarButton))
+                        .addContainerGap())
+                    .add(layout.createSequentialGroup()
+                        .add(asociarButton)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -175,8 +202,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(5, 5, 5)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(seeAsociadasButton)
-                    .add(addTestExistButton)
-                    .add(SaveAndNewButton))
+                    .add(seeTestButton)
+                    .add(SaveAndNewButton)
+                    .add(addTestExistButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -190,22 +218,20 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    AddInstancesJPanel.setStateExaminar(false);
    AddInstancesJPanel.setStateSeeInst(false);
    int var=0;
-   ArrayList<ScenarioTest> scenarioTest = MainJPanel.getCollectionTest().getScenariotest();
-   if(AddSPARQLJPanel.isSeleccionado()==false) {     
-        ScenarioTest sT = GroupTestsJPanel.getScenarioTest();
+   if(AddSPARQLJPanel.isSeleccionado()==false) {
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-        clasInst = sT.getClassInstances();
-        propInst = sT.getPropertyInstances();
+        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
             var=1;
-        }
+        } 
         if(var==0){
-            addInst = new AddInstancesClasPropJDialog(parent,true,7);
+            addInst = new AddInstancesClasPropJDialog(parent,true,8,0);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(parent,true,7,scenarioTest);
+            addInst = new AddInstancesClasPropJDialog(parent,true,8,1);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -219,11 +245,11 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             var=1;
         }
         if(var==0){
-            addInst = new AddInstancesClasPropJDialog(parent,true,7);
+            addInst = new AddInstancesClasPropJDialog(parent,true,8,0);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(parent,true,7,sT);
+            addInst = new AddInstancesClasPropJDialog(parent,true,8,sT);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -242,7 +268,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         int option = filechooser.showOpenDialog(frame);
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
-            String nameFile = selectedFile.getName();
+            nameFile = selectedFile.getPath();
             addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
@@ -256,31 +282,32 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    ScenarioTest scenarioTest;
-    
-    if(AddSPARQLJPanel.isSeleccionado()==false){
-        scenarioTest = GroupTestsJPanel.getScenarioTest();
-    }else{
-        scenarioTest = AddSPARQLJPanel.getScenarioTestQuery();
-    }
-      
+    ScenarioTest scenarioTest = new ScenarioTest();
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-    clasInst = scenarioTest.getClassInstances();
-    propInst = scenarioTest.getPropertyInstances();
+    
+    if(AddSPARQLJPanel.isSeleccionado()==true){
+        scenarioTest = AddSPARQLJPanel.getScenarioTestQuery();
+        clasInst = scenarioTest.getClassInstances();
+        propInst = scenarioTest.getPropertyInstances();
+    }else{
+        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());    
+    }
+      
     if(!clasInst.isEmpty() || !propInst.isEmpty()){
         var=1;
     }
     
     if(var==0){
-        addInst = new AddInstancesClasPropJDialog(parent,true,7);
+        addInst = new AddInstancesClasPropJDialog(parent,true,8,0);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }else{
         AddInstancesJPanel.setStateAsociar(false);
         AddInstancesJPanel.setStateSeeInst(true);
         AddInstancesJPanel.setStateExaminar(false);
-        addInst = new AddInstancesClasPropJDialog(parent,true,7,scenarioTest);
+        addInst = new AddInstancesClasPropJDialog(parent,true,8,1);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }
@@ -316,8 +343,11 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
         }
+        AddSPARQLJPanel.setContadorAnt(-1);
+        AddSPARQLJPanel.setContadorSig(1);
+        AddSPARQLJPanel.setAntQueryButton(false);
     }else{
-        GroupTestsJPanel.asociarInstancias(jpanel.getSelectedTabed());   
+        GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());   
     }
     AddInstancesJPanel.setStateNuevo(true);
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
@@ -325,11 +355,12 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
     filechooser = new JFileChooser("./");
-    String nameFile="";
+    setStateAbrirTest(true);
+    
       int option = filechooser.showOpenDialog(frame);
       if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
-          nameFile = selectedFile.getName();
+          nameFile = selectedFile.getPath();
       }   
 
     DescripcionJPanel descPanel = null;
@@ -350,8 +381,15 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String descrip = s.getDescripcion();  
         String tab = s.getTestName();
         ArrayList<QueryOntology> qO = s.getQueryTest(); 
-        ListIterator qi;
+        ArrayList<ClassInstances> clasI = s.getClassInstances();
+        ArrayList<PropertyInstances> propI = s.getPropertyInstances();
+        ListIterator qi,ci,pi;
         qi = qO.listIterator();
+        ci =  clasI.listIterator();
+        pi = propI.listIterator();
+        int ind = GroupTestsJPanel.getSelectedTabed();
+        ContentMainJFrame.getConjuntoClassInstances().set(ind, clasI);
+        ContentMainJFrame.getConjuntoPropInstances().set(ind, propI);
         while(qi.hasNext()){   
             QueryOntology cI = (QueryOntology) qi.next();
             if(tab.equals("Instanciación")){
@@ -420,13 +458,19 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 test1.setQueryResult(cI.getResultexpected());
                 cont++;
             }
-        }   
-    //MainJPanel.getCollectionTest().getScenariotest().add(s);
+        }  
     decoder.close();    
     }catch(FileNotFoundException e){
     }
-
 }//GEN-LAST:event_addTestExistButtonActionPerformed
+
+private void seeTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeTestButtonActionPerformed
+// TODO add your handling code here:
+    AbrirTestsJDialog testDialog = new AbrirTestsJDialog(parent,true);
+    testDialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    testDialog.setVisible(true);
+
+}//GEN-LAST:event_seeTestButtonActionPerformed
 
 public void setSelectedTabbed(int index){
     this.index = index;
@@ -448,6 +492,15 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton seeAsociadasButton;
+    private javax.swing.JButton seeTestButton;
     // End of variables declaration//GEN-END:variables
+
+    public static boolean isStateAbrirTest() {
+        return stateAbrirTest;
+    }
+
+    public static void setStateAbrirTest(boolean astateAbrirTest) {
+        stateAbrirTest = astateAbrirTest;
+    }
 
 }

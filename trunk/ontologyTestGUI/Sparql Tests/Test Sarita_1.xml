@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="model.ScenarioTest"> 
+  <void property="descripcion"> 
+   <string>Probando otra vez</string> 
+  </void> 
+  <void property="nombre"> 
+   <string>Test Sarita</string> 
+  </void> 
+  <void property="sparqlQuerys"> 
+   <void method="add"> 
+    <object class="model.SparqlQueryOntology"> 
+     <void property="querySparql"> 
+      <string>PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+SELECT ?subject ?object 
+FROM &lt;data/family.owl&gt;
+WHERE {?subject rdfs:subClassOf ?object }</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>Person</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.SparqlQueryOntology"> 
+     <void property="querySparql"> 
+      <string>PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+SELECT ?subject ?object 
+FROM &lt;data/family.owl&gt;
+WHERE {?subject rdfs:subClassOf ?object }</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>Person
+Sara</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="model.SparqlQueryOntology"> 
+     <void property="querySparql"> 
+      <string>PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+SELECT ?subject ?object 
+FROM &lt;data/family.owl&gt;
+WHERE {?subject rdfs:subClassOf ?object }</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>Wife
+Female
+Male
+Person</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+  <void property="testName"> 
+   <string>sparql</string> 
+  </void> 
+ </object> 
+</java> 

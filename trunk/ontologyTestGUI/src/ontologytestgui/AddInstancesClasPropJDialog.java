@@ -49,7 +49,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }
     public static boolean seleccionado;
 
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num) {
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var) {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
@@ -63,11 +63,61 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
         classScrollPane.setMaximumSize(new Dimension(455,422));
         clasPanel.setMaximumSize(new Dimension(455,422));*/
-
-        for (int i = 0; i <= num; i++) {
-            clasPanel.add(new CreateInstancesJPanel());
-            propPanel.add(new CreateInstancesJPanel());
+        
+        if(var==0){
+            for (int i = 0; i <= num; i++) {
+                clasPanel.add(new CreateInstancesJPanel());
+                propPanel.add(new CreateInstancesJPanel());
         } 
+        }else if(var==1){
+            clasFinal = new ArrayList<ClassInstances>();
+            propFinal = new ArrayList<PropertyInstances>();
+            int contI=0,contP=0;
+
+            ListIterator ci,pi;
+            if(AddSPARQLJPanel.isSeleccionado()==false){
+                clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+            }else{
+                clasInst = AddSPARQLJPanel.getScenarioTestQuery().getClassInstances();
+            }
+            ci = clasInst.listIterator();
+            while(ci.hasNext()){ 
+                ClassInstances cI = (ClassInstances) ci.next();
+                CreateInstancesJPanel instClas = new CreateInstancesJPanel();
+                instClas.setInstance(cI.getClassInstance());
+                commentPane = instClas.getComment();
+                commentPane.setComent(cI.getComment());
+                instClas.setComment(commentPane);
+                clasPanel.add(instClas);
+                clasFinal.add(cI);
+                contI++;
+            }
+  
+            if(AddSPARQLJPanel.isSeleccionado()==false){
+                propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
+            }else{
+                propInst = AddSPARQLJPanel.getScenarioTestQuery().getPropertyInstances();
+            }
+            pi = propInst.listIterator();
+            while(pi.hasNext()){
+                PropertyInstances pI = (PropertyInstances) pi.next();
+                CreateInstancesJPanel instProp = new CreateInstancesJPanel();
+                instProp.setInstance(pI.getPropertyInstance());
+                commentPane = instProp.getComment();
+                commentPane.setComent(pI.getComment());
+                instProp.setComment(commentPane);
+                propPanel.add(instProp);
+                propFinal.add(pI);
+                contP++;
+            }
+            
+            for (int j = 0; j <= (num-contI); j++) {
+                clasPanel.add(new CreateInstancesJPanel());
+            }
+            for (int k = 0; k <= (num-contP); k++) {
+                propPanel.add(new CreateInstancesJPanel());
+            }
+        }
     }
     
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num,
@@ -82,8 +132,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
-
-        setNombreFichero(MainJPanel.getPath());
 
         ListIterator ci,pi;
         ScenarioTest sT = scenarioT.get(this.indexVect);
@@ -136,8 +184,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
 
-        setNombreFichero(MainJPanel.getPath());
-
         ListIterator ci,pi;
         clasInst = sT.getClassInstances();
         ci = clasInst.listIterator();
@@ -185,12 +231,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         int contP=0,contC=0;
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
+        ArrayList<ClassInstances> al;
+        ArrayList<PropertyInstances> la;
+        ListIterator li,il;
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));   
         try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(textName)));
-            ArrayList<ClassInstances> al = (ArrayList<ClassInstances>) decoder.readObject();
-            ListIterator li;
+            al = (ArrayList<ClassInstances>) decoder.readObject();      
             li = al.listIterator();
             while(li.hasNext()){   
                 ClassInstances cI = (ClassInstances) li.next();
@@ -203,8 +251,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 clasPanel.add(instClas);
                 clasFinal.add(cI);
             }
-            ArrayList<PropertyInstances> la = (ArrayList<PropertyInstances>) decoder.readObject();
-            ListIterator il;
+            la = (ArrayList<PropertyInstances>) decoder.readObject();
             il = la.listIterator();
             while(il.hasNext()){   
                 PropertyInstances pI = (PropertyInstances) il.next();
@@ -362,8 +409,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                         .addComponent(classScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(propScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(contentPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(263, 263, 263))
+                            .addComponent(propScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -450,11 +499,12 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             aux=1;
         }
     }
+    
     if(aux==1){
         JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
                 "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
-        if((AddInstancesJPanel.isStateAsociar()==true && MainJPanel.getExistsTestsState()==false)
+        if((AddInstancesJPanel.isStateAsociar()==true)
                 || (AddInstancesJPanel.isStateAsociar()==true && AddSPARQLJPanel.isSeleccionado()==true)){
             Component comp = null;
             int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar este conjunto de" +
@@ -480,15 +530,9 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                 if (n == JOptionPane.YES_OPTION) {
-                    if(MainJPanel.getExistsTestsState()==false){
                         this.setInstances(clasInst, propInst);
                         crearArchivoDeInstancias(getNombreFichero());
                         this.setVisible(false);
-                    }else { 
-                        this.setInstances(clasInst, propInst);
-                        crearArchivoDeTests(getNombreFichero());
-                        this.setVisible(false);            
-                    }
                 }else if (n == JOptionPane.NO_OPTION) {
                      crearArchivoDeInstancias(); 
                      this.setInstances(clasInst, propInst);
@@ -639,8 +683,9 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {
     if(AddSPARQLJPanel.isSeleccionado()==false) {     
-        GroupTestsJPanel.getScenarioTest().setClassInstances(clasinst);
-        GroupTestsJPanel.getScenarioTest().setPropertyInstances(propinst);
+        int tab = GroupTestsJPanel.getSelectedTabed();
+        ContentMainJFrame.getConjuntoClassInstances().set(tab, clasinst);
+        ContentMainJFrame.getConjuntoPropInstances().set(tab, propinst);
     }else{
         AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasinst);
         AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propinst);

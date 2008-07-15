@@ -39,6 +39,10 @@
                                   <Group type="102" alignment="0" attributes="1">
                                       <Component id="limpiarButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="antQueryButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="sigQueryButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="nuevaConsultaButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="añadirConsultaButton" min="-2" max="-2" attributes="0"/>
@@ -85,6 +89,8 @@
                   <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="añadirConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="sigQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="antQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="instancesPanel" min="-2" max="-2" attributes="0"/>
@@ -200,5 +206,21 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="sigQueryButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sigQueryButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="antQueryButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="antQueryButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

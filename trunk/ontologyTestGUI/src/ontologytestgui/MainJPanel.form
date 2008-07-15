@@ -18,41 +18,52 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="newTestChekBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="existsTestsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="sparqlCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
-                          <Component id="newInstancesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="addTestPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="sparqlCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="newInstancesCheckBox" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="146" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" pref="250" max="-2" attributes="1"/>
-                      <EmptySpace pref="403" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" max="32767" attributes="1"/>
-                      <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel4" min="-2" pref="265" max="-2" attributes="0"/>
-                      <EmptySpace pref="388" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="namespaceOntologyTextField" alignment="0" pref="336" max="32767" attributes="1"/>
-                          <Component id="fisicalOntologyTextField" alignment="1" pref="336" max="32767" attributes="1"/>
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" alignment="0" min="-2" pref="340" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="259" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" pref="250" max="-2" attributes="1"/>
+                              <EmptySpace pref="403" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel3" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel4" min="-2" pref="265" max="-2" attributes="0"/>
+                              <EmptySpace pref="388" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="namespaceOntologyTextField" alignment="0" pref="336" max="32767" attributes="1"/>
+                                  <Component id="fisicalOntologyTextField" alignment="1" pref="336" max="32767" attributes="1"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="examinarFisicalButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="newTestChekBox" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="572" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="examinarFisicalButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -80,15 +91,11 @@
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="newTestChekBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="existsTestsCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="addTestPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="newInstancesCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="sparqlCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -134,79 +141,6 @@
         <Property name="text" type="java.lang.String" value="Seleccione las acciones que desea realizar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="newTestChekBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Crear tests"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newTestChekBoxActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="existsTestsCheckBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Trabajar con test existentes"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="existsTestsCheckBoxActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JPanel" name="addTestPanel">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="abrirTestLabel" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="pathTestTextField" min="-2" pref="327" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="examinarTestButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="abrirTestLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="examinarTestButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="pathTestTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="abrirTestLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Seleccione el test:"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="pathTestTextField">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="examinarTestButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Examinar"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="examinarTestButtonActionPerformed"/>
-          </Events>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JCheckBox" name="newInstancesCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear conjunto de instancias"/>
@@ -215,6 +149,11 @@
     <Component class="javax.swing.JCheckBox" name="sparqlCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Realizar consultas SPARQL"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="newTestChekBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear Tests"/>
       </Properties>
     </Component>
   </SubComponents>
