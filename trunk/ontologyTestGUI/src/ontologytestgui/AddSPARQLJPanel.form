@@ -38,17 +38,19 @@
                                   <Component id="jLabel2" alignment="0" pref="563" max="32767" attributes="1"/>
                                   <Group type="102" alignment="0" attributes="1">
                                       <Component id="limpiarButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="279" max="32767" attributes="0"/>
+                                      <EmptySpace pref="255" max="32767" attributes="0"/>
                                       <Component id="antQueryButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="sigQueryButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="nuevaConsultaButton" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" alignment="0" min="-2" pref="563" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="limpiarResultButton" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" min="-2" pref="303" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -85,9 +87,10 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="limpiarButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="sigQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="limpiarResultButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="antQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="sigQueryButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nuevaConsultaButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="instancesPanel" min="-2" max="-2" attributes="0"/>
@@ -209,6 +212,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="antQueryButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="limpiarResultButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarResultButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -17,14 +18,16 @@ import java.io.File;
  */
 public class AbrirTestsJDialog extends javax.swing.JDialog {
 
-    File dir;
-    ListaFicheros listaFicheros,listaBis;
+    private File dir;
+    private ListaFicheros listaFicheros;
     
     /** Creates new form AbrirTestsJDialog */
     public AbrirTestsJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        this.setModal(false);
+        this.setTitle("Descripción Tests");
+        
         AddInstancesJPanel.setPathFichero("./Simple Tests/");
         dir = new File("./Simple Tests/");
         AddInstancesJPanel.setFicheros(dir.list());
@@ -56,11 +59,6 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
             
 	}
 	});
-    }
-
-    private void abrirFichero(String pathFicheroAbrir) {
-        
-    
     }
 
     /** This method is called from within the constructor to
@@ -159,11 +157,15 @@ private void ficherosComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
 // TODO add your handling code here:  
-    abrirFichero(ListaFicheros.getPathFicheroAbrir());
+    VistaTestJFrame vistaDialog = new VistaTestJFrame(ListaFicheros.getPathFicheroAbrir());
+    vistaDialog.setTitle(ListaFicheros.getPathFicheroAbrir());
+    vistaDialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    vistaDialog.setVisible(true);
 }//GEN-LAST:event_abrirButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
+    this.setVisible(false);
 }//GEN-LAST:event_cancelarButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -54,23 +54,19 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         descripcionScrollPane = new JScrollPane(descripcion);
         descripcionScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        //Create a split pane with the two scroll panes in it.
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                                    listScrollPane, descripcionScrollPane);
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(150);
 
-        //Provide minimum sizes for the two components in the split pane.
         Dimension minimumSize = new Dimension(100, 50);
         listScrollPane.setMinimumSize(minimumSize);
         descripcionScrollPane.setMinimumSize(minimumSize);
 
-        //Provide a preferred size for the split pane.
         splitPane.setPreferredSize(new Dimension(400, 200));
         updateLabel(listaFicheros[list.getSelectedIndex()]);
     }
     
-    //Listens to the list
     @Override
     public void valueChanged(ListSelectionEvent e) {
         list = (JList)e.getSource();
@@ -78,10 +74,7 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         updateLabel(listaFicheros[list.getSelectedIndex()]);
     }
     
-    //Renders the selected image
     public void updateLabel (String name) {
-        //ImageIcon icon = createImageIcon("images/" + name + ".gif");
-        //picture.setIcon(icon);
         
         String path = AddInstancesJPanel.getPathFichero();
         ListaFicheros.setPathFicheroAbrir(path.concat(name));
@@ -123,15 +116,8 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
             decoder.close();    
         }catch(FileNotFoundException e){
         }
-        
-        /*if  (icon != null) {
-            picture.setText(null);
-        } else {
-            picture.setText("Image not found");
-        }*/
     }
 
-    //Used by SplitPaneDemo2
     public JList getImageList() {
         return list;
     }
@@ -140,32 +126,4 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         return splitPane;
     }
 
-   
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    /*protected static ImageIcon createImageIcon(String path) {
-       java.net.URL imgURL = SplitPaneDemo.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }*/
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    /*public static void createAndShowListaFicheros() {
-
-        //Create and set up the window.
-        JFrame frame = new JFrame("Abrir Tests");
-        ListaFicheros listaFich = new ListaFicheros();
-        frame.getContentPane().add(listaFich.getSplitPane());
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }  */   
 }

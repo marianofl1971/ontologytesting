@@ -7,13 +7,7 @@
 package ontologytestgui;
 
 import java.awt.FlowLayout;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.ScenarioTest;
@@ -52,14 +46,22 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     public static void setAntQueryButton(boolean state) {
         antQueryButton.setEnabled(state);
     }
-    private JFileChooser filechooser;
-    private XMLDecoder decoder;
+     public static void setSigQueryButton(boolean state) {
+        sigQueryButton.setEnabled(state);
+    }
     private static int contadorAnt = -1;
     private static int contadorSig = 1;
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
         initComponents();
+        
+        sparqlTextArea.setLineWrap(true);
+        sparqlTextArea.setWrapStyleWord(true);
+        testDescTextArea.setLineWrap(true);
+        testDescTextArea.setWrapStyleWord(true);
+        resultTextArea.setLineWrap(true);
+        resultTextArea.setWrapStyleWord(true);
         
         antQueryButton.setEnabled(false);
         sigQueryButton.setEnabled(false);
@@ -101,6 +103,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         instancesPanel = new javax.swing.JPanel();
         sigQueryButton = new javax.swing.JButton();
         antQueryButton = new javax.swing.JButton();
+        limpiarResultButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -161,6 +164,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        limpiarResultButton.setText("Limpiar");
+        limpiarResultButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarResultButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -185,15 +195,17 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                     .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 279, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 255, Short.MAX_VALUE)
                                         .add(antQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(nuevaConsultaButton))
+                                        .add(nuevaConsultaButton)
+                                        .add(24, 24, 24))
                                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 563, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(18, 18, 18)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(limpiarResultButton)
                                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 303, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(jLabel4)))))
                     .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -221,9 +233,10 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(6, 6, 6)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(limpiarButton)
-                    .add(nuevaConsultaButton)
+                    .add(limpiarResultButton)
+                    .add(antQueryButton)
                     .add(sigQueryButton)
-                    .add(antQueryButton))
+                    .add(nuevaConsultaButton))
                 .add(8, 8, 8)
                 .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -256,7 +269,6 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
 private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
 // TODO add your handling code here:
     AddSPARQLJPanel.setSPARQLQuery("");
-    AddSPARQLJPanel.setResultTextArea("");
 }//GEN-LAST:event_limpiarButtonActionPerformed
 
 private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antQueryButtonActionPerformed
@@ -303,28 +315,11 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         antQueryButton.setEnabled(true);
 }//GEN-LAST:event_sigQueryButtonActionPerformed
 
-  private static void createAndShowGUI() {
-        //JFrame.setDefaultLookAndFeelDecorated(true);
-        //Create and set up the window.
-        frame = new JFrame("Test de Prueba");
-        frame.getContentPane().add(new AddSPARQLJPanel()); 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+private void limpiarResultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarResultButtonActionPerformed
+// TODO add your handling code here:
+    AddSPARQLJPanel.setResultTextArea("");
+}//GEN-LAST:event_limpiarResultButtonActionPerformed
 
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JButton antQueryButton;
@@ -337,9 +332,10 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton limpiarButton;
+    private javax.swing.JButton limpiarResultButton;
     private javax.swing.JButton nuevaConsultaButton;
     private static javax.swing.JTextArea resultTextArea;
-    private javax.swing.JButton sigQueryButton;
+    private static javax.swing.JButton sigQueryButton;
     private static javax.swing.JTextArea sparqlTextArea;
     private static javax.swing.JTextArea testDescTextArea;
     private static javax.swing.JTextField testNameTextField;

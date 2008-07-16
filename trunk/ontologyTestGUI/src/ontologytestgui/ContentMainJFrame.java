@@ -172,9 +172,9 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }else if(paginas.get(2).equals(1)){
                 sparql = new AddSPARQLJPanel();
                 AddSPARQLJPanel.setSPARQLQuery("" +
-                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
                         "SELECT ?subject ?object " +
-                        "FROM <data/family.owl>" +
+                        "FROM <data/family.owl> " +
                         "WHERE " +
                         "{?subject rdfs:subClassOf ?object }");
                 contentPanel.remove(mainPanel);
@@ -199,9 +199,9 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }else if(paginas.get(2).equals(1)){
                 sparql = new AddSPARQLJPanel();
                 AddSPARQLJPanel.setSPARQLQuery("" +
-                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
                         "SELECT ?subject ?object " +
-                        "FROM <data/family.owl>" +
+                        "FROM <data/family.owl> " +
                         "WHERE " +
                         "{?subject rdfs:subClassOf ?object }");
                 contentPanel.remove(groupTests);
@@ -223,9 +223,9 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             if(paginas.get(2).equals(1)){
                 sparql = new AddSPARQLJPanel();
                 AddSPARQLJPanel.setSPARQLQuery("" +
-                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
                         "SELECT ?subject ?object " +
-                        "FROM <data/family.owl>" +
+                        "FROM <data/family.owl> " +
                         "WHERE " +
                         "{?subject rdfs:subClassOf ?object }");
                 contentPanel.remove(addInstances.getContentPanel());

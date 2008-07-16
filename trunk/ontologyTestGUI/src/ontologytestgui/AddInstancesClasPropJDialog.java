@@ -568,7 +568,7 @@ public void crearArchivoDeInstancias(){
         e.writeObject(propInst);
         e.close();
     }catch (FileNotFoundException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
      }
 }
 
@@ -581,7 +581,7 @@ public void crearArchivoDeInstancias(String nombreFichero){
         e.writeObject(propInst);
         e.close();
     }catch (FileNotFoundException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
      }
 }
 
@@ -593,7 +593,7 @@ public void crearArchivoDeTests(String nombreFichero){
         e.writeObject(MainJPanel.getCollectionTest());
         e.close();
     }catch (FileNotFoundException ex) {
-        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
      }
 }
 

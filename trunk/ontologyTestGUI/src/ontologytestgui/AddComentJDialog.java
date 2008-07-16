@@ -21,6 +21,10 @@ public class AddComentJDialog extends javax.swing.JDialog {
     public AddComentJDialog(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        comentTextArea.setLineWrap(true);
+        comentTextArea.setWrapStyleWord(true);
+        
         this.setTitle("Añadir Comentario");
         this.setLocationRelativeTo(this.getParent());
         this.setSize(desktopWidth,desktopHeight);
