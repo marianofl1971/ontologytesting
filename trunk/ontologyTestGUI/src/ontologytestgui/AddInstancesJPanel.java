@@ -145,14 +145,14 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
-        addTestExistButton.setText("Abrir Test Existente");
+        addTestExistButton.setText("Añadir Test Existente");
         addTestExistButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addTestExistButtonActionPerformed(evt);
             }
         });
 
-        seeTestButton.setText("Ver Test");
+        seeTestButton.setText("Ver Tests Guardados");
         seeTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seeTestButtonActionPerformed(evt);
@@ -168,24 +168,24 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(507, Short.MAX_VALUE))
+                        .addContainerGap(575, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                         .add(339, 339, 339))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(seeAsociadasButton)
-                                .add(228, 228, 228)
+                                .add(367, 367, 367)
                                 .add(addTestExistButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(SaveAndNewButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(seeTestButton))
                             .add(examinarButton))
                         .addContainerGap())
                     .add(layout.createSequentialGroup()
                         .add(asociarButton)
+                        .add(590, 590, 590)
+                        .add(SaveAndNewButton)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -194,7 +194,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .add(jLabel2)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(asociarButton)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(asociarButton)
+                    .add(SaveAndNewButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -203,7 +205,6 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(seeAsociadasButton)
                     .add(seeTestButton)
-                    .add(SaveAndNewButton)
                     .add(addTestExistButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -463,8 +464,51 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     decoder.close();    
     }catch(FileNotFoundException e){
     }
+    
     }else{
-        System.out.println("No implementado todavía");
+        
+        filechooser = new JFileChooser("./");
+        setStateAbrirTest(true);
+    
+        int option = filechooser.showOpenDialog(frame);
+        if (option == JFileChooser.APPROVE_OPTION) {
+          File selectedFile = filechooser.getSelectedFile();
+          nameFile = selectedFile.getPath();
+        }   
+
+        try{
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            ScenarioTest s = (ScenarioTest) decoder.readObject();
+            String nombre = s.getNombre();
+            String descrip = s.getDescripcion();  
+            ArrayList<SparqlQueryOntology> qO = s.getSparqlQuerys();
+            ArrayList<ClassInstances> clasI = s.getClassInstances();
+            ArrayList<PropertyInstances> propI = s.getPropertyInstances();
+            
+            AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasI);
+            AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propI);
+            
+            AddSPARQLJPanel.setTestNameTextField(nombre);
+            AddSPARQLJPanel.setTestDescTextArea(descrip);
+            ListIterator qi;
+            qi = qO.listIterator();
+        
+            while(qi.hasNext()){   
+                SparqlQueryOntology cI = (SparqlQueryOntology) qi.next();
+                AddSPARQLJPanel.getListSparqlQuerys().add(cI);
+            }  
+            AddSPARQLJPanel.setSPARQLQuery(AddSPARQLJPanel.getListSparqlQuerys().get(0).getQuerySparql());
+            AddSPARQLJPanel.setResultTextArea(AddSPARQLJPanel.getListSparqlQuerys().get(0).getResultexpected());
+            int tam = qO.size();
+            if(tam >=2){
+                AddSPARQLJPanel.setContadorAnt(-1);
+                AddSPARQLJPanel.setContadorSig(1);
+                AddSPARQLJPanel.setSigQueryButton(true);
+            }
+            
+        decoder.close();    
+        }catch(FileNotFoundException e){
+        }
     }
 }//GEN-LAST:event_addTestExistButtonActionPerformed
 
