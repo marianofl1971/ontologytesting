@@ -23,12 +23,9 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import ontologytestgui.MainJPanel;
 import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
-import org.mindswap.pellet.jena.NodeFormatter;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
-import org.mindswap.pellet.output.TableData;
 
 /**
  *
