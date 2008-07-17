@@ -461,6 +461,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 cont++;
             }
         }  
+    //MainJPanel.getCollectionTest().getScenariotest().add(s);
     decoder.close();    
     }catch(FileNotFoundException e){
     }
