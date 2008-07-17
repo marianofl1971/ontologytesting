@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="model.ClassInstances"> 
+    <void property="classInstance"> 
+     <string>sara</string> 
+    </void> 
+    <void property="comment"> 
+     <string>garcia</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="model.ClassInstances"> 
+    <void property="classInstance"> 
+     <string>ana</string> 
+    </void> 
+    <void property="comment"> 
+     <string>cristina</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="model.PropertyInstances"> 
+    <void property="comment"> 
+     <string>ramos</string> 
+    </void> 
+    <void property="propertyInstance"> 
+     <string>floren</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="model.PropertyInstances"> 
+    <void property="comment"> 
+     <string>garcia rimada</string> 
+    </void> 
+    <void property="propertyInstance"> 
+     <string>jose luis</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 
