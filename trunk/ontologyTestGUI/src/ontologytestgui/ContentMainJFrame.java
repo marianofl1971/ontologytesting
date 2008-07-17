@@ -190,6 +190,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
     }else{
         if(ContentMainJFrame.getActual()==1){
+            //groupTests = new GroupTestsJPanel(8);
             if(paginas.get(1).equals(1)){
                 contentPanel.remove(groupTests);
                 contentPanel.add(addInstances.getContentPanel());
@@ -211,7 +212,6 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else{
-                groupTests = new GroupTestsJPanel(8);
                 contentPanel.remove(groupTests);
                 contentPanel.add(label);
                 groupTests.guardarDatos();
