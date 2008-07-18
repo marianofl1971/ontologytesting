@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_02" class="java.beans.XMLDecoder"> 
- <object class="model.ScenarioTest"> 
+ <object class="code.google.com.p.ontologytesting.model.ScenarioTest"> 
   <void property="descripcion"> 
    <string>Descripcion aquí</string> 
   </void> 
@@ -9,7 +9,7 @@
   </void> 
   <void property="sparqlQuerys"> 
    <void method="add"> 
-    <object class="model.SparqlQueryOntology"> 
+    <object class="code.google.com.p.ontologytesting.model.SparqlQueryOntology"> 
      <void property="querySparql"> 
       <string>PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 SELECT ?subject ?object 
@@ -23,7 +23,7 @@ Vasken</string>
     </object> 
    </void> 
    <void method="add"> 
-    <object class="model.SparqlQueryOntology"> 
+    <object class="code.google.com.p.ontologytesting.model.SparqlQueryOntology"> 
      <void property="querySparql"> 
       <string>PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 SELECT ?subject ?object 

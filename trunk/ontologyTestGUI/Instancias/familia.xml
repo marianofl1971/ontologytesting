@@ -2,7 +2,7 @@
 <java version="1.6.0_02" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>sara</string> 
     </void> 
@@ -12,7 +12,7 @@
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>ana</string> 
     </void> 
@@ -24,7 +24,7 @@
  </object> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
-   <object class="model.PropertyInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
     <void property="comment"> 
      <string>ramos</string> 
     </void> 
@@ -34,7 +34,7 @@
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.PropertyInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
     <void property="comment"> 
      <string>garcia rimada</string> 
     </void> 

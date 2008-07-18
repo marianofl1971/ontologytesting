@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_02" class="java.beans.XMLDecoder"> 
- <object class="model.ScenarioTest"> 
+ <object class="code.google.com.p.ontologytesting.model.ScenarioTest"> 
   <void property="descripcion"> 
    <string>Desc reali</string> 
   </void> 
@@ -9,7 +9,7 @@
   </void> 
   <void property="queryTest"> 
    <void method="add"> 
-    <object class="model.QueryOntology"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
      <void property="comment"> 
       <string></string> 
      </void> 
@@ -22,7 +22,7 @@
     </object> 
    </void> 
    <void method="add"> 
-    <object class="model.QueryOntology"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
      <void property="comment"> 
       <string></string> 
      </void> 

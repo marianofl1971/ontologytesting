@@ -2,28 +2,28 @@
 <java version="1.6.0_02" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>Male(johon)</string> 
     </void> 
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>Male(tom)</string> 
     </void> 
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>Female(marry)</string> 
     </void> 
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.ClassInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
     <void property="classInstance"> 
      <string>Wife(lee)</string> 
     </void> 
@@ -32,14 +32,14 @@
  </object> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
-   <object class="model.PropertyInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
     <void property="propertyInstance"> 
      <string>hasChild(lee,tom)</string> 
     </void> 
    </object> 
   </void> 
   <void method="add"> 
-   <object class="model.PropertyInstances"> 
+   <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
     <void property="propertyInstance"> 
      <string>hasChild(marry,john)</string> 
     </void> 
