@@ -582,12 +582,12 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JScrollPane test3ScrollPane;
     private javax.swing.JScrollPane test4ScrollPane;
     private javax.swing.JScrollPane test5ScrollPane;
-    private javax.swing.JPanel testClasPanel;
-    private javax.swing.JPanel testInstPanel;
-    private javax.swing.JPanel testRealPanel;
-    private javax.swing.JPanel testRetPanel;
-    private javax.swing.JPanel testSatPanel;
-    private javax.swing.JTabbedPane testsTabbedPane;
+    private static javax.swing.JPanel testClasPanel;
+    private static javax.swing.JPanel testInstPanel;
+    private static javax.swing.JPanel testRealPanel;
+    private static javax.swing.JPanel testRetPanel;
+    private static javax.swing.JPanel testSatPanel;
+    private static javax.swing.JTabbedPane testsTabbedPane;
     // End of variables declaration//GEN-END:variables
 
 public void guardarDatos(){
