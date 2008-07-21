@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -39,7 +40,7 @@ public class TreeResults extends JFrame {
     private DefaultMutableTreeNode test = null;
     private static OntologyTestFailure actualScenarioFailure;
 
-    public TreeResults(OntologyTestResult testresult) {
+    public TreeResults(final OntologyTestResult testresult) {
 
         //Create the nodes.
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Resultado de sus Tests");
@@ -58,9 +59,8 @@ public class TreeResults extends JFrame {
                 Object nodeInfo = node.getUserObject();
                 if (node.isLeaf()) {
                     String test = (String) nodeInfo;
-                    displaySimpleTest(test);
+                    displaySimpleTest(test,testresult);
                 } else {
-
                 }
                 if (DEBUG) {
                     System.out.println(nodeInfo.toString());
@@ -95,12 +95,22 @@ public class TreeResults extends JFrame {
         getContentPane().add(splitPane);
     }
 
-    private void displaySimpleTest(String test) {
+    private void displaySimpleTest(String test, OntologyTestResult testresult) {
         
-        OntologyTestFailure ontoFailure = TreeResults.getActualScenarioFailure();
+        ListIterator liFailures,liSparql;
+        ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
+        ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
+        liFailures = failures.listIterator();
+        liSparql = failuresSparql.listIterator();
+        if(liFailures.hasNext()){
+            while(liFailures.hasNext()){
+                OntologyTestFailure ontoFailure = (OntologyTestFailure) liFailures.next();
+                if(ontoFailure.getTestNameUsuario().equals(test)){
+                    htmlPane.setText(ontoFailure.toString());  
+                }
         
-        htmlPane.setText(ontoFailure.toString());
-
+            }
+        }
     }
     
     private void createNodes(DefaultMutableTreeNode top, OntologyTestResult testresult) {
@@ -118,65 +128,55 @@ public class TreeResults extends JFrame {
             if(otf.getTestName().equals("Instanciación")){
                 if(var==0){
                     var=1;
-                    TreeResults.setActualScenarioFailure(otf);
                     category = new DefaultMutableTreeNode("Tests de Instanciación");
                     top.add(category);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }else{
-                    TreeResults.setActualScenarioFailure(otf);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }
             }else if(otf.getTestName().equals("Retrieval")){
                 if(var==0){
                     var=1;
-                    TreeResults.setActualScenarioFailure(otf);
                     category = new DefaultMutableTreeNode("Tests de Retrieval");
                     top.add(category);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }else{
-                    TreeResults.setActualScenarioFailure(otf);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }
             }else if(otf.getTestName().equals("Realización")){
                 if(var==0){
                     var=1;
-                    TreeResults.setActualScenarioFailure(otf);
                     category = new DefaultMutableTreeNode("Tests de Realización");
                     top.add(category);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }else{
-                    TreeResults.setActualScenarioFailure(otf);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }
             }else if(otf.getTestName().equals("Clasificación")){
                 if(var==0){
                     var=1;
-                    TreeResults.setActualScenarioFailure(otf);
                     category = new DefaultMutableTreeNode("Tests de Clasificación");
                     top.add(category);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }else{
-                    TreeResults.setActualScenarioFailure(otf);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }
             }else if(otf.getTestName().equals("Satisfactibilidad")){
                 if(var==0){
                     var=1;
-                    TreeResults.setActualScenarioFailure(otf);
                     category = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
                     top.add(category);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }else{
-                    TreeResults.setActualScenarioFailure(otf);
                     test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
                     category.add(test);
                 }
@@ -196,41 +196,7 @@ public class TreeResults extends JFrame {
             }
         }else{
             System.out.println("No se han producido errores.");
-        }  
-        
-        
-        category = new DefaultMutableTreeNode("Books for Java Programmers");
-        top.add(category);
-
-        book = new DefaultMutableTreeNode(new OntologyTestResult());
-        category.add(book);
-
-        book = new DefaultMutableTreeNode(new OntologyTestResult());
-        category.add(book);
-
-        //FAQ
-        book = new DefaultMutableTreeNode(new SimpleTestsInfo(
-            "The Java FAQ"));
-        category.add(book);
-
-        //Chan/Lee
-        book = new DefaultMutableTreeNode(new SimpleTestsInfo
-            ("The Java Class Libraries: An Annotated Reference"));
-        category.add(book);
-
-        //Threads
-        book = new DefaultMutableTreeNode(new SimpleTestsInfo
-            ("Concurrent Programming in Java: Design Principles and Patterns"));
-        category.add(book);
-
-        category = new DefaultMutableTreeNode("Books for Java Implementers");
-        top.add(category);
-
-        book = new DefaultMutableTreeNode(new OntologyTestResult());
-        category.add(book);
-
-        book = new DefaultMutableTreeNode(new OntologyTestResult());
-        category.add(book);*/
+        } */
     }
 
     public static void main(String[] args) {
