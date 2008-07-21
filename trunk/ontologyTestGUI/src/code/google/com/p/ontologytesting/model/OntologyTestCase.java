@@ -9,7 +9,8 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.jenainterfaz.JenaImplementation;
+import code.google.com.p.ontologytesting.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,25 +23,21 @@ import java.util.ListIterator;
 public class OntologyTestCase implements OntologyTest{
     
     public String ontologyname;
-    /*private OntClass nameclass;
-    private Individual classValue, hasprop;
-    private Property nameprop;*/
     boolean namepropIsUsed=false;
     boolean nameclasIsUsed=false;
-    private JenaImplementation jenaImpl = new JenaImplementation();
-                    
+    private JenaInterface jenaInterface = new JenaInterface();   
+    private Jena jena;
+    
     public OntologyTestCase(){
     }
 
     protected void setUpOntology(ScenarioTest st, String ont, String ns){  
         
     ListIterator liClass,liProperties;   
-    String ciClas[],ciInd[],piClas[],piInd[];    
-       
-    jenaImpl.addReasoner(ont);
-    /*model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
-    model.read(ont);  
-    model.prepare();*/
+    String ciClas[],ciInd[],piClas[],piInd[];   
+    
+    jena = jenaInterface.getJena();
+    jena.addReasoner(ont);
    
     List<ClassInstances> classInstances = st.getClassInstances();
     List<PropertyInstances> propertyInstances = st.getPropertyInstances();
@@ -53,8 +50,7 @@ public class OntologyTestCase implements OntologyTest{
             String ci = cla.getClassInstance();
             ciClas = ci.split("\\(");
             ciInd = ciClas[1].split("\\)");
-            jenaImpl.addInstanceClass(ns, ciClas[0], ciInd[0]);
-            //addInstanceClass(ns,ciClas[0],ciInd[0]);
+            jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
     }
         
     while(liProperties.hasNext()){
@@ -62,22 +58,13 @@ public class OntologyTestCase implements OntologyTest{
             String pi = p.getPropertyInstance();
             piClas = pi.split("\\(");
             piInd = piClas[1].split("\\)");
-            jenaImpl.addInstanceProperty(ns, piClas[0], piInd[0]);
-            //addInstanceProperty(ns,piClas[0],piInd[0]);
+            jena.addInstanceProperty(ns, piClas[0], piInd[0]);
     }
        
     }
     
     protected void tearDownOntology(){
-        jenaImpl.deleteEntries();
-        /*if(nameclasIsUsed==true){
-            nameclass.remove();
-            classValue.remove();
-        }
-        if(namepropIsUsed==true){
-            nameprop.removeProperties();
-            hasprop.remove();
-        }   */ 
+        jena.deleteEntries();
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
@@ -110,12 +97,12 @@ public class OntologyTestCase implements OntologyTest{
                     res = query.split(",");
                     clasF = res[0];
                     indF = res[1];
-                    resObtenidoInst = jenaImpl.instantiation(ns, clasF, indF);
+                    resObtenidoInst = jena.instantiation(ns, clasF, indF);
                     if(!resObtenidoInst.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoInst);
                     }
                 }else if(testName.equals("Retrieval")){
-                    resObtenidoRet = jenaImpl.retieval(ns, query);
+                    resObtenidoRet = jena.retieval(ns, query);
                     String[] queryMod = resQueryExpected.split(",");
                     ArrayList<String> queryRet = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
@@ -127,7 +114,7 @@ public class OntologyTestCase implements OntologyTest{
                         testresult.addOntologyFailureQuery(testName,qo,resObtenidoRet.toString());
                     }
                 }else if(testName.equals("Realización")){
-                    resObtenidoRealiz = jenaImpl.realization(ns, query);
+                    resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoRealiz);
                     }
@@ -135,7 +122,7 @@ public class OntologyTestCase implements OntologyTest{
                     res = query.split(",");
                     concepto = res[0];
                     loincluye = res[1];
-                    resObtenidoSatisf = jenaImpl.satisfactibility(ns, concepto, loincluye);
+                    resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
                     }
@@ -145,7 +132,7 @@ public class OntologyTestCase implements OntologyTest{
                     for(int k=0;k<queryMod.length;k++){
                         querySat.add(queryMod[k]);
                     }
-                    resObtenidoClas = jenaImpl.classification(ns, query);
+                    resObtenidoClas = jena.classification(ns, query);
                     Collections.sort(resObtenidoClas);
                     Collections.sort(querySat);
                     if(!this.comparaArray(querySat, resObtenidoClas)){
@@ -164,8 +151,7 @@ public class OntologyTestCase implements OntologyTest{
             for(int k=0; k<res.length;k++){
                 sparqlExp.add(res[k]);
             }
-            //tests.testSPARQL(sparqlQuery, false, model);
-            resSparql = jenaImpl.testSPARQL(sparqlQuery, true);
+            resSparql = jena.testSPARQL(sparqlQuery, true);
             Collections.sort(sparqlExp);
             Collections.sort(resSparql);
             if(!this.comparaArray(sparqlExp, resSparql)){
@@ -195,18 +181,6 @@ public class OntologyTestCase implements OntologyTest{
         showResultTests(testresult);
    
     }
-    
-    /*public void addInstanceClass(String ns,String nameClass, String value){
-        nameclass = model.createClass(ns + nameClass);
-        classValue = model.createIndividual(ns + value,nameclass);
-        nameclasIsUsed=true;
-    }
-    
-    public void addInstanceProperty(String ns,String nameProperty, String value){
-        nameprop = model.createProperty(ns + nameProperty);
-        hasprop = model.createIndividual(ns + value,nameprop);
-        namepropIsUsed=true;
-    }*/
     
     public boolean comparaArray(ArrayList<String> array1, ArrayList<String> array2){
         if(array1.size() == array2.size()){

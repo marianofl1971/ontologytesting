@@ -378,7 +378,6 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     int cont=2;
     try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-        System.out.println(nameFile);
         ScenarioTest s = (ScenarioTest) decoder.readObject();
         String nombre = s.getNombre();
         String descrip = s.getDescripcion();  
@@ -462,7 +461,6 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 cont++;
             }
         }  
-    //MainJPanel.getCollectionTest().getScenariotest().add(s);
     decoder.close();    
     }catch(FileNotFoundException e){
     }

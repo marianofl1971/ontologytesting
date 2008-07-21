@@ -34,6 +34,8 @@ public class JenaImplementation implements Jena{
     private OntClass nameclass;
     private Property nameprop;
     
+    public JenaImplementation(){}
+    
     @Override
     public void addInstanceClass(String ns, String nameClass, String value) {
         nameclass = model.createClass(ns + nameClass);
@@ -203,5 +205,4 @@ public class JenaImplementation implements Jena{
         }
         return res;
     }
-
 }

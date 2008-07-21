@@ -31,7 +31,7 @@ public interface Jena {
 
     ArrayList<String> classification(String ns, String individuo);
     
-    ArrayList<String> testSPARQL(String queryStr, boolean formatHTML);
+    ArrayList<String> testSPARQL(String queryStr, boolean formatHTML);   
 
 }
 
