@@ -73,6 +73,7 @@ public class OntologyTestCase implements OntologyTest{
         ListIterator liQuery,liSparql;
         String res[],clasF="",indF="",concepto="",loincluye="";
         String testName = scenariotest.getTestName();
+        String nombreTestUsuario = scenariotest.getNombre();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         List<SparqlQueryOntology> sparqlTest = scenariotest.getSparqlQuerys();
         
@@ -89,7 +90,6 @@ public class OntologyTestCase implements OntologyTest{
         liSparql = sparqlTest.listIterator();
         
         while(liQuery.hasNext()){         
-            if(liQuery.hasNext()){
                 qo = (QueryOntology) liQuery.next();
                 String query = qo.getQuery();
                 resQueryExpected = qo.getResultexpected();
@@ -99,7 +99,7 @@ public class OntologyTestCase implements OntologyTest{
                     indF = res[1];
                     resObtenidoInst = jena.instantiation(ns, clasF, indF);
                     if(!resObtenidoInst.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoInst);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoInst);
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = jena.retieval(ns, query);
@@ -111,12 +111,12 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(resObtenidoRet);
                     Collections.sort(queryRet);
                     if(!this.comparaArray(resObtenidoRet, queryRet)){
-                        testresult.addOntologyFailureQuery(testName,qo,resObtenidoRet.toString());
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo,resObtenidoRet.toString());
                     }
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoRealiz);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoRealiz);
                     }
                 }else if(testName.equals("Satisfactibilidad")){
                     res = query.split(",");
@@ -124,7 +124,7 @@ public class OntologyTestCase implements OntologyTest{
                     loincluye = res[1];
                     resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoSatisf);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoSatisf);
                     }
                 }else if(testName.equals("Clasificación")){
                     String[] queryMod = resQueryExpected.split(",");
@@ -136,14 +136,12 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(resObtenidoClas);
                     Collections.sort(querySat);
                     if(!this.comparaArray(querySat, resObtenidoClas)){
-                        testresult.addOntologyFailureQuery(testName,qo, resObtenidoClas.toString());
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoClas.toString());
                     }
-                }
-            }    
+                }  
         }
         
     while(liSparql.hasNext()){    
-        if(liSparql.hasNext()){
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
@@ -155,9 +153,8 @@ public class OntologyTestCase implements OntologyTest{
             Collections.sort(sparqlExp);
             Collections.sort(resSparql);
             if(!this.comparaArray(sparqlExp, resSparql)){
-                testresult.addOntologyFailureSparql(testName,sparqlquery,resSparql);
-            }
-        }    
+                testresult.addOntologyFailureSparql(nombreTestUsuario, testName,sparqlquery,resSparql);
+            }   
     }
 } 
 

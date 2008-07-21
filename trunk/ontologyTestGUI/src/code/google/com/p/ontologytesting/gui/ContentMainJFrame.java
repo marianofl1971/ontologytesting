@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
+import javax.swing.JTree;
 
 /**
  *

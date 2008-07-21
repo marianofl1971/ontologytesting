@@ -10,8 +10,6 @@
 package code.google.com.p.ontologytesting.model;
 
 import java.util.ArrayList;
-import code.google.com.p.ontologytesting.model.QueryOntology;
-import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
 
 /**
  *
@@ -28,9 +26,12 @@ public class OntologyTestFailure extends Object{
     protected String fcommentsparqlquery;
     protected String fquerysparql;
     protected String testName;
+    protected String ftestNameUsuario;
+    private String result="";
     
-    public OntologyTestFailure(String testName,QueryOntology query, String resQueryObte, 
+    public OntologyTestFailure(String testNameUsuario, String testName,QueryOntology query, String resQueryObte, 
             SparqlQueryOntology querysparql, ArrayList<String> resSparqlQueryObte){
+        this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquery = query.getQuery();
         this.fcommentquery = query.getComment();
@@ -44,7 +45,8 @@ public class OntologyTestFailure extends Object{
     public OntologyTestFailure(){
     }   
     
-    void addOntologyTestFailureQuery(String testName,QueryOntology query, String resQueryObte){
+    void addOntologyTestFailureQuery(String testNameUsuario, String testName,QueryOntology query, String resQueryObte){
+        this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquery = query.getQuery();
         this.fcommentquery = query.getComment();
@@ -52,8 +54,9 @@ public class OntologyTestFailure extends Object{
         this.fresqueryobtenido = resQueryObte;
     }
     
-    void addOntologyTestFailureSparql(String testName, SparqlQueryOntology querysparql, 
+    void addOntologyTestFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
             ArrayList<String> resQueryObte){
+        this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
@@ -96,4 +99,14 @@ public class OntologyTestFailure extends Object{
         return this.testName;
     }
     
+    public String getTestNameUsuario(){
+        return this.ftestNameUsuario;
+    }
+    
+    @Override
+    public String toString() {
+        result = "Consulta realizada: " +this.fquery+"\nResultado esperado: " 
+                +this.fresultexpected+"\nResultado obtenido: " +this.fresqueryobtenido;
+        return result;
+    }
 }

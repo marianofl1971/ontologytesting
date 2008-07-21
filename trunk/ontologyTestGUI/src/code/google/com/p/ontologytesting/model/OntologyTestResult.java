@@ -10,8 +10,6 @@
 package code.google.com.p.ontologytesting.model;
 
 import java.util.ArrayList;
-import code.google.com.p.ontologytesting.model.QueryOntology;
-import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
 
 /**
  *
@@ -27,18 +25,18 @@ public class OntologyTestResult extends Object{
         ontologyfailuressparql = new ArrayList<OntologyTestFailure>();
     }
     
-    public void addOntologyFailureQuery(String testName,QueryOntology query, String resObte){
+    public void addOntologyFailureQuery(String testNameUsuario, String testName,QueryOntology query, String resObte){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
-        ontologytestfailure.addOntologyTestFailureQuery(testName,query, resObte);
+        ontologytestfailure.addOntologyTestFailureQuery(testNameUsuario, testName,query, resObte);
         ontologyfailuresquerys.add(ontologytestfailure);
     }
     
-    public void addOntologyFailureSparql(String testName, SparqlQueryOntology sparqlquery, 
+    public void addOntologyFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology sparqlquery, 
             ArrayList<String> resObte){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
-        ontologytestfailure.addOntologyTestFailureSparql(testName,sparqlquery,resObte);
+        ontologytestfailure.addOntologyTestFailureSparql(testNameUsuario, testName,sparqlquery,resObte);
         ontologyfailuressparql.add(ontologytestfailure);
     }
     

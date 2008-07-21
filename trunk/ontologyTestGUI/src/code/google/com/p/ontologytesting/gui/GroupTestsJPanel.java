@@ -31,6 +31,8 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  *
@@ -672,9 +674,15 @@ public void guardarDatos(){
             //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         testcase.run(testresult, MainJPanel.getCollectionTest());
+        JFrame frame1 = new TreeResults(testresult);
+        frame1.pack();
+        frame1.setVisible(true);
         GroupTestsJPanel.setDatosGuardados(true);
     }else{
         testcase.run(testresult, MainJPanel.getCollectionTest());
+        JFrame frame1 = new TreeResults(testresult);
+        frame1.pack();
+        frame1.setVisible(true);
         GroupTestsJPanel.setDatosGuardados(true); 
     }
 }
@@ -812,9 +820,8 @@ public static void asociarInstancias(int sel){
                     QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                     queryTest2.add(testQuery);
                     scenario.setQueryTest(queryTest2);
-                    testRetPanel.remove(test1);
-                    testRetPanel.add(new TestInstancesQueryJPanel());
                     cont++;
+                    aux=1;
                 }else if((!query.equals("") && queryExp.equals("")) || 
                         (query.equals("") && !queryExp.equals(""))){
                         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
@@ -877,9 +884,8 @@ public static void asociarInstancias(int sel){
                     QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                     queryTest3.add(testQuery);
                     scenario.setQueryTest(queryTest3);
-                    testRealPanel.remove(test1);
-                    testRealPanel.add(new TestInstancesQueryJPanel());
                     cont++;
+                    aux=1;
                 }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
                     JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
                                 "y RESULTADO ESPERADO son obligatorios.",
@@ -942,9 +948,8 @@ public static void asociarInstancias(int sel){
                     QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
                     queryTest4.add(testQuery);
                     scenario.setQueryTest(queryTest4);
-                    testSatPanel.remove(test);
-                    testSatPanel.add(new TestInstancesTFJPanel());
                     cont++;
+                    aux=1;
                 }else if((!query.equals("") && resExpT.equals(resExpF)) || 
                         ((query.equals("") && !resExpT.equals(resExpF)))){
                     JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
@@ -1007,9 +1012,8 @@ public static void asociarInstancias(int sel){
                     QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                     queryTest5.add(testQuery);
                     scenario.setQueryTest(queryTest5);
-                    testClasPanel.remove(test1);
-                    testClasPanel.add(new TestInstancesQueryJPanel());
                     cont++;
+                    aux=1;
                 }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
                     JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
                                 "y RESULTADO ESPERADO son obligatorios.",
