@@ -433,7 +433,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 test1.setQueryResult(cI.getResultexpected());
                 cont++;
             }else if(tab.equals("Satisfactibilidad")){
-                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                descPanel = (DescripcionJPanel) panelSat.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
                 test = (TestInstancesTFJPanel) panelSat.getComponent(cont);

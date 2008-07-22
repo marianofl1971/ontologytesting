@@ -24,7 +24,9 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.ListIterator;
+import java.util.Vector;
 
 public class TreeResults extends JFrame {
 
@@ -36,8 +38,10 @@ public class TreeResults extends JFrame {
     }    
     private JEditorPane htmlPane;
     private static boolean DEBUG = false;
-    private DefaultMutableTreeNode category = null;
-    private DefaultMutableTreeNode test = null;
+    private DefaultMutableTreeNode inst=null, ret=null, clas=null, sat=null, 
+            real=null;
+    private DefaultMutableTreeNode inst_hijo=null, ret_hijo=null, clas_hijo=null, 
+            sat_hijo=null, real_hijo=null;
     private static OntologyTestFailure actualScenarioFailure;
 
     public TreeResults(final OntologyTestResult testresult) {
@@ -98,6 +102,7 @@ public class TreeResults extends JFrame {
     private void displaySimpleTest(String test, OntologyTestResult testresult) {
         
         ListIterator liFailures,liSparql;
+        String resultado = "Las pruebas que han fallado son: \n\n";
         ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
         ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
         liFailures = failures.listIterator();
@@ -106,11 +111,12 @@ public class TreeResults extends JFrame {
             while(liFailures.hasNext()){
                 OntologyTestFailure ontoFailure = (OntologyTestFailure) liFailures.next();
                 if(ontoFailure.getTestNameUsuario().equals(test)){
-                    htmlPane.setText(ontoFailure.toString());  
+                    resultado = resultado + ontoFailure.toString() + "\n\n";
                 }
         
             }
         }
+        htmlPane.setText(resultado);  
     }
     
     private void createNodes(DefaultMutableTreeNode top, OntologyTestResult testresult) {
@@ -118,67 +124,98 @@ public class TreeResults extends JFrame {
         ListIterator liFailures,liSparql;
         ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
         ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
+        ArrayList<String> list_clas = new ArrayList<String>(), list_ret = new ArrayList<String>(), 
+                list_inst = new ArrayList<String>(), list_sat = new ArrayList<String>(), 
+                list_real = new ArrayList<String>();
         liFailures = failures.listIterator();
         liSparql = failuresSparql.listIterator();
+        int var_inst=0, var_sat=0, var_ret=0, var_real=0, var_clas=0;
         if(liFailures.hasNext()){
         while(liFailures.hasNext()){
-            int var=0;
+            
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();
             
             if(otf.getTestName().equals("Instanciación")){
-                if(var==0){
-                    var=1;
-                    category = new DefaultMutableTreeNode("Tests de Instanciación");
-                    top.add(category);
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                if(var_inst==0){
+                    var_inst=1;
+                    inst = new DefaultMutableTreeNode("Tests de Instanciación");
+                    top.add(inst);
+                    inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    inst.add(inst_hijo);
+                    list_inst.add(inst_hijo.toString());
                 }else{
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                    if(!inst_hijo.equals(otf.getTestNameUsuario())){
+                        inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                        if(!list_inst.contains(inst_hijo.toString()))
+                        {
+                            inst.add(inst_hijo);
+                            list_inst.add(inst_hijo.toString());
+                        }
+                    }
                 }
             }else if(otf.getTestName().equals("Retrieval")){
-                if(var==0){
-                    var=1;
-                    category = new DefaultMutableTreeNode("Tests de Retrieval");
-                    top.add(category);
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                if(var_ret==0){
+                    var_ret=1;
+                    ret = new DefaultMutableTreeNode("Tests de Retrieval");
+                    top.add(ret);
+                    ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    ret.add(ret_hijo);
+                    list_ret.add(ret_hijo.toString());
                 }else{
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                    ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    if(!list_ret.contains(ret_hijo.toString()))
+                        {
+                            ret.add(ret_hijo);
+                            list_ret.add(ret_hijo.toString());
+                        }
                 }
             }else if(otf.getTestName().equals("Realización")){
-                if(var==0){
-                    var=1;
-                    category = new DefaultMutableTreeNode("Tests de Realización");
-                    top.add(category);
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                if(var_real==0){
+                    var_real=1;
+                    real = new DefaultMutableTreeNode("Tests de Realización");
+                    top.add(real);
+                    real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    real.add(real_hijo);
+                    list_real.add(real_hijo.toString());
                 }else{
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                    real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    if(!list_real.contains(real_hijo.toString()))
+                        {
+                            real.add(real_hijo);
+                            list_real.add(real_hijo.toString());
+                        }
                 }
             }else if(otf.getTestName().equals("Clasificación")){
-                if(var==0){
-                    var=1;
-                    category = new DefaultMutableTreeNode("Tests de Clasificación");
-                    top.add(category);
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                if(var_clas==0){
+                    var_clas=1;
+                    clas = new DefaultMutableTreeNode("Tests de Clasificación");
+                    top.add(clas);
+                    clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    clas.add(clas_hijo);
+                    list_clas.add(clas_hijo.toString());
                 }else{
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                    clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    if(!list_clas.contains(clas_hijo.toString()))
+                        {
+                            clas.add(clas_hijo);
+                            list_clas.add(clas_hijo.toString());
+                        }
                 }
             }else if(otf.getTestName().equals("Satisfactibilidad")){
-                if(var==0){
-                    var=1;
-                    category = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
-                    top.add(category);
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                if(var_sat==0){
+                    var_sat=1;
+                    sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
+                    top.add(sat);
+                    sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                    sat.add(sat_hijo);
+                    list_sat.add(sat_hijo.toString());
                 }else{
-                    test = new DefaultMutableTreeNode(otf.getTestNameUsuario());
-                    category.add(test);
+                        sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario());
+                        if(!list_sat.contains(sat_hijo.toString()))
+                        {
+                            sat.add(sat_hijo);
+                            list_sat.add(sat_hijo.toString());
+                        }    
                 }
             }
         }

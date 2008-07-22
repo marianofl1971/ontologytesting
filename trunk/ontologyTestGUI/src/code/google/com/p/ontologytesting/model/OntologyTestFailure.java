@@ -105,7 +105,7 @@ public class OntologyTestFailure extends Object{
     
     @Override
     public String toString() {
-        result = "Consulta realizada: " +this.fquery+"\nResultado esperado: " 
+        result = "Consulta: " +this.fquery+"\nResultado esperado: " 
                 +this.fresultexpected+"\nResultado obtenido: " +this.fresqueryobtenido;
         return result;
     }
