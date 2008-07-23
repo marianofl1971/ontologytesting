@@ -19,10 +19,14 @@ public class OntologyTestResult extends Object{
 
     protected ArrayList<OntologyTestFailure> ontologyfailuresquerys;
     protected ArrayList<OntologyTestFailure> ontologyfailuressparql;
+    protected ArrayList<OntologyTestPassed> ontologypassedquerys;
+    protected ArrayList<OntologyTestPassed> ontologypassedsparql;
     
     public OntologyTestResult(){
         ontologyfailuresquerys = new ArrayList<OntologyTestFailure>();
         ontologyfailuressparql = new ArrayList<OntologyTestFailure>();
+        ontologypassedquerys = new ArrayList<OntologyTestPassed>();
+        ontologypassedsparql = new ArrayList<OntologyTestPassed>();
     }
     
     public void addOntologyFailureQuery(String testNameUsuario, String testName,QueryOntology query, String resObte){
@@ -40,12 +44,32 @@ public class OntologyTestResult extends Object{
         ontologyfailuressparql.add(ontologytestfailure);
     }
     
+    public void addOntologyPassedTestQuery(String testNameUsuario, String testName){
+        OntologyTestPassed ontologytestpassed = new OntologyTestPassed();
+        ontologytestpassed.addOntologyPassedTestQuery(testNameUsuario, testName);
+        ontologypassedquerys.add(ontologytestpassed);
+    }
+    
+    public void addOntologyPassedTestSparql(String testNameUsuario, String testName){
+        OntologyTestPassed ontologytestpassedsparql = new OntologyTestPassed();
+        ontologytestpassedsparql.addOntologyPassedTestSparql(testNameUsuario, testName);
+        ontologypassedsparql.add(ontologytestpassedsparql);
+    }
+    
     public ArrayList<OntologyTestFailure> getOntologyTestFailureQuery(){
         return this.ontologyfailuresquerys;
     }
    
     public ArrayList<OntologyTestFailure> getOntologyTestFailureSparql(){
         return this.ontologyfailuressparql;
+    }
+    
+    public ArrayList<OntologyTestPassed> getOntologyTestPassedQuery(){
+        return this.ontologypassedquerys;
+    }
+    
+    public ArrayList<OntologyTestPassed> getOntologyTestPassedSparql(){
+        return this.ontologypassedsparql;
     }
     
     public int ontologyFailuresCountQuery() {

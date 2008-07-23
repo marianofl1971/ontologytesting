@@ -31,8 +31,6 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  *
@@ -49,6 +47,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     }
     public static void setScenarioTest(ScenarioTest aScenarioTest) {
         scenarioTest = aScenarioTest;
+    }
+    public static JPanel getPanelTree() {
+        return panelTree;
+    }
+    public static void setPanelTree(JPanel aPanelTree) {
+        panelTree = aPanelTree;
     }
     private HelpJDialog frameHelp;
     public static boolean isState() {
@@ -79,6 +83,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private XMLDecoder decoder;
     private AddComentJDialog commentPane;
     private static ScenarioTest scenarioTest;
+    private static JPanel panelTree;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -674,15 +679,13 @@ public void guardarDatos(){
             //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         testcase.run(testresult, MainJPanel.getCollectionTest());
-        JFrame frame1 = new TreeResults(testresult);
-        frame1.pack();
-        frame1.setVisible(true);
+        JPanel panel = new TreeResults(testresult);
+        GroupTestsJPanel.setPanelTree(panel);
         GroupTestsJPanel.setDatosGuardados(true);
     }else{
         testcase.run(testresult, MainJPanel.getCollectionTest());
-        JFrame frame1 = new TreeResults(testresult);
-        frame1.pack();
-        frame1.setVisible(true);
+        JPanel panel = new TreeResults(testresult);
+        GroupTestsJPanel.setPanelTree(panel);
         GroupTestsJPanel.setDatosGuardados(true); 
     }
 }

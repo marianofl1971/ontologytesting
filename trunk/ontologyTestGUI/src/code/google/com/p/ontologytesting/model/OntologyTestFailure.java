@@ -103,10 +103,16 @@ public class OntologyTestFailure extends Object{
         return this.ftestNameUsuario;
     }
     
-    @Override
-    public String toString() {
-        result = "Consulta: " +this.fquery+"\nResultado esperado: " 
-                +this.fresultexpected+"\nResultado obtenido: " +this.fresqueryobtenido;
+    public String showSimpleTest() {
+        result = "<b>Consulta: </b>" +this.fquery+"<br><b>Resultado esperado: </b>" 
+                +this.fresultexpected+"<br><b>Resultado obtenido: </b>" +this.fresqueryobtenido;
         return result;
+    }
+    
+    public String showSparqlTest() {
+        result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
+                +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>" +this.fressparqlobtenido;
+        return result;
+
     }
 }

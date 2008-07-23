@@ -77,6 +77,8 @@ public class OntologyTestCase implements OntologyTest{
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         List<SparqlQueryOntology> sparqlTest = scenariotest.getSparqlQuerys();
         
+        int inst=0, sat=0, clas=0, ret=0, real=0, sparql=0;
+        
         String resObtenidoInst="",resQueryExpected="",
                 resObtenidoRealiz="",resObtenidoSatisf="";
         ArrayList<String> resObtenidoRet = new ArrayList<String>();
@@ -99,6 +101,7 @@ public class OntologyTestCase implements OntologyTest{
                     indF = res[1];
                     resObtenidoInst = jena.instantiation(ns, clasF, indF);
                     if(!resObtenidoInst.equals(resQueryExpected)){
+                        inst=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoInst);
                     }
                 }else if(testName.equals("Retrieval")){
@@ -111,11 +114,13 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(resObtenidoRet);
                     Collections.sort(queryRet);
                     if(!this.comparaArray(resObtenidoRet, queryRet)){
+                        ret=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo,resObtenidoRet.toString());
                     }
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
+                        real=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoRealiz);
                     }
                 }else if(testName.equals("Satisfactibilidad")){
@@ -124,6 +129,7 @@ public class OntologyTestCase implements OntologyTest{
                     loincluye = res[1];
                     resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
+                        sat=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoSatisf);
                     }
                 }else if(testName.equals("Clasificación")){
@@ -136,6 +142,7 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(resObtenidoClas);
                     Collections.sort(querySat);
                     if(!this.comparaArray(querySat, resObtenidoClas)){
+                        clas=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoClas.toString());
                     }
                 }  
@@ -154,8 +161,22 @@ public class OntologyTestCase implements OntologyTest{
             Collections.sort(resSparql);
             if(!this.comparaArray(sparqlExp, resSparql)){
                 testresult.addOntologyFailureSparql(nombreTestUsuario, testName,sparqlquery,resSparql);
+                sparql=1;
             }   
     }
+        if(inst==0){
+            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
+        }else if(ret==0){
+            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
+        }else if(real==0){
+            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
+        }else if(sat==0){
+            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
+        }else if(clas==0){
+            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
+        }else if(sparql==0){
+            testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
+        }
 } 
 
     @Override

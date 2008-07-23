@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
-import javax.swing.JTree;
 
 /**
  *
@@ -213,9 +212,9 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else{
-                contentPanel.remove(groupTests);
-                contentPanel.add(label);
                 groupTests.guardarDatos();
+                contentPanel.remove(groupTests);
+                contentPanel.add(GroupTestsJPanel.getPanelTree());
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
                 this.validate();
@@ -240,7 +239,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 groupTests = new GroupTestsJPanel(8);
                 groupTests.guardarDatos();
                 contentPanel.remove(sparql);
-                contentPanel.add(label);
+                contentPanel.add(GroupTestsJPanel.getPanelTree());
                 AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(4);
