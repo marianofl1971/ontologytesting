@@ -22,12 +22,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="sparqlCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="newInstances" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="newInstancesCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="sparql" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
@@ -60,8 +60,8 @@
                               <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="newTestChekBox" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="572" max="32767" attributes="0"/>
+                              <Component id="newTest" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="534" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -90,11 +90,11 @@
               <EmptySpace pref="81" max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="newTestChekBox" min="-2" max="-2" attributes="0"/>
+              <Component id="newTest" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="newInstancesCheckBox" min="-2" max="-2" attributes="0"/>
+              <Component id="sparql" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="sparqlCheckBox" min="-2" max="-2" attributes="0"/>
+              <Component id="newInstances" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -141,19 +141,19 @@
         <Property name="text" type="java.lang.String" value="Seleccione las acciones que desea realizar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="newInstancesCheckBox">
+    <Component class="javax.swing.JRadioButton" name="newTest">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear conjunto de instancias"/>
+        <Property name="text" type="java.lang.String" value="Crear Tests Simples"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="sparqlCheckBox">
+    <Component class="javax.swing.JRadioButton" name="sparql">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Realizar consultas SPARQL"/>
+        <Property name="text" type="java.lang.String" value="Crear Tests SPARQL"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="newTestChekBox">
+    <Component class="javax.swing.JRadioButton" name="newInstances">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear Tests"/>
+        <Property name="text" type="java.lang.String" value="Crear Instancias"/>
       </Properties>
     </Component>
   </SubComponents>

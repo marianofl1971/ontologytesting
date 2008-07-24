@@ -11,6 +11,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import code.google.com.p.ontologytesting.model.CollectionTest;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -19,16 +20,16 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 public class MainJPanel extends javax.swing.JPanel {
 
     public static void setExistsTestsCheckBox(Boolean aExistsTestsCheckBox) {
-        newTestChekBox.setSelected(aExistsTestsCheckBox);
+        newTest.setSelected(aExistsTestsCheckBox);
     }
     public static void setNewInstancesCheckBox(Boolean aNewInstancesCheckBox) {
-        newInstancesCheckBox.setSelected(aNewInstancesCheckBox);
+        newInstances.setSelected(aNewInstancesCheckBox);
     }
     public static void setNewTestCheckBox(Boolean aNewTestCheckBox) {
-        newTestChekBox.setSelected(aNewTestCheckBox);
+        newTest.setSelected(aNewTestCheckBox);
     }
     public static void setSparqlCheckBox(Boolean aSparqlCheckBox) {
-        sparqlCheckBox.setSelected(aSparqlCheckBox);
+        sparql.setSelected(aSparqlCheckBox);
     }
     public static String getFisicalOntologyTextField() {
         return fisicalOntologyTextField.getText();
@@ -57,6 +58,10 @@ public class MainJPanel extends javax.swing.JPanel {
     public MainJPanel() {
         initComponents();
         setSeleccionado(true);
+        ButtonGroup group = new ButtonGroup();
+        group.add(sparql);
+        group.add(newInstances);
+        group.add(newTest);
         namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
         collectionTest = new CollectionTest();
     }
@@ -78,9 +83,9 @@ public class MainJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         namespaceOntologyTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        newInstancesCheckBox = new javax.swing.JCheckBox();
-        sparqlCheckBox = new javax.swing.JCheckBox();
-        newTestChekBox = new javax.swing.JCheckBox();
+        newTest = new javax.swing.JRadioButton();
+        sparql = new javax.swing.JRadioButton();
+        newInstances = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("¡¡BIENVENIDO AL EVALUADOR DE ONTOLOGÍAS!!");
@@ -100,11 +105,11 @@ public class MainJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Seleccione las acciones que desea realizar:");
 
-        newInstancesCheckBox.setText("Crear conjunto de instancias");
+        newTest.setText("Crear Tests Simples");
 
-        sparqlCheckBox.setText("Realizar consultas SPARQL");
+        sparql.setText("Crear Tests SPARQL");
 
-        newTestChekBox.setText("Crear Tests");
+        newInstances.setText("Crear Instancias");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,11 +119,11 @@ public class MainJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(sparqlCheckBox)
+                        .addComponent(newInstances)
                         .addContainerGap())
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(newInstancesCheckBox)
+                            .addComponent(sparql)
                             .addContainerGap())
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -143,8 +148,8 @@ public class MainJPanel extends javax.swing.JPanel {
                                 .addComponent(examinarFisicalButton)
                                 .addGap(222, 222, 222))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(newTestChekBox)
-                                .addContainerGap(572, Short.MAX_VALUE))))))
+                                .addComponent(newTest)
+                                .addContainerGap(534, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,11 +171,11 @@ public class MainJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(newTestChekBox)
+                .addComponent(newTest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(newInstancesCheckBox)
+                .addComponent(sparql)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sparqlCheckBox)
+                .addComponent(newInstances)
                 .addGap(93, 93, 93))
         );
 
@@ -201,22 +206,22 @@ private void openFile(JTextField textfield){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private static javax.swing.JTextField namespaceOntologyTextField;
-    private static javax.swing.JCheckBox newInstancesCheckBox;
-    private static javax.swing.JCheckBox newTestChekBox;
-    private static javax.swing.JCheckBox sparqlCheckBox;
+    private static javax.swing.JRadioButton newInstances;
+    private static javax.swing.JRadioButton newTest;
+    private static javax.swing.JRadioButton sparql;
     // End of variables declaration//GEN-END:variables
 
 
     public static boolean getNewInstancesState() {
-        return newInstancesCheckBox.isSelected();
+        return newInstances.isSelected();
     }
 
     public static boolean getNewTestState() {
-        return newTestChekBox.isSelected();
+        return newTest.isSelected();
     }
 
     public static boolean getSparqlState() {
-        return sparqlCheckBox.isSelected();
+        return sparql.isSelected();
     }
 
 }

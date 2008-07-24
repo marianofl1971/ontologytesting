@@ -612,13 +612,12 @@ public void guardarDatos(){
         MainJPanel.getCollectionTest().setNamespace(ontologyURI.concat("#"));
     }   
     
-    if(AddSPARQLJPanel.isSeleccionado()==false){
-        for(int j=0;j<5;j++){
-            GroupTestsJPanel.asociarInstancias(j);
-        }
-    }else{
+    
+    for(int j=0;j<5;j++){
+        GroupTestsJPanel.asociarInstancias(j);
+    }
+    if(AddSPARQLJPanel.isSeleccionado()==true){
         if(AddSPARQLJPanel.getSPARQLQuery().equals("")){
-            //if(AddInstancesJPanel.isStateNuevo()==true){
                 ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
                 int s = scT.size();
                 ScenarioTest t = scT.get(s-1);
@@ -688,8 +687,8 @@ public void guardarDatos(){
         GroupTestsJPanel.setPanelTree(panel);
         GroupTestsJPanel.setDatosGuardados(true); 
     }
-}
-    
+}   
+
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
     
     ArrayList<ClassInstances> classInstances = scenarioTest.getClassInstances();
@@ -773,14 +772,18 @@ public static void asociarInstancias(int sel){
             }   
         }
     }
-    for(int j=0; j<cont; j++){
-        testInstPanel.remove(j+2);
-        testInstPanel.add(new TestInstancesTFJPanel());
+    if(AddInstancesJPanel.isStateNuevo()==true){
+        for(int j=0; j<cont; j++){
+            testInstPanel.remove(j+2);
+            testInstPanel.add(new TestInstancesTFJPanel());
+        }
+        testInstPanel.validate();
     }
-    testInstPanel.validate();
     if(aux==1){
-        descPanel.setDescTextArea("");
-        descPanel.setNombreTextField("");
+        if(AddInstancesJPanel.isStateNuevo()==true){
+            descPanel.setDescTextArea("");
+            descPanel.setNombreTextField("");
+        }
         clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
         propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
         scenario.setClassInstances(clasFinal);
@@ -837,14 +840,19 @@ public static void asociarInstancias(int sel){
                 
         }
     }
+    if(AddInstancesJPanel.isStateNuevo()==true){
         for(int j=0; j<cont; j++){
             testRetPanel.remove(j+2);
             testRetPanel.add(new TestInstancesQueryJPanel());
         }
         testRetPanel.validate();
+    }
+        
         if(aux==1){
-        descPanel.setDescTextArea("");
-        descPanel.setNombreTextField("");
+        if(AddInstancesJPanel.isStateNuevo()==true){
+            descPanel.setDescTextArea("");
+            descPanel.setNombreTextField("");
+        }
         clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
         propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
         scenario.setClassInstances(clasFinal);
@@ -900,14 +908,18 @@ public static void asociarInstancias(int sel){
                 
         }
     }
+    if(AddInstancesJPanel.isStateNuevo()==true){
         for(int j=0; j<cont; j++){
             testRealPanel.remove(j+2);
             testRealPanel.add(new TestInstancesQueryJPanel());
         }
         testRealPanel.validate();
+    }
         if(aux==1){
-        descPanel.setDescTextArea("");
-        descPanel.setNombreTextField("");
+        if(AddInstancesJPanel.isStateNuevo()==true){
+            descPanel.setDescTextArea("");
+            descPanel.setNombreTextField("");
+        }
         clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
         propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
         scenario.setClassInstances(clasFinal);
@@ -965,14 +977,18 @@ public static void asociarInstancias(int sel){
                 
         }
     }
+    if(AddInstancesJPanel.isStateNuevo()==true){
         for(int j=0; j<cont; j++){
             testSatPanel.remove(j+2);
             testSatPanel.add(new TestInstancesTFJPanel());
         }
         testSatPanel.validate();
+    }
         if(aux==1){
-        descPanel.setDescTextArea("");
-        descPanel.setNombreTextField("");
+        if(AddInstancesJPanel.isStateNuevo()==true){
+            descPanel.setDescTextArea("");
+            descPanel.setNombreTextField("");
+        }
         clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
         propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
         scenario.setClassInstances(clasFinal);
@@ -1028,14 +1044,18 @@ public static void asociarInstancias(int sel){
                 
         }
     }
+    if(AddInstancesJPanel.isStateNuevo()==true){
         for(int j=0; j<cont; j++){
             testClasPanel.remove(j+2);
             testClasPanel.add(new TestInstancesQueryJPanel());
         }
         testClasPanel.validate();
+    }
         if(aux==1){
-        descPanel.setDescTextArea("");
-        descPanel.setNombreTextField("");
+        if(AddInstancesJPanel.isStateNuevo()==true){
+            descPanel.setDescTextArea("");
+            descPanel.setNombreTextField("");
+        }
         clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
         propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
         scenario.setClassInstances(clasFinal);
