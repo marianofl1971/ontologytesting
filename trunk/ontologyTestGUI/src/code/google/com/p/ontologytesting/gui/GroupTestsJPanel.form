@@ -96,49 +96,236 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="567" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="introInstPanel" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Component id="contentInstTabedPanel" alignment="0" min="-2" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace pref="245" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="438" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="introInstPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="contentInstTabedPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="142" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="labelInstPanel">
+                    <Container class="javax.swing.JPanel" name="introInstPanel">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace pref="85" max="32767" attributes="0"/>
-                                  <Component id="labelInstLabel" min="-2" pref="417" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel7" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel6" min="-2" pref="104" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nombreTextField" min="-2" pref="175" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="367" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="labelInstLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nombreTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="labelInstLabel">
+                        <Component class="javax.swing.JLabel" name="jLabel6">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO                           "/>
+                            <Property name="text" type="java.lang.String" value="Nombre del test:"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="nombreTextField">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel7">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="descTextArea">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="contentInstTabedPanel">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="850" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneInst" alignment="0" pref="850" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="312" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneInst" alignment="0" pref="312" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JTabbedPane" name="tabbedPaneInst">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="opcionAyudaInstPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato ayuda">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" min="-2" pref="807" max="-2" attributes="0"/>
+                                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" pref="262" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="instAyudaPanel">
+
+                                      <Layout>
+                                        <DimensionLayout dim="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="293" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                        <DimensionLayout dim="1">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="213" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="javax.swing.JPanel" name="labelInstPanel">
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel" min="-2" pref="397" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JLabel" name="labelInstLabel">
+                                              <Properties>
+                                                <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO"/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="opcionTextInstPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato Texto">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="845" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="284" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -167,33 +354,46 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelRetPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="635" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="introRetPanel" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Component id="contentRetTabedPanel" alignment="0" min="-2" max="-2" attributes="1"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
-                              <Component id="labelRetPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="411" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="introRetPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="contentRetTabedPanel" min="-2" pref="302" max="-2" attributes="0"/>
+                              <EmptySpace pref="157" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="labelRetPanel">
+                    <Container class="javax.swing.JPanel" name="introRetPanel">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel9" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel8" min="-2" pref="104" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nombreTextField1" min="-2" pref="175" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane2" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="369" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -201,18 +401,194 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nombreTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" min="-2" pref="85" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel2">
+                        <Component class="javax.swing.JLabel" name="jLabel8">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="                    CONSULTAS                                 RESULTADO ESPERADO                           "/>
+                            <Property name="text" type="java.lang.String" value="Nombre del test:"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="nombreTextField1">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel9">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="descTextArea1">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="contentRetTabedPanel">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="826" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneRet" alignment="0" pref="826" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="326" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tabbedPaneRet" min="-2" pref="326" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JTabbedPane" name="tabbedPaneRet">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="opcionAyudaRetPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato ayuda">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane7" pref="801" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane7" min="-2" pref="256" max="-2" attributes="0"/>
+                                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane7">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="retAyudaPanel">
+
+                                      <Layout>
+                                        <DimensionLayout dim="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel2" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="287" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                        <DimensionLayout dim="1">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel2" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="207" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="javax.swing.JPanel" name="labelInstPanel2">
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel1" min="-2" pref="397" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="labelInstLabel1" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JLabel" name="labelInstLabel1">
+                                              <Properties>
+                                                <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO "/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="opcionTextRetPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato Texto">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="821" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="298" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -238,33 +614,55 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelRealPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="635" max="32767" attributes="0"/>
+                              <Component id="introRealPanel" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="contentRealTabedPanel" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace pref="234" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                              <Component id="labelRealPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="420" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="introRealPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="544" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                  <Component id="contentRealTabedPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="164" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="labelRealPanel">
+                    <Container class="javax.swing.JPanel" name="introRealPanel">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel11" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel10" min="-2" pref="104" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nombreTextField2" min="-2" pref="175" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane3" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="359" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -272,18 +670,194 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nombreTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="85" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel3">
+                        <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="                    CONSULTAS                                 RESULTADO ESPERADO                           "/>
+                            <Property name="text" type="java.lang.String" value="Nombre del test:"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="nombreTextField2">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel11">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="descTextArea2">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="contentRealTabedPanel">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="835" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneReal" alignment="0" pref="835" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="327" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tabbedPaneReal" min="-2" pref="316" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JTabbedPane" name="tabbedPaneReal">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="opcionAyudaRealPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato ayuda">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane8" pref="810" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane8" min="-2" pref="253" max="-2" attributes="0"/>
+                                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane8">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="realAyudaPanel">
+
+                                      <Layout>
+                                        <DimensionLayout dim="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel4" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="296" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                        <DimensionLayout dim="1">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel4" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="204" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="javax.swing.JPanel" name="labelInstPanel4">
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel4" min="-2" pref="386" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="labelInstLabel4" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JLabel" name="labelInstLabel4">
+                                              <Properties>
+                                                <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO"/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="opcionTextRealPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato Texto">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="830" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="288" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -309,51 +883,250 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelSatisPanel" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="567" max="32767" attributes="0"/>
+                              <Component id="introSatPanel" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="contentSatTabedPanel" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace pref="233" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="labelSatisPanel" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="418" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="introSatPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="580" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                  <Component id="contentSatTabedPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="191" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="labelSatisPanel">
+                    <Container class="javax.swing.JPanel" name="introSatPanel">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace pref="85" max="32767" attributes="0"/>
-                                  <Component id="labelInstLabel1" min="-2" pref="417" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel13" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel12" min="-2" pref="104" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nombreTextField3" min="-2" pref="175" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane4" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="359" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="labelInstLabel1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nombreTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane4" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="labelInstLabel1">
+                        <Component class="javax.swing.JLabel" name="jLabel12">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO                           "/>
+                            <Property name="text" type="java.lang.String" value="Nombre del test:"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="nombreTextField3">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel13">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="descTextArea3">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="contentSatTabedPanel">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="836" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneSat" alignment="0" pref="836" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="336" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tabbedPaneSat" min="-2" pref="316" max="-2" attributes="0"/>
+                                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JTabbedPane" name="tabbedPaneSat">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="opcionAyudaSatPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato ayuda">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane9" pref="811" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane9" min="-2" pref="257" max="-2" attributes="0"/>
+                                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane9">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="satAyudaPanel">
+
+                                      <Layout>
+                                        <DimensionLayout dim="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel6" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="297" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                        <DimensionLayout dim="1">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel6" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="208" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="javax.swing.JPanel" name="labelInstPanel6">
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel6" min="-2" pref="386" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel6" pref="14" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JLabel" name="labelInstLabel6">
+                                              <Properties>
+                                                <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO  "/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="opcionTextSatPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato Texto">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="831" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="288" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -379,33 +1152,55 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelClasPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="635" max="32767" attributes="0"/>
+                              <Component id="introClasPanel" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="contentClasTabedPanel" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace pref="234" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                              <Component id="labelClasPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="418" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="introClasPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="598" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                  <Component id="contentClasTabedPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="204" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="labelClasPanel">
+                    <Container class="javax.swing.JPanel" name="introClasPanel">
 
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel15" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel14" min="-2" pref="104" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="nombreTextField4" min="-2" pref="175" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jScrollPane5" alignment="0" min="-2" pref="467" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="359" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -413,18 +1208,194 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="nombreTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane5" min="-2" pref="85" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel4">
+                        <Component class="javax.swing.JLabel" name="jLabel14">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="                    CONSULTAS                                 RESULTADO ESPERADO                           "/>
+                            <Property name="text" type="java.lang.String" value="Nombre del test:"/>
                           </Properties>
                         </Component>
+                        <Component class="javax.swing.JTextField" name="nombreTextField4">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel15">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTextArea" name="descTextArea4">
+                              <Properties>
+                                <Property name="columns" type="int" value="20"/>
+                                <Property name="rows" type="int" value="5"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="contentClasTabedPanel">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="835" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Component id="tabbedPaneClas" alignment="0" pref="835" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace min="0" pref="341" max="32767" attributes="0"/>
+                              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tabbedPaneClas" min="-2" pref="330" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JTabbedPane" name="tabbedPaneClas">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                          <SubComponents>
+                            <Container class="javax.swing.JPanel" name="opcionAyudaClasPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato ayuda">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane10" pref="810" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane10" min="-2" pref="252" max="-2" attributes="0"/>
+                                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                              <SubComponents>
+                                <Container class="javax.swing.JScrollPane" name="jScrollPane10">
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Container class="javax.swing.JPanel" name="clasAyudaPanel">
+
+                                      <Layout>
+                                        <DimensionLayout dim="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel8" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="296" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                        <DimensionLayout dim="1">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="labelInstPanel8" min="-2" max="-2" attributes="1"/>
+                                                  <EmptySpace pref="203" max="32767" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                        </DimensionLayout>
+                                      </Layout>
+                                      <SubComponents>
+                                        <Container class="javax.swing.JPanel" name="labelInstPanel8">
+
+                                          <Layout>
+                                            <DimensionLayout dim="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel8" min="-2" pref="388" max="-2" attributes="0"/>
+                                                      <EmptySpace pref="104" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                            <DimensionLayout dim="1">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="labelInstLabel8" pref="14" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                            </DimensionLayout>
+                                          </Layout>
+                                          <SubComponents>
+                                            <Component class="javax.swing.JLabel" name="labelInstLabel8">
+                                              <Properties>
+                                                <Property name="text" type="java.lang.String" value="                      CONSULTAS                               RESULTADO ESPERADO"/>
+                                              </Properties>
+                                            </Component>
+                                          </SubComponents>
+                                        </Container>
+                                      </SubComponents>
+                                    </Container>
+                                  </SubComponents>
+                                </Container>
+                              </SubComponents>
+                            </Container>
+                            <Container class="javax.swing.JPanel" name="opcionTextClasPanel">
+                              <Constraints>
+                                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                                  <JTabbedPaneConstraints tabName="Formato Texto">
+                                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                                  </JTabbedPaneConstraints>
+                                </Constraint>
+                              </Constraints>
+
+                              <Layout>
+                                <DimensionLayout dim="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="830" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                                <DimensionLayout dim="1">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="302" max="32767" attributes="0"/>
+                                  </Group>
+                                </DimensionLayout>
+                              </Layout>
+                            </Container>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>

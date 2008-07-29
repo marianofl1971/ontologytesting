@@ -29,7 +29,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
     private String inicio="";
     private JFileChooser filechooser;
     private Component frame;
-    private static boolean haSidoConfigurado=false;
+    private static boolean haSidoConfigurado=true;
     
     /** Creates new form ConfigurationJPanel */
     public ConfigurationJPanel() {

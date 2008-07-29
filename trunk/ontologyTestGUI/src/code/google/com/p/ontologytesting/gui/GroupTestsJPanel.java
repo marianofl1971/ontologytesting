@@ -31,6 +31,8 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -97,29 +99,28 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
         testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
         testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));
-        labelInstPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelRetPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelRealPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelClasPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelSatisPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        
-        testInstPanel.add(new DescripcionJPanel());
-        testInstPanel.add(labelInstPanel);
-        testRetPanel.add(new DescripcionJPanel());
-        testRetPanel.add(labelRetPanel);
-        testRealPanel.add(new DescripcionJPanel());
-        testRealPanel.add(labelRealPanel);
-        testSatPanel.add(new DescripcionJPanel());
-        testSatPanel.add(labelSatisPanel);
-        testClasPanel.add(new DescripcionJPanel());
-        testClasPanel.add(labelClasPanel);
-        
+        opcionTextInstPanel.setLayout(new BoxLayout(opcionTextInstPanel, BoxLayout.Y_AXIS));
+        opcionTextRetPanel.setLayout(new BoxLayout(opcionTextRetPanel, BoxLayout.Y_AXIS));
+        opcionTextClasPanel.setLayout(new BoxLayout(opcionTextClasPanel, BoxLayout.Y_AXIS));
+        opcionTextSatPanel.setLayout(new BoxLayout(opcionTextSatPanel, BoxLayout.Y_AXIS));
+        opcionTextRealPanel.setLayout(new BoxLayout(opcionTextRealPanel, BoxLayout.Y_AXIS));
+        instAyudaPanel.setLayout(new BoxLayout(instAyudaPanel, BoxLayout.Y_AXIS));
+        retAyudaPanel.setLayout(new BoxLayout(retAyudaPanel, BoxLayout.Y_AXIS));
+        clasAyudaPanel.setLayout(new BoxLayout(clasAyudaPanel, BoxLayout.Y_AXIS));
+        satAyudaPanel.setLayout(new BoxLayout(satAyudaPanel, BoxLayout.Y_AXIS));
+        realAyudaPanel.setLayout(new BoxLayout(realAyudaPanel, BoxLayout.Y_AXIS));
+        opcionTextInstPanel.add(new TestInstancesTextJPanel());    
+        opcionTextRetPanel.add(new TestInstancesTextJPanel());
+        opcionTextClasPanel.add(new TestInstancesTextJPanel());
+        opcionTextSatPanel.add(new TestInstancesTextJPanel());
+        opcionTextRealPanel.add(new TestInstancesTextJPanel());
+
         for (int i = 0; i <= num; i++) {
-            testInstPanel.add(new TestInstancesTFJPanel());
-            testRetPanel.add(new TestInstancesQueryJPanel());
-            testRealPanel.add(new TestInstancesQueryJPanel());
-            testSatPanel.add(new TestInstancesTFJPanel());
-            testClasPanel.add(new TestInstancesQueryJPanel());
+            instAyudaPanel.add(new TestInstancesTFJPanel());
+            retAyudaPanel.add(new TestInstancesQueryJPanel());
+            realAyudaPanel.add(new TestInstancesQueryJPanel());
+            satAyudaPanel.add(new TestInstancesTFJPanel());
+            clasAyudaPanel.add(new TestInstancesQueryJPanel());
         }
         
         /*scenarioTest = new ScenarioTest();
@@ -148,22 +149,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
         testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));
         labelInstPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelRetPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelRealPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelClasPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        labelSatisPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-               
-        testClasPanel.add(new DescripcionJPanel());
-        testClasPanel.add(labelClasPanel);
-        testInstPanel.add(new DescripcionJPanel());
-        testInstPanel.add(labelInstPanel);
-        testRetPanel.add(new DescripcionJPanel());
-        testRetPanel.add(labelRetPanel);
-        testRealPanel.add(new DescripcionJPanel());
-        testRealPanel.add(labelRealPanel);
-        testSatPanel.add(new DescripcionJPanel());
-        testSatPanel.add(labelSatisPanel);
-        testClasPanel.add(labelClasPanel); 
 
         try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
@@ -265,24 +250,84 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane = new javax.swing.JTabbedPane();
         test1ScrollPane = new javax.swing.JScrollPane();
         testInstPanel = new javax.swing.JPanel();
+        introInstPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        nombreTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descTextArea = new javax.swing.JTextArea();
+        contentInstTabedPanel = new javax.swing.JPanel();
+        tabbedPaneInst = new javax.swing.JTabbedPane();
+        opcionAyudaInstPanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        instAyudaPanel = new javax.swing.JPanel();
         labelInstPanel = new javax.swing.JPanel();
         labelInstLabel = new javax.swing.JLabel();
+        opcionTextInstPanel = new javax.swing.JPanel();
         test2ScrollPane = new javax.swing.JScrollPane();
         testRetPanel = new javax.swing.JPanel();
-        labelRetPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        introRetPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        nombreTextField1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        descTextArea1 = new javax.swing.JTextArea();
+        contentRetTabedPanel = new javax.swing.JPanel();
+        tabbedPaneRet = new javax.swing.JTabbedPane();
+        opcionAyudaRetPanel = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        retAyudaPanel = new javax.swing.JPanel();
+        labelInstPanel2 = new javax.swing.JPanel();
+        labelInstLabel1 = new javax.swing.JLabel();
+        opcionTextRetPanel = new javax.swing.JPanel();
         test3ScrollPane = new javax.swing.JScrollPane();
         testRealPanel = new javax.swing.JPanel();
-        labelRealPanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        introRealPanel = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        nombreTextField2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        descTextArea2 = new javax.swing.JTextArea();
+        contentRealTabedPanel = new javax.swing.JPanel();
+        tabbedPaneReal = new javax.swing.JTabbedPane();
+        opcionAyudaRealPanel = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        realAyudaPanel = new javax.swing.JPanel();
+        labelInstPanel4 = new javax.swing.JPanel();
+        labelInstLabel4 = new javax.swing.JLabel();
+        opcionTextRealPanel = new javax.swing.JPanel();
         test4ScrollPane = new javax.swing.JScrollPane();
         testSatPanel = new javax.swing.JPanel();
-        labelSatisPanel = new javax.swing.JPanel();
-        labelInstLabel1 = new javax.swing.JLabel();
+        introSatPanel = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        nombreTextField3 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        descTextArea3 = new javax.swing.JTextArea();
+        contentSatTabedPanel = new javax.swing.JPanel();
+        tabbedPaneSat = new javax.swing.JTabbedPane();
+        opcionAyudaSatPanel = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        satAyudaPanel = new javax.swing.JPanel();
+        labelInstPanel6 = new javax.swing.JPanel();
+        labelInstLabel6 = new javax.swing.JLabel();
+        opcionTextSatPanel = new javax.swing.JPanel();
         test5ScrollPane = new javax.swing.JScrollPane();
         testClasPanel = new javax.swing.JPanel();
-        labelClasPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        introClasPanel = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        nombreTextField4 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        descTextArea4 = new javax.swing.JTextArea();
+        contentClasTabedPanel = new javax.swing.JPanel();
+        tabbedPaneClas = new javax.swing.JTabbedPane();
+        opcionAyudaClasPanel = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        clasAyudaPanel = new javax.swing.JPanel();
+        labelInstPanel8 = new javax.swing.JPanel();
+        labelInstLabel8 = new javax.swing.JLabel();
+        opcionTextClasPanel = new javax.swing.JPanel();
         introduccionPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         helpButton = new javax.swing.JButton();
@@ -295,22 +340,126 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         test1ScrollPane.setToolTipText("Deduce si el individuo pertenece a la clase dada.");
         test1ScrollPane.setMinimumSize(new java.awt.Dimension(700, 550));
 
-        labelInstLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO                           ");
+        jLabel6.setText("Nombre del test:");
+
+        jLabel7.setText("Descripción:");
+
+        descTextArea.setColumns(20);
+        descTextArea.setRows(5);
+        jScrollPane1.setViewportView(descTextArea);
+
+        javax.swing.GroupLayout introInstPanelLayout = new javax.swing.GroupLayout(introInstPanel);
+        introInstPanel.setLayout(introInstPanelLayout);
+        introInstPanelLayout.setHorizontalGroup(
+            introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introInstPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(introInstPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(367, Short.MAX_VALUE))
+        );
+        introInstPanelLayout.setVerticalGroup(
+            introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introInstPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelInstLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
         javax.swing.GroupLayout labelInstPanelLayout = new javax.swing.GroupLayout(labelInstPanel);
         labelInstPanel.setLayout(labelInstPanelLayout);
         labelInstPanelLayout.setHorizontalGroup(
             labelInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(labelInstPanelLayout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addComponent(labelInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(labelInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         labelInstPanelLayout.setVerticalGroup(
             labelInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelInstPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(labelInstPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(labelInstLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout instAyudaPanelLayout = new javax.swing.GroupLayout(instAyudaPanel);
+        instAyudaPanel.setLayout(instAyudaPanelLayout);
+        instAyudaPanelLayout.setHorizontalGroup(
+            instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(instAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+        instAyudaPanelLayout.setVerticalGroup(
+            instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(instAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(213, Short.MAX_VALUE))
+        );
+
+        jScrollPane6.setViewportView(instAyudaPanel);
+
+        javax.swing.GroupLayout opcionAyudaInstPanelLayout = new javax.swing.GroupLayout(opcionAyudaInstPanel);
+        opcionAyudaInstPanel.setLayout(opcionAyudaInstPanelLayout);
+        opcionAyudaInstPanelLayout.setHorizontalGroup(
+            opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        opcionAyudaInstPanelLayout.setVerticalGroup(
+            opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionAyudaInstPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        tabbedPaneInst.addTab("Formato ayuda", opcionAyudaInstPanel);
+
+        javax.swing.GroupLayout opcionTextInstPanelLayout = new javax.swing.GroupLayout(opcionTextInstPanel);
+        opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
+        opcionTextInstPanelLayout.setHorizontalGroup(
+            opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 845, Short.MAX_VALUE)
+        );
+        opcionTextInstPanelLayout.setVerticalGroup(
+            opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 284, Short.MAX_VALUE)
+        );
+
+        tabbedPaneInst.addTab("Formato Texto", opcionTextInstPanel);
+
+        javax.swing.GroupLayout contentInstTabedPanelLayout = new javax.swing.GroupLayout(contentInstTabedPanel);
+        contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
+        contentInstTabedPanelLayout.setHorizontalGroup(
+            contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE))
+        );
+        contentInstTabedPanelLayout.setVerticalGroup(
+            contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 312, Short.MAX_VALUE)
+            .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout testInstPanelLayout = new javax.swing.GroupLayout(testInstPanel);
@@ -319,15 +468,19 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(567, Short.MAX_VALUE))
+                .addGroup(testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(introInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         testInstPanelLayout.setVerticalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testInstPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(introInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         test1ScrollPane.setViewportView(testInstPanel);
@@ -337,23 +490,128 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test2ScrollPane.setToolTipText("Deduce TODOS los individuos que pertenecen a una clase dada.");
 
-        jLabel2.setText("                    CONSULTAS                                 RESULTADO ESPERADO                           ");
+        jLabel8.setText("Nombre del test:");
 
-        javax.swing.GroupLayout labelRetPanelLayout = new javax.swing.GroupLayout(labelRetPanel);
-        labelRetPanel.setLayout(labelRetPanelLayout);
-        labelRetPanelLayout.setHorizontalGroup(
-            labelRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelRetPanelLayout.createSequentialGroup()
+        jLabel9.setText("Descripción:");
+
+        descTextArea1.setColumns(20);
+        descTextArea1.setRows(5);
+        jScrollPane2.setViewportView(descTextArea1);
+
+        javax.swing.GroupLayout introRetPanelLayout = new javax.swing.GroupLayout(introRetPanel);
+        introRetPanel.setLayout(introRetPanelLayout);
+        introRetPanelLayout.setHorizontalGroup(
+            introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introRetPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(introRetPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(369, Short.MAX_VALUE))
+        );
+        introRetPanelLayout.setVerticalGroup(
+            introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introRetPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(nombreTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelInstLabel1.setText("                      CONSULTAS                               RESULTADO ESPERADO ");
+
+        javax.swing.GroupLayout labelInstPanel2Layout = new javax.swing.GroupLayout(labelInstPanel2);
+        labelInstPanel2.setLayout(labelInstPanel2Layout);
+        labelInstPanel2Layout.setHorizontalGroup(
+            labelInstPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        labelInstPanel2Layout.setVerticalGroup(
+            labelInstPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelInstPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(labelInstLabel1)
                 .addContainerGap())
         );
-        labelRetPanelLayout.setVerticalGroup(
-            labelRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelRetPanelLayout.createSequentialGroup()
+
+        javax.swing.GroupLayout retAyudaPanelLayout = new javax.swing.GroupLayout(retAyudaPanel);
+        retAyudaPanel.setLayout(retAyudaPanelLayout);
+        retAyudaPanelLayout.setHorizontalGroup(
+            retAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(retAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labelInstPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+        retAyudaPanelLayout.setVerticalGroup(
+            retAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(retAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setViewportView(retAyudaPanel);
+
+        javax.swing.GroupLayout opcionAyudaRetPanelLayout = new javax.swing.GroupLayout(opcionAyudaRetPanel);
+        opcionAyudaRetPanel.setLayout(opcionAyudaRetPanelLayout);
+        opcionAyudaRetPanelLayout.setHorizontalGroup(
+            opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        opcionAyudaRetPanelLayout.setVerticalGroup(
+            opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        tabbedPaneRet.addTab("Formato ayuda", opcionAyudaRetPanel);
+
+        javax.swing.GroupLayout opcionTextRetPanelLayout = new javax.swing.GroupLayout(opcionTextRetPanel);
+        opcionTextRetPanel.setLayout(opcionTextRetPanelLayout);
+        opcionTextRetPanelLayout.setHorizontalGroup(
+            opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 821, Short.MAX_VALUE)
+        );
+        opcionTextRetPanelLayout.setVerticalGroup(
+            opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 298, Short.MAX_VALUE)
+        );
+
+        tabbedPaneRet.addTab("Formato Texto", opcionTextRetPanel);
+
+        javax.swing.GroupLayout contentRetTabedPanelLayout = new javax.swing.GroupLayout(contentRetTabedPanel);
+        contentRetTabedPanel.setLayout(contentRetTabedPanelLayout);
+        contentRetTabedPanelLayout.setHorizontalGroup(
+            contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 826, Short.MAX_VALUE)
+            .addGroup(contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE))
+        );
+        contentRetTabedPanelLayout.setVerticalGroup(
+            contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+            .addGroup(contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout testRetPanelLayout = new javax.swing.GroupLayout(testRetPanel);
@@ -362,15 +620,19 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addGroup(testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(introRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(243, 243, 243))
         );
         testRetPanelLayout.setVerticalGroup(
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRetPanelLayout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(labelRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(introRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         test2ScrollPane.setViewportView(testRetPanel);
@@ -380,23 +642,128 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test3ScrollPane.setToolTipText("Deduce dado un individuo, cual es la clase más exacta a la que pertenece.");
 
-        jLabel3.setText("                    CONSULTAS                                 RESULTADO ESPERADO                           ");
+        jLabel10.setText("Nombre del test:");
 
-        javax.swing.GroupLayout labelRealPanelLayout = new javax.swing.GroupLayout(labelRealPanel);
-        labelRealPanel.setLayout(labelRealPanelLayout);
-        labelRealPanelLayout.setHorizontalGroup(
-            labelRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelRealPanelLayout.createSequentialGroup()
+        jLabel11.setText("Descripción:");
+
+        descTextArea2.setColumns(20);
+        descTextArea2.setRows(5);
+        jScrollPane3.setViewportView(descTextArea2);
+
+        javax.swing.GroupLayout introRealPanelLayout = new javax.swing.GroupLayout(introRealPanel);
+        introRealPanel.setLayout(introRealPanelLayout);
+        introRealPanelLayout.setHorizontalGroup(
+            introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introRealPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(introRealPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(359, Short.MAX_VALUE))
+        );
+        introRealPanelLayout.setVerticalGroup(
+            introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introRealPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nombreTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelInstLabel4.setText("                      CONSULTAS                               RESULTADO ESPERADO");
+
+        javax.swing.GroupLayout labelInstPanel4Layout = new javax.swing.GroupLayout(labelInstPanel4);
+        labelInstPanel4.setLayout(labelInstPanel4Layout);
+        labelInstPanel4Layout.setHorizontalGroup(
+            labelInstPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+        labelInstPanel4Layout.setVerticalGroup(
+            labelInstPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelInstPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addComponent(labelInstLabel4)
                 .addContainerGap())
         );
-        labelRealPanelLayout.setVerticalGroup(
-            labelRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelRealPanelLayout.createSequentialGroup()
+
+        javax.swing.GroupLayout realAyudaPanelLayout = new javax.swing.GroupLayout(realAyudaPanel);
+        realAyudaPanel.setLayout(realAyudaPanelLayout);
+        realAyudaPanelLayout.setHorizontalGroup(
+            realAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(realAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labelInstPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
+        );
+        realAyudaPanelLayout.setVerticalGroup(
+            realAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(realAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+
+        jScrollPane8.setViewportView(realAyudaPanel);
+
+        javax.swing.GroupLayout opcionAyudaRealPanelLayout = new javax.swing.GroupLayout(opcionAyudaRealPanel);
+        opcionAyudaRealPanel.setLayout(opcionAyudaRealPanelLayout);
+        opcionAyudaRealPanelLayout.setHorizontalGroup(
+            opcionAyudaRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaRealPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        opcionAyudaRealPanelLayout.setVerticalGroup(
+            opcionAyudaRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaRealPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        tabbedPaneReal.addTab("Formato ayuda", opcionAyudaRealPanel);
+
+        javax.swing.GroupLayout opcionTextRealPanelLayout = new javax.swing.GroupLayout(opcionTextRealPanel);
+        opcionTextRealPanel.setLayout(opcionTextRealPanelLayout);
+        opcionTextRealPanelLayout.setHorizontalGroup(
+            opcionTextRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 830, Short.MAX_VALUE)
+        );
+        opcionTextRealPanelLayout.setVerticalGroup(
+            opcionTextRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 288, Short.MAX_VALUE)
+        );
+
+        tabbedPaneReal.addTab("Formato Texto", opcionTextRealPanel);
+
+        javax.swing.GroupLayout contentRealTabedPanelLayout = new javax.swing.GroupLayout(contentRealTabedPanel);
+        contentRealTabedPanel.setLayout(contentRealTabedPanelLayout);
+        contentRealTabedPanelLayout.setHorizontalGroup(
+            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 835, Short.MAX_VALUE)
+            .addGroup(contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneReal, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE))
+        );
+        contentRealTabedPanelLayout.setVerticalGroup(
+            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 327, Short.MAX_VALUE)
+            .addGroup(contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneReal, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout testRealPanelLayout = new javax.swing.GroupLayout(testRealPanel);
@@ -405,15 +772,25 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRealPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addComponent(introRealPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(233, 233, 233))
+            .addGroup(testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testRealPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(234, Short.MAX_VALUE)))
         );
         testRealPanelLayout.setVerticalGroup(
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRealPanelLayout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(labelRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(introRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(544, Short.MAX_VALUE))
+            .addGroup(testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testRealPanelLayout.createSequentialGroup()
+                    .addGap(217, 217, 217)
+                    .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(164, Short.MAX_VALUE)))
         );
 
         test3ScrollPane.setViewportView(testRealPanel);
@@ -422,22 +799,128 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test4ScrollPane.setToolTipText("Deduce si se puede o no añadir una nueva instancia de clase.");
 
-        labelInstLabel1.setText("                      CONSULTAS                               RESULTADO ESPERADO                           ");
+        jLabel12.setText("Nombre del test:");
 
-        javax.swing.GroupLayout labelSatisPanelLayout = new javax.swing.GroupLayout(labelSatisPanel);
-        labelSatisPanel.setLayout(labelSatisPanelLayout);
-        labelSatisPanelLayout.setHorizontalGroup(
-            labelSatisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelSatisPanelLayout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addComponent(labelInstLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jLabel13.setText("Descripción:");
+
+        descTextArea3.setColumns(20);
+        descTextArea3.setRows(5);
+        jScrollPane4.setViewportView(descTextArea3);
+
+        javax.swing.GroupLayout introSatPanelLayout = new javax.swing.GroupLayout(introSatPanel);
+        introSatPanel.setLayout(introSatPanelLayout);
+        introSatPanelLayout.setHorizontalGroup(
+            introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introSatPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(introSatPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
-        labelSatisPanelLayout.setVerticalGroup(
-            labelSatisPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelSatisPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelInstLabel1)
+        introSatPanelLayout.setVerticalGroup(
+            introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introSatPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(nombreTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelInstLabel6.setText("                      CONSULTAS                               RESULTADO ESPERADO  ");
+
+        javax.swing.GroupLayout labelInstPanel6Layout = new javax.swing.GroupLayout(labelInstPanel6);
+        labelInstPanel6.setLayout(labelInstPanel6Layout);
+        labelInstPanel6Layout.setHorizontalGroup(
+            labelInstPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+        labelInstPanel6Layout.setVerticalGroup(
+            labelInstPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout satAyudaPanelLayout = new javax.swing.GroupLayout(satAyudaPanel);
+        satAyudaPanel.setLayout(satAyudaPanelLayout);
+        satAyudaPanelLayout.setHorizontalGroup(
+            satAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(satAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(297, Short.MAX_VALUE))
+        );
+        satAyudaPanelLayout.setVerticalGroup(
+            satAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(satAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
+        );
+
+        jScrollPane9.setViewportView(satAyudaPanel);
+
+        javax.swing.GroupLayout opcionAyudaSatPanelLayout = new javax.swing.GroupLayout(opcionAyudaSatPanel);
+        opcionAyudaSatPanel.setLayout(opcionAyudaSatPanelLayout);
+        opcionAyudaSatPanelLayout.setHorizontalGroup(
+            opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaSatPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        opcionAyudaSatPanelLayout.setVerticalGroup(
+            opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaSatPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        tabbedPaneSat.addTab("Formato ayuda", opcionAyudaSatPanel);
+
+        javax.swing.GroupLayout opcionTextSatPanelLayout = new javax.swing.GroupLayout(opcionTextSatPanel);
+        opcionTextSatPanel.setLayout(opcionTextSatPanelLayout);
+        opcionTextSatPanelLayout.setHorizontalGroup(
+            opcionTextSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 831, Short.MAX_VALUE)
+        );
+        opcionTextSatPanelLayout.setVerticalGroup(
+            opcionTextSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 288, Short.MAX_VALUE)
+        );
+
+        tabbedPaneSat.addTab("Formato Texto", opcionTextSatPanel);
+
+        javax.swing.GroupLayout contentSatTabedPanelLayout = new javax.swing.GroupLayout(contentSatTabedPanel);
+        contentSatTabedPanel.setLayout(contentSatTabedPanelLayout);
+        contentSatTabedPanelLayout.setHorizontalGroup(
+            contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 836, Short.MAX_VALUE)
+            .addGroup(contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneSat, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE))
+        );
+        contentSatTabedPanelLayout.setVerticalGroup(
+            contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 336, Short.MAX_VALUE)
+            .addGroup(contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(contentSatTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneSat, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(20, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout testSatPanelLayout = new javax.swing.GroupLayout(testSatPanel);
@@ -446,15 +929,25 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testSatPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelSatisPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(567, Short.MAX_VALUE))
+                .addComponent(introSatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(233, 233, 233))
+            .addGroup(testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testSatPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(233, Short.MAX_VALUE)))
         );
         testSatPanelLayout.setVerticalGroup(
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testSatPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(labelSatisPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(introSatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(580, Short.MAX_VALUE))
+            .addGroup(testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testSatPanelLayout.createSequentialGroup()
+                    .addGap(217, 217, 217)
+                    .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(191, Short.MAX_VALUE)))
         );
 
         test4ScrollPane.setViewportView(testSatPanel);
@@ -463,23 +956,128 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test5ScrollPane.setToolTipText("Deduce, dado un individuo, TODAS las clases a las que pertenece.");
 
-        jLabel4.setText("                    CONSULTAS                                 RESULTADO ESPERADO                           ");
+        jLabel14.setText("Nombre del test:");
 
-        javax.swing.GroupLayout labelClasPanelLayout = new javax.swing.GroupLayout(labelClasPanel);
-        labelClasPanel.setLayout(labelClasPanelLayout);
-        labelClasPanelLayout.setHorizontalGroup(
-            labelClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labelClasPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+        jLabel15.setText("Descripción:");
+
+        descTextArea4.setColumns(20);
+        descTextArea4.setRows(5);
+        jScrollPane5.setViewportView(descTextArea4);
+
+        javax.swing.GroupLayout introClasPanelLayout = new javax.swing.GroupLayout(introClasPanel);
+        introClasPanel.setLayout(introClasPanelLayout);
+        introClasPanelLayout.setHorizontalGroup(
+            introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introClasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(introClasPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(359, Short.MAX_VALUE))
+        );
+        introClasPanelLayout.setVerticalGroup(
+            introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(introClasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(nombreTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        labelInstLabel8.setText("                      CONSULTAS                               RESULTADO ESPERADO");
+
+        javax.swing.GroupLayout labelInstPanel8Layout = new javax.swing.GroupLayout(labelInstPanel8);
+        labelInstPanel8.setLayout(labelInstPanel8Layout);
+        labelInstPanel8Layout.setHorizontalGroup(
+            labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        labelInstPanel8Layout.setVerticalGroup(
+            labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        labelClasPanelLayout.setVerticalGroup(
-            labelClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelClasPanelLayout.createSequentialGroup()
+
+        javax.swing.GroupLayout clasAyudaPanelLayout = new javax.swing.GroupLayout(clasAyudaPanel);
+        clasAyudaPanel.setLayout(clasAyudaPanelLayout);
+        clasAyudaPanelLayout.setHorizontalGroup(
+            clasAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clasAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labelInstPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
+        );
+        clasAyudaPanelLayout.setVerticalGroup(
+            clasAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(clasAyudaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+
+        jScrollPane10.setViewportView(clasAyudaPanel);
+
+        javax.swing.GroupLayout opcionAyudaClasPanelLayout = new javax.swing.GroupLayout(opcionAyudaClasPanel);
+        opcionAyudaClasPanel.setLayout(opcionAyudaClasPanelLayout);
+        opcionAyudaClasPanelLayout.setHorizontalGroup(
+            opcionAyudaClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaClasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        opcionAyudaClasPanelLayout.setVerticalGroup(
+            opcionAyudaClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionAyudaClasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        tabbedPaneClas.addTab("Formato ayuda", opcionAyudaClasPanel);
+
+        javax.swing.GroupLayout opcionTextClasPanelLayout = new javax.swing.GroupLayout(opcionTextClasPanel);
+        opcionTextClasPanel.setLayout(opcionTextClasPanelLayout);
+        opcionTextClasPanelLayout.setHorizontalGroup(
+            opcionTextClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 830, Short.MAX_VALUE)
+        );
+        opcionTextClasPanelLayout.setVerticalGroup(
+            opcionTextClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 302, Short.MAX_VALUE)
+        );
+
+        tabbedPaneClas.addTab("Formato Texto", opcionTextClasPanel);
+
+        javax.swing.GroupLayout contentClasTabedPanelLayout = new javax.swing.GroupLayout(contentClasTabedPanel);
+        contentClasTabedPanel.setLayout(contentClasTabedPanelLayout);
+        contentClasTabedPanelLayout.setHorizontalGroup(
+            contentClasTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 835, Short.MAX_VALUE)
+            .addGroup(contentClasTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabbedPaneClas, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE))
+        );
+        contentClasTabedPanelLayout.setVerticalGroup(
+            contentClasTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 341, Short.MAX_VALUE)
+            .addGroup(contentClasTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(contentClasTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneClas, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout testClasPanelLayout = new javax.swing.GroupLayout(testClasPanel);
@@ -488,15 +1086,25 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testClasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelClasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(635, Short.MAX_VALUE))
+                .addComponent(introClasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(233, 233, 233))
+            .addGroup(testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testClasPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(234, Short.MAX_VALUE)))
         );
         testClasPanelLayout.setVerticalGroup(
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testClasPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(labelClasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(introClasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(598, Short.MAX_VALUE))
+            .addGroup(testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testClasPanelLayout.createSequentialGroup()
+                    .addGap(217, 217, 217)
+                    .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(204, Short.MAX_VALUE)))
         );
 
         test5ScrollPane.setViewportView(testClasPanel);
@@ -574,20 +1182,80 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_helpButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel clasAyudaPanel;
+    private javax.swing.JPanel contentClasTabedPanel;
+    private javax.swing.JPanel contentInstTabedPanel;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JPanel contentRealTabedPanel;
+    private javax.swing.JPanel contentRetTabedPanel;
+    private javax.swing.JPanel contentSatTabedPanel;
+    private javax.swing.JTextArea descTextArea;
+    private javax.swing.JTextArea descTextArea1;
+    private javax.swing.JTextArea descTextArea2;
+    private javax.swing.JTextArea descTextArea3;
+    private javax.swing.JTextArea descTextArea4;
     private javax.swing.JButton helpButton;
+    private javax.swing.JPanel instAyudaPanel;
+    private javax.swing.JPanel introClasPanel;
+    private javax.swing.JPanel introInstPanel;
+    private javax.swing.JPanel introRealPanel;
+    private javax.swing.JPanel introRetPanel;
+    private javax.swing.JPanel introSatPanel;
     private javax.swing.JPanel introduccionPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel labelClasPanel;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel labelInstLabel;
     private javax.swing.JLabel labelInstLabel1;
+    private javax.swing.JLabel labelInstLabel4;
+    private javax.swing.JLabel labelInstLabel6;
+    private javax.swing.JLabel labelInstLabel8;
     private javax.swing.JPanel labelInstPanel;
-    private javax.swing.JPanel labelRealPanel;
-    private javax.swing.JPanel labelRetPanel;
-    private javax.swing.JPanel labelSatisPanel;
+    private javax.swing.JPanel labelInstPanel2;
+    private javax.swing.JPanel labelInstPanel4;
+    private javax.swing.JPanel labelInstPanel6;
+    private javax.swing.JPanel labelInstPanel8;
+    private javax.swing.JTextField nombreTextField;
+    private javax.swing.JTextField nombreTextField1;
+    private javax.swing.JTextField nombreTextField2;
+    private javax.swing.JTextField nombreTextField3;
+    private javax.swing.JTextField nombreTextField4;
+    private javax.swing.JPanel opcionAyudaClasPanel;
+    private javax.swing.JPanel opcionAyudaInstPanel;
+    private javax.swing.JPanel opcionAyudaRealPanel;
+    private javax.swing.JPanel opcionAyudaRetPanel;
+    private javax.swing.JPanel opcionAyudaSatPanel;
+    private javax.swing.JPanel opcionTextClasPanel;
+    private javax.swing.JPanel opcionTextInstPanel;
+    private javax.swing.JPanel opcionTextRealPanel;
+    private javax.swing.JPanel opcionTextRetPanel;
+    private javax.swing.JPanel opcionTextSatPanel;
+    private javax.swing.JPanel realAyudaPanel;
+    private javax.swing.JPanel retAyudaPanel;
+    private javax.swing.JPanel satAyudaPanel;
+    private javax.swing.JTabbedPane tabbedPaneClas;
+    private javax.swing.JTabbedPane tabbedPaneInst;
+    private javax.swing.JTabbedPane tabbedPaneReal;
+    private javax.swing.JTabbedPane tabbedPaneRet;
+    private javax.swing.JTabbedPane tabbedPaneSat;
     private javax.swing.JScrollPane test1ScrollPane;
     private javax.swing.JScrollPane test2ScrollPane;
     private javax.swing.JScrollPane test3ScrollPane;
