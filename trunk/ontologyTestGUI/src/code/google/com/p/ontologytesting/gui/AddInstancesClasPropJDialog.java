@@ -75,11 +75,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             int contI=0,contP=0;
 
             ListIterator ci,pi;
-            if(AddSPARQLJPanel.isSeleccionado()==false){
+            //if(AddSPARQLJPanel.isSeleccionado()==false){
                 clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-            }else{
-                clasInst = AddSPARQLJPanel.getScenarioTestQuery().getClassInstances();
-            }
+            //}else{
+                //clasInst = AddSPARQLJPanel.getScenarioTestQuery().getClassInstances();
+            //}
             ci = clasInst.listIterator();
             while(ci.hasNext()){ 
                 ClassInstances cI = (ClassInstances) ci.next();
@@ -93,11 +93,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 contI++;
             }
   
-            if(AddSPARQLJPanel.isSeleccionado()==false){
+            //if(AddSPARQLJPanel.isSeleccionado()==false){
                 propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
-            }else{
-                propInst = AddSPARQLJPanel.getScenarioTestQuery().getPropertyInstances();
-            }
+            //}else{
+                //propInst = AddSPARQLJPanel.getScenarioTestQuery().getPropertyInstances();
+            //}
             pi = propInst.listIterator();
             while(pi.hasNext()){
                 PropertyInstances pI = (PropertyInstances) pi.next();
@@ -682,14 +682,14 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {
-    if(AddSPARQLJPanel.isSeleccionado()==false) {     
+    //if(AddSPARQLJPanel.isSeleccionado()==false) {     
         int tab = GroupTestsJPanel.getSelectedTabed();
         ContentMainJFrame.getConjuntoClassInstances().set(tab, clasinst);
         ContentMainJFrame.getConjuntoPropInstances().set(tab, propinst);
-    }else{
-        AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasinst);
-        AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propinst);
-    }
+    //}else{
+        //AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasinst);
+        //AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propinst);
+    //}
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -136,6 +136,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     public GroupTestsJPanel(String path) {
         
         initComponents(); 
+        int pos=0;
         setNewState(true);
         frameHelp = new HelpJDialog(frame,true);
         
@@ -180,6 +181,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                 while(qi.hasNext()){   
                     QueryOntology cI = (QueryOntology) qi.next();
                     TestInstancesTFJPanel testTF = new TestInstancesTFJPanel();
+                    pos++;
                     TestInstancesQueryJPanel testQuery = new TestInstancesQueryJPanel();
                     if(s.getTestName().equals("Instanciación") || s.getTestName().equals("Satisfactibilidad")){   
                         testTF.setQuery(cI.getQuery());
@@ -219,6 +221,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         if(testInstPanel.getComponentCount()<8){
             while(testInstPanel.getComponentCount()<8){
                 testInstPanel.add(new TestInstancesTFJPanel());
+                pos++;
             }
         }
         if(testRetPanel.getComponentCount()<8){
@@ -234,6 +237,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         if(testSatPanel.getComponentCount()<8){
             while(testSatPanel.getComponentCount()<8){
                 testSatPanel.add(new TestInstancesTFJPanel());
+                pos++;
             }
         }
         if(testClasPanel.getComponentCount()<8){
@@ -612,36 +616,60 @@ public void guardarDatos(){
         MainJPanel.getCollectionTest().setNamespace(ontologyURI.concat("#"));
     }   
     
-    
-    for(int j=0;j<5;j++){
-        GroupTestsJPanel.asociarInstancias(j);
+    if(AddSPARQLJPanel.isSeleccionado()==false){
+        for(int j=0;j<5;j++){
+            GroupTestsJPanel.asociarInstancias(j);
+        }
     }
+    
     if(AddSPARQLJPanel.isSeleccionado()==true){
         if(AddSPARQLJPanel.getSPARQLQuery().equals("")){
                 ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
-                int s = scT.size();
-                ScenarioTest t = scT.get(s-1);
-                t.setTestName("sparql");
-                t.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-                t.setNombre(AddSPARQLJPanel.getTestNameTextField());
+                ScenarioTest scenarioSparql = new ScenarioTest();
+                //int s = scT.size();
+                //ScenarioTest t = scT.get(s-1);
+                scenarioSparql.setTestName("sparql");
+                scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+                scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
                 ArrayList<SparqlQueryOntology> listQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-                SparqlQueryOntology qo = new SparqlQueryOntology();
-                qo.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
-                qo.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-                listQuerys.add(qo);
-                t.setSparqlQuerys(listQuerys);
+                //SparqlQueryOntology qo = new SparqlQueryOntology();
+                //qo.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+                //qo.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+                //listQuerys.add(qo);
+                scenarioSparql.setSparqlQuerys(listQuerys);
+                if(scT.size()==0){
+                    scT.add(scenarioSparql);
+                    MainJPanel.getCollectionTest().setScenariotest(scT);
+                }else{
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                }
                 AddInstancesJPanel.setStateNuevo(false);
             }else{
+                ScenarioTest scenarioSparql = new ScenarioTest();
                 ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-                SparqlQueryOntology query = new SparqlQueryOntology();
                 if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
-                    query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
-                    query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-                    listSparqlQuerys.add(query);
-                    AddSPARQLJPanel.getScenarioTestQuery().setNombre(AddSPARQLJPanel.getTestNameTextField());
-                    AddSPARQLJPanel.getScenarioTestQuery().setTestName("sparql");
-                    AddSPARQLJPanel.getScenarioTestQuery().setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-                    AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);
+                    
+                    SparqlQueryOntology query = new SparqlQueryOntology(AddSPARQLJPanel.getSPARQLQuery(),
+                            AddSPARQLJPanel.getResultTextArea());
+                    
+                    if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
+                        listSparqlQuerys.add(query);
+                    }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
+                        listSparqlQuerys.remove(AddSPARQLJPanel.getPosListQuerysSel());
+                        listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
+                    }
+                    
+                    scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
+                    scenarioSparql.setTestName("sparql");
+                    scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+                    scenarioSparql.setSparqlQuerys(listSparqlQuerys);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenarioSparql);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                    }    
             }
         }
     }
@@ -1073,6 +1101,19 @@ public static void asociarInstancias(int sel){
     }       
 }
 
+public static boolean inListSparqlQuerys(SparqlQueryOntology query){
+    String queryq = query.getQuerySparql();
+    String queryres = query.getResultexpected();
+    SparqlQueryOntology sparql = AddSPARQLJPanel.getListSparqlQuerys().get(AddSPARQLJPanel.getPosListQuerysSel());
+    String qquery = sparql.getQuerySparql();
+    String qresult = sparql.getResultexpected();
+    if(!qquery.equals(queryq) || !qresult.equals(queryres)){
+        return false;
+    }
+    return true;
+}
+
+
 public static JPanel getTestClasPanel() {
     return testClasPanel;
 }
@@ -1094,10 +1135,14 @@ public static JPanel getTestSatPanel() {
 }
     
 public static int getSelectedTabed(){
-    return testsTabbedPane.getSelectedIndex();
+    if(AddSPARQLJPanel.isSeleccionado()==true){
+        return 5;
+    }else{
+        return testsTabbedPane.getSelectedIndex();
+    }
 }
 
-public javax.swing.JPanel getContentPanel() {
+public JPanel getContentPanel() {
     return contentPanel;
 }
 

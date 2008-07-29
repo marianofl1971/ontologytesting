@@ -6,7 +6,11 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.QueryOntology;
+import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.Frame;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import javax.swing.ButtonGroup;
 import javax.swing.WindowConstants;
 
@@ -18,15 +22,37 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
     private AddComentJDialog frameComent;
     private Frame frame;
+    private int posicion;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
         initComponents();
+        this.setPosicion(posicion);
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+
+    private void borrarDeScenario(ScenarioTest scenario, QueryOntology query) {
+        String aquery = query.getQuery();
+        String acoment = query.getComment();
+        String aresult = query.getResultexpected();
+        ArrayList<QueryOntology> q = scenario.getQueryTest();
+        ListIterator li;
+        li = q.listIterator();
+        int cont=0;
+        while(li.hasNext()){
+            QueryOntology queryOnto = (QueryOntology) li.next();
+            String qquery = queryOnto.getQuery();
+            String qresult = queryOnto.getResultexpected();
+            String qcoment = queryOnto.getComment();
+            if(aquery.equals(qquery) && acoment.equals(qcoment) && aresult.equals(qresult)){
+                scenario.getQueryTest().remove(cont);
+            }
+            cont++;
+        }
     }
 
     /** This method is called from within the constructor to
@@ -122,7 +148,23 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
+    /*ArrayList<ScenarioTest> listScenario = MainJPanel.getCollectionTest().getScenariotest();
+    String q = getQuery();
+    String result = isTestTrue();
+    AddComentJDialog c = getComment();
+    String coment = c.getComent();
+    QueryOntology query = new QueryOntology(q,result,coment);
+    ListIterator li;
+    li = listScenario.listIterator();
+    if(listScenario.size()==0){
+        remove(this);
+    }else{
+        while(li.hasNext()){
+            ScenarioTest scenario = (ScenarioTest) li.next();
+            borrarDeScenario(scenario,query);
+        }
+    }*/
+    
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
@@ -186,5 +228,13 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 }

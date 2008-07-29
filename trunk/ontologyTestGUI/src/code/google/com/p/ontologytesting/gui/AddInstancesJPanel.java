@@ -237,11 +237,13 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             addInst.setVisible(true);
         }
    }else{
-        ScenarioTest sT = AddSPARQLJPanel.getScenarioTestQuery();
+        //ScenarioTest sT = AddSPARQLJPanel.getScenarioTestQuery();
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-        clasInst = sT.getClassInstances();
-        propInst = sT.getPropertyInstances();
+        //clasInst = sT.getClassInstances();
+        //propInst = sT.getPropertyInstances();
+        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
             var=1;
         }
@@ -250,7 +252,7 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(parent,true,8,sT);
+            addInst = new AddInstancesClasPropJDialog(parent,true,8,1);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -263,9 +265,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     
     AddInstancesJPanel.setStateExaminar(true);
     AddInstancesJPanel.setStateAsociar(false);
-    AddInstancesJPanel.setStateSeeInst(false);
- 
-        filechooser = new JFileChooser("./");
+        filechooser = new JFileChooser(Configuration.getPathInstancias());
         int option = filechooser.showOpenDialog(frame);
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
@@ -283,18 +283,21 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    ScenarioTest scenarioTest = new ScenarioTest();
+    //ScenarioTest scenarioTest = new ScenarioTest();
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
     
-    if(AddSPARQLJPanel.isSeleccionado()==true){
+    /*if(AddSPARQLJPanel.isSeleccionado()==true){
         scenarioTest = AddSPARQLJPanel.getScenarioTestQuery();
         clasInst = scenarioTest.getClassInstances();
         propInst = scenarioTest.getPropertyInstances();
     }else{
         clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
         propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());    
-    }
+    }*/
+    
+    clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+    propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
       
     if(!clasInst.isEmpty() || !propInst.isEmpty()){
         var=1;
@@ -316,28 +319,52 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed
 // TODO add your handling code here:
+    ScenarioTest scenarioSparql = new ScenarioTest();
     if(AddSPARQLJPanel.isSeleccionado()==true){
         ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
         SparqlQueryOntology query = new SparqlQueryOntology();
+        ArrayList<ClassInstances> clasFinal = new ArrayList<ClassInstances>();
+        ArrayList<PropertyInstances> propFinal = new ArrayList<PropertyInstances>();
+        ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
+        ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
         if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+               
             query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
             query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
             listSparqlQuerys.add(query);
+            scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
+            scenarioSparql.setTestName("sparql");
+            scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
+            scenarioSparql.setSparqlQuerys(listSparqlQuerys);
+            /*
             AddSPARQLJPanel.getScenarioTestQuery().setNombre(AddSPARQLJPanel.getTestNameTextField());
             AddSPARQLJPanel.getScenarioTestQuery().setTestName("sparql");
             AddSPARQLJPanel.getScenarioTestQuery().setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-            AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);
+            AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);*/
     
+            clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
+            propFinal = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
+            scenarioSparql.setClassInstances(clasFinal);
+            scenarioSparql.setPropertyInstances(propFinal);
+            ContentMainJFrame.getConjuntoClassInstances().set(GroupTestsJPanel.getSelectedTabed(), vaciaClase);
+            ContentMainJFrame.getConjuntoPropInstances().set(GroupTestsJPanel.getSelectedTabed(), vaciaPropiedad);
+            
             AddSPARQLJPanel.setTestDescTextArea("");
             AddSPARQLJPanel.setTestNameTextField("");
             AddSPARQLJPanel.setSPARQLQuery("");
             AddSPARQLJPanel.setResultTextArea("");
         
-            ScenarioTest scenario = new ScenarioTest();
-            AddSPARQLJPanel.setScenarioTestQuery(scenario);
+            //ScenarioTest scenario = new ScenarioTest();
+            //AddSPARQLJPanel.setScenarioTestQuery(scenario);
             ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-            scenarioT.add(AddSPARQLJPanel.getScenarioTestQuery());
-            MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+            if(scenarioT.size()==0){
+                scenarioT.add(scenarioSparql);
+                MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+            }else{
+                MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+            }
+            //scenarioT.add(AddSPARQLJPanel.getScenarioTestQuery());
+            //MainJPanel.getCollectionTest().setScenariotest(scenarioT);
             listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
             AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
         }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
@@ -356,7 +383,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
     if(AddSPARQLJPanel.isSeleccionado()==false){
-    filechooser = new JFileChooser("./");
+    filechooser = new JFileChooser(Configuration.getPathTestSimples());
     setStateAbrirTest(true);
     
       int option = filechooser.showOpenDialog(frame);
@@ -467,7 +494,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     
     }else{
         
-        filechooser = new JFileChooser("./");
+        filechooser = new JFileChooser(Configuration.getPathTestSparql());
         setStateAbrirTest(true);
     
         int option = filechooser.showOpenDialog(frame);
@@ -484,21 +511,17 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             ArrayList<SparqlQueryOntology> qO = s.getSparqlQuerys();
             ArrayList<ClassInstances> clasI = s.getClassInstances();
             ArrayList<PropertyInstances> propI = s.getPropertyInstances();
-            
-            AddSPARQLJPanel.getScenarioTestQuery().setClassInstances(clasI);
-            AddSPARQLJPanel.getScenarioTestQuery().setPropertyInstances(propI);
+            int ind = GroupTestsJPanel.getSelectedTabed();
+            ContentMainJFrame.getConjuntoClassInstances().set(ind, clasI);
+            ContentMainJFrame.getConjuntoPropInstances().set(ind, propI);
             
             AddSPARQLJPanel.setTestNameTextField(nombre);
             AddSPARQLJPanel.setTestDescTextArea(descrip);
-            ListIterator qi;
-            qi = qO.listIterator();
-        
-            while(qi.hasNext()){   
-                SparqlQueryOntology cI = (SparqlQueryOntology) qi.next();
-                AddSPARQLJPanel.getListSparqlQuerys().add(cI);
-            }  
+            AddSPARQLJPanel.setListSparqlQuerys(qO);
+            AddSPARQLJPanel.setPosListQuerysSel(0);
             AddSPARQLJPanel.setSPARQLQuery(AddSPARQLJPanel.getListSparqlQuerys().get(0).getQuerySparql());
             AddSPARQLJPanel.setResultTextArea(AddSPARQLJPanel.getListSparqlQuerys().get(0).getResultexpected());
+            
             int tam = qO.size();
             if(tam >=2){
                 AddSPARQLJPanel.setContadorAnt(-1);

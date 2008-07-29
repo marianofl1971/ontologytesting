@@ -153,6 +153,7 @@ public class OntologyTestCase implements OntologyTest{
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
             res = resQueryExpected.split("\n");
+            sparqlExp = new ArrayList<String>();
             for(int k=0; k<res.length;k++){
                 sparqlExp.add(res[k]);
             }

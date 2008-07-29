@@ -28,6 +28,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     public static void setSeleccionado(boolean aSeleccionado) {
         seleccionado = aSeleccionado;
     }
+    private static int posListQuerysSel = 0;
     public static boolean seleccionado;
     public static ScenarioTest scenarioTestQuery;
     private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
@@ -51,6 +52,12 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     }
     private static int contadorAnt = -1;
     private static int contadorSig = 1;
+    public static int getPosListQuerysSel() {
+        return posListQuerysSel;
+    }
+    public static void setPosListQuerysSel(int aPosListQuerysSel) {
+        posListQuerysSel = aPosListQuerysSel;
+    }
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
@@ -66,10 +73,10 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         antQueryButton.setEnabled(false);
         sigQueryButton.setEnabled(false);
         listSparqlQuerys = new ArrayList<SparqlQueryOntology>();
-        scenarioTestQuery = new ScenarioTest();
-        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-        scenarioT.add(scenarioTestQuery);
-        MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+        //scenarioTestQuery = new ScenarioTest();
+        //ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+        //scenarioT.add(scenarioTestQuery);
+        //MainJPanel.getCollectionTest().setScenariotest(scenarioT);
         
         instancesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         instancesPanel.add(new AddInstancesJPanel());
@@ -256,6 +263,8 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
         JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
     }
+    int pos = AddSPARQLJPanel.getPosListQuerysSel();
+    AddSPARQLJPanel.setPosListQuerysSel(pos+1);
     int contadorQ = AddSPARQLJPanel.getContadorAnt();
     int contadorS = AddSPARQLJPanel.getContadorSig();
     int cont = contadorQ+1;
@@ -276,6 +285,19 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     
     SparqlQueryOntology sparql;
     
+    int posSel = AddSPARQLJPanel.getPosListQuerysSel();
+
+    SparqlQueryOntology query = new SparqlQueryOntology(AddSPARQLJPanel.getSPARQLQuery(),
+        AddSPARQLJPanel.getResultTextArea());
+        if(posSel==listSparqlQuerys.size()){
+            if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+                listSparqlQuerys.add(query);
+            }
+        }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
+            listSparqlQuerys.remove(posSel);
+            listSparqlQuerys.add(posSel,query);
+        }
+  
     sparql = getListSparqlQuerys().get(AddSPARQLJPanel.getContadorAnt());
     AddSPARQLJPanel.setSPARQLQuery(sparql.getQuerySparql());
     AddSPARQLJPanel.setResultTextArea(sparql.getResultexpected());  
@@ -291,14 +313,27 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         AddSPARQLJPanel.setContadorSig(c+2);
         sigQueryButton.setEnabled(true);
     }
+    AddSPARQLJPanel.setPosListQuerysSel(posSel-1);
 }//GEN-LAST:event_antQueryButtonActionPerformed
 
 private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigQueryButtonActionPerformed
 // TODO add your handling code here:
     int cont;
+    
+    int posSel = AddSPARQLJPanel.getPosListQuerysSel();
+     
     cont = AddSPARQLJPanel.getContadorSig();
-
     int size = getListSparqlQuerys().size();
+    
+    SparqlQueryOntology query = new SparqlQueryOntology(AddSPARQLJPanel.getSPARQLQuery(),
+        AddSPARQLJPanel.getResultTextArea());
+    if(posSel<size){
+        if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
+            listSparqlQuerys.remove(posSel);
+            listSparqlQuerys.add(posSel,query);
+        }
+    }
+    
     if(size <= cont){
         AddSPARQLJPanel.setSPARQLQuery("");
         AddSPARQLJPanel.setResultTextArea("");
@@ -312,7 +347,8 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         AddSPARQLJPanel.setContadorSig(var);
         AddSPARQLJPanel.setContadorAnt(var-2);
     }
-        antQueryButton.setEnabled(true);
+    AddSPARQLJPanel.setPosListQuerysSel(posSel+1);
+    antQueryButton.setEnabled(true);
 }//GEN-LAST:event_sigQueryButtonActionPerformed
 
 private void limpiarResultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarResultButtonActionPerformed
