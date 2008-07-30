@@ -134,6 +134,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JTabbedPane" name="tabbedPaneInst">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabbedPaneInstMouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>
@@ -325,6 +328,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JTabbedPane" name="tabbedPaneRet">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabbedPaneRetMouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>
@@ -513,6 +519,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JTabbedPane" name="tabbedPaneReal">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabbedPaneRealMouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>
@@ -701,6 +710,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JTabbedPane" name="tabbedPaneSat">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabbedPaneSatMouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>
@@ -889,6 +901,9 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JTabbedPane" name="tabbedPaneClas">
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabbedPaneClasMouseClicked"/>
+                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                           <SubComponents>

@@ -40,6 +40,25 @@ import javax.swing.JTabbedPane;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
+    private static TestInstancesTFJPanel test;
+    private static TestInstancesQueryJPanel test1;
+    private static JPanel panelInst;
+    private static JPanel panelClas;
+    private static JPanel panelReal;
+    private static JPanel panelRet;
+    private static JPanel panelSat;
+    
+    private static JPanel panelAyudaInst;
+    private static int totalInst;
+    private static JPanel panelAyudaClas;
+    private static int totalClas;
+    private static JPanel panelAyudaReal;
+    private static int totalReal;
+    private static JPanel panelAyudaRet;
+    private static int totalRet;
+    private static JPanel panelAyudaSat;
+    private static int totalSat;
+    
     static final int desktopWidth = 750;
     static final int desktopHeight = 600;
     static JFrame frame;
@@ -99,11 +118,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
         testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
         testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));
-        opcionTextInstPanel.setLayout(new BoxLayout(opcionTextInstPanel, BoxLayout.Y_AXIS));
-        opcionTextRetPanel.setLayout(new BoxLayout(opcionTextRetPanel, BoxLayout.Y_AXIS));
-        opcionTextClasPanel.setLayout(new BoxLayout(opcionTextClasPanel, BoxLayout.Y_AXIS));
-        opcionTextSatPanel.setLayout(new BoxLayout(opcionTextSatPanel, BoxLayout.Y_AXIS));
-        opcionTextRealPanel.setLayout(new BoxLayout(opcionTextRealPanel, BoxLayout.Y_AXIS));
+        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
+        opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
+        opcionTextClasPanel.setLayout(new BoxLayout(getOpcionTextClasPanel(), BoxLayout.Y_AXIS));
+        opcionTextSatPanel.setLayout(new BoxLayout(getOpcionTextSatPanel(), BoxLayout.Y_AXIS));
+        opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
         retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
         clasAyudaPanel.setLayout(new BoxLayout(getClasAyudaPanel(), BoxLayout.Y_AXIS));
@@ -327,6 +346,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         test1ScrollPane.setToolTipText("Deduce si el individuo pertenece a la clase dada.");
         test1ScrollPane.setMinimumSize(new java.awt.Dimension(700, 550));
 
+        tabbedPaneInst.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedPaneInstMouseClicked(evt);
+            }
+        });
+
         labelInstLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
         javax.swing.GroupLayout labelInstPanelLayout = new javax.swing.GroupLayout(labelInstPanel);
@@ -435,6 +460,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Instanciación", test1ScrollPane);
 
         test2ScrollPane.setToolTipText("Deduce TODOS los individuos que pertenecen a una clase dada.");
+
+        tabbedPaneRet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedPaneRetMouseClicked(evt);
+            }
+        });
 
         labelInstLabel1.setText("                      CONSULTAS                               RESULTADO ESPERADO ");
 
@@ -547,6 +578,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test3ScrollPane.setToolTipText("Deduce dado un individuo, cual es la clase más exacta a la que pertenece.");
 
+        tabbedPaneReal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedPaneRealMouseClicked(evt);
+            }
+        });
+
         labelInstLabel4.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
         javax.swing.GroupLayout labelInstPanel4Layout = new javax.swing.GroupLayout(labelInstPanel4);
@@ -657,6 +694,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test4ScrollPane.setToolTipText("Deduce si se puede o no añadir una nueva instancia de clase.");
 
+        tabbedPaneSat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedPaneSatMouseClicked(evt);
+            }
+        });
+
         labelInstLabel6.setText("                      CONSULTAS                               RESULTADO ESPERADO  ");
 
         javax.swing.GroupLayout labelInstPanel6Layout = new javax.swing.GroupLayout(labelInstPanel6);
@@ -766,6 +809,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Satisfactibilidad", test4ScrollPane);
 
         test5ScrollPane.setToolTipText("Deduce, dado un individuo, TODAS las clases a las que pertenece.");
+
+        tabbedPaneClas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedPaneClasMouseClicked(evt);
+            }
+        });
 
         labelInstLabel8.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
@@ -944,6 +993,56 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 // TODO add your handling code here:
     frameHelp.setVisible(true);
 }//GEN-LAST:event_helpButtonActionPerformed
+
+private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneInstMouseClicked
+// TODO add your handling code here:
+    int subTab = getTabbedPaneInst();
+        if(subTab==1){
+            copiarDeAyudaATexto(0);
+        }else{
+            copiarDeTextoAAyuda(0);
+        }
+}//GEN-LAST:event_tabbedPaneInstMouseClicked
+
+private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneRetMouseClicked
+// TODO add your handling code here:
+    int subTab = getTabbedPaneRet();
+        if(subTab==1){
+            copiarDeAyudaATexto(1);
+        }else{
+            copiarDeTextoAAyuda(1);
+        }
+}//GEN-LAST:event_tabbedPaneRetMouseClicked
+
+private void tabbedPaneRealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneRealMouseClicked
+// TODO add your handling code here:
+    int subTab = getTabbedPaneReal();
+        if(subTab==1){
+            copiarDeAyudaATexto(2);
+        }else{
+            copiarDeTextoAAyuda(2);
+        }
+}//GEN-LAST:event_tabbedPaneRealMouseClicked
+
+private void tabbedPaneSatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneSatMouseClicked
+// TODO add your handling code here:
+    int subTab = getTabbedPaneSat();
+        if(subTab==1){
+            copiarDeAyudaATexto(3);
+        }else{
+            copiarDeTextoAAyuda(3);
+        }
+}//GEN-LAST:event_tabbedPaneSatMouseClicked
+
+private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneClasMouseClicked
+// TODO add your handling code here:
+    int subTab = getTabbedPaneClas();
+        if(subTab==1){
+            copiarDeAyudaATexto(4);
+        }else{
+            copiarDeTextoAAyuda(4);
+        }
+}//GEN-LAST:event_tabbedPaneClasMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JPanel clasAyudaPanel;
@@ -1144,29 +1243,29 @@ public static void asociarInstancias(int sel){
     ArrayList<QueryOntology> queryTest4 = new ArrayList<QueryOntology>();
     ArrayList<QueryOntology> queryTest5 = new ArrayList<QueryOntology>();
     DescripcionJPanel descPanel = null;
-    TestInstancesTFJPanel test = null;
-    TestInstancesQueryJPanel test1 = null;
+    test = null;
+    test1 = null;
     ArrayList<ClassInstances> clasFinal = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propFinal = new ArrayList<PropertyInstances>();
     ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
 
-    JPanel panelInst = getTestInstPanel();   
-    JPanel panelClas = getTestClasPanel();   
-    JPanel panelReal = getTestRealPanel();    
-    JPanel panelRet = getTestRetPanel();    
-    JPanel panelSat = getTestSatPanel();   
+    panelInst = getTestInstPanel();   
+    panelClas = getTestClasPanel();   
+    panelReal = getTestRealPanel();    
+    panelRet = getTestRetPanel();    
+    panelSat = getTestSatPanel();   
     
-    JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
-    int totalInst = panelAyudaInst.getComponentCount();
-    JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
-     int totalClas = panelAyudaClas.getComponentCount();
-    JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
-    int totalReal = panelAyudaReal.getComponentCount();
-    JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
-    int totalRet = panelAyudaRet.getComponentCount();
-    JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
-    int totalSat = panelAyudaSat.getComponentCount();
+    panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+    totalInst = panelAyudaInst.getComponentCount();
+    panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+    totalClas = panelAyudaClas.getComponentCount();
+    panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+    totalReal = panelAyudaReal.getComponentCount();
+    panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+    totalRet = panelAyudaRet.getComponentCount();
+    panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+    totalSat = panelAyudaSat.getComponentCount();
     
     
     int var=0,cont=0;
@@ -1581,4 +1680,415 @@ public JPanel getContentPanel() {
         return satAyudaPanel;
     }
 
+    public int getTabbedPaneClas() {
+        return tabbedPaneClas.getSelectedIndex();
+    }
+    
+    public int getTabbedPaneInst() {
+        return tabbedPaneInst.getSelectedIndex();
+    }
+
+    public int getTabbedPaneReal() {
+        return tabbedPaneReal.getSelectedIndex();
+    }
+
+    public int getTabbedPaneRet() {
+        return tabbedPaneRet.getSelectedIndex();
+    }
+
+    public int getTabbedPaneSat() {
+        return tabbedPaneSat.getSelectedIndex();
+    }
+
+    public void copiarDeAyudaATexto(int tab){
+        
+        TestInstancesTextJPanel texto;
+        String conjuntoQuerys="", conjuntoResExp="", conjuntoComent="";
+        test = null;
+        test1 = null; 
+    
+        panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+        totalInst = panelAyudaInst.getComponentCount();
+        panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+        totalClas = panelAyudaClas.getComponentCount();
+        panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+        totalReal = panelAyudaReal.getComponentCount();
+        panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+        totalRet = panelAyudaRet.getComponentCount();
+        panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+        totalSat = panelAyudaSat.getComponentCount();
+        
+        if(tab==0){
+            for(int i=1;i<totalInst;i++){
+                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
+                if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
+                    String query = test.getQuery();
+                    String resExpT = test.isTestTrue();
+                    String resExpF = test.isTestFalse();
+                    AddComentJDialog comentPane = test.getComment();
+                    String coment = comentPane.getComent();
+                    if(!query.equals("") && !resExpT.equals(resExpF)){
+                        if(conjuntoQuerys.equals("")){
+                            conjuntoQuerys = query.concat("\n");
+                        }else{
+                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                        }
+                        if(conjuntoResExp.equals("")){
+                            conjuntoResExp = resExpT.concat("\n");
+                        }else{
+                            conjuntoResExp = conjuntoResExp.concat(resExpT).concat("\n");
+                        }
+                        if(conjuntoComent.equals("")){
+                            conjuntoComent = coment.concat("\n");
+                        }else{
+                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                        }
+                    } 
+                }
+            }
+            texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+            texto.setConsultaTextArea(conjuntoQuerys);
+            texto.setResultadoEsperadoTextArea(conjuntoResExp);
+            texto.setComentTextArea(conjuntoComent);
+            int c = instAyudaPanel.getComponentCount();
+            for(int i=1;i<c;i++){
+                instAyudaPanel.remove(instAyudaPanel.getComponent(i));
+                instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            }
+            instAyudaPanel.validate();
+        }else if(tab==1){
+            for(int i=1;i<totalRet;i++){
+                test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i);
+                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+                    String query = test1.getQuery();
+                    String queryExp = test1.getQueryResult();
+                    AddComentJDialog comentPane = test1.getComment();
+                    String coment = comentPane.getComent();
+                    if(!query.equals("") && !queryExp.equals("")){
+                        if(conjuntoQuerys.equals("")){
+                            conjuntoQuerys = query.concat("\n");
+                        }else{
+                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                        }
+                        if(conjuntoResExp.equals("")){
+                            conjuntoResExp = queryExp.concat("\n");
+                        }else{
+                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
+                        }
+                        if(conjuntoComent.equals("")){
+                            conjuntoComent = coment.concat("\n");
+                        }else{
+                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                        }
+                    } 
+                }
+            }
+            texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
+            texto.setConsultaTextArea(conjuntoQuerys);
+            texto.setResultadoEsperadoTextArea(conjuntoResExp);
+            texto.setComentTextArea(conjuntoComent);
+            int c = retAyudaPanel.getComponentCount();
+            for(int i=1;i<c;i++){
+                retAyudaPanel.remove(retAyudaPanel.getComponent(i));
+                retAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+            }
+            retAyudaPanel.validate();
+        }else if(tab==2){
+            for(int i=1;i<totalReal;i++){
+                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
+                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+                    String query = test1.getQuery();
+                    String queryExp = test1.getQueryResult();
+                    AddComentJDialog comentPane = test1.getComment();
+                    String coment = comentPane.getComent();
+                    if(!query.equals("") && !queryExp.equals("")){
+                        if(conjuntoQuerys.equals("")){
+                            conjuntoQuerys = query.concat("\n");
+                        }else{
+                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                        }
+                        if(conjuntoResExp.equals("")){
+                            conjuntoResExp = queryExp.concat("\n");
+                        }else{
+                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
+                        }
+                        if(conjuntoComent.equals("")){
+                            conjuntoComent = coment.concat("\n");
+                        }else{
+                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                        }
+                    } 
+                }
+            }
+            texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
+            texto.setConsultaTextArea(conjuntoQuerys);
+            texto.setResultadoEsperadoTextArea(conjuntoResExp);
+            texto.setComentTextArea(conjuntoComent);
+            int c = realAyudaPanel.getComponentCount();
+            for(int i=1;i<c;i++){
+                realAyudaPanel.remove(realAyudaPanel.getComponent(i));
+                realAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+            }
+            realAyudaPanel.validate();
+        }else if(tab==3){
+            for(int i=1;i<totalSat;i++){
+                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
+                if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
+                    String query = test.getQuery();
+                    String resExpT = test.isTestTrue();
+                    String resExpF = test.isTestFalse();
+                    AddComentJDialog comentPane = test.getComment();
+                    String coment = comentPane.getComent();
+                    if(!query.equals("") && !resExpT.equals(resExpF)){
+                        if(conjuntoQuerys.equals("")){
+                            conjuntoQuerys = query.concat("\n");
+                        }else{
+                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                        }
+                        if(conjuntoResExp.equals("")){
+                            conjuntoResExp = resExpT.concat("\n");
+                        }else{
+                            conjuntoResExp = conjuntoResExp.concat(resExpT).concat("\n");
+                        }
+                        if(conjuntoComent.equals("")){
+                            conjuntoComent = coment.concat("\n");
+                        }else{
+                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                        }
+                    } 
+                }
+            }
+            texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
+            texto.setConsultaTextArea(conjuntoQuerys);
+            texto.setResultadoEsperadoTextArea(conjuntoResExp);
+            texto.setComentTextArea(conjuntoComent);
+            int c = satAyudaPanel.getComponentCount();
+            for(int i=1;i<c;i++){
+                satAyudaPanel.remove(satAyudaPanel.getComponent(i));
+                satAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            }
+            satAyudaPanel.validate();
+        }else if(tab==4){
+            for(int i=1;i<totalClas;i++){
+                test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i);
+                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+                    String query = test1.getQuery();
+                    String queryExp = test1.getQueryResult();
+                    AddComentJDialog comentPane = test1.getComment();
+                    String coment = comentPane.getComent();
+                    if(!query.equals("") && !queryExp.equals("")){
+                        if(conjuntoQuerys.equals("")){
+                            conjuntoQuerys = query.concat("\n");
+                        }else{
+                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                        }
+                        if(conjuntoResExp.equals("")){
+                            conjuntoResExp = queryExp.concat("\n");
+                        }else{
+                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
+                        }
+                        if(conjuntoComent.equals("")){
+                            conjuntoComent = coment.concat("\n");
+                        }else{
+                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                        }
+                    } 
+                }
+            }
+            texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
+            texto.setConsultaTextArea(conjuntoQuerys);
+            texto.setResultadoEsperadoTextArea(conjuntoResExp);
+            texto.setComentTextArea(conjuntoComent);
+            int c = clasAyudaPanel.getComponentCount();
+            for(int i=1;i<c;i++){
+                clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
+                clasAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+            }
+            clasAyudaPanel.validate();
+        }
+    }
+    
+    public void copiarDeTextoAAyuda(int tab){
+
+    DescripcionJPanel descPanel = null;
+    test = null;
+    test1 = null;
+    
+    panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+    totalInst = panelAyudaInst.getComponentCount();
+    panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+    totalClas = panelAyudaClas.getComponentCount();
+    panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+    totalReal = panelAyudaReal.getComponentCount();
+    panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+    totalRet = panelAyudaRet.getComponentCount();
+    panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+    totalSat = panelAyudaSat.getComponentCount();
+
+    TestInstancesTextJPanel texto;
+    
+    String conjuntoQuerys = "",conjuntoResult="",conjuntoComent="";
+    String cQuery[],cResult[],cComent[];
+
+    if(tab==0){
+        texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+        conjuntoQuerys = texto.getConsultaTextArea();
+        conjuntoResult = texto.getResultadoEsperadoTextArea();
+        conjuntoComent = texto.getComentTextArea();
+        cQuery = conjuntoQuerys.split("\\\n");
+        cResult = conjuntoResult.split("\\\n");
+        cComent = conjuntoComent.split("\\\n");
+        for(int i=0; i<cQuery.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
+            test.setQuery(cQuery[i]);
+        }
+        for(int i=0; i<cResult.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
+            String res = cResult[i];
+            if(res.equals("true")){
+                test.setTrueTest(true);
+            }else{
+                test.setFalseTest(true);
+            }
+        }
+        for(int i=0; i<cComent.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
+            AddComentJDialog comentPane = test.getComment();
+            comentPane.setComent(cComent[i]);
+            test.setComment(comentPane);
+        }
+        texto.setComentTextArea("");
+        texto.setConsultaTextArea("");
+        texto.setResultadoEsperadoTextArea("");
+     }else if(tab==1){
+        texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
+        conjuntoQuerys = texto.getConsultaTextArea();
+        conjuntoResult = texto.getResultadoEsperadoTextArea();
+        conjuntoComent = texto.getComentTextArea();
+        cQuery = conjuntoQuerys.split("\\\n");
+        cResult = conjuntoResult.split("\\\n");
+        cComent = conjuntoComent.split("\\\n");
+        for(int i=0; i<cQuery.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
+            test1.setQuery(cQuery[i]);
+        }
+        for(int i=0; i<cResult.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
+            String res = cResult[i];
+            test1.setQueryResult(res);
+        }
+        for(int i=0; i<cComent.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
+            AddComentJDialog comentPane = test1.getComment();
+            comentPane.setComent(cComent[i]);
+            test1.setComment(comentPane);
+        }
+        texto.setComentTextArea("");
+        texto.setConsultaTextArea("");
+        texto.setResultadoEsperadoTextArea("");
+      }else if(tab==2){
+        texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
+        conjuntoQuerys = texto.getConsultaTextArea();
+        conjuntoResult = texto.getResultadoEsperadoTextArea();
+        conjuntoComent = texto.getComentTextArea();
+        cQuery = conjuntoQuerys.split("\\\n");
+        cResult = conjuntoResult.split("\\\n");
+        cComent = conjuntoComent.split("\\\n");
+        for(int i=0; i<cQuery.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
+            test1.setQuery(cQuery[i]);
+        }
+        for(int i=0; i<cResult.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
+            String res = cResult[i];
+            test1.setQueryResult(res);
+        }
+        for(int i=0; i<cComent.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
+            AddComentJDialog comentPane = test1.getComment();
+            comentPane.setComent(cComent[i]);
+            test1.setComment(comentPane);
+        }
+        texto.setComentTextArea("");
+        texto.setConsultaTextArea("");
+        texto.setResultadoEsperadoTextArea("");  
+      }else if(tab==3){
+        texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
+        conjuntoQuerys = texto.getConsultaTextArea();
+        conjuntoResult = texto.getResultadoEsperadoTextArea();
+        conjuntoComent = texto.getComentTextArea();
+        cQuery = conjuntoQuerys.split("\\\n");
+        cResult = conjuntoResult.split("\\\n");
+        cComent = conjuntoComent.split("\\\n");
+        for(int i=0; i<cQuery.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
+            test.setQuery(cQuery[i]);
+        }
+        for(int i=0; i<cResult.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
+            String res = cResult[i];
+            if(res.equals("true")){
+                test.setTrueTest(true);
+            }else{
+                test.setFalseTest(true);
+            }
+        }
+        for(int i=0; i<cComent.length; i++){
+            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
+            AddComentJDialog comentPane = test.getComment();
+            comentPane.setComent(cComent[i]);
+            test.setComment(comentPane);
+        }
+        texto.setComentTextArea("");
+        texto.setConsultaTextArea("");
+        texto.setResultadoEsperadoTextArea("");
+      }else if(tab==4){
+        texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
+        conjuntoQuerys = texto.getConsultaTextArea();
+        conjuntoResult = texto.getResultadoEsperadoTextArea();
+        conjuntoComent = texto.getComentTextArea();
+        cQuery = conjuntoQuerys.split("\\\n");
+        cResult = conjuntoResult.split("\\\n");
+        cComent = conjuntoComent.split("\\\n");
+        for(int i=0; i<cQuery.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
+            test1.setQuery(cQuery[i]);
+        }
+        for(int i=0; i<cResult.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
+            String res = cResult[i];
+            test1.setQueryResult(res);
+        }
+        for(int i=0; i<cComent.length; i++){
+            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
+            AddComentJDialog comentPane = test1.getComment();
+            comentPane.setComent(cComent[i]);
+            test1.setComment(comentPane);
+        }
+        texto.setComentTextArea("");
+        texto.setConsultaTextArea("");
+        texto.setResultadoEsperadoTextArea("");     
+      }
+    }
+
+    public JPanel getOpcionTextClasPanel() {
+        return opcionTextClasPanel;
+    }
+
+    public JPanel getOpcionTextInstPanel() {
+        return opcionTextInstPanel;
+    }
+
+    public JPanel getOpcionTextRealPanel() {
+        return opcionTextRealPanel;
+    }
+
+    public JPanel getOpcionTextRetPanel() {
+        return opcionTextRetPanel;
+    }
+
+    public JPanel getOpcionTextSatPanel() {
+        return opcionTextSatPanel;
+    }
+    
 }
