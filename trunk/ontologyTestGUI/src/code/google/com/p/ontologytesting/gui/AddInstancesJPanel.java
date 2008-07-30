@@ -319,6 +319,7 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed
 // TODO add your handling code here:
+    AddInstancesJPanel.setStateNuevo(true);
     ScenarioTest scenarioSparql = new ScenarioTest();
     if(AddSPARQLJPanel.isSeleccionado()==true){
         ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
@@ -377,7 +378,6 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     }else{
         GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());   
     }
-    AddInstancesJPanel.setStateNuevo(true);
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
@@ -401,8 +401,14 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     JPanel panelReal = GroupTestsJPanel.getTestRealPanel();
     JPanel panelRet = GroupTestsJPanel.getTestRetPanel();
     JPanel panelSat = GroupTestsJPanel.getTestSatPanel();
+    
+    JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+    JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+    JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+    JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+    JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
 
-    int cont=2;
+    int cont=1;
     try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
         ScenarioTest s = (ScenarioTest) decoder.readObject();
@@ -425,7 +431,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelInst.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test = (TestInstancesTFJPanel) panelInst.getComponent(cont);
+                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(cont);
                 AddComentJDialog comentPane = test.getComment();
                 comentPane.setComent(cI.getComment());
                 test.setComment(comentPane);
@@ -441,7 +447,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelRet.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test1 = (TestInstancesQueryJPanel) panelRet.getComponent(cont);
+                test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(cont);
                 AddComentJDialog comentPane = test1.getComment();
                 comentPane.setComent(cI.getComment());
                 test1.setComment(comentPane);
@@ -452,7 +458,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelReal.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test1 = (TestInstancesQueryJPanel) panelReal.getComponent(cont);
+                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(cont);
                 AddComentJDialog comentPane = test1.getComment();
                 comentPane.setComent(cI.getComment());
                 test1.setComment(comentPane);
@@ -463,7 +469,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelSat.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test = (TestInstancesTFJPanel) panelSat.getComponent(cont);
+                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(cont);
                 AddComentJDialog comentPane = test.getComment();
                 comentPane.setComent(cI.getComment());
                 test.setComment(comentPane);
@@ -479,7 +485,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelClas.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test1 = (TestInstancesQueryJPanel) panelClas.getComponent(cont);
+                test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(cont);
                 AddComentJDialog comentPane = test1.getComment();
                 comentPane.setComent(cI.getComment());
                 test1.setComment(comentPane);

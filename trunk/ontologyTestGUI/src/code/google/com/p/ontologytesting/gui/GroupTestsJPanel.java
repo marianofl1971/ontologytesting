@@ -104,17 +104,23 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextClasPanel.setLayout(new BoxLayout(opcionTextClasPanel, BoxLayout.Y_AXIS));
         opcionTextSatPanel.setLayout(new BoxLayout(opcionTextSatPanel, BoxLayout.Y_AXIS));
         opcionTextRealPanel.setLayout(new BoxLayout(opcionTextRealPanel, BoxLayout.Y_AXIS));
-        instAyudaPanel.setLayout(new BoxLayout(instAyudaPanel, BoxLayout.Y_AXIS));
-        retAyudaPanel.setLayout(new BoxLayout(retAyudaPanel, BoxLayout.Y_AXIS));
-        clasAyudaPanel.setLayout(new BoxLayout(clasAyudaPanel, BoxLayout.Y_AXIS));
-        satAyudaPanel.setLayout(new BoxLayout(satAyudaPanel, BoxLayout.Y_AXIS));
-        realAyudaPanel.setLayout(new BoxLayout(realAyudaPanel, BoxLayout.Y_AXIS));
+        instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
+        retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
+        clasAyudaPanel.setLayout(new BoxLayout(getClasAyudaPanel(), BoxLayout.Y_AXIS));
+        satAyudaPanel.setLayout(new BoxLayout(getSatAyudaPanel(), BoxLayout.Y_AXIS));
+        realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());    
         opcionTextRetPanel.add(new TestInstancesTextJPanel());
         opcionTextClasPanel.add(new TestInstancesTextJPanel());
         opcionTextSatPanel.add(new TestInstancesTextJPanel());
         opcionTextRealPanel.add(new TestInstancesTextJPanel());
 
+        testInstPanel.add(new DescripcionJPanel(),0);
+        testRetPanel.add(new DescripcionJPanel(),0);
+        testRealPanel.add(new DescripcionJPanel(),0);
+        testSatPanel.add(new DescripcionJPanel(),0);
+        testClasPanel.add(new DescripcionJPanel(),0);
+        
         for (int i = 0; i <= num; i++) {
             instAyudaPanel.add(new TestInstancesTFJPanel());
             retAyudaPanel.add(new TestInstancesQueryJPanel());
@@ -143,12 +149,23 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
-        testInstPanel.setLayout(new BoxLayout(testInstPanel, BoxLayout.Y_AXIS));
+        /*testInstPanel.setLayout(new BoxLayout(testInstPanel, BoxLayout.Y_AXIS));
         testRetPanel.setLayout(new BoxLayout(testRetPanel, BoxLayout.Y_AXIS));
         testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
         testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
-        testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));
+        testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));*/
         labelInstPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        
+        instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
+        retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
+        clasAyudaPanel.setLayout(new BoxLayout(getClasAyudaPanel(), BoxLayout.Y_AXIS));
+        satAyudaPanel.setLayout(new BoxLayout(getSatAyudaPanel(), BoxLayout.Y_AXIS));
+        realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
+        opcionTextInstPanel.add(new TestInstancesTextJPanel());    
+        opcionTextRetPanel.add(new TestInstancesTextJPanel());
+        opcionTextClasPanel.add(new TestInstancesTextJPanel());
+        opcionTextSatPanel.add(new TestInstancesTextJPanel());
+        opcionTextRealPanel.add(new TestInstancesTextJPanel());
 
         try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
@@ -187,15 +204,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                         testQuery.setComment(commentPane);
                     }
                     if(s.getTestName().equals("Instanciación")){
-                        testInstPanel.add(testTF);
+                        instAyudaPanel.add(testTF);
                     }else if(s.getTestName().equals("Retrieval")){
-                        testRetPanel.add(testQuery);
+                        retAyudaPanel.add(testQuery);
                     }else if(s.getTestName().equals("Realización")){
-                        testRealPanel.add(testQuery);
+                        realAyudaPanel.add(testQuery);
                     }else if(s.getTestName().equals("Satisfactibilidad")){
-                        testSatPanel.add(testTF);
+                        satAyudaPanel.add(testTF);
                     }else if(s.getTestName().equals("Clasificación")){
-                        testClasPanel.add(testQuery);
+                        clasAyudaPanel.add(testQuery);
                     }
                 }           
         }
@@ -203,31 +220,31 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }catch(FileNotFoundException e){
         } 
 
-        if(testInstPanel.getComponentCount()<8){
-            while(testInstPanel.getComponentCount()<8){
-                testInstPanel.add(new TestInstancesTFJPanel());
+        if(instAyudaPanel.getComponentCount()<8){
+            while(instAyudaPanel.getComponentCount()<8){
+                instAyudaPanel.add(new TestInstancesTFJPanel());
                 pos++;
             }
         }
-        if(testRetPanel.getComponentCount()<8){
-            while(testRetPanel.getComponentCount()<8){
-                testRetPanel.add(new TestInstancesQueryJPanel());
+        if(retAyudaPanel.getComponentCount()<8){
+            while(retAyudaPanel.getComponentCount()<8){
+                retAyudaPanel.add(new TestInstancesQueryJPanel());
             }
         }
-        if(testRealPanel.getComponentCount()<8){
-            while(testRealPanel.getComponentCount()<8){
-                testRealPanel.add(new TestInstancesQueryJPanel());
+        if(realAyudaPanel.getComponentCount()<8){
+            while(realAyudaPanel.getComponentCount()<8){
+                realAyudaPanel.add(new TestInstancesQueryJPanel());
             }
         }
-        if(testSatPanel.getComponentCount()<8){
-            while(testSatPanel.getComponentCount()<8){
-                testSatPanel.add(new TestInstancesTFJPanel());
+        if(satAyudaPanel.getComponentCount()<8){
+            while(satAyudaPanel.getComponentCount()<8){
+                satAyudaPanel.add(new TestInstancesTFJPanel());
                 pos++;
             }
         }
-        if(testClasPanel.getComponentCount()<8){
-            while(testClasPanel.getComponentCount()<8){
-                testClasPanel.add(new TestInstancesQueryJPanel());
+        if(clasAyudaPanel.getComponentCount()<8){
+            while(clasAyudaPanel.getComponentCount()<8){
+                clasAyudaPanel.add(new TestInstancesQueryJPanel());
             }
         }
         
@@ -250,12 +267,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane = new javax.swing.JTabbedPane();
         test1ScrollPane = new javax.swing.JScrollPane();
         testInstPanel = new javax.swing.JPanel();
-        introInstPanel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        nombreTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        descTextArea = new javax.swing.JTextArea();
         contentInstTabedPanel = new javax.swing.JPanel();
         tabbedPaneInst = new javax.swing.JTabbedPane();
         opcionAyudaInstPanel = new javax.swing.JPanel();
@@ -266,12 +277,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextInstPanel = new javax.swing.JPanel();
         test2ScrollPane = new javax.swing.JScrollPane();
         testRetPanel = new javax.swing.JPanel();
-        introRetPanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        nombreTextField1 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        descTextArea1 = new javax.swing.JTextArea();
         contentRetTabedPanel = new javax.swing.JPanel();
         tabbedPaneRet = new javax.swing.JTabbedPane();
         opcionAyudaRetPanel = new javax.swing.JPanel();
@@ -282,12 +287,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextRetPanel = new javax.swing.JPanel();
         test3ScrollPane = new javax.swing.JScrollPane();
         testRealPanel = new javax.swing.JPanel();
-        introRealPanel = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        nombreTextField2 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        descTextArea2 = new javax.swing.JTextArea();
         contentRealTabedPanel = new javax.swing.JPanel();
         tabbedPaneReal = new javax.swing.JTabbedPane();
         opcionAyudaRealPanel = new javax.swing.JPanel();
@@ -298,12 +297,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextRealPanel = new javax.swing.JPanel();
         test4ScrollPane = new javax.swing.JScrollPane();
         testSatPanel = new javax.swing.JPanel();
-        introSatPanel = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        nombreTextField3 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        descTextArea3 = new javax.swing.JTextArea();
         contentSatTabedPanel = new javax.swing.JPanel();
         tabbedPaneSat = new javax.swing.JTabbedPane();
         opcionAyudaSatPanel = new javax.swing.JPanel();
@@ -314,12 +307,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextSatPanel = new javax.swing.JPanel();
         test5ScrollPane = new javax.swing.JScrollPane();
         testClasPanel = new javax.swing.JPanel();
-        introClasPanel = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        nombreTextField4 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        descTextArea4 = new javax.swing.JTextArea();
         contentClasTabedPanel = new javax.swing.JPanel();
         tabbedPaneClas = new javax.swing.JTabbedPane();
         opcionAyudaClasPanel = new javax.swing.JPanel();
@@ -339,43 +326,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         test1ScrollPane.setToolTipText("Deduce si el individuo pertenece a la clase dada.");
         test1ScrollPane.setMinimumSize(new java.awt.Dimension(700, 550));
-
-        jLabel6.setText("Nombre del test:");
-
-        jLabel7.setText("Descripción:");
-
-        descTextArea.setColumns(20);
-        descTextArea.setRows(5);
-        jScrollPane1.setViewportView(descTextArea);
-
-        javax.swing.GroupLayout introInstPanelLayout = new javax.swing.GroupLayout(introInstPanel);
-        introInstPanel.setLayout(introInstPanelLayout);
-        introInstPanelLayout.setHorizontalGroup(
-            introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introInstPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(introInstPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(367, Short.MAX_VALUE))
-        );
-        introInstPanelLayout.setVerticalGroup(
-            introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introInstPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         labelInstLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
@@ -468,17 +418,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(introInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(245, Short.MAX_VALUE))
         );
         testInstPanelLayout.setVerticalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testInstPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(introInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(217, 217, 217)
                 .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(142, Short.MAX_VALUE))
         );
@@ -489,43 +435,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Instanciación", test1ScrollPane);
 
         test2ScrollPane.setToolTipText("Deduce TODOS los individuos que pertenecen a una clase dada.");
-
-        jLabel8.setText("Nombre del test:");
-
-        jLabel9.setText("Descripción:");
-
-        descTextArea1.setColumns(20);
-        descTextArea1.setRows(5);
-        jScrollPane2.setViewportView(descTextArea1);
-
-        javax.swing.GroupLayout introRetPanelLayout = new javax.swing.GroupLayout(introRetPanel);
-        introRetPanel.setLayout(introRetPanelLayout);
-        introRetPanelLayout.setHorizontalGroup(
-            introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introRetPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(introRetPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(369, Short.MAX_VALUE))
-        );
-        introRetPanelLayout.setVerticalGroup(
-            introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introRetPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(nombreTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         labelInstLabel1.setText("                      CONSULTAS                               RESULTADO ESPERADO ");
 
@@ -620,17 +529,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(introRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(243, 243, 243))
+                .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(263, 263, 263))
         );
         testRetPanelLayout.setVerticalGroup(
             testRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRetPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(introRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(217, 217, 217)
                 .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(157, Short.MAX_VALUE))
         );
@@ -641,43 +546,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Retrieval", test2ScrollPane);
 
         test3ScrollPane.setToolTipText("Deduce dado un individuo, cual es la clase más exacta a la que pertenece.");
-
-        jLabel10.setText("Nombre del test:");
-
-        jLabel11.setText("Descripción:");
-
-        descTextArea2.setColumns(20);
-        descTextArea2.setRows(5);
-        jScrollPane3.setViewportView(descTextArea2);
-
-        javax.swing.GroupLayout introRealPanelLayout = new javax.swing.GroupLayout(introRealPanel);
-        introRealPanel.setLayout(introRealPanelLayout);
-        introRealPanelLayout.setHorizontalGroup(
-            introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introRealPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(introRealPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
-        );
-        introRealPanelLayout.setVerticalGroup(
-            introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introRealPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(nombreTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         labelInstLabel4.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
@@ -772,25 +640,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRealPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(introRealPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(233, 233, 233))
-            .addGroup(testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testRealPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(234, Short.MAX_VALUE)))
+                .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         testRealPanelLayout.setVerticalGroup(
             testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testRealPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(introRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
-            .addGroup(testRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testRealPanelLayout.createSequentialGroup()
-                    .addGap(217, 217, 217)
-                    .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(164, Short.MAX_VALUE)))
+                .addGap(217, 217, 217)
+                .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         test3ScrollPane.setViewportView(testRealPanel);
@@ -798,43 +656,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Realización", test3ScrollPane);
 
         test4ScrollPane.setToolTipText("Deduce si se puede o no añadir una nueva instancia de clase.");
-
-        jLabel12.setText("Nombre del test:");
-
-        jLabel13.setText("Descripción:");
-
-        descTextArea3.setColumns(20);
-        descTextArea3.setRows(5);
-        jScrollPane4.setViewportView(descTextArea3);
-
-        javax.swing.GroupLayout introSatPanelLayout = new javax.swing.GroupLayout(introSatPanel);
-        introSatPanel.setLayout(introSatPanelLayout);
-        introSatPanelLayout.setHorizontalGroup(
-            introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introSatPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(introSatPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
-        );
-        introSatPanelLayout.setVerticalGroup(
-            introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introSatPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(nombreTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         labelInstLabel6.setText("                      CONSULTAS                               RESULTADO ESPERADO  ");
 
@@ -929,25 +750,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testSatPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(introSatPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(233, 233, 233))
-            .addGroup(testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testSatPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(233, Short.MAX_VALUE)))
+                .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         testSatPanelLayout.setVerticalGroup(
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testSatPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(introSatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(580, Short.MAX_VALUE))
-            .addGroup(testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testSatPanelLayout.createSequentialGroup()
-                    .addGap(217, 217, 217)
-                    .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(191, Short.MAX_VALUE)))
+                .addGap(217, 217, 217)
+                .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         test4ScrollPane.setViewportView(testSatPanel);
@@ -955,43 +766,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testsTabbedPane.addTab("Satisfactibilidad", test4ScrollPane);
 
         test5ScrollPane.setToolTipText("Deduce, dado un individuo, TODAS las clases a las que pertenece.");
-
-        jLabel14.setText("Nombre del test:");
-
-        jLabel15.setText("Descripción:");
-
-        descTextArea4.setColumns(20);
-        descTextArea4.setRows(5);
-        jScrollPane5.setViewportView(descTextArea4);
-
-        javax.swing.GroupLayout introClasPanelLayout = new javax.swing.GroupLayout(introClasPanel);
-        introClasPanel.setLayout(introClasPanelLayout);
-        introClasPanelLayout.setHorizontalGroup(
-            introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introClasPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(introClasPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
-        );
-        introClasPanelLayout.setVerticalGroup(
-            introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(introClasPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(introClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(nombreTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         labelInstLabel8.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
@@ -1086,25 +860,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testClasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(introClasPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(233, 233, 233))
-            .addGroup(testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testClasPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(234, Short.MAX_VALUE)))
+                .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         testClasPanelLayout.setVerticalGroup(
             testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(testClasPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(introClasPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(598, Short.MAX_VALUE))
-            .addGroup(testClasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(testClasPanelLayout.createSequentialGroup()
-                    .addGap(217, 217, 217)
-                    .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(204, Short.MAX_VALUE)))
+                .addGap(217, 217, 217)
+                .addComponent(contentClasTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         test5ScrollPane.setViewportView(testClasPanel);
@@ -1182,43 +946,18 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_helpButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel clasAyudaPanel;
+    private static javax.swing.JPanel clasAyudaPanel;
     private javax.swing.JPanel contentClasTabedPanel;
     private javax.swing.JPanel contentInstTabedPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JPanel contentRealTabedPanel;
     private javax.swing.JPanel contentRetTabedPanel;
     private javax.swing.JPanel contentSatTabedPanel;
-    private javax.swing.JTextArea descTextArea;
-    private javax.swing.JTextArea descTextArea1;
-    private javax.swing.JTextArea descTextArea2;
-    private javax.swing.JTextArea descTextArea3;
-    private javax.swing.JTextArea descTextArea4;
     private javax.swing.JButton helpButton;
-    private javax.swing.JPanel instAyudaPanel;
-    private javax.swing.JPanel introClasPanel;
-    private javax.swing.JPanel introInstPanel;
-    private javax.swing.JPanel introRealPanel;
-    private javax.swing.JPanel introRetPanel;
-    private javax.swing.JPanel introSatPanel;
+    private static javax.swing.JPanel instAyudaPanel;
     private javax.swing.JPanel introduccionPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -1233,11 +972,6 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel labelInstPanel4;
     private javax.swing.JPanel labelInstPanel6;
     private javax.swing.JPanel labelInstPanel8;
-    private javax.swing.JTextField nombreTextField;
-    private javax.swing.JTextField nombreTextField1;
-    private javax.swing.JTextField nombreTextField2;
-    private javax.swing.JTextField nombreTextField3;
-    private javax.swing.JTextField nombreTextField4;
     private javax.swing.JPanel opcionAyudaClasPanel;
     private javax.swing.JPanel opcionAyudaInstPanel;
     private javax.swing.JPanel opcionAyudaRealPanel;
@@ -1248,9 +982,9 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel opcionTextRealPanel;
     private javax.swing.JPanel opcionTextRetPanel;
     private javax.swing.JPanel opcionTextSatPanel;
-    private javax.swing.JPanel realAyudaPanel;
-    private javax.swing.JPanel retAyudaPanel;
-    private javax.swing.JPanel satAyudaPanel;
+    private static javax.swing.JPanel realAyudaPanel;
+    private static javax.swing.JPanel retAyudaPanel;
+    private static javax.swing.JPanel satAyudaPanel;
     private javax.swing.JTabbedPane tabbedPaneClas;
     private javax.swing.JTabbedPane tabbedPaneInst;
     private javax.swing.JTabbedPane tabbedPaneReal;
@@ -1417,21 +1151,29 @@ public static void asociarInstancias(int sel){
     ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
 
-    JPanel panelInst = getTestInstPanel();
-    int totalInst = panelInst.getComponentCount();
-    JPanel panelClas = getTestClasPanel();
-    int totalClas = panelClas.getComponentCount();
-    JPanel panelReal = getTestRealPanel();
-    int totalReal = panelReal.getComponentCount();
-    JPanel panelRet = getTestRetPanel();
-    int totalRet = panelRet.getComponentCount();
-    JPanel panelSat = getTestSatPanel();
-    int totalSat = panelSat.getComponentCount();
+    JPanel panelInst = getTestInstPanel();   
+    JPanel panelClas = getTestClasPanel();   
+    JPanel panelReal = getTestRealPanel();    
+    JPanel panelRet = getTestRetPanel();    
+    JPanel panelSat = getTestSatPanel();   
+    
+    JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+    int totalInst = panelAyudaInst.getComponentCount();
+    JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+     int totalClas = panelAyudaClas.getComponentCount();
+    JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+    int totalReal = panelAyudaReal.getComponentCount();
+    JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+    int totalRet = panelAyudaRet.getComponentCount();
+    JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+    int totalSat = panelAyudaSat.getComponentCount();
+    
+    
     int var=0,cont=0;
     
     if(sel==0){
-    for(int i=2;i<totalInst;i++){
-        test = (TestInstancesTFJPanel) panelInst.getComponent(i);
+    for(int i=1;i<totalInst;i++){
+        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
         descPanel = (DescripcionJPanel) panelInst.getComponent(0);
         if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
             if(descPanel.getNombreTextField().equals("")){
@@ -1469,11 +1211,12 @@ public static void asociarInstancias(int sel){
         }
     }
     if(AddInstancesJPanel.isStateNuevo()==true){
-        for(int j=0; j<cont; j++){
-            testInstPanel.remove(j+2);
-            testInstPanel.add(new TestInstancesTFJPanel());
+        int c = instAyudaPanel.getComponentCount();
+        for (int i = 1; i < c; i++) {
+            instAyudaPanel.remove(instAyudaPanel.getComponent(i));
+            instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
         }
-        testInstPanel.validate();
+        instAyudaPanel.validate();
     }
     if(aux==1){
         if(AddInstancesJPanel.isStateNuevo()==true){
@@ -1495,8 +1238,8 @@ public static void asociarInstancias(int sel){
         ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
     }
     }else if(sel==1){
-    for(int i=2;i<totalRet;i++){
-        test1 = (TestInstancesQueryJPanel) panelRet.getComponent(i);
+    for(int i=1;i<totalRet;i++){
+        test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i);
         descPanel = (DescripcionJPanel) panelRet.getComponent(0);
         if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
             if(descPanel.getNombreTextField().equals("")){
@@ -1537,11 +1280,12 @@ public static void asociarInstancias(int sel){
         }
     }
     if(AddInstancesJPanel.isStateNuevo()==true){
-        for(int j=0; j<cont; j++){
-            testRetPanel.remove(j+2);
-            testRetPanel.add(new TestInstancesQueryJPanel());
+        int c = retAyudaPanel.getComponentCount();
+        for (int i = 1; i < c; i++) {
+            retAyudaPanel.remove(retAyudaPanel.getComponent(i));
+            retAyudaPanel.add(new TestInstancesTFJPanel(),i); 
         }
-        testRetPanel.validate();
+        retAyudaPanel.validate();
     }
         
         if(aux==1){
@@ -1564,8 +1308,8 @@ public static void asociarInstancias(int sel){
             ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
         }
     }else if(sel==2){
-    for(int i=2;i<totalReal;i++){
-        test1 = (TestInstancesQueryJPanel) panelReal.getComponent(i);
+    for(int i=1;i<totalReal;i++){
+        test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
         descPanel = (DescripcionJPanel) panelReal.getComponent(0);
         if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
             if(descPanel.getNombreTextField().equals("")){
@@ -1605,11 +1349,12 @@ public static void asociarInstancias(int sel){
         }
     }
     if(AddInstancesJPanel.isStateNuevo()==true){
-        for(int j=0; j<cont; j++){
-            testRealPanel.remove(j+2);
-            testRealPanel.add(new TestInstancesQueryJPanel());
+        int c = realAyudaPanel.getComponentCount();
+        for (int i = 1; i < c; i++) {
+            realAyudaPanel.remove(realAyudaPanel.getComponent(i));
+            realAyudaPanel.add(new TestInstancesTFJPanel(),i); 
         }
-        testRealPanel.validate();
+        realAyudaPanel.validate();
     }
         if(aux==1){
         if(AddInstancesJPanel.isStateNuevo()==true){
@@ -1631,8 +1376,8 @@ public static void asociarInstancias(int sel){
             ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
         }
     }else if(sel==3){
-    for(int i=2;i<totalSat;i++){
-        test = (TestInstancesTFJPanel) panelSat.getComponent(i);
+    for(int i=1;i<totalSat;i++){
+        test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
         descPanel = (DescripcionJPanel) panelSat.getComponent(0);
         if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
             if(descPanel.getNombreTextField().equals("")){
@@ -1674,11 +1419,12 @@ public static void asociarInstancias(int sel){
         }
     }
     if(AddInstancesJPanel.isStateNuevo()==true){
-        for(int j=0; j<cont; j++){
-            testSatPanel.remove(j+2);
-            testSatPanel.add(new TestInstancesTFJPanel());
+        int c = satAyudaPanel.getComponentCount();
+        for (int i = 1; i < c; i++) {
+            satAyudaPanel.remove(satAyudaPanel.getComponent(i));
+            satAyudaPanel.add(new TestInstancesTFJPanel(),i); 
         }
-        testSatPanel.validate();
+        satAyudaPanel.validate();
     }
         if(aux==1){
         if(AddInstancesJPanel.isStateNuevo()==true){
@@ -1700,8 +1446,8 @@ public static void asociarInstancias(int sel){
             ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
         }
     }else{
-    for(int i=2;i<totalClas;i++){
-        test1 = (TestInstancesQueryJPanel) panelClas.getComponent(i);
+    for(int i=1;i<totalClas;i++){
+        test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i);
         descPanel = (DescripcionJPanel) panelClas.getComponent(0);
         if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
             if(descPanel.getNombreTextField().equals("")){
@@ -1741,11 +1487,12 @@ public static void asociarInstancias(int sel){
         }
     }
     if(AddInstancesJPanel.isStateNuevo()==true){
-        for(int j=0; j<cont; j++){
-            testClasPanel.remove(j+2);
-            testClasPanel.add(new TestInstancesQueryJPanel());
+        int c = clasAyudaPanel.getComponentCount();
+        for (int i = 1; i < c; i++) {
+            clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
+            clasAyudaPanel.add(new TestInstancesTFJPanel(),i); 
         }
-        testClasPanel.validate();
+        clasAyudaPanel.validate();
     }
         if(aux==1){
         if(AddInstancesJPanel.isStateNuevo()==true){
@@ -1813,5 +1560,25 @@ public static int getSelectedTabed(){
 public JPanel getContentPanel() {
     return contentPanel;
 }
+
+    public static JPanel getClasAyudaPanel() {
+        return clasAyudaPanel;
+    }
+
+    public static JPanel getInstAyudaPanel() {
+        return instAyudaPanel;
+    }
+
+    public static JPanel getRealAyudaPanel() {
+        return realAyudaPanel;
+    }
+
+    public static JPanel getRetAyudaPanel() {
+        return retAyudaPanel;
+    }
+
+    public static JPanel getSatAyudaPanel() {
+        return satAyudaPanel;
+    }
 
 }

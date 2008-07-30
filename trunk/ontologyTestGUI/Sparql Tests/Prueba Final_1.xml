@@ -39,16 +39,6 @@ Mal</string>
      </void> 
     </object> 
    </void> 
-   <void method="add"> 
-    <object class="code.google.com.p.ontologytesting.model.SparqlQueryOntology"> 
-     <void property="querySparql"> 
-      <string></string> 
-     </void> 
-     <void property="resultexpected"> 
-      <string></string> 
-     </void> 
-    </object> 
-   </void> 
   </void> 
   <void property="testName"> 
    <string>sparql</string> 
