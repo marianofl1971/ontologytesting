@@ -395,6 +395,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     DescripcionJPanel descPanel = null;
     TestInstancesTFJPanel test = null;
     TestInstancesQueryJPanel test1 = null;
+    TestInstancesTextAreaJPanel test2 = null;
     
     JPanel panelInst = GroupTestsJPanel.getTestInstPanel();
     JPanel panelClas = GroupTestsJPanel.getTestClasPanel();
@@ -447,12 +448,12 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelRet.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(cont);
-                AddComentJDialog comentPane = test1.getComment();
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(cont);
+                AddComentJDialog comentPane = test2.getComment();
                 comentPane.setComent(cI.getComment());
-                test1.setComment(comentPane);
-                test1.setQuery(cI.getQuery());
-                test1.setQueryResult(cI.getResultexpected());
+                test2.setComment(comentPane);
+                test2.setQuery(cI.getQuery());
+                test2.setQueryResult(cI.getResultexpected());
                 cont++;
             }else if(tab.equals("Realización")){
                 descPanel = (DescripcionJPanel) panelReal.getComponent(0);
@@ -485,12 +486,12 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 descPanel = (DescripcionJPanel) panelClas.getComponent(0);
                 descPanel.setNombreTextField(nombre);
                 descPanel.setDescTextArea(descrip);
-                test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(cont);
-                AddComentJDialog comentPane = test1.getComment();
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(cont);
+                AddComentJDialog comentPane = test2.getComment();
                 comentPane.setComent(cI.getComment());
-                test1.setComment(comentPane);
-                test1.setQuery(cI.getQuery());
-                test1.setQueryResult(cI.getResultexpected());
+                test2.setComment(comentPane);
+                test2.setQuery(cI.getQuery());
+                test2.setQueryResult(cI.getResultexpected());
                 cont++;
             }
         }  

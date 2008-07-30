@@ -42,6 +42,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
     private static TestInstancesTFJPanel test;
     private static TestInstancesQueryJPanel test1;
+    private static TestInstancesTextAreaJPanel test2;
     private static JPanel panelInst;
     private static JPanel panelClas;
     private static JPanel panelReal;
@@ -142,10 +143,10 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         
         for (int i = 0; i <= num; i++) {
             instAyudaPanel.add(new TestInstancesTFJPanel());
-            retAyudaPanel.add(new TestInstancesQueryJPanel());
+            retAyudaPanel.add(new TestInstancesTextAreaJPanel());
             realAyudaPanel.add(new TestInstancesQueryJPanel());
             satAyudaPanel.add(new TestInstancesTFJPanel());
-            clasAyudaPanel.add(new TestInstancesQueryJPanel());
+            clasAyudaPanel.add(new TestInstancesTextAreaJPanel());
         }
         
         /*scenarioTest = new ScenarioTest();
@@ -181,8 +182,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         satAyudaPanel.setLayout(new BoxLayout(getSatAyudaPanel(), BoxLayout.Y_AXIS));
         realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());    
-        opcionTextRetPanel.add(new TestInstancesTextJPanel());
-        opcionTextClasPanel.add(new TestInstancesTextJPanel());
+        opcionTextRetPanel.add(new TestInstancesTextAreaJPanel());
+        opcionTextClasPanel.add(new TestInstancesTextAreaJPanel());
         opcionTextSatPanel.add(new TestInstancesTextJPanel());
         opcionTextRealPanel.add(new TestInstancesTextJPanel());
 
@@ -247,7 +248,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
         if(retAyudaPanel.getComponentCount()<8){
             while(retAyudaPanel.getComponentCount()<8){
-                retAyudaPanel.add(new TestInstancesQueryJPanel());
+                retAyudaPanel.add(new TestInstancesTextAreaJPanel());
             }
         }
         if(realAyudaPanel.getComponentCount()<8){
@@ -263,7 +264,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
         if(clasAyudaPanel.getComponentCount()<8){
             while(clasAyudaPanel.getComponentCount()<8){
-                clasAyudaPanel.add(new TestInstancesQueryJPanel());
+                clasAyudaPanel.add(new TestInstancesTextAreaJPanel());
             }
         }
         
@@ -1245,6 +1246,7 @@ public static void asociarInstancias(int sel){
     DescripcionJPanel descPanel = null;
     test = null;
     test1 = null;
+    test2 = null;
     ArrayList<ClassInstances> clasFinal = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propFinal = new ArrayList<PropertyInstances>();
     ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
@@ -1338,9 +1340,9 @@ public static void asociarInstancias(int sel){
     }
     }else if(sel==1){
     for(int i=1;i<totalRet;i++){
-        test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i);
+        test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
         descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-        if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+        if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
             if(descPanel.getNombreTextField().equals("")){
                 JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
                         "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1351,9 +1353,9 @@ public static void asociarInstancias(int sel){
                     scenario.setDescripcion(descTest);
                     scenario.setNombre(nombreTest);
                 }
-                String query = test1.getQuery();
-                String queryExp = test1.getQueryResult();
-                AddComentJDialog comentPane = test1.getComment();
+                String query = test2.getQuery();
+                String queryExp = test2.getQueryResult();
+                AddComentJDialog comentPane = test2.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") && !queryExp.equals("")){
                     if(var==0){
@@ -1382,7 +1384,7 @@ public static void asociarInstancias(int sel){
         int c = retAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             retAyudaPanel.remove(retAyudaPanel.getComponent(i));
-            retAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            retAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
         }
         retAyudaPanel.validate();
     }
@@ -1546,9 +1548,9 @@ public static void asociarInstancias(int sel){
         }
     }else{
     for(int i=1;i<totalClas;i++){
-        test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i);
+        test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
         descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-        if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+        if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
             if(descPanel.getNombreTextField().equals("")){
                 JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
                         "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1559,9 +1561,9 @@ public static void asociarInstancias(int sel){
                     scenario.setDescripcion(descTest);
                     scenario.setNombre(nombreTest);
                 }
-                String query = test1.getQuery();
-                String queryExp = test1.getQueryResult();
-                AddComentJDialog comentPane = test1.getComment();
+                String query = test2.getQuery();
+                String queryExp = test2.getQueryResult();
+                AddComentJDialog comentPane = test2.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") && !queryExp.equals("")){
                     if(var==0){
@@ -1589,7 +1591,7 @@ public static void asociarInstancias(int sel){
         int c = clasAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
-            clasAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            clasAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
         }
         clasAyudaPanel.validate();
     }
@@ -1706,6 +1708,7 @@ public JPanel getContentPanel() {
         String conjuntoQuerys="", conjuntoResExp="", conjuntoComent="";
         test = null;
         test1 = null; 
+        test2 = null;
     
         panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
         totalInst = panelAyudaInst.getComponentCount();
@@ -1758,11 +1761,11 @@ public JPanel getContentPanel() {
             instAyudaPanel.validate();
         }else if(tab==1){
             for(int i=1;i<totalRet;i++){
-                test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i);
-                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
-                    String query = test1.getQuery();
-                    String queryExp = test1.getQueryResult();
-                    AddComentJDialog comentPane = test1.getComment();
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
+                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
+                    String query = test2.getQuery();
+                    String queryExp = test2.getQueryResult();
+                    AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerys.equals("")){
@@ -1790,16 +1793,16 @@ public JPanel getContentPanel() {
             int c = retAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 retAyudaPanel.remove(retAyudaPanel.getComponent(i));
-                retAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+                retAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
             }
             retAyudaPanel.validate();
         }else if(tab==2){
             for(int i=1;i<totalReal;i++){
-                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
-                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
-                    String query = test1.getQuery();
-                    String queryExp = test1.getQueryResult();
-                    AddComentJDialog comentPane = test1.getComment();
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaReal.getComponent(i);
+                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
+                    String query = test2.getQuery();
+                    String queryExp = test2.getQueryResult();
+                    AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerys.equals("")){
@@ -1827,7 +1830,7 @@ public JPanel getContentPanel() {
             int c = realAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 realAyudaPanel.remove(realAyudaPanel.getComponent(i));
-                realAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+                realAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
             }
             realAyudaPanel.validate();
         }else if(tab==3){
@@ -1870,11 +1873,11 @@ public JPanel getContentPanel() {
             satAyudaPanel.validate();
         }else if(tab==4){
             for(int i=1;i<totalClas;i++){
-                test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i);
-                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
-                    String query = test1.getQuery();
-                    String queryExp = test1.getQueryResult();
-                    AddComentJDialog comentPane = test1.getComment();
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
+                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
+                    String query = test2.getQuery();
+                    String queryExp = test2.getQueryResult();
+                    AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerys.equals("")){
@@ -1902,7 +1905,7 @@ public JPanel getContentPanel() {
             int c = clasAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
-                clasAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+                clasAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
             }
             clasAyudaPanel.validate();
         }
@@ -1910,9 +1913,9 @@ public JPanel getContentPanel() {
     
     public void copiarDeTextoAAyuda(int tab){
 
-    DescripcionJPanel descPanel = null;
     test = null;
     test1 = null;
+    test2 = null;
     
     panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
     totalInst = panelAyudaInst.getComponentCount();
@@ -1969,19 +1972,19 @@ public JPanel getContentPanel() {
         cResult = conjuntoResult.split("\\\n");
         cComent = conjuntoComent.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
-            test1.setQuery(cQuery[i]);
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
+            test2.setQuery(cQuery[i]);
         }
         for(int i=0; i<cResult.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
             String res = cResult[i];
-            test1.setQueryResult(res);
+            test2.setQueryResult(res);
         }
         for(int i=0; i<cComent.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaRet.getComponent(i+1);
-            AddComentJDialog comentPane = test1.getComment();
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
+            AddComentJDialog comentPane = test2.getComment();
             comentPane.setComent(cComent[i]);
-            test1.setComment(comentPane);
+            test2.setComment(comentPane);
         }
         texto.setComentTextArea("");
         texto.setConsultaTextArea("");
@@ -2051,19 +2054,19 @@ public JPanel getContentPanel() {
         cResult = conjuntoResult.split("\\\n");
         cComent = conjuntoComent.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
-            test1.setQuery(cQuery[i]);
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
+            test2.setQuery(cQuery[i]);
         }
         for(int i=0; i<cResult.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
             String res = cResult[i];
-            test1.setQueryResult(res);
+            test2.setQueryResult(res);
         }
         for(int i=0; i<cComent.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaClas.getComponent(i+1);
-            AddComentJDialog comentPane = test1.getComment();
+            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
+            AddComentJDialog comentPane = test2.getComment();
             comentPane.setComent(cComent[i]);
-            test1.setComment(comentPane);
+            test2.setComment(comentPane);
         }
         texto.setComentTextArea("");
         texto.setConsultaTextArea("");
