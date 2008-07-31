@@ -1402,7 +1402,7 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0){
+                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);
@@ -1535,7 +1535,7 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0){
+                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);
@@ -1665,7 +1665,7 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0){
+                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);
@@ -1797,7 +1797,7 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0){
+                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);
@@ -1927,7 +1927,7 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0){
+                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);

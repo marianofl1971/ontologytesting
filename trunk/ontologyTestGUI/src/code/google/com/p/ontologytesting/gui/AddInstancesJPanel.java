@@ -432,6 +432,8 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         int ind = GroupTestsJPanel.getSelectedTabed();
         ContentMainJFrame.getConjuntoClassInstances().set(ind, clasI);
         ContentMainJFrame.getConjuntoPropInstances().set(ind, propI);
+        int var=0;
+        String textoQuery = "", textoResult="", textoComent="";
         while(qi.hasNext()){   
             QueryOntology cI = (QueryOntology) qi.next();
             if(tab.equals("Instanciación")){
@@ -456,15 +458,23 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     descPanel.setNombreTextField(nombre);
                     descPanel.setDescTextArea(descrip);
                     test3 = (TestInstancesTextJPanel) opcionTextInstPanel.getComponent(0);
-                    test3.setComentTextArea(cI.getComment());
-                    test3.setConsultaTextArea(cI.getQuery());
-                    String res = cI.getResultexpected();
-                    if(res.equals("true")){
-                        test3.setResultadoEsperadoTextArea("true");
+                    if(textoQuery.equals("")){
+                        textoQuery = cI.getQuery();
                     }else{
-                        test3.setResultadoEsperadoTextArea("false");
+                        textoQuery = textoQuery+"\n"+cI.getQuery();
+                    }
+                    if(textoResult.equals("")){
+                        textoResult = cI.getResultexpected();
+                    }else{
+                        textoResult = textoResult+"\n"+cI.getResultexpected();
+                    }
+                    if(textoComent.equals("")){
+                        textoComent = cI.getComment();
+                    }else{
+                        textoComent = textoComent+"\n"+cI.getComment();
                     }
                     cont++;
+                    var=1;
                 }
             }else if(tab.equals("Retrieval")){
                 if(GroupTestsJPanel.getTabbedPaneRet()==0){
@@ -483,10 +493,23 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     descPanel.setNombreTextField(nombre);
                     descPanel.setDescTextArea(descrip);
                     test3 = (TestInstancesTextJPanel) opcionTextRetPanel.getComponent(0);
-                    test3.setComentTextArea(cI.getComment());
-                    test3.setConsultaTextArea(cI.getQuery());
-                    test3.setResultadoEsperadoTextArea(cI.getResultexpected());
+                    if(textoQuery.equals("")){
+                        textoQuery = cI.getQuery();
+                    }else{
+                        textoQuery = textoQuery+"\n"+cI.getQuery();
+                    }
+                    if(textoResult.equals("")){
+                        textoResult = cI.getResultexpected();
+                    }else{
+                        textoResult = textoResult+"\n"+cI.getResultexpected();
+                    }
+                    if(textoComent.equals("")){
+                        textoComent = cI.getComment();
+                    }else{
+                        textoComent = textoComent+"\n"+cI.getComment();
+                    }
                     cont++;
+                    var=1;
                 }
             }else if(tab.equals("Realización")){
                 if(GroupTestsJPanel.getTabbedPaneReal()==0){
@@ -505,10 +528,23 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     descPanel.setNombreTextField(nombre);
                     descPanel.setDescTextArea(descrip);
                     test3 = (TestInstancesTextJPanel) opcionTextRealPanel.getComponent(0);
-                    test3.setComentTextArea(cI.getComment());
-                    test3.setConsultaTextArea(cI.getQuery());
-                    test3.setResultadoEsperadoTextArea(cI.getResultexpected());
+                    if(textoQuery.equals("")){
+                        textoQuery = cI.getQuery();
+                    }else{
+                        textoQuery = textoQuery+"\n"+cI.getQuery();
+                    }
+                    if(textoResult.equals("")){
+                        textoResult = cI.getResultexpected();
+                    }else{
+                        textoResult = textoResult+"\n"+cI.getResultexpected();
+                    }
+                    if(textoComent.equals("")){
+                        textoComent = cI.getComment();
+                    }else{
+                        textoComent = textoComent+"\n"+cI.getComment();
+                    }
                     cont++;
+                    var=1;
                 }
             }else if(tab.equals("Satisfactibilidad")){
                 if(GroupTestsJPanel.getTabbedPaneSat()==0){
@@ -532,15 +568,23 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     descPanel.setNombreTextField(nombre);
                     descPanel.setDescTextArea(descrip);
                     test3 = (TestInstancesTextJPanel) opcionTextSatPanel.getComponent(0);
-                    test3.setComentTextArea(cI.getComment());
-                    test3.setConsultaTextArea(cI.getQuery());
-                    String res = cI.getResultexpected();
-                    if(res.equals("true")){
-                        test3.setResultadoEsperadoTextArea("true");
+                    if(textoQuery.equals("")){
+                        textoQuery = cI.getQuery();
                     }else{
-                        test3.setResultadoEsperadoTextArea("false");
+                        textoQuery = textoQuery+"\n"+cI.getQuery();
+                    }
+                    if(textoResult.equals("")){
+                        textoResult = cI.getResultexpected();
+                    }else{
+                        textoResult = textoResult+"\n"+cI.getResultexpected();
+                    }
+                    if(textoComent.equals("")){
+                        textoComent = cI.getComment();
+                    }else{
+                        textoComent = textoComent+"\n"+cI.getComment();
                     }
                     cont++;
+                    var=1;
                 }
             }else if(tab.equals("Clasificación")){
                 if(GroupTestsJPanel.getTabbedPaneClas()==0){
@@ -559,13 +603,31 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     descPanel.setNombreTextField(nombre);
                     descPanel.setDescTextArea(descrip);
                     test3 = (TestInstancesTextJPanel) opcionTextClasPanel.getComponent(0);
-                    test3.setComentTextArea(cI.getComment());
-                    test3.setConsultaTextArea(cI.getQuery());
-                    test3.setResultadoEsperadoTextArea(cI.getResultexpected());
+                    if(textoQuery.equals("")){
+                        textoQuery = cI.getQuery();
+                    }else{
+                        textoQuery = textoQuery+"\n"+cI.getQuery();
+                    }
+                    if(textoResult.equals("")){
+                        textoResult = cI.getResultexpected();
+                    }else{
+                        textoResult = textoResult+"\n"+cI.getResultexpected();
+                    }
+                    if(textoComent.equals("")){
+                        textoComent = cI.getComment();
+                    }else{
+                        textoComent = textoComent+"\n"+cI.getComment();
+                    }
                     cont++;
+                    var=1;
                 }
             }
         }  
+    if(var==1){
+         test3.setResultadoEsperadoTextArea(textoResult);
+         test3.setComentTextArea(textoComent);
+         test3.setConsultaTextArea(textoQuery);
+    }
     decoder.close();    
     }catch(FileNotFoundException e){
     }
