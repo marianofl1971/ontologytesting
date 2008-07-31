@@ -1132,6 +1132,7 @@ public void guardarDatos(){
     testresult = new OntologyTestResult();
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
+    if(ontologyFisical.endsWith(".owl")){
     String ontologyURI = MainJPanel.getNamespaceOntologyTextField();
     
     MainJPanel.getCollectionTest().setOntology("file:".concat(ontologyFisical));
@@ -1239,6 +1240,10 @@ public void guardarDatos(){
         JPanel panel = new TreeResults(testresult);
         GroupTestsJPanel.setPanelTree(panel);
         GroupTestsJPanel.setDatosGuardados(true); 
+    }
+    }else{
+        JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
+                "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
     }
 }   
 
@@ -1397,7 +1402,11 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(cComent.length!=0){
+                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    }else{
+                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                    }
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
@@ -1526,7 +1535,11 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(cComent.length!=0){
+                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    }else{
+                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                    }
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
@@ -1652,7 +1665,11 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(cComent.length!=0){
+                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    }else{
+                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                    }
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
@@ -1780,7 +1797,11 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(cComent.length!=0){
+                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    }else{
+                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                    }
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
@@ -1906,7 +1927,11 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(cComent.length!=0){
+                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    }else{
+                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                    }
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
@@ -2089,17 +2114,26 @@ public JPanel getContentPanel() {
                     String queryExp = test2.getQueryResult();
                     AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
+                    String[] conjFinal = queryExp.split("\n| |,");
+                         
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerys.equals("")){
                             conjuntoQuerys = query.concat("\n");
                         }else{
                             conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
-                        }
-                        if(conjuntoResExp.equals("")){
-                            conjuntoResExp = queryExp.concat("\n");
-                        }else{
-                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
-                        }
+                        }  
+                        for(int j=0;j<conjFinal.length;j++){
+                            if(conjuntoResExp.equals("")){
+                                conjuntoResExp = conjFinal[j]+",";
+                            }else{
+                                if(j==conjFinal.length-1){
+                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j]);
+                                }else{
+                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j])+",";
+                                }
+                            }
+                        } 
+                        conjuntoResExp = conjuntoResExp.concat("\n");
                         if(conjuntoComent.equals("")){
                             conjuntoComent = coment.concat("\n");
                         }else{
@@ -2201,17 +2235,26 @@ public JPanel getContentPanel() {
                     String queryExp = test2.getQueryResult();
                     AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
+                    String[] conjFinal = queryExp.split("\n| |,");
+                    
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerys.equals("")){
                             conjuntoQuerys = query.concat("\n");
                         }else{
                             conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
                         }
-                        if(conjuntoResExp.equals("")){
-                            conjuntoResExp = queryExp.concat("\n");
-                        }else{
-                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
-                        }
+                        for(int j=0;j<conjFinal.length;j++){
+                            if(conjuntoResExp.equals("")){
+                                conjuntoResExp = conjFinal[j]+",";
+                            }else{
+                                if(j==conjFinal.length-1){
+                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j]);
+                                }else{
+                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j])+",";
+                                }
+                            }
+                        } 
+                        conjuntoResExp = conjuntoResExp.concat("\n");
                         if(conjuntoComent.equals("")){
                             conjuntoComent = coment.concat("\n");
                         }else{
@@ -2300,7 +2343,11 @@ public JPanel getContentPanel() {
         for(int i=0; i<cResult.length; i++){
             test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
             String res = cResult[i];
-            test2.setQueryResult(res);
+            if(res.equals(",") || res.endsWith(" ")){
+                test2.setQueryResult("\n");
+            }else{
+                test2.setQueryResult(res);
+            }
         }
         for(int i=0; i<cComent.length; i++){
             test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
