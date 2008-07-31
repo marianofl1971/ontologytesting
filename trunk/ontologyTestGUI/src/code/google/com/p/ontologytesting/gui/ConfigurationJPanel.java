@@ -162,7 +162,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel6.setText("CONFIGUARCION DEL SISTEMA PARA LA UBICACIÓN DE SUS TESTS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -170,11 +170,11 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(548, 548, 548)
+                .addContainerGap()
                 .addComponent(cancelarButton)
                 .addGap(18, 18, 18)
                 .addComponent(aceptarButton)
-                .addContainerGap())
+                .addGap(548, 548, 548))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(302, Short.MAX_VALUE))
@@ -249,8 +249,8 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(aceptarButton)
-                            .addComponent(cancelarButton)))
+                            .addComponent(cancelarButton)
+                            .addComponent(aceptarButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -17,8 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -563,7 +561,7 @@ public void crearArchivoDeInstancias(){
             
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream("./Instances/"+nameInstances)));
+                            FileOutputStream(Configuration.getPathInstancias()+"/"+nameInstances)));
         e.writeObject(clasInst);
         e.writeObject(propInst);
         e.close();
@@ -576,7 +574,7 @@ public void crearArchivoDeInstancias(String nombreFichero){
         
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream("./Instances/"+nombreFichero)));
+                            FileOutputStream(Configuration.getPathInstancias()+"/"+nombreFichero)));
         e.writeObject(clasInst);
         e.writeObject(propInst);
         e.close();

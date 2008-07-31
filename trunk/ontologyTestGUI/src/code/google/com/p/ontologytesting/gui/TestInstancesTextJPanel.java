@@ -43,7 +43,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         resultadoEsperadoTextArea.setRows(5);
         jScrollPane17.setViewportView(resultadoEsperadoTextArea);
 
-        jLabel1.setText("                        CONSULTA                                                      RESULTADO ESPERADO                                            COMENTARIO");
+        jLabel1.setText("                        CONSULTA                                                  RESULTADO ESPERADO                                            COMENTARIO");
 
         comentTextArea.setColumns(20);
         comentTextArea.setRows(5);
