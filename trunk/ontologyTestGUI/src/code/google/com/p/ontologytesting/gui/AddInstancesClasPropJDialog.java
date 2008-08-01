@@ -234,6 +234,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         ArrayList<ClassInstances> al;
         ArrayList<PropertyInstances> la;
         ListIterator li,il;
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));   
         try{
@@ -339,6 +340,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         newPropButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPropButtonActionPerformed(evt);
+            }
+        });
+
+        instancesTabbedPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instancesTabbedPaneMouseClicked(evt);
             }
         });
 
@@ -681,6 +688,15 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     this.validate();
 }//GEN-LAST:event_newPropButtonActionPerformed
 
+private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instancesTabbedPaneMouseClicked
+// TODO add your handling code here:
+    System.out.println(getInstancesTabbedPane());
+    if(getInstancesTabbedPane()==2){
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
+        copiarAInstancesTextArea();
+    }
+}//GEN-LAST:event_instancesTabbedPaneMouseClicked
+
 
 private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
 {  
@@ -692,7 +708,7 @@ private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyI
 public void copiarAInstancesTextArea(){
     String textoClase="",textoProp="";
     
-    CreateInstancesTextAreaJPanel conjunto = new CreateInstancesTextAreaJPanel();
+    CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
     int aux=0;
@@ -703,7 +719,7 @@ public void copiarAInstancesTextArea(){
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(!query.equals("") && !coment.equals("")){
+        if(!query.equals("")){
             if(textoClase.equals("")){
                 textoClase = query+"\n";
             }else{
@@ -719,7 +735,7 @@ public void copiarAInstancesTextArea(){
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(!query.equals("") && !coment.equals("")){
+        if(!query.equals("")){
             if(textoProp.equals("")){
                 textoProp = query+"\n";
             }else{
@@ -731,6 +747,8 @@ public void copiarAInstancesTextArea(){
     }
     conjunto.setClaseTextArea(textoClase);
     conjunto.setPropiedadTextArea(textoProp);
+    this.validate();
+    
 }
 
 public void copiarAInstancesAyuda(){
