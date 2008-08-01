@@ -46,8 +46,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelReal;
     private static JPanel panelRet;
     private static JPanel panelSat;
-    
-    private static int actualSubTab=0;
+    private boolean ontologiaValida=false;
+    private static boolean instTextName=false, retTextName=false, clasTextName=false,
+            realTextName=false, satTextName=false;
+    private static int actualSubTabInst=0, actualSubTabRet=0, actualSubTabClas=0,
+            actualSubTabSat=0, actualSubTabReal=0;
     
     private static JPanel panelAyudaInst;
     private static int totalInst;
@@ -77,12 +80,44 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         panelTree = aPanelTree;
     }
 
-    public static int getActualSubTab() {
-        return actualSubTab;
+    public static int getActualSubTabInst() {
+        return actualSubTabInst;
     }
 
-    public static void setActualSubTab(int aActualSubTab) {
-        actualSubTab = aActualSubTab;
+    public static void setActualSubTabInst(int aActualSubTabInst) {
+        actualSubTabInst = aActualSubTabInst;
+    }
+
+    public static int getActualSubTabRet() {
+        return actualSubTabRet;
+    }
+
+    public static void setActualSubTabRet(int aActualSubTabRet) {
+        actualSubTabRet = aActualSubTabRet;
+    }
+
+    public static int getActualSubTabClas() {
+        return actualSubTabClas;
+    }
+
+    public static void setActualSubTabClas(int aActualSubTabClas) {
+        actualSubTabClas = aActualSubTabClas;
+    }
+
+    public static int getActualSubTabSat() {
+        return actualSubTabSat;
+    }
+
+    public static void setActualSubTabSat(int aActualSubTabSat) {
+        actualSubTabSat = aActualSubTabSat;
+    }
+
+    public static int getActualSubTabReal() {
+        return actualSubTabReal;
+    }
+
+    public static void setActualSubTabReal(int aActualSubTabReal) {
+        actualSubTabReal = aActualSubTabReal;
     }
     private HelpJDialog frameHelp;
     public static boolean isState() {
@@ -1006,65 +1041,65 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneInstMouseClicked
 // TODO add your handling code here:
     int subTab = getTabbedPaneInst();
-    if(getActualSubTab()!=subTab){
+    if(getActualSubTabInst()!=subTab){
         if(subTab==1){
             copiarDeAyudaATexto(0);
         }else{
             copiarDeTextoAAyuda(0);
         }
-        setActualSubTab(subTab);
+        setActualSubTabInst(subTab);
     }
 }//GEN-LAST:event_tabbedPaneInstMouseClicked
 
 private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneRetMouseClicked
 // TODO add your handling code here:
     int subTab = getTabbedPaneRet();
-    if(getActualSubTab()!=subTab){
+    if(getActualSubTabRet()!=subTab){
         if(subTab==1){
             copiarDeAyudaATexto(1);
         }else{
             copiarDeTextoAAyuda(1);
         }
-        setActualSubTab(subTab);
+        setActualSubTabRet(subTab);
     }
 }//GEN-LAST:event_tabbedPaneRetMouseClicked
 
 private void tabbedPaneRealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneRealMouseClicked
 // TODO add your handling code here:
     int subTab = getTabbedPaneReal();
-    if(getActualSubTab()!=subTab){
+    if(getActualSubTabReal()!=subTab){
         if(subTab==1){
             copiarDeAyudaATexto(2);
         }else{
             copiarDeTextoAAyuda(2);
         }
-        setActualSubTab(subTab);
+        setActualSubTabReal(subTab);
     }
 }//GEN-LAST:event_tabbedPaneRealMouseClicked
 
 private void tabbedPaneSatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneSatMouseClicked
 // TODO add your handling code here:
     int subTab = getTabbedPaneSat();
-    if(getActualSubTab()!=subTab){
+    if(getActualSubTabSat()!=subTab){
         if(subTab==1){
             copiarDeAyudaATexto(3);
         }else{
             copiarDeTextoAAyuda(3);
         }
-        setActualSubTab(subTab);
+        setActualSubTabSat(subTab);
     }
 }//GEN-LAST:event_tabbedPaneSatMouseClicked
 
 private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneClasMouseClicked
 // TODO add your handling code here:
     int subTab = getTabbedPaneClas();
-    if(getActualSubTab()!=subTab){
+    if(getActualSubTabClas()!=subTab){
         if(subTab==1){
             copiarDeAyudaATexto(4);
         }else{
             copiarDeTextoAAyuda(4);
         }
-        setActualSubTab(subTab);
+        setActualSubTabClas(subTab);
     }
 }//GEN-LAST:event_tabbedPaneClasMouseClicked
 
@@ -1132,7 +1167,9 @@ public void guardarDatos(){
     testresult = new OntologyTestResult();
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
+    
     if(ontologyFisical.endsWith(".owl")){
+        setOntologiaValida(true);
     String ontologyURI = MainJPanel.getNamespaceOntologyTextField();
     
     MainJPanel.getCollectionTest().setOntology("file:".concat(ontologyFisical));
@@ -1200,50 +1237,49 @@ public void guardarDatos(){
         }
     }
     
-    Component comp = null;
-    int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
+    if(getInstTextName()==true){
+        Component comp = null;
+        int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
             "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
-    if (n == JOptionPane.YES_OPTION){
-        /*  JFileChooser fileChooser = new JFileChooser();
-            int seleccion = fileChooser.showSaveDialog(areaTexto);*/
-        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-        try{ 
-            for(int i=0;i<scenarioT.size();i++){
-                int val=1;
-                if(AddSPARQLJPanel.isSeleccionado()==false){
-                    if(!scenarioT.get(i).getNombre().equals("")){
-                        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+        if (n == JOptionPane.YES_OPTION){
+            ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+            try{ 
+                for(int i=0;i<scenarioT.size();i++){
+                    int val=1;
+                    if(AddSPARQLJPanel.isSeleccionado()==false){
+                        if(!scenarioT.get(i).getNombre().equals("")){
+                            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre())));
-                        e.writeObject(scenarioT.get(i));
-                        e.close();
-                    }
-                }else{
-                    if(!scenarioT.get(i).getNombre().equals("")){
-                        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                        FileOutputStream(Configuration.getPathTestSparql()+"/"
-                        +scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
-                        val++;
-                        e.writeObject(scenarioT.get(i)); 
-                        e.close();
+                            e.writeObject(scenarioT.get(i));
+                            e.close();
+                        }
+                    }else{
+                        if(!scenarioT.get(i).getNombre().equals("")){
+                            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                            FileOutputStream(Configuration.getPathTestSparql()+"/"
+                            +scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
+                            val++;
+                            e.writeObject(scenarioT.get(i)); 
+                            e.close();
+                        }
                     }
                 }
+            }catch (FileNotFoundException ex) {
+                //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }catch (FileNotFoundException ex) {
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            testcase.run(testresult, MainJPanel.getCollectionTest());
+            JPanel panel = new TreeResults(testresult);
+            GroupTestsJPanel.setPanelTree(panel);
+            GroupTestsJPanel.setDatosGuardados(true);
+        }else{
+            testcase.run(testresult, MainJPanel.getCollectionTest());
+            JPanel panel = new TreeResults(testresult);
+            GroupTestsJPanel.setPanelTree(panel);
+            GroupTestsJPanel.setDatosGuardados(true); 
         }
-        testcase.run(testresult, MainJPanel.getCollectionTest());
-        JPanel panel = new TreeResults(testresult);
-        GroupTestsJPanel.setPanelTree(panel);
-        GroupTestsJPanel.setDatosGuardados(true);
+        }
     }else{
-        testcase.run(testresult, MainJPanel.getCollectionTest());
-        JPanel panel = new TreeResults(testresult);
-        GroupTestsJPanel.setPanelTree(panel);
-        GroupTestsJPanel.setDatosGuardados(true); 
-    }
-    }else{
-        JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
-                "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            setOntologiaValida(false);
     }
 }   
 
@@ -1309,14 +1345,17 @@ public static void asociarInstancias(int sel){
     
     if(sel==0){
         if(getTabbedPaneInst()==0){
+            descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+            if(descPanel.getNombreTextField().equals("")){
+                        JOptionPane.showMessageDialog(frame,"No ha introducido un nombre" +
+                                "para el Test de Instanciación y es un campo obligatorio",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setInstTextName(false);
+            }else{
+                setInstTextName(true);
             for(int i=1;i<totalInst;i++){
                 test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
-                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-                if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
-                    if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-                    }else{
+                    if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1346,95 +1385,97 @@ public static void asociarInstancias(int sel){
                         }
                     }   
                 }
-            }
-            if(AddInstancesJPanel.isStateNuevo()==true){
-                int c = instAyudaPanel.getComponentCount();
-                for (int i = 1; i < c; i++) {
-                    instAyudaPanel.remove(instAyudaPanel.getComponent(i));
-                    instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
-                }
-                instAyudaPanel.validate();
-            }
-            if(aux==1){
                 if(AddInstancesJPanel.isStateNuevo()==true){
-                    descPanel.setDescTextArea("");
-                    descPanel.setNombreTextField("");
+                    int c = instAyudaPanel.getComponentCount();
+                    for (int i = 1; i < c; i++) {
+                        instAyudaPanel.remove(instAyudaPanel.getComponent(i));
+                        instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+                    }
+                    instAyudaPanel.validate();
                 }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
-                }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                if(aux==1){
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        descPanel.setDescTextArea("");
+                        descPanel.setNombreTextField("");
+                    }
+                    clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
+                    propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
+                    scenario.setClassInstances(clasFinal);
+                    scenario.setPropertyInstances(propFinal);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
+                    ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
                 }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
             }
         }else{
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
             if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
+                        JOptionPane.showMessageDialog(frame,"No ha introducido un nombre" +
+                        "para el Test de Instanciación y es un campo obligatorio",
                         "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setInstTextName(false);
             }else{
-            texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
-            conjuntoComent = texto.getComentTextArea();
-            cQuery = conjuntoQuerys.split("\\\n");
-            cResult = conjuntoResult.split("\\\n");
-            cComent = conjuntoComent.split("\\\n");
-            if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
+                texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaTextArea();
+                conjuntoResult = texto.getResultadoEsperadoTextArea();
+                conjuntoComent = texto.getComentTextArea();
+                cQuery = conjuntoQuerys.split("\\\n");
+                cResult = conjuntoResult.split("\\\n");
+                cComent = conjuntoComent.split("\\\n");
+                if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
                     (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
                     JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                             "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-                if(var==0){
-                    nombreTest = descPanel.getNombreTextField();
-                    descTest = descPanel.getDescTextArea();
-                    scenario.setDescripcion(descTest);
-                    scenario.setNombre(nombreTest);
-                    scenario.setTestName("Instanciación");
-                    var=1;
-                }
-                QueryOntology testQuery = new QueryOntology();
-                for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
-                    }else{
-                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                    if(var==0){
+                        nombreTest = descPanel.getNombreTextField();
+                        descTest = descPanel.getDescTextArea();
+                        scenario.setDescripcion(descTest);
+                        scenario.setNombre(nombreTest);
+                        scenario.setTestName("Instanciación");
+                        var=1;
                     }
-                    queryTest1.add(testQuery);
-                    scenario.setQueryTest(queryTest1);
-                    aux=1;
+                    QueryOntology testQuery = new QueryOntology();
+                    for(int i=0; i<cQuery.length;i++){
+                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                        }else{
+                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        }
+                        queryTest1.add(testQuery);
+                        scenario.setQueryTest(queryTest1);
+                        aux=1;
+                    }
+                }
+                if(aux==1){
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        descPanel.setDescTextArea("");
+                        descPanel.setNombreTextField("");
+                        texto.setComentTextArea("");
+                        texto.setConsultaTextArea("");
+                        texto.setResultadoEsperadoTextArea("");
+                    }
+                    clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
+                    propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
+                    scenario.setClassInstances(clasFinal);
+                    scenario.setPropertyInstances(propFinal);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
+                    ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
                 }
             }
-            if(aux==1){
-                if(AddInstancesJPanel.isStateNuevo()==true){
-                    descPanel.setDescTextArea("");
-                    descPanel.setNombreTextField("");
-                    texto.setComentTextArea("");
-                    texto.setConsultaTextArea("");
-                    texto.setResultadoEsperadoTextArea("");
-                }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
-                }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-                }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
-            }
-        }
         }
       var=0;
     }else if(sel==1){
@@ -2052,7 +2093,14 @@ public JPanel getContentPanel() {
     public void copiarDeAyudaATexto(int tab){
         
         TestInstancesTextJPanel texto;
-        String conjuntoQuerys="", conjuntoResExp="", conjuntoComent="";
+        String conjuntoQuerysInst="", conjuntoQuerysRet="", conjuntoQuerysReal="",
+                conjuntoQuerysSat="", conjuntoQuerysClas="";
+        String conjuntoResExpInst="", conjuntoResExpRet="", conjuntoResExpReal="", 
+                conjuntoResExpSat="", conjuntoResExpClas="";
+        String conjuntoComentInst="", conjuntoComentRet="", conjuntoComentReal="", 
+                conjuntoComentSat="", conjuntoComentClas="";
+        
+        
         test = null;
         test1 = null; 
         test2 = null;
@@ -2078,28 +2126,28 @@ public JPanel getContentPanel() {
                     AddComentJDialog comentPane = test.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !resExpT.equals(resExpF)){
-                        if(conjuntoQuerys.equals("")){
-                            conjuntoQuerys = query.concat("\n");
+                        if(conjuntoQuerysInst.equals("")){
+                            conjuntoQuerysInst = query.concat("\n");
                         }else{
-                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                            conjuntoQuerysInst = conjuntoQuerysInst.concat(query).concat("\n");
                         }
-                        if(conjuntoResExp.equals("")){
-                            conjuntoResExp = resExpT.concat("\n");
+                        if(conjuntoResExpInst.equals("")){
+                            conjuntoResExpInst = resExpT.concat("\n");
                         }else{
-                            conjuntoResExp = conjuntoResExp.concat(resExpT).concat("\n");
+                            conjuntoResExpInst = conjuntoResExpInst.concat(resExpT).concat("\n");
                         }
-                        if(conjuntoComent.equals("")){
-                            conjuntoComent = coment.concat("\n");
+                        if(conjuntoComentInst.equals("")){
+                            conjuntoComentInst = coment.concat("\n");
                         }else{
-                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                            conjuntoComentInst = conjuntoComentInst.concat(coment).concat("\n");
                         }
                     } 
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerys);
-            texto.setResultadoEsperadoTextArea(conjuntoResExp);
-            texto.setComentTextArea(conjuntoComent);
+            texto.setConsultaTextArea(conjuntoQuerysInst);
+            texto.setResultadoEsperadoTextArea(conjuntoResExpInst);
+            texto.setComentTextArea(conjuntoComentInst);
             int c = instAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 instAyudaPanel.remove(instAyudaPanel.getComponent(i));
@@ -2117,35 +2165,35 @@ public JPanel getContentPanel() {
                     String[] conjFinal = queryExp.split("\n| |,");
                          
                     if(!query.equals("") && !queryExp.equals("")){
-                        if(conjuntoQuerys.equals("")){
-                            conjuntoQuerys = query.concat("\n");
+                        if(conjuntoQuerysRet.equals("")){
+                            conjuntoQuerysRet = query.concat("\n");
                         }else{
-                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                            conjuntoQuerysRet = conjuntoQuerysRet.concat(query).concat("\n");
                         }  
                         for(int j=0;j<conjFinal.length;j++){
-                            if(conjuntoResExp.equals("")){
-                                conjuntoResExp = conjFinal[j]+",";
+                            if(conjuntoResExpRet.equals("")){
+                                conjuntoResExpRet = conjFinal[j]+",";
                             }else{
                                 if(j==conjFinal.length-1){
-                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j]);
+                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j]);
                                 }else{
-                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j])+",";
+                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j])+",";
                                 }
                             }
                         } 
-                        conjuntoResExp = conjuntoResExp.concat("\n");
-                        if(conjuntoComent.equals("")){
-                            conjuntoComent = coment.concat("\n");
+                        conjuntoResExpRet = conjuntoResExpRet.concat("\n");
+                        if(conjuntoComentRet.equals("")){
+                            conjuntoComentRet = coment.concat("\n");
                         }else{
-                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                            conjuntoComentRet = conjuntoComentRet.concat(coment).concat("\n");
                         }
                     } 
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerys);
-            texto.setResultadoEsperadoTextArea(conjuntoResExp);
-            texto.setComentTextArea(conjuntoComent);
+            texto.setConsultaTextArea(conjuntoQuerysRet);
+            texto.setResultadoEsperadoTextArea(conjuntoResExpRet);
+            texto.setComentTextArea(conjuntoComentRet);
             int c = retAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 retAyudaPanel.remove(retAyudaPanel.getComponent(i));
@@ -2161,28 +2209,28 @@ public JPanel getContentPanel() {
                     AddComentJDialog comentPane = test1.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !queryExp.equals("")){
-                        if(conjuntoQuerys.equals("")){
-                            conjuntoQuerys = query.concat("\n");
+                        if(conjuntoQuerysReal.equals("")){
+                            conjuntoQuerysReal = query.concat("\n");
                         }else{
-                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                            conjuntoQuerysReal = conjuntoQuerysReal.concat(query).concat("\n");
                         }
-                        if(conjuntoResExp.equals("")){
-                            conjuntoResExp = queryExp.concat("\n");
+                        if(conjuntoResExpReal.equals("")){
+                            conjuntoResExpReal = queryExp.concat("\n");
                         }else{
-                            conjuntoResExp = conjuntoResExp.concat(queryExp).concat("\n");
+                            conjuntoResExpReal = conjuntoResExpReal.concat(queryExp).concat("\n");
                         }
-                        if(conjuntoComent.equals("")){
-                            conjuntoComent = coment.concat("\n");
+                        if(conjuntoComentReal.equals("")){
+                            conjuntoComentReal = coment.concat("\n");
                         }else{
-                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                            conjuntoComentReal = conjuntoComentReal.concat(coment).concat("\n");
                         }
                     } 
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerys);
-            texto.setResultadoEsperadoTextArea(conjuntoResExp);
-            texto.setComentTextArea(conjuntoComent);
+            texto.setConsultaTextArea(conjuntoQuerysReal);
+            texto.setResultadoEsperadoTextArea(conjuntoResExpReal);
+            texto.setComentTextArea(conjuntoComentReal);
             int c = realAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 realAyudaPanel.remove(realAyudaPanel.getComponent(i));
@@ -2199,28 +2247,28 @@ public JPanel getContentPanel() {
                     AddComentJDialog comentPane = test.getComment();
                     String coment = comentPane.getComent();
                     if(!query.equals("") && !resExpT.equals(resExpF)){
-                        if(conjuntoQuerys.equals("")){
-                            conjuntoQuerys = query.concat("\n");
+                        if(conjuntoQuerysSat.equals("")){
+                            conjuntoQuerysSat = query.concat("\n");
                         }else{
-                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                            conjuntoQuerysSat = conjuntoQuerysSat.concat(query).concat("\n");
                         }
-                        if(conjuntoResExp.equals("")){
-                            conjuntoResExp = resExpT.concat("\n");
+                        if(conjuntoResExpSat.equals("")){
+                            conjuntoResExpSat = resExpT.concat("\n");
                         }else{
-                            conjuntoResExp = conjuntoResExp.concat(resExpT).concat("\n");
+                            conjuntoResExpSat = conjuntoResExpSat.concat(resExpT).concat("\n");
                         }
-                        if(conjuntoComent.equals("")){
-                            conjuntoComent = coment.concat("\n");
+                        if(conjuntoComentSat.equals("")){
+                            conjuntoComentSat = coment.concat("\n");
                         }else{
-                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                            conjuntoComentSat = conjuntoComentSat.concat(coment).concat("\n");
                         }
                     } 
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerys);
-            texto.setResultadoEsperadoTextArea(conjuntoResExp);
-            texto.setComentTextArea(conjuntoComent);
+            texto.setConsultaTextArea(conjuntoQuerysSat);
+            texto.setResultadoEsperadoTextArea(conjuntoResExpSat);
+            texto.setComentTextArea(conjuntoComentSat);
             int c = satAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 satAyudaPanel.remove(satAyudaPanel.getComponent(i));
@@ -2238,35 +2286,35 @@ public JPanel getContentPanel() {
                     String[] conjFinal = queryExp.split("\n| |,");
                     
                     if(!query.equals("") && !queryExp.equals("")){
-                        if(conjuntoQuerys.equals("")){
-                            conjuntoQuerys = query.concat("\n");
+                        if(conjuntoQuerysClas.equals("")){
+                            conjuntoQuerysClas = query.concat("\n");
                         }else{
-                            conjuntoQuerys = conjuntoQuerys.concat(query).concat("\n");
+                            conjuntoQuerysClas = conjuntoQuerysClas.concat(query).concat("\n");
                         }
                         for(int j=0;j<conjFinal.length;j++){
-                            if(conjuntoResExp.equals("")){
-                                conjuntoResExp = conjFinal[j]+",";
+                            if(conjuntoResExpClas.equals("")){
+                                conjuntoResExpClas = conjFinal[j]+",";
                             }else{
                                 if(j==conjFinal.length-1){
-                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j]);
+                                    conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j]);
                                 }else{
-                                    conjuntoResExp = conjuntoResExp.concat(conjFinal[j])+",";
+                                    conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j])+",";
                                 }
                             }
                         } 
-                        conjuntoResExp = conjuntoResExp.concat("\n");
-                        if(conjuntoComent.equals("")){
-                            conjuntoComent = coment.concat("\n");
+                        conjuntoResExpClas = conjuntoResExpClas.concat("\n");
+                        if(conjuntoComentClas.equals("")){
+                            conjuntoComentClas = coment.concat("\n");
                         }else{
-                            conjuntoComent = conjuntoComent.concat(coment).concat("\n");
+                            conjuntoComentClas = conjuntoComentClas.concat(coment).concat("\n");
                         }
                     } 
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerys);
-            texto.setResultadoEsperadoTextArea(conjuntoResExp);
-            texto.setComentTextArea(conjuntoComent);
+            texto.setConsultaTextArea(conjuntoQuerysClas);
+            texto.setResultadoEsperadoTextArea(conjuntoResExpClas);
+            texto.setComentTextArea(conjuntoComentClas);
             int c = clasAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
@@ -2295,17 +2343,22 @@ public JPanel getContentPanel() {
 
     TestInstancesTextJPanel texto;
     
-    String conjuntoQuerys = "",conjuntoResult="",conjuntoComent="";
+    String conjuntoQuerysInst="", conjuntoQuerysRet="", conjuntoQuerysReal="",
+                conjuntoQuerysSat="", conjuntoQuerysClas="";
+    String conjuntoResultInst="", conjuntoResultRet="", conjuntoResultReal="", 
+                conjuntoResultSat="", conjuntoResultClas="";
+    String conjuntoComentInst="", conjuntoComentRet="", conjuntoComentReal="", 
+                conjuntoComentSat="", conjuntoComentClas="";
     String cQuery[],cResult[],cComent[];
 
     if(tab==0){
         texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-        conjuntoQuerys = texto.getConsultaTextArea();
-        conjuntoResult = texto.getResultadoEsperadoTextArea();
-        conjuntoComent = texto.getComentTextArea();
-        cQuery = conjuntoQuerys.split("\\\n");
-        cResult = conjuntoResult.split("\\\n");
-        cComent = conjuntoComent.split("\\\n");
+        conjuntoQuerysInst = texto.getConsultaTextArea();
+        conjuntoResultInst = texto.getResultadoEsperadoTextArea();
+        conjuntoComentInst = texto.getComentTextArea();
+        cQuery = conjuntoQuerysInst.split("\\\n");
+        cResult = conjuntoResultInst.split("\\\n");
+        cComent = conjuntoComentInst.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
             test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
             test.setQuery(cQuery[i]);
@@ -2325,17 +2378,14 @@ public JPanel getContentPanel() {
             comentPane.setComent(cComent[i]);
             test.setComment(comentPane);
         }
-        texto.setComentTextArea("");
-        texto.setConsultaTextArea("");
-        texto.setResultadoEsperadoTextArea("");
      }else if(tab==1){
         texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-        conjuntoQuerys = texto.getConsultaTextArea();
-        conjuntoResult = texto.getResultadoEsperadoTextArea();
-        conjuntoComent = texto.getComentTextArea();
-        cQuery = conjuntoQuerys.split("\\\n");
-        cResult = conjuntoResult.split("\\\n");
-        cComent = conjuntoComent.split("\\\n");
+        conjuntoQuerysRet = texto.getConsultaTextArea();
+        conjuntoResultRet = texto.getResultadoEsperadoTextArea();
+        conjuntoComentRet = texto.getComentTextArea();
+        cQuery = conjuntoQuerysRet.split("\\\n");
+        cResult = conjuntoResultRet.split("\\\n");
+        cComent = conjuntoComentRet.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
             test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
             test2.setQuery(cQuery[i]);
@@ -2355,17 +2405,14 @@ public JPanel getContentPanel() {
             comentPane.setComent(cComent[i]);
             test2.setComment(comentPane);
         }
-        texto.setComentTextArea("");
-        texto.setConsultaTextArea("");
-        texto.setResultadoEsperadoTextArea("");
       }else if(tab==2){
         texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-        conjuntoQuerys = texto.getConsultaTextArea();
-        conjuntoResult = texto.getResultadoEsperadoTextArea();
-        conjuntoComent = texto.getComentTextArea();
-        cQuery = conjuntoQuerys.split("\\\n");
-        cResult = conjuntoResult.split("\\\n");
-        cComent = conjuntoComent.split("\\\n");
+        conjuntoQuerysReal = texto.getConsultaTextArea();
+        conjuntoResultReal = texto.getResultadoEsperadoTextArea();
+        conjuntoComentReal = texto.getComentTextArea();
+        cQuery = conjuntoQuerysReal.split("\\\n");
+        cResult = conjuntoResultReal.split("\\\n");
+        cComent = conjuntoComentReal.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
             test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
             test1.setQuery(cQuery[i]);
@@ -2380,18 +2427,15 @@ public JPanel getContentPanel() {
             AddComentJDialog comentPane = test1.getComment();
             comentPane.setComent(cComent[i]);
             test1.setComment(comentPane);
-        }
-        texto.setComentTextArea("");
-        texto.setConsultaTextArea("");
-        texto.setResultadoEsperadoTextArea("");  
+        }  
       }else if(tab==3){
         texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-        conjuntoQuerys = texto.getConsultaTextArea();
-        conjuntoResult = texto.getResultadoEsperadoTextArea();
-        conjuntoComent = texto.getComentTextArea();
-        cQuery = conjuntoQuerys.split("\\\n");
-        cResult = conjuntoResult.split("\\\n");
-        cComent = conjuntoComent.split("\\\n");
+        conjuntoQuerysSat = texto.getConsultaTextArea();
+        conjuntoResultSat = texto.getResultadoEsperadoTextArea();
+        conjuntoComentSat = texto.getComentTextArea();
+        cQuery = conjuntoQuerysSat.split("\\\n");
+        cResult = conjuntoResultSat.split("\\\n");
+        cComent = conjuntoComentSat.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
             test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
             test.setQuery(cQuery[i]);
@@ -2411,17 +2455,14 @@ public JPanel getContentPanel() {
             comentPane.setComent(cComent[i]);
             test.setComment(comentPane);
         }
-        texto.setComentTextArea("");
-        texto.setConsultaTextArea("");
-        texto.setResultadoEsperadoTextArea("");
       }else if(tab==4){
         texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-        conjuntoQuerys = texto.getConsultaTextArea();
-        conjuntoResult = texto.getResultadoEsperadoTextArea();
-        conjuntoComent = texto.getComentTextArea();
-        cQuery = conjuntoQuerys.split("\\\n");
-        cResult = conjuntoResult.split("\\\n");
-        cComent = conjuntoComent.split("\\\n");
+        conjuntoQuerysClas = texto.getConsultaTextArea();
+        conjuntoResultClas = texto.getResultadoEsperadoTextArea();
+        conjuntoComentClas = texto.getComentTextArea();
+        cQuery = conjuntoQuerysClas.split("\\\n");
+        cResult = conjuntoResultClas.split("\\\n");
+        cComent = conjuntoComentClas.split("\\\n");
         for(int i=0; i<cQuery.length; i++){
             test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
             test2.setQuery(cQuery[i]);
@@ -2436,10 +2477,7 @@ public JPanel getContentPanel() {
             AddComentJDialog comentPane = test2.getComment();
             comentPane.setComent(cComent[i]);
             test2.setComment(comentPane);
-        }
-        texto.setComentTextArea("");
-        texto.setConsultaTextArea("");
-        texto.setResultadoEsperadoTextArea("");     
+        }     
       }
     }
 
@@ -2461,6 +2499,54 @@ public JPanel getContentPanel() {
 
     public static JPanel getOpcionTextSatPanel() {
         return opcionTextSatPanel;
+    }
+
+    public boolean isOntologiaValida() {
+        return ontologiaValida;
+    }
+
+    public void setOntologiaValida(boolean ontologiaValida) {
+        this.ontologiaValida = ontologiaValida;
+    }
+
+    public static boolean getInstTextName() {
+        return instTextName;
+    }
+
+    public static void setInstTextName(boolean ainstTextName) {
+        instTextName = ainstTextName;
+    }
+
+    public static boolean getRetTextName() {
+        return retTextName;
+    }
+
+    public static void setRetTextName(boolean aretTextName) {
+        retTextName = aretTextName;
+    }
+
+    public static boolean getClasTextName() {
+        return clasTextName;
+    }
+
+    public static void setClasTextName(boolean aclasTextName) {
+        clasTextName = aclasTextName;
+    }
+
+    public static boolean getRealTextName() {
+        return realTextName;
+    }
+
+    public static void setRealTextName(boolean arealTextName) {
+        realTextName = arealTextName;
+    }
+
+    public static boolean getSatTextName() {
+        return satTextName;
+    }
+
+    public static void setSatTextName(boolean asatTextName) {
+        satTextName = asatTextName;
     }
     
 }

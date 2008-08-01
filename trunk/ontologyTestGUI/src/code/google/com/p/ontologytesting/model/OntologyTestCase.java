@@ -260,5 +260,5 @@ public class OntologyTestCase implements OntologyTest{
         }
         
     }
-        
+      
 }

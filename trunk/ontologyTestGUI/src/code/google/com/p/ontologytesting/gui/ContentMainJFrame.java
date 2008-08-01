@@ -214,16 +214,39 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }else{
         if(ContentMainJFrame.getActual()==1){
                 getGroupTests().guardarDatos();
-                getContentPanel().remove(getGroupTests());
-                getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                ContentMainJFrame.setActual(4);
-                this.validate();
+                if(getGroupTests().isOntologiaValida()==true){
+                    if(GroupTestsJPanel.getInstTextName()==true){
+                        getContentPanel().remove(getGroupTests());
+                        getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                        ContentMainJFrame.setActual(4);
+                    this.validate();
+                    }else{
+                        this.setGroupTests(getGroupTests());
+                        ContentMainJFrame.setActual(1);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
+                    "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    getContentPanel().remove(getGroupTests());
+                    getContentPanel().add(getMainPanel());
+                    ContentMainJFrame.setActual(0);
+                    AddSPARQLJPanel.setSeleccionado(false);
+                    this.validate();
+                }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
-                getContentPanel().remove(sparql);
-                getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                ContentMainJFrame.setActual(4);
-                this.validate();
+                if(getGroupTests().isOntologiaValida()==true){
+                    getContentPanel().remove(sparql);
+                    getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                    ContentMainJFrame.setActual(4);
+                    this.validate();
+                }else{
+                    getContentPanel().remove(sparql);
+                    getContentPanel().add(getMainPanel());
+                    ContentMainJFrame.setActual(0);
+                    AddSPARQLJPanel.setSeleccionado(false);
+                    this.validate();
+                }
         }else if(ContentMainJFrame.getActual()==3){
                 getContentPanel().remove(addInstances.getContentPanel());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
