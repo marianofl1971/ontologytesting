@@ -20,40 +20,35 @@ public class ScenarioTest {
     private String testName;
     private String nombre="";
     private String descripcion="";
-    private ArrayList<ClassInstances> classInstances = new ArrayList<ClassInstances>();
-    private ArrayList<PropertyInstances> propertyInstances = new ArrayList<PropertyInstances>();
+    private Instancias instancias = new Instancias();
     private ArrayList<QueryOntology> queryTest = new ArrayList<QueryOntology>();
     private ArrayList<SparqlQueryOntology> sparqlQuerys = new 
             ArrayList<SparqlQueryOntology>();
     
-    public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, List<QueryOntology> tests, String testName,
+    public ScenarioTest(Instancias instancias, List<QueryOntology> tests, String testName,
             List<SparqlQueryOntology> sparqlquerys,String nombre,String descripcion){
-        
-        this.classInstances.addAll(classInstances);
-        this.propertyInstances.addAll(propertyInstances);
+
         this.sparqlQuerys.addAll(sparqlquerys);
         this.queryTest.addAll(tests);   
         this.testName=testName;   
         this.nombre=nombre;
         this.descripcion=descripcion;
+        this.instancias = instancias;
     }
     
-    public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, List<QueryOntology> tests, String testName){
+    public ScenarioTest(Instancias instancias, List<QueryOntology> tests, 
+            String testName){
         
-        this.classInstances.addAll(classInstances);
-        this.propertyInstances.addAll(propertyInstances);
+        this.instancias = instancias;
         this.queryTest.addAll(tests);   
         this.testName=testName;  
     }    
     
-    public ScenarioTest(List<ClassInstances> classInstances, List<PropertyInstances> 
-            propertyInstances, String testName, List<SparqlQueryOntology> 
-            sparqlquerys,String nombre,String descripcion){
+    public ScenarioTest(Instancias instancias, String testName, 
+            List<SparqlQueryOntology> sparqlquerys, String nombre,
+            String descripcion){
         
-        this.classInstances.addAll(classInstances);
-        this.propertyInstances.addAll(propertyInstances);
+        this.instancias = instancias;
         this.sparqlQuerys.addAll(sparqlquerys);   
         this.testName=testName; 
         this.nombre=nombre;
@@ -62,13 +57,12 @@ public class ScenarioTest {
     
     public ScenarioTest(){
         
-        this.classInstances = new ArrayList<ClassInstances>();
-        this.propertyInstances = new ArrayList<PropertyInstances>();
+        this.instancias = new Instancias();
         this.queryTest = new ArrayList<QueryOntology>();
-        this.testName=null;
-        this.sparqlQuerys=new ArrayList<SparqlQueryOntology>();
-        this.nombre="";
-        this.descripcion="";
+        this.testName = null;
+        this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
+        this.nombre = "";
+        this.descripcion = "";
     
     }
 
@@ -78,22 +72,6 @@ public class ScenarioTest {
 
     public void setTestName(String test_name) {
         this.testName = test_name;
-    }
-
-    public ArrayList<ClassInstances> getClassInstances() {
-        return classInstances;
-    }
-
-    public void setClassInstances(ArrayList<ClassInstances> classInstances) {
-        this.classInstances = classInstances;
-    }
-
-    public ArrayList<PropertyInstances> getPropertyInstances() {
-        return propertyInstances;
-    }
-
-    public void setPropertyInstances(ArrayList<PropertyInstances> propertyInstances) {
-        this.propertyInstances = propertyInstances;
     }
 
     public ArrayList<QueryOntology> getQueryTest() {
@@ -112,13 +90,13 @@ public class ScenarioTest {
         this.sparqlQuerys = sparqlQuerys;
     } 
     
-    public void clearClasInstances(){
+    /*public void clearClasInstances(){
         this.classInstances.clear();
     }
     
     public void clearPropInstances(){
         this.classInstances.clear();
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -134,6 +112,14 @@ public class ScenarioTest {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Instancias getInstancias() {
+        return instancias;
+    }
+
+    public void setInstancias(Instancias instancias) {
+        this.instancias = instancias;
     }
 
 }

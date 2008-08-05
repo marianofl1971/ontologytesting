@@ -11,8 +11,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import code.google.com.p.ontologytesting.model.ClassInstances;
-import code.google.com.p.ontologytesting.model.PropertyInstances;
+import code.google.com.p.ontologytesting.model.Instancias;
 
 /**
  *
@@ -32,21 +31,8 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     public static void setActual(int aActual) {
         actual = aActual;
     }
-    public static ArrayList<ArrayList<ClassInstances>> getConjuntoClassInstances() {
-        return conjuntoClassInstances;
-    }
-    public static void setConjuntoClassInstances(ArrayList<ClassInstances> aConjuntoClassInstances, int pos) {
-        conjuntoClassInstances.add(pos, aConjuntoClassInstances);
-    }
-    public static ArrayList<ArrayList<PropertyInstances>> getConjuntoPropInstances() {
-        return conjuntoPropInstances;
-    }
-    public static void setConjuntoPropInstances(ArrayList<PropertyInstances> aConjuntoPropInstances, int pos) {
-        conjuntoPropInstances.add(pos,aConjuntoPropInstances);
-    }
     private static boolean heVueltoGroupTest=false,heVueltoSparql=false;
-    private static ArrayList conjuntoClassInstances = new ArrayList<ClassInstances>();
-    private static ArrayList conjuntoPropInstances = new ArrayList<PropertyInstances>();
+    private static ArrayList<Instancias> instancias = new ArrayList<Instancias>();
     public static boolean isHeVueltoGroupTest() {
         return heVueltoGroupTest;
     }
@@ -61,6 +47,12 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     }
     private static MainJPanel mainPanel;
     private static GroupTestsJPanel groupTests;
+    public static ArrayList<Instancias> getInstancias() {
+        return instancias;
+    }
+    public static void setInstancias(int index,Instancias aInstancias) {
+        instancias.set(index, aInstancias);
+    }
     private JFrame frame;
     private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8,0);
     private AddSPARQLJPanel sparql;
@@ -75,8 +67,7 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         groupTests = new GroupTestsJPanel(8);
         this.setGroupTests(groupTests);
         for (int i = 0; i <= 5; i++) {
-            conjuntoClassInstances.add(new ArrayList<ClassInstances>());
-            conjuntoPropInstances.add(new ArrayList<PropertyInstances>());
+            instancias.add(new Instancias());
         }
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
@@ -162,13 +153,15 @@ public class ContentMainJFrame extends javax.swing.JFrame {
 private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
 // TODO add your handling code here:
     completarArrayOrden();
+    String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
     if(ContentMainJFrame.getActual()==0){
             if(MainJPanel.getFisicalOntologyTextField().equals("") || 
                     MainJPanel.getNamespaceOntologyTextField().equals("")){
-                
                 JOptionPane.showMessageDialog(frame,"Ambos campos ubicación " +
                         "física y namespace son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
-
+            }else if(!ontologyFisical.endsWith(".owl")){
+                JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
+                "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
             }else{
             if(paginas.get(0).equals(1)){
                 getContentPanel().remove(getMainPanel());
@@ -213,26 +206,18 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
     }else{
         if(ContentMainJFrame.getActual()==1){
-                getGroupTests().guardarDatos();
-                if(getGroupTests().isOntologiaValida()==true){
-                    if(GroupTestsJPanel.getInstTextName()==true){
-                        getContentPanel().remove(getGroupTests());
-                        getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                        ContentMainJFrame.setActual(4);
-                    this.validate();
-                    }else{
-                        this.setGroupTests(getGroupTests());
-                        ContentMainJFrame.setActual(1);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
-                    "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                    getContentPanel().remove(getGroupTests());
-                    getContentPanel().add(getMainPanel());
-                    ContentMainJFrame.setActual(0);
-                    AddSPARQLJPanel.setSeleccionado(false);
-                    this.validate();
-                }
+            getGroupTests().guardarDatos();
+            if(getGroupTests().getNombreTestsValidos()==true){
+                getContentPanel().remove(getGroupTests());
+                getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                ContentMainJFrame.setActual(4);
+                this.validate();
+            }else{
+                JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
+                 "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                this.setGroupTests(getGroupTests());
+               ContentMainJFrame.setActual(1);
+            }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
                 if(getGroupTests().isOntologiaValida()==true){

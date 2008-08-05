@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
@@ -46,9 +47,9 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelReal;
     private static JPanel panelRet;
     private static JPanel panelSat;
-    private boolean ontologiaValida=false;
-    private static boolean instTextName=false, retTextName=false, clasTextName=false,
-            realTextName=false, satTextName=false;
+    private boolean ontologiaValida=false,nombreTestsValidos=false;
+    private static boolean instTextName=true, retTextName=true, clasTextName=true,
+            realTextName=true, satTextName=true;
     private static int actualSubTabInst=0, actualSubTabRet=0, actualSubTabClas=0,
             actualSubTabSat=0, actualSubTabReal=0;
     
@@ -149,6 +150,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private AddComentJDialog commentPane;
     private static ScenarioTest scenarioTest;
     private static JPanel panelTree;
+    private static int nameTest=0;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -191,11 +193,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             satAyudaPanel.add(new TestInstancesTFJPanel());
             clasAyudaPanel.add(new TestInstancesTextAreaJPanel());
         }
-        
-        /*scenarioTest = new ScenarioTest();
-        ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-        scenarioT.add(scenarioTest);
-        MainJPanel.getCollectionTest().setScenariotest(scenarioT);*/
                 
         contentPanel.add(introduccionPanel,BorderLayout.NORTH);
         addInstances = new AddInstancesJPanel(this);
@@ -212,11 +209,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         
         contentPanel.setLayout(new BorderLayout());
         contentPanel.setPreferredSize(new Dimension(desktopWidth, desktopHeight));
-        /*testInstPanel.setLayout(new BoxLayout(testInstPanel, BoxLayout.Y_AXIS));
-        testRetPanel.setLayout(new BoxLayout(testRetPanel, BoxLayout.Y_AXIS));
-        testRealPanel.setLayout(new BoxLayout(testRealPanel, BoxLayout.Y_AXIS));
-        testSatPanel.setLayout(new BoxLayout(testSatPanel, BoxLayout.Y_AXIS));
-        testClasPanel.setLayout(new BoxLayout(testClasPanel, BoxLayout.Y_AXIS));*/
         labelInstPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
@@ -1168,8 +1160,8 @@ public void guardarDatos(){
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
     
-    if(ontologyFisical.endsWith(".owl")){
-        setOntologiaValida(true);
+    //if(ontologyFisical.endsWith(".owl")){
+        //setOntologiaValida(true);
     String ontologyURI = MainJPanel.getNamespaceOntologyTextField();
     
     MainJPanel.getCollectionTest().setOntology("file:".concat(ontologyFisical));
@@ -1189,16 +1181,10 @@ public void guardarDatos(){
         if(AddSPARQLJPanel.getSPARQLQuery().equals("")){
                 ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
                 ScenarioTest scenarioSparql = new ScenarioTest();
-                //int s = scT.size();
-                //ScenarioTest t = scT.get(s-1);
                 scenarioSparql.setTestName("sparql");
                 scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
                 scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
                 ArrayList<SparqlQueryOntology> listQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-                //SparqlQueryOntology qo = new SparqlQueryOntology();
-                //qo.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
-                //qo.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-                //listQuerys.add(qo);
                 scenarioSparql.setSparqlQuerys(listQuerys);
                 if(scT.size()==0){
                     scT.add(scenarioSparql);
@@ -1237,7 +1223,8 @@ public void guardarDatos(){
         }
     }
     
-    if(getInstTextName()==true){
+    if(todosTienenNombre()==true){
+        setNombreTestsValidos(true);
         Component comp = null;
         int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
             "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
@@ -1249,7 +1236,7 @@ public void guardarDatos(){
                     if(AddSPARQLJPanel.isSeleccionado()==false){
                         if(!scenarioT.get(i).getNombre().equals("")){
                             XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre())));
+                            FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre()+".xml")));
                             e.writeObject(scenarioT.get(i));
                             e.close();
                         }
@@ -1277,16 +1264,18 @@ public void guardarDatos(){
             GroupTestsJPanel.setPanelTree(panel);
             GroupTestsJPanel.setDatosGuardados(true); 
         }
+        }else{
+            setNombreTestsValidos(false);
         }
-    }else{
+    /*}else{
             setOntologiaValida(false);
-    }
+    }*/
 }   
 
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
     
-    ArrayList<ClassInstances> classInstances = scenarioTest.getClassInstances();
-    ArrayList<PropertyInstances> propertyInstances = scenarioTest.getPropertyInstances();
+    ArrayList<ClassInstances> classInstances = scenarioTest.getInstancias().getClassInstances();
+    ArrayList<PropertyInstances> propertyInstances = scenarioTest.getInstancias().getPropertyInstances();
     ArrayList<QueryOntology> queryTest = scenarioTest.getQueryTest();
     ArrayList<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
     if(classInstances.isEmpty() && propertyInstances.isEmpty() && 
@@ -1311,11 +1300,7 @@ public static void asociarInstancias(int sel){
     test = null;
     test1 = null;
     test2 = null;
-    ArrayList<ClassInstances> clasFinal = new ArrayList<ClassInstances>();
-    ArrayList<PropertyInstances> propFinal = new ArrayList<PropertyInstances>();
-    ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
-    ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
-
+    
     panelInst = getTestInstPanel();   
     panelClas = getTestClasPanel();   
     panelReal = getTestRealPanel();    
@@ -1346,16 +1331,13 @@ public static void asociarInstancias(int sel){
     if(sel==0){
         if(getTabbedPaneInst()==0){
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"No ha introducido un nombre" +
-                                "para el Test de Instanciación y es un campo obligatorio",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                        setInstTextName(false);
-            }else{
-                setInstTextName(true);
-            for(int i=1;i<totalInst;i++){
+                for(int i=1;i<totalInst;i++){
+                if(getInstTextName()==true){
                 test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
-                    if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
+                    if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
+                        if(descPanel.getNombreTextField().equals("")){
+                                setInstTextName(false);
+                        }else{
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1383,8 +1365,11 @@ public static void asociarInstancias(int sel){
                         }else{
                             i++;
                         }
-                    }   
+                    } 
                 }
+                }
+                }
+            if(getInstTextName()==true){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     int c = instAyudaPanel.getComponentCount();
                     for (int i = 1; i < c; i++) {
@@ -1398,10 +1383,8 @@ public static void asociarInstancias(int sel){
                         descPanel.setDescTextArea("");
                         descPanel.setNombreTextField("");
                     }
-                    clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                    propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                    scenario.setClassInstances(clasFinal);
-                    scenario.setPropertyInstances(propFinal);
+                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);                   
+                    scenario.setInstancias(instancias);
                     ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                     if(st.size()==0){
                         st.add(scenario);
@@ -1409,22 +1392,18 @@ public static void asociarInstancias(int sel){
                     }else{
                         MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                     }
-                    ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                    ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                    ContentMainJFrame.setInstancias(sel,new Instancias());
                 }
-            }
+        }
         }else{
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"No ha introducido un nombre" +
-                        "para el Test de Instanciación y es un campo obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+            texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+            conjuntoQuerys = texto.getConsultaTextArea();
+            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoComent = texto.getComentTextArea();
+            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
                         setInstTextName(false);
             }else{
-                texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-                conjuntoQuerys = texto.getConsultaTextArea();
-                conjuntoResult = texto.getResultadoEsperadoTextArea();
-                conjuntoComent = texto.getComentTextArea();
                 cQuery = conjuntoQuerys.split("\\\n");
                 cResult = conjuntoResult.split("\\\n");
                 cComent = conjuntoComent.split("\\\n");
@@ -1461,10 +1440,8 @@ public static void asociarInstancias(int sel){
                         texto.setConsultaTextArea("");
                         texto.setResultadoEsperadoTextArea("");
                     }
-                    clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                    propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                    scenario.setClassInstances(clasFinal);
-                    scenario.setPropertyInstances(propFinal);
+                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                    scenario.setInstancias(instancias);
                     ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                     if(st.size()==0){
                         st.add(scenario);
@@ -1472,8 +1449,7 @@ public static void asociarInstancias(int sel){
                     }else{
                         MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                     }
-                    ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                    ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                    ContentMainJFrame.setInstancias(sel,new Instancias());
                 }
             }
         }
@@ -1481,12 +1457,12 @@ public static void asociarInstancias(int sel){
     }else if(sel==1){
         if(getTabbedPaneRet()==0){
             for(int i=1;i<totalRet;i++){
+                if(getRetTextName()==true){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
                 descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
+                if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
                     if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setRetTextName(false);
                     }else{
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
@@ -1518,8 +1494,11 @@ public static void asociarInstancias(int sel){
                             i++;
                         }
                     }
+                    
                 }
             }
+            }
+            if(getRetTextName()==true){
             if(AddInstancesJPanel.isStateNuevo()==true){
                 int c = retAyudaPanel.getComponentCount();
                 for (int i = 1; i < c; i++) {
@@ -1534,10 +1513,8 @@ public static void asociarInstancias(int sel){
                 descPanel.setDescTextArea("");
                 descPanel.setNombreTextField("");
             }
-            clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-            propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-            scenario.setClassInstances(clasFinal);
-            scenario.setPropertyInstances(propFinal);
+            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+            scenario.setInstancias(instancias);
             ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
             if(st.size()==0){
                 st.add(scenario);
@@ -1545,19 +1522,18 @@ public static void asociarInstancias(int sel){
             }else{
                 MainJPanel.getCollectionTest().getScenariotest().add(scenario);
             }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
+        }
         }else{
             descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else{
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
             conjuntoQuerys = texto.getConsultaTextArea();
             conjuntoResult = texto.getResultadoEsperadoTextArea();
             conjuntoComent = texto.getComentTextArea();
+            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
+                        setRetTextName(false);
+            }else{
             cQuery = conjuntoQuerys.split("\\\n");
             cResult = conjuntoResult.split("\\\n");
             cComent = conjuntoComent.split("\\\n");
@@ -1594,10 +1570,8 @@ public static void asociarInstancias(int sel){
                     texto.setConsultaTextArea("");
                     texto.setResultadoEsperadoTextArea("");
                 }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                scenario.setInstancias(instancias);
                 ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                 if(st.size()==0){
                     st.add(scenario);
@@ -1605,20 +1579,19 @@ public static void asociarInstancias(int sel){
                 }else{
                     MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                 }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
         }
         }
     }else if(sel==2){
         if(getTabbedPaneReal()==0){
             for(int i=1;i<totalReal;i++){
+                if(getRealTextName()==true){
                 test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
                 descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-                if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
+                if(!test1.getQuery().equals("") && !test1.getQueryResult().equals("")){
                     if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setRealTextName(false);
                     }else{
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
@@ -1651,6 +1624,8 @@ public static void asociarInstancias(int sel){
                     }   
                 }
             }
+            }
+        if(getRealTextName()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = realAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -1664,10 +1639,8 @@ public static void asociarInstancias(int sel){
                 descPanel.setDescTextArea("");
                 descPanel.setNombreTextField("");
         }
-        clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-        propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-        scenario.setClassInstances(clasFinal);
-        scenario.setPropertyInstances(propFinal);
+        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+        scenario.setInstancias(instancias);
         ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
         if(st.size()==0){
             st.add(scenario);
@@ -1675,19 +1648,18 @@ public static void asociarInstancias(int sel){
         }else{
             MainJPanel.getCollectionTest().getScenariotest().add(scenario);
         }
-            ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-            ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+            ContentMainJFrame.setInstancias(sel,new Instancias());
+        }
         }
         }else{
             descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else{
             texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
             conjuntoQuerys = texto.getConsultaTextArea();
             conjuntoResult = texto.getResultadoEsperadoTextArea();
             conjuntoComent = texto.getComentTextArea();
+            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
+                        setRealTextName(false);
+            }else{
             cQuery = conjuntoQuerys.split("\\\n");
             cResult = conjuntoResult.split("\\\n");
             cComent = conjuntoComent.split("\\\n");
@@ -1724,10 +1696,8 @@ public static void asociarInstancias(int sel){
                     texto.setConsultaTextArea("");
                     texto.setResultadoEsperadoTextArea("");
                 }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                scenario.setInstancias(instancias);
                 ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                 if(st.size()==0){
                     st.add(scenario);
@@ -1735,20 +1705,19 @@ public static void asociarInstancias(int sel){
                 }else{
                     MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                 }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
         }
         }
     }else if(sel==3){
         if(getTabbedPaneSat()==0){
             for(int i=1;i<totalSat;i++){
+                if(getSatTextName()==true){
                 test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
                 descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-                if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
+                if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
                     if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSatTextName(false);
                     }else{
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
@@ -1783,6 +1752,8 @@ public static void asociarInstancias(int sel){
                     }     
                 }
             }
+            }
+        if(getSatTextName()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = satAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -1796,10 +1767,8 @@ public static void asociarInstancias(int sel){
             descPanel.setDescTextArea("");
             descPanel.setNombreTextField("");
         }
-        clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-        propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-        scenario.setClassInstances(clasFinal);
-        scenario.setPropertyInstances(propFinal);
+        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+        scenario.setInstancias(instancias);
         ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
         if(st.size()==0){
             st.add(scenario);
@@ -1807,19 +1776,18 @@ public static void asociarInstancias(int sel){
         }else{
             MainJPanel.getCollectionTest().getScenariotest().add(scenario);
         }
-            ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-            ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+            ContentMainJFrame.setInstancias(sel,new Instancias());
+        }
         }
         }else{
             descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else{
             texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
             conjuntoQuerys = texto.getConsultaTextArea();
             conjuntoResult = texto.getResultadoEsperadoTextArea();
             conjuntoComent = texto.getComentTextArea();
+            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
+                        setSatTextName(false);
+            }else{
             cQuery = conjuntoQuerys.split("\\\n");
             cResult = conjuntoResult.split("\\\n");
             cComent = conjuntoComent.split("\\\n");
@@ -1856,10 +1824,8 @@ public static void asociarInstancias(int sel){
                     texto.setConsultaTextArea("");
                     texto.setResultadoEsperadoTextArea("");
                 }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                scenario.setInstancias(instancias);
                 ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                 if(st.size()==0){
                     st.add(scenario);
@@ -1867,20 +1833,19 @@ public static void asociarInstancias(int sel){
                 }else{
                     MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                 }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
         }
         }
     }else if(sel==4){
         if(getTabbedPaneClas()==0){
             for(int i=1;i<totalClas;i++){
+                if(getClasTextName()==true){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
                 descPanel = (DescripcionJPanel) panelClas.getComponent(0);
                 if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
                     if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setClasTextName(false);
                     }else{
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
@@ -1913,6 +1878,8 @@ public static void asociarInstancias(int sel){
                     }    
                 }
             }
+            }
+        if(getClasTextName()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = clasAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -1926,10 +1893,8 @@ public static void asociarInstancias(int sel){
             descPanel.setDescTextArea("");
             descPanel.setNombreTextField("");
         }
-        clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-        propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-        scenario.setClassInstances(clasFinal);
-        scenario.setPropertyInstances(propFinal);
+        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+        scenario.setInstancias(instancias);
         ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
         if(st.size()==0){
             st.add(scenario);
@@ -1937,19 +1902,18 @@ public static void asociarInstancias(int sel){
         }else{
             MainJPanel.getCollectionTest().getScenariotest().add(scenario);
         }
-        ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-        ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+        ContentMainJFrame.setInstancias(sel,new Instancias());
         }  
+        }
     }else{
             descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-            if(descPanel.getNombreTextField().equals("")){
-                        JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else{
             texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
             conjuntoQuerys = texto.getConsultaTextArea();
             conjuntoResult = texto.getResultadoEsperadoTextArea();
             conjuntoComent = texto.getComentTextArea();
+            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("") ){
+                        setClasTextName(false);
+            }else{ 
             cQuery = conjuntoQuerys.split("\\\n");
             cResult = conjuntoResult.split("\\\n");
             cComent = conjuntoComent.split("\\\n");
@@ -1986,10 +1950,8 @@ public static void asociarInstancias(int sel){
                     texto.setConsultaTextArea("");
                     texto.setResultadoEsperadoTextArea("");
                 }
-                clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(sel);
-                propFinal = ContentMainJFrame.getConjuntoPropInstances().get(sel);
-                scenario.setClassInstances(clasFinal);
-                scenario.setPropertyInstances(propFinal);
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                scenario.setInstancias(instancias);
                 ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
                 if(st.size()==0){
                     st.add(scenario);
@@ -1997,8 +1959,7 @@ public static void asociarInstancias(int sel){
                 }else{
                     MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                 }
-                ContentMainJFrame.getConjuntoClassInstances().set(sel, vaciaClase);
-                ContentMainJFrame.getConjuntoPropInstances().set(sel, vaciaPropiedad);
+                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
         }
     }
@@ -2170,17 +2131,21 @@ public JPanel getContentPanel() {
                         }else{
                             conjuntoQuerysRet = conjuntoQuerysRet.concat(query).concat("\n");
                         }  
-                        for(int j=0;j<conjFinal.length;j++){
-                            if(conjuntoResExpRet.equals("")){
-                                conjuntoResExpRet = conjFinal[j]+",";
-                            }else{
-                                if(j==conjFinal.length-1){
-                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j]);
+                        if(conjFinal.length==1){
+                            conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[0]);
+                        }else{
+                            for(int j=0;j<conjFinal.length;j++){
+                                if(conjuntoResExpRet.equals("")){
+                                    conjuntoResExpRet = conjFinal[j]+",";
                                 }else{
-                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j])+",";
+                                    if(j==conjFinal.length-1){
+                                        conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j]);
+                                    }else{
+                                        conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j])+",";
+                                    }
                                 }
-                            }
-                        } 
+                            } 
+                        }
                         conjuntoResExpRet = conjuntoResExpRet.concat("\n");
                         if(conjuntoComentRet.equals("")){
                             conjuntoComentRet = coment.concat("\n");
@@ -2284,24 +2249,28 @@ public JPanel getContentPanel() {
                     AddComentJDialog comentPane = test2.getComment();
                     String coment = comentPane.getComent();
                     String[] conjFinal = queryExp.split("\n| |,");
-                    
+                         
                     if(!query.equals("") && !queryExp.equals("")){
                         if(conjuntoQuerysClas.equals("")){
                             conjuntoQuerysClas = query.concat("\n");
                         }else{
                             conjuntoQuerysClas = conjuntoQuerysClas.concat(query).concat("\n");
-                        }
-                        for(int j=0;j<conjFinal.length;j++){
-                            if(conjuntoResExpClas.equals("")){
-                                conjuntoResExpClas = conjFinal[j]+",";
-                            }else{
-                                if(j==conjFinal.length-1){
-                                    conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j]);
+                        }  
+                        if(conjFinal.length==1){
+                            conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[0]);
+                        }else{
+                            for(int j=0;j<conjFinal.length;j++){
+                                if(conjuntoResExpClas.equals("")){
+                                    conjuntoResExpClas = conjFinal[j]+",";
                                 }else{
-                                    conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j])+",";
+                                    if(j==conjFinal.length-1){
+                                        conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j]);
+                                    }else{
+                                        conjuntoResExpClas = conjuntoResExpClas.concat(conjFinal[j])+",";
+                                    }
                                 }
-                            }
-                        } 
+                            } 
+                        }
                         conjuntoResExpClas = conjuntoResExpClas.concat("\n");
                         if(conjuntoComentClas.equals("")){
                             conjuntoComentClas = coment.concat("\n");
@@ -2353,30 +2322,42 @@ public JPanel getContentPanel() {
 
     if(tab==0){
         texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-        conjuntoQuerysInst = texto.getConsultaTextArea();
-        conjuntoResultInst = texto.getResultadoEsperadoTextArea();
-        conjuntoComentInst = texto.getComentTextArea();
+        conjuntoQuerysInst = texto.getConsultaTextArea().trim();
+        conjuntoResultInst = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoComentInst = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysInst.split("\\\n");
         cResult = conjuntoResultInst.split("\\\n");
         cComent = conjuntoComentInst.split("\\\n");
+        int j=1;
         for(int i=0; i<cQuery.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
-            test.setQuery(cQuery[i]);
-        }
-        for(int i=0; i<cResult.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
-            String res = cResult[i];
-            if(res.equals("true")){
-                test.setTrueTest(true);
-            }else{
-                test.setFalseTest(true);
+            if(!cQuery[i].equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                test.setQuery(cQuery[i]);
+                j++;
             }
         }
+        j=1;
+        for(int i=0; i<cResult.length; i++){
+            String res = cResult[i];
+            if(!res.equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                if(res.equals("true")){
+                    test.setTrueTest(true);
+                }else{
+                    test.setFalseTest(true);
+                }
+                j++;
+            }
+        }
+        j=1;
         for(int i=0; i<cComent.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i+1);
-            AddComentJDialog comentPane = test.getComment();
-            comentPane.setComent(cComent[i]);
-            test.setComment(comentPane);
+            if(!cComent[i].equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                AddComentJDialog comentPane = test.getComment();
+                comentPane.setComent(cComent[i]);
+                test.setComment(comentPane);
+                j++;
+            }
         }
      }else if(tab==1){
         texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
@@ -2386,97 +2367,145 @@ public JPanel getContentPanel() {
         cQuery = conjuntoQuerysRet.split("\\\n");
         cResult = conjuntoResultRet.split("\\\n");
         cComent = conjuntoComentRet.split("\\\n");
+        int j=1;
         for(int i=0; i<cQuery.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
-            test2.setQuery(cQuery[i]);
-        }
-        for(int i=0; i<cResult.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
-            String res = cResult[i];
-            if(res.equals(",") || res.endsWith(" ")){
-                test2.setQueryResult("\n");
-            }else{
-                test2.setQueryResult(res);
+            if(!cQuery[i].equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                test2.setQuery(cQuery[i]);
+                j++;
             }
         }
+        j=1;
+        for(int i=0; i<cResult.length; i++){
+            String res = cResult[i];
+            if(!res.equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                if(res.equals(",") || res.endsWith(" ")){
+                    test2.setQueryResult("\n");
+                }else{
+                    test2.setQueryResult(res);
+                }
+                j++;
+            }
+        }
+        j=1;
         for(int i=0; i<cComent.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i+1);
-            AddComentJDialog comentPane = test2.getComment();
-            comentPane.setComent(cComent[i]);
-            test2.setComment(comentPane);
+            if(!cComent[i].equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                AddComentJDialog comentPane = test2.getComment();
+                comentPane.setComent(cComent[i]);
+                test2.setComment(comentPane);
+                j++;
+            }
         }
       }else if(tab==2){
         texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-        conjuntoQuerysReal = texto.getConsultaTextArea();
-        conjuntoResultReal = texto.getResultadoEsperadoTextArea();
-        conjuntoComentReal = texto.getComentTextArea();
+        conjuntoQuerysReal = texto.getConsultaTextArea().trim();
+        conjuntoResultReal = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoComentReal = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysReal.split("\\\n");
         cResult = conjuntoResultReal.split("\\\n");
         cComent = conjuntoComentReal.split("\\\n");
+        int j=1;
         for(int i=0; i<cQuery.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
-            test1.setQuery(cQuery[i]);
+            if(!cQuery[i].equals("")){
+                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(j);
+                test1.setQuery(cQuery[i]);
+                j++;
+            }
         }
+        j=1;
         for(int i=0; i<cResult.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
             String res = cResult[i];
-            test1.setQueryResult(res);
+            if(!res.equals("")){
+                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(j);
+                test1.setQueryResult(res);
+                j++;
+            }
         }
+        j=1;
         for(int i=0; i<cComent.length; i++){
-            test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i+1);
-            AddComentJDialog comentPane = test1.getComment();
-            comentPane.setComent(cComent[i]);
-            test1.setComment(comentPane);
+            if(!cComent[i].equals("")){
+                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(j);
+                AddComentJDialog comentPane = test1.getComment();
+                comentPane.setComent(cComent[i]);
+                test1.setComment(comentPane);
+                j++;
+            }
         }  
       }else if(tab==3){
         texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-        conjuntoQuerysSat = texto.getConsultaTextArea();
-        conjuntoResultSat = texto.getResultadoEsperadoTextArea();
-        conjuntoComentSat = texto.getComentTextArea();
+        conjuntoQuerysSat = texto.getConsultaTextArea().trim();
+        conjuntoResultSat = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoComentSat = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysSat.split("\\\n");
         cResult = conjuntoResultSat.split("\\\n");
         cComent = conjuntoComentSat.split("\\\n");
+        int j=1;
         for(int i=0; i<cQuery.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
-            test.setQuery(cQuery[i]);
-        }
-        for(int i=0; i<cResult.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
-            String res = cResult[i];
-            if(res.equals("true")){
-                test.setTrueTest(true);
-            }else{
-                test.setFalseTest(true);
+            if(!cQuery[i].equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                test.setQuery(cQuery[i]);
+                j++;
             }
         }
+        j=1;
+        for(int i=0; i<cResult.length; i++){
+            String res = cResult[i];
+            if(!res.equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                if(res.equals("true")){
+                    test.setTrueTest(true);
+                }else{
+                    test.setFalseTest(true);
+                }
+                j++;
+            }
+        }
+        j=1;
         for(int i=0; i<cComent.length; i++){
-            test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i+1);
-            AddComentJDialog comentPane = test.getComment();
-            comentPane.setComent(cComent[i]);
-            test.setComment(comentPane);
+            if(!cComent[i].equals("")){
+                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                AddComentJDialog comentPane = test.getComment();
+                comentPane.setComent(cComent[i]);
+                test.setComment(comentPane);
+                j++;
+            }
         }
       }else if(tab==4){
         texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-        conjuntoQuerysClas = texto.getConsultaTextArea();
-        conjuntoResultClas = texto.getResultadoEsperadoTextArea();
-        conjuntoComentClas = texto.getComentTextArea();
+        conjuntoQuerysClas = texto.getConsultaTextArea().trim();
+        conjuntoResultClas = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoComentClas = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysClas.split("\\\n");
         cResult = conjuntoResultClas.split("\\\n");
         cComent = conjuntoComentClas.split("\\\n");
+        int j=1;
         for(int i=0; i<cQuery.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
-            test2.setQuery(cQuery[i]);
+            if(!cQuery[i].equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                test2.setQuery(cQuery[i]);
+                j++;
+            }
         }
+        j=1;
         for(int i=0; i<cResult.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
             String res = cResult[i];
-            test2.setQueryResult(res);
+            if(!res.equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                test2.setQueryResult(res);
+                j++;
+            }
         }
+        j=1;
         for(int i=0; i<cComent.length; i++){
-            test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i+1);
-            AddComentJDialog comentPane = test2.getComment();
-            comentPane.setComent(cComent[i]);
-            test2.setComment(comentPane);
+            if(!cComent[i].equals("")){
+                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                AddComentJDialog comentPane = test2.getComment();
+                comentPane.setComent(cComent[i]);
+                test2.setComment(comentPane);
+                j++;
+            }
         }     
       }
     }
@@ -2547,6 +2576,31 @@ public JPanel getContentPanel() {
 
     public static void setSatTextName(boolean asatTextName) {
         satTextName = asatTextName;
+    }
+
+    public static int getNameTest() {
+        return nameTest;
+    }
+
+    public static void setNameTest(int anameTest) {
+        nameTest = anameTest;
+    }
+
+    private boolean todosTienenNombre() {
+        if(getInstTextName()==true && getRetTextName()==true && getRealTextName()==true
+                && getSatTextName()==true && getClasTextName()==true){
+                return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean getNombreTestsValidos() {
+        return nombreTestsValidos;
+    }
+
+    public void setNombreTestsValidos(boolean nombreTestsValidos) {
+        this.nombreTestsValidos = nombreTestsValidos;
     }
     
 }

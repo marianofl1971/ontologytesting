@@ -44,8 +44,8 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
                 String descripTest = scenario.getDescripcion();
-                ArrayList<ClassInstances> clasInst = scenario.getClassInstances();
-                ArrayList<PropertyInstances> propInst = scenario.getPropertyInstances();
+                ArrayList<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
+                ArrayList<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
                 ArrayList<QueryOntology> queryOnt = scenario.getQueryTest();
                 ListIterator qo;
                 qo = queryOnt.listIterator();
@@ -164,8 +164,8 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
                 String descripTest = scenario.getDescripcion();
-                ArrayList<ClassInstances> clasInst = scenario.getClassInstances();
-                ArrayList<PropertyInstances> propInst = scenario.getPropertyInstances();
+                ArrayList<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
+                ArrayList<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
                 ArrayList<SparqlQueryOntology> queryOnt = scenario.getSparqlQuerys();
                 ListIterator qo;
                 qo = queryOnt.listIterator();

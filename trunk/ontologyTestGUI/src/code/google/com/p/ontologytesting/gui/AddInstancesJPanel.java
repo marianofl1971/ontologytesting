@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import code.google.com.p.ontologytesting.model.ClassInstances;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -84,6 +85,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private static boolean stateSeeInst;
     private XMLDecoder decoder;
     private String nameFile="";
+    private boolean testCompatible=true;
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -218,12 +220,13 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    AddInstancesJPanel.setStateAsociar(true);
    AddInstancesJPanel.setStateExaminar(false);
    AddInstancesJPanel.setStateSeeInst(false);
+   Instancias instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
    int var=0;
    if(AddSPARQLJPanel.isSeleccionado()==false) {
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-        ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
+        ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();        
+        clasInst = instancias.getClassInstances();
+        propInst = instancias.getPropertyInstances();
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
             var=1;
         } 
@@ -237,13 +240,10 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             addInst.setVisible(true);
         }
    }else{
-        //ScenarioTest sT = AddSPARQLJPanel.getScenarioTestQuery();
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
-        //clasInst = sT.getClassInstances();
-        //propInst = sT.getPropertyInstances();
-        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
+        clasInst = instancias.getClassInstances();
+        propInst = instancias.getPropertyInstances();
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
             var=1;
         }
@@ -283,21 +283,12 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    //ScenarioTest scenarioTest = new ScenarioTest();
     ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
     ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
     
-    /*if(AddSPARQLJPanel.isSeleccionado()==true){
-        scenarioTest = AddSPARQLJPanel.getScenarioTestQuery();
-        clasInst = scenarioTest.getClassInstances();
-        propInst = scenarioTest.getPropertyInstances();
-    }else{
-        clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-        propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());    
-    }*/
-    
-    clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-    propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
+    Instancias instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
+    clasInst = instancias.getClassInstances();
+    propInst = instancias.getPropertyInstances();
       
     if(!clasInst.isEmpty() || !propInst.isEmpty()){
         var=1;
@@ -321,11 +312,10 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 // TODO add your handling code here:
     AddInstancesJPanel.setStateNuevo(true);
     ScenarioTest scenarioSparql = new ScenarioTest();
+    Instancias instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
     if(AddSPARQLJPanel.isSeleccionado()==true){
         ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
         SparqlQueryOntology query = new SparqlQueryOntology();
-        ArrayList<ClassInstances> clasFinal = new ArrayList<ClassInstances>();
-        ArrayList<PropertyInstances> propFinal = new ArrayList<PropertyInstances>();
         ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
         if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
@@ -337,26 +327,17 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             scenarioSparql.setTestName("sparql");
             scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
             scenarioSparql.setSparqlQuerys(listSparqlQuerys);
-            /*
-            AddSPARQLJPanel.getScenarioTestQuery().setNombre(AddSPARQLJPanel.getTestNameTextField());
-            AddSPARQLJPanel.getScenarioTestQuery().setTestName("sparql");
-            AddSPARQLJPanel.getScenarioTestQuery().setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-            AddSPARQLJPanel.getScenarioTestQuery().setSparqlQuerys(listSparqlQuerys);*/
-    
-            clasFinal = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-            propFinal = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
-            scenarioSparql.setClassInstances(clasFinal);
-            scenarioSparql.setPropertyInstances(propFinal);
-            ContentMainJFrame.getConjuntoClassInstances().set(GroupTestsJPanel.getSelectedTabed(), vaciaClase);
-            ContentMainJFrame.getConjuntoPropInstances().set(GroupTestsJPanel.getSelectedTabed(), vaciaPropiedad);
+            
+            scenarioSparql.setInstancias(instancias);
+            instancias.setClassInstances(vaciaClase);
+            instancias.setPropertyInstances(vaciaPropiedad);
+            ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias);
             
             AddSPARQLJPanel.setTestDescTextArea("");
             AddSPARQLJPanel.setTestNameTextField("");
             AddSPARQLJPanel.setSPARQLQuery("");
             AddSPARQLJPanel.setResultTextArea("");
         
-            //ScenarioTest scenario = new ScenarioTest();
-            //AddSPARQLJPanel.setScenarioTestQuery(scenario);
             ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
             if(scenarioT.size()==0){
                 scenarioT.add(scenarioSparql);
@@ -364,8 +345,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             }else{
                 MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
             }
-            //scenarioT.add(AddSPARQLJPanel.getScenarioTestQuery());
-            //MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+
             listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
             AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
         }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
@@ -416,6 +396,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     JPanel opcionTextRealPanel = GroupTestsJPanel.getOpcionTextRealPanel();
     
     int cont=1;
+    int tabSel = GroupTestsJPanel.getSelectedTabed();
     try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
         ScenarioTest s = (ScenarioTest) decoder.readObject();
@@ -423,20 +404,18 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         String descrip = s.getDescripcion();  
         String tab = s.getTestName();
         ArrayList<QueryOntology> qO = s.getQueryTest(); 
-        ArrayList<ClassInstances> clasI = s.getClassInstances();
-        ArrayList<PropertyInstances> propI = s.getPropertyInstances();
-        ListIterator qi,ci,pi;
+
+        ListIterator qi;
         qi = qO.listIterator();
-        ci =  clasI.listIterator();
-        pi = propI.listIterator();
+
         int ind = GroupTestsJPanel.getSelectedTabed();
-        ContentMainJFrame.getConjuntoClassInstances().set(ind, clasI);
-        ContentMainJFrame.getConjuntoPropInstances().set(ind, propI);
+        ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
+
         int var=0;
         String textoQuery = "", textoResult="", textoComent="";
         while(qi.hasNext()){   
             QueryOntology cI = (QueryOntology) qi.next();
-            if(tab.equals("Instanciación")){
+            if(tab.equals("Instanciación") && tabSel==0){
                 if(GroupTestsJPanel.getTabbedPaneInst()==0){
                     descPanel = (DescripcionJPanel) panelInst.getComponent(0);
                     descPanel.setNombreTextField(nombre);
@@ -476,7 +455,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     cont++;
                     var=1;
                 }
-            }else if(tab.equals("Retrieval")){
+            }else if(tab.equals("Retrieval") && tabSel==1){
                 if(GroupTestsJPanel.getTabbedPaneRet()==0){
                     descPanel = (DescripcionJPanel) panelRet.getComponent(0);
                     descPanel.setNombreTextField(nombre);
@@ -511,7 +490,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     cont++;
                     var=1;
                 }
-            }else if(tab.equals("Realización")){
+            }else if(tab.equals("Realización") && tabSel==2){
                 if(GroupTestsJPanel.getTabbedPaneReal()==0){
                     descPanel = (DescripcionJPanel) panelReal.getComponent(0);
                     descPanel.setNombreTextField(nombre);
@@ -546,7 +525,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     cont++;
                     var=1;
                 }
-            }else if(tab.equals("Satisfactibilidad")){
+            }else if(tab.equals("Satisfactibilidad") && tabSel==3){
                 if(GroupTestsJPanel.getTabbedPaneSat()==0){
                     descPanel = (DescripcionJPanel) panelSat.getComponent(0);
                     descPanel.setNombreTextField(nombre);
@@ -586,7 +565,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     cont++;
                     var=1;
                 }
-            }else if(tab.equals("Clasificación")){
+            }else if(tab.equals("Clasificación") && tabSel==4){
                 if(GroupTestsJPanel.getTabbedPaneClas()==0){
                     descPanel = (DescripcionJPanel) panelClas.getComponent(0);
                     descPanel.setNombreTextField(nombre);
@@ -621,17 +600,25 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                     cont++;
                     var=1;
                 }
+            }else{
+                setTestCompatible(false);
             }
         }  
-    if(var==1){
-         test3.setResultadoEsperadoTextArea(textoResult);
-         test3.setComentTextArea(textoComent);
-         test3.setConsultaTextArea(textoQuery);
+    if(getTestCompatible()==true){
+        if(var==1){
+            test3.setResultadoEsperadoTextArea(textoResult);
+            test3.setComentTextArea(textoComent);
+            test3.setConsultaTextArea(textoQuery);
+        }
     }
     decoder.close();    
     }catch(FileNotFoundException e){
     }
-    
+    if(getTestCompatible()==false){
+        JOptionPane.showMessageDialog(frame,"El test que intenta abrir no es " +
+                "compatible con el tipo de test seleccionado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+        setTestCompatible(true);
+    }
     }else{
         
         filechooser = new JFileChooser(Configuration.getPathTestSparql());
@@ -649,11 +636,9 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             String nombre = s.getNombre();
             String descrip = s.getDescripcion();  
             ArrayList<SparqlQueryOntology> qO = s.getSparqlQuerys();
-            ArrayList<ClassInstances> clasI = s.getClassInstances();
-            ArrayList<PropertyInstances> propI = s.getPropertyInstances();
+
             int ind = GroupTestsJPanel.getSelectedTabed();
-            ContentMainJFrame.getConjuntoClassInstances().set(ind, clasI);
-            ContentMainJFrame.getConjuntoPropInstances().set(ind, propI);
+            ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
             
             AddSPARQLJPanel.setTestNameTextField(nombre);
             AddSPARQLJPanel.setTestDescTextArea(descrip);
@@ -712,6 +697,14 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
 
     public static void setStateAbrirTest(boolean astateAbrirTest) {
         stateAbrirTest = astateAbrirTest;
+    }
+
+    public boolean getTestCompatible() {
+        return testCompatible;
+    }
+
+    public void setTestCompatible(boolean testCompatible) {
+        this.testCompatible = testCompatible;
     }
 
 }

@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import code.google.com.p.ontologytesting.model.ClassInstances;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 /**
@@ -45,26 +46,23 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     public static void setSeleccionado(boolean aSeleccionado) {
         seleccionado = aSeleccionado;
     }
+    Instancias instancias;
     public static boolean seleccionado;
+    private int tabActual=0;
 
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var) {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
+
         initComponents();
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
-        
-        /*clasPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        propPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
-        classScrollPane.setMaximumSize(new Dimension(455,422));
-        clasPanel.setMaximumSize(new Dimension(455,422));*/
-        
         if(var==0){
-            clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
             for (int i = 0; i <= num; i++) {
                 clasPanel.add(new CreateInstancesJPanel());
                 propPanel.add(new CreateInstancesJPanel());
@@ -75,11 +73,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             int contI=0,contP=0;
 
             ListIterator ci,pi;
-            //if(AddSPARQLJPanel.isSeleccionado()==false){
-                clasInst = ContentMainJFrame.getConjuntoClassInstances().get(GroupTestsJPanel.getSelectedTabed());
-            //}else{
-                //clasInst = AddSPARQLJPanel.getScenarioTestQuery().getClassInstances();
-            //}
+
+            clasInst = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed()).getClassInstances();
+            setNomInstanciasTextField(ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed()).getNombre());
+            setDescInstanciasTextArea(ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed()).getDescripcion());
+
             ci = clasInst.listIterator();
             while(ci.hasNext()){ 
                 ClassInstances cI = (ClassInstances) ci.next();
@@ -92,12 +90,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 clasFinal.add(cI);
                 contI++;
             }
-  
-            //if(AddSPARQLJPanel.isSeleccionado()==false){
-                propInst = ContentMainJFrame.getConjuntoPropInstances().get(GroupTestsJPanel.getSelectedTabed());
-            //}else{
-                //propInst = AddSPARQLJPanel.getScenarioTestQuery().getPropertyInstances();
-            //}
+
+            propInst = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed()).getPropertyInstances();
+
             pi = propInst.listIterator();
             while(pi.hasNext()){
                 PropertyInstances pI = (PropertyInstances) pi.next();
@@ -132,10 +127,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
         ListIterator ci,pi;
         ScenarioTest sT = scenarioT.get(this.indexVect);
-        clasInst = sT.getClassInstances();
+        setNomInstanciasTextField(sT.getInstancias().getNombre());
+        setDescInstanciasTextArea(sT.getInstancias().getDescripcion());
+        clasInst = sT.getInstancias().getClassInstances();
         ci = clasInst.listIterator();
         while(ci.hasNext()){ 
             ClassInstances cI = (ClassInstances) ci.next();
@@ -149,7 +148,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             contI++;
         }
   
-        propInst = sT.getPropertyInstances();
+        propInst = sT.getInstancias().getPropertyInstances();
         pi = propInst.listIterator();
         while(pi.hasNext()){
             PropertyInstances pI = (PropertyInstances) pi.next();
@@ -183,9 +182,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
+        setNomInstanciasTextField(sT.getInstancias().getNombre());
+        setDescInstanciasTextArea(sT.getInstancias().getDescripcion());
         ListIterator ci,pi;
-        clasInst = sT.getClassInstances();
+        clasInst = sT.getInstancias().getClassInstances();
         ci = clasInst.listIterator();
         while(ci.hasNext()){ 
             ClassInstances cI = (ClassInstances) ci.next();
@@ -199,7 +202,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             contI++;
         }
   
-        propInst = sT.getPropertyInstances();
+        propInst = sT.getInstancias().getPropertyInstances();
         pi = propInst.listIterator();
         while(pi.hasNext()){
             PropertyInstances pI = (PropertyInstances) pi.next();
@@ -233,13 +236,18 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propFinal = new ArrayList<PropertyInstances>();
         ArrayList<ClassInstances> al;
         ArrayList<PropertyInstances> la;
+        Instancias inst;
         ListIterator li,il;
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
-        propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));   
+        propPanel.setLayout(new BoxLayout(propPanel, BoxLayout.Y_AXIS));  
+        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
         try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(textName)));
-            al = (ArrayList<ClassInstances>) decoder.readObject();      
+            inst = (Instancias) decoder.readObject();
+            setDescInstanciasTextArea(inst.getDescripcion());
+            setNomInstanciasTextField(inst.getNombre());
+            al = inst.getClassInstances();
             li = al.listIterator();
             while(li.hasNext()){   
                 ClassInstances cI = (ClassInstances) li.next();
@@ -252,7 +260,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 clasPanel.add(instClas);
                 clasFinal.add(cI);
             }
-            la = (ArrayList<PropertyInstances>) decoder.readObject();
+            la = inst.getPropertyInstances();
             il = la.listIterator();
             while(il.hasNext()){   
                 PropertyInstances pI = (PropertyInstances) il.next();
@@ -267,6 +275,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
             decoder.close();    
         }catch(FileNotFoundException e){
+            e.printStackTrace();
         } 
         if(contC<8){
             for (int j=0; j<=(8-contC); j++) {
@@ -303,6 +312,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propPanel = new javax.swing.JPanel();
         textAreaScrollPane = new javax.swing.JScrollPane();
         clasPropPanel = new javax.swing.JPanel();
+        contentDescPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descInstanciasTextArea = new javax.swing.JTextArea();
+        nomInstanciasTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -360,11 +376,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPanel.setLayout(clasPanelLayout);
         clasPanelLayout.setHorizontalGroup(
             clasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 912, Short.MAX_VALUE)
+            .addGap(0, 645, Short.MAX_VALUE)
         );
         clasPanelLayout.setVerticalGroup(
             clasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         classScrollPane.setViewportView(clasPanel);
@@ -382,11 +398,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propPanel.setLayout(propPanelLayout);
         propPanelLayout.setHorizontalGroup(
             propPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 912, Short.MAX_VALUE)
+            .addGap(0, 632, Short.MAX_VALUE)
         );
         propPanelLayout.setVerticalGroup(
             propPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         propScrollPane.setViewportView(propPanel);
@@ -397,11 +413,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPropPanel.setLayout(clasPropPanelLayout);
         clasPropPanelLayout.setHorizontalGroup(
             clasPropPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
+            .addGap(0, 629, Short.MAX_VALUE)
         );
         clasPropPanelLayout.setVerticalGroup(
             clasPropPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
 
         textAreaScrollPane.setViewportView(clasPropPanel);
@@ -413,24 +429,20 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contentPanelLayout.createSequentialGroup()
-                                .addComponent(limpiarInstButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(newClasButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(newPropButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
-                                .addComponent(cancelarInstButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(guardarInstButton))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(limpiarInstButton)
+                        .addGap(10, 10, 10)
+                        .addComponent(newClasButton)
+                        .addGap(10, 10, 10)
+                        .addComponent(newPropButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelarInstButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(guardarInstButton)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -438,34 +450,81 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(guardarInstButton)
-                        .addComponent(cancelarInstButton))
-                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(limpiarInstButton)
-                        .addComponent(newClasButton)
-                        .addComponent(newPropButton)))
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newPropButton)
+                    .addComponent(newClasButton)
+                    .addComponent(limpiarInstButton)
+                    .addComponent(guardarInstButton)
+                    .addComponent(cancelarInstButton))
                 .addContainerGap())
         );
+
+        descInstanciasTextArea.setColumns(20);
+        descInstanciasTextArea.setRows(5);
+        jScrollPane1.setViewportView(descInstanciasTextArea);
+
+        jLabel2.setText("Nombre para el conjunto de instancias:");
+
+        jLabel3.setText("Descripción:");
+
+        javax.swing.GroupLayout contentDescPanelLayout = new javax.swing.GroupLayout(contentDescPanel);
+        contentDescPanel.setLayout(contentDescPanelLayout);
+        contentDescPanelLayout.setHorizontalGroup(
+            contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentDescPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentDescPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+        contentDescPanelLayout.setVerticalGroup(
+            contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentDescPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel4.setText("Complete los siguientes campos:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(228, Short.MAX_VALUE))
+            .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(681, 680));
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
@@ -473,6 +532,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
     
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
+    instancias = new Instancias();
     int aux=0;
     int totalClas = clasPanel.getComponentCount();
     
@@ -507,7 +567,11 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             aux=1;
         }
     }
-    
+    instancias.setClassInstances(clasInst);
+    instancias.setPropertyInstances(propInst);
+    instancias.setDescripcion(getDescInstanciasTextArea());
+    instancias.setNombre(getNomInstanciasTextField());
+    instancias.setType("Instancias");
     if(aux==1){
         JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
                 "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -519,18 +583,17 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             " instancias para futuras pruebas?", "Guardar Instancias",
             JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION) {
-                crearArchivoDeInstancias();
-                this.setInstances(clasInst, propInst);
+                crearArchivoDeInstancias(instancias);
+                setInstances(instancias);
                 this.setVisible(false);
             }else{
-                this.setInstances(clasInst, propInst);
+                setInstances(instancias);
                 this.setVisible(false);
             }
       }else{  
-          if(this.compararListaClase(clasInst, clasFinal) && 
-                  this.compararListaPropiedad(propInst, propFinal)){
-                this.setInstances(clasInst, propInst);
-                this.setVisible(false);
+          if(compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)){
+              setInstances(instancias);
+              this.setVisible(false);
             }else{
                 Object[] options = {"Sobreescribir","Crear nuevo","No guardar"};
                     int n = JOptionPane.showOptionDialog(frame,"El conjunto de " +
@@ -538,23 +601,23 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                 if (n == JOptionPane.YES_OPTION) {
-                        this.setInstances(clasInst, propInst);
-                        crearArchivoDeInstancias(getNombreFichero());
-                        this.setVisible(false);
+                     setInstances(instancias);
+                     crearArchivoDeInstancias(getNombreFichero(),instancias);
+                     this.setVisible(false);
                 }else if (n == JOptionPane.NO_OPTION) {
-                     crearArchivoDeInstancias(); 
-                     this.setInstances(clasInst, propInst);
+                     crearArchivoDeInstancias(instancias); 
+                     setInstances(instancias);
                      this.setVisible(false);
                 }else if (n == JOptionPane.CANCEL_OPTION) {
-                        this.setInstances(clasInst, propInst);
-                        this.setVisible(false);
+                     setInstances(instancias);
+                     this.setVisible(false);
                 }             
             }
       }
     }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
-public void crearArchivoDeInstancias(){
+public void crearArchivoDeInstancias(Instancias instancias){
     
     String nombreArch=null;
     String nameInstances=null;
@@ -572,21 +635,19 @@ public void crearArchivoDeInstancias(){
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(Configuration.getPathInstancias()+"/"+nameInstances)));
-        e.writeObject(clasInst);
-        e.writeObject(propInst);
+        e.writeObject(instancias);
         e.close();
     }catch (FileNotFoundException ex) {
         //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
      }
 }
 
-public void crearArchivoDeInstancias(String nombreFichero){
+public void crearArchivoDeInstancias(String nombreFichero,Instancias instancias){
         
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(Configuration.getPathInstancias()+"/"+nombreFichero)));
-        e.writeObject(clasInst);
-        e.writeObject(propInst);
+        e.writeObject(instancias);
         e.close();
     }catch (FileNotFoundException ex) {
         //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -689,20 +750,22 @@ private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_newPropButtonActionPerformed
 
 private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instancesTabbedPaneMouseClicked
-// TODO add your handling code here:
-    System.out.println(getInstancesTabbedPane());
-    if(getInstancesTabbedPane()==2){
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
-        copiarAInstancesTextArea();
+// TODO add your handling code here:   
+    if(getInstancesTabbedPane()!=getTabActual()){
+        if(getInstancesTabbedPane()==2){
+            copiarAInstancesTextArea();
+        }else{
+            copiarAInstancesAyuda();
+        }
     }
+    setTabActual(getInstancesTabbedPane());
 }//GEN-LAST:event_instancesTabbedPaneMouseClicked
 
 
-private void setInstances(ArrayList<ClassInstances> clasinst,ArrayList<PropertyInstances> propinst)
+private void setInstances(Instancias instancias)
 {  
     int tab = GroupTestsJPanel.getSelectedTabed();
-    ContentMainJFrame.getConjuntoClassInstances().set(tab, clasinst);
-    ContentMainJFrame.getConjuntoPropInstances().set(tab, propinst);
+    ContentMainJFrame.getInstancias().set(tab, instancias);
 }
 
 public void copiarAInstancesTextArea(){
@@ -749,11 +812,43 @@ public void copiarAInstancesTextArea(){
     conjunto.setPropiedadTextArea(textoProp);
     this.validate();
     
+    for(int i=0;i<totalClas;i++){
+        clasPanel.remove(clasPanel.getComponent(i));
+        clasPanel.add(new CreateInstancesJPanel(),i);
+    }
+    clasPanel.validate();
+    for(int i=0;i<totalProp;i++){
+        propPanel.remove(propPanel.getComponent(i));
+        propPanel.add(new CreateInstancesJPanel(),i);
+    }
+    propPanel.validate();
+    
 }
 
 public void copiarAInstancesAyuda(){
-
-    
+    String patron="\\\n";
+    CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+    String conjuntoClase = conjunto.getClaseTextArea().trim();
+    String conjuntoProp = conjunto.getPropiedadTextArea().trim();
+    String[] clas = conjuntoClase.split(patron);
+    String[] prop = conjuntoProp.split(patron);
+    int j=0;
+    for(int i=0;i<clas.length;i++){
+        if(!clas[i].equals("")){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) clasPanel.getComponent(j);
+            panelInst.setInstance(clas[i]);
+            j++;
+        }
+    }
+    j=0;
+    for(int i=0;i<prop.length;i++){
+        if(!prop[i].equals("")){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) propPanel.getComponent(j);
+            panelInst.setInstance(prop[i]);
+            j++;
+        }
+    }
+        
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -761,13 +856,20 @@ public void copiarAInstancesAyuda(){
     private javax.swing.JPanel clasPanel;
     private javax.swing.JPanel clasPropPanel;
     private javax.swing.JScrollPane classScrollPane;
+    private javax.swing.JPanel contentDescPanel;
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JTextArea descInstanciasTextArea;
     private javax.swing.JButton guardarInstButton;
     private javax.swing.JTabbedPane instancesTabbedPane;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiarInstButton;
     private javax.swing.JButton newClasButton;
     private javax.swing.JButton newPropButton;
+    private javax.swing.JTextField nomInstanciasTextField;
     private javax.swing.JPanel propPanel;
     private javax.swing.JScrollPane propScrollPane;
     private javax.swing.JScrollPane textAreaScrollPane;
@@ -795,6 +897,30 @@ public void copiarAInstancesAyuda(){
 
     public int getInstancesTabbedPane() {
         return instancesTabbedPane.getSelectedIndex();
+    }
+
+    public int getTabActual() {
+        return tabActual;
+    }
+
+    public void setTabActual(int tabActual) {
+        this.tabActual = tabActual;
+    }
+
+    public String getDescInstanciasTextArea() {
+        return descInstanciasTextArea.getText();
+    }
+
+    public void setDescInstanciasTextArea(String adescInstanciasTextArea) {
+        descInstanciasTextArea.setText(adescInstanciasTextArea);
+    }
+
+    public String getNomInstanciasTextField() {
+        return nomInstanciasTextField.getText();
+    }
+
+    public void setNomInstanciasTextField(String anomInstanciasTextField) {
+        nomInstanciasTextField.setText(anomInstanciasTextField);
     }
 
 }

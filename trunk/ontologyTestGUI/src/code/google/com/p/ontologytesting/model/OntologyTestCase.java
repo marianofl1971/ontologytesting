@@ -27,6 +27,8 @@ public class OntologyTestCase implements OntologyTest{
     boolean nameclasIsUsed=false;
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
+    private static String patron1="\\(|,|\n| ",patron2=",|\n| |\\)",
+            patron3="\\(|\\)|,| ",patron4=",|\n| ";
     
     public OntologyTestCase(){
     }
@@ -35,29 +37,34 @@ public class OntologyTestCase implements OntologyTest{
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];   
+    String test = st.getTestName();
     
     jena = jenaInterface.getJena();
     jena.addReasoner(ont);
    
-    List<ClassInstances> classInstances = st.getClassInstances();
-    List<PropertyInstances> propertyInstances = st.getPropertyInstances();
-  
+    //List<ClassInstances> classInstances = st.getClassInstances();
+    //List<PropertyInstances> propertyInstances = st.getPropertyInstances();
+    Instancias instancias = st.getInstancias();
+
+    List<ClassInstances> classInstances = instancias.getClassInstances();
+    List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
+
     liClass = classInstances.listIterator();
     liProperties = propertyInstances.listIterator();
         
     while(liClass.hasNext()){
             ClassInstances cla = (ClassInstances) liClass.next();
             String ci = cla.getClassInstance();
-            ciClas = ci.split("\\(|,|\n| ");
-            ciInd = ciClas[1].split(",|\n| |\\)");
+            ciClas = ci.split(patron1);
+            ciInd = ciClas[1].split(patron2);
             jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
     }
         
     while(liProperties.hasNext()){
             PropertyInstances p = (PropertyInstances) liProperties.next();
             String pi = p.getPropertyInstance();
-            piClas = pi.split("\\(|,|\n| ");
-            piInd = piClas[1].split(",|\n| |\\)");
+            piClas = pi.split(patron1);
+            piInd = piClas[1].split(patron2);
             jena.addInstanceProperty(ns, piClas[0], piInd[0]);
     }
        
@@ -79,8 +86,8 @@ public class OntologyTestCase implements OntologyTest{
         
         int inst=0, sat=0, clas=0, ret=0, real=0, sparql=0;
         
-        String resObtenidoInst="",resQueryExpected="",
-                resObtenidoRealiz="",resObtenidoSatisf="";
+        String resObtenidoInst="",resQueryExpected="", resObtenidoRealiz="",
+                resObtenidoSatisf="";
         ArrayList<String> resObtenidoRet = new ArrayList<String>();
         ArrayList<String> resObtenidoClas = new ArrayList<String>();
         ArrayList<String> sparqlExp = new ArrayList<String>();
@@ -96,17 +103,18 @@ public class OntologyTestCase implements OntologyTest{
                 String query = qo.getQuery();
                 resQueryExpected = qo.getResultexpected();
                 if(testName.equals("Instanciación")){
-                    res = query.split("\\(|\\)|,| ");
+                    res = query.split(patron3);
                     clasF = res[0];
                     indF = res[1];
                     resObtenidoInst = jena.instantiation(ns, clasF, indF);
                     if(!resObtenidoInst.equals(resQueryExpected)){
                         inst=1;
-                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoInst);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo, resObtenidoInst);
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = jena.retieval(ns, query);
-                    String[] queryMod = resQueryExpected.split(",|\n| ");
+                    String[] queryMod = resQueryExpected.split(patron4);
                     ArrayList<String> queryRet = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
                         queryRet.add(queryMod[k]);
@@ -115,25 +123,28 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(queryRet);
                     if(!this.comparaArray(resObtenidoRet, queryRet)){
                         ret=1;
-                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo,resObtenidoRet.toString());
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo,resObtenidoRet.toString());
                     }
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
                         real=1;
-                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoRealiz);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo, resObtenidoRealiz);
                     }
                 }else if(testName.equals("Satisfactibilidad")){
-                    res = query.split("\\(|\\)|,| ");
+                    res = query.split(patron3);
                     concepto = res[0];
                     loincluye = res[1];
                     resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
                         sat=1;
-                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoSatisf);
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo, resObtenidoSatisf);
                     }
                 }else if(testName.equals("Clasificación")){
-                    String[] queryMod = resQueryExpected.split(",|\n| ");
+                    String[] queryMod = resQueryExpected.split(patron4);
                     ArrayList<String> querySat = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
                         querySat.add(queryMod[k]);
@@ -143,7 +154,8 @@ public class OntologyTestCase implements OntologyTest{
                     Collections.sort(querySat);
                     if(!this.comparaArray(querySat, resObtenidoClas)){
                         clas=1;
-                        testresult.addOntologyFailureQuery(nombreTestUsuario, testName,qo, resObtenidoClas.toString());
+                        testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo, resObtenidoClas.toString());
                     }
                 }  
         }
@@ -152,7 +164,7 @@ public class OntologyTestCase implements OntologyTest{
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
-            res = resQueryExpected.split(",|\n| ");
+            res = resQueryExpected.split(patron4);
             sparqlExp = new ArrayList<String>();
             for(int k=0; k<res.length;k++){
                 sparqlExp.add(res[k]);
@@ -161,7 +173,8 @@ public class OntologyTestCase implements OntologyTest{
             Collections.sort(sparqlExp);
             Collections.sort(resSparql);
             if(!this.comparaArray(sparqlExp, resSparql)){
-                testresult.addOntologyFailureSparql(nombreTestUsuario, testName,sparqlquery,resSparql);
+                testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
+                        sparqlquery,resSparql);
                 sparql=1;
             }   
     }
