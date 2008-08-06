@@ -136,19 +136,19 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     // End of variables declaration//GEN-END:variables
 
     public void setQuery(String query){
-        queryTextField.setText(query);
+        getQueryTextField().setText(query);
     }
     
     public String getQuery(){
-        return queryTextField.getText();
+        return getQueryTextField().getText();
     }
 
     public void setQueryResult(String result){
-        resultTextField.setText(result);
+        getResultTextField().setText(result);
     }
     
     public String getQueryResult(){
-        return resultTextField.getText();
+        return getResultTextField().getText();
     }
     
     public boolean isSelected() {
@@ -165,6 +165,14 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
+    }
+
+    public javax.swing.JTextField getQueryTextField() {
+        return queryTextField;
+    }
+
+    public javax.swing.JTextField getResultTextField() {
+        return resultTextField;
     }
     
 }

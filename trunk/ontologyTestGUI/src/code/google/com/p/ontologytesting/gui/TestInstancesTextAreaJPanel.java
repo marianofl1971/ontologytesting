@@ -145,19 +145,27 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
     
     public void setQuery(String query){
-        queryTextField.setText(query);
+        getQueryTextField().setText(query);
     }
     
     public String getQuery(){
-        return queryTextField.getText();
+        return getQueryTextField().getText();
     }
 
     public void setQueryResult(String result){
-        resultTextArea.setText(result);
+        getResultTextArea().setText(result);
     }
     
     public String getQueryResult(){
-        return resultTextArea.getText();
+        return getResultTextArea().getText();
+    }
+
+    public javax.swing.JTextField getQueryTextField() {
+        return queryTextField;
+    }
+
+    public javax.swing.JTextArea getResultTextArea() {
+        return resultTextArea;
     }
 
 }

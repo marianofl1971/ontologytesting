@@ -32,6 +32,7 @@ import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
+import code.google.com.p.ontologytesting.model.ValidarTests;
 
 /**
  *
@@ -39,6 +40,7 @@ import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
+    private static ValidarTests validarTests;
     private static TestInstancesTFJPanel test;
     private static TestInstancesQueryJPanel test1;
     private static TestInstancesTextAreaJPanel test2;
@@ -47,12 +49,28 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelReal;
     private static JPanel panelRet;
     private static JPanel panelSat;
-    private boolean ontologiaValida=false,nombreTestsValidos=false;
+    public static ArrayList getInst() {
+        return inst;
+    }
+    public static ArrayList getRet() {
+        return ret;
+    }
+    public static ArrayList getReal() {
+        return real;
+    }
+    public static ArrayList getSat() {
+        return sat;
+    }
+    public static ArrayList getClas() {
+        return clas;
+    }
+    private boolean nombreTestsValidos=true,testsValidos=true;
     private static boolean instTextName=true, retTextName=true, clasTextName=true,
             realTextName=true, satTextName=true;
     private static int actualSubTabInst=0, actualSubTabRet=0, actualSubTabClas=0,
             actualSubTabSat=0, actualSubTabReal=0;
-    
+    private static boolean validoInst=true,validoRet=true,validoClas=true,validoSat=true,
+            validoReal=true;
     private static JPanel panelAyudaInst;
     private static int totalInst;
     private static JPanel panelAyudaClas;
@@ -151,6 +169,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static ScenarioTest scenarioTest;
     private static JPanel panelTree;
     private static int nameTest=0;
+    private static ArrayList inst,ret,real,sat,clas;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -1160,8 +1179,6 @@ public void guardarDatos(){
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
     
-    //if(ontologyFisical.endsWith(".owl")){
-        //setOntologiaValida(true);
     String ontologyURI = MainJPanel.getNamespaceOntologyTextField();
     
     MainJPanel.getCollectionTest().setOntology("file:".concat(ontologyFisical));
@@ -1173,7 +1190,7 @@ public void guardarDatos(){
     
     if(AddSPARQLJPanel.isSeleccionado()==false){
         for(int j=0;j<5;j++){
-            GroupTestsJPanel.asociarInstancias(j);
+            asociarInstancias(j);
         }
     }
     
@@ -1223,7 +1240,7 @@ public void guardarDatos(){
         }
     }
     
-    if(todosTienenNombre()==true){
+    if(todosTienenNombre()==true && todosSonValidos()==true){
         setNombreTestsValidos(true);
         Component comp = null;
         int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
@@ -1252,7 +1269,7 @@ public void guardarDatos(){
                     }
                 }
             }catch (FileNotFoundException ex) {
-                //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
             testcase.run(testresult, MainJPanel.getCollectionTest());
             JPanel panel = new TreeResults(testresult);
@@ -1261,15 +1278,15 @@ public void guardarDatos(){
         }else{
             testcase.run(testresult, MainJPanel.getCollectionTest());
             JPanel panel = new TreeResults(testresult);
-            GroupTestsJPanel.setPanelTree(panel);
-            GroupTestsJPanel.setDatosGuardados(true); 
+            setPanelTree(panel);
+            setDatosGuardados(true); 
+            setTestsValidos(true);
         }
-        }else{
+        }else if(todosTienenNombre()==false){
             setNombreTestsValidos(false);
+        }else{
+            setTestsValidos(false);
         }
-    /*}else{
-            setOntologiaValida(false);
-    }*/
 }   
 
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
@@ -1285,7 +1302,7 @@ public boolean isScenarioEmpty(ScenarioTest scenarioTest){
         return false;
      }
 }
-    
+
 public static void asociarInstancias(int sel){
        
     ScenarioTest scenario = new ScenarioTest();
@@ -1318,6 +1335,8 @@ public static void asociarInstancias(int sel){
     panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
     totalSat = panelAyudaSat.getComponentCount();
     
+    validarTests = new ValidarTests();
+    
     TestInstancesTextJPanel texto;
     
     int var=0,cont=0;
@@ -1329,6 +1348,9 @@ public static void asociarInstancias(int sel){
         String[] cComent;
     
     if(sel==0){
+        inst = new ArrayList();
+        getInst().add(0,0);
+        setValidoInst(true);
         if(getTabbedPaneInst()==0){
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
                 for(int i=1;i<totalInst;i++){
@@ -1355,10 +1377,16 @@ public static void asociarInstancias(int sel){
                                 var=1;
                             }
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            queryTest1.add(testQuery);
-                            scenario.setQueryTest(queryTest1);
-                            cont++;
-                            aux=1;
+                            if(validarTests.validarTestInstanciacion(testQuery)==true){
+                                queryTest1.add(testQuery);
+                                scenario.setQueryTest(queryTest1);
+                                cont++;
+                                aux=1;
+                                getInst().add(i, 0);
+                            }else{
+                                getInst().add(i, 1);
+                                setValidoInst(false);
+                            }
                         }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                             "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1369,7 +1397,7 @@ public static void asociarInstancias(int sel){
                 }
                 }
                 }
-            if(getInstTextName()==true){
+            if(getInstTextName()==true && getValidoInst()==true){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     int c = instAyudaPanel.getComponentCount();
                     for (int i = 1; i < c; i++) {
@@ -1455,6 +1483,9 @@ public static void asociarInstancias(int sel){
         }
       var=0;
     }else if(sel==1){
+        ret = new ArrayList();
+        getRet().add(0,0);
+        setValidoRet(true);
         if(getTabbedPaneRet()==0){
             for(int i=1;i<totalRet;i++){
                 if(getRetTextName()==true){
@@ -1481,10 +1512,16 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            queryTest2.add(testQuery);
-                            scenario.setQueryTest(queryTest2);
-                            cont++;
-                            aux=1;
+                            if(validarTests.validarTestRetrieval(testQuery)==true){
+                                queryTest2.add(testQuery);
+                                scenario.setQueryTest(queryTest2);
+                                cont++;
+                                aux=1;
+                                        getRet().add(i, 0);
+                            }else{
+                                        getRet().add(i, 1);
+                                setValidoRet(false);
+                            }  
                         }else if((!query.equals("") && queryExp.equals("")) || 
                                 (query.equals("") && !queryExp.equals(""))){
                                 JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
@@ -1498,7 +1535,7 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-            if(getRetTextName()==true){
+            if(getRetTextName()==true && getValidoRet()==true){
             if(AddInstancesJPanel.isStateNuevo()==true){
                 int c = retAyudaPanel.getComponentCount();
                 for (int i = 1; i < c; i++) {
@@ -1584,6 +1621,9 @@ public static void asociarInstancias(int sel){
         }
         }
     }else if(sel==2){
+        real = new ArrayList();
+            getReal().add(0,0);
+        setValidoReal(true);
         if(getTabbedPaneReal()==0){
             for(int i=1;i<totalReal;i++){
                 if(getRealTextName()==true){
@@ -1610,10 +1650,16 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            queryTest3.add(testQuery);
-                            scenario.setQueryTest(queryTest3);
-                            cont++;
-                            aux=1;
+                            if(validarTests.validarTestRealizacion(testQuery)==true){
+                                queryTest3.add(testQuery);
+                                scenario.setQueryTest(queryTest3);
+                                cont++;
+                                aux=1;
+                                        getReal().add(i, 0);
+                            }else{
+                                        getReal().add(i, 1);
+                                setValidoReal(false);
+                            } 
                         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
                                 "y RESULTADO ESPERADO son obligatorios.",
@@ -1625,7 +1671,7 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-        if(getRealTextName()==true){
+        if(getRealTextName()==true && getValidoReal()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = realAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -1710,6 +1756,9 @@ public static void asociarInstancias(int sel){
         }
         }
     }else if(sel==3){
+        sat = new ArrayList();
+            getSat().add(0,0);
+        setValidoSat(true);
         if(getTabbedPaneSat()==0){
             for(int i=1;i<totalSat;i++){
                 if(getSatTextName()==true){
@@ -1737,10 +1786,16 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            queryTest4.add(testQuery);
-                            scenario.setQueryTest(queryTest4);
-                            cont++;
-                            aux=1;
+                            if(validarTests.validarTestSatisfactibilidad(testQuery)==true){
+                                queryTest4.add(testQuery);
+                                scenario.setQueryTest(queryTest4);
+                                cont++;
+                                aux=1;
+                                        getSat().add(i, 0);
+                            }else{
+                                        getSat().add(i, 1);
+                                setValidoSat(false);
+                            }
                         }else if((!query.equals("") && resExpT.equals(resExpF)) || 
                                 ((query.equals("") && !resExpT.equals(resExpF)))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
@@ -1753,7 +1808,7 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-        if(getSatTextName()==true){
+        if(getSatTextName()==true && getValidoSat()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = satAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -1838,6 +1893,9 @@ public static void asociarInstancias(int sel){
         }
         }
     }else if(sel==4){
+        clas = new ArrayList();
+            getClas().add(0,0);
+        setValidoClas(true);
         if(getTabbedPaneClas()==0){
             for(int i=1;i<totalClas;i++){
                 if(getClasTextName()==true){
@@ -1864,10 +1922,16 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            queryTest5.add(testQuery);
-                            scenario.setQueryTest(queryTest5);
-                            cont++;
-                            aux=1;
+                            if(validarTests.validarTestClasificacion(testQuery)==true){
+                                queryTest5.add(testQuery);
+                                scenario.setQueryTest(queryTest5);
+                                cont++;
+                                aux=1;
+                                        getClas().add(i, 0);
+                            }else{
+                                        getClas().add(i, 1);
+                                setValidoClas(false);
+                            }
                         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
                                 "y RESULTADO ESPERADO son obligatorios.",
@@ -1879,7 +1943,7 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-        if(getClasTextName()==true){
+        if(getClasTextName()==true && getValidoClas()==true){
         if(AddInstancesJPanel.isStateNuevo()==true){
             int c = clasAyudaPanel.getComponentCount();
             for (int i = 1; i < c; i++) {
@@ -2530,14 +2594,6 @@ public JPanel getContentPanel() {
         return opcionTextSatPanel;
     }
 
-    public boolean isOntologiaValida() {
-        return ontologiaValida;
-    }
-
-    public void setOntologiaValida(boolean ontologiaValida) {
-        this.ontologiaValida = ontologiaValida;
-    }
-
     public static boolean getInstTextName() {
         return instTextName;
     }
@@ -2594,6 +2650,15 @@ public JPanel getContentPanel() {
             return false;
         }
     }
+    
+    private boolean todosSonValidos() {
+        if(getValidoInst()==true && getValidoRet()==true && getValidoReal()==true
+                && getValidoClas()==true && getValidoSat()==true){
+                return true;
+        }else{
+            return false;
+        }
+    }
 
     public boolean getNombreTestsValidos() {
         return nombreTestsValidos;
@@ -2601,6 +2666,54 @@ public JPanel getContentPanel() {
 
     public void setNombreTestsValidos(boolean nombreTestsValidos) {
         this.nombreTestsValidos = nombreTestsValidos;
+    }
+
+    public static boolean getValidoInst() {
+        return validoInst;
+    }
+
+    public static void setValidoInst(boolean avalidoInst) {
+        validoInst = avalidoInst;
+    }
+
+    public static boolean getValidoRet() {
+        return validoRet;
+    }
+
+    public static void setValidoRet(boolean avalidoRet) {
+        validoRet = avalidoRet;
+    }
+
+    public static boolean getValidoClas() {
+        return validoClas;
+    }
+
+    public static void setValidoClas(boolean avalidoClas) {
+        validoClas = avalidoClas;
+    }
+
+    public static boolean getValidoSat() {
+        return validoSat;
+    }
+
+    public static void setValidoSat(boolean avalidoSat) {
+        validoSat = avalidoSat;
+    }
+
+    public static boolean getValidoReal() {
+        return validoReal;
+    }
+
+    public static void setValidoReal(boolean avalidoReal) {
+        validoReal = avalidoReal;
+    }
+
+    public boolean getTestsValidos() {
+        return testsValidos;
+    }
+
+    public void setTestsValidos(boolean testsValidos) {
+        this.testsValidos = testsValidos;
     }
     
 }

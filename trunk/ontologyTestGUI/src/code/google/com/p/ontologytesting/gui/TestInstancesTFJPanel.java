@@ -8,6 +8,8 @@ package code.google.com.p.ontologytesting.gui;
 
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.ValidarTests;
+import java.awt.Color;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -23,6 +25,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     private AddComentJDialog frameComent;
     private Frame frame;
     private int posicion;
+    private ValidarTests validarTests;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
@@ -73,6 +76,11 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         selectCheckBox = new javax.swing.JCheckBox();
 
         queryTextField.setToolTipText("Consulta");
+        queryTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                queryTextFieldFocusLost(evt);
+            }
+        });
 
         trueRadioButton.setText("True");
 
@@ -171,6 +179,17 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
+private void queryTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_queryTextFieldFocusLost
+// TODO add your handling code here:
+    /*validarTests = new ValidarTests();
+    boolean res = validarTests.validarQuery(getQuery());
+    if(res==false){
+            getQueryTextField().requestFocus();
+            getQueryTextField().setSelectionColor(Color.RED);
+            getQueryTextField().selectAll();
+    }*/
+}//GEN-LAST:event_queryTextFieldFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton comentarioButton;
@@ -183,11 +202,11 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     
     public void setQuery(String query){
-        queryTextField.setText(query);
+        getQueryTextField().setText(query);
     }
     
     public String getQuery(){
-        return queryTextField.getText();
+        return getQueryTextField().getText();
     }
 
     public String isTestTrue() {
@@ -236,5 +255,9 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+
+    public javax.swing.JTextField getQueryTextField() {
+        return queryTextField;
     }
 }

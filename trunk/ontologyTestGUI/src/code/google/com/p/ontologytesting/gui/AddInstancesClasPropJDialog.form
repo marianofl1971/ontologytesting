@@ -130,7 +130,6 @@
             <Property name="text" type="java.lang.String" value="Nueva clase"/>
           </Properties>
           <Events>
-            <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="newClasButtonComponentAdded"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newClasButtonActionPerformed"/>
           </Events>
         </Component>

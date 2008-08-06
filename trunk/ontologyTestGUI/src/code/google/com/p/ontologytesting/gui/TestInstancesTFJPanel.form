@@ -59,6 +59,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Consulta"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="queryTextFieldFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="trueRadioButton">
       <Properties>

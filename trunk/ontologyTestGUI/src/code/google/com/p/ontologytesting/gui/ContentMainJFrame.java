@@ -8,10 +8,15 @@ package code.google.com.p.ontologytesting.gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import code.google.com.p.ontologytesting.model.Instancias;
+import java.awt.Color;
+import java.util.ListIterator;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -207,12 +212,58 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }else{
         if(ContentMainJFrame.getActual()==1){
             getGroupTests().guardarDatos();
-            if(getGroupTests().getNombreTestsValidos()==true){
+            if(getGroupTests().getNombreTestsValidos()==true && getGroupTests().getTestsValidos()==true){
                 getContentPanel().remove(getGroupTests());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
                 ContentMainJFrame.setActual(4);
                 this.validate();
-            }else{
+            }else if(getGroupTests().getTestsValidos()==false){
+                JOptionPane.showMessageDialog(frame,"La query " +
+                "introducida no es correcta. Los formatos posibles son:\n" +
+                "clase,individuo\nclase.individuo\n" +
+                "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);
+                ArrayList listInst = GroupTestsJPanel.getInst();
+                ArrayList listRet = GroupTestsJPanel.getRet();
+                ArrayList listReal = GroupTestsJPanel.getReal();
+                ArrayList listSat = GroupTestsJPanel.getSat();
+                ArrayList listClas = GroupTestsJPanel.getClas();
+                JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+                JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+                JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+                JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+                JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+                for(int j=0;j<listInst.size();j++){
+                        if(listInst.get(j).equals(1)){
+                            TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                            test.getQueryTextField().setForeground(Color.RED);
+                        }
+                }
+                for(int j=0;j<listRet.size();j++){
+                        if(listRet.get(j).equals(1)){
+                            TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                            test.getQueryTextField().setForeground(Color.RED);
+                        }
+                }
+                for(int j=0;j<listReal.size();j++){
+                        if(listInst.get(j).equals(1)){
+                            TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(j);
+                            test.getQueryTextField().setForeground(Color.RED);
+                        }
+                }
+                for(int j=0;j<listSat.size();j++){
+                        if(listSat.get(j).equals(1)){
+                            TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                            test.getQueryTextField().setForeground(Color.RED);
+                        }
+                }
+                for(int j=0;j<listClas.size();j++){
+                        if(listClas.get(j).equals(1)){
+                            TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                            test.getQueryTextField().setForeground(Color.RED);
+                        }
+                }
+                ContentMainJFrame.setActual(1);
+            }else if(getGroupTests().getNombreTestsValidos()==false){
                 JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
                  "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
                 this.setGroupTests(getGroupTests());
@@ -220,18 +271,10 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
-                if(getGroupTests().isOntologiaValida()==true){
                     getContentPanel().remove(sparql);
                     getContentPanel().add(GroupTestsJPanel.getPanelTree());
                     ContentMainJFrame.setActual(4);
                     this.validate();
-                }else{
-                    getContentPanel().remove(sparql);
-                    getContentPanel().add(getMainPanel());
-                    ContentMainJFrame.setActual(0);
-                    AddSPARQLJPanel.setSeleccionado(false);
-                    this.validate();
-                }
         }else if(ContentMainJFrame.getActual()==3){
                 getContentPanel().remove(addInstances.getContentPanel());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
@@ -329,7 +372,7 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             public void run() {
                 new ContentMainJFrame().setVisible(true);
             }
-        });
+        });    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
