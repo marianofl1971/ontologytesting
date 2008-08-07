@@ -34,7 +34,7 @@ public class ValidarTests {
         
         String consulta = query.getQuery();
         String resultado = query.getResultexpected();
-        if(!consulta.matches(regexp1)){
+        if(!consulta.trim().matches(regexp1)){
             return false;
         }
         if(!resultado.matches(regexp2)){
@@ -49,10 +49,10 @@ public class ValidarTests {
 
         String consulta = query.getQuery();
         String resultado = query.getResultexpected();
-        if(!consulta.matches(regexp1)){
+        if(!consulta.trim().matches(regexp1)){
             return false;
         }
-        if(!resultado.matches(regexp1)){
+        if(!resultado.trim().matches(regexp1)){
             return false;
         }else{
             return true;
@@ -81,7 +81,7 @@ public class ValidarTests {
 
         String consulta = query.getQuery();
         String resultado = query.getResultexpected();
-        if(!consulta.matches(regexp1)){
+        if(!consulta.trim().matches(regexp1)){
             return false;
         }
         if(!resultado.matches(regexp2)){
@@ -92,6 +92,35 @@ public class ValidarTests {
     }
     
     public boolean validarQuery(String query){
+        String regexp1 = "([a-zA-Z]+){1}";
+        
+        if(!query.trim().matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean validarResultado(String res){
+        String regexp1 = "[a-zA-Z|,|.|\\s]+";
+        
+        if(!res.matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean validarResultadoInstSatis(String res){
+        
+        if(!res.equals("true") && !res.equals("false")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean validarQueryInstSatis(String query){
         String regexp1 = "([a-zA-Z]+[\\s|,|.]{1}[a-zA-Z]+){1}";
         String regexp2 = "([a-zA-Z]+[(]{1}[a-zA-Z]+[)]{1}){1}";
         
@@ -101,4 +130,5 @@ public class ValidarTests {
             return true;
         }
     }
+    
 }

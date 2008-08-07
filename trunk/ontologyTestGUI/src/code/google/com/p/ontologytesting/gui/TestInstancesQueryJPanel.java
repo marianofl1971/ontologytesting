@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
 
@@ -42,6 +43,11 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         resultTextField = new javax.swing.JTextField();
 
         queryTextField.setToolTipText("Consulta");
+        queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                queryTextFieldMouseClicked(evt);
+            }
+        });
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment.gif"))); // NOI18N
         comentarioButton.setText("Comentario");
@@ -69,6 +75,11 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         });
 
         resultTextField.setToolTipText("Resultado esperado");
+        resultTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultTextFieldMouseClicked(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -124,6 +135,16 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_duplicarButtonActionPerformed
+
+private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
+// TODO add your handling code here:
+    getQueryTextField().setForeground(Color.BLACK);
+}//GEN-LAST:event_queryTextFieldMouseClicked
+
+private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextFieldMouseClicked
+// TODO add your handling code here:
+     getResultTextField().setForeground(Color.BLACK);
+}//GEN-LAST:event_resultTextFieldMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

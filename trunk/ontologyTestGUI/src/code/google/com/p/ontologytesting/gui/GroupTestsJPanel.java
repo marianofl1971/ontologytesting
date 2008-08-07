@@ -1351,6 +1351,7 @@ public static void asociarInstancias(int sel){
         inst = new ArrayList();
         getInst().add(0,0);
         setValidoInst(true);
+        setInstTextName(true);
         if(getTabbedPaneInst()==0){
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
                 for(int i=1;i<totalInst;i++){
@@ -1377,7 +1378,7 @@ public static void asociarInstancias(int sel){
                                 var=1;
                             }
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            if(validarTests.validarTestInstanciacion(testQuery)==true){
+                            if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                                 queryTest1.add(testQuery);
                                 scenario.setQueryTest(queryTest1);
                                 cont++;
@@ -1426,8 +1427,8 @@ public static void asociarInstancias(int sel){
         }else{
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoQuerys = texto.getConsultaQuery();
+            conjuntoResult = texto.getResultadoEsperado();
             conjuntoComent = texto.getComentTextArea();
             if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
                         setInstTextName(false);
@@ -1450,6 +1451,8 @@ public static void asociarInstancias(int sel){
                     }
                     QueryOntology testQuery = new QueryOntology();
                     for(int i=0; i<cQuery.length;i++){
+                        if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                validarTests.validarResultadoInstSatis(cResult[i])==true){
                         if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                             testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                         }else{
@@ -1458,15 +1461,29 @@ public static void asociarInstancias(int sel){
                         queryTest1.add(testQuery);
                         scenario.setQueryTest(queryTest1);
                         aux=1;
-                    }
+                        getInst().add(i, 0);
+                        }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
+                                validarTests.validarResultadoInstSatis(cResult[i])==true){
+                            getInst().add(i, 1);
+                            setValidoInst(false);
+                        }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                validarTests.validarResultadoInstSatis(cResult[i])==false){
+                            getInst().add(i, 2);
+                            setValidoInst(false);
+                        }else{
+                            getInst().add(i, 3);
+                            setValidoInst(false);
+                        }
+                    } 
                 }
+                if(getValidoInst()==true){
                 if(aux==1){
                     if(AddInstancesJPanel.isStateNuevo()==true){
                         descPanel.setDescTextArea("");
                         descPanel.setNombreTextField("");
                         texto.setComentTextArea("");
-                        texto.setConsultaTextArea("");
-                        texto.setResultadoEsperadoTextArea("");
+                        texto.setConsultaQuery("");
+                        texto.setResultadoEsperado("");
                     }
                     Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                     scenario.setInstancias(instancias);
@@ -1479,12 +1496,14 @@ public static void asociarInstancias(int sel){
                     }
                     ContentMainJFrame.setInstancias(sel,new Instancias());
                 }
+                }
             }
         }
       var=0;
     }else if(sel==1){
         ret = new ArrayList();
         getRet().add(0,0);
+        setRetTextName(true);
         setValidoRet(true);
         if(getTabbedPaneRet()==0){
             for(int i=1;i<totalRet;i++){
@@ -1512,16 +1531,25 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(validarTests.validarTestRetrieval(testQuery)==true){
+                            if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
                                 queryTest2.add(testQuery);
                                 scenario.setQueryTest(queryTest2);
                                 cont++;
                                 aux=1;
-                                        getRet().add(i, 0);
-                            }else{
-                                        getRet().add(i, 1);
+                                getRet().add(i, 0);
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                getRet().add(i, 1);
                                 setValidoRet(false);
-                            }  
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                    validarTests.validarResultado(testQuery.getResultexpected())==false){
+                                getRet().add(i, 2);
+                                setValidoRet(false);
+                            }else{
+                                getRet().add(i, 3);
+                                setValidoRet(false);
+                            }
                         }else if((!query.equals("") && queryExp.equals("")) || 
                                 (query.equals("") && !queryExp.equals(""))){
                                 JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
@@ -1565,8 +1593,8 @@ public static void asociarInstancias(int sel){
         }else{
             descPanel = (DescripcionJPanel) panelRet.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoQuerys = texto.getConsultaQuery();
+            conjuntoResult = texto.getResultadoEsperado();
             conjuntoComent = texto.getComentTextArea();
             if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
                         setRetTextName(false);
@@ -1589,23 +1617,39 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(validarTests.validarQuery(cQuery[i])==true &&
+                       validarTests.validarResultado(cResult[i])==true){
+                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                        }else{
+                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        }
+                        queryTest1.add(testQuery);
+                        scenario.setQueryTest(queryTest1);
+                        aux=1;
+                        getRet().add(i, 0);
+                    }else if(validarTests.validarQuery(cQuery[i])==false && 
+                             validarTests.validarResultado(cResult[i])==true){
+                        getRet().add(i, 1);
+                        setValidoRet(false);
+                    }else if(validarTests.validarQuery(cQuery[i])==true && 
+                             validarTests.validarResultado(cResult[i])==false){
+                        getRet().add(i, 2);
+                        setValidoRet(false);
                     }else{
-                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        getRet().add(i, 3);
+                        setValidoRet(false);
                     }
-                    queryTest1.add(testQuery);
-                    scenario.setQueryTest(queryTest1);
-                    aux=1;
                 }
             }
+            if(getValidoRet()==true){
             if(aux==1){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     descPanel.setDescTextArea("");
                     descPanel.setNombreTextField("");
                     texto.setComentTextArea("");
-                    texto.setConsultaTextArea("");
-                    texto.setResultadoEsperadoTextArea("");
+                    texto.setConsultaQuery("");
+                    texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                 scenario.setInstancias(instancias);
@@ -1618,12 +1662,14 @@ public static void asociarInstancias(int sel){
                 }
                 ContentMainJFrame.setInstancias(sel,new Instancias());
             }
+            }
         }
         }
     }else if(sel==2){
         real = new ArrayList();
-            getReal().add(0,0);
+        getReal().add(0,0);
         setValidoReal(true);
+        setRealTextName(true);
         if(getTabbedPaneReal()==0){
             for(int i=1;i<totalReal;i++){
                 if(getRealTextName()==true){
@@ -1650,16 +1696,25 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(validarTests.validarTestRealizacion(testQuery)==true){
+                            if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                    validarTests.validarQuery(testQuery.getResultexpected())==true){
                                 queryTest3.add(testQuery);
                                 scenario.setQueryTest(queryTest3);
                                 cont++;
                                 aux=1;
-                                        getReal().add(i, 0);
-                            }else{
-                                        getReal().add(i, 1);
+                                getReal().add(i, 0);
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                    validarTests.validarQuery(testQuery.getResultexpected())==true){
+                                getReal().add(i, 1);
                                 setValidoReal(false);
-                            } 
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                    validarTests.validarQuery(testQuery.getResultexpected())==false){
+                                getReal().add(i, 2);
+                                setValidoReal(false);
+                            }else{
+                                getReal().add(i, 3);
+                                setValidoReal(false);
+                            }
                         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
                                 "y RESULTADO ESPERADO son obligatorios.",
@@ -1700,8 +1755,8 @@ public static void asociarInstancias(int sel){
         }else{
             descPanel = (DescripcionJPanel) panelReal.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoQuerys = texto.getConsultaQuery();
+            conjuntoResult = texto.getResultadoEsperado();
             conjuntoComent = texto.getComentTextArea();
             if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
                         setRealTextName(false);
@@ -1724,23 +1779,40 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(validarTests.validarQuery(cQuery[i])==true &&
+                        validarTests.validarQuery(cResult[i])==true){
+                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                        }else{
+                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        }
+                        queryTest1.add(testQuery);
+                        scenario.setQueryTest(queryTest1);
+                        aux=1;
+                        getReal().add(i, 0);
+                    }else if(validarTests.validarQuery(cQuery[i])==false && 
+                             validarTests.validarQuery(cResult[i])==true){
+                        getReal().add(i, 1);
+                        setValidoReal(false);
+                    }else if(validarTests.validarQuery(cQuery[i])==true && 
+                             validarTests.validarQuery(cResult[i])==false){
+                        getReal().add(i, 2);
+                        setValidoReal(false);
                     }else{
-                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
-                    }
-                    queryTest1.add(testQuery);
-                    scenario.setQueryTest(queryTest1);
-                    aux=1;
-                }
+                        getReal().add(i, 3);
+                        setValidoReal(false);
+                    } 
+                } 
+               
             }
+            if(getValidoReal()==true){
             if(aux==1){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     descPanel.setDescTextArea("");
                     descPanel.setNombreTextField("");
                     texto.setComentTextArea("");
-                    texto.setConsultaTextArea("");
-                    texto.setResultadoEsperadoTextArea("");
+                    texto.setConsultaQuery("");
+                    texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                 scenario.setInstancias(instancias);
@@ -1753,12 +1825,14 @@ public static void asociarInstancias(int sel){
                 }
                 ContentMainJFrame.setInstancias(sel,new Instancias());
             }
+            }
         }
         }
     }else if(sel==3){
         sat = new ArrayList();
-            getSat().add(0,0);
+        getSat().add(0,0);
         setValidoSat(true);
+        setSatTextName(true);
         if(getTabbedPaneSat()==0){
             for(int i=1;i<totalSat;i++){
                 if(getSatTextName()==true){
@@ -1786,14 +1860,14 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            if(validarTests.validarTestSatisfactibilidad(testQuery)==true){
+                            if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                                 queryTest4.add(testQuery);
                                 scenario.setQueryTest(queryTest4);
                                 cont++;
                                 aux=1;
-                                        getSat().add(i, 0);
+                                getSat().add(i, 0);
                             }else{
-                                        getSat().add(i, 1);
+                                getSat().add(i, 1);
                                 setValidoSat(false);
                             }
                         }else if((!query.equals("") && resExpT.equals(resExpF)) || 
@@ -1837,8 +1911,8 @@ public static void asociarInstancias(int sel){
         }else{
             descPanel = (DescripcionJPanel) panelSat.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoQuerys = texto.getConsultaQuery();
+            conjuntoResult = texto.getResultadoEsperado();
             conjuntoComent = texto.getComentTextArea();
             if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
                         setSatTextName(false);
@@ -1861,6 +1935,8 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
+                    if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                            validarTests.validarResultadoInstSatis(cResult[i])==true){
                     if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
                         testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
                     }else{
@@ -1869,15 +1945,29 @@ public static void asociarInstancias(int sel){
                     queryTest1.add(testQuery);
                     scenario.setQueryTest(queryTest1);
                     aux=1;
+                    getSat().add(i, 0);
+                    }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
+                            validarTests.validarResultadoInstSatis(cResult[i])==true){
+                            getSat().add(i, 1);
+                            setValidoSat(false);
+                    }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                            validarTests.validarResultadoInstSatis(cResult[i])==false){
+                            getSat().add(i, 2);
+                            setValidoSat(false);
+                    }else{
+                            getSat().add(i, 3);
+                            setValidoSat(false);
+                    }
                 }
             }
+            if(getValidoSat()==true){
             if(aux==1){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     descPanel.setDescTextArea("");
                     descPanel.setNombreTextField("");
                     texto.setComentTextArea("");
-                    texto.setConsultaTextArea("");
-                    texto.setResultadoEsperadoTextArea("");
+                    texto.setConsultaQuery("");
+                    texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                 scenario.setInstancias(instancias);
@@ -1890,12 +1980,14 @@ public static void asociarInstancias(int sel){
                 }
                 ContentMainJFrame.setInstancias(sel,new Instancias());
             }
+            }
         }
         }
     }else if(sel==4){
         clas = new ArrayList();
-            getClas().add(0,0);
+        getClas().add(0,0);
         setValidoClas(true);
+        setClasTextName(true);
         if(getTabbedPaneClas()==0){
             for(int i=1;i<totalClas;i++){
                 if(getClasTextName()==true){
@@ -1922,14 +2014,23 @@ public static void asociarInstancias(int sel){
                             }
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(validarTests.validarTestClasificacion(testQuery)==true){
+                            if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
                                 queryTest5.add(testQuery);
                                 scenario.setQueryTest(queryTest5);
                                 cont++;
                                 aux=1;
-                                        getClas().add(i, 0);
+                                getClas().add(i, 0);
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                getRet().add(i, 1);
+                                setValidoClas(false);
+                            }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                    validarTests.validarResultado(testQuery.getResultexpected())==false){
+                                getClas().add(i, 2);
+                                setValidoClas(false);
                             }else{
-                                        getClas().add(i, 1);
+                                getClas().add(i, 3);
                                 setValidoClas(false);
                             }
                         }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
@@ -1972,8 +2073,8 @@ public static void asociarInstancias(int sel){
     }else{
             descPanel = (DescripcionJPanel) panelClas.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaTextArea();
-            conjuntoResult = texto.getResultadoEsperadoTextArea();
+            conjuntoQuerys = texto.getConsultaQuery();
+            conjuntoResult = texto.getResultadoEsperado();
             conjuntoComent = texto.getComentTextArea();
             if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("") ){
                         setClasTextName(false);
@@ -1996,23 +2097,39 @@ public static void asociarInstancias(int sel){
                 }
                 QueryOntology testQuery = new QueryOntology();
                 for(int i=0; i<cQuery.length;i++){
-                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                    if(validarTests.validarQuery(cQuery[i])==true &&
+                       validarTests.validarResultado(cResult[i])==true){
+                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                        }else{
+                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        }
+                        queryTest1.add(testQuery);
+                        scenario.setQueryTest(queryTest1);
+                        aux=1;
+                        getClas().add(i, 0);
+                    }else if(validarTests.validarQuery(cQuery[i])==false && 
+                             validarTests.validarResultado(cResult[i])==true){
+                        getClas().add(i, 1);
+                        setValidoClas(false);
+                    }else if(validarTests.validarQuery(cQuery[i])==true && 
+                             validarTests.validarResultado(cResult[i])==false){
+                        getClas().add(i, 2);
+                        setValidoClas(false);
                     }else{
-                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                        getClas().add(i, 3);
+                        setValidoClas(false);
                     }
-                    queryTest1.add(testQuery);
-                    scenario.setQueryTest(queryTest1);
-                    aux=1;
                 }
             }
+            if(getValidoClas()==true){
             if(aux==1){
                 if(AddInstancesJPanel.isStateNuevo()==true){
                     descPanel.setDescTextArea("");
                     descPanel.setNombreTextField("");
                     texto.setComentTextArea("");
-                    texto.setConsultaTextArea("");
-                    texto.setResultadoEsperadoTextArea("");
+                    texto.setConsultaQuery("");
+                    texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                 scenario.setInstancias(instancias);
@@ -2024,6 +2141,7 @@ public static void asociarInstancias(int sel){
                     MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                 }
                 ContentMainJFrame.setInstancias(sel,new Instancias());
+            }
             }
         }
     }
@@ -2170,8 +2288,8 @@ public JPanel getContentPanel() {
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerysInst);
-            texto.setResultadoEsperadoTextArea(conjuntoResExpInst);
+            texto.setConsultaQuery(conjuntoQuerysInst);
+            texto.setResultadoEsperado(conjuntoResExpInst);
             texto.setComentTextArea(conjuntoComentInst);
             int c = instAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
@@ -2220,8 +2338,8 @@ public JPanel getContentPanel() {
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerysRet);
-            texto.setResultadoEsperadoTextArea(conjuntoResExpRet);
+            texto.setConsultaQuery(conjuntoQuerysRet);
+            texto.setResultadoEsperado(conjuntoResExpRet);
             texto.setComentTextArea(conjuntoComentRet);
             int c = retAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
@@ -2257,8 +2375,8 @@ public JPanel getContentPanel() {
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerysReal);
-            texto.setResultadoEsperadoTextArea(conjuntoResExpReal);
+            texto.setConsultaQuery(conjuntoQuerysReal);
+            texto.setResultadoEsperado(conjuntoResExpReal);
             texto.setComentTextArea(conjuntoComentReal);
             int c = realAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
@@ -2295,8 +2413,8 @@ public JPanel getContentPanel() {
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerysSat);
-            texto.setResultadoEsperadoTextArea(conjuntoResExpSat);
+            texto.setConsultaQuery(conjuntoQuerysSat);
+            texto.setResultadoEsperado(conjuntoResExpSat);
             texto.setComentTextArea(conjuntoComentSat);
             int c = satAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
@@ -2345,8 +2463,8 @@ public JPanel getContentPanel() {
                 }
             }
             texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-            texto.setConsultaTextArea(conjuntoQuerysClas);
-            texto.setResultadoEsperadoTextArea(conjuntoResExpClas);
+            texto.setConsultaQuery(conjuntoQuerysClas);
+            texto.setResultadoEsperado(conjuntoResExpClas);
             texto.setComentTextArea(conjuntoComentClas);
             int c = clasAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
@@ -2386,8 +2504,8 @@ public JPanel getContentPanel() {
 
     if(tab==0){
         texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-        conjuntoQuerysInst = texto.getConsultaTextArea().trim();
-        conjuntoResultInst = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoQuerysInst = texto.getConsultaQuery().trim();
+        conjuntoResultInst = texto.getResultadoEsperado().trim();
         conjuntoComentInst = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysInst.split("\\\n");
         cResult = conjuntoResultInst.split("\\\n");
@@ -2425,8 +2543,8 @@ public JPanel getContentPanel() {
         }
      }else if(tab==1){
         texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-        conjuntoQuerysRet = texto.getConsultaTextArea();
-        conjuntoResultRet = texto.getResultadoEsperadoTextArea();
+        conjuntoQuerysRet = texto.getConsultaQuery();
+        conjuntoResultRet = texto.getResultadoEsperado();
         conjuntoComentRet = texto.getComentTextArea();
         cQuery = conjuntoQuerysRet.split("\\\n");
         cResult = conjuntoResultRet.split("\\\n");
@@ -2464,8 +2582,8 @@ public JPanel getContentPanel() {
         }
       }else if(tab==2){
         texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-        conjuntoQuerysReal = texto.getConsultaTextArea().trim();
-        conjuntoResultReal = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoQuerysReal = texto.getConsultaQuery().trim();
+        conjuntoResultReal = texto.getResultadoEsperado().trim();
         conjuntoComentReal = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysReal.split("\\\n");
         cResult = conjuntoResultReal.split("\\\n");
@@ -2499,8 +2617,8 @@ public JPanel getContentPanel() {
         }  
       }else if(tab==3){
         texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-        conjuntoQuerysSat = texto.getConsultaTextArea().trim();
-        conjuntoResultSat = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoQuerysSat = texto.getConsultaQuery().trim();
+        conjuntoResultSat = texto.getResultadoEsperado().trim();
         conjuntoComentSat = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysSat.split("\\\n");
         cResult = conjuntoResultSat.split("\\\n");
@@ -2538,8 +2656,8 @@ public JPanel getContentPanel() {
         }
       }else if(tab==4){
         texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-        conjuntoQuerysClas = texto.getConsultaTextArea().trim();
-        conjuntoResultClas = texto.getResultadoEsperadoTextArea().trim();
+        conjuntoQuerysClas = texto.getConsultaQuery().trim();
+        conjuntoResultClas = texto.getResultadoEsperado().trim();
         conjuntoComentClas = texto.getComentTextArea().trim();
         cQuery = conjuntoQuerysClas.split("\\\n");
         cResult = conjuntoResultClas.split("\\\n");

@@ -76,9 +76,9 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         selectCheckBox = new javax.swing.JCheckBox();
 
         queryTextField.setToolTipText("Consulta");
-        queryTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                queryTextFieldFocusLost(evt);
+        queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                queryTextFieldMouseClicked(evt);
             }
         });
 
@@ -179,16 +179,10 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
-private void queryTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_queryTextFieldFocusLost
+private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
-    /*validarTests = new ValidarTests();
-    boolean res = validarTests.validarQuery(getQuery());
-    if(res==false){
-            getQueryTextField().requestFocus();
-            getQueryTextField().setSelectionColor(Color.RED);
-            getQueryTextField().selectAll();
-    }*/
-}//GEN-LAST:event_queryTextFieldFocusLost
+    getQueryTextField().setForeground(Color.BLACK);
+}//GEN-LAST:event_queryTextFieldMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;

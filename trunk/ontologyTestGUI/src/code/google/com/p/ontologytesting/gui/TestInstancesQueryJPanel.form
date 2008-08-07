@@ -56,6 +56,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Consulta"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="queryTextFieldMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="comentarioButton">
       <Properties>
@@ -95,6 +98,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Resultado esperado"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="resultTextFieldMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

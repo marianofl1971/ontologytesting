@@ -67,7 +67,7 @@ public class JenaImplementation implements Jena{
 
         if(ontClass==null) 
         {
-            return "El individuo introducido no es una instancia para el modelo";
+            return "La clase introducida no es una instancia para el modelo";
         }
       
         Iterator it = ontClass.listInstances();       
@@ -87,9 +87,14 @@ public class JenaImplementation implements Jena{
     @Override
     public ArrayList<String> retieval(String ns, String className){
         
-        OntClass ontClass = model.getOntClass(ns + className);         
-        Iterator it = ontClass.listInstances();
         ArrayList<String> rval = new ArrayList<String>();
+        OntClass ontClass = model.getOntClass(ns + className);    
+        if(ontClass==null) 
+        {
+            rval = null;
+            return rval;
+        }
+        Iterator it = ontClass.listInstances();
         while(it.hasNext())
         {
             String instanceName=it.next().toString();
@@ -119,6 +124,9 @@ public class JenaImplementation implements Jena{
     public String satisfactibility(String ns, String concepto, String clase){
       
        OntClass ontClass = model.getOntClass(ns+clase);
+       if(ontClass==null){
+            return "La clase introducida no es una instancia para el modelo";
+       }
        Iterator it = ontClass.listDisjointWith();
        ArrayList<String> conjuntoDisj = new ArrayList<String>();
        
@@ -147,15 +155,35 @@ public class JenaImplementation implements Jena{
     @Override
     public ArrayList<String> classification(String ns, String individuo){
         
+        Individual individual = model.getIndividual(ns + individuo);
         String pertenece;
         ArrayList<String> clases = new ArrayList<String>();
-        Iterator it = model.listNamedClasses();
+        
+        if(individual==null){
+            clases = null;
+            return clases;
+        }
 
+        Iterator it = model.listNamedClasses();
+        Iterator itaux = model.listObjectProperties();
+        ArrayList<String[]> arrayProp = new ArrayList<String[]>();
+        while(itaux.hasNext()){
+            arrayProp.add(itaux.next().toString().split("#"));
+        }
         while(it.hasNext()){
+            int aux=0;
             String[] instanceName = it.next().toString().split("#");
-            pertenece = instantiation(ns, instanceName[1].toString(), individuo);
-            if(pertenece.equals("true")){
-                clases.add(instanceName[1].toString());
+            for(int i=0; i<arrayProp.size(); i++){
+                String[] deProp = arrayProp.get(i);
+                if(deProp[0].equals(instanceName[0]) && deProp[1].equals(instanceName[1])){
+                    aux=1;
+                }
+            }
+            if(aux==0){
+                pertenece = instantiation(ns, instanceName[1].toString(), individuo);
+                if(pertenece.equals("true")){
+                    clases.add(instanceName[1].toString());
+                }
             }
         }       
         return clases;

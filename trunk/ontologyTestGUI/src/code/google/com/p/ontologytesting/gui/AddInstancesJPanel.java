@@ -606,9 +606,9 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         }  
     if(getTestCompatible()==true){
         if(var==1){
-            test3.setResultadoEsperadoTextArea(textoResult);
+            test3.setResultadoEsperado(textoResult);
             test3.setComentTextArea(textoComent);
-            test3.setConsultaTextArea(textoQuery);
+            test3.setConsultaQuery(textoQuery);
         }
     }
     decoder.close();    

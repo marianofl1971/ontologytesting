@@ -9,8 +9,6 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.model.CollectionTest;
-
 /**
  *
  * @author Saruskas

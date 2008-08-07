@@ -37,13 +37,10 @@ public class OntologyTestCase implements OntologyTest{
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];   
-    String test = st.getTestName();
     
     jena = jenaInterface.getJena();
     jena.addReasoner(ont);
    
-    //List<ClassInstances> classInstances = st.getClassInstances();
-    //List<PropertyInstances> propertyInstances = st.getPropertyInstances();
     Instancias instancias = st.getInstancias();
 
     List<ClassInstances> classInstances = instancias.getClassInstances();
@@ -119,12 +116,19 @@ public class OntologyTestCase implements OntologyTest{
                     for(int k=0;k<queryMod.length;k++){
                         queryRet.add(queryMod[k]);
                     }
-                    Collections.sort(resObtenidoRet);
-                    Collections.sort(queryRet);
-                    if(!this.comparaArray(resObtenidoRet, queryRet)){
+                    if(resObtenidoRet==null){
                         ret=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo,"La clase introducida no es una " +
+                                "instancia para el modelo");
+                    }else{
+                        Collections.sort(resObtenidoRet);
+                        Collections.sort(queryRet);
+                        if(!this.comparaArray(resObtenidoRet, queryRet)){
+                            ret=1;
+                            testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo,resObtenidoRet.toString());
+                        }
                     }
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = jena.realization(ns, query);
@@ -150,14 +154,21 @@ public class OntologyTestCase implements OntologyTest{
                         querySat.add(queryMod[k]);
                     }
                     resObtenidoClas = jena.classification(ns, query);
-                    Collections.sort(resObtenidoClas);
-                    Collections.sort(querySat);
-                    if(!this.comparaArray(querySat, resObtenidoClas)){
+                    if(resObtenidoClas==null){
                         clas=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
+                                testName,qo, "El individuo introducido no es una" +
+                                "instancia para el modelo");
+                    }else{
+                        Collections.sort(resObtenidoClas);
+                        Collections.sort(querySat);
+                        if(!this.comparaArray(querySat, resObtenidoClas)){
+                            clas=1;
+                            testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoClas.toString());
-                    }
-                }  
+                        }
+                    }  
+                }
         }
         
     while(liSparql.hasNext()){    

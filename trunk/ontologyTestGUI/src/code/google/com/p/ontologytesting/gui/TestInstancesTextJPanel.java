@@ -6,6 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -37,10 +39,20 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
 
         consultaTextArea.setColumns(20);
         consultaTextArea.setRows(5);
+        consultaTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                consultaTextAreaMouseClicked(evt);
+            }
+        });
         jScrollPane16.setViewportView(consultaTextArea);
 
         resultadoEsperadoTextArea.setColumns(20);
         resultadoEsperadoTextArea.setRows(5);
+        resultadoEsperadoTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultadoEsperadoTextAreaMouseClicked(evt);
+            }
+        });
         jScrollPane17.setViewportView(resultadoEsperadoTextArea);
 
         jLabel1.setText("                        CONSULTA                                                  RESULTADO ESPERADO                                            COMENTARIO");
@@ -85,6 +97,16 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
+private void consultaTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaTextAreaMouseClicked
+// TODO add your handling code here:
+    getConsultaTextArea().setForeground(Color.BLACK);
+}//GEN-LAST:event_consultaTextAreaMouseClicked
+
+private void resultadoEsperadoTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultadoEsperadoTextAreaMouseClicked
+// TODO add your handling code here:
+    getResultadoEsperadoTextArea().setForeground(Color.BLACK);
+}//GEN-LAST:event_resultadoEsperadoTextAreaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea comentTextArea;
@@ -96,20 +118,20 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea resultadoEsperadoTextArea;
     // End of variables declaration//GEN-END:variables
 
-    public String getConsultaTextArea() {
-        return consultaTextArea.getText();
+    public String getConsultaQuery() {
+        return getConsultaTextArea().getText();
     }
 
-    public void setConsultaTextArea(String aconsultaTextArea) {
-        consultaTextArea.setText(aconsultaTextArea);
+    public void setConsultaQuery(String aconsultaTextArea) {
+        getConsultaTextArea().setText(aconsultaTextArea);
     }
 
-    public String getResultadoEsperadoTextArea() {
-        return resultadoEsperadoTextArea.getText();
+    public String getResultadoEsperado() {
+        return getResultadoEsperadoTextArea().getText();
     }
 
-    public void setResultadoEsperadoTextArea(String aresultadoEsperadoTextArea) {
-        resultadoEsperadoTextArea.setText(aresultadoEsperadoTextArea);
+    public void setResultadoEsperado(String aresultadoEsperadoTextArea) {
+        getResultadoEsperadoTextArea().setText(aresultadoEsperadoTextArea);
     }
 
     public String getComentTextArea() {
@@ -118,6 +140,14 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
 
     public void setComentTextArea(String acomentTextArea) {
         comentTextArea.setText(acomentTextArea);
+    }
+
+    public javax.swing.JTextArea getConsultaTextArea() {
+        return consultaTextArea;
+    }
+
+    public javax.swing.JTextArea getResultadoEsperadoTextArea() {
+        return resultadoEsperadoTextArea;
     }
 
 }

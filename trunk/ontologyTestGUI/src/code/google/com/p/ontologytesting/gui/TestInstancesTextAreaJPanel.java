@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
 
@@ -42,8 +43,19 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         duplicarButton = new javax.swing.JButton();
         selectCheckBox = new javax.swing.JCheckBox();
 
+        queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                queryTextFieldMouseClicked(evt);
+            }
+        });
+
         resultTextArea.setColumns(20);
         resultTextArea.setRows(5);
+        resultTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultTextAreaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(resultTextArea);
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment.gif"))); // NOI18N
@@ -123,6 +135,16 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_duplicarButtonActionPerformed
+
+private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
+// TODO add your handling code here:
+    getQueryTextField().setForeground(Color.BLACK);
+}//GEN-LAST:event_queryTextFieldMouseClicked
+
+private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextAreaMouseClicked
+// TODO add your handling code here:
+    getResultTextArea().setForeground(Color.BLACK);
+}//GEN-LAST:event_resultTextAreaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

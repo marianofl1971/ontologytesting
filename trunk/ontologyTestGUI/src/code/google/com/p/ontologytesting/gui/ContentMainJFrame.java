@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import code.google.com.p.ontologytesting.model.Instancias;
+import code.google.com.p.ontologytesting.model.ValidarConsultas;
 import java.awt.Color;
 import java.util.ListIterator;
 import javax.swing.JPanel;
@@ -212,57 +213,63 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     }else{
         if(ContentMainJFrame.getActual()==1){
             getGroupTests().guardarDatos();
+            ValidarConsultas validar = new ValidarConsultas();
             if(getGroupTests().getNombreTestsValidos()==true && getGroupTests().getTestsValidos()==true){
                 getContentPanel().remove(getGroupTests());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
                 ContentMainJFrame.setActual(4);
                 this.validate();
             }else if(getGroupTests().getTestsValidos()==false){
-                JOptionPane.showMessageDialog(frame,"La query " +
-                "introducida no es correcta. Los formatos posibles son:\n" +
-                "clase,individuo\nclase.individuo\n" +
-                "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);
-                ArrayList listInst = GroupTestsJPanel.getInst();
-                ArrayList listRet = GroupTestsJPanel.getRet();
-                ArrayList listReal = GroupTestsJPanel.getReal();
-                ArrayList listSat = GroupTestsJPanel.getSat();
-                ArrayList listClas = GroupTestsJPanel.getClas();
-                JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
-                JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
-                JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
-                JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
-                JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
-                for(int j=0;j<listInst.size();j++){
-                        if(listInst.get(j).equals(1)){
-                            TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                            test.getQueryTextField().setForeground(Color.RED);
+                JOptionPane.showMessageDialog(frame,"El formato de los datos marcados en rojo" +
+                        "no es correcto.\nPor favor, consulte la ayuda acerca del formato " +
+                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+
+                    if(GroupTestsJPanel.getActualSubTabInst()==0){
+                        if(validar.comprovarErrorEnAyudaInst()==false){
+                            ContentMainJFrame.setActual(1);
                         }
-                }
-                for(int j=0;j<listRet.size();j++){
-                        if(listRet.get(j).equals(1)){
-                            TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                            test.getQueryTextField().setForeground(Color.RED);
+                    }else{
+                        if(validar.comprovarErrorQuerysInst()==false){
+                            ContentMainJFrame.setActual(1);
                         }
-                }
-                for(int j=0;j<listReal.size();j++){
-                        if(listInst.get(j).equals(1)){
-                            TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(j);
-                            test.getQueryTextField().setForeground(Color.RED);
+                    }
+                    if(GroupTestsJPanel.getActualSubTabRet()==0){
+                        if(validar.comprovarErrorEnAyudaRet()==false){
+                            ContentMainJFrame.setActual(1);
                         }
-                }
-                for(int j=0;j<listSat.size();j++){
-                        if(listSat.get(j).equals(1)){
-                            TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
-                            test.getQueryTextField().setForeground(Color.RED);
+                    }else{
+                        if(validar.comprovarErrorQuerysRet()==false){
+                            ContentMainJFrame.setActual(1);
                         }
-                }
-                for(int j=0;j<listClas.size();j++){
-                        if(listClas.get(j).equals(1)){
-                            TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
-                            test.getQueryTextField().setForeground(Color.RED);
+                    }
+                    if(GroupTestsJPanel.getActualSubTabReal()==0){
+                        if(validar.comprovarErrorEnAyudaReal()==false){
+                            ContentMainJFrame.setActual(1);
                         }
-                }
-                ContentMainJFrame.setActual(1);
+                    }else{
+                        if(validar.comprovarErrorQuerysReal()==false){
+                            ContentMainJFrame.setActual(1);
+                        }
+                    }
+                    if(GroupTestsJPanel.getActualSubTabSat()==0){
+                        if(validar.comprovarErrorEnAyudaSat()==false){
+                            ContentMainJFrame.setActual(1);
+                        }
+                    }else{
+                        if(validar.comprovarErrorQuerysSat()==false){
+                            ContentMainJFrame.setActual(1);
+                        }
+                    }
+                    if(GroupTestsJPanel.getActualSubTabClas()==0){
+                        if(validar.comprovarErrorEnAyudaClas()==false){
+                            ContentMainJFrame.setActual(1);
+                        } 
+                    }else{
+                        if(validar.comprovarErrorQuerysClas()==false){
+                            ContentMainJFrame.setActual(1);
+                        }
+                    }
+                
             }else if(getGroupTests().getNombreTestsValidos()==false){
                 JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
                  "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -396,5 +403,29 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         MainJPanel.actualizarEstado();
         return mainPanel;
     }
+    
+    /*for(int i=1; i<panelAyudaInst.getComponentCount();i++){
+                    TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
+                    test.getQueryTextField().setForeground(Color.BLACK);
+                }
+                for(int i=1; i<panelAyudaRet.getComponentCount();i++){
+                    TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
+                    test.getQueryTextField().setForeground(Color.BLACK);
+                    test.getResultTextArea().setForeground(Color.BLACK); 
+                }
+                for(int i=1; i<panelAyudaReal.getComponentCount();i++){
+                    TestInstancesQueryJPanel test = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
+                    test.getQueryTextField().setForeground(Color.BLACK);
+                    test.getResultTextField().setForeground(Color.BLACK);
+                }
+                for(int i=1; i<panelAyudaSat.getComponentCount();i++){
+                    TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
+                    test.getQueryTextField().setForeground(Color.BLACK);
+                }
+                for(int i=1; i<panelAyudaClas.getComponentCount();i++){
+                    TestInstancesTextAreaJPanel test = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
+                    test.getQueryTextField().setForeground(Color.BLACK);
+                    test.getResultTextArea().setForeground(Color.BLACK);
+                }*/
 }
 
