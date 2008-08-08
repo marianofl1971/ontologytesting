@@ -13,9 +13,7 @@ import code.google.com.p.ontologytesting.gui.TestInstancesTextJPanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -33,7 +31,6 @@ public class ValidarConsultas {
     private JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
     private JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
     private JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
-    private Component frame;
     private JPanel panelInst = GroupTestsJPanel.getOpcionTextInstPanel();
     private JPanel panelRet = GroupTestsJPanel.getOpcionTextRetPanel();
     private JPanel panelReal = GroupTestsJPanel.getOpcionTextRealPanel();

@@ -49,6 +49,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelReal;
     private static JPanel panelRet;
     private static JPanel panelSat;
+    
     public static ArrayList getInst() {
         return inst;
     }
@@ -63,6 +64,42 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     }
     public static ArrayList getClas() {
         return clas;
+    }
+    public static boolean getNoHayInstancias() {
+        return noHayInstancias;
+    }
+    public static void setNoHayInstancias(boolean aNoHayInstancias) {
+        noHayInstancias = aNoHayInstancias;
+    }
+    public static boolean isInstGuardado() {
+        return instGuardado;
+    }
+    public static void setInstGuardado(boolean aInstGuardado) {
+        instGuardado = aInstGuardado;
+    }
+    public static boolean isRetGuardado() {
+        return retGuardado;
+    }
+    public static void setRetGuardado(boolean aRetGuardado) {
+        retGuardado = aRetGuardado;
+    }
+    public static boolean isRealGuardado() {
+        return realGuardado;
+    }
+    public static void setRealGuardado(boolean aRealGuardado) {
+        realGuardado = aRealGuardado;
+    }
+    public static boolean isSatGuardado() {
+        return satGuardado;
+    }
+    public static void setSatGuardado(boolean aSatGuardado) {
+        satGuardado = aSatGuardado;
+    }
+    public static boolean isClasGuardado() {
+        return clasGuardado;
+    }
+    public static void setClasGuardado(boolean aClasGuardado) {
+        clasGuardado = aClasGuardado;
     }
     private boolean nombreTestsValidos=true,testsValidos=true;
     private static boolean instTextName=true, retTextName=true, clasTextName=true,
@@ -170,6 +207,9 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelTree;
     private static int nameTest=0;
     private static ArrayList inst,ret,real,sat,clas;
+    private static boolean noHayInstancias;
+    private static boolean instGuardado=false,retGuardado=false,realGuardado=false,
+            satGuardado=false,clasGuardado=false;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -1174,6 +1214,7 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 public void guardarDatos(){
       
+    setNoHayInstancias(false);
     OntologyTestCase testcase = new OntologyTestCase();
     testresult = new OntologyTestResult();
 
@@ -1189,9 +1230,11 @@ public void guardarDatos(){
     }   
     
     if(AddSPARQLJPanel.isSeleccionado()==false){
-        for(int j=0;j<5;j++){
-            asociarInstancias(j);
-        }
+            for(int j=0;j<5;j++){
+                if(getNoHayInstancias()==false){
+                    asociarInstancias(j);
+                }
+            }
     }
     
     if(AddSPARQLJPanel.isSeleccionado()==true){
@@ -1239,7 +1282,7 @@ public void guardarDatos(){
             }
         }
     }
-    
+    if(getNoHayInstancias()==false){
     if(todosTienenNombre()==true && todosSonValidos()==true){
         setNombreTestsValidos(true);
         Component comp = null;
@@ -1287,7 +1330,35 @@ public void guardarDatos(){
         }else{
             setTestsValidos(false);
         }
+    }
 }   
+
+public static boolean hayInstanciasAsociadas(Instancias instancias){
+
+    ArrayList<ClassInstances> clasI = instancias.getClassInstances();
+    ArrayList<PropertyInstances> propI = instancias.getPropertyInstances();
+    if(clasI.size()==0 && propI.size()==0){
+        return false;
+    }
+
+    return true;
+}
+
+private static boolean yaAniadidaQuery(ArrayList<QueryOntology> lista,QueryOntology query){
+    
+    if(lista.size()!=0){
+        for(int i=0;i<lista.size();i++){
+            String q = lista.get(i).getQuery();
+            String c = lista.get(i).getResultexpected();
+            if(query.getQuery().equals(q) && query.getResultexpected().equals(c)){
+                return true;
+            }
+        }
+    }else{
+        return false;
+    }
+    return false;
+}
 
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
     
@@ -1304,7 +1375,8 @@ public boolean isScenarioEmpty(ScenarioTest scenarioTest){
 }
 
 public static void asociarInstancias(int sel){
-       
+     
+    setNoHayInstancias(false);
     ScenarioTest scenario = new ScenarioTest();
     int aux=0;
     String nombreTest = "",descTest = "";
@@ -1335,6 +1407,7 @@ public static void asociarInstancias(int sel){
     panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
     totalSat = panelAyudaSat.getComponentCount();
     
+    Component comp=null;
     validarTests = new ValidarTests();
     
     TestInstancesTextJPanel texto;
@@ -1379,7 +1452,9 @@ public static void asociarInstancias(int sel){
                             }
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
                             if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
-                                queryTest1.add(testQuery);
+                                if(yaAniadidaQuery(queryTest1,testQuery)==false){
+                                    queryTest1.add(testQuery);
+                                }
                                 scenario.setQueryTest(queryTest1);
                                 cont++;
                                 aux=1;
@@ -1412,18 +1487,47 @@ public static void asociarInstancias(int sel){
                         descPanel.setDescTextArea("");
                         descPanel.setNombreTextField("");
                     }
-                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);                   
-                    scenario.setInstancias(instancias);
-                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                    if(st.size()==0){
-                        st.add(scenario);
-                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);   
+                    if(hayInstanciasAsociadas(instancias)==false){
+                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                "Instanciacion no tiene instancias asociadas. ¿Desea " +
+                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                        if (n == JOptionPane.YES_OPTION){
+                            if(isInstGuardado()==false){
+                            scenario.setInstancias(instancias);
+                            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                            if(st.size()==0){
+                                st.add(scenario);
+                                MainJPanel.getCollectionTest().setScenariotest(st);
+                            }else{
+                                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                            }
+                            setInstGuardado(true);
+                            }
+                        }else{
+                                setNoHayInstancias(true);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
                     }else{
-                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        if(isInstGuardado()==false){
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                        setInstGuardado(true);
+                        }
                     }
-                    ContentMainJFrame.setInstancias(sel,new Instancias());
                 }
-        }
+            }
         }else{
             descPanel = (DescripcionJPanel) panelInst.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
@@ -1458,7 +1562,9 @@ public static void asociarInstancias(int sel){
                         }else{
                             testQuery = new QueryOntology(cQuery[i],cResult[i]);
                         }
-                        queryTest1.add(testQuery);
+                        if(yaAniadidaQuery(queryTest1,testQuery)==false){
+                            queryTest1.add(testQuery);
+                        }
                         scenario.setQueryTest(queryTest1);
                         aux=1;
                         getInst().add(i, 0);
@@ -1486,15 +1592,44 @@ public static void asociarInstancias(int sel){
                         texto.setResultadoEsperado("");
                     }
                     Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                    scenario.setInstancias(instancias);
-                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                    if(st.size()==0){
-                        st.add(scenario);
-                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    if(hayInstanciasAsociadas(instancias)==false){
+                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                "Instanciacion no tiene instancias asociadas. ¿Desea " +
+                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                        if (n == JOptionPane.YES_OPTION){
+                            if(isInstGuardado()==false){
+                            scenario.setInstancias(instancias);
+                            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                            if(st.size()==0){
+                                st.add(scenario);
+                                MainJPanel.getCollectionTest().setScenariotest(st);
+                            }else{
+                                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                            }
+                            if(AddInstancesJPanel.isStateNuevo()==true){
+                                ContentMainJFrame.setInstancias(sel,new Instancias());
+                            }
+                            setInstGuardado(true);
+                        }
+                        }else{
+                                    setNoHayInstancias(true);
+                        }
                     }else{
-                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        if(isInstGuardado()==false){
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                        setInstGuardado(true);
+                        }
                     }
-                    ContentMainJFrame.setInstancias(sel,new Instancias());
                 }
                 }
             }
@@ -1533,7 +1668,9 @@ public static void asociarInstancias(int sel){
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                             if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                     validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                queryTest2.add(testQuery);
+                                if(yaAniadidaQuery(queryTest2,testQuery)==false){
+                                    queryTest2.add(testQuery);
+                                }
                                 scenario.setQueryTest(queryTest2);
                                 cont++;
                                 aux=1;
@@ -1574,23 +1711,46 @@ public static void asociarInstancias(int sel){
             }
         
             if(aux==1){
-            if(AddInstancesJPanel.isStateNuevo()==true){
-                descPanel.setDescTextArea("");
-                descPanel.setNombreTextField("");
-            }
-            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-            scenario.setInstancias(instancias);
-            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-            if(st.size()==0){
-                st.add(scenario);
-                MainJPanel.getCollectionTest().setScenariotest(st);
-            }else{
-                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-            }
-                ContentMainJFrame.setInstancias(sel,new Instancias());
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    descPanel.setDescTextArea("");
+                    descPanel.setNombreTextField("");
+                }
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                if(hayInstanciasAsociadas(instancias)==false){
+                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                        "Retrieval no tiene instancias asociadas. ¿Desea " +
+                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION){    
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                    }else{
+                        setNoHayInstancias(true);
+                    }
+                }else{
+                    scenario.setInstancias(instancias);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                }
             }
         }
-        }else{
+    }else{
             descPanel = (DescripcionJPanel) panelRet.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
             conjuntoQuerys = texto.getConsultaQuery();
@@ -1624,8 +1784,10 @@ public static void asociarInstancias(int sel){
                         }else{
                             testQuery = new QueryOntology(cQuery[i],cResult[i]);
                         }
-                        queryTest1.add(testQuery);
-                        scenario.setQueryTest(queryTest1);
+                        if(yaAniadidaQuery(queryTest2,testQuery)==false){
+                            queryTest2.add(testQuery);
+                        }
+                        scenario.setQueryTest(queryTest2);
                         aux=1;
                         getRet().add(i, 0);
                     }else if(validarTests.validarQuery(cQuery[i])==false && 
@@ -1643,28 +1805,51 @@ public static void asociarInstancias(int sel){
                 }
             }
             if(getValidoRet()==true){
-            if(aux==1){
-                if(AddInstancesJPanel.isStateNuevo()==true){
-                    descPanel.setDescTextArea("");
-                    descPanel.setNombreTextField("");
-                    texto.setComentTextArea("");
-                    texto.setConsultaQuery("");
-                    texto.setResultadoEsperado("");
+                if(aux==1){
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        descPanel.setDescTextArea("");
+                        descPanel.setNombreTextField("");
+                        texto.setComentTextArea("");
+                        texto.setConsultaQuery("");
+                        texto.setResultadoEsperado("");
+                    }
+                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                    if(hayInstanciasAsociadas(instancias)==false){
+                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                            "Retrieval no tiene instancias asociadas. ¿Desea " +
+                            "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                        if (n == JOptionPane.YES_OPTION){ 
+                            scenario.setInstancias(instancias);
+                            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                            if(st.size()==0){
+                                st.add(scenario);
+                                MainJPanel.getCollectionTest().setScenariotest(st);
+                            }else{
+                                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                            }
+                            if(AddInstancesJPanel.isStateNuevo()==true){
+                                ContentMainJFrame.setInstancias(sel,new Instancias());
+                            }
+                        }else{
+                            setNoHayInstancias(true);
+                        }
+                    }else{
+                          scenario.setInstancias(instancias);
+                            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                            if(st.size()==0){
+                                st.add(scenario);
+                                MainJPanel.getCollectionTest().setScenariotest(st);
+                            }else{
+                                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                            }
+                            if(AddInstancesJPanel.isStateNuevo()==true){
+                                ContentMainJFrame.setInstancias(sel,new Instancias());
+                            }
+                    }
                 }
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                scenario.setInstancias(instancias);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
-                }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-                }
-                ContentMainJFrame.setInstancias(sel,new Instancias());
-            }
             }
         }
-        }
+     }
     }else if(sel==2){
         real = new ArrayList();
         getReal().add(0,0);
@@ -1698,7 +1883,9 @@ public static void asociarInstancias(int sel){
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                             if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                     validarTests.validarQuery(testQuery.getResultexpected())==true){
-                                queryTest3.add(testQuery);
+                                if(yaAniadidaQuery(queryTest3,testQuery)==false){
+                                    queryTest3.add(testQuery);
+                                }
                                 scenario.setQueryTest(queryTest3);
                                 cont++;
                                 aux=1;
@@ -1727,30 +1914,53 @@ public static void asociarInstancias(int sel){
             }
             }
         if(getRealTextName()==true && getValidoReal()==true){
-        if(AddInstancesJPanel.isStateNuevo()==true){
-            int c = realAyudaPanel.getComponentCount();
-            for (int i = 1; i < c; i++) {
-                realAyudaPanel.remove(realAyudaPanel.getComponent(i));
-                realAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
-            }
-            realAyudaPanel.validate();
-        }
-        if(aux==1){
             if(AddInstancesJPanel.isStateNuevo()==true){
-                descPanel.setDescTextArea("");
-                descPanel.setNombreTextField("");
-        }
-        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-        scenario.setInstancias(instancias);
-        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-        if(st.size()==0){
-            st.add(scenario);
-            MainJPanel.getCollectionTest().setScenariotest(st);
-        }else{
-            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-        }
-            ContentMainJFrame.setInstancias(sel,new Instancias());
-        }
+                int c = realAyudaPanel.getComponentCount();
+                for (int i = 1; i < c; i++) {
+                    realAyudaPanel.remove(realAyudaPanel.getComponent(i));
+                    realAyudaPanel.add(new TestInstancesQueryJPanel(),i); 
+                }
+                realAyudaPanel.validate();
+            }
+            if(aux==1){
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    descPanel.setDescTextArea("");
+                    descPanel.setNombreTextField("");
+                }
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                if(hayInstanciasAsociadas(instancias)==false){
+                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                        "Realizacion no tiene instancias asociadas. ¿Desea " +
+                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION){ 
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                                ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                    }else{
+                        setNoHayInstancias(true);
+                    }
+                }else{
+                    scenario.setInstancias(instancias);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        ContentMainJFrame.setInstancias(sel,new Instancias());
+                    }  
+                }
+            }
         }
         }else{
             descPanel = (DescripcionJPanel) panelReal.getComponent(0);
@@ -1786,8 +1996,10 @@ public static void asociarInstancias(int sel){
                         }else{
                             testQuery = new QueryOntology(cQuery[i],cResult[i]);
                         }
-                        queryTest1.add(testQuery);
-                        scenario.setQueryTest(queryTest1);
+                        if(yaAniadidaQuery(queryTest3,testQuery)==false){
+                            queryTest3.add(testQuery);
+                        }
+                        scenario.setQueryTest(queryTest3);
                         aux=1;
                         getReal().add(i, 0);
                     }else if(validarTests.validarQuery(cQuery[i])==false && 
@@ -1815,17 +2027,40 @@ public static void asociarInstancias(int sel){
                     texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                scenario.setInstancias(instancias);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
+                if(hayInstanciasAsociadas(instancias)==false){
+                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                        "Realizacion no tiene instancias asociadas. ¿Desea " +
+                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION){ 
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                    }else{
+                        setNoHayInstancias(true);
+                    }
                 }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    scenario.setInstancias(instancias);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        ContentMainJFrame.setInstancias(sel,new Instancias());
+                    }
                 }
-                ContentMainJFrame.setInstancias(sel,new Instancias());
-            }
-            }
+              }
+          }
         }
         }
     }else if(sel==3){
@@ -1861,7 +2096,9 @@ public static void asociarInstancias(int sel){
                             aux=1;
                             QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
                             if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
-                                queryTest4.add(testQuery);
+                                if(yaAniadidaQuery(queryTest4,testQuery)==false){
+                                    queryTest4.add(testQuery);
+                                }
                                 scenario.setQueryTest(queryTest4);
                                 cont++;
                                 aux=1;
@@ -1897,15 +2134,38 @@ public static void asociarInstancias(int sel){
             descPanel.setNombreTextField("");
         }
         Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-        scenario.setInstancias(instancias);
-        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-        if(st.size()==0){
-            st.add(scenario);
-            MainJPanel.getCollectionTest().setScenariotest(st);
+        if(hayInstanciasAsociadas(instancias)==false){
+            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                    "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
+                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){ 
+                scenario.setInstancias(instancias);
+                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                if(st.size()==0){
+                    st.add(scenario);
+                    MainJPanel.getCollectionTest().setScenariotest(st);
+                }else{
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                }
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    ContentMainJFrame.setInstancias(sel,new Instancias());
+                }
+            }else{
+                setNoHayInstancias(true);
+            }
         }else{
-            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                scenario.setInstancias(instancias);
+                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                if(st.size()==0){
+                    st.add(scenario);
+                    MainJPanel.getCollectionTest().setScenariotest(st);
+                }else{
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                }
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    ContentMainJFrame.setInstancias(sel,new Instancias());
+                }
         }
-            ContentMainJFrame.setInstancias(sel,new Instancias());
         }
         }
         }else{
@@ -1942,8 +2202,10 @@ public static void asociarInstancias(int sel){
                     }else{
                         testQuery = new QueryOntology(cQuery[i],cResult[i]);
                     }
-                    queryTest1.add(testQuery);
-                    scenario.setQueryTest(queryTest1);
+                    if(yaAniadidaQuery(queryTest4,testQuery)==false){
+                        queryTest4.add(testQuery);
+                    }
+                    scenario.setQueryTest(queryTest4);
                     aux=1;
                     getSat().add(i, 0);
                     }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
@@ -1970,15 +2232,38 @@ public static void asociarInstancias(int sel){
                     texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                scenario.setInstancias(instancias);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
+                if(hayInstanciasAsociadas(instancias)==false){
+                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                    "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
+                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION){
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                        if(st.size()==0){
+                            st.add(scenario);
+                            MainJPanel.getCollectionTest().setScenariotest(st);
+                        }else{
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                        }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                    }else{
+                        setNoHayInstancias(true);
+                    }
                 }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    scenario.setInstancias(instancias);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                    if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    }
+                    if(AddInstancesJPanel.isStateNuevo()==true){
+                        ContentMainJFrame.setInstancias(sel,new Instancias());
+                    }
                 }
-                ContentMainJFrame.setInstancias(sel,new Instancias());
             }
             }
         }
@@ -2016,14 +2301,16 @@ public static void asociarInstancias(int sel){
                             QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
                             if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                     validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                queryTest5.add(testQuery);
+                                if(yaAniadidaQuery(queryTest5,testQuery)==false){
+                                    queryTest5.add(testQuery);
+                                }
                                 scenario.setQueryTest(queryTest5);
                                 cont++;
                                 aux=1;
                                 getClas().add(i, 0);
                             }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
                                     validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                getRet().add(i, 1);
+                                getClas().add(i, 1);
                                 setValidoClas(false);
                             }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
                                     validarTests.validarResultado(testQuery.getResultexpected())==false){
@@ -2059,15 +2346,38 @@ public static void asociarInstancias(int sel){
             descPanel.setNombreTextField("");
         }
         Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-        scenario.setInstancias(instancias);
-        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-        if(st.size()==0){
-            st.add(scenario);
-            MainJPanel.getCollectionTest().setScenariotest(st);
+        if(hayInstanciasAsociadas(instancias)==false){
+            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                    "Clasificacion no tiene instancias asociadas. ¿Desea " +
+                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                scenario.setInstancias(instancias);
+                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                if(st.size()==0){
+                    st.add(scenario);
+                    MainJPanel.getCollectionTest().setScenariotest(st);
+                }else{
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                }
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    ContentMainJFrame.setInstancias(sel,new Instancias());
+                }
+            }else{
+                setNoHayInstancias(true);
+            }
         }else{
-            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+            scenario.setInstancias(instancias);
+            ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+            if(st.size()==0){
+                st.add(scenario);
+                MainJPanel.getCollectionTest().setScenariotest(st);
+            }else{
+                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+            }
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                ContentMainJFrame.setInstancias(sel,new Instancias());
+            }
         }
-        ContentMainJFrame.setInstancias(sel,new Instancias());
         }  
         }
     }else{
@@ -2104,8 +2414,10 @@ public static void asociarInstancias(int sel){
                         }else{
                             testQuery = new QueryOntology(cQuery[i],cResult[i]);
                         }
-                        queryTest1.add(testQuery);
-                        scenario.setQueryTest(queryTest1);
+                        if(yaAniadidaQuery(queryTest5,testQuery)==false){
+                            queryTest5.add(testQuery);
+                        }
+                        scenario.setQueryTest(queryTest5);
                         aux=1;
                         getClas().add(i, 0);
                     }else if(validarTests.validarQuery(cQuery[i])==false && 
@@ -2132,20 +2444,43 @@ public static void asociarInstancias(int sel){
                     texto.setResultadoEsperado("");
                 }
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                scenario.setInstancias(instancias);
-                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                if(st.size()==0){
-                    st.add(scenario);
-                    MainJPanel.getCollectionTest().setScenariotest(st);
+                if(hayInstanciasAsociadas(instancias)==false){
+                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                        "Clasificacion no tiene instancias asociadas. ¿Desea " +
+                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION){
+                        scenario.setInstancias(instancias);
+                        ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                            if(st.size()==0){
+                                st.add(scenario);
+                                MainJPanel.getCollectionTest().setScenariotest(st);
+                            }else{
+                                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                            }
+                        if(AddInstancesJPanel.isStateNuevo()==true){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                        }
+                    }else{
+                        setNoHayInstancias(true);
+                    }
                 }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                    scenario.setInstancias(instancias);
+                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                     if(st.size()==0){
+                        st.add(scenario);
+                        MainJPanel.getCollectionTest().setScenariotest(st);
+                     }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                     }
+                     if(AddInstancesJPanel.isStateNuevo()==true){
+                        ContentMainJFrame.setInstancias(sel,new Instancias());
+                     }
                 }
-                ContentMainJFrame.setInstancias(sel,new Instancias());
-            }
+                }
             }
         }
     }
-  }
+  } 
 }
 
 public static boolean inListSparqlQuerys(SparqlQueryOntology query){

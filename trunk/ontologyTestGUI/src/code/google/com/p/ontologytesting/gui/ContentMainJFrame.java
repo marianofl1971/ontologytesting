@@ -8,16 +8,11 @@ package code.google.com.p.ontologytesting.gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ValidarConsultas;
-import java.awt.Color;
-import java.util.ListIterator;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -214,16 +209,16 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
         if(ContentMainJFrame.getActual()==1){
             getGroupTests().guardarDatos();
             ValidarConsultas validar = new ValidarConsultas();
-            if(getGroupTests().getNombreTestsValidos()==true && getGroupTests().getTestsValidos()==true){
-                getContentPanel().remove(getGroupTests());
-                getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                ContentMainJFrame.setActual(4);
-                this.validate();
-            }else if(getGroupTests().getTestsValidos()==false){
-                JOptionPane.showMessageDialog(frame,"El formato de los datos marcados en rojo" +
+            if(GroupTestsJPanel.getNoHayInstancias()==false){
+                if(getGroupTests().getNombreTestsValidos()==true && getGroupTests().getTestsValidos()==true){
+                    getContentPanel().remove(getGroupTests());
+                    getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                    ContentMainJFrame.setActual(4);
+                    this.validate();
+                }else if(getGroupTests().getTestsValidos()==false){
+                    JOptionPane.showMessageDialog(frame,"El formato de los datos marcados en rojo" +
                         "no es correcto.\nPor favor, consulte la ayuda acerca del formato " +
                         "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-
                     if(GroupTestsJPanel.getActualSubTabInst()==0){
                         if(validar.comprovarErrorEnAyudaInst()==false){
                             ContentMainJFrame.setActual(1);
@@ -268,14 +263,16 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                         if(validar.comprovarErrorQuerysClas()==false){
                             ContentMainJFrame.setActual(1);
                         }
-                    }
-                
+                    }                
             }else if(getGroupTests().getNombreTestsValidos()==false){
                 JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
                  "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
                 this.setGroupTests(getGroupTests());
                ContentMainJFrame.setActual(1);
             }
+        }else{
+            ContentMainJFrame.setActual(1);
+        }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
                     getContentPanel().remove(sparql);
