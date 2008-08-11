@@ -60,6 +60,7 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     private ConfigurationJPanel configurar;
     private static ArrayList paginas = new ArrayList();
     private static int actual=0;
+    private static boolean botonAnte=false;
     
     /** Creates new form ContentMainJFrame */
     public ContentMainJFrame() {
@@ -210,7 +211,9 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             getGroupTests().guardarDatos();
             ValidarConsultas validar = new ValidarConsultas();
             if(GroupTestsJPanel.getNoHayInstancias()==false){
-                if(getGroupTests().getNombreTestsValidos()==true && getGroupTests().getTestsValidos()==true){
+                if(getGroupTests().getNombreTestsValidos()==true && 
+                    getGroupTests().getTestsValidos()==true && 
+                    getGroupTests().getTestYaExiste()==false){
                     getContentPanel().remove(getGroupTests());
                     getContentPanel().add(GroupTestsJPanel.getPanelTree());
                     ContentMainJFrame.setActual(4);
@@ -269,16 +272,21 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                  "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
                 this.setGroupTests(getGroupTests());
                ContentMainJFrame.setActual(1);
+            }else if(getGroupTests().getTestYaExiste()==true){
+                JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor," +
+                        "introduzca uno nuevo","Warning Message",JOptionPane.WARNING_MESSAGE);
+                this.setGroupTests(getGroupTests());
+                ContentMainJFrame.setActual(1);
             }
         }else{
             ContentMainJFrame.setActual(1);
         }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
-                    getContentPanel().remove(sparql);
-                    getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                    ContentMainJFrame.setActual(4);
-                    this.validate();
+                getContentPanel().remove(sparql);
+                getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                ContentMainJFrame.setActual(4);
+                this.validate();
         }else if(ContentMainJFrame.getActual()==3){
                 getContentPanel().remove(addInstances.getContentPanel());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
@@ -289,6 +297,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             //Esto en la pagina de configuracion
         }
     }
+    setBotonAnte(false);
 }//GEN-LAST:event_siguienteButtonActionPerformed
 
 public void completarArrayOrden(){
@@ -341,27 +350,28 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 this.validate(); 
         }else if(ContentMainJFrame.getActual()==4){
             if(paginas.get(2).equals(1)){
-                    getContentPanel().remove(GroupTestsJPanel.getPanelTree());
-                    getContentPanel().add(addInstances.getContentPanel());
+                getContentPanel().remove(GroupTestsJPanel.getPanelTree());
+                getContentPanel().add(addInstances.getContentPanel());
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
                 ContentMainJFrame.setHeVueltoSparql(true);
-                    getContentPanel().remove(GroupTestsJPanel.getPanelTree());
-                    getContentPanel().add(sparql);
+                getContentPanel().remove(GroupTestsJPanel.getPanelTree());
+                getContentPanel().add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
                 anteriorButton.setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(0).equals(1)){
                 ContentMainJFrame.setHeVueltoGroupTest(true);
-                    getContentPanel().remove(GroupTestsJPanel.getPanelTree());
-                    getContentPanel().add(getGroupTests());
+                getContentPanel().remove(GroupTestsJPanel.getPanelTree());
+                getContentPanel().add(getGroupTests());
                 anteriorButton.setEnabled(true);
                 this.validate();
                 AddSPARQLJPanel.setSeleccionado(false);
                 ContentMainJFrame.setActual(1);    
+                setBotonAnte(true);
             }
         }
     }
@@ -399,6 +409,12 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     public static MainJPanel getMainPanel() {
         MainJPanel.actualizarEstado();
         return mainPanel;
+    }
+    public static boolean getBotonAnte() {
+        return botonAnte;
+    }
+    public static void setBotonAnte(boolean abotonAnte) {
+        botonAnte = abotonAnte;
     }
     
     /*for(int i=1; i<panelAyudaInst.getComponentCount();i++){

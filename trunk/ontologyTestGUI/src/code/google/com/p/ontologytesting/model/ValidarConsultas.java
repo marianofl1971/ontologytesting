@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.gui.TestInstancesTFJPanel;
 import code.google.com.p.ontologytesting.gui.TestInstancesTextAreaJPanel;
 import code.google.com.p.ontologytesting.gui.TestInstancesTextJPanel;
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
