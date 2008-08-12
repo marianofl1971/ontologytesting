@@ -272,7 +272,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                  "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
                 this.setGroupTests(getGroupTests());
                ContentMainJFrame.setActual(1);
-            }else if(getGroupTests().getTestYaExiste()==true){
+            }else if(GroupTestsJPanel.getTestYaExiste()==true){
                 JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor," +
                         "introduzca uno nuevo","Warning Message",JOptionPane.WARNING_MESSAGE);
                 this.setGroupTests(getGroupTests());

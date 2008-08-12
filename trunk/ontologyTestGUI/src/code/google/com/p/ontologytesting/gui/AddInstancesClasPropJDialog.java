@@ -25,6 +25,8 @@ import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.ValidarTests;
+import java.awt.Color;
 /**
  *
  * @author  Saruskas
@@ -49,6 +51,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     Instancias instancias;
     public static boolean seleccionado;
     private int tabActual=0;
+    private boolean queryValida=true;
 
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var) {
         
@@ -529,26 +532,38 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
 // TODO add your handling code here:
-    
+    ValidarTests validar = new ValidarTests();
+    ArrayList failClas = new ArrayList();
+    ArrayList failProp = new ArrayList();
+    int failGroupClas=0,failGroupProp=0;
+    setQueryValida(true);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
     instancias = new Instancias();
     int aux=0;
     int totalClas = clasPanel.getComponentCount();
-    
+    if(getInstancesTabbedPane()!=2){
     for(int i=0; i<totalClas; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) clasPanel.getComponent(i);
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(!query.equals("") && !coment.equals("")){
-            ClassInstances cI = new ClassInstances(query,coment);
-            clasInst.add(cI);
-        }else if(!query.equals("") && coment.equals("")){
-            ClassInstances cI = new ClassInstances(query);
-            clasInst.add(cI);
-        }else if(query.equals("") && !coment.equals("")){
-            aux=1;
+        if(validar.validarInstanciaClase(query)==true){
+            if(!query.equals("") && !coment.equals("")){
+                ClassInstances cI = new ClassInstances(query,coment);
+                clasInst.add(cI);
+            }else if(!query.equals("") && coment.equals("")){
+                ClassInstances cI = new ClassInstances(query);
+                clasInst.add(cI);
+            }else if(query.equals("") && !coment.equals("")){
+                aux=1;
+            }
+            failClas.add(i,0);
+        }else{
+            if(!query.equals("")){
+                failClas.add(i,1);
+                setQueryValida(false);
+            }
         }
     }
     int totalProp = propPanel.getComponentCount();
@@ -557,14 +572,56 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(!query.equals("") && !coment.equals("")){
-            PropertyInstances pI = new PropertyInstances(query,coment);
-            propInst.add(pI);
-        }else if(!query.equals("") && coment.equals("")){
-            PropertyInstances pI = new PropertyInstances(query);
-            propInst.add(pI);
-        }else if(query.equals("") && !coment.equals("")){
-            aux=1;
+        if(validar.validarInstanciaPropiedad(query)==true){
+            if(!query.equals("") && !coment.equals("")){
+                PropertyInstances pI = new PropertyInstances(query,coment);
+                propInst.add(pI);
+            }else if(!query.equals("") && coment.equals("")){
+                PropertyInstances pI = new PropertyInstances(query);
+                propInst.add(pI);
+            }else if(query.equals("") && !coment.equals("")){
+                aux=1;
+            }
+            failProp.add(i, 0);
+        }else{
+            if(!query.equals("")){
+                failProp.add(i, 1);
+                setQueryValida(false);
+            }
+        }
+    }
+    }else{
+        String patron="\\\n";
+        CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+        String conjuntoClase = conjunto.getClaseTextArea().trim();
+        String conjuntoProp = conjunto.getPropiedadTextArea().trim();
+        String[] clas = conjuntoClase.split(patron);
+        String[] prop = conjuntoProp.split(patron);
+        for(int i=0;i<clas.length;i++){
+            if(!clas[i].equals("")){
+                if(validar.validarInstanciaClase(clas[i])==true){
+                    ClassInstances cI = new ClassInstances(clas[i]);
+                    clasInst.add(cI);
+                    failClas.add(i,0);
+                }else{
+                    failClas.add(i,1);
+                    failGroupClas=1;
+                    setQueryValida(false);
+                }
+            }
+        }
+        for(int i=0;i<prop.length;i++){
+            if(!prop[i].equals("")){
+                if(validar.validarInstanciaPropiedad(prop[i])==true){
+                    PropertyInstances pI = new PropertyInstances(prop[i]);
+                    propInst.add(pI);
+                    failProp.add(i,0);
+                }else{
+                    failProp.add(i,1);
+                    failGroupProp=1;
+                    setQueryValida(false);
+                }
+            }
         }
     }
     instancias.setClassInstances(clasInst);
@@ -572,48 +629,79 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
     instancias.setDescripcion(getDescInstanciasTextArea());
     instancias.setNombre(getNomInstanciasTextField());
     instancias.setType("Instancias");
-    if(aux==1){
-        JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
+    if(isQueryValida()==true){
+        if(aux==1){
+            JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
                 "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
-    }else{
-        if((AddInstancesJPanel.isStateAsociar()==true)
+        }else{
+            if((AddInstancesJPanel.isStateAsociar()==true)
                 || (AddInstancesJPanel.isStateAsociar()==true && AddSPARQLJPanel.isSeleccionado()==true)){
-            Component comp = null;
-            int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar este conjunto de" +
-            " instancias para futuras pruebas?", "Guardar Instancias",
-            JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION) {
-                crearArchivoDeInstancias(instancias);
-                setInstances(instancias);
-                this.setVisible(false);
-            }else{
-                setInstances(instancias);
-                this.setVisible(false);
-            }
-      }else{  
-          if(compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)){
-              setInstances(instancias);
-              this.setVisible(false);
-            }else{
-                Object[] options = {"Sobreescribir","Crear nuevo","No guardar"};
+                Component comp = null;
+                int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar este conjunto de" +
+                " instancias para futuras pruebas?", "Guardar Instancias",
+                JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION) {
+                    crearArchivoDeInstancias(instancias);
+                    setInstances(instancias);
+                    this.setVisible(false);
+                }else{
+                    setInstances(instancias);
+                    this.setVisible(false);
+                }
+            }else{  
+                if(compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)){
+                    setInstances(instancias);
+                    this.setVisible(false);
+                }else{
+                    Object[] options = {"Sobreescribir","Crear nuevo","No guardar"};
                     int n = JOptionPane.showOptionDialog(frame,"El conjunto de " +
                     "instancias ha cambiado. ¿Qué desea hacer?","Question",
                     JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
-                if (n == JOptionPane.YES_OPTION) {
-                     setInstances(instancias);
-                     crearArchivoDeInstancias(getNombreFichero(),instancias);
-                     this.setVisible(false);
-                }else if (n == JOptionPane.NO_OPTION) {
-                     crearArchivoDeInstancias(instancias); 
-                     setInstances(instancias);
-                     this.setVisible(false);
-                }else if (n == JOptionPane.CANCEL_OPTION) {
-                     setInstances(instancias);
-                     this.setVisible(false);
-                }             
+                    if (n == JOptionPane.YES_OPTION) {
+                        setInstances(instancias);
+                        crearArchivoDeInstancias(getNombreFichero(),instancias);
+                        this.setVisible(false);
+                    }else if (n == JOptionPane.NO_OPTION) {
+                        crearArchivoDeInstancias(instancias); 
+                        setInstances(instancias);
+                        this.setVisible(false);
+                    }else if (n == JOptionPane.CANCEL_OPTION) {
+                        setInstances(instancias);
+                        this.setVisible(false);
+                    }             
+                }
             }
-      }
+        }
+    }else{
+        JOptionPane.showMessageDialog(frame,"El formato de las instancias marcadas" +
+                "en rojo es incorrecto. Por favor, revise la documentación para ver" +
+                "los formatos permitidos.","Warning Message",JOptionPane.WARNING_MESSAGE);
+        if(getInstancesTabbedPane()!=2){
+            CreateInstancesJPanel panelInst = null;
+            for(int j=0;j<failClas.size();j++){
+                if(failClas.get(j).equals(1)){
+                    panelInst = (CreateInstancesJPanel) clasPanel.getComponent(j);
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                }
+            }
+            for(int j=0;j<failProp.size();j++){
+                if(failProp.get(j).equals(1)){
+                    panelInst = (CreateInstancesJPanel) propPanel.getComponent(j);
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                }
+            }
+        }else{
+            CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+            if(failGroupClas==1 && failGroupProp==1){
+                conjunto.getPropiedadArea().setForeground(Color.RED);
+                conjunto.getClaseArea().setForeground(Color.RED);
+            }else if(failGroupClas==1){
+                conjunto.getClaseArea().setForeground(Color.RED);
+            }else{
+                conjunto.getPropiedadArea().setForeground(Color.RED);
+            }
+        }
     }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
@@ -638,7 +726,7 @@ public void crearArchivoDeInstancias(Instancias instancias){
         e.writeObject(instancias);
         e.close();
     }catch (FileNotFoundException ex) {
-        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        ex.printStackTrace();
      }
 }
 
@@ -650,7 +738,7 @@ public void crearArchivoDeInstancias(String nombreFichero,Instancias instancias)
         e.writeObject(instancias);
         e.close();
     }catch (FileNotFoundException ex) {
-        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        ex.printStackTrace();
      }
 }
 
@@ -662,7 +750,7 @@ public void crearArchivoDeTests(String nombreFichero){
         e.writeObject(MainJPanel.getCollectionTest());
         e.close();
     }catch (FileNotFoundException ex) {
-        //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        ex.printStackTrace();
      }
 }
 
@@ -847,8 +935,7 @@ public void copiarAInstancesAyuda(){
             panelInst.setInstance(prop[i]);
             j++;
         }
-    }
-        
+    }      
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -921,6 +1008,14 @@ public void copiarAInstancesAyuda(){
 
     public void setNomInstanciasTextField(String anomInstanciasTextField) {
         nomInstanciasTextField.setText(anomInstanciasTextField);
+    }
+
+    public boolean isQueryValida() {
+        return queryValida;
+    }
+
+    public void setQueryValida(boolean queryValida) {
+        this.queryValida = queryValida;
     }
 
 }

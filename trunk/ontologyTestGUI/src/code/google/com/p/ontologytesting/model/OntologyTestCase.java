@@ -27,8 +27,8 @@ public class OntologyTestCase implements OntologyTest{
     boolean nameclasIsUsed=false;
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
-    private static String patron1="\\(|,|\n| ",patron2=",|\n| |\\)",
-            patron3="\\(|\\)|,| ",patron4=",|\n| ";
+    private static String patron1="[\\(|,|\n| ]",patron2="[,|\n| |\\)]",
+            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]";
     
     public OntologyTestCase(){
     }

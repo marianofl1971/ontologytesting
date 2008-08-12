@@ -128,11 +128,11 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     // End of variables declaration//GEN-END:variables
 
     public void setInstance(String instance){
-        instanciaTextField.setText(instance);
+        getInstanciaTextField().setText(instance);
     }
     
     public String getQuery(){
-        return instanciaTextField.getText();
+        return getInstanciaTextField().getText();
     }
 
     public AddComentJDialog getComment() {
@@ -145,6 +145,14 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public String getIdentifier() {
         return identifier;
+    }
+
+    public void setInstanciaTextField(javax.swing.JTextField instanciaTextField) {
+        this.instanciaTextField = instanciaTextField;
+    }
+
+    public javax.swing.JTextField getInstanciaTextField() {
+        return instanciaTextField;
     }
     
 }

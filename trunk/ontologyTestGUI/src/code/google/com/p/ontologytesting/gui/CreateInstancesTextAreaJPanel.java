@@ -87,19 +87,35 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public String getClaseTextArea() {
-        return claseTextArea.getText();
+        return getClaseArea().getText();
     }
 
     public void setClaseTextArea(String aclaseTextArea) {
-        claseTextArea.setText(aclaseTextArea);
+        getClaseArea().setText(aclaseTextArea);
     }
 
     public String getPropiedadTextArea() {
-        return propiedadTextArea.getText();
+        return getPropiedadArea().getText();
     }
 
     public void setPropiedadTextArea(String apropiedadTextArea) {
-        propiedadTextArea.setText(apropiedadTextArea);
+        getPropiedadArea().setText(apropiedadTextArea);
+    }
+
+    public javax.swing.JTextArea getClaseArea() {
+        return claseTextArea;
+    }
+
+    public void setClaseArea(javax.swing.JTextArea claseTextArea) {
+        this.claseTextArea = claseTextArea;
+    }
+
+    public javax.swing.JTextArea getPropiedadArea() {
+        return propiedadTextArea;
+    }
+
+    public void setPropiedadTextArea(javax.swing.JTextArea propiedadTextArea) {
+        this.propiedadTextArea = propiedadTextArea;
     }
 
 }

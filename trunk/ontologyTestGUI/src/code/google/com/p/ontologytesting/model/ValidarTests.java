@@ -131,4 +131,25 @@ public class ValidarTests {
         }
     }
     
+    public boolean validarInstanciaClase(String query){
+        String regexp1 = "([a-zA-Z]+[,|.]{1}[a-zA-Z]+){1}";
+        String regexp2 = "([a-zA-Z]+[(]{1}[a-zA-Z]+[)]{1}){1}";
+        
+        if(!query.matches(regexp2) && !query.matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean validarInstanciaPropiedad(String query){
+        String regexp1 = "([a-zA-Z]+[(]{1}[a-zA-Z]+[,|.]{1}[a-zA-Z]+[)]{1}){1}";
+        
+        if(!query.matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
 }

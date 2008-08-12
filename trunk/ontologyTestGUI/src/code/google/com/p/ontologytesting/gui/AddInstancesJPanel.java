@@ -358,6 +358,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     }else{
         GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());   
     }
+    ContentMainJFrame.setBotonAnte(false);
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
 
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
