@@ -37,15 +37,30 @@ public class JenaImplementation implements Jena{
     public JenaImplementation(){}
     
     @Override
-    public void addInstanceClass(String ns, String nameClass, String value) {
-        nameclass = model.createClass(ns + nameClass);
-        model.createIndividual(ns + value,nameclass);
+    public boolean addInstanceClass(String ns, String nameClass, String value) {
+        Iterator it = model.listNamedClasses();
+        String[] clas = null;
+        ArrayList<String> clases = new ArrayList<String>();
+        while(it.hasNext()){
+            clas = it.next().toString().split("#");
+            for(int i=0;i<clas.length;i++){
+                clases.add(clas[i]);
+            }
+        }
+        if(clases.contains(nameClass)){
+            nameclass = model.createClass(ns + nameClass);
+            model.createIndividual(ns + value,nameclass);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
-    public void addInstanceProperty(String ns, String nameProperty, String value) {
+    public boolean addInstanceProperty(String ns, String nameProperty, String value) {
         nameprop = model.createProperty(ns + nameProperty);
         model.createIndividual(ns + value,nameprop);
+        return true;
     }
 
     @Override

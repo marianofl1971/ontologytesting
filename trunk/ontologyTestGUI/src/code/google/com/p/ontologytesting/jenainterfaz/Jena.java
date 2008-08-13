@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 public interface Jena {
     
-    void addInstanceClass(String ns,String nameClass, String value);
+    boolean addInstanceClass(String ns,String nameClass, String value);
     
-    void addInstanceProperty(String ns,String nameProperty, String value);
+    boolean addInstanceProperty(String ns,String nameProperty, String value);
     
     void addReasoner(String ontologia);
     

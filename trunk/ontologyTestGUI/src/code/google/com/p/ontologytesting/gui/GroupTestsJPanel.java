@@ -1330,10 +1330,16 @@ public void guardarDatos(){
             GroupTestsJPanel.setDatosGuardados(true);
         }else{
             testcase.run(testresult, MainJPanel.getCollectionTest());
+            if(testcase.isInstanciasValidas()==true){
             JPanel panel = new TreeResults(testresult);
             setPanelTree(panel);
             setDatosGuardados(true); 
             setTestsValidos(true);
+            }else{
+            JOptionPane.showMessageDialog(frame,"Por favor, revise las instancias" +
+                    "que ha asociado porque algunas no se corresponden con la" +
+                    "definicion de la ontologia.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            }
         }
         }else if(todosTienenNombre()==false){
             setNombreTestsValidos(false);
@@ -1424,7 +1430,7 @@ public static void asociarInstancias(int sel){
                 for(int i=1;i<totalInst;i++){
                 if(getInstTextName()==true){
                     test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
-                    if(descPanel.getNombreTextField().equals("")){
+                    if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue()))){
                         setInstTextName(false);
                     }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
                         if(var==0){
@@ -1566,10 +1572,9 @@ public static void asociarInstancias(int sel){
                 if(getRetTextName()==true){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
                 descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-                if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
-                    if(descPanel.getNombreTextField().equals("")){
-                        setRetTextName(false);
-                    }else{
+                if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") && !test2.getQueryResult().equals(""))){
+                    setRetTextName(false);
+                }else if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1614,11 +1619,23 @@ public static void asociarInstancias(int sel){
                         }else{
                             i++;
                         }
-                    }
-                    
+                        hayQuery=true;  
                 }
             }
             }
+            
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                if(todosTienenNombre()==false){
+                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
+                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else if(hayQuery==true){
+                    tratarNuevoTest(sel);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
+                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                } 
+            }
+
             if(getRetTextName()==true && getValidoRet()==true){
             if(aux==1){
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
@@ -1631,7 +1648,7 @@ public static void asociarInstancias(int sel){
                     }
                 }
             }
-        }
+            }
     }else{
             descPanel = (DescripcionJPanel) panelRet.getComponent(0);
             texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
@@ -1709,10 +1726,9 @@ public static void asociarInstancias(int sel){
                 if(getRealTextName()==true){
                 test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
                 descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-                if(!test1.getQuery().equals("") && !test1.getQueryResult().equals("")){
-                    if(descPanel.getNombreTextField().equals("")){
-                        setRealTextName(false);
-                    }else{
+                if(descPanel.getNombreTextField().equals("") && (!test1.getQuery().equals("") && !test1.getQueryResult().equals(""))){
+                    setRealTextName(false);
+                }else if(!test1.getQuery().equals("") && !test1.getQueryResult().equals("")){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1755,11 +1771,24 @@ public static void asociarInstancias(int sel){
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                         }else{
                             i++;
-                        }
-                    }   
+                        }  
+                        hayQuery=true;
                 }
             }
             }
+            
+        if(AddInstancesJPanel.isStateNuevo()==true){
+                if(todosTienenNombre()==false){
+                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
+                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else if(hayQuery==true){
+                    tratarNuevoTest(sel);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
+                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                } 
+            }
+            
         if(getRealTextName()==true && getValidoReal()==true){
             if(aux==1){
                 Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
@@ -1851,10 +1880,9 @@ public static void asociarInstancias(int sel){
                 if(getSatTextName()==true){
                 test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
                 descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-                if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
-                    if(descPanel.getNombreTextField().equals("")){
-                        setSatTextName(false);
-                    }else{
+                if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue()))){
+                    setSatTextName(false);
+                }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1890,11 +1918,24 @@ public static void asociarInstancias(int sel){
                             JOptionPane.WARNING_MESSAGE);
                         }else{
                             i++;
-                        }
-                    }     
+                        }   
+                        hayQuery=true;
                 }
             }
             }
+            
+        if(AddInstancesJPanel.isStateNuevo()==true){
+                if(todosTienenNombre()==false){
+                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
+                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else if(hayQuery==true){
+                    tratarNuevoTest(sel);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
+                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                } 
+            }
+            
         if(getSatTextName()==true && getValidoSat()==true){
         if(aux==1){
             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
@@ -1985,10 +2026,10 @@ public static void asociarInstancias(int sel){
                 if(getClasTextName()==true){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
                 descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
-                    if(descPanel.getNombreTextField().equals("")){
+                if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") || !test2.getQueryResult().equals(""))){
                         setClasTextName(false);
-                    }else{
+                }else 
+                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -2031,11 +2072,24 @@ public static void asociarInstancias(int sel){
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                         }else{
                             i++;
-                        }
-                    }    
+                        }  
+                        hayQuery=true;
                 }
             }
             }
+            
+        if(AddInstancesJPanel.isStateNuevo()==true){
+                if(todosTienenNombre()==false){
+                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
+                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else if(hayQuery==true){
+                    tratarNuevoTest(sel);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
+                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                } 
+            }
+            
         if(getClasTextName()==true && getValidoClas()==true){
         if(aux==1){
             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
@@ -2140,9 +2194,9 @@ public static void asociarInstancias(int sel){
                             MainJPanel.getCollectionTest().getScenariotest().add(scenario);
                             v=1;
                         }else if(name.equals(scenario.getNombre()) && 
-                                ContentMainJFrame.getBotonAnte()==false){
-                                setTestYaExiste(true);
-                                v=1;
+                            ContentMainJFrame.getBotonAnte()==false){
+                            setTestYaExiste(true);
+                            v=1;
                         }
                     }
                 }
@@ -2351,7 +2405,7 @@ public JPanel getContentPanel() {
 
     public void copiarDeAyudaATexto(int tab){
         
-        TestInstancesTextJPanel texto;
+        TestInstancesTextJPanel t;
         String conjuntoQuerysInst="", conjuntoQuerysRet="", conjuntoQuerysReal="",
                 conjuntoQuerysSat="", conjuntoQuerysClas="";
         String conjuntoResExpInst="", conjuntoResExpRet="", conjuntoResExpReal="", 
@@ -2403,10 +2457,10 @@ public JPanel getContentPanel() {
                     } 
                 }
             }
-            texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            texto.setConsultaQuery(conjuntoQuerysInst);
-            texto.setResultadoEsperado(conjuntoResExpInst);
-            texto.setComentTextArea(conjuntoComentInst);
+            t = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+            t.setConsultaQuery(conjuntoQuerysInst);
+            t.setResultadoEsperado(conjuntoResExpInst);
+            t.setComentTextArea(conjuntoComentInst);
             int c = instAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 instAyudaPanel.remove(instAyudaPanel.getComponent(i));
@@ -2453,10 +2507,10 @@ public JPanel getContentPanel() {
                     } 
                 }
             }
-            texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-            texto.setConsultaQuery(conjuntoQuerysRet);
-            texto.setResultadoEsperado(conjuntoResExpRet);
-            texto.setComentTextArea(conjuntoComentRet);
+            t = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
+            t.setConsultaQuery(conjuntoQuerysRet);
+            t.setResultadoEsperado(conjuntoResExpRet);
+            t.setComentTextArea(conjuntoComentRet);
             int c = retAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 retAyudaPanel.remove(retAyudaPanel.getComponent(i));
@@ -2490,10 +2544,10 @@ public JPanel getContentPanel() {
                     } 
                 }
             }
-            texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-            texto.setConsultaQuery(conjuntoQuerysReal);
-            texto.setResultadoEsperado(conjuntoResExpReal);
-            texto.setComentTextArea(conjuntoComentReal);
+            t = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
+            t.setConsultaQuery(conjuntoQuerysReal);
+            t.setResultadoEsperado(conjuntoResExpReal);
+            t.setComentTextArea(conjuntoComentReal);
             int c = realAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 realAyudaPanel.remove(realAyudaPanel.getComponent(i));
@@ -2528,10 +2582,10 @@ public JPanel getContentPanel() {
                     } 
                 }
             }
-            texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-            texto.setConsultaQuery(conjuntoQuerysSat);
-            texto.setResultadoEsperado(conjuntoResExpSat);
-            texto.setComentTextArea(conjuntoComentSat);
+            t = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
+            t.setConsultaQuery(conjuntoQuerysSat);
+            t.setResultadoEsperado(conjuntoResExpSat);
+            t.setComentTextArea(conjuntoComentSat);
             int c = satAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 satAyudaPanel.remove(satAyudaPanel.getComponent(i));
@@ -2578,10 +2632,10 @@ public JPanel getContentPanel() {
                     } 
                 }
             }
-            texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-            texto.setConsultaQuery(conjuntoQuerysClas);
-            texto.setResultadoEsperado(conjuntoResExpClas);
-            texto.setComentTextArea(conjuntoComentClas);
+            t = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
+            t.setConsultaQuery(conjuntoQuerysClas);
+            t.setResultadoEsperado(conjuntoResExpClas);
+            t.setComentTextArea(conjuntoComentClas);
             int c = clasAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
@@ -2608,7 +2662,7 @@ public JPanel getContentPanel() {
     panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
     totalSat = panelAyudaSat.getComponentCount();
 
-    TestInstancesTextJPanel texto;
+    TestInstancesTextJPanel ti;
     
     String conjuntoQuerysInst="", conjuntoQuerysRet="", conjuntoQuerysReal="",
                 conjuntoQuerysSat="", conjuntoQuerysClas="";
@@ -2619,10 +2673,10 @@ public JPanel getContentPanel() {
     String cQuery[],cResult[],cComent[];
 
     if(tab==0){
-        texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-        conjuntoQuerysInst = texto.getConsultaQuery().trim();
-        conjuntoResultInst = texto.getResultadoEsperado().trim();
-        conjuntoComentInst = texto.getComentTextArea().trim();
+        ti = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+        conjuntoQuerysInst = ti.getConsultaQuery().trim();
+        conjuntoResultInst = ti.getResultadoEsperado().trim();
+        conjuntoComentInst = ti.getComentTextArea().trim();
         cQuery = conjuntoQuerysInst.split("\\\n");
         cResult = conjuntoResultInst.split("\\\n");
         cComent = conjuntoComentInst.split("\\\n");
@@ -2658,10 +2712,10 @@ public JPanel getContentPanel() {
             }
         }
      }else if(tab==1){
-        texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-        conjuntoQuerysRet = texto.getConsultaQuery();
-        conjuntoResultRet = texto.getResultadoEsperado();
-        conjuntoComentRet = texto.getComentTextArea();
+        ti = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
+        conjuntoQuerysRet = ti.getConsultaQuery();
+        conjuntoResultRet = ti.getResultadoEsperado();
+        conjuntoComentRet = ti.getComentTextArea();
         cQuery = conjuntoQuerysRet.split("\\\n");
         cResult = conjuntoResultRet.split("\\\n");
         cComent = conjuntoComentRet.split("\\\n");
@@ -2697,10 +2751,10 @@ public JPanel getContentPanel() {
             }
         }
       }else if(tab==2){
-        texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-        conjuntoQuerysReal = texto.getConsultaQuery().trim();
-        conjuntoResultReal = texto.getResultadoEsperado().trim();
-        conjuntoComentReal = texto.getComentTextArea().trim();
+        ti = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
+        conjuntoQuerysReal = ti.getConsultaQuery().trim();
+        conjuntoResultReal = ti.getResultadoEsperado().trim();
+        conjuntoComentReal = ti.getComentTextArea().trim();
         cQuery = conjuntoQuerysReal.split("\\\n");
         cResult = conjuntoResultReal.split("\\\n");
         cComent = conjuntoComentReal.split("\\\n");
@@ -2732,10 +2786,10 @@ public JPanel getContentPanel() {
             }
         }  
       }else if(tab==3){
-        texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-        conjuntoQuerysSat = texto.getConsultaQuery().trim();
-        conjuntoResultSat = texto.getResultadoEsperado().trim();
-        conjuntoComentSat = texto.getComentTextArea().trim();
+        ti = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
+        conjuntoQuerysSat = ti.getConsultaQuery().trim();
+        conjuntoResultSat = ti.getResultadoEsperado().trim();
+        conjuntoComentSat = ti.getComentTextArea().trim();
         cQuery = conjuntoQuerysSat.split("\\\n");
         cResult = conjuntoResultSat.split("\\\n");
         cComent = conjuntoComentSat.split("\\\n");
@@ -2771,10 +2825,10 @@ public JPanel getContentPanel() {
             }
         }
       }else if(tab==4){
-        texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-        conjuntoQuerysClas = texto.getConsultaQuery().trim();
-        conjuntoResultClas = texto.getResultadoEsperado().trim();
-        conjuntoComentClas = texto.getComentTextArea().trim();
+        ti = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
+        conjuntoQuerysClas = ti.getConsultaQuery().trim();
+        conjuntoResultClas = ti.getResultadoEsperado().trim();
+        conjuntoComentClas = ti.getComentTextArea().trim();
         cQuery = conjuntoQuerysClas.split("\\\n");
         cResult = conjuntoResultClas.split("\\\n");
         cComent = conjuntoComentClas.split("\\\n");

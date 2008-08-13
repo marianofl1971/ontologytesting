@@ -213,7 +213,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             if(GroupTestsJPanel.getNoHayInstancias()==false){
                 if(getGroupTests().getNombreTestsValidos()==true && 
                     getGroupTests().getTestsValidos()==true && 
-                    getGroupTests().getTestYaExiste()==false){
+                    GroupTestsJPanel.getTestYaExiste()==false){
                     getContentPanel().remove(getGroupTests());
                     getContentPanel().add(GroupTestsJPanel.getPanelTree());
                     ContentMainJFrame.setActual(4);
