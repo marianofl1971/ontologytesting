@@ -27,9 +27,8 @@ public class OntologyTestCase implements OntologyTest{
     boolean nameclasIsUsed=false;
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
-    private static String patron1="[\\(|,|\n| ]",patron2="[,|\n| |\\)]",
+    private static String patron1="[\\(|,|\n| ]",patron2="[\n| |\\)]",
             patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]";
-    private boolean instanciasValidas = false;
     
     public OntologyTestCase(){
     }
@@ -38,7 +37,6 @@ public class OntologyTestCase implements OntologyTest{
         
     ListIterator liClass,liProperties;   
     String ciClas[],ciInd[],piClas[],piInd[];   
-    setInstanciasValidas(true);
     
     jena = jenaInterface.getJena();
     jena.addReasoner(ont);
@@ -52,16 +50,11 @@ public class OntologyTestCase implements OntologyTest{
     liProperties = propertyInstances.listIterator();
         
     while(liClass.hasNext()){
-        if(isInstanciasValidas()==true){
             ClassInstances cla = (ClassInstances) liClass.next();
             String ci = cla.getClassInstance();
             ciClas = ci.split(patron1);
             ciInd = ciClas[1].split(patron2);
-            boolean clasValida = jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
-            if(clasValida==false){
-                setInstanciasValidas(false);
-            }
-        }
+            jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
     }
         
     while(liProperties.hasNext()){
@@ -223,15 +216,12 @@ public class OntologyTestCase implements OntologyTest{
         liScenario = listscenario.listIterator();
  
         while(liScenario.hasNext()){
-            if(isInstanciasValidas()==true){
                 scenariotest = (ScenarioTest) liScenario.next();
                 setUpOntology(scenariotest, ont, ns);
                 runOntologyTest(testresult,ns,scenariotest);
                 tearDownOntology(); 
-            }
         }
-        showResultTests(testresult);
-   
+        //showResultTests(testresult);
     }
     
     public boolean comparaArray(ArrayList<String> array1, ArrayList<String> array2){
@@ -292,14 +282,6 @@ public class OntologyTestCase implements OntologyTest{
             System.out.println("No se han producido errores.");
         }
         
-    }
-
-    public boolean isInstanciasValidas() {
-        return instanciasValidas;
-    }
-
-    public void setInstanciasValidas(boolean instanciasValidas) {
-        this.instanciasValidas = instanciasValidas;
     }
       
 }

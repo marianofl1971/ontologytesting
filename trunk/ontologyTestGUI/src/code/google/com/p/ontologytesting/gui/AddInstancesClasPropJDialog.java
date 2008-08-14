@@ -6,6 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import java.awt.Component;
 import java.awt.Frame;
 import java.beans.XMLDecoder;
@@ -52,6 +54,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     public static boolean seleccionado;
     private int tabActual=0;
     private boolean queryValida=true;
+    private JenaInterface jenaInterface = new JenaInterface();   
+    private Jena jena;
+    private boolean instanciaValida=true;
+    private String patron1="[\\(|,|\n| ]",patron2="[,|\n| |\\)]";
 
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var) {
         
@@ -121,7 +127,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num,
             ArrayList<ScenarioTest> scenarioT) {
         
-        super(parent, modal);
+        super(parent, modal);  
         this.setTitle("Asociar Instancias");
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
@@ -532,23 +538,43 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
 // TODO add your handling code here:
+    jena = jenaInterface.getJena();
+    jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
     ValidarTests validar = new ValidarTests();
+    String[] ciClas=null,ciInd=null;
     ArrayList failClas = new ArrayList();
     ArrayList failProp = new ArrayList();
     int failGroupClas=0,failGroupProp=0;
-    setQueryValida(true);
+    setInstanciaValida(true);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
     instancias = new Instancias();
     int aux=0;
     int totalClas = clasPanel.getComponentCount();
+    
     if(getInstancesTabbedPane()!=2){
+    setQueryValida(true);
     for(int i=0; i<totalClas; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) clasPanel.getComponent(i);
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(validar.validarInstanciaClase(query)==true){
+        if(!query.equals("")){
+            if(validar.validarInstanciaClase(query)==true){
+                ciClas = query.split(patron1);
+                ciInd = ciClas[1].split(patron2);
+                boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), 
+                    ciClas[0], ciInd[0]);
+                if(v==false){
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                    setInstanciaValida(false);
+                }else{
+                    panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                }
+            }
+        }
+        
+        if(validar.validarInstanciaClase(query)==true && isInstanciaValida()==true){
             if(!query.equals("") && !coment.equals("")){
                 ClassInstances cI = new ClassInstances(query,coment);
                 clasInst.add(cI);
@@ -559,11 +585,13 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 aux=1;
             }
             failClas.add(i,0);
-        }else{
+        }else if(validar.validarInstanciaClase(query)==false){
             if(!query.equals("")){
                 failClas.add(i,1);
                 setQueryValida(false);
             }
+        }else{
+            failClas.add(i,0);
         }
     }
     int totalProp = propPanel.getComponentCount();
@@ -572,7 +600,22 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         String query = panelInst.getQuery();
         AddComentJDialog comentPane = panelInst.getComment();
         String coment = comentPane.getComent();
-        if(validar.validarInstanciaPropiedad(query)==true){
+        if(!query.equals("")){
+            if(validar.validarInstanciaPropiedad(query)==true){
+                ciClas = query.split(patron1);
+                ciInd = ciClas[1].split(patron2);
+                boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), 
+                    ciClas[0], ciInd[0]);
+                if(v==false){
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                    setInstanciaValida(false);
+                }else{
+                    panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                }
+            }
+        }
+        
+        if(validar.validarInstanciaPropiedad(query)==true && isInstanciaValida()==true){
             if(!query.equals("") && !coment.equals("")){
                 PropertyInstances pI = new PropertyInstances(query,coment);
                 propInst.add(pI);
@@ -583,14 +626,17 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 aux=1;
             }
             failProp.add(i, 0);
-        }else{
+        }else if(validar.validarInstanciaPropiedad(query)==false){
             if(!query.equals("")){
                 failProp.add(i, 1);
                 setQueryValida(false);
             }
+        }else{
+            failProp.add(i, 0);
         }
     }
     }else{
+        setQueryValida(true);
         String patron="\\\n";
         CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
         String conjuntoClase = conjunto.getClaseTextArea().trim();
@@ -600,19 +646,45 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         for(int i=0;i<clas.length;i++){
             if(!clas[i].equals("")){
                 if(validar.validarInstanciaClase(clas[i])==true){
-                    ClassInstances cI = new ClassInstances(clas[i]);
-                    clasInst.add(cI);
-                    failClas.add(i,0);
+                    ciClas = clas[i].split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), 
+                        ciClas[0], ciInd[0]);
+                    if(v==false){
+                        conjunto.getClaseArea().setForeground(Color.RED);
+                        setInstanciaValida(false);
+                    }else{
+                        conjunto.getClaseArea().setForeground(Color.BLACK);
+                    }
+                }
+                if(validar.validarInstanciaClase(clas[i])==true && 
+                        isInstanciaValida()==true){
+                        ClassInstances cI = new ClassInstances(clas[i]);
+                        clasInst.add(cI);
+                        failClas.add(i,0);
                 }else{
-                    failClas.add(i,1);
-                    failGroupClas=1;
-                    setQueryValida(false);
+                        failClas.add(i,1);
+                        failGroupClas=1;
+                        setQueryValida(false);
                 }
             }
         }
         for(int i=0;i<prop.length;i++){
             if(!prop[i].equals("")){
                 if(validar.validarInstanciaPropiedad(prop[i])==true){
+                    ciClas = prop[i].split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), 
+                        ciClas[0], ciInd[0]);
+                    if(v==false){
+                        conjunto.getPropiedadArea().setForeground(Color.RED);
+                        setInstanciaValida(false);
+                    }else{
+                        conjunto.getPropiedadArea().setForeground(Color.BLACK);
+                    }
+                }
+                if(validar.validarInstanciaPropiedad(prop[i])==true &&
+                        isInstanciaValida()==true){
                     PropertyInstances pI = new PropertyInstances(prop[i]);
                     propInst.add(pI);
                     failProp.add(i,0);
@@ -629,7 +701,8 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
     instancias.setDescripcion(getDescInstanciasTextArea());
     instancias.setNombre(getNomInstanciasTextField());
     instancias.setType("Instancias");
-    if(isQueryValida()==true){
+     
+    if(isQueryValida()==true && isInstanciaValida()==true){
         if(aux==1){
             JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
                 "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -673,7 +746,11 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 }
             }
         }
-    }else{
+    }else if(isInstanciaValida()==false){
+        JOptionPane.showMessageDialog(frame,"Las instancias marcadas" +
+                "en rojo no se corresponden con la definicion de su ontologia. " +
+                "Por favor, reviselas.","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else if(isQueryValida()==false){
         JOptionPane.showMessageDialog(frame,"El formato de las instancias marcadas" +
                 "en rojo es incorrecto. Por favor, revise la documentación para ver" +
                 "los formatos permitidos.","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1016,6 +1093,14 @@ public void copiarAInstancesAyuda(){
 
     public void setQueryValida(boolean queryValida) {
         this.queryValida = queryValida;
+    }
+
+    public boolean isInstanciaValida() {
+        return instanciaValida;
+    }
+
+    public void setInstanciaValida(boolean instanciaValida) {
+        this.instanciaValida = instanciaValida;
     }
 
 }

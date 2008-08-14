@@ -58,9 +58,22 @@ public class JenaImplementation implements Jena{
 
     @Override
     public boolean addInstanceProperty(String ns, String nameProperty, String value) {
-        nameprop = model.createProperty(ns + nameProperty);
-        model.createIndividual(ns + value,nameprop);
-        return true;
+        Iterator it = model.listObjectProperties();
+        String[] prop = null;
+        ArrayList<String> propiedades = new ArrayList<String>();
+        while(it.hasNext()){
+            prop = it.next().toString().split("#");
+            for(int i=0;i<prop.length;i++){
+                propiedades.add(prop[i]);
+            }
+        }
+        if(propiedades.contains(nameProperty)){
+            nameprop = model.createProperty(ns + nameProperty);
+            model.createIndividual(ns + value,nameprop);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

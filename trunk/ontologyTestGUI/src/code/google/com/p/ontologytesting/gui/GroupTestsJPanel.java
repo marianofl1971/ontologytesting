@@ -1330,16 +1330,10 @@ public void guardarDatos(){
             GroupTestsJPanel.setDatosGuardados(true);
         }else{
             testcase.run(testresult, MainJPanel.getCollectionTest());
-            if(testcase.isInstanciasValidas()==true){
             JPanel panel = new TreeResults(testresult);
             setPanelTree(panel);
             setDatosGuardados(true); 
             setTestsValidos(true);
-            }else{
-            JOptionPane.showMessageDialog(frame,"Por favor, revise las instancias" +
-                    "que ha asociado porque algunas no se corresponden con la" +
-                    "definicion de la ontologia.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }
         }
         }else if(todosTienenNombre()==false){
             setNombreTestsValidos(false);
