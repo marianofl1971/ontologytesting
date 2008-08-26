@@ -49,21 +49,21 @@ public class OntologyTestCase implements OntologyTest{
     liClass = classInstances.listIterator();
     liProperties = propertyInstances.listIterator();
         
-    while(liClass.hasNext()){
+        while(liClass.hasNext()){
             ClassInstances cla = (ClassInstances) liClass.next();
             String ci = cla.getClassInstance();
             ciClas = ci.split(patron1);
             ciInd = ciClas[1].split(patron2);
             jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
-    }
+        }
         
-    while(liProperties.hasNext()){
+        while(liProperties.hasNext()){
             PropertyInstances p = (PropertyInstances) liProperties.next();
             String pi = p.getPropertyInstance();
             piClas = pi.split(patron1);
             piInd = piClas[1].split(patron2);
             jena.addInstanceProperty(ns, piClas[0], piInd[0]);
-    }
+        }
        
     }
     
@@ -171,7 +171,7 @@ public class OntologyTestCase implements OntologyTest{
                 }
         }
         
-    while(liSparql.hasNext()){    
+        while(liSparql.hasNext()){    
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
@@ -188,7 +188,8 @@ public class OntologyTestCase implements OntologyTest{
                         sparqlquery,resSparql);
                 sparql=1;
             }   
-    }
+        }
+        
         if(inst==0){
             testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
         }else if(ret==0){
@@ -202,7 +203,7 @@ public class OntologyTestCase implements OntologyTest{
         }else if(sparql==0){
             testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
         }
-} 
+    } 
 
     @Override
     public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
@@ -272,7 +273,7 @@ public class OntologyTestCase implements OntologyTest{
         
         if(liSparql.hasNext()){
           System.out.println("De las pruebas introducidas han fallado las siguientes:");
-        while(liSparql.hasNext()){
+            while(liSparql.hasNext()){
                 OntologyTestFailure otf = (OntologyTestFailure) liSparql.next();
                 System.out.println("De la query introducida " +otf.getfSparqlQuery());
                 System.out.println("Se esperaba obtener : " +otf.getfResultSparqlExpected());
@@ -280,8 +281,7 @@ public class OntologyTestCase implements OntologyTest{
             }
         }else{
             System.out.println("No se han producido errores.");
-        }
-        
+        } 
     }
       
 }

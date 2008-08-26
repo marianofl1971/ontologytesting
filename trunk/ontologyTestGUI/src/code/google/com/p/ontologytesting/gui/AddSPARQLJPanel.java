@@ -115,6 +115,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         sigQueryButton = new javax.swing.JButton();
         antQueryButton = new javax.swing.JButton();
         limpiarResultButton = new javax.swing.JButton();
+        borrarConsultaJButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -154,7 +155,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         instancesPanel.setLayout(instancesPanelLayout);
         instancesPanelLayout.setHorizontalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 743, Short.MAX_VALUE)
+            .add(0, 839, Short.MAX_VALUE)
         );
         instancesPanelLayout.setVerticalGroup(
             instancesPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -182,6 +183,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        borrarConsultaJButton.setText("Borrar Consulta");
+        borrarConsultaJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarConsultaJButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,38 +197,41 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 495, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
                         .add(10, 10, 10)
                         .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 224, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                            .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 209, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 255, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 86, Short.MAX_VALUE)
                                         .add(antQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(nuevaConsultaButton)
-                                        .add(24, 24, 24))
-                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 563, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .add(18, 18, 18)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(borrarConsultaJButton))
+                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(limpiarResultButton)
-                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 303, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(jLabel4)))))
-                    .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(jLabel4)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(limpiarResultButton)
+                                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 480, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(instancesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -241,13 +252,17 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                     .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                .add(6, 6, 6)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(limpiarButton)
-                    .add(limpiarResultButton)
-                    .add(antQueryButton)
-                    .add(sigQueryButton)
-                    .add(nuevaConsultaButton))
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(borrarConsultaJButton)
+                            .add(nuevaConsultaButton)
+                            .add(sigQueryButton)
+                            .add(antQueryButton)
+                            .add(limpiarResultButton))))
                 .add(8, 8, 8)
                 .add(instancesPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -257,32 +272,57 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaConsultaButtonActionPerformed
 // TODO add your handling code here:
     int posSel = getPosListQuerysSel();
-    if(posSel == getListAux().size() || posSel == getListAux().size()-1){
     SparqlQueryOntology query = new SparqlQueryOntology();
-    if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
-        query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
-        query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-        if(getListAux().size()==posSel){
-            getListAux().add(query);
-        }else if(pertenece(query)==false){
-            getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
-            getListAux().get(posSel).setResultexpected(getResultTextArea());
-        }
-        AddSPARQLJPanel.setResultTextArea("");
-        AddSPARQLJPanel.setSPARQLQuery("");
-        antQueryButton.setEnabled(true);
-        sigQueryButton.setEnabled(false);
-        int pos = AddSPARQLJPanel.getPosListQuerysSel();
-        AddSPARQLJPanel.setPosListQuerysSel(pos+1);
-        contador=0;
-    }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
-        JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+    SparqlQueryOntology queryAux = new SparqlQueryOntology();
+    if(posSel == getListAux().size() || posSel == getListAux().size()-1){
+        if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+            query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+            query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+            if(getListAux().size()==posSel){
+                getListAux().add(query);
+            }else if(pertenece(query)==false){
+                getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
+                getListAux().get(posSel).setResultexpected(getResultTextArea());
+            }
+            AddSPARQLJPanel.setResultTextArea("");
+            AddSPARQLJPanel.setSPARQLQuery("");
+            antQueryButton.setEnabled(true);
+            sigQueryButton.setEnabled(false);
+            AddSPARQLJPanel.setPosListQuerysSel(posSel+1);
+            contador=0;
+        }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
+            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
-    }
+        }
     }else if(!getListAux().get(getListAux().size()-1).getQuerySparql().equals("") &&
             !getListAux().get(getListAux().size()-1).getResultexpected().equals("")){
-            getListAux().get(posSel).setQuerySparql("");
-            getListAux().get(posSel).setResultexpected("");
+            if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+                query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+                query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+                if(pertenece(query)==false){
+                    getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
+                    getListAux().get(posSel).setResultexpected(getResultTextArea());
+                }
+                queryAux.setQuerySparql("");
+                queryAux.setResultexpected("");
+                getListAux().add(queryAux);
+            }else{
+                JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                    "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
+            }
+    }else if(getListAux().get(getListAux().size()-1).getQuerySparql().equals("") &&
+            getListAux().get(getListAux().size()-1).getResultexpected().equals("")){
+        if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
+            query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+            query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+            if(pertenece(query)==false){
+                    getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
+                    getListAux().get(posSel).setResultexpected(getResultTextArea());
+            }
+        }else{
+            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
     }
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
@@ -301,14 +341,14 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             getListAux().add(sparqlAux);
             contador=1;
         }else{
-            getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
-            getListAux().get(posSel).setResultexpected(getResultTextArea());
+                getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
+                getListAux().get(posSel).setResultexpected(getResultTextArea());
+            }
         }
-    }
-    sparql = getListAux().get(posSel-1);
-    setSPARQLQuery(sparql.getQuerySparql());
-    setResultTextArea(sparql.getResultexpected());
-    setPosListQuerysSel(getPosListQuerysSel()-1);
+        sparql = getListAux().get(posSel-1);
+        setSPARQLQuery(sparql.getQuerySparql());
+        setResultTextArea(sparql.getResultexpected());
+        setPosListQuerysSel(getPosListQuerysSel()-1);
     if(getPosListQuerysSel()==0){
         antQueryButton.setEnabled(false);
     }
@@ -327,16 +367,16 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigQueryButtonActionPerformed
 // TODO add your handling code here:
     int posSel = getPosListQuerysSel();
-    SparqlQueryOntology sparql;
+    SparqlQueryOntology sparql,sparqlAux;
     antQueryButton.setEnabled(true);
     if(!getSPARQLQuery().equals("") && !getResultTextArea().equals("")){
-        getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
-        getListAux().get(posSel).setResultexpected(getResultTextArea());
-    }
-    sparql = getListAux().get(posSel+1);
-    setSPARQLQuery(sparql.getQuerySparql());
-    setResultTextArea(sparql.getResultexpected());
-    setPosListQuerysSel(getPosListQuerysSel()+1);
+            getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
+            getListAux().get(posSel).setResultexpected(getResultTextArea());
+        }
+        sparql = getListAux().get(posSel+1);
+        setSPARQLQuery(sparql.getQuerySparql());
+        setResultTextArea(sparql.getResultexpected());
+        setPosListQuerysSel(getPosListQuerysSel()+1);
     if(getPosListQuerysSel()==getListAux().size()-1){
         sigQueryButton.setEnabled(false);
     }
@@ -348,10 +388,31 @@ private void limpiarResultButtonActionPerformed(java.awt.event.ActionEvent evt) 
     AddSPARQLJPanel.setResultTextArea("");
 }//GEN-LAST:event_limpiarResultButtonActionPerformed
 
+private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarConsultaJButtonActionPerformed
+// TODO add your handling code here: 
+    int posSel = getPosListQuerysSel();
+    if(posSel==getListAux().size()){
+        AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel).getQuerySparql());
+        AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel).getResultexpected());
+        getListAux().remove(posSel);
+        setPosListQuerysSel(posSel-1);
+        sigQueryButton.setEnabled(false);
+    }else{
+        getListAux().remove(posSel);
+        if(posSel<=getListAux().size()-1){
+            AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel).getQuerySparql());
+            AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel).getResultexpected());
+            sigQueryButton.setEnabled(false);
+        }
+    }
+}//GEN-LAST:event_borrarConsultaJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton borrarConsultaJButton;
     private static javax.swing.JButton antQueryButton;
     private javax.swing.JPanel instancesPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

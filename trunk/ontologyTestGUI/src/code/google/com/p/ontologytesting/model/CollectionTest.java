@@ -59,8 +59,6 @@ public class CollectionTest {
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
-    }
-    
- 
+    }    
     
 }

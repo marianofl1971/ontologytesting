@@ -87,7 +87,7 @@ public class JenaImplementation implements Jena{
         model.prepare();
     }
 
-        //Saber si un individuo pertenece a una clase
+    //Saber si un individuo pertenece a una clase
     @Override
     public String instantiation(String ns, String className, String individualName){
         
@@ -217,6 +217,12 @@ public class JenaImplementation implements Jena{
         return clases;
     }
     
+    //Validar las consultas de tipo select x,y,z from ...
+    //incluir mostrar el resultado de x de y de z por separado.
+    //El formato del resultado seria algo de tipo:
+    //x(a,b)
+    //y(c,d,e)
+    //z(f)
     @Override
     public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML){
         
@@ -237,12 +243,12 @@ public class JenaImplementation implements Jena{
         
 	QueryExecution qexec = new PelletQueryExecution(query, model);
         ResultSet results = qexec.execSelect();
-        // create a node formatter
+        // Create a node formatter
         //NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
-        // variables used in select
+        //Variables used in SELECT
         List resultVars = query.getResultVars();
         ArrayList<String> res = new ArrayList<String>();
-        // store the formatted results an a table 
+        //Store the formatted results an a table 
         //TableData table = new TableData( resultVars );
         while( results.hasNext() ) {
             QuerySolution binding = results.nextSolution();
