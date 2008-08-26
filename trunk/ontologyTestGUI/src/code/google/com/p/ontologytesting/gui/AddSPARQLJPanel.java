@@ -392,11 +392,12 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here: 
     int posSel = getPosListQuerysSel();
     if(posSel==getListAux().size()){
-        AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel).getQuerySparql());
-        AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel).getResultexpected());
-        getListAux().remove(posSel);
+        AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
+        AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
+        getListAux().remove(posSel-1);
         setPosListQuerysSel(posSel-1);
         sigQueryButton.setEnabled(false);
+        antQueryButton.setEnabled(false);
     }else{
         getListAux().remove(posSel);
         if(posSel<=getListAux().size()-1){
