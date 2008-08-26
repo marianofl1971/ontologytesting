@@ -367,7 +367,7 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigQueryButtonActionPerformed
 // TODO add your handling code here:
     int posSel = getPosListQuerysSel();
-    SparqlQueryOntology sparql,sparqlAux;
+    SparqlQueryOntology sparql;
     antQueryButton.setEnabled(true);
     if(!getSPARQLQuery().equals("") && !getResultTextArea().equals("")){
             getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
@@ -390,21 +390,61 @@ private void limpiarResultButtonActionPerformed(java.awt.event.ActionEvent evt) 
 
 private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarConsultaJButtonActionPerformed
 // TODO add your handling code here: 
+
     int posSel = getPosListQuerysSel();
-    if(posSel==getListAux().size()){
-        AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
-        AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
-        getListAux().remove(posSel-1);
-        setPosListQuerysSel(posSel-1);
-        sigQueryButton.setEnabled(false);
-        antQueryButton.setEnabled(false);
-    }else{
-        getListAux().remove(posSel);
-        if(posSel<=getListAux().size()-1){
-            AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel).getQuerySparql());
-            AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel).getResultexpected());
-            sigQueryButton.setEnabled(false);
+    if(getListAux().size()==0){
+        AddSPARQLJPanel.setSPARQLQuery("");
+        AddSPARQLJPanel.setResultTextArea("");
+    }else if(!getSPARQLQuery().equals("") && !getResultTextArea().equals("")){
+        if(getListAux().size()==1){
+            getListAux().remove(posSel);
+            AddSPARQLJPanel.setSPARQLQuery("");
+            AddSPARQLJPanel.setResultTextArea("");
+        }else if(posSel==getListAux().size()){
+            if(getListAux().size()==1){
+                AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
+                AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
+                getListAux().remove(posSel-1);
+                setPosListQuerysSel(posSel-1);
+                sigQueryButton.setEnabled(false);
+                antQueryButton.setEnabled(false);
+            }else{
+                AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
+                AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
+                getListAux().remove(posSel-1);
+                setPosListQuerysSel(posSel-1);
+                antQueryButton.setEnabled(true);
+            }
+        }else{
+            getListAux().remove(posSel);
+            if(posSel<=getListAux().size()-1){
+                AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel).getQuerySparql());
+                AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel).getResultexpected());
+                if((posSel==0 && getListAux().size()>1) || posSel<getListAux().size()-1){
+                    sigQueryButton.setEnabled(true);
+                }else{
+                    sigQueryButton.setEnabled(false);
+                }
+            }else{
+                if(getListAux().size()==1){
+                    AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
+                    AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
+                    getListAux().remove(posSel-1);
+                    setPosListQuerysSel(posSel-1);
+                    sigQueryButton.setEnabled(false);
+                    antQueryButton.setEnabled(false);
+                }else{
+                    AddSPARQLJPanel.setSPARQLQuery(getListAux().get(posSel-1).getQuerySparql());
+                    AddSPARQLJPanel.setResultTextArea(getListAux().get(posSel-1).getResultexpected());
+                    getListAux().remove(posSel-1);
+                    setPosListQuerysSel(posSel-1);
+                    antQueryButton.setEnabled(true);
+                }
+            }
         }
+    }else{
+         JOptionPane.showMessageDialog(frame,"No ha introducido ninguna consulta para borrar.",
+                 "Warning Message",JOptionPane.WARNING_MESSAGE);
     }
 }//GEN-LAST:event_borrarConsultaJButtonActionPerformed
 
