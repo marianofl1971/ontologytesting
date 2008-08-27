@@ -6,12 +6,15 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.Frame;
+
 /**
  *
  * @author  sara.garcia
  */
 public class DescripcionJPanel extends javax.swing.JPanel {
 
+    Frame frame;
     /** Creates new form DescripcionJPanel */
     public DescripcionJPanel() {
         initComponents();
@@ -31,6 +34,7 @@ public class DescripcionJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descTextArea = new javax.swing.JTextArea();
+        formatosButton = new javax.swing.JButton();
 
         jLabel6.setText("Nombre del test:");
 
@@ -39,6 +43,14 @@ public class DescripcionJPanel extends javax.swing.JPanel {
         descTextArea.setColumns(20);
         descTextArea.setRows(5);
         jScrollPane1.setViewportView(descTextArea);
+
+        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        formatosButton.setText("Formatos Permitidos");
+        formatosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,7 +65,11 @@ public class DescripcionJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(512, Short.MAX_VALUE)
+                .addComponent(formatosButton)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,13 +82,23 @@ public class DescripcionJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(formatosButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
+// TODO add your handling code here:
+    FormatTestsJDialog format = new FormatTestsJDialog(frame,true);
+    format.setModal(false);
+    format.setVisible(true);
+}//GEN-LAST:event_formatosButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descTextArea;
+    private javax.swing.JButton formatosButton;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;

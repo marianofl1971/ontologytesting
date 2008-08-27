@@ -182,7 +182,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="293" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="261" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -205,7 +205,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="labelInstLabel" min="-2" pref="397" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                                                      <EmptySpace pref="135" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -376,7 +376,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel2" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="287" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="333" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -399,7 +399,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="labelInstLabel1" min="-2" pref="397" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                                                      <EmptySpace pref="53" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -567,7 +567,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel4" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="296" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="307" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -590,7 +590,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="labelInstLabel4" min="-2" pref="386" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                                                      <EmptySpace pref="99" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -758,7 +758,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel6" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="297" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="380" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -781,7 +781,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="labelInstLabel6" min="-2" pref="386" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                                                      <EmptySpace pref="27" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>
@@ -949,7 +949,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel8" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="296" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="404" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -970,9 +970,8 @@
                                             <DimensionLayout dim="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
                                                       <Component id="labelInstLabel8" min="-2" pref="388" max="-2" attributes="0"/>
-                                                      <EmptySpace pref="104" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                             </DimensionLayout>

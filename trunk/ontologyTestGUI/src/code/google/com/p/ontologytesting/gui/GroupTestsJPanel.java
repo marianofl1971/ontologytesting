@@ -466,7 +466,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(labelInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         labelInstPanelLayout.setVerticalGroup(
             labelInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +483,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         instAyudaPanelLayout.setVerticalGroup(
             instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,7 +581,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(labelInstPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         labelInstPanel2Layout.setVerticalGroup(
             labelInstPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,7 +598,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(retAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         retAyudaPanelLayout.setVerticalGroup(
             retAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -698,7 +698,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(labelInstPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         labelInstPanel4Layout.setVerticalGroup(
             labelInstPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -715,7 +715,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(realAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         realAyudaPanelLayout.setVerticalGroup(
             realAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -814,7 +814,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(labelInstPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         labelInstPanel6Layout.setVerticalGroup(
             labelInstPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -831,7 +831,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(satAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(380, Short.MAX_VALUE))
         );
         satAyudaPanelLayout.setVerticalGroup(
             satAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -928,9 +928,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         labelInstPanel8Layout.setHorizontalGroup(
             labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(labelInstPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelInstLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelInstLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         labelInstPanel8Layout.setVerticalGroup(
             labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -947,7 +946,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(clasAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(404, Short.MAX_VALUE))
         );
         clasAyudaPanelLayout.setVerticalGroup(
             clasAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -63,7 +63,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
-
+        this.setModal(false);
         initComponents();
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(clasPanel, BoxLayout.Y_AXIS));
@@ -129,6 +129,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         
         super(parent, modal);  
         this.setTitle("Asociar Instancias");
+        this.setModal(false);
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         int contI=0,contP=0;
@@ -184,6 +185,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
+        this.setModal(false);
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         int contI=0,contP=0;
@@ -237,6 +239,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
+        this.setModal(false);
         setNombreFichero(textName);
         setSeleccionado(true);
         initComponents();
@@ -321,6 +324,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propPanel = new javax.swing.JPanel();
         textAreaScrollPane = new javax.swing.JScrollPane();
         clasPropPanel = new javax.swing.JPanel();
+        formatosButton = new javax.swing.JButton();
         contentDescPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descInstanciasTextArea = new javax.swing.JTextArea();
@@ -433,32 +437,46 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
         instancesTabbedPane.addTab("Introducir ambas en forma de texto", textAreaScrollPane);
 
+        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        formatosButton.setText("Formatos Permitidos");
+        formatosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatosButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contentPanelLayout.createSequentialGroup()
+                            .addComponent(limpiarInstButton)
+                            .addGap(10, 10, 10)
+                            .addComponent(newClasButton)
+                            .addGap(10, 10, 10)
+                            .addComponent(newPropButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cancelarInstButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(guardarInstButton)))
                     .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(limpiarInstButton)
-                        .addGap(10, 10, 10)
-                        .addComponent(newClasButton)
-                        .addGap(10, 10, 10)
-                        .addComponent(newPropButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancelarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guardarInstButton)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addComponent(formatosButton)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(formatosButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -468,7 +486,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                     .addComponent(limpiarInstButton)
                     .addComponent(guardarInstButton)
                     .addComponent(cancelarInstButton))
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         descInstanciasTextArea.setColumns(20);
@@ -514,12 +532,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(228, Short.MAX_VALUE))
             .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,10 +548,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(185, 185, 185))
+                .addGap(177, 177, 177))
         );
 
-        setSize(new java.awt.Dimension(681, 680));
+        setSize(new java.awt.Dimension(681, 698));
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
@@ -926,6 +944,13 @@ private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//G
     setTabActual(getInstancesTabbedPane());
 }//GEN-LAST:event_instancesTabbedPaneMouseClicked
 
+private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
+// TODO add your handling code here:
+    FormatInstancesJDialog format = new FormatInstancesJDialog(frame,true);
+    format.setModal(false);
+    format.setVisible(true);
+}//GEN-LAST:event_formatosButtonActionPerformed
+
 
 private void setInstances(Instancias instancias)
 {  
@@ -1023,6 +1048,7 @@ public void copiarAInstancesAyuda(){
     private javax.swing.JPanel contentDescPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JTextArea descInstanciasTextArea;
+    private javax.swing.JButton formatosButton;
     private javax.swing.JButton guardarInstButton;
     private javax.swing.JTabbedPane instancesTabbedPane;
     private javax.swing.JLabel jLabel1;
