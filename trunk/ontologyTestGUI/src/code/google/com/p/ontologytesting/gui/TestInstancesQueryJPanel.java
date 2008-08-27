@@ -18,6 +18,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog frameComent;
     private Frame frame;
+    private boolean borrado=false,duplicado=false;
     
     /** Creates new form TestInstancesQueryJPanel */
     public TestInstancesQueryJPanel() {
@@ -130,10 +131,12 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
+    setBorrado(true);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
+    setDuplicado(true);
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
@@ -196,4 +199,19 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
         return resultTextField;
     }
     
+    public boolean getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+    
+    public boolean getDuplicado() {
+        return duplicado;
+    }
+
+    public void setDuplicado(boolean duplicado) {
+        this.duplicado = duplicado;
+    }
 }

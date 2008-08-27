@@ -125,9 +125,12 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="312" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="347" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                                  <Component id="tabbedPaneInst" alignment="0" pref="312" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tabbedPaneInst" min="-2" pref="336" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -161,10 +164,9 @@
                                 </DimensionLayout>
                                 <DimensionLayout dim="1">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane6" pref="262" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane6" pref="297" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -191,7 +193,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="213" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="231" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -250,7 +252,7 @@
                                 </DimensionLayout>
                                 <DimensionLayout dim="1">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <EmptySpace min="0" pref="284" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
                                   </Group>
                                 </DimensionLayout>
                               </Layout>
@@ -357,8 +359,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane7" min="-2" pref="256" max="-2" attributes="0"/>
-                                          <EmptySpace pref="31" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane7" min="-2" pref="296" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -385,7 +387,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel2" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="207" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="230" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -507,10 +509,10 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="327" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="348" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tabbedPaneReal" min="-2" pref="316" max="-2" attributes="0"/>
+                                      <Component id="tabbedPaneReal" min="-2" pref="337" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -548,8 +550,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane8" min="-2" pref="253" max="-2" attributes="0"/>
-                                          <EmptySpace pref="24" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane8" pref="298" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -576,7 +577,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel4" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="204" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="232" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -635,7 +636,7 @@
                                 </DimensionLayout>
                                 <DimensionLayout dim="1">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <EmptySpace min="0" pref="288" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="309" max="32767" attributes="0"/>
                                   </Group>
                                 </DimensionLayout>
                               </Layout>
@@ -739,8 +740,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane9" min="-2" pref="257" max="-2" attributes="0"/>
-                                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane9" min="-2" pref="296" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -767,7 +768,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel6" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="208" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="230" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>
@@ -892,7 +893,7 @@
                               <EmptySpace min="0" pref="341" max="32767" attributes="0"/>
                               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tabbedPaneClas" min="-2" pref="330" max="-2" attributes="0"/>
+                                      <Component id="tabbedPaneClas" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -930,8 +931,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane10" min="-2" pref="252" max="-2" attributes="0"/>
-                                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane10" pref="291" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -958,7 +958,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="labelInstPanel8" min="-2" max="-2" attributes="1"/>
-                                                  <EmptySpace pref="203" max="32767" attributes="0"/>
+                                                  <EmptySpace pref="225" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                         </DimensionLayout>

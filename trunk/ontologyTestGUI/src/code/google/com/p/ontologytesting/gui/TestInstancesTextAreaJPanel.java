@@ -18,6 +18,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog frameComent;
     private Frame frame;
+    private boolean borrado=false,duplicado=false;
     
     /** Creates new form TextInstancesTextAreaJPanel */
     public TestInstancesTextAreaJPanel() {
@@ -129,11 +130,13 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-
+    this.setVisible(false);
+    setBorrado(true);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
+    setDuplicado(true);
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
@@ -190,5 +193,20 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         return resultTextArea;
     }
 
+    public boolean getBorrado() {
+        return borrado;
+    }
+
+    public void setBorrado(boolean borrado) {
+        this.borrado = borrado;
+    }
+
+    public boolean getDuplicado() {
+        return duplicado;
+    }
+
+    public void setDuplicado(boolean duplicado) {
+        this.duplicado = duplicado;
+    }
 }
 

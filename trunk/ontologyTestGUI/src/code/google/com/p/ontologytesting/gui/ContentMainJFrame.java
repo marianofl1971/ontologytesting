@@ -210,7 +210,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
         if(ContentMainJFrame.getActual()==1){
             getGroupTests().guardarDatos();
             ValidarConsultas validar = new ValidarConsultas();
-            if(GroupTestsJPanel.getNoHayInstancias()==false){
+            if(GroupTestsJPanel.getNoHayInstancias()==false && GroupTestsJPanel.getContinua()==true){
                 if(getGroupTests().getNombreTestsValidos()==true && 
                     getGroupTests().getTestsValidos()==true && 
                     GroupTestsJPanel.getTestYaExiste()==false){
@@ -297,7 +297,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             //Esto en la pagina de configuracion
         }
     }
-    setBotonAnte(false);
+    //setBotonAnte(false);
 }//GEN-LAST:event_siguienteButtonActionPerformed
 
 public void completarArrayOrden(){
