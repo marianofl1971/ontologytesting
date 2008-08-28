@@ -21,9 +21,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="instanciaTextField" min="-2" pref="149" max="-2" attributes="0"/>
+              <Component id="instanciaTextField" pref="193" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="comentarioButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -31,8 +31,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="duplicarButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="selectCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,11 +41,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="selectCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="duplicarButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="borrarButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="comentarioButton" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="instanciaTextField" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="duplicarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="borrarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comentarioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -87,7 +92,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="duplicarButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="selectCheckBox">
+    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
     </Component>
   </SubComponents>
 </Form>

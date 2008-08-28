@@ -46,7 +46,6 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        selectCheckBox = new javax.swing.JCheckBox();
 
         queryTextField.setToolTipText("Consulta");
         queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,23 +100,19 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
                 .add(borrarButton)
                 .add(32, 32, 32)
                 .add(duplicarButton)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(selectCheckBox)
-                .add(14, 14, 14))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(trueRadioButton)
-                        .add(falseRadioButton)
-                        .add(comentarioButton)
-                        .add(borrarButton)
-                        .add(duplicarButton))
-                    .add(selectCheckBox))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(trueRadioButton)
+                    .add(falseRadioButton)
+                    .add(comentarioButton)
+                    .add(borrarButton)
+                    .add(duplicarButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -149,7 +144,6 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JButton duplicarButton;
     private javax.swing.JRadioButton falseRadioButton;
     private javax.swing.JTextField queryTextField;
-    private javax.swing.JCheckBox selectCheckBox;
     private javax.swing.JRadioButton trueRadioButton;
     // End of variables declaration//GEN-END:variables
 
@@ -184,14 +178,6 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
     public void setFalseTest(boolean testF) {
         falseRadioButton.setSelected(testF);
-    }
-    
-    public boolean isSelected() {
-        return selectCheckBox.isSelected();
-    }
-
-    public void setSelecion(boolean selecion) {
-        selectCheckBox.setSelected(selecion);
     }
     
     public AddComentJDialog getComment() {

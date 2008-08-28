@@ -325,6 +325,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         textAreaScrollPane = new javax.swing.JScrollPane();
         clasPropPanel = new javax.swing.JPanel();
         formatosButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         contentDescPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descInstanciasTextArea = new javax.swing.JTextArea();
@@ -351,7 +352,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
-        limpiarInstButton.setText("Limpiar");
+        limpiarInstButton.setText(" Limpiar Seleccion");
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarInstButtonActionPerformed(evt);
@@ -389,7 +390,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPanel.setLayout(clasPanelLayout);
         clasPanelLayout.setHorizontalGroup(
             clasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
         clasPanelLayout.setVerticalGroup(
             clasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,7 +412,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propPanel.setLayout(propPanelLayout);
         propPanelLayout.setHorizontalGroup(
             propPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
         propPanelLayout.setVerticalGroup(
             propPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +427,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         clasPropPanel.setLayout(clasPropPanelLayout);
         clasPropPanelLayout.setHorizontalGroup(
             clasPropPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 629, Short.MAX_VALUE)
+            .addGap(0, 691, Short.MAX_VALUE)
         );
         clasPropPanelLayout.setVerticalGroup(
             clasPropPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,6 +446,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setText("Borrar Seleccion");
+
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
@@ -452,41 +455,44 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(contentPanelLayout.createSequentialGroup()
-                            .addComponent(limpiarInstButton)
-                            .addGap(10, 10, 10)
-                            .addComponent(newClasButton)
-                            .addGap(10, 10, 10)
-                            .addComponent(newPropButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cancelarInstButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(guardarInstButton)))
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                        .addComponent(formatosButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                        .addComponent(formatosButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                        .addComponent(limpiarInstButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                        .addComponent(newClasButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newPropButton))
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(cancelarInstButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 573, Short.MAX_VALUE)
+                        .addComponent(guardarInstButton)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(contentPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(formatosButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newPropButton)
                     .addComponent(newClasButton)
                     .addComponent(limpiarInstButton)
-                    .addComponent(guardarInstButton)
-                    .addComponent(cancelarInstButton))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelarInstButton)
+                    .addComponent(guardarInstButton)))
         );
 
         descInstanciasTextArea.setColumns(20);
@@ -510,7 +516,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                         .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         contentDescPanelLayout.setVerticalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +541,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
             .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -548,10 +554,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                .addGap(194, 194, 194))
         );
 
-        setSize(new java.awt.Dimension(681, 698));
+        setSize(new java.awt.Dimension(751, 691));
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
@@ -751,7 +757,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                     if (n == JOptionPane.YES_OPTION) {
                         setInstances(instancias);
-                        crearArchivoDeInstancias(getNombreFichero(),instancias);
+                        crearArchivoDeInstancias(getNombreFichero());
                         this.setVisible(false);
                     }else if (n == JOptionPane.NO_OPTION) {
                         crearArchivoDeInstancias(instancias); 
@@ -825,11 +831,11 @@ public void crearArchivoDeInstancias(Instancias instancias){
      }
 }
 
-public void crearArchivoDeInstancias(String nombreFichero,Instancias instancias){
+public void crearArchivoDeInstancias(String nombreFichero){
         
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(Configuration.getPathInstancias()+"/"+nombreFichero)));
+                            FileOutputStream(nombreFichero)));
         e.writeObject(instancias);
         e.close();
     }catch (FileNotFoundException ex) {
@@ -1051,6 +1057,7 @@ public void copiarAInstancesAyuda(){
     private javax.swing.JButton formatosButton;
     private javax.swing.JButton guardarInstButton;
     private javax.swing.JTabbedPane instancesTabbedPane;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

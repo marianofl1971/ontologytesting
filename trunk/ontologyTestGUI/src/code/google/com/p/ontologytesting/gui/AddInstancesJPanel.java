@@ -270,6 +270,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         int option = filechooser.showOpenDialog(frame);
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
+            //nameFile = selectedFile.getPath();
             nameFile = selectedFile.getPath();
             addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

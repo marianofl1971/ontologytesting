@@ -21,11 +21,16 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
     public static boolean isHaSidoConfigurado() {
         return haSidoConfigurado;
     }
-
+    private static boolean conf=false;
     public static void setHaSidoConfigurado(boolean aHaSidoConfigurado) {
         haSidoConfigurado = aHaSidoConfigurado;
     }
-
+    public static boolean getConf() {
+        return conf;
+    }
+    public static void setConf(boolean aConf) {
+        conf = aConf;
+    }
     private String inicio="";
     private JFileChooser filechooser;
     private Component frame;
@@ -291,13 +296,14 @@ private void noRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
  // TODO add your handling code here:
+    setConf(true);
     if(siRadioButton.isSelected()){
-       if(!this.getInstanciasTextField().equals("") && !this.getTestsSimplesTextField().equals("") 
-               && !this.getTestsSparqlTextField().equals("")){
+       if(!getInstanciasTextField().equals("") && !getTestsSimplesTextField().equals("") 
+               && !getTestsSparqlTextField().equals("")){
            //Si es valida la ruta
-           Configuration.setPathTestSimples(this.getTestsSimplesTextField());  
-           Configuration.setPathTestSparql(this.getTestsSparqlTextField());
-           Configuration.setPathInstancias(this.getInstanciasTextField());
+           Configuration.setPathTestSimples(getTestsSimplesTextField());  
+           Configuration.setPathTestSparql(getTestsSparqlTextField());
+           Configuration.setPathInstancias(getInstanciasTextField());
            JOptionPane.showMessageDialog(frame,"Su configuración ha sido " +
                    "guardada correctamente.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
            ConfigurationJPanel.setHaSidoConfigurado(true);

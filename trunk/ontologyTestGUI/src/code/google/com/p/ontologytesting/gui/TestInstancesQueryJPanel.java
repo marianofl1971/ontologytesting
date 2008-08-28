@@ -40,7 +40,6 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        selectCheckBox = new javax.swing.JCheckBox();
         resultTextField = new javax.swing.JTextField();
 
         queryTextField.setToolTipText("Consulta");
@@ -91,14 +90,12 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
                 .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(resultTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(comentarioButton)
                 .add(18, 18, 18)
                 .add(borrarButton)
                 .add(18, 18, 18)
                 .add(duplicarButton)
-                .add(29, 29, 29)
-                .add(selectCheckBox)
                 .addContainerGap())
         );
 
@@ -108,14 +105,12 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(duplicarButton)
-                        .add(borrarButton)
-                        .add(comentarioButton)
-                        .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(resultTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(selectCheckBox))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(resultTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(duplicarButton)
+                    .add(borrarButton)
+                    .add(comentarioButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -156,7 +151,6 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     private javax.swing.JButton duplicarButton;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JTextField resultTextField;
-    private javax.swing.JCheckBox selectCheckBox;
     // End of variables declaration//GEN-END:variables
 
     public void setQuery(String query){
@@ -174,15 +168,7 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     public String getQueryResult(){
         return getResultTextField().getText();
     }
-    
-    public boolean isSelected() {
-        return selectCheckBox.isSelected();
-    }
 
-    public void setSelecion(boolean selecion) {
-        selectCheckBox.setSelected(selecion);
-    }
-    
     public AddComentJDialog getComment() {
         return frameComent;
     }

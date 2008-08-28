@@ -40,7 +40,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        selectCheckBox = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setName("instances"); // NOI18N
 
@@ -73,9 +73,9 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .add(instanciaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 149, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(instanciaTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .add(18, 18, 18)
                 .add(comentarioButton)
                 .add(18, 18, 18)
@@ -83,19 +83,22 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
                 .add(18, 18, 18)
                 .add(duplicarButton)
                 .add(18, 18, 18)
-                .add(selectCheckBox)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(jCheckBox1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(selectCheckBox)
-                    .add(duplicarButton)
-                    .add(borrarButton)
-                    .add(comentarioButton)
-                    .add(instanciaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(instanciaTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(duplicarButton)
+                        .add(borrarButton)
+                        .add(comentarioButton))
+                    .add(layout.createSequentialGroup()
+                        .add(2, 2, 2)
+                        .add(jCheckBox1)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -124,7 +127,7 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JButton comentarioButton;
     private javax.swing.JButton duplicarButton;
     private javax.swing.JTextField instanciaTextField;
-    private javax.swing.JCheckBox selectCheckBox;
+    private javax.swing.JCheckBox jCheckBox1;
     // End of variables declaration//GEN-END:variables
 
     public void setInstance(String instance){

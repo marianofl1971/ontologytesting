@@ -42,7 +42,6 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        selectCheckBox = new javax.swing.JCheckBox();
 
         queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,26 +98,19 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
                 .addComponent(borrarButton)
                 .addGap(32, 32, 32)
                 .addComponent(duplicarButton)
-                .addGap(18, 18, 18)
-                .addComponent(selectCheckBox)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(comentarioButton)
-                                .addComponent(borrarButton)
-                                .addComponent(duplicarButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(selectCheckBox)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comentarioButton)
+                        .addComponent(borrarButton)
+                        .addComponent(duplicarButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(queryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -157,7 +149,6 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField queryTextField;
     private javax.swing.JTextArea resultTextArea;
-    private javax.swing.JCheckBox selectCheckBox;
     // End of variables declaration//GEN-END:variables
 
     

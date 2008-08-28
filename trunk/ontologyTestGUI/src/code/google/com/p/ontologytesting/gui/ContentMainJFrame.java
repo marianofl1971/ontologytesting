@@ -165,6 +165,11 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 JOptionPane.showMessageDialog(frame,"La ontología introdcida no es válida, por favor, " +
                 "compruebe que es correcta.","Warning Message",JOptionPane.WARNING_MESSAGE);
             }else{
+                if(ConfigurationJPanel.getConf()==false){
+                    Configuration.setPathTestSimples("./Simple Tests");  
+                    Configuration.setPathTestSparql("./Sparql Tests");
+                    Configuration.setPathInstancias("./Instancias");
+                }
             if(paginas.get(0).equals(1)){
                 getContentPanel().remove(getMainPanel());
                 getContentPanel().add(getGroupTests());

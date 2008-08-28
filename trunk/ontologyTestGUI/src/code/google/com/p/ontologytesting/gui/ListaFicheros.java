@@ -113,7 +113,7 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
                     }
                 }
                 descripcion.setText("Instancias de Clase: \n\n"+deClase+
-                        "\n\n\nInstancias de Propiedad: \n\n"+dePropiedad);
+                        "\n\nInstancias de Propiedad: \n\n"+dePropiedad);
             }           
             decoder.close();    
         }catch(FileNotFoundException e){

@@ -442,8 +442,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionAyudaClasPanel = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         clasAyudaPanel = new javax.swing.JPanel();
-        labelInstPanel8 = new javax.swing.JPanel();
-        labelInstLabel8 = new javax.swing.JLabel();
+        labelInstPanel1 = new javax.swing.JPanel();
+        labelInstLabel2 = new javax.swing.JLabel();
         opcionTextClasPanel = new javax.swing.JPanel();
         introduccionPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -489,14 +489,14 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         instAyudaPanelLayout.setVerticalGroup(
             instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(instAyudaPanel);
@@ -507,8 +507,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionAyudaInstPanelLayout.setVerticalGroup(
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +523,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
         opcionTextInstPanelLayout.setHorizontalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGap(0, 899, Short.MAX_VALUE)
         );
         opcionTextInstPanelLayout.setVerticalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,9 +536,9 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
         contentInstTabedPanelLayout.setHorizontalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 904, Short.MAX_VALUE)
             .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE))
+                .addComponent(tabbedPaneInst))
         );
         contentInstTabedPanelLayout.setVerticalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -855,8 +855,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaSatPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         opcionAyudaSatPanelLayout.setVerticalGroup(
             opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,7 +872,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextSatPanel.setLayout(opcionTextSatPanelLayout);
         opcionTextSatPanelLayout.setHorizontalGroup(
             opcionTextSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 831, Short.MAX_VALUE)
+            .addGap(0, 833, Short.MAX_VALUE)
         );
         opcionTextSatPanelLayout.setVerticalGroup(
             opcionTextSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -885,9 +885,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentSatTabedPanel.setLayout(contentSatTabedPanelLayout);
         contentSatTabedPanelLayout.setHorizontalGroup(
             contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 836, Short.MAX_VALUE)
+            .addGap(0, 848, Short.MAX_VALUE)
             .addGroup(contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tabbedPaneSat, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE))
+                .addGroup(contentSatTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneSat, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         contentSatTabedPanelLayout.setVerticalGroup(
             contentSatTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -905,7 +907,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(testSatPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(contentSatTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         testSatPanelLayout.setVerticalGroup(
             testSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -927,22 +929,23 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             }
         });
 
-        labelInstLabel8.setText("                      CONSULTAS                               RESULTADO ESPERADO");
+        labelInstLabel2.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
-        javax.swing.GroupLayout labelInstPanel8Layout = new javax.swing.GroupLayout(labelInstPanel8);
-        labelInstPanel8.setLayout(labelInstPanel8Layout);
-        labelInstPanel8Layout.setHorizontalGroup(
-            labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelInstPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelInstLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        labelInstPanel8Layout.setVerticalGroup(
-            labelInstPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(labelInstPanel8Layout.createSequentialGroup()
+        javax.swing.GroupLayout labelInstPanel1Layout = new javax.swing.GroupLayout(labelInstPanel1);
+        labelInstPanel1.setLayout(labelInstPanel1Layout);
+        labelInstPanel1Layout.setHorizontalGroup(
+            labelInstPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelInstLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(labelInstLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+        labelInstPanel1Layout.setVerticalGroup(
+            labelInstPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labelInstPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelInstLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout clasAyudaPanelLayout = new javax.swing.GroupLayout(clasAyudaPanel);
@@ -951,15 +954,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             clasAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clasAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelInstPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addComponent(labelInstPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         clasAyudaPanelLayout.setVerticalGroup(
             clasAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clasAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelInstPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addComponent(labelInstPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         jScrollPane10.setViewportView(clasAyudaPanel);
@@ -1036,6 +1039,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         jLabel1.setText("Complete los tests que desee realizar ");
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        helpButton.setText("Descripcion de los Tests");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
@@ -1187,14 +1191,14 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel labelInstLabel;
     private javax.swing.JLabel labelInstLabel1;
+    private javax.swing.JLabel labelInstLabel2;
     private javax.swing.JLabel labelInstLabel4;
     private javax.swing.JLabel labelInstLabel6;
-    private javax.swing.JLabel labelInstLabel8;
     private javax.swing.JPanel labelInstPanel;
+    private javax.swing.JPanel labelInstPanel1;
     private javax.swing.JPanel labelInstPanel2;
     private javax.swing.JPanel labelInstPanel4;
     private javax.swing.JPanel labelInstPanel6;
-    private javax.swing.JPanel labelInstPanel8;
     private javax.swing.JPanel opcionAyudaClasPanel;
     private javax.swing.JPanel opcionAyudaInstPanel;
     private javax.swing.JPanel opcionAyudaRealPanel;
