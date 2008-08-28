@@ -135,6 +135,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     static final int desktopWidth = 750;
     static final int desktopHeight = 600;
     static JFrame frame;
+    private boolean nombreSparqlRep=false;
     private static boolean continua=true;
 
     public static ScenarioTest getScenarioTest() {
@@ -1255,9 +1256,7 @@ public void guardarDatos(){
                     asociarInstancias(j);
                 }
             }
-    }
-    
-    if(AddSPARQLJPanel.isSeleccionado()==true){
+    }else{
         if(AddSPARQLJPanel.getSPARQLQuery().equals("")){
                 ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
                 ScenarioTest scenarioSparql = new ScenarioTest();
@@ -1297,8 +1296,31 @@ public void guardarDatos(){
                         st.add(scenarioSparql);
                         MainJPanel.getCollectionTest().setScenariotest(st);
                     }else{
+                        ListIterator li;
+                        li = st.listIterator();
+                        int v=0;
+                        while(li.hasNext()){
+                            if(v==0){
+                                ScenarioTest s = (ScenarioTest) li.next();
+                                String name = s.getNombre();
+                                if(name.equals(scenarioSparql.getNombre()) && ContentMainJFrame.getBotonAnte()==true){
+                                    st.remove(s);
+                                    MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                                    v=1;
+                                }else if(name.equals(scenarioSparql.getNombre()) && 
+                                    ContentMainJFrame.getBotonAnte()==false){
+                                    setTestYaExiste(true);
+                                    v=1;
+                                }
+                            }
+                        }
+                        if(v==0){
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                        }
+                    }
+                    /*}else{
                         MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
-                    }    
+                    }  */  
             }
         }
     }
@@ -3094,6 +3116,14 @@ public JPanel getContentPanel() {
 
     public GroupTestsJPanel getGroupTests() {
         return this;
+    }
+
+    public boolean getNombreSparqlRep() {
+        return nombreSparqlRep;
+    }
+
+    public void setNombreSparqlRep(boolean nombreSparqlRep) {
+        this.nombreSparqlRep = nombreSparqlRep;
     }
     
 }

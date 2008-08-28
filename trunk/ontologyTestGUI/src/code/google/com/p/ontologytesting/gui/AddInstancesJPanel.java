@@ -335,18 +335,45 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             instancias.setPropertyInstances(vaciaPropiedad);
             ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias);
             
-            AddSPARQLJPanel.setTestDescTextArea("");
-            AddSPARQLJPanel.setTestNameTextField("");
-            AddSPARQLJPanel.setSPARQLQuery("");
-            AddSPARQLJPanel.setResultTextArea("");
         
             ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
             if(scenarioT.size()==0){
+                AddSPARQLJPanel.setTestDescTextArea("");
+                AddSPARQLJPanel.setTestNameTextField("");
+                AddSPARQLJPanel.setSPARQLQuery("");
+                AddSPARQLJPanel.setResultTextArea("");
                 scenarioT.add(scenarioSparql);
                 MainJPanel.getCollectionTest().setScenariotest(scenarioT);
             }else{
-                MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                ListIterator li;
+                li = scenarioT.listIterator();
+                int v=0;
+                while(li.hasNext()){
+                    if(v==0){
+                        ScenarioTest s = (ScenarioTest) li.next();
+                        String name = s.getNombre();
+                        if(name.equals(scenarioSparql.getNombre())){
+                            scenarioT.remove(s);
+                            MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                            v=1;
+                        }else if(name.equals(scenarioSparql.getNombre())){
+                            JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor," +
+                        "introduzca uno nuevo","Warning Message",JOptionPane.WARNING_MESSAGE);
+                            v=1;
+                        }
+                     }
+                 }
+                 if(v==0){
+                    AddSPARQLJPanel.setTestDescTextArea("");
+                    AddSPARQLJPanel.setTestNameTextField("");
+                    AddSPARQLJPanel.setSPARQLQuery("");
+                    AddSPARQLJPanel.setResultTextArea("");
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                 }
             }
+            //}else{
+                //MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+            //}
 
             listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
             AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);

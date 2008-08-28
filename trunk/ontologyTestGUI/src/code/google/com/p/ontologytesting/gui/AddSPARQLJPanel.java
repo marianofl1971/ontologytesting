@@ -53,7 +53,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private static int contadorAnt = -1;
     private static int contadorSig = 1;
     public static int getPosListQuerysSel() {
-        return posListQuerysSel;
+            return posListQuerysSel;
     }
     public static void setPosListQuerysSel(int aPosListQuerysSel) {
         posListQuerysSel = aPosListQuerysSel;

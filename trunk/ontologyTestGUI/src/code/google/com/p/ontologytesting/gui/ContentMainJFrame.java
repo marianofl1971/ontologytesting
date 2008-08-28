@@ -297,10 +297,16 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
         }
         }else if(ContentMainJFrame.getActual()==2){ 
                 getGroupTests().guardarDatos();
-                getContentPanel().remove(sparql);
-                getContentPanel().add(GroupTestsJPanel.getPanelTree());
-                ContentMainJFrame.setActual(4);
-                this.validate();
+                if(GroupTestsJPanel.getTestYaExiste()==true){
+                     JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor," +
+                        "introduzca uno nuevo","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    ContentMainJFrame.setActual(4);
+                }else{
+                    getContentPanel().remove(sparql);
+                    getContentPanel().add(GroupTestsJPanel.getPanelTree());
+                    ContentMainJFrame.setActual(4);
+                    this.validate();
+                }
         }else if(ContentMainJFrame.getActual()==3){
                 getContentPanel().remove(addInstances.getContentPanel());
                 getContentPanel().add(GroupTestsJPanel.getPanelTree());
@@ -377,6 +383,7 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                     getAnteriorButton().setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
+                setBotonAnte(true);
             }else if(paginas.get(0).equals(1)){
                 ContentMainJFrame.setHeVueltoGroupTest(true);
                 getContentPanel().remove(GroupTestsJPanel.getPanelTree());
