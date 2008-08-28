@@ -54,6 +54,14 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     public static void setInstancias(int index,Instancias aInstancias) {
         instancias.set(index, aInstancias);
     }
+
+    public static javax.swing.JButton getAnteriorButton() {
+        return anteriorButton;
+    }
+
+    public static javax.swing.JButton getSiguienteButton() {
+        return siguienteButton;
+    }
     private JFrame frame;
     private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8,0);
     private AddSPARQLJPanel sparql;
@@ -174,7 +182,7 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 getContentPanel().remove(getMainPanel());
                 getContentPanel().add(getGroupTests());
                 AddSPARQLJPanel.setSeleccionado(false);
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 ContentMainJFrame.setActual(1);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
@@ -188,13 +196,13 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                     getContentPanel().remove(getMainPanel());
                     getContentPanel().add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(2).equals(1)){
                 getContentPanel().remove(getMainPanel());
                 getContentPanel().add(addInstances.getContentPanel());
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 AddSPARQLJPanel.setSeleccionado(false);
                 ContentMainJFrame.setActual(3);
                 this.validate();
@@ -202,7 +210,8 @@ private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 configurar = new ConfigurationJPanel();
                 getContentPanel().remove(getMainPanel());
                 getContentPanel().add(configurar);
-                anteriorButton.setEnabled(true);
+                getAnteriorButton().setEnabled(false);
+                getSiguienteButton().setEnabled(false);
                 AddSPARQLJPanel.setSeleccionado(false);
                 ContentMainJFrame.setActual(4);
                 this.validate();
@@ -333,31 +342,31 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
     completarArrayOrden();
     if(ContentMainJFrame.getActual()==0){
-        anteriorButton.setEnabled(false);
+            getAnteriorButton().setEnabled(false);
     }else{
         if(ContentMainJFrame.getActual()==1){
                 getContentPanel().remove(getGroupTests());
                 getContentPanel().add(getMainPanel());
-                anteriorButton.setEnabled(false);
+                getAnteriorButton().setEnabled(false);
                 ContentMainJFrame.setActual(0);
                 this.validate();
         }else if(ContentMainJFrame.getActual()==2){            
                 getContentPanel().remove(sparql);
                 getContentPanel().add(getMainPanel());
-                anteriorButton.setEnabled(false);
+                getAnteriorButton().setEnabled(false);
                 ContentMainJFrame.setActual(0);
                 this.validate();   
         }else if(ContentMainJFrame.getActual()==3){
                 getContentPanel().remove(addInstances.getContentPanel());
                 getContentPanel().add(getMainPanel());
-                anteriorButton.setEnabled(false);
+                getAnteriorButton().setEnabled(false);
                 ContentMainJFrame.setActual(0);
                 this.validate(); 
         }else if(ContentMainJFrame.getActual()==4){
             if(paginas.get(2).equals(1)){
                 getContentPanel().remove(GroupTestsJPanel.getPanelTree());
                 getContentPanel().add(addInstances.getContentPanel());
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 ContentMainJFrame.setActual(3);
                 this.validate();
             }else if(paginas.get(1).equals(1)){
@@ -365,14 +374,14 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 getContentPanel().remove(GroupTestsJPanel.getPanelTree());
                 getContentPanel().add(sparql);
                 AddSPARQLJPanel.setSeleccionado(true);
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 ContentMainJFrame.setActual(2);
                 this.validate();
             }else if(paginas.get(0).equals(1)){
                 ContentMainJFrame.setHeVueltoGroupTest(true);
                 getContentPanel().remove(GroupTestsJPanel.getPanelTree());
                 getContentPanel().add(getGroupTests());
-                anteriorButton.setEnabled(true);
+                    getAnteriorButton().setEnabled(true);
                 this.validate();
                 AddSPARQLJPanel.setSeleccionado(false);
                 ContentMainJFrame.setActual(1);    
@@ -395,10 +404,10 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton anteriorButton;
+    private static javax.swing.JButton anteriorButton;
     private static javax.swing.JPanel contentPanel;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton siguienteButton;
+    private static javax.swing.JButton siguienteButton;
     // End of variables declaration//GEN-END:variables
 
     public GroupTestsJPanel getGroupTests() {
@@ -412,6 +421,8 @@ private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         return contentPanel;
     }
     public static MainJPanel getMainPanel() {
+        getAnteriorButton().setEnabled(true);
+        getSiguienteButton().setEnabled(true);
         MainJPanel.actualizarEstado();
         return mainPanel;
     }
