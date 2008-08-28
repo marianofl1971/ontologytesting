@@ -19,6 +19,7 @@ import java.util.ListIterator;
 import javax.swing.*;
 import javax.swing.event.*;
 import code.google.com.p.ontologytesting.model.ClassInstances;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 
@@ -77,18 +78,19 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     public void updateLabel (String name) {
         
         String path = AddInstancesJPanel.getPathFichero();
-        ListaFicheros.setPathFicheroAbrir(path.concat(name));
+        ListaFicheros.setPathFicheroAbrir(path.concat("\\").concat(name));
         ScenarioTest scenario = new ScenarioTest();
         try{
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path.concat(name))));
-            if(path.contains("Simple Tests") || path.contains("Sparql Tests")){
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path.concat("\\").concat(name))));
+            if(AbrirTestsJDialog.getFicherosComboBox()==0 || AbrirTestsJDialog.getFicherosComboBox()==2){
                 scenario = (ScenarioTest) decoder.readObject();
                 descripcion.setText("Nombre Test: "+scenario.getNombre()+
                         "\n\nDescripción: "+scenario.getDescripcion());
                 descripcion.setEditable(false);         
-            }else if(path.contains("Instancias")){
-                ArrayList<ClassInstances> clasInst = (ArrayList<ClassInstances>) decoder.readObject();
-                ArrayList<PropertyInstances> propInst = (ArrayList<PropertyInstances>) decoder.readObject();
+            }else if(AbrirTestsJDialog.getFicherosComboBox()==1){ 
+                Instancias inst = (Instancias) decoder.readObject();
+                ArrayList<ClassInstances> clasInst = inst.getClassInstances();
+                ArrayList<PropertyInstances> propInst = inst.getPropertyInstances();
                 ListIterator cI,pI;
                 cI = clasInst.listIterator();
                 pI = propInst.listIterator();
@@ -110,8 +112,8 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
                         dePropiedad=dePropiedad+propInstance.getPropertyInstance()+"\n";
                     }
                 }
-                descripcion.setText("Instancias de Clase: \n"+deClase+
-                        "\nInstancias de Propiedad: \n"+dePropiedad);
+                descripcion.setText("Instancias de Clase: \n\n"+deClase+
+                        "\n\n\nInstancias de Propiedad: \n\n"+dePropiedad);
             }           
             decoder.close();    
         }catch(FileNotFoundException e){

@@ -1299,7 +1299,7 @@ public void guardarDatos(){
         }
     }
 
-    if( getContinua()==true){
+    if(getContinua()==true){
     if(getNoHayInstancias()==false){
     if(todosTienenNombre()==true && todosSonValidos()==true && getTestYaExiste()==false){
         setNombreTestsValidos(true);
@@ -1422,6 +1422,7 @@ public static void asociarInstancias(int sel){
     String[] cComent;
     
     if(sel==0){
+        continua=true;
         inst = new ArrayList();
         getInst().add(0,0);
         setValidoInst(true);
@@ -1467,15 +1468,20 @@ public static void asociarInstancias(int sel){
                                 test.remove(i);
                                 getInst().add(i, 0);
                             }
-                        }else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
+                        }/*else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
                             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                             "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                        }else{
+                        }*/else{
                             i++;
                         }
                         hayQuery=true;
                 }
                 }
+                }
+                if(hayQuery==false){
+                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                   continua=false;
                 }
             if(AddInstancesJPanel.isStateNuevo()==true){
                 if(todosTienenNombre()==false){
@@ -1570,6 +1576,7 @@ public static void asociarInstancias(int sel){
             }
         }
     }else if(sel==1){
+        continua=true;
         ret = new ArrayList();
         getRet().add(0,0);
         setRetTextName(true);
@@ -1636,7 +1643,11 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-            
+            if(hayQuery==false){
+                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                   continua=false;
+            }
             if(AddInstancesJPanel.isStateNuevo()==true){
                 if(todosTienenNombre()==false){
                     JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
@@ -1730,6 +1741,7 @@ public static void asociarInstancias(int sel){
         }
      }
     }else if(sel==2){
+        continua=true;
         real = new ArrayList();
         getReal().add(0,0);
         setValidoReal(true);
@@ -1795,7 +1807,11 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-            
+            if(hayQuery==false){
+                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                   continua=false;
+            }
         if(AddInstancesJPanel.isStateNuevo()==true){
                 if(todosTienenNombre()==false){
                     JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
@@ -1890,6 +1906,7 @@ public static void asociarInstancias(int sel){
         }
         }
     }else if(sel==3){
+        continua=true;
         sat = new ArrayList();
         getSat().add(0,0);
         setValidoSat(true);
@@ -1948,7 +1965,11 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-            
+            if(hayQuery==false){
+                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                   continua=false;
+            }
         if(AddInstancesJPanel.isStateNuevo()==true){
                 if(todosTienenNombre()==false){
                     JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
@@ -2042,6 +2063,7 @@ public static void asociarInstancias(int sel){
         }
         }
     }else if(sel==4){
+        continua=true;
         clas = new ArrayList();
         getClas().add(0,0);
         setValidoClas(true);
@@ -2108,7 +2130,11 @@ public static void asociarInstancias(int sel){
                 }
             }
             }
-            
+            if(hayQuery==false){
+                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                   continua=false;
+            }
         if(AddInstancesJPanel.isStateNuevo()==true){
                 if(todosTienenNombre()==false){
                     JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
@@ -2202,7 +2228,7 @@ public static void asociarInstancias(int sel){
         }
     }
   }
-    if( getContinua()==true){
+    if(getContinua()==true){
     if(getNoHayInstancias()==false){
         if(todosTienenNombre()==true && todosSonValidos()==true && aux==1){
             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);

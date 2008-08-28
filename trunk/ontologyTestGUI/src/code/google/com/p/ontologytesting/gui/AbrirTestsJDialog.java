@@ -28,8 +28,8 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
         this.setModal(false);
         this.setTitle("Descripción Tests");
         
-        AddInstancesJPanel.setPathFichero("./Simple Tests/");
-        dir = new File("./Simple Tests/");
+        AddInstancesJPanel.setPathFichero(Configuration.getPathTestSimples());
+        dir = new File(Configuration.getPathTestSimples());
         AddInstancesJPanel.setFicheros(dir.list());
         //Aquí pondría la ruta de configuración creada por el usuario
         ficherosComboBox.addItem("Simple Tests");
@@ -45,8 +45,16 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
 	@Override
 	public void actionPerformed(ActionEvent e) {
             
-            dir = new File("./"+ficherosComboBox.getSelectedItem().toString()+"/");
-            AddInstancesJPanel.setPathFichero("./"+ficherosComboBox.getSelectedItem().toString()+"/");
+            if( getFicherosComboBox()==0){
+                dir = new File(Configuration.getPathTestSimples());
+                AddInstancesJPanel.setPathFichero(Configuration.getPathTestSimples());  
+            }else if(getFicherosComboBox()==1){
+                dir = new File(Configuration.getPathInstancias());
+                AddInstancesJPanel.setPathFichero(Configuration.getPathInstancias());   
+            }else if(getFicherosComboBox()==2){
+                dir = new File(Configuration.getPathTestSparql());
+                AddInstancesJPanel.setPathFichero(Configuration.getPathTestSparql());
+            }
             AddInstancesJPanel.setFicheros(dir.list());
             
             contentPanel.setLayout(new FlowLayout());
@@ -172,9 +180,12 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JButton abrirButton;
     private javax.swing.JButton cancelarButton;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JComboBox ficherosComboBox;
+    private static javax.swing.JComboBox ficherosComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
+    public static int getFicherosComboBox() {
+        return ficherosComboBox.getSelectedIndex();
+    }
 }

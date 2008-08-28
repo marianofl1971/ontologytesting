@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import code.google.com.p.ontologytesting.model.ClassInstances;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -38,7 +39,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
     try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
             
-            if(path.contains("Simple Tests")){
+            if(AbrirTestsJDialog.getFicherosComboBox()==0){
                 testEditorPane.setContentType("text/html");
                 
                 scenario = (ScenarioTest) decoder.readObject(); 
@@ -113,11 +114,11 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                         "</tr>"+consulta+"</table>");   
                 }
                 
-            }else if(path.contains("Instancias")){
+            }else if(AbrirTestsJDialog.getFicherosComboBox()==1){
                 testEditorPane.setContentType("text/html");
-                
-                ArrayList<ClassInstances> clasInst = (ArrayList<ClassInstances>) decoder.readObject(); 
-                ArrayList<PropertyInstances> propInst = (ArrayList<PropertyInstances>) decoder.readObject(); 
+                Instancias inst = (Instancias) decoder.readObject();
+                ArrayList<ClassInstances> clasInst = inst.getClassInstances();
+                ArrayList<PropertyInstances> propInst = inst.getPropertyInstances();
                 String clas = "";  
               
                 int sizeClas = clasInst.size();
@@ -157,7 +158,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                             "<td><i><u>De Propiedad</u></i></td>" +
                         "</tr>"+clas+"</table><br><br>");                                   
                 }
-            }else if(path.contains("Sparql Tests")){
+            }else if(AbrirTestsJDialog.getFicherosComboBox()==2){
                 
                 testEditorPane.setContentType("text/html");
                 
@@ -239,6 +240,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
             }         
             decoder.close();    
         }catch(FileNotFoundException e){
+            e.printStackTrace();
         }    
         testEditorPane.setEditable(false);
     }

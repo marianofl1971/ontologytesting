@@ -60,6 +60,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     }
     private static String[] ficheros;
     private static String pathFichero;
+    
     public static String[] getFicheros() {
         return ficheros;
     }
