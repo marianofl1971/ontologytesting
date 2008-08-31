@@ -41,6 +41,7 @@ import code.google.com.p.ontologytesting.model.ValidarTests;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
+    private static boolean nombreVacio=false;
     private static ValidarTests validarTests;
     private static TestInstancesTFJPanel test;
     private static TestInstancesQueryJPanel test1;
@@ -110,8 +111,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testYaExiste = aTestYaExiste;
     }
 
-    public static boolean getContinua() {
-        return continua;
+    public static boolean getSinConsultas() {
+        return sinConsultas;
+    }
+
+    public static void setSinConsultas(boolean aSinConsultas) {
+        sinConsultas = aSinConsultas;
     }
     private boolean nombreTestsValidos=true;
     private static boolean testsValidos=true;
@@ -136,7 +141,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     static final int desktopHeight = 600;
     static JFrame frame;
     private boolean nombreSparqlRep=false;
-    private static boolean continua=true;
 
     public static ScenarioTest getScenarioTest() {
         return scenarioTest;
@@ -212,6 +216,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     public static OntologyTestResult getTestresult() {
         return testresult;
     }
+    private static boolean ambosNecesarios=false,sinConsultas=false;
     private AddInstancesJPanel addInstances;
     public static boolean seleccionado;
     private static boolean datosGuardados;
@@ -226,7 +231,10 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static boolean instGuardado=false,retGuardado=false,realGuardado=false,
             satGuardado=false,clasGuardado=false;
     private static boolean testYaExiste=false;
-    private GroupTestsJPanel groupTests;
+    private static boolean instCompletado=false,retCompletado=false,realCompletado=false,
+            satCompletado=false,clasCompletado=false;
+    private static int varAux=0;
+    private Component comp;
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
@@ -1231,11 +1239,30 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private static javax.swing.JTabbedPane testsTabbedPane;
     // End of variables declaration//GEN-END:variables
 
-public void guardarDatos(){
+    public static void inicializarVariables(){
+        setSinConsultas(false);
+        setAmbosNecesarios(false);
+        setNoHayInstancias(false);
+        setTestsValidos(true);
+        setTestYaExiste(false);
+        setInstTextName(true);
+        setRetTextName(true);
+        setRealTextName(true);
+        setSatTextName(true);
+        setClasTextName(true);
+        setValidoClas(true);
+        setValidoInst(true);
+        setValidoReal(true);
+        setValidoRet(true);
+        setValidoSat(true);
+        nombreVacio=false;
+        varAux=0;
+    }
+     
+    public boolean guardarDatos(){
       
-    setNoHayInstancias(false);
-    setTestsValidos(true);
-    setTestYaExiste(false);
+    inicializarVariables();
+    
     OntologyTestCase testcase = new OntologyTestCase();
     testresult = new OntologyTestResult();
 
@@ -1250,131 +1277,84 @@ public void guardarDatos(){
         MainJPanel.getCollectionTest().setNamespace(ontologyURI.concat("#"));
     }   
     
-    if(AddSPARQLJPanel.isSeleccionado()==false){
-            for(int j=0;j<5;j++){
-                if(getNoHayInstancias()==false){
-                    asociarInstancias(j);
+    for(int j=0;j<5;j++){
+        if(todosTienenNombre()==true){
+            if(getTestYaExiste()==false){
+                if(getSinConsultas()==false){
+                    if(getAmbosNecesarios()==false){
+                        if(todosSonValidos()==true){
+                            if(getNoHayInstancias()==false){
+                                asociarInstancias(j);
+                            }
+                        }
+                    }
                 }
             }
-    }else{
-        if(AddSPARQLJPanel.getSPARQLQuery().equals("")){
-                ArrayList<ScenarioTest> scT = MainJPanel.getCollectionTest().getScenariotest();
-                ScenarioTest scenarioSparql = new ScenarioTest();
-                scenarioSparql.setTestName("sparql");
-                scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-                scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
-                ArrayList<SparqlQueryOntology> listQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-                scenarioSparql.setSparqlQuerys(listQuerys);
-                if(scT.size()==0){
-                    scT.add(scenarioSparql);
-                    MainJPanel.getCollectionTest().setScenariotest(scT);
-                }else{
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
-                }
-                AddInstancesJPanel.setStateNuevo(false);
-            }else{
-                ScenarioTest scenarioSparql = new ScenarioTest();
-                ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-                if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){
-                    
-                    SparqlQueryOntology query = new SparqlQueryOntology(AddSPARQLJPanel.getSPARQLQuery(),
-                            AddSPARQLJPanel.getResultTextArea());
-                    
-                    if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
-                        listSparqlQuerys.add(query);
-                    }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
-                        listSparqlQuerys.remove(AddSPARQLJPanel.getPosListQuerysSel());
-                        listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
-                    }
-                    
-                    scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
-                    scenarioSparql.setTestName("sparql");
-                    scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
-                    scenarioSparql.setSparqlQuerys(listSparqlQuerys);
-                    ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
-                    if(st.size()==0){
-                        st.add(scenarioSparql);
-                        MainJPanel.getCollectionTest().setScenariotest(st);
-                    }else{
-                        ListIterator li;
-                        li = st.listIterator();
-                        int v=0;
-                        while(li.hasNext()){
-                            if(v==0){
-                                ScenarioTest s = (ScenarioTest) li.next();
-                                String name = s.getNombre();
-                                if(name.equals(scenarioSparql.getNombre()) && ContentMainJFrame.getBotonAnte()==true){
-                                    st.remove(s);
-                                    MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
-                                    v=1;
-                                }else if(name.equals(scenarioSparql.getNombre()) && 
-                                    ContentMainJFrame.getBotonAnte()==false){
-                                    setTestYaExiste(true);
-                                    v=1;
+        }
+     }
+
+        if(getNoHayInstancias()==false){
+            if(todosTienenNombre()==true && todosSonValidos()==true && getTestYaExiste()==false
+                    && getAmbosNecesarios()==false && getSinConsultas()==false){
+                if(MainJPanel.getCollectionTest().getScenariotest().size()!=0){
+                setNombreTestsValidos(true);
+                int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
+                    "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION){
+                    ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+                    try{ 
+                        for(int i=0;i<scenarioT.size();i++){
+                            int val=1;
+                            if(AddSPARQLJPanel.isSeleccionado()==false){
+                                if(!scenarioT.get(i).getNombre().equals("")){
+                                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                                    FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre()+".xml")));
+                                    e.writeObject(scenarioT.get(i));
+                                    e.close();
+                                }
+                            }else{
+                                if(!scenarioT.get(i).getNombre().equals("")){
+                                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                                    FileOutputStream(Configuration.getPathTestSparql()+"/"
+                                    +scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
+                                    val++;
+                                    e.writeObject(scenarioT.get(i)); 
+                                    e.close();
                                 }
                             }
                         }
-                        if(v==0){
-                            MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
-                        }
+                    }catch (FileNotFoundException ex) {
+                        ex.printStackTrace();
                     }
-                    /*}else{
-                        MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
-                    }  */  
-            }
-        }
-    }
-
-    if(getContinua()==true){
-    if(getNoHayInstancias()==false){
-    if(todosTienenNombre()==true && todosSonValidos()==true && getTestYaExiste()==false){
-        setNombreTestsValidos(true);
-        Component comp = null;
-        int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
-            "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.YES_OPTION){
-            ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-            try{ 
-                for(int i=0;i<scenarioT.size();i++){
-                    int val=1;
-                    if(AddSPARQLJPanel.isSeleccionado()==false){
-                        if(!scenarioT.get(i).getNombre().equals("")){
-                            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre()+".xml")));
-                            e.writeObject(scenarioT.get(i));
-                            e.close();
-                        }
-                    }else{
-                        if(!scenarioT.get(i).getNombre().equals("")){
-                            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(Configuration.getPathTestSparql()+"/"
-                            +scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
-                            val++;
-                            e.writeObject(scenarioT.get(i)); 
-                            e.close();
-                        }
-                    }
+                    testcase.run(testresult, MainJPanel.getCollectionTest());
+                    JPanel panel = new TreeResults(testresult);
+                    GroupTestsJPanel.setPanelTree(panel);
+                    GroupTestsJPanel.setDatosGuardados(true);
+                    instCompletado=false;
+                    retCompletado=false;
+                    realCompletado=false;
+                    satCompletado=false;
+                    clasCompletado=false;
+                    return true;
+                }else{
+                    testcase.run(testresult, MainJPanel.getCollectionTest());
+                    JPanel panel = new TreeResults(testresult);
+                    setPanelTree(panel);
+                    setDatosGuardados(true); 
+                    instCompletado=false;
+                    retCompletado=false;
+                    realCompletado=false;
+                    satCompletado=false;
+                    clasCompletado=false;
+                    return true;
                 }
-            }catch (FileNotFoundException ex) {
-                ex.printStackTrace();
+            }else{
+                JOptionPane.showMessageDialog(frame,"No ha creado ningun test para ejecutar.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
             }
-            testcase.run(testresult, MainJPanel.getCollectionTest());
-            JPanel panel = new TreeResults(testresult);
-            GroupTestsJPanel.setPanelTree(panel);
-            GroupTestsJPanel.setDatosGuardados(true);
-        }else{
-            testcase.run(testresult, MainJPanel.getCollectionTest());
-            JPanel panel = new TreeResults(testresult);
-            setPanelTree(panel);
-            setDatosGuardados(true); 
-        }
-        }else if(todosTienenNombre()==false){
-            setNombreTestsValidos(false);
-        }else if(todosSonValidos()==false){
-            setTestsValidos(false);
         }
     }
-    }
+    return false;
 }   
 
 public static boolean hayInstanciasAsociadas(Instancias instancias){
@@ -1402,9 +1382,64 @@ public boolean isScenarioEmpty(ScenarioTest scenarioTest){
      }
 }
 
+public static void formatoIncorrecto(int tab){
+    ValidarConsultas validar = new ValidarConsultas();
+    if(tab==0){
+        if(GroupTestsJPanel.getActualSubTabInst()==0){
+            if(validar.comprovarErrorEnAyudaInst()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }else{
+            if(validar.comprovarErrorQuerysInst()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }
+    }else if(tab==1){
+        if(GroupTestsJPanel.getActualSubTabRet()==0){
+            if(validar.comprovarErrorEnAyudaRet()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }else{
+            if(validar.comprovarErrorQuerysRet()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }
+    }else if(tab==2){
+        if(GroupTestsJPanel.getActualSubTabReal()==0){
+            if(validar.comprovarErrorEnAyudaReal()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }else{
+            if(validar.comprovarErrorQuerysReal()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }
+    }else if(tab==3){
+        if(GroupTestsJPanel.getActualSubTabSat()==0){
+            if(validar.comprovarErrorEnAyudaSat()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }else{
+            if(validar.comprovarErrorQuerysSat()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        }
+    }else if(tab==4){
+        if(GroupTestsJPanel.getActualSubTabClas()==0){
+            if(validar.comprovarErrorEnAyudaClas()==false){
+                ContentMainJFrame.setActual(1);
+            } 
+        }else{
+            if(validar.comprovarErrorQuerysClas()==false){
+                ContentMainJFrame.setActual(1);
+            }
+        } 
+    }
+}
+
 public static void asociarInstancias(int sel){
      
-    setNoHayInstancias(false);
+    inicializarVariables();
     ScenarioTest scenario = new ScenarioTest();
     
     String nombreTest = "",descTest = "";
@@ -1438,7 +1473,6 @@ public static void asociarInstancias(int sel){
     Component comp=null;
     validarTests = new ValidarTests();
     
-    boolean hayQuery = false;
     int var=0,cont=0,aux=0;
     String conjuntoQuerys;
     String conjuntoResult;
@@ -1448,115 +1482,807 @@ public static void asociarInstancias(int sel){
     String[] cComent;
     
     if(sel==0){
-        continua=true;
-        inst = new ArrayList();
-        getInst().add(0,0);
-        setValidoInst(true);
-        setInstTextName(true);
-        setTestYaExiste(false);
-        if(getTabbedPaneInst()==0){
-            descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-                for(int i=1;i<totalInst;i++){
-                if(getInstTextName()==true){
-                    test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
-                    if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue()))){
-                        setInstTextName(false);
-                    }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
+        if(instCompletado==false){
+            inst = new ArrayList();
+            getInst().add(0,0);
+            if(getTabbedPaneInst()==0){
+                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                String s = descPanel.getNombreTextField();
+                    for(int i=1;i<totalInst;i++){
+                    if(getSinConsultas()==false){
+                    if(getInstTextName()==true){
+                        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
+                        if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue()))){
+                            JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                            "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                            setInstTextName(false);
+                        }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
+                            if(var==0){
+                                nombreTest = descPanel.getNombreTextField();
+                                descTest = descPanel.getDescTextArea();
+                                scenario.setDescripcion(descTest);
+                                scenario.setNombre(nombreTest);
+                            }
+                            String query = test.getQuery();
+                            String resExpT = test.isTestTrue();
+                            String resExpF = test.isTestFalse();
+                            AddComentJDialog comentPane = test.getComment();
+                            String coment = comentPane.getComent();
+                            if(!query.equals("") && !resExpT.equals(resExpF)){
+                                varAux=1;
+                                if(var==0){
+                                    scenario.setTestName("Instanciación");
+                                    var=1;
+                                }
+                                QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+                                if(test.getBorrado()==false){
+                                    if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
+                                        queryTest1.add(testQuery);
+                                        scenario.setQueryTest(queryTest1);
+                                        cont++;
+                                        aux=1;
+                                        getInst().add(i, 0);
+                                    }else{
+                                        getInst().add(i, 1);
+                                        setValidoInst(false);
+                                    }
+                                }else{
+                                    test.remove(i);
+                                    getInst().add(i, 0);
+                                }
+                            }else{
+                                i++;
+                            }
+                    }else if((test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())) || 
+                                ((!test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue())))){
+                                JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setAmbosNecesarios(true);
+                                varAux=1;
+                    }else if(test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue())){
+                        String ar = descPanel.getNombreTextField();
+                        if(!descPanel.getNombreTextField().equals("")){
+                            if(varAux==0){
+                                JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }
+                        }
+                    }
+                    }
+                    }
+            }
+            if(testYaExiste(scenario.getNombre())==true){
+                JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                setTestYaExiste(true);
+            }     
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    if(getInstTextName()==true){
+                        if(getTestYaExiste()==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoInst()==true){
+                                        tratarNuevoTest(sel);
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                            "El formato de los datos marcados en rojo no es correcto." +
+                                            "\nPor favor, consulte la ayuda acerca del formato " +
+                                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                        formatoIncorrecto(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(getInstTextName()==true && getValidoInst()==true && getTestYaExiste()==false){
+                        if(aux==1){
+                            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);   
+                            if(hayInstanciasAsociadas(instancias)==false){
+                                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                        "Instanciacion no tiene instancias asociadas. ¿Desea " +
+                                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                if (n == JOptionPane.NO_OPTION){
+                                        setNoHayInstancias(true);
+                                }
+                            }
+                        }
+                    }else if(getValidoInst()==false){
+                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                        "El formato de los datos marcados en rojo no es correcto." +
+                        "\nPor favor, consulte la ayuda acerca del formato " +
+                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        formatoIncorrecto(0);
+                    }
+                }
+            }else{
+                descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaQuery();
+                conjuntoResult = texto.getResultadoEsperado();
+                conjuntoComent = texto.getComentTextArea();
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("") || (!conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                    "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);        
+                    setInstTextName(false);
+                }else{
+                    cQuery = conjuntoQuerys.split("\\\n");
+                    cResult = conjuntoResult.split("\\\n");
+                    cComent = conjuntoComent.split("\\\n");
+                    if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
+                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                            "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                            setAmbosNecesarios(true);
+                    }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
                             scenario.setDescripcion(descTest);
                             scenario.setNombre(nombreTest);
+                            scenario.setTestName("Instanciación");
+                            var=1;
                         }
-                        String query = test.getQuery();
-                        String resExpT = test.isTestTrue();
-                        String resExpF = test.isTestFalse();
-                        AddComentJDialog comentPane = test.getComment();
-                        String coment = comentPane.getComent();
-                        if(!query.equals("") && !resExpT.equals(resExpF)){
-                            if(var==0){
-                                scenario.setTestName("Instanciación");
-                                var=1;
+                        QueryOntology testQuery = new QueryOntology();
+                        for(int i=0; i<cQuery.length;i++){
+                            if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
+                            if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                                testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                            }else{
+                                testQuery = new QueryOntology(cQuery[i],cResult[i]);
                             }
-                            QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            if(test.getBorrado()==false){
-                                if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
-                                    queryTest1.add(testQuery);
-                                    scenario.setQueryTest(queryTest1);
-                                    cont++;
-                                    aux=1;
-                                    getInst().add(i, 0);
+                            queryTest1.add(testQuery);
+                            scenario.setQueryTest(queryTest1);
+                            aux=1;
+                            getInst().add(i, 0);
+                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
+                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
+                                getInst().add(i, 1);
+                                setValidoInst(false);
+                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                    validarTests.validarResultadoInstSatis(cResult[i])==false){
+                                getInst().add(i, 2);
+                                setValidoInst(false);
+                            }else{
+                                getInst().add(i, 3);
+                                setValidoInst(false);
+                            }
+                        } 
+                    }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
+                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                        "Al menos debe introducir una consulta para ejecutar el test.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSinConsultas(true);
+                    } 
+                    if(getInstTextName()==true){
+                        if(testYaExiste(scenario.getNombre())==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoInst()==true){
+                                        if(aux==1){
+                                            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                                            if(hayInstanciasAsociadas(instancias)==false){
+                                                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                                    "Instanciacion no tiene instancias asociadas. ¿Desea " +
+                                                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                                if (n == JOptionPane.NO_OPTION){
+                                                    setNoHayInstancias(true);
+                                                }
+                                            }
+                                        }
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                        "El formato de los datos marcados en rojo no es correcto." +
+                                        "\nPor favor, consulte la ayuda acerca del formato " +
+                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                        formatoIncorrecto(0);
+                                    }
+                                }
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                            "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                            "Warning Message",JOptionPane.WARNING_MESSAGE);
+                            setTestYaExiste(true);
+                        }
+                    }  
+                }
+            }
+        }
+    }else if(sel==1){
+        if(retCompletado==false){
+            ret = new ArrayList();
+            getRet().add(0,0);
+            if(getTabbedPaneRet()==0){
+                for(int i=1;i<totalRet;i++){
+                    if(getSinConsultas()==false){
+                    if(getRetTextName()==true){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
+                    descPanel = (DescripcionJPanel) panelRet.getComponent(0);
+                    if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") || !test2.getQueryResult().equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setRetTextName(false);
+                    }else if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
+                            if(var==0){
+                                nombreTest = descPanel.getNombreTextField();
+                                descTest = descPanel.getDescTextArea();
+                                scenario.setDescripcion(descTest);
+                                scenario.setNombre(nombreTest);
+                            }
+                            String query = test2.getQuery();
+                            String queryExp = test2.getQueryResult();
+                            AddComentJDialog comentPane = test2.getComment();
+                            String coment = comentPane.getComent();
+                            if(!query.equals("") && !queryExp.equals("")){
+                                varAux=1;
+                                if(var==0){
+                                    scenario.setTestName("Retrieval");
+                                    var=1;
+                                }
+                                aux=1;
+                                QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+                                if(test2.getBorrado()==false){
+                                        if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                            validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                            queryTest2.add(testQuery);
+                                            scenario.setQueryTest(queryTest2);
+                                            cont++;
+                                            aux=1;
+                                            getRet().add(i, 0);
+                                        }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                            validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                            getRet().add(i, 1);
+                                            setValidoRet(false);
+                                        }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                            validarTests.validarResultado(testQuery.getResultexpected())==false){
+                                            getRet().add(i, 2);
+                                            setValidoRet(false);
+                                        }else{
+                                            getRet().add(i, 3);
+                                            setValidoRet(false);
+                                        }
                                 }else{
-                                    getInst().add(i, 1);
-                                    setValidoInst(false);
+                                    test2.remove(i);
+                                    getRet().add(i, 0);
                                 }
                             }else{
-                                test.remove(i);
-                                getInst().add(i, 0);
+                                i++;
                             }
-                        }/*else if((!query.equals("") && resExpT.equals(resExpF)) || ((query.equals("") && !resExpT.equals(resExpF)))){
-                            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                        }*/else{
-                            i++;
-                        }
-                        hayQuery=true;
-                }
-                }
-                }
-                if(hayQuery==false){
-                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
-                   continua=false;
-                }
-            if(AddInstancesJPanel.isStateNuevo()==true){
-                if(todosTienenNombre()==false){
-                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
-                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else if(hayQuery==true){
-                    tratarNuevoTest(sel);
-                }else{
-                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
-                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                } 
-            }
-            
-            if(getInstTextName()==true && getValidoInst()==true){
-                if(aux==1){
-                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);   
-                    if(hayInstanciasAsociadas(instancias)==false){
-                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                                "Instanciacion no tiene instancias asociadas. ¿Desea " +
-                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                        if (n == JOptionPane.NO_OPTION){
-                                setNoHayInstancias(true);
+                    }else if((!test2.getQuery().equals("") && test2.getQueryResult().equals("")) ||
+                            ((test2.getQuery().equals("") && !test2.getQueryResult().equals("")))){
+                                varAux=1;
+                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setAmbosNecesarios(true);
+                    }else if(test2.getQuery().equals("") && test2.getQueryResult().equals("")){
+                        if(!descPanel.getNombreTextField().equals("")){
+                            if(varAux==0){
+                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }
                         }
                     }
                 }
-            }
+                }
+                }
+                if(testYaExiste(scenario.getNombre())==true){
+                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                    "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    setTestYaExiste(true);
+                } 
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    if(getRetTextName()==true){
+                        if(getTestYaExiste()==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoRet()==true){
+                                        tratarNuevoTest(sel);
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                        "El formato de los datos marcados en rojo no es correcto." +
+                                        "\nPor favor, consulte la ayuda acerca del formato " +
+                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                        formatoIncorrecto(1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(getRetTextName()==true && getValidoRet()==true && getTestYaExiste()==false){
+                        if(aux==1){
+                            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                            if(hayInstanciasAsociadas(instancias)==false){
+                                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                    "Retrieval no tiene instancias asociadas. ¿Desea " +
+                                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                if (n == JOptionPane.NO_OPTION){    
+                                    setNoHayInstancias(true);
+                                }
+                            }
+                        }
+                    }else if(getValidoRet()==false){
+                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        "El formato de los datos marcados en rojo no es correcto." +
+                        "\nPor favor, consulte la ayuda acerca del formato " +
+                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        formatoIncorrecto(1);
+                    }
+                }
         }else{
-            descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-            texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaQuery();
-            conjuntoResult = texto.getResultadoEsperado();
-            conjuntoComent = texto.getComentTextArea();
-            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
-                        setInstTextName(false);
-            }else{
+                descPanel = (DescripcionJPanel) panelRet.getComponent(0);
+                texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaQuery();
+                conjuntoResult = texto.getResultadoEsperado();
+                conjuntoComent = texto.getComentTextArea();
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("")) || (!conjuntoResult.equals(""))){
+                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                    "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);        
+                    setRetTextName(false);
+                }else{
                 cQuery = conjuntoQuerys.split("\\\n");
                 cResult = conjuntoResult.split("\\\n");
                 cComent = conjuntoComent.split("\\\n");
                 if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                    (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
                 }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
                     if(var==0){
                         nombreTest = descPanel.getNombreTextField();
                         descTest = descPanel.getDescTextArea();
                         scenario.setDescripcion(descTest);
                         scenario.setNombre(nombreTest);
-                        scenario.setTestName("Instanciación");
+                        scenario.setTestName("Retrieval");
+                        var=1;
+                    }
+                    QueryOntology testQuery = new QueryOntology();
+                    for(int i=0; i<cQuery.length;i++){
+                        if(validarTests.validarQuery(cQuery[i])==true &&
+                           validarTests.validarResultado(cResult[i])==true){
+                            if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                                testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                            }else{
+                                testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                            }
+                            queryTest2.add(testQuery);
+                            scenario.setQueryTest(queryTest2);
+                            aux=1;
+                            getRet().add(i, 0);
+                        }else if(validarTests.validarQuery(cQuery[i])==false && 
+                                 validarTests.validarResultado(cResult[i])==true){
+                            getRet().add(i, 1);
+                            setValidoRet(false);
+                        }else if(validarTests.validarQuery(cQuery[i])==true && 
+                                 validarTests.validarResultado(cResult[i])==false){
+                            getRet().add(i, 2);
+                            setValidoRet(false);
+                        }else{
+                            getRet().add(i, 3);
+                            setValidoRet(false);
+                        }
+                    }
+                }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
+                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        "Al menos debe introducir una consulta para ejecutar el test.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSinConsultas(true);
+                }
+                if(getRetTextName()==true){
+                    if(testYaExiste(scenario.getNombre())==false){
+                        if(getSinConsultas()==false){
+                            if(getAmbosNecesarios()==false){
+                                if(getValidoRet()==true){
+                                    if(aux==1){
+                                        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                                        if(hayInstanciasAsociadas(instancias)==false){
+                                            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                                "Retrieval no tiene instancias asociadas. ¿Desea " +
+                                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                            if (n == JOptionPane.NO_OPTION){
+                                                setNoHayInstancias(true);
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                    "El formato de los datos marcados en rojo no es correcto." +
+                                    "\nPor favor, consulte la ayuda acerca del formato " +
+                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                    formatoIncorrecto(1);
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                    "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    setTestYaExiste(true);
+                }
+            }
+         }
+    }
+    }else if(sel==2){
+        if(realCompletado==false){
+            real = new ArrayList();
+            getReal().add(0,0);
+            if(getTabbedPaneReal()==0){
+                for(int i=1;i<totalReal;i++){
+                    if(getSinConsultas()==false){
+                    if(getRealTextName()==true){
+                    test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
+                    descPanel = (DescripcionJPanel) panelReal.getComponent(0);
+                    if(descPanel.getNombreTextField().equals("") && (!test1.getQuery().equals("") || !test1.getQueryResult().equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                            "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setRealTextName(false);
+                    }else if(!test1.getQuery().equals("") && !test1.getQueryResult().equals("")){
+                            if(var==0){
+                                nombreTest = descPanel.getNombreTextField();
+                                descTest = descPanel.getDescTextArea();
+                                scenario.setDescripcion(descTest);
+                                scenario.setNombre(nombreTest);
+                            }
+                            String query = test1.getQuery();
+                            String queryExp = test1.getQueryResult();
+                            AddComentJDialog comentPane = test1.getComment();
+                            String coment = comentPane.getComent();
+                            if(!query.equals("") && !queryExp.equals("")){
+                                varAux=1;
+                                if(var==0){
+                                    scenario.setTestName("Realización");
+                                    var=1;
+                                }
+                                aux=1;
+                                QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+                                if(test1.getBorrado()==false){
+                                    if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                        validarTests.validarQuery(testQuery.getResultexpected())==true){
+                                        queryTest3.add(testQuery);
+                                        scenario.setQueryTest(queryTest3);
+                                        cont++;
+                                        aux=1;
+                                        getReal().add(i, 0);
+                                    }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                        validarTests.validarQuery(testQuery.getResultexpected())==true){
+                                        getReal().add(i, 1);
+                                        setValidoReal(false);
+                                    }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                        validarTests.validarQuery(testQuery.getResultexpected())==false){
+                                        getReal().add(i, 2);
+                                        setValidoReal(false);
+                                    }else{
+                                        getReal().add(i, 3);
+                                        setValidoReal(false);
+                                    }
+                                }else{
+                                    test1.remove(i);
+                                    getReal().add(i, 0);
+                                }
+                            }else{
+                                i++;
+                            }  
+                    }else if((!test1.getQuery().equals("") && test1.getQueryResult().equals("")) 
+                            || (test1.getQuery().equals("") && !test1.getQueryResult().equals(""))){
+                                varAux=1;
+                                JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                        "Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios.",
+                                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setAmbosNecesarios(true);
+                    }else if(test1.getQuery().equals("") && test1.getQueryResult().equals("")){
+                        if(!descPanel.getNombreTextField().equals("")){
+                            if(varAux==0){
+                                JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }
+                        }
+                    }
+                }
+                }
+                }
+                
+            if(testYaExiste(scenario.getNombre())==true){
+                JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                setTestYaExiste(true);
+            }     
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                    if(getRealTextName()==true){
+                        if(getTestYaExiste()==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoReal()==true){
+                                        tratarNuevoTest(sel);
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                        "El formato de los datos marcados en rojo no es correcto." +
+                                        "\nPor favor, consulte la ayuda acerca del formato " +
+                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                        formatoIncorrecto(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(getRealTextName()==true && getValidoReal()==true && getTestYaExiste()==false){
+                        if(aux==1){
+                            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                            if(hayInstanciasAsociadas(instancias)==false){
+                                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                    "Realizacion no tiene instancias asociadas. ¿Desea " +
+                                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                if (n == JOptionPane.NO_OPTION){ 
+                                    setNoHayInstancias(true);
+                                }
+                            }
+                        }
+                    }else if(getValidoReal()==false){
+                            JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                            "El formato de los datos marcados en rojo no es correcto." +
+                            "\nPor favor, consulte la ayuda acerca del formato " +
+                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                            formatoIncorrecto(2);
+                    }
+                }
+            }else{
+                descPanel = (DescripcionJPanel) panelReal.getComponent(0);
+                texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaQuery();
+                conjuntoResult = texto.getResultadoEsperado();
+                conjuntoComent = texto.getComentTextArea();
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("") || (!conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                    "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);         
+                    setRealTextName(false);
+                }else{
+                cQuery = conjuntoQuerys.split("\\\n");
+                cResult = conjuntoResult.split("\\\n");
+                cComent = conjuntoComent.split("\\\n");
+                if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
+                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
+                }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                    if(var==0){
+                        nombreTest = descPanel.getNombreTextField();
+                        descTest = descPanel.getDescTextArea();
+                        scenario.setDescripcion(descTest);
+                        scenario.setNombre(nombreTest);
+                        scenario.setTestName("Realización");
+                        var=1;
+                    }
+                    QueryOntology testQuery = new QueryOntology();
+                    for(int i=0; i<cQuery.length;i++){
+                        if(validarTests.validarQuery(cQuery[i])==true &&
+                            validarTests.validarQuery(cResult[i])==true){
+                            if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                                testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                            }else{
+                                testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                            }
+                            queryTest3.add(testQuery);
+                            scenario.setQueryTest(queryTest3);
+                            aux=1;
+                            getReal().add(i, 0);
+                        }else if(validarTests.validarQuery(cQuery[i])==false && 
+                                 validarTests.validarQuery(cResult[i])==true){
+                            getReal().add(i, 1);
+                            setValidoReal(false);
+                        }else if(validarTests.validarQuery(cQuery[i])==true && 
+                                 validarTests.validarQuery(cResult[i])==false){
+                            getReal().add(i, 2);
+                            setValidoReal(false);
+                        }else{
+                            getReal().add(i, 3);
+                            setValidoReal(false);
+                        } 
+                    } 
+
+                }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
+                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                        "Al menos debe introducir una consulta para ejecutar el test.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSinConsultas(true);
+                }
+                if(getRealTextName()==true){
+                    if(testYaExiste(scenario.getNombre())==false){
+                        if(getSinConsultas()==false){
+                            if(getAmbosNecesarios()==false){
+                                if(getValidoReal()==true){
+                                    if(aux==1){
+                                        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                                        if(hayInstanciasAsociadas(instancias)==false){
+                                            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                                "Realizacion no tiene instancias asociadas. ¿Desea " +
+                                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                            if (n == JOptionPane.NO_OPTION){
+                                                setNoHayInstancias(true);
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                    "El formato de los datos marcados en rojo no es correcto." +
+                                    "\nPor favor, consulte la ayuda acerca del formato " +
+                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                    formatoIncorrecto(2);
+                                }
+                            }
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                        "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setTestYaExiste(true);
+                }
+                }
+                }
+            }
+        }
+    }else if(sel==3){
+        if(satCompletado==false){
+            sat = new ArrayList();
+            getSat().add(0,0);
+            if(getTabbedPaneSat()==0){
+                for(int i=1;i<totalSat;i++){
+                    if(getSinConsultas()==false){
+                    if(getSatTextName()==true){
+                    test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
+                    descPanel = (DescripcionJPanel) panelSat.getComponent(0);
+                    if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue()))){
+                        JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                        "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSatTextName(false);
+                    }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
+                            if(var==0){
+                                nombreTest = descPanel.getNombreTextField();
+                                descTest = descPanel.getDescTextArea();
+                                scenario.setDescripcion(descTest);
+                                scenario.setNombre(nombreTest);
+                            }
+                            String query = test.getQuery();
+                            String resExpT = test.isTestTrue();
+                            String resExpF = test.isTestFalse();
+                            AddComentJDialog comentPane = test.getComment();
+                            String coment = comentPane.getComent();
+                            if(!query.equals("") && !resExpT.equals(resExpF)){
+                                varAux=1;
+                                if(var==0){
+                                    scenario.setTestName("Satisfactibilidad");
+                                    var=1;
+                                }
+                                aux=1;
+                                QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+                                if(test.getBorrado()==false){
+                                    if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
+                                        queryTest4.add(testQuery);
+                                        scenario.setQueryTest(queryTest4);
+                                        cont++;
+                                        aux=1;
+                                        getSat().add(i, 0);
+                                    }else{
+                                        getSat().add(i, 1);
+                                        setValidoSat(false);
+                                    }
+                                }else{
+                                    test.remove(i);
+                                    getSat().add(i, 0);
+                                }
+                            }else{
+                                i++;
+                            }   
+                    }else if(!test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue()) ||
+                            test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
+                                varAux=1;
+                                JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                        "Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios.","Warning Message",
+                                JOptionPane.WARNING_MESSAGE);
+                                setAmbosNecesarios(true);
+                    }else if(test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue())){
+                        if(!descPanel.getNombreTextField().equals("")){
+                            if(varAux==0){
+                                JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }
+                        }
+                    }
+                }
+                }
+                }
+            if(testYaExiste(scenario.getNombre())==true){
+                JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                setTestYaExiste(true);
+            }     
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                    if(getSatTextName()==true){
+                        if(getTestYaExiste()==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoSat()==true){
+                                        tratarNuevoTest(sel);
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                        "El formato de los datos marcados en rojo no es correcto." +
+                                        "\nPor favor, consulte la ayuda acerca del formato " +
+                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                        formatoIncorrecto(3);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    if(getSatTextName()==true && getValidoSat()==true && getTestYaExiste()==false){
+                        if(aux==1){
+                            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                            if(hayInstanciasAsociadas(instancias)==false){
+                                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                    "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
+                                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                if (n == JOptionPane.NO_OPTION){ 
+                                    setNoHayInstancias(true);
+                                }
+                            }
+                        }
+                    }else if(getValidoSat()==false){
+                            JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                "El formato de los datos marcados en rojo no es correcto." +
+                                "\nPor favor, consulte la ayuda acerca del formato " +
+                                "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                            formatoIncorrecto(3);
+                    }
+                }
+            }else{
+                descPanel = (DescripcionJPanel) panelSat.getComponent(0);
+                texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaQuery();
+                conjuntoResult = texto.getResultadoEsperado();
+                conjuntoComent = texto.getComentTextArea();
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("") || (!conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                    "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);         
+                    setSatTextName(false);
+                }else{
+                cQuery = conjuntoQuerys.split("\\\n");
+                cResult = conjuntoResult.split("\\\n");
+                cComent = conjuntoComent.split("\\\n");
+                if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
+                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test Satisfactibilidad: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
+                }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                    if(var==0){
+                        nombreTest = descPanel.getNombreTextField();
+                        descTest = descPanel.getDescTextArea();
+                        scenario.setDescripcion(descTest);
+                        scenario.setNombre(nombreTest);
+                        scenario.setTestName("Satisfactibilidad");
                         var=1;
                     }
                     QueryOntology testQuery = new QueryOntology();
@@ -1568,695 +2294,291 @@ public static void asociarInstancias(int sel){
                         }else{
                             testQuery = new QueryOntology(cQuery[i],cResult[i]);
                         }
-                        queryTest1.add(testQuery);
-                        scenario.setQueryTest(queryTest1);
+                        queryTest4.add(testQuery);
+                        scenario.setQueryTest(queryTest4);
                         aux=1;
-                        getInst().add(i, 0);
+                        getSat().add(i, 0);
                         }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
                                 validarTests.validarResultadoInstSatis(cResult[i])==true){
-                            getInst().add(i, 1);
-                            setValidoInst(false);
+                                getSat().add(i, 1);
+                                setValidoSat(false);
                         }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
                                 validarTests.validarResultadoInstSatis(cResult[i])==false){
-                            getInst().add(i, 2);
-                            setValidoInst(false);
+                                getSat().add(i, 2);
+                                setValidoSat(false);
                         }else{
-                            getInst().add(i, 3);
-                            setValidoInst(false);
-                        }
-                    } 
-                }
-                if(getValidoInst()==true){
-                if(aux==1){
-                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                    if(hayInstanciasAsociadas(instancias)==false){
-                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                                "Instanciacion no tiene instancias asociadas. ¿Desea " +
-                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                        if (n == JOptionPane.NO_OPTION){
-                                    setNoHayInstancias(true);
+                                getSat().add(i, 3);
+                                setValidoSat(false);
                         }
                     }
+                }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
+                        JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                        "Al menos debe introducir una consulta para ejecutar el test.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSinConsultas(true);
                 }
-                }
-            }
-        }
-    }else if(sel==1){
-        continua=true;
-        ret = new ArrayList();
-        getRet().add(0,0);
-        setRetTextName(true);
-        setTestYaExiste(false);
-        setValidoRet(true);
-        if(getTabbedPaneRet()==0){
-            for(int i=1;i<totalRet;i++){
-                if(getRetTextName()==true){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
-                descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-                if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") && !test2.getQueryResult().equals(""))){
-                    setRetTextName(false);
-                }else if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
-                        if(var==0){
-                            nombreTest = descPanel.getNombreTextField();
-                            descTest = descPanel.getDescTextArea();
-                            scenario.setDescripcion(descTest);
-                            scenario.setNombre(nombreTest);
-                        }
-                        String query = test2.getQuery();
-                        String queryExp = test2.getQueryResult();
-                        AddComentJDialog comentPane = test2.getComment();
-                        String coment = comentPane.getComent();
-                        if(!query.equals("") && !queryExp.equals("")){
-                            if(var==0){
-                                scenario.setTestName("Retrieval");
-                                var=1;
-                            }
-                            aux=1;
-                            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(test2.getBorrado()==false){
-                                if(validarTests.validarQuery(testQuery.getQuery())==true &&
-                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                    queryTest2.add(testQuery);
-                                    scenario.setQueryTest(queryTest2);
-                                    cont++;
-                                    aux=1;
-                                    getRet().add(i, 0);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
-                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                    getRet().add(i, 1);
-                                    setValidoRet(false);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
-                                    validarTests.validarResultado(testQuery.getResultexpected())==false){
-                                    getRet().add(i, 2);
-                                    setValidoRet(false);
-                                }else{
-                                    getRet().add(i, 3);
-                                    setValidoRet(false);
-                                }
-                            }else{
-                                test2.remove(i);
-                                getRet().add(i, 0);
-                            }
-                        }else if((!query.equals("") && queryExp.equals("")) || 
-                                (query.equals("") && !queryExp.equals(""))){
-                                JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
-                                "y RESULTADO ESPERADO son obligatorios.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                        }else{
-                            i++;
-                        }
-                        hayQuery=true;  
-                }
-            }
-            }
-            if(hayQuery==false){
-                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
-                   continua=false;
-            }
-            if(AddInstancesJPanel.isStateNuevo()==true){
-                if(todosTienenNombre()==false){
-                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
-                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else if(hayQuery==true){
-                    tratarNuevoTest(sel);
-                }else{
-                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
-                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                } 
-            }
-
-            if(getRetTextName()==true && getValidoRet()==true){
-            if(aux==1){
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                if(hayInstanciasAsociadas(instancias)==false){
-                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                        "Retrieval no tiene instancias asociadas. ¿Desea " +
-                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.NO_OPTION){    
-                        setNoHayInstancias(true);
-                    }
-                }
-            }
-            }
-    }else{
-            descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-            texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaQuery();
-            conjuntoResult = texto.getResultadoEsperado();
-            conjuntoComent = texto.getComentTextArea();
-            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
-                        setRetTextName(false);
-            }else{
-            cQuery = conjuntoQuerys.split("\\\n");
-            cResult = conjuntoResult.split("\\\n");
-            cComent = conjuntoComent.split("\\\n");
-            if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                    (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-                if(var==0){
-                    nombreTest = descPanel.getNombreTextField();
-                    descTest = descPanel.getDescTextArea();
-                    scenario.setDescripcion(descTest);
-                    scenario.setNombre(nombreTest);
-                    scenario.setTestName("Retrieval");
-                    var=1;
-                }
-                QueryOntology testQuery = new QueryOntology();
-                for(int i=0; i<cQuery.length;i++){
-                    if(validarTests.validarQuery(cQuery[i])==true &&
-                       validarTests.validarResultado(cResult[i])==true){
-                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
-                        }else{
-                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
-                        }
-                        queryTest2.add(testQuery);
-                        scenario.setQueryTest(queryTest2);
-                        aux=1;
-                        getRet().add(i, 0);
-                    }else if(validarTests.validarQuery(cQuery[i])==false && 
-                             validarTests.validarResultado(cResult[i])==true){
-                        getRet().add(i, 1);
-                        setValidoRet(false);
-                    }else if(validarTests.validarQuery(cQuery[i])==true && 
-                             validarTests.validarResultado(cResult[i])==false){
-                        getRet().add(i, 2);
-                        setValidoRet(false);
-                    }else{
-                        getRet().add(i, 3);
-                        setValidoRet(false);
-                    }
-                }
-            }
-            if(getValidoRet()==true){
-                if(aux==1){
-                    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                    if(hayInstanciasAsociadas(instancias)==false){
-                        int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                            "Retrieval no tiene instancias asociadas. ¿Desea " +
-                            "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                        if (n == JOptionPane.NO_OPTION){ 
-                            setNoHayInstancias(true);
-                        }
-                    }
-                }
-            }
-        }
-     }
-    }else if(sel==2){
-        continua=true;
-        real = new ArrayList();
-        getReal().add(0,0);
-        setValidoReal(true);
-        setTestYaExiste(false);
-        setRealTextName(true);
-        if(getTabbedPaneReal()==0){
-            for(int i=1;i<totalReal;i++){
-                if(getRealTextName()==true){
-                test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
-                descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-                if(descPanel.getNombreTextField().equals("") && (!test1.getQuery().equals("") && !test1.getQueryResult().equals(""))){
-                    setRealTextName(false);
-                }else if(!test1.getQuery().equals("") && !test1.getQueryResult().equals("")){
-                        if(var==0){
-                            nombreTest = descPanel.getNombreTextField();
-                            descTest = descPanel.getDescTextArea();
-                            scenario.setDescripcion(descTest);
-                            scenario.setNombre(nombreTest);
-                        }
-                        String query = test1.getQuery();
-                        String queryExp = test1.getQueryResult();
-                        AddComentJDialog comentPane = test1.getComment();
-                        String coment = comentPane.getComent();
-                        if(!query.equals("") && !queryExp.equals("")){
-                            if(var==0){
-                                scenario.setTestName("Realización");
-                                var=1;
-                            }
-                            aux=1;
-                            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(test1.getBorrado()==false){
-                                if(validarTests.validarQuery(testQuery.getQuery())==true &&
-                                    validarTests.validarQuery(testQuery.getResultexpected())==true){
-                                    queryTest3.add(testQuery);
-                                    scenario.setQueryTest(queryTest3);
-                                    cont++;
-                                    aux=1;
-                                    getReal().add(i, 0);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
-                                    validarTests.validarQuery(testQuery.getResultexpected())==true){
-                                    getReal().add(i, 1);
-                                    setValidoReal(false);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
-                                    validarTests.validarQuery(testQuery.getResultexpected())==false){
-                                    getReal().add(i, 2);
-                                    setValidoReal(false);
-                                }else{
-                                    getReal().add(i, 3);
-                                    setValidoReal(false);
-                                }
-                            }else{
-                                test1.remove(i);
-                                getReal().add(i, 0);
-                            }
-                        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
-                            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
-                                "y RESULTADO ESPERADO son obligatorios.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                        }else{
-                            i++;
-                        }  
-                        hayQuery=true;
-                }
-            }
-            }
-            if(hayQuery==false){
-                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
-                   continua=false;
-            }
-        if(AddInstancesJPanel.isStateNuevo()==true){
-                if(todosTienenNombre()==false){
-                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
-                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else if(hayQuery==true){
-                    tratarNuevoTest(sel);
-                }else{
-                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
-                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                } 
-            }
-            
-        if(getRealTextName()==true && getValidoReal()==true){
-            if(aux==1){
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                if(hayInstanciasAsociadas(instancias)==false){
-                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                        "Realizacion no tiene instancias asociadas. ¿Desea " +
-                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.NO_OPTION){ 
-                        setNoHayInstancias(true);
-                    }
-                }
-            }
-        }
-        }else{
-            descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-            texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaQuery();
-            conjuntoResult = texto.getResultadoEsperado();
-            conjuntoComent = texto.getComentTextArea();
-            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
-                        setRealTextName(false);
-            }else{
-            cQuery = conjuntoQuerys.split("\\\n");
-            cResult = conjuntoResult.split("\\\n");
-            cComent = conjuntoComent.split("\\\n");
-            if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                    (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-                if(var==0){
-                    nombreTest = descPanel.getNombreTextField();
-                    descTest = descPanel.getDescTextArea();
-                    scenario.setDescripcion(descTest);
-                    scenario.setNombre(nombreTest);
-                    scenario.setTestName("Realización");
-                    var=1;
-                }
-                QueryOntology testQuery = new QueryOntology();
-                for(int i=0; i<cQuery.length;i++){
-                    if(validarTests.validarQuery(cQuery[i])==true &&
-                        validarTests.validarQuery(cResult[i])==true){
-                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
-                        }else{
-                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
-                        }
-                        queryTest3.add(testQuery);
-                        scenario.setQueryTest(queryTest3);
-                        aux=1;
-                        getReal().add(i, 0);
-                    }else if(validarTests.validarQuery(cQuery[i])==false && 
-                             validarTests.validarQuery(cResult[i])==true){
-                        getReal().add(i, 1);
-                        setValidoReal(false);
-                    }else if(validarTests.validarQuery(cQuery[i])==true && 
-                             validarTests.validarQuery(cResult[i])==false){
-                        getReal().add(i, 2);
-                        setValidoReal(false);
-                    }else{
-                        getReal().add(i, 3);
-                        setValidoReal(false);
-                    } 
-                } 
-               
-            }
-            if(getValidoReal()==true){
-            if(aux==1){
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                if(hayInstanciasAsociadas(instancias)==false){
-                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                        "Realizacion no tiene instancias asociadas. ¿Desea " +
-                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.NO_OPTION){ 
-                        setNoHayInstancias(true);
-                    }
-                }
-              }
-          }
-        }
-        }
-    }else if(sel==3){
-        continua=true;
-        sat = new ArrayList();
-        getSat().add(0,0);
-        setValidoSat(true);
-        setTestYaExiste(false);
-        setSatTextName(true);
-        if(getTabbedPaneSat()==0){
-            for(int i=1;i<totalSat;i++){
                 if(getSatTextName()==true){
-                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
-                descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-                if(descPanel.getNombreTextField().equals("") && (!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue()))){
-                    setSatTextName(false);
-                }else if(!test.getQuery().equals("") && !test.isTestFalse().equals(test.isTestTrue())){
-                        if(var==0){
-                            nombreTest = descPanel.getNombreTextField();
-                            descTest = descPanel.getDescTextArea();
-                            scenario.setDescripcion(descTest);
-                            scenario.setNombre(nombreTest);
-                        }
-                        String query = test.getQuery();
-                        String resExpT = test.isTestTrue();
-                        String resExpF = test.isTestFalse();
-                        AddComentJDialog comentPane = test.getComment();
-                        String coment = comentPane.getComent();
-                        if(!query.equals("") && !resExpT.equals(resExpF)){
-                            if(var==0){
-                                scenario.setTestName("Satisfactibilidad");
-                                var=1;
-                            }
-                            aux=1;
-                            QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                            if(test.getBorrado()==false){
-                                if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
-                                    queryTest4.add(testQuery);
-                                    scenario.setQueryTest(queryTest4);
-                                    cont++;
-                                    aux=1;
-                                    getSat().add(i, 0);
+                    if(testYaExiste(scenario.getNombre())==false){
+                        if(getSinConsultas()==false){
+                            if(getAmbosNecesarios()==false){
+                                if(getValidoSat()==true){
+                                    if(aux==1){
+                                        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                                        if(hayInstanciasAsociadas(instancias)==false){
+                                            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                                "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
+                                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                            if (n == JOptionPane.NO_OPTION){
+                                                setNoHayInstancias(true);
+                                            }
+                                        }
+                                    }
                                 }else{
-                                    getSat().add(i, 1);
-                                    setValidoSat(false);
+                                    JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                    "El formato de los datos marcados en rojo no es correcto." +
+                                    "\nPor favor, consulte la ayuda acerca del formato " +
+                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                    formatoIncorrecto(3);
                                 }
-                            }else{
-                                test.remove(i);
-                                getSat().add(i, 0);
                             }
-                        }else if((!query.equals("") && resExpT.equals(resExpF)) || 
-                                ((query.equals("") && !resExpT.equals(resExpF)))){
-                            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
-                            "y RESULTADO ESPERADO son obligatorios.","Warning Message",
-                            JOptionPane.WARNING_MESSAGE);
-                        }else{
-                            i++;
-                        }   
-                        hayQuery=true;
-                }
-            }
-            }
-            if(hayQuery==false){
-                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
-                   continua=false;
-            }
-        if(AddInstancesJPanel.isStateNuevo()==true){
-                if(todosTienenNombre()==false){
-                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
-                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else if(hayQuery==true){
-                    tratarNuevoTest(sel);
-                }else{
-                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
-                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                } 
-            }
-            
-        if(getSatTextName()==true && getValidoSat()==true){
-        if(aux==1){
-            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-            if(hayInstanciasAsociadas(instancias)==false){
-                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                    "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
-                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.NO_OPTION){ 
-                    setNoHayInstancias(true);
-                }
-            }
-        }
-        }
-        }else{
-            descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-            texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaQuery();
-            conjuntoResult = texto.getResultadoEsperado();
-            conjuntoComent = texto.getComentTextArea();
-            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("")){
-                        setSatTextName(false);
-            }else{
-            cQuery = conjuntoQuerys.split("\\\n");
-            cResult = conjuntoResult.split("\\\n");
-            cComent = conjuntoComent.split("\\\n");
-            if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                    (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-                if(var==0){
-                    nombreTest = descPanel.getNombreTextField();
-                    descTest = descPanel.getDescTextArea();
-                    scenario.setDescripcion(descTest);
-                    scenario.setNombre(nombreTest);
-                    scenario.setTestName("Satisfactibilidad");
-                    var=1;
-                }
-                QueryOntology testQuery = new QueryOntology();
-                for(int i=0; i<cQuery.length;i++){
-                    if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                            validarTests.validarResultadoInstSatis(cResult[i])==true){
-                    if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                        testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                        }
                     }else{
-                        testQuery = new QueryOntology(cQuery[i],cResult[i]);
-                    }
-                    queryTest4.add(testQuery);
-                    scenario.setQueryTest(queryTest4);
-                    aux=1;
-                    getSat().add(i, 0);
-                    }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
-                            validarTests.validarResultadoInstSatis(cResult[i])==true){
-                            getSat().add(i, 1);
-                            setValidoSat(false);
-                    }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                            validarTests.validarResultadoInstSatis(cResult[i])==false){
-                            getSat().add(i, 2);
-                            setValidoSat(false);
-                    }else{
-                            getSat().add(i, 3);
-                            setValidoSat(false);
-                    }
-                }
-            }
-            if(getValidoSat()==true){
-            if(aux==1){
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                if(hayInstanciasAsociadas(instancias)==false){
-                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                    "Satisfactibilidad no tiene instancias asociadas. ¿Desea " +
-                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.NO_OPTION){
-                        setNoHayInstancias(true);
+                        JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                        "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setTestYaExiste(true);
                     }
                 }
             }
             }
-        }
         }
     }else if(sel==4){
-        continua=true;
-        clas = new ArrayList();
-        getClas().add(0,0);
-        setValidoClas(true);
-        setTestYaExiste(false);
-        setClasTextName(true);
-        if(getTabbedPaneClas()==0){
-            for(int i=1;i<totalClas;i++){
-                if(getClasTextName()==true){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
-                descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-                if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") || !test2.getQueryResult().equals(""))){
+        if(clasCompletado==false){
+            clas = new ArrayList();
+            getClas().add(0,0);
+            if(getTabbedPaneClas()==0){
+                for(int i=1;i<totalClas;i++){
+                    if(getSinConsultas()==false){
+                    if(getClasTextName()==true){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
+                    descPanel = (DescripcionJPanel) panelClas.getComponent(0);
+                    if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") || !test2.getQueryResult().equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                            "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);    
                         setClasTextName(false);
-                }else 
-                if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
-                        if(var==0){
-                            nombreTest = descPanel.getNombreTextField();
-                            descTest = descPanel.getDescTextArea();
-                            scenario.setDescripcion(descTest);
-                            scenario.setNombre(nombreTest);
-                        }
-                        String query = test2.getQuery();
-                        String queryExp = test2.getQueryResult();
-                        AddComentJDialog comentPane = test2.getComment();
-                        String coment = comentPane.getComent();
-                        if(!query.equals("") && !queryExp.equals("")){
+                    }else 
+                    if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
                             if(var==0){
-                                scenario.setTestName("Clasificación");
-                                var=1;
+                                nombreTest = descPanel.getNombreTextField();
+                                descTest = descPanel.getDescTextArea();
+                                scenario.setDescripcion(descTest);
+                                scenario.setNombre(nombreTest);
                             }
-                            aux=1;
-                            QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                            if(test2.getBorrado()==false){
-                                if(validarTests.validarQuery(testQuery.getQuery())==true &&
-                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                    queryTest5.add(testQuery);
-                                    scenario.setQueryTest(queryTest5);
-                                    cont++;
-                                    aux=1;
-                                    getClas().add(i, 0);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
-                                    validarTests.validarResultado(testQuery.getResultexpected())==true){
-                                    getClas().add(i, 1);
-                                    setValidoClas(false);
-                                }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
-                                    validarTests.validarResultado(testQuery.getResultexpected())==false){
-                                    getClas().add(i, 2);
-                                    setValidoClas(false);
-                                }else{
-                                    getClas().add(i, 3);
-                                    setValidoClas(false);
+                            String query = test2.getQuery();
+                            String queryExp = test2.getQueryResult();
+                            AddComentJDialog comentPane = test2.getComment();
+                            String coment = comentPane.getComent();
+                            if(!query.equals("") && !queryExp.equals("")){
+                                varAux=1;
+                                if(var==0){
+                                    scenario.setTestName("Clasificación");
+                                    var=1;
                                 }
-                            }else{
-                                test2.remove(i);
-                                getClas().add(i, 0);
-                            }
-                        }else if((!query.equals("") && queryExp.equals("")) || (query.equals("") && !queryExp.equals(""))){
-                            JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA " +
-                                "y RESULTADO ESPERADO son obligatorios.",
+                                aux=1;
+                                QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
+                                if(test2.getBorrado()==false){
+                                    if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                        validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                        queryTest5.add(testQuery);
+                                        scenario.setQueryTest(queryTest5);
+                                        cont++;
+                                        aux=1;
+                                        getClas().add(i, 0);
+                                    }else if(validarTests.validarQuery(testQuery.getQuery())==false && 
+                                        validarTests.validarResultado(testQuery.getResultexpected())==true){
+                                        getClas().add(i, 1);
+                                        setValidoClas(false);
+                                    }else if(validarTests.validarQuery(testQuery.getQuery())==true && 
+                                        validarTests.validarResultado(testQuery.getResultexpected())==false){
+                                        getClas().add(i, 2);
+                                        setValidoClas(false);
+                                    }else{
+                                        getClas().add(i, 3);
+                                        setValidoClas(false);
+                                    }
+                                }else{
+                                    test2.remove(i);
+                                    getClas().add(i, 0);
+                                }
+                            }else {
+                                i++;
+                            }  
+                    }else if((!test2.getQuery().equals("") && test2.getQueryResult().equals(""))
+                            || (test2.getQuery().equals("") && !test2.getQueryResult().equals(""))){
+                                varAux=1;
+                                JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios.","Warning Message",
+                                JOptionPane.WARNING_MESSAGE);
+                                setAmbosNecesarios(true);
+                    }else if(test2.getQuery().equals("") && test2.getQueryResult().equals("")){
+                        if(!descPanel.getNombreTextField().equals("")){
+                            if(varAux==0){
+                                JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
-                        }else{
-                            i++;
-                        }  
-                        hayQuery=true;
-                }
-            }
-            }
-            if(hayQuery==false){
-                   JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE); 
-                   continua=false;
-            }
-        if(AddInstancesJPanel.isStateNuevo()==true){
-                if(todosTienenNombre()==false){
-                    JOptionPane.showMessageDialog(frame,"El nombre de los tests es " +
-                    "obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else if(hayQuery==true){
-                    tratarNuevoTest(sel);
-                }else{
-                    JOptionPane.showMessageDialog(frame,"No ha introducido ninguna" +
-                            "consulta para el Test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                } 
-            }
-            
-        if(getClasTextName()==true && getValidoClas()==true){
-        if(aux==1){
-            Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-            if(hayInstanciasAsociadas(instancias)==false){
-                int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                    "Clasificacion no tiene instancias asociadas. ¿Desea " +
-                    "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.NO_OPTION){
-                    setNoHayInstancias(true);
-                }
-            }
-        }  
-        }
-    }else{
-            descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-            texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-            conjuntoQuerys = texto.getConsultaQuery();
-            conjuntoResult = texto.getResultadoEsperado();
-            conjuntoComent = texto.getComentTextArea();
-            if(descPanel.getNombreTextField().equals("") && !conjuntoQuerys.equals("") ){
-                        setClasTextName(false);
-            }else{ 
-            cQuery = conjuntoQuerys.split("\\\n");
-            cResult = conjuntoResult.split("\\\n");
-            cComent = conjuntoComent.split("\\\n");
-            if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                    (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-                if(var==0){
-                    nombreTest = descPanel.getNombreTextField();
-                    descTest = descPanel.getDescTextArea();
-                    scenario.setDescripcion(descTest);
-                    scenario.setNombre(nombreTest);
-                    scenario.setTestName("Clasificación");
-                    var=1;
-                }
-                QueryOntology testQuery = new QueryOntology();
-                for(int i=0; i<cQuery.length;i++){
-                    if(validarTests.validarQuery(cQuery[i])==true &&
-                       validarTests.validarResultado(cResult[i])==true){
-                        if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                            testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
-                        }else{
-                            testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                                setSinConsultas(true);
+                            }
                         }
-                        queryTest5.add(testQuery);
-                        scenario.setQueryTest(queryTest5);
-                        aux=1;
-                        getClas().add(i, 0);
-                    }else if(validarTests.validarQuery(cQuery[i])==false && 
-                             validarTests.validarResultado(cResult[i])==true){
-                        getClas().add(i, 1);
-                        setValidoClas(false);
-                    }else if(validarTests.validarQuery(cQuery[i])==true && 
-                             validarTests.validarResultado(cResult[i])==false){
-                        getClas().add(i, 2);
-                        setValidoClas(false);
-                    }else{
-                        getClas().add(i, 3);
-                        setValidoClas(false);
                     }
+                }
+                }
+                }
+            if(testYaExiste(scenario.getNombre())==true){
+                JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                setTestYaExiste(true);
+            }    
+            if(AddInstancesJPanel.isStateNuevo()==true){
+                if(getClasTextName()==true){
+                    if(getTestYaExiste()==false){
+                        if(getSinConsultas()==false){
+                            if(getAmbosNecesarios()==false){
+                                if(getValidoClas()==true){
+                                    tratarNuevoTest(sel);
+                                }else{
+                                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                    "El formato de los datos marcados en rojo no es correcto." +
+                                    "\nPor favor, consulte la ayuda acerca del formato " +
+                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                     formatoIncorrecto(4);
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{   
+                if(getClasTextName()==true && getValidoClas()==true && getTestYaExiste()==false){
+                    if(aux==1){
+                        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                        if(hayInstanciasAsociadas(instancias)==false){
+                            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                "Clasificacion no tiene instancias asociadas. ¿Desea " +
+                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                            if (n == JOptionPane.NO_OPTION){
+                                setNoHayInstancias(true);
+                            }
+                        }
+                    }  
+                }else if(getValidoClas()==false){
+                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                "El formato de los datos marcados en rojo no es correcto." +
+                                "\nPor favor, consulte la ayuda acerca del formato " +
+                                "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        formatoIncorrecto(4);
                 }
             }
-            if(getValidoClas()==true){
-            if(aux==1){
-                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-                if(hayInstanciasAsociadas(instancias)==false){
-                    int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                        "Clasificacion no tiene instancias asociadas. ¿Desea " +
-                        "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.NO_OPTION){
-                        setNoHayInstancias(true);
+        }else{
+                descPanel = (DescripcionJPanel) panelClas.getComponent(0);
+                texto = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
+                conjuntoQuerys = texto.getConsultaQuery();
+                conjuntoResult = texto.getResultadoEsperado();
+                conjuntoComent = texto.getComentTextArea();
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("") || (!conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                    "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);         
+                    setClasTextName(false);
+                }else{ 
+                cQuery = conjuntoQuerys.split("\\\n");
+                cResult = conjuntoResult.split("\\\n");
+                cComent = conjuntoComent.split("\\\n");
+                if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
+                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
+                }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                    if(var==0){
+                        nombreTest = descPanel.getNombreTextField();
+                        descTest = descPanel.getDescTextArea();
+                        scenario.setDescripcion(descTest);
+                        scenario.setNombre(nombreTest);
+                        scenario.setTestName("Clasificación");
+                        var=1;
                     }
+                    QueryOntology testQuery = new QueryOntology();
+                    for(int i=0; i<cQuery.length;i++){
+                        if(validarTests.validarQuery(cQuery[i])==true &&
+                           validarTests.validarResultado(cResult[i])==true){
+                            if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                                testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                            }else{
+                                testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                            }
+                            queryTest5.add(testQuery);
+                            scenario.setQueryTest(queryTest5);
+                            aux=1;
+                            getClas().add(i, 0);
+                        }else if(validarTests.validarQuery(cQuery[i])==false && 
+                                 validarTests.validarResultado(cResult[i])==true){
+                            getClas().add(i, 1);
+                            setValidoClas(false);
+                        }else if(validarTests.validarQuery(cQuery[i])==true && 
+                                 validarTests.validarResultado(cResult[i])==false){
+                            getClas().add(i, 2);
+                            setValidoClas(false);
+                        }else{
+                            getClas().add(i, 3);
+                            setValidoClas(false);
+                        }
+                    }
+                }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
+                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                        "Al menos debe introducir una consulta para ejecutar el test.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setSinConsultas(true);
                 }
+                if(getClasTextName()==true){
+                    if(testYaExiste(scenario.getNombre())==false){
+                        if(getSinConsultas()==false){
+                            if(getAmbosNecesarios()==false){
+                                if(getValidoClas()==true){
+                                    if(aux==1){
+                                        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                                        if(hayInstanciasAsociadas(instancias)==false){
+                                            int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
+                                                "Clasificacion no tiene instancias asociadas. ¿Desea " +
+                                                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+                                            if (n == JOptionPane.NO_OPTION){
+                                                setNoHayInstancias(true);
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                    "El formato de los datos marcados en rojo no es correcto." +
+                                    "\nPor favor, consulte la ayuda acerca del formato " +
+                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                    formatoIncorrecto(4);
+                                }
+                            }
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                        "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setTestYaExiste(true);
+                    }
                 }
             }
         }
     }
   }
-    if(getContinua()==true){
     if(getNoHayInstancias()==false){
-        if(todosTienenNombre()==true && todosSonValidos()==true && aux==1){
+        if(todosTienenNombre()==true && todosSonValidos()==true && 
+                getAmbosNecesarios()==false && getSinConsultas()==false && aux==1
+                && getTestYaExiste()==false){
             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
             scenario.setInstancias(instancias);
             ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
@@ -2264,44 +2586,45 @@ public static void asociarInstancias(int sel){
                 st.add(scenario);
                 MainJPanel.getCollectionTest().setScenariotest(st);
             }else{
-                ArrayList<ScenarioTest> scenTest = MainJPanel.getCollectionTest().getScenariotest();
-                ListIterator li;
-                li = scenTest.listIterator();
-                int v=0;
-                while(li.hasNext()){
-                    if(v==0){
-                        ScenarioTest s = (ScenarioTest) li.next();
-                        String name = s.getNombre();
-                        if(name.equals(scenario.getNombre()) && ContentMainJFrame.getBotonAnte()==true){
-                            scenTest.remove(s);
-                            MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-                            v=1;
-                        }else if(name.equals(scenario.getNombre()) && 
-                            ContentMainJFrame.getBotonAnte()==false){
-                            setTestYaExiste(true);
-                            v=1;
-                        }
-                    }
-                }
-                if(v==0){
-                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
-                }
+                MainJPanel.getCollectionTest().getScenariotest().add(scenario);
             }
             if(AddInstancesJPanel.isStateNuevo()==true){
-                ContentMainJFrame.setInstancias(sel,new Instancias());
-                if(getTestYaExiste()==true){
-                    JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor," +
-                        "introduzca uno nuevo","Warning Message",JOptionPane.WARNING_MESSAGE);
-                }else{
+                if(getTestYaExiste()==false){
                     if(getNoHayInstancias()==false){
+                        ContentMainJFrame.setInstancias(sel,new Instancias());
                         actulaizarTestsNuevos(sel);
                     }
                 }
             }
+            if(AddInstancesJPanel.isStateNuevo()==false){
+                if(sel==0){
+                    instCompletado=true;
+                }else if(sel==1){
+                    retCompletado=true;
+                }else if(sel==2){
+                    realCompletado=true;
+                }else if(sel==3){
+                    satCompletado=true;
+                }else if(sel==4){
+                    clasCompletado=true;
+                }
+            }
         }
     }
-    AddInstancesJPanel.setStateNuevo(false);
+}
+
+public static boolean testYaExiste(String nombre){
+    ListIterator li;
+    ArrayList<ScenarioTest> lista = MainJPanel.getCollectionTest().getScenariotest();
+    li = lista.listIterator();
+    while(li.hasNext()){
+        ScenarioTest scenario = (ScenarioTest) li.next();
+        String n = scenario.getNombre();
+        if(n.equals(nombre)){
+            return true;
+        }
     }
+    return false;
 }
 
 public static void actulaizarTestsNuevos(int sel){
@@ -2354,44 +2677,28 @@ public static void actulaizarTestsNuevos(int sel){
 }
 
 public static void tratarNuevoTest(int sel){
-        ValidarConsultas validar = new ValidarConsultas();
-        Component comp = null;
-        if(todosSonValidos()==false){
-            JOptionPane.showMessageDialog(frame,"El formato de los datos marcados en rojo" +
-                        "no es correcto.\nPor favor, consulte la ayuda acerca del formato " +
-                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            if(sel==0){
-                if(getActualSubTabInst()==0){
-                    validar.comprovarErrorEnAyudaInst();
-                }else{
-                    validar.comprovarErrorQuerysInst();
-                }
-            }else if(sel==1){
-                if(getActualSubTabInst()==0){
-                    validar.comprovarErrorEnAyudaRet();
-                }else{
-                    validar.comprovarErrorQuerysRet();
-                }
-            }else if(sel == 2){
-                if(getActualSubTabInst()==0){
-                    validar.comprovarErrorEnAyudaReal();
-                }else{
-                    validar.comprovarErrorQuerysReal();
-                }
-            }else if(sel==3){
-                if(getActualSubTabInst()==0){
-                    validar.comprovarErrorEnAyudaSat();
-                  }else{
-                    validar.comprovarErrorQuerysSat();
-                  }
-            }else if(sel==4){
-                if(getActualSubTabInst()==0){
-                    validar.comprovarErrorEnAyudaClas();
-                  }else{
-                    validar.comprovarErrorQuerysClas();
-                   }
-            }
+    Component comp = null;
+    String test="";
+    if(sel==0){
+        test="Instanciacion";
+    }else if(sel==1){
+        test="Retrieval";
+    }else if(sel==2){
+        test="Realizacion";
+    }else if(sel==3){
+        test="Satisfactibilidad";
+    }else if(sel==4){
+        test="Clasificacion";
+    }
+    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+    if(hayInstanciasAsociadas(instancias)==false){
+        int n = JOptionPane.showConfirmDialog(comp, "El Test de "+test+" no tiene instancias asociadas. ¿Desea " +
+            "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.NO_OPTION){ 
+            setNoHayInstancias(true);
         }
+    }
+        /*Component comp = null; 
         if(getNoHayInstancias()==true){
             int n = JOptionPane.showConfirmDialog(comp, "Este test no tiene " +
                     "instancias asociadas. ¿Desea continuar?", "Warning Message"
@@ -2399,7 +2706,7 @@ public static void tratarNuevoTest(int sel){
             if (n == JOptionPane.NO_OPTION){
                 setNoHayInstancias(true);
             }
-        } 
+        } */
 }
 
 public static boolean inListSparqlQuerys(SparqlQueryOntology query){
@@ -3124,6 +3431,14 @@ public JPanel getContentPanel() {
 
     public void setNombreSparqlRep(boolean nombreSparqlRep) {
         this.nombreSparqlRep = nombreSparqlRep;
+    }
+
+    public static boolean getAmbosNecesarios() {
+        return ambosNecesarios;
+    }
+
+    public static void setAmbosNecesarios(boolean a) {
+        ambosNecesarios = a;
     }
     
 }

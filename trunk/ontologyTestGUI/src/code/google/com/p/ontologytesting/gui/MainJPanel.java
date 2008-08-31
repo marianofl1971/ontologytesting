@@ -11,7 +11,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import code.google.com.p.ontologytesting.model.CollectionTest;
-import javax.swing.ButtonGroup;
+import java.awt.BorderLayout;
+import java.awt.Frame;
 
 /**
  *
@@ -19,21 +20,6 @@ import javax.swing.ButtonGroup;
  */
 public class MainJPanel extends javax.swing.JPanel {
 
-    public static void setExistsTestsCheckBox(Boolean aExistsTestsCheckBox) {
-        getNewTest().setSelected(aExistsTestsCheckBox);
-    }
-    public static void setNewInstancesCheckBox(Boolean aNewInstancesCheckBox) {
-        getNewInstances().setSelected(aNewInstancesCheckBox);
-    }
-    public static void setNewTestCheckBox(Boolean aNewTestCheckBox) {
-        getNewTest().setSelected(aNewTestCheckBox);
-    }
-    public static void setConfigurarCheckBox(Boolean aConfCheckBox) {
-        configurar.setSelected(aConfCheckBox);
-    }
-    public static void setSparqlCheckBox(Boolean aSparqlCheckBox) {
-        getSparql().setSelected(aSparqlCheckBox);
-    }
     public static String getFisicalOntologyTextField() {
         return fisicalOntologyTextField.getText();
     }
@@ -53,15 +39,30 @@ public class MainJPanel extends javax.swing.JPanel {
         collectionTest = aCollectionTest;
     }
     private static CollectionTest collectionTest;
-    public static javax.swing.JRadioButton getNewInstances() {
-        return newInstances;
+    private static boolean simpleTestSelect=false, sparqlTestsSelect=false,
+            instancesSelect=false;
+
+    public static boolean getSimpleTestSelect() {
+        return simpleTestSelect;
     }
-    public static javax.swing.JRadioButton getNewTest() {
-        return newTest;
+
+    public static void setSimpleTestSelect(boolean aSimpleTestSelect) {
+        simpleTestSelect = aSimpleTestSelect;
     }
-    public static javax.swing.JRadioButton getSparql() {
-        return sparql;
+
+    public static boolean getSparqlTestsSelect() {
+        return sparqlTestsSelect;
     }
+    public static void setSparqlTestsSelect(boolean aSparqlTestsSelect) {
+        sparqlTestsSelect = aSparqlTestsSelect;
+    }
+    public static boolean getInstancesSelect() {
+        return instancesSelect;
+    }
+    public static void setInstancesSelect(boolean aInstancesSelect) {
+        instancesSelect = aInstancesSelect;
+    }
+    Frame parent;
     private JFileChooser filechooser;
     private Component frame;
     public static boolean seleccionado;
@@ -70,22 +71,8 @@ public class MainJPanel extends javax.swing.JPanel {
     public MainJPanel() {
         initComponents();
         setSeleccionado(true);
-        ButtonGroup group = new ButtonGroup();
-        group.add(sparql);
-        group.add(newInstances);
-        group.add(newTest);
-        group.add(configurar);
         namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
         collectionTest = new CollectionTest();
-        if(ConfigurationJPanel.isHaSidoConfigurado()==true){
-            MainJPanel.getNewInstances().setEnabled(true);
-            MainJPanel.getNewTest().setEnabled(true);
-            MainJPanel.getSparql().setEnabled(true);
-        }else{
-            MainJPanel.getNewInstances().setEnabled(false);
-            MainJPanel.getNewTest().setEnabled(false);
-            MainJPanel.getSparql().setEnabled(false);
-        }
     }
 
     /** This method is called from within the constructor to
@@ -105,11 +92,14 @@ public class MainJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         namespaceOntologyTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        newTest = new javax.swing.JRadioButton();
-        sparql = new javax.swing.JRadioButton();
-        newInstances = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        configurar = new javax.swing.JRadioButton();
+        configurar = new javax.swing.JButton();
+        newTest = new javax.swing.JButton();
+        sparql = new javax.swing.JButton();
+        newInstances = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("¡¡BIENVENIDO AL EVALUADOR DE ONTOLOGÍAS!!");
@@ -129,15 +119,41 @@ public class MainJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Seleccione las acciones que desea realizar:");
 
-        newTest.setText("Crear Tests Simples");
-
-        sparql.setText("Crear Tests SPARQL");
-
-        newInstances.setText("Crear Instancias");
-
         jLabel6.setText("Configure la aplicación:");
 
         configurar.setText("Configurar");
+        configurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configurarActionPerformed(evt);
+            }
+        });
+
+        newTest.setText("Crear Tests Simples");
+        newTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newTestActionPerformed(evt);
+            }
+        });
+
+        sparql.setText("Crear Tests SPARQL");
+        sparql.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sparqlActionPerformed(evt);
+            }
+        });
+
+        newInstances.setText("Crear Instancias");
+        newInstances.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newInstancesActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Para realizar consultas simples a su ontología, seleccione esta opción: ");
+
+        jLabel8.setText("Para probar su ontología utlilizando el lenguaje de consultas SPARQL, seleccione esta opción: ");
+
+        jLabel9.setText("Si solo desea crear conjuntos de instancias para futuras pruebas, seleccione esta opción:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -147,44 +163,59 @@ public class MainJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(configurar)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(313, Short.MAX_VALUE))
+                        .addContainerGap(635, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(403, Short.MAX_VALUE))
+                        .addContainerGap(725, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                         .addGap(418, 418, 418))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(388, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(namespaceOntologyTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                            .addComponent(fisicalOntologyTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(examinarFisicalButton)
-                        .addGap(222, 222, 222))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(newInstances)
-                        .addContainerGap(548, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(sparql)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(259, Short.MAX_VALUE))
+                        .addContainerGap(710, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(newTest)
-                        .addContainerGap(534, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(namespaceOntologyTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fisicalOntologyTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(examinarFisicalButton)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(configurar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(newTest))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(567, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(sparql, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(newInstances))
+                            .addComponent(jLabel9))
+                        .addContainerGap(547, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(581, Short.MAX_VALUE))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {newInstances, newTest, sparql});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -196,8 +227,8 @@ public class MainJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(examinarFisicalButton)
-                    .addComponent(fisicalOntologyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fisicalOntologyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(examinarFisicalButton))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,16 +237,24 @@ public class MainJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(configurar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newTest)
-                .addGap(3, 3, 3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sparql)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(newInstances)
-                .addGap(39, 39, 39))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {newInstances, newTest, sparql});
 
         getAccessibleContext().setAccessibleName("card2");
     }// </editor-fold>//GEN-END:initComponents
@@ -225,17 +264,46 @@ private void examinarFisicalButtonActionPerformed(java.awt.event.ActionEvent evt
     openFile(fisicalOntologyTextField);
 }//GEN-LAST:event_examinarFisicalButtonActionPerformed
 
-public static void actualizarEstado(){
-    if(ConfigurationJPanel.isHaSidoConfigurado()==true){
-            MainJPanel.getNewInstances().setEnabled(true);
-            MainJPanel.getNewTest().setEnabled(true);
-            MainJPanel.getSparql().setEnabled(true);
-    }else{
-            MainJPanel.getNewInstances().setEnabled(false);
-            MainJPanel.getNewTest().setEnabled(false);
-            MainJPanel.getSparql().setEnabled(false);
-    }
-}
+private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configurarActionPerformed
+// TODO add your handling code here:
+    ContentMainJFrame.getContentPanel().remove(0);//GEN-LAST:event_configurarActionPerformed
+    ContentMainJFrame.getContentPanel().add(new ConfigurationJPanel());
+    ContentMainJFrame.getSeparador().setVisible(true);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorConfigPanel(),BorderLayout.CENTER);
+    ContentMainJFrame.getContentPanel().getParent().validate();
+}                                          
+
+private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTestActionPerformed
+// TODO add your handling code here:
+    ContentMainJFrame.getContentPanel().remove(0);
+    ContentMainJFrame.getContentPanel().add(new GroupTestsJPanel(8));
+    ContentMainJFrame.getSeparador().setVisible(true);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
+    ContentMainJFrame.getContentPanel().getParent().validate();
+    setSimpleTestSelect(true);
+}//GEN-LAST:event_newTestActionPerformed
+
+private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sparqlActionPerformed
+// TODO add your handling code here:
+    AddSPARQLJPanel.setSeleccionado(true);
+    ContentMainJFrame.getContentPanel().remove(0);
+    ContentMainJFrame.getContentPanel().add(new AddSPARQLJPanel());
+    ContentMainJFrame.getSeparador().setVisible(true);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
+    ContentMainJFrame.getContentPanel().getParent().validate();
+    setSparqlTestsSelect(true);
+}//GEN-LAST:event_sparqlActionPerformed
+
+private void newInstancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newInstancesActionPerformed
+// TODO add your handling code here:
+    AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(parent,true,8,0);
+    ContentMainJFrame.getContentPanel().remove(0);
+    ContentMainJFrame.getContentPanel().add(addInstances.getContentPanel());
+    ContentMainJFrame.getSeparador().setVisible(true);
+    ContentMainJFrame.getContentPanel().getParent().validate();
+    setInstancesSelect(true);
+}//GEN-LAST:event_newInstancesActionPerformed
+
 
 private void openFile(JTextField textfield){
       filechooser = new JFileChooser("./data/");
@@ -247,7 +315,7 @@ private void openFile(JTextField textfield){
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JRadioButton configurar;
+    private javax.swing.JButton configurar;
     private javax.swing.JButton examinarFisicalButton;
     private static javax.swing.JTextField fisicalOntologyTextField;
     private javax.swing.JLabel jLabel1;
@@ -256,27 +324,14 @@ private void openFile(JTextField textfield){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private static javax.swing.JTextField namespaceOntologyTextField;
-    private static javax.swing.JRadioButton newInstances;
-    private static javax.swing.JRadioButton newTest;
-    private static javax.swing.JRadioButton sparql;
+    private javax.swing.JButton newInstances;
+    private javax.swing.JButton newTest;
+    private javax.swing.JButton sparql;
     // End of variables declaration//GEN-END:variables
 
-
-    public static boolean getNewInstancesState() {
-        return getNewInstances().isSelected();
-    }
-
-    public static boolean getNewTestState() {
-        return getNewTest().isSelected();
-    }
-    
-    public static boolean getConfigurarState() {
-        return configurar.isSelected();
-    }
-
-    public static boolean getSparqlState() {
-        return getSparql().isSelected();
-    }
 
 }

@@ -10,7 +10,6 @@ import java.awt.Component;
 import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,8 +81,6 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
         examinarTestsSimplesButton = new javax.swing.JButton();
         examinarTestsSparqlButton = new javax.swing.JButton();
         examinarInstanciasButton = new javax.swing.JButton();
-        aceptarButton = new javax.swing.JButton();
-        cancelarButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         restaurarRadioButton = new javax.swing.JRadioButton();
         siRadioButton = new javax.swing.JRadioButton();
@@ -135,20 +132,6 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
             }
         });
 
-        aceptarButton.setText("Aceptar");
-        aceptarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aceptarButtonActionPerformed(evt);
-            }
-        });
-
-        cancelarButton.setText("Cancelar");
-        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarButtonActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Restaurar valores predeterminados:");
 
         restaurarRadioButton.setText("Restaurar");
@@ -174,71 +157,79 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cancelarButton)
-                .addGap(18, 18, 18)
-                .addComponent(aceptarButton)
-                .addGap(548, 548, 548))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                .addGap(288, 288, 288))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(siRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(noRadioButton))
-                    .addComponent(testsSimplesTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
-                    .addComponent(testsSparqlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(instanciasTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(restaurarRadioButton))
-                            .addComponent(examinarTestsSimplesButton)
-                            .addComponent(examinarTestsSparqlButton)
-                            .addComponent(examinarInstanciasButton))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                        .addComponent(instanciasTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(examinarInstanciasButton)
+                        .addGap(303, 303, 303))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(248, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(497, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addGap(384, 384, 384))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(testsSparqlTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(examinarTestsSparqlButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addComponent(jLabel3))
+                .addGap(303, 303, 303))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(179, 179, 179))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(siRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(noRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
+                .addComponent(restaurarRadioButton)
+                .addGap(273, 273, 273))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(567, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(testsSimplesTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(examinarTestsSimplesButton)
+                .addGap(303, 303, 303))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(siRadioButton)
                     .addComponent(noRadioButton)
                     .addComponent(restaurarRadioButton))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(testsSimplesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(examinarTestsSimplesButton))
@@ -250,17 +241,10 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
                     .addComponent(examinarTestsSparqlButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cancelarButton)
-                            .addComponent(aceptarButton)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(instanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(examinarInstanciasButton))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(instanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(examinarInstanciasButton))
                 .addContainerGap())
         );
 
@@ -293,60 +277,6 @@ private void noRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     jLabel3.setEnabled(false);
     jLabel4.setEnabled(false);
 }//GEN-LAST:event_noRadioButtonActionPerformed
-
-private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
- // TODO add your handling code here:
-    setConf(true);
-    if(siRadioButton.isSelected()){
-       if(!getInstanciasTextField().equals("") && !getTestsSimplesTextField().equals("") 
-               && !getTestsSparqlTextField().equals("")){
-           //Si es valida la ruta
-           Configuration.setPathTestSimples(getTestsSimplesTextField());  
-           Configuration.setPathTestSparql(getTestsSparqlTextField());
-           Configuration.setPathInstancias(getInstanciasTextField());
-           JOptionPane.showMessageDialog(frame,"Su configuración ha sido " +
-                   "guardada correctamente.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-           ConfigurationJPanel.setHaSidoConfigurado(true);
-           ContentMainJFrame.getContentPanel().remove(this);
-           ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
-           ContentMainJFrame.setActual(0);
-           ContentMainJFrame.getContentPanel().getParent().validate();
-       }else{
-            JOptionPane.showMessageDialog(frame,"Debe completar los tres campos" +
-                    "para coninuar","Warning Message",JOptionPane.WARNING_MESSAGE);
-       }
-    }else if(noRadioButton.isSelected()){
-        Configuration.setPathTestSimples("./Simple Tests");  
-        Configuration.setPathTestSparql("./Sparql Tests");
-        Configuration.setPathInstancias("./Instancias");
-        JOptionPane.showMessageDialog(frame,"Se mantiene la configuracion establecida" +
-                "por defecto.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        ConfigurationJPanel.setHaSidoConfigurado(true);
-        ContentMainJFrame.getContentPanel().remove(this);
-        ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
-        ContentMainJFrame.setActual(0);
-        ContentMainJFrame.getContentPanel().getParent().validate();
-    }else if(restaurarRadioButton.isSelected()){
-        Configuration.setPathTestSimples("./Simple Tests");  
-        Configuration.setPathTestSparql("./Sparql Tests");
-        Configuration.setPathInstancias("./Instancias");
-        JOptionPane.showMessageDialog(frame,"Se ha restaurado la configuracion" +
-                "original.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        ConfigurationJPanel.setHaSidoConfigurado(true);
-        ContentMainJFrame.getContentPanel().remove(this);
-        ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
-        ContentMainJFrame.setActual(0);
-        ContentMainJFrame.getContentPanel().getParent().validate();
-    }else{
-       JOptionPane.showMessageDialog(frame,"Debe seleccionar una opcion para " +
-               "continuar.","Warning Message",JOptionPane.ERROR_MESSAGE);
-    }
-}//GEN-LAST:event_aceptarButtonActionPerformed
-
-private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
-// TODO add your handling code here:
-    
-}//GEN-LAST:event_cancelarButtonActionPerformed
 
 private void examinarTestsSimplesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarTestsSimplesButtonActionPerformed
 // TODO add your handling code here:
@@ -383,13 +313,11 @@ private void examinarInstanciasButtonActionPerformed(java.awt.event.ActionEvent 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aceptarButton;
-    private javax.swing.JButton cancelarButton;
     private javax.swing.JEditorPane descripcionEditorPane;
     private javax.swing.JButton examinarInstanciasButton;
     private javax.swing.JButton examinarTestsSimplesButton;
     private javax.swing.JButton examinarTestsSparqlButton;
-    private javax.swing.JTextField instanciasTextField;
+    private static javax.swing.JTextField instanciasTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -397,14 +325,14 @@ private void examinarInstanciasButtonActionPerformed(java.awt.event.ActionEvent 
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton noRadioButton;
-    private javax.swing.JRadioButton restaurarRadioButton;
-    private javax.swing.JRadioButton siRadioButton;
-    private javax.swing.JTextField testsSimplesTextField;
-    private javax.swing.JTextField testsSparqlTextField;
+    private static javax.swing.JRadioButton noRadioButton;
+    private static javax.swing.JRadioButton restaurarRadioButton;
+    private static javax.swing.JRadioButton siRadioButton;
+    private static javax.swing.JTextField testsSimplesTextField;
+    private static javax.swing.JTextField testsSparqlTextField;
     // End of variables declaration//GEN-END:variables
 
-    public String getInstanciasTextField() {
+    public static String getInstanciasTextField() {
         return instanciasTextField.getText();
     }
 
@@ -412,7 +340,7 @@ private void examinarInstanciasButtonActionPerformed(java.awt.event.ActionEvent 
         instanciasTextField.setText(ainstanciasTextField);
     }
 
-    public String getTestsSimplesTextField() {
+    public static String getTestsSimplesTextField() {
         return testsSimplesTextField.getText();
     }
 
@@ -420,12 +348,24 @@ private void examinarInstanciasButtonActionPerformed(java.awt.event.ActionEvent 
         testsSimplesTextField.setText(atestsSimplesTextField);
     }
 
-    public String getTestsSparqlTextField() {
+    public static String getTestsSparqlTextField() {
         return testsSparqlTextField.getText();
     }
 
     public void setTestsSparqlTextField(String atestsSparqlTextField) {
         testsSparqlTextField.setText(atestsSparqlTextField);
+    }
+
+    public static javax.swing.JRadioButton getNoRadioButton() {
+        return noRadioButton;
+    }
+
+    public static javax.swing.JRadioButton getRestaurarRadioButton() {
+        return restaurarRadioButton;
+    }
+
+    public static javax.swing.JRadioButton getSiRadioButton() {
+        return siRadioButton;
     }
 
 }
