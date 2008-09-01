@@ -21,6 +21,10 @@ public class ExecQuerySparql {
         this.datos = datos;
         this.nombre=nombre;
     }
+    
+    public ExecQuerySparql(String nombre){
+        this.nombre=nombre;
+    }
 
     public ArrayList<String> getDatos() {
         return datos;

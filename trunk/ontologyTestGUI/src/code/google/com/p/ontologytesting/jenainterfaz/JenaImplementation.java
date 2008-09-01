@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.jenainterfaz;
 
+import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
@@ -232,6 +233,7 @@ public class JenaImplementation implements Jena{
     //z(f)
     @Override
     public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML){
+        
         ArrayList<String> res = new ArrayList<String>();
 
         String expReg = "([\\?]{1}[a-zA-Z]+)";
@@ -242,19 +244,21 @@ public class JenaImplementation implements Jena{
         String p = patern.toString();
         String[] consulta = p.split("(\\s)");
         for(int i=0; i<consulta.length;i++){
-            System.out.println("consulta "+consulta[i]);
             if(consulta[i].matches(expReg)){
-                sel.add(consulta[i]);
+                sel.add(consulta[i].substring(1));
                 cont++;
             }
         }
 
-        System.out.println(cont);
+        ArrayList<ExecQuerySparql> lista = new ArrayList<ExecQuerySparql>();
+        /*for(int j=0;j<cont;j++){
+            lista.add(j, new ExecQuerySparql(sel.get(j))); 
+        }*/
+
+        
         //create an empty ontology model using Pellet spec     
         model.setStrictMode(false);
-       
-        //if(query.getGraphURIs().size()==0)
-            //throw new ExceptionsImplementation("La query debe tener una clausula FROM");
+
         for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
         	String sourceURI = (String) iter.next();
         	model.read(sourceURI);
@@ -289,15 +293,10 @@ public class JenaImplementation implements Jena{
                 }       
             }
         }
-        // create a node formatter
+
         NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
-        
-        addDefaultQNames(formatter.getQNames());
-                
-        // variables used in select
-        List resultV = query.getResultVars();
-        
-        // store the formatted results an a table 
+        addDefaultQNames(formatter.getQNames());               
+        List resultV = query.getResultVars();       
         TableData table = new TableData( resultV );
         while( results.hasNext() ) {
             QuerySolution binding = results.nextSolution();
@@ -307,17 +306,10 @@ public class JenaImplementation implements Jena{
                 RDFNode result = binding.get(var);
                                 
                 formattedBinding.add(formatter.format(result));                
-            }
-            
+            }          
             table.add(formattedBinding);
         }
-        /*Query q = QueryFactory.create(queryStr);
-        // Execute the query and obtain results
-        QueryExecution qe = QueryExecutionFactory.create(q, model);
-        ResultSet r = qe.execSelect();
-        ResultSetFormatter.out(System.out, r, q);*/
-        //table.print(System.out, formatHTML);
-
+        
         return res;
     }
     
