@@ -6,6 +6,9 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.jenainterfaz.ExceptionsImplementation;
+import code.google.com.p.ontologytesting.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
@@ -77,6 +80,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private boolean isAntSelected=false, isSigSelected=false;
     private static ArrayList<SparqlQueryOntology> listAux = new ArrayList<SparqlQueryOntology>();
     private Component comp;
+    private Jena jena;
+    private JenaInterface jenaInterface = new JenaInterface();
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel() {
@@ -509,6 +514,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
 public boolean guardarDatos(){
     
+    noHayInsatncias=false;
     OntologyTestCase testcase = new OntologyTestCase();
     OntologyTestResult testresult = new OntologyTestResult();
 
@@ -545,6 +551,14 @@ public boolean guardarDatos(){
                 "ejectuar el test","Warning Message",JOptionPane.WARNING_MESSAGE);
         sinConsultas=true;
     }else if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
+        jena = jenaInterface.getJena();
+        if(!jena.validarSparqlQuery(AddSPARQLJPanel.getSPARQLQuery())){
+            throw new ExceptionsImplementation("La consulta introducida no es válida.\nPor favor, " +
+                    "consulte el tutorial de SPARQL que se le facilita en esta misma pantalla.");
+        }
+        if(!jena.validarSparqlQuerySelect(AddSPARQLJPanel.getSPARQLQuery())){
+            throw new ExceptionsImplementation("Solo estan permitidas las consultas de tipo SELECT");
+        }
         query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
         query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
         if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
@@ -580,10 +594,6 @@ public boolean guardarDatos(){
             }else{
                 MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
             }
-            AddSPARQLJPanel.setTestDescTextArea("");
-            AddSPARQLJPanel.setTestNameTextField("");
-            AddSPARQLJPanel.setSPARQLQuery("");
-            AddSPARQLJPanel.setResultTextArea("");
             listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
             AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
         }

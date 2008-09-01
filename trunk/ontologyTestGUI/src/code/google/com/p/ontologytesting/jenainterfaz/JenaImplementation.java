@@ -9,8 +9,10 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.query.QueryException;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QueryParseException;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -225,17 +227,19 @@ public class JenaImplementation implements Jena{
     //z(f)
     @Override
     public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML){
-        
+        ArrayList<String> res = new ArrayList<String>();
+
         Query query = QueryFactory.create(queryStr);
+        
         if (!query.isSelectType()) {
-        	throw new UnsupportedFeatureException("Only SELECT supported for this example");
+        	throw new UnsupportedFeatureException();
         }
         
-        // create an empty ontology model using Pellet spec     
+        //create an empty ontology model using Pellet spec     
         model.setStrictMode(false);
        
-        if(query.getGraphURIs().size()==0)
-            throw new UnsupportedFeatureException("SPARQL query must have a FROM clause for this example");
+        //if(query.getGraphURIs().size()==0)
+            //throw new ExceptionsImplementation("La query debe tener una clausula FROM");
         for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
         	String sourceURI = (String) iter.next();
         	model.read(sourceURI);
@@ -247,7 +251,7 @@ public class JenaImplementation implements Jena{
         //NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
         //Variables used in SELECT
         List resultVars = query.getResultVars();
-        ArrayList<String> res = new ArrayList<String>();
+        res = new ArrayList<String>();
         //Store the formatted results an a table 
         //TableData table = new TableData( resultVars );
         while( results.hasNext() ) {
@@ -266,5 +270,24 @@ public class JenaImplementation implements Jena{
             }
         }
         return res;
+    }
+    
+    @Override
+    public boolean validarSparqlQuery(String query){
+        try{    
+            QueryFactory.create(query);
+            return true;
+        }catch (QueryException ex){
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean validarSparqlQuerySelect(String query){ 
+        Query queryStr = QueryFactory.create(query);
+        if(!queryStr.isSelectType()){
+            return false;
+        }
+        return true;
     }
 }

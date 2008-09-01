@@ -32,6 +32,10 @@ public interface Jena {
     ArrayList<String> classification(String ns, String individuo);
     
     ArrayList<String> testSPARQL(String queryStr, boolean formatHTML);   
+    
+    boolean validarSparqlQuery(String query);
+    
+    boolean validarSparqlQuerySelect(String query);
 
 }
 

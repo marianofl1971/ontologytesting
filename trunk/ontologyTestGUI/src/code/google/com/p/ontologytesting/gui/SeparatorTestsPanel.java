@@ -6,15 +6,13 @@
 
 package code.google.com.p.ontologytesting.gui;
 
-import java.awt.Component;
-import javax.swing.JOptionPane;
+import code.google.com.p.ontologytesting.jenainterfaz.ExceptionsImplementation;
 
 /**
  *
  * @author  sara.garcia
  */
 public class SeparatorTestsPanel extends javax.swing.JPanel {
-    private Component frame;
 
     /** Creates new form SeparatorTestsPanel */
     public SeparatorTestsPanel() {
@@ -83,7 +81,7 @@ private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
 // TODO add your handling code here:
-
+    
     if(AddSPARQLJPanel.isSeleccionado()==false){
         GroupTestsJPanel group = (GroupTestsJPanel) ContentMainJFrame.getContentPanel().getComponent(0);
         if(group.guardarDatos()==true){
@@ -96,6 +94,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         }
     }else{
         AddSPARQLJPanel group = (AddSPARQLJPanel) ContentMainJFrame.getContentPanel().getComponent(0);
+        try{
         if(group.guardarDatos()==true){
             ContentMainJFrame.getContentPanel().remove(0);
             ContentMainJFrame.getSeparadorPanel().remove(0);
@@ -104,8 +103,10 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             ContentMainJFrame.getContentPanel().validate();
             ContentMainJFrame.getSeparadorPanel().validate();
         }
+        }catch(ExceptionsImplementation e){
+            e.SparqlException(e.getMensaje());
+        }
     }
-    
 }//GEN-LAST:event_ejecutarButtonActionPerformed
 
 

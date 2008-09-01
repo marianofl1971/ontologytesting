@@ -6,6 +6,9 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.jenainterfaz.ExceptionsImplementation;
+import code.google.com.p.ontologytesting.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import java.awt.Component;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
@@ -87,6 +90,8 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private XMLDecoder decoder;
     private String nameFile="";
     private boolean testCompatible=true;
+    private Jena jena;
+    private JenaInterface jenaInterface = new JenaInterface();
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -333,6 +338,11 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             JOptionPane.showMessageDialog(frame,"Al menosdebe introducir una consulta para" +
                     "ejectuar el test","Warning Message",JOptionPane.WARNING_MESSAGE);
         }else if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
+            jena = jenaInterface.getJena();
+            if(!jena.validarSparqlQuery(AddSPARQLJPanel.getSPARQLQuery())){
+                throw new ExceptionsImplementation("La consulta introducida no es válida, por favor, " +
+                    "consulte el tutorial de SPARQL que se le facilita en esta misma pantalla.");
+            }
             query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
             query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
             listSparqlQuerys.add(query);
