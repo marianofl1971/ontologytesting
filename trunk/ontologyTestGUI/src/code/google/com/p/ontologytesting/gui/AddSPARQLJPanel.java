@@ -25,6 +25,7 @@ import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.JPanel;
 
 /**
@@ -556,9 +557,9 @@ public boolean guardarDatos(){
             throw new ExceptionsImplementation("La consulta introducida no es válida.\nPor favor, " +
                     "consulte el tutorial de SPARQL que se le facilita en esta misma pantalla.");
         }
-        if(!jena.validarSparqlQuerySelect(AddSPARQLJPanel.getSPARQLQuery())){
+        /*if(!jena.validarSparqlQuerySelect(AddSPARQLJPanel.getSPARQLQuery())){
             throw new ExceptionsImplementation("Solo estan permitidas las consultas de tipo SELECT");
-        }
+        }*/
         query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
         query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
         if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
@@ -613,32 +614,21 @@ public boolean guardarDatos(){
                     ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
                     try{ 
                         for(int i=0;i<scenarioT.size();i++){
-                            int val=1;
-                            if(AddSPARQLJPanel.isSeleccionado()==false){
-                                if(!scenarioT.get(i).getNombre().equals("")){
-                                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                                    FileOutputStream(Configuration.getPathTestSimples()+"/"+scenarioT.get(i).getNombre()+".xml")));
-                                    e.writeObject(scenarioT.get(i));
-                                    e.close();
-                                }
-                            }else{
-                                if(!scenarioT.get(i).getNombre().equals("")){
-                                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                                    FileOutputStream(Configuration.getPathTestSparql()+"/"
-                                    +scenarioT.get(i).getNombre().concat("_"+val).concat(".xml"))));
-                                    val++;
-                                    e.writeObject(scenarioT.get(i)); 
-                                    e.close();
-                                }
+                            if(!scenarioT.get(i).getNombre().equals("")){
+                                XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                                FileOutputStream(Configuration.getPathTestSparql()+"/"+scenarioT.get(i).getNombre()+".xml")));
+                                e.writeObject(scenarioT.get(i));
+                                e.close();
                             }
                         }
-                    }catch (FileNotFoundException ex) {
+                    }catch (FileNotFoundException ex){
                         ex.printStackTrace();
+                    }catch (IOException io){
+                        io.printStackTrace();
                     }
                     testcase.run(testresult, MainJPanel.getCollectionTest());
                     JPanel panel = new TreeResults(testresult);
-                    GroupTestsJPanel.setPanelTree(panel);
-                    GroupTestsJPanel.setDatosGuardados(true);
+                    setPanelTree(panel); 
                     return true;
                 }else{
                     testcase.run(testresult, MainJPanel.getCollectionTest());

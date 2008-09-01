@@ -11,20 +11,25 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.QueryException;
 import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QueryParseException;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.sparql.syntax.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
+import org.mindswap.pellet.jena.NodeFormatter;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
+import org.mindswap.pellet.output.TableData;
+import org.mindswap.pellet.utils.QNameProvider;
 
 /**
  *
@@ -229,12 +234,22 @@ public class JenaImplementation implements Jena{
     public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML){
         ArrayList<String> res = new ArrayList<String>();
 
+        String expReg = "([\\?]{1}[a-zA-Z]+)";
+        int cont=0;
+        ArrayList<String> sel = new ArrayList<String>();
         Query query = QueryFactory.create(queryStr);
-        
-        if (!query.isSelectType()) {
-        	throw new UnsupportedFeatureException();
+        Element patern = query.getQueryPattern();
+        String p = patern.toString();
+        String[] consulta = p.split("(\\s)");
+        for(int i=0; i<consulta.length;i++){
+            System.out.println("consulta "+consulta[i]);
+            if(consulta[i].matches(expReg)){
+                sel.add(consulta[i]);
+                cont++;
+            }
         }
-        
+
+        System.out.println(cont);
         //create an empty ontology model using Pellet spec     
         model.setStrictMode(false);
        
@@ -247,6 +262,7 @@ public class JenaImplementation implements Jena{
         
 	QueryExecution qexec = new PelletQueryExecution(query, model);
         ResultSet results = qexec.execSelect();
+       
         // Create a node formatter
         //NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
         //Variables used in SELECT
@@ -254,13 +270,17 @@ public class JenaImplementation implements Jena{
         res = new ArrayList<String>();
         //Store the formatted results an a table 
         //TableData table = new TableData( resultVars );
-        while( results.hasNext() ) {
+        while(results.hasNext()){
             QuerySolution binding = results.nextSolution();
             //List formattedBinding = new ArrayList();
             for(int i = 0; i < resultVars.size(); i++) {
                 String var = (String) resultVars.get(i);
+                System.out.println("var "+var);
                 RDFNode result = binding.get(var);
+                System.out.println("RDFNode "+result);
                 String aux = result.toString();
+                System.out.println("DATO"+aux.substring(aux.indexOf("#")+1));
+                System.out.println("----------------------------------");
                 if(!res.contains(aux.substring(aux.indexOf("#")+1))){
                     if(!aux.substring(aux.indexOf("#")+1).equals("Nothing") && 
                             !aux.substring(aux.indexOf("#")+1).equals("Thing")){
@@ -269,6 +289,35 @@ public class JenaImplementation implements Jena{
                 }       
             }
         }
+        // create a node formatter
+        NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
+        
+        addDefaultQNames(formatter.getQNames());
+                
+        // variables used in select
+        List resultV = query.getResultVars();
+        
+        // store the formatted results an a table 
+        TableData table = new TableData( resultV );
+        while( results.hasNext() ) {
+            QuerySolution binding = results.nextSolution();
+            List formattedBinding = new ArrayList();
+            for(int i = 0; i < resultV.size(); i++) {
+                String var = (String) resultV.get(i);
+                RDFNode result = binding.get(var);
+                                
+                formattedBinding.add(formatter.format(result));                
+            }
+            
+            table.add(formattedBinding);
+        }
+        /*Query q = QueryFactory.create(queryStr);
+        // Execute the query and obtain results
+        QueryExecution qe = QueryExecutionFactory.create(q, model);
+        ResultSet r = qe.execSelect();
+        ResultSetFormatter.out(System.out, r, q);*/
+        //table.print(System.out, formatHTML);
+
         return res;
     }
     
@@ -290,4 +339,23 @@ public class JenaImplementation implements Jena{
         }
         return true;
     }
+    
+    private static void addDefaultQNames(QNameProvider qnames) {
+        qnames.setMapping("tce-service", "http://www.flacp.fujitsulabs.com/tce/ontologies/2004/03/service.owl#");
+        qnames.setMapping("tce-object", "http://www.flacp.fujitsulabs.com/tce/ontologies/2004/03/object.owl#");
+
+        String owls = "http://www.daml.org/services/owl-s/";
+        String[] versions = {"0.9", "1.0", "1.1"};
+        String[] add = {"-0.9", "-1.0", ""};
+        String[] files = {"Service", "Profile", "Process", "Grounding"};
+        for(int version = 0; version < versions.length; version++) {
+            for(int file = 0; file < files.length; file++) {
+                String prefix = files[file].toLowerCase() + add[version];
+                String uri = owls + versions[version] + "/" + files[file] + ".owl#";
+                qnames.setMapping(prefix, uri);
+            }
+        }
+
+    }
+
 }
