@@ -12,11 +12,9 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.query.QueryException;
 import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -25,7 +23,6 @@ import com.hp.hpl.jena.sparql.syntax.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
 import org.mindswap.pellet.jena.NodeFormatter;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
@@ -232,7 +229,7 @@ public class JenaImplementation implements Jena{
     //y(c,d,e)
     //z(f)
     @Override
-    public ArrayList<String> testSPARQL(String queryStr, boolean formatHTML){
+    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
         
         ArrayList<String> res = new ArrayList<String>();
 
@@ -250,21 +247,7 @@ public class JenaImplementation implements Jena{
             }
         }
 
-        ArrayList<ExecQuerySparql> lista = new ArrayList<ExecQuerySparql>();
-        /*for(int j=0;j<cont;j++){
-            lista.add(j, new ExecQuerySparql(sel.get(j))); 
-        }*/
-
-        
-        //create an empty ontology model using Pellet spec     
-        model.setStrictMode(false);
-
-        for (Iterator iter = query.getGraphURIs().iterator(); iter.hasNext();) {
-        	String sourceURI = (String) iter.next();
-        	model.read(sourceURI);
-        }
-        
-	QueryExecution qexec = new PelletQueryExecution(query, model);
+        QueryExecution qexec = new PelletQueryExecution(query, model);
         ResultSet results = qexec.execSelect();
        
         // Create a node formatter
@@ -274,26 +257,79 @@ public class JenaImplementation implements Jena{
         res = new ArrayList<String>();
         //Store the formatted results an a table 
         //TableData table = new TableData( resultVars );
+        ArrayList<ExecQuerySparql> lista = new ArrayList<ExecQuerySparql>();
         while(results.hasNext()){
             QuerySolution binding = results.nextSolution();
-            //List formattedBinding = new ArrayList();
             for(int i = 0; i < resultVars.size(); i++) {
+                ExecQuerySparql e = new ExecQuerySparql();
+                
                 String var = (String) resultVars.get(i);
-                System.out.println("var "+var);
                 RDFNode result = binding.get(var);
-                System.out.println("RDFNode "+result);
                 String aux = result.toString();
-                System.out.println("DATO"+aux.substring(aux.indexOf("#")+1));
-                System.out.println("----------------------------------");
-                if(!res.contains(aux.substring(aux.indexOf("#")+1))){
-                    if(!aux.substring(aux.indexOf("#")+1).equals("Nothing") && 
-                            !aux.substring(aux.indexOf("#")+1).equals("Thing")){
-                        res.add(aux.substring(aux.indexOf("#")+1));
+                String dato = aux.substring(aux.indexOf("#")+1);
+                
+                if(perteneceALista(var,lista)==false){
+                    e.setNombreSelect(var);
+                    lista.add(e);
+                    lista.get(i).getDatos().add(dato);
+                }else{
+                    ExecQuerySparql eq = seleccionarLista(var, lista);
+                    eq.getDatos().add(dato);
+                }
+                if(!res.contains(dato)){
+                    if(!dato.equals("Nothing") && 
+                            !dato.equals("Thing")){
+                        res.add(dato);
                     }
                 }       
             }
         }
 
+        /*ArrayList<String> obtenido = new ArrayList<String>();
+        String contenidoObtenido = "";
+
+        int tam = lista.get(0).getDatos().size();
+        for(int s=0;s<tam;s++){
+            for(int t=0; t<lista.size(); t++){
+                String valor = lista.get(t).getDatos().get(s);
+                contenidoObtenido = contenidoObtenido+valor+";";
+            } 
+            obtenido.add(contenidoObtenido);
+            contenidoObtenido = "";
+        }
+        
+        ArrayList<ExecQuerySparql> listaFinal = new ArrayList<ExecQuerySparql>();
+        ExecQuerySparql exeqQ = new ExecQuerySparql();
+        for(int k=0;k<obtenido.size();k++){
+            String datoAux = obtenido.get(k);
+            String[] dato = datoAux.split(";");
+            if(perteneceALista(dato[0], listaFinal)==false){
+                exeqQ.setNombreSelect(dato[0]);
+                exeqQ.getDatos().add(k, dato[1]);
+                listaFinal.add(exeqQ);
+            }else{
+                ExecQuerySparql listaEx = seleccionarLista(dato[0], listaFinal);
+                listaEx.getDatos().add(dato[1]);
+            }
+        }
+        for(int k=0;k<listaFinal.size();k++){
+                    ExecQuerySparql eqy = listaFinal.get(k);
+                    System.out.println("Dato "+eqy.getNombreSelect());
+                    for(int s=0;s<eqy.getDatos().size();s++){
+                        System.out.println("Contenido "+eqy.getDatos().get(s));
+                    }
+                    System.out.println("----------------------------------");
+        }
+
+        
+        for(int k=0;k<lista.size();k++){
+                    ExecQuerySparql eqy = lista.get(k);
+                    System.out.println("Select "+eqy.getNombreSelect());
+                    for(int s=0;s<eqy.getDatos().size();s++){
+                        System.out.println("Dato "+eqy.getDatos().get(s));
+                    }
+                    System.out.println("----------------------------------");
+        }
         NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
         addDefaultQNames(formatter.getQNames());               
         List resultV = query.getResultVars();       
@@ -308,9 +344,9 @@ public class JenaImplementation implements Jena{
                 formattedBinding.add(formatter.format(result));                
             }          
             table.add(formattedBinding);
-        }
+        }*/
         
-        return res;
+        return lista;
     }
     
     @Override
@@ -330,6 +366,25 @@ public class JenaImplementation implements Jena{
             return false;
         }
         return true;
+    }
+    
+    public boolean perteneceALista(String nombre, ArrayList<ExecQuerySparql> lista){
+        for(int i=0;i<lista.size();i++){
+            String nombreAux = lista.get(i).getNombreSelect();
+            if(nombreAux.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public ExecQuerySparql seleccionarLista(String nombreSelect,ArrayList<ExecQuerySparql> lista){
+        for(int i=0;i<lista.size();i++){
+            if(lista.get(i).getNombreSelect().equals(nombreSelect)){
+                return lista.get(i);
+            }
+        }
+        return new ExecQuerySparql();
     }
     
     private static void addDefaultQNames(QNameProvider qnames) {

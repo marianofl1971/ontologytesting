@@ -22,7 +22,7 @@ public class OntologyTestFailure extends Object{
     protected String fcommentquery;
     protected String fresultexpected;
     protected String fresultsparqlexpected;
-    protected ArrayList<String> fressparqlobtenido;
+    protected ArrayList<ExecQuerySparql> fressparqlobtenido;
     protected String fcommentsparqlquery;
     protected String fquerysparql;
     protected String testName;
@@ -30,7 +30,7 @@ public class OntologyTestFailure extends Object{
     private String result="";
     
     public OntologyTestFailure(String testNameUsuario, String testName,QueryOntology query, String resQueryObte, 
-            SparqlQueryOntology querysparql, ArrayList<String> resSparqlQueryObte){
+            SparqlQueryOntology querysparql, ArrayList<ExecQuerySparql> resSparqlQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquery = query.getQuery();
@@ -55,7 +55,7 @@ public class OntologyTestFailure extends Object{
     }
     
     void addOntologyTestFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
-            ArrayList<String> resQueryObte){
+            ArrayList<ExecQuerySparql> resQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
@@ -67,7 +67,7 @@ public class OntologyTestFailure extends Object{
          return this.fresqueryobtenido;    
      }  
     
-    public ArrayList<String> getResultSparqlQueryObtenido() {    
+    public ArrayList<ExecQuerySparql> getResultSparqlQueryObtenido() {    
          return this.fressparqlobtenido;    
      }
     
@@ -110,9 +110,31 @@ public class OntologyTestFailure extends Object{
     }
     
     public String showSparqlTest() {
-        result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
-                +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>" +this.fressparqlobtenido;
-        return result;
-
+        
+        ArrayList<ExecQuerySparql> execQ = this.fressparqlobtenido;
+        if(execQ.size()>0){
+        String resultadoTotal="";
+        for(int i=0;i<execQ.size();i++){
+            String resultado = "";
+            String nombre = execQ.get(i).getNombreSelect();
+            ArrayList<String> datos = execQ.get(i).getDatos();
+            resultado = nombre+"(";
+            for(int j=0;j<datos.size();j++){
+                if(j!=datos.size()-1){
+                    resultado = resultado+datos.get(j)+",";
+                }else{
+                     resultado = resultado+datos.get(j)+")";
+                }
+            }
+            resultadoTotal=resultadoTotal+resultado+"\n";
+        }
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
+                    +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>" +resultadoTotal;
+        
+        }else{
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
+                    +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>No se han producido resultados";    
+        }
+        return result;    
     }
 }

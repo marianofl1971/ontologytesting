@@ -152,4 +152,14 @@ public class ValidarTests {
         }
     }
     
+    public boolean validarSparqlTest(String query){
+        String regexp1 = "[a-zA-Z]+[(]{1}[[a-zA-Z]+[,.;]]+[)]{1}[;]?";
+        if(!query.matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
+    
 }

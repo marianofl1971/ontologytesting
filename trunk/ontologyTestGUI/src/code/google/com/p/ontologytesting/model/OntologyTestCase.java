@@ -28,7 +28,9 @@ public class OntologyTestCase implements OntologyTest{
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
     private static String patron1="[\\(|,|\n| ]",patron2="[\n| |\\)]",
-            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]";
+            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\\;|\n|\\t|\\v|\\s]",
+            patron6="[.,\\s\\)]";
+    private int fallo=0;
     
     public OntologyTestCase(){
     }
@@ -73,7 +75,9 @@ public class OntologyTestCase implements OntologyTest{
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
             ScenarioTest scenariotest){
-           
+          
+        ArrayList<String> esperado = new ArrayList<String>();
+        ArrayList<String> obtenido = new ArrayList<String>();
         ListIterator liQuery,liSparql;
         String res[],clasF="",indF="",concepto="",loincluye="";
         String testName = scenariotest.getTestName();
@@ -172,24 +176,60 @@ public class OntologyTestCase implements OntologyTest{
         }
         
         while(liSparql.hasNext()){    
+            ArrayList<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
-            res = resQueryExpected.split(patron4);
-            sparqlExp = new ArrayList<String>();
+            res = resQueryExpected.split(patron5);
             for(int k=0; k<res.length;k++){
-                sparqlExp.add(res[k]);
+                if(!res[k].equals(""))
+                {
+                    ExecQuerySparql execQuery = new ExecQuerySparql();
+                    String[] select = res[k].split("[\\(]");
+                    execQuery.setNombreSelect(select[0]); 
+                    for(int i=0;i<select.length;i++){
+                        System.out.println("select[]"+i+" "+select[i]);
+                    }
+                    String[] subRes = select[1].split(patron6);
+                    for(int s=0; s<subRes.length;s++){
+                        execQuery.getDatos().add(subRes[s]);
+                    }
+                    listaResultEsperada.add(execQuery);
+                }
             }
-            resSparql = jena.testSPARQL(sparqlQuery, true);
-            Collections.sort(sparqlExp);
-            Collections.sort(resSparql);
-            if(!this.comparaArray(sparqlExp, resSparql)){
-                testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
-                        sparqlquery,resSparql);
-                sparql=1;
-            }   
-        }
         
+            
+            ArrayList<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
+            listaResultObtenida = jena.testSPARQL(sparqlQuery, true);
+            if(listaResultObtenida.size()>0){
+                esperado = new ArrayList<String>();
+                obtenido = new ArrayList<String>();
+                String contenidoObtenido = "",contenidoEsperado="";
+                int tam = listaResultObtenida.get(0).getDatos().size();
+                int tamBis = listaResultEsperada.get(0).getDatos().size();
+                fallo=0;
+                if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
+                    for(int s=0;s<tam;s++){
+                        for(int t=0; t<listaResultObtenida.size(); t++){
+                            contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(s);
+                            contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(s);
+                        } 
+                        esperado.add(contenidoEsperado);
+                        obtenido.add(contenidoObtenido);
+                        contenidoObtenido = "";
+                        contenidoEsperado = "";
+                }
+                }else{
+                    fallo=1;
+                }
+            }
+            if(contieneTodosIguales(esperado, obtenido)==false || fallo==1){
+                testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
+                sparqlquery,listaResultObtenida);
+                sparql=1;
+            }
+        }
+
         if(inst==0){
             testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
         }else if(ret==0){
@@ -205,6 +245,37 @@ public class OntologyTestCase implements OntologyTest{
         }
     } 
 
+    public boolean contieneTodosIguales(ArrayList<String> array1, ArrayList<String> array2){
+        if(array1.size()==array2.size()){
+            for(int i=0;i<array1.size();i++){
+                String dato1 = array1.get(i);
+                if(!array2.contains(dato1)){
+                    return false;
+                }
+            }
+        }else return false;
+        return true;
+    }
+    
+    public ExecQuerySparql seleccionarLista(String nombreSelect,ArrayList<ExecQuerySparql> lista){
+        for(int i=0;i<lista.size();i++){
+            if(lista.get(i).getNombreSelect().equals(nombreSelect)){
+                return lista.get(i);
+            }
+        }
+        return new ExecQuerySparql();
+    }
+    
+    public boolean perteneceALista(String nombre, ArrayList<ExecQuerySparql> lista){
+        for(int i=0;i<lista.size();i++){
+            String nombreAux = lista.get(i).getNombreSelect();
+            if(nombreAux.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
 
@@ -283,5 +354,5 @@ public class OntologyTestCase implements OntologyTest{
             System.out.println("No se han producido errores.");
         } 
     }
-      
-}
+}    
+

@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.jenainterfaz;
 
+import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +32,7 @@ public interface Jena {
 
     ArrayList<String> classification(String ns, String individuo);
     
-    ArrayList<String> testSPARQL(String queryStr, boolean formatHTML);   
+    ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);   
     
     boolean validarSparqlQuery(String query);
     

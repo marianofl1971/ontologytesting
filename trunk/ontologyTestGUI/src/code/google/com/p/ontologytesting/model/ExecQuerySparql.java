@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ExecQuerySparql {
     private ArrayList<String> datos = new ArrayList<String>();
     private String nombre;
+    private String nombreSelect;
 
     public ExecQuerySparql(){}
     
@@ -41,4 +42,13 @@ public class ExecQuerySparql {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getNombreSelect() {
+        return nombreSelect;
+    }
+
+    public void setNombreSelect(String nombreSelect) {
+        this.nombreSelect = nombreSelect;
+    }
+    
 }
