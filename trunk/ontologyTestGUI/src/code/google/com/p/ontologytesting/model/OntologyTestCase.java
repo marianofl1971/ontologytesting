@@ -175,7 +175,8 @@ public class OntologyTestCase implements OntologyTest{
                 }
         }
         
-        while(liSparql.hasNext()){    
+        while(liSparql.hasNext()){ 
+            
             ArrayList<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
@@ -185,7 +186,7 @@ public class OntologyTestCase implements OntologyTest{
                 if(!res[k].equals(""))
                 {
                     ExecQuerySparql execQuery = new ExecQuerySparql();
-                    String[] select = res[k].split("[\\(]");
+                    String[] select = res[k].trim().split("\\(");
                     execQuery.setNombreSelect(select[0]); 
                     for(int i=0;i<select.length;i++){
                         System.out.println("select[]"+i+" "+select[i]);
