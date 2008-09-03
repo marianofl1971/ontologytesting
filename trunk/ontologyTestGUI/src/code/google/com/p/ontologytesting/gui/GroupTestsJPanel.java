@@ -1530,11 +1530,15 @@ public static void asociarInstancias(int sel){
                                 setAmbosNecesarios(true);
                                 varAux=1;
                     }else if(test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue())){
-                        String ar = descPanel.getNombreTextField();
-                        if(!descPanel.getNombreTextField().equals("")){
-                            if(varAux==0){
+                        if(varAux==0){
+                            if(!descPanel.getNombreTextField().equals("")){
                                 JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }else{
+                                JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                "No has completado ningun test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
                             }
@@ -1752,10 +1756,15 @@ public static void asociarInstancias(int sel){
                                         "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setAmbosNecesarios(true);
                     }else if(test2.getQuery().equals("") && test2.getQueryResult().equals("")){
-                        if(!descPanel.getNombreTextField().equals("")){
-                            if(varAux==0){
+                        if(varAux==0){
+                            if(!descPanel.getNombreTextField().equals("")){
                                 JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }else{
+                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                "No has completado ningun test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
                             }
@@ -1973,10 +1982,15 @@ public static void asociarInstancias(int sel){
                                     "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setAmbosNecesarios(true);
                     }else if(test1.getQuery().equals("") && test1.getQueryResult().equals("")){
-                        if(!descPanel.getNombreTextField().equals("")){
-                            if(varAux==0){
+                        if(varAux==0){
+                            if(!descPanel.getNombreTextField().equals("")){
                                 JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }else{
+                                JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                "No has completado ningun test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
                             }
@@ -2188,10 +2202,15 @@ public static void asociarInstancias(int sel){
                                 JOptionPane.WARNING_MESSAGE);
                                 setAmbosNecesarios(true);
                     }else if(test.getQuery().equals("") && test.isTestFalse().equals(test.isTestTrue())){
-                        if(!descPanel.getNombreTextField().equals("")){
-                            if(varAux==0){
+                        if(varAux==0){
+                            if(!descPanel.getNombreTextField().equals("")){
                                 JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }else{
+                                JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                "No has completado ningun test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
                             }
@@ -2410,10 +2429,15 @@ public static void asociarInstancias(int sel){
                                 JOptionPane.WARNING_MESSAGE);
                                 setAmbosNecesarios(true);
                     }else if(test2.getQuery().equals("") && test2.getQueryResult().equals("")){
-                        if(!descPanel.getNombreTextField().equals("")){
-                            if(varAux==0){
+                        if(varAux==0){
+                            if(!descPanel.getNombreTextField().equals("")){
                                 JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                                setSinConsultas(true);
+                            }else{
+                                JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                "No has completado ningun test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
                             }

@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import java.awt.BorderLayout;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -275,23 +276,39 @@ private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTestActionPerformed
 // TODO add your handling code here:
-    ContentMainJFrame.getContentPanel().remove(0);
-    ContentMainJFrame.getContentPanel().add(new GroupTestsJPanel(8));
-    ContentMainJFrame.getSeparador().setVisible(true);
-    ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
-    ContentMainJFrame.getContentPanel().getParent().validate();
-    setSimpleTestSelect(true);
+    if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
+        JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
+                "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else if(!getFisicalOntologyTextField().endsWith(".owl")){
+         JOptionPane.showMessageDialog(frame,"La ontologia debe de ser un archivo " +
+                 ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else{
+        ContentMainJFrame.getContentPanel().remove(0);
+        ContentMainJFrame.getContentPanel().add(new GroupTestsJPanel(8));
+        ContentMainJFrame.getSeparador().setVisible(true);
+        ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
+        ContentMainJFrame.getContentPanel().getParent().validate();
+        setSimpleTestSelect(true);
+    }
 }//GEN-LAST:event_newTestActionPerformed
 
 private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sparqlActionPerformed
 // TODO add your handling code here:
-    AddSPARQLJPanel.setSeleccionado(true);
-    ContentMainJFrame.getContentPanel().remove(0);
-    ContentMainJFrame.getContentPanel().add(new AddSPARQLJPanel());
-    ContentMainJFrame.getSeparador().setVisible(true);
-    ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
-    ContentMainJFrame.getContentPanel().getParent().validate();
-    setSparqlTestsSelect(true);
+    if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
+       JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
+                "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else if(!getFisicalOntologyTextField().endsWith(".owl")){
+         JOptionPane.showMessageDialog(frame,"La ontologia debe de ser un archivo " +
+                 ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else{
+        AddSPARQLJPanel.setSeleccionado(true);
+        ContentMainJFrame.getContentPanel().remove(0);
+        ContentMainJFrame.getContentPanel().add(new AddSPARQLJPanel());
+        ContentMainJFrame.getSeparador().setVisible(true);
+        ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
+        ContentMainJFrame.getContentPanel().getParent().validate();
+        setSparqlTestsSelect(true);
+    }
 }//GEN-LAST:event_sparqlActionPerformed
 
 private void newInstancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newInstancesActionPerformed
