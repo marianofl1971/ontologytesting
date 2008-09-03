@@ -87,7 +87,7 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
         this.setSize(new Dimension(980,720));
-    contentPanel.add(mainPanel);
+        contentPanel.add(mainPanel);
     }
 
     /** This method is called from within the constructor to

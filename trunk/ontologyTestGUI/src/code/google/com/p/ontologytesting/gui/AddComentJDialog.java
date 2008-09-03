@@ -149,6 +149,10 @@ private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     public String getComent(){
         return comentTextArea.getText();
     }
+    
+    public javax.swing.JTextArea getComentTextArea(){
+        return comentTextArea;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -268,14 +268,13 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    
     AddInstancesJPanel.setStateExaminar(true);
     AddInstancesJPanel.setStateAsociar(false);
+    AddInstancesJPanel.setStateSeeInst(false);
         filechooser = new JFileChooser(Configuration.getPathInstancias());
         int option = filechooser.showOpenDialog(frame);
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
-            //nameFile = selectedFile.getPath();
             nameFile = selectedFile.getPath();
             addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -285,8 +284,6 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeAsociadasButtonActionPerformed
 // TODO add your handling code here:
-    
-    int var=0;
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
@@ -298,21 +295,19 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     propInst = instancias.getPropertyInstances();
       
     if(!clasInst.isEmpty() || !propInst.isEmpty()){
-        var=1;
-    }
-    
-    if(var==0){
-        addInst = new AddInstancesClasPropJDialog(parent,true,8,0);
-        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        addInst.setVisible(true);
-    }else{
         AddInstancesJPanel.setStateAsociar(false);
         AddInstancesJPanel.setStateSeeInst(true);
         AddInstancesJPanel.setStateExaminar(false);
         addInst = new AddInstancesClasPropJDialog(parent,true,8,1);
+        addInst.getDescTextField().setEditable(false);
+        addInst.getNombreTextField().setEditable(false);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
+    }else{
+        JOptionPane.showMessageDialog(frame,"Este test no tiene istancias asociadas",
+        "Warning Message",JOptionPane.WARNING_MESSAGE); 
     }
+
 }//GEN-LAST:event_seeAsociadasButtonActionPerformed
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed

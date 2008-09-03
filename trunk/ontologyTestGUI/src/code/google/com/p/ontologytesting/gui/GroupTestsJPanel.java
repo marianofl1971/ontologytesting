@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.OntologyTestResult;
 import java.awt.BorderLayout;
@@ -1260,7 +1261,7 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     }
      
     public boolean guardarDatos(){
-      
+    Auxiliar auxiliar = new Auxiliar();  
     inicializarVariables();
     
     OntologyTestCase testcase = new OntologyTestCase();
@@ -1293,13 +1294,13 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         }
      }
 
-        if(getNoHayInstancias()==false){
-            if(todosTienenNombre()==true && todosSonValidos()==true && getTestYaExiste()==false
-                    && getAmbosNecesarios()==false && getSinConsultas()==false){
-                if(MainJPanel.getCollectionTest().getScenariotest().size()!=0){
-                setNombreTestsValidos(true);
-                int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
-                    "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
+    if(getNoHayInstancias()==false){
+        if(todosTienenNombre()==true && todosSonValidos()==true && getTestYaExiste()==false
+                && getAmbosNecesarios()==false && getSinConsultas()==false){
+            if(MainJPanel.getCollectionTest().getScenariotest().size()!=0){
+            setNombreTestsValidos(true);
+            int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar estos tests " +
+                "para futuras pruebas?", "Guardar Tests",JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION){
                     ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
                     try{ 

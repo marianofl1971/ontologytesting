@@ -93,9 +93,10 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                    "guardada correctamente.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
            ConfigurationJPanel.setHaSidoConfigurado(true);
            ContentMainJFrame.getContentPanel().remove(0);
-           ContentMainJFrame.getContentPanel().add(new MainJPanel());
-           ContentMainJFrame.getSeparador().setVisible(false);
            ContentMainJFrame.getSeparadorPanel().remove(0);
+           ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
+           ContentMainJFrame.getSeparador().setVisible(false);
+           ContentMainJFrame.getSeparadorPanel().validate();
            ContentMainJFrame.getContentPanel().validate();
        }else{
             JOptionPane.showMessageDialog(frame,"Debe completar los tres campos" +
@@ -109,8 +110,10 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 "por defecto.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
         ContentMainJFrame.getContentPanel().remove(0);
-        ContentMainJFrame.getContentPanel().add(new MainJPanel());
+        ContentMainJFrame.getSeparadorPanel().remove(0);
+        ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
         ContentMainJFrame.getContentPanel().getParent().validate();
+        ContentMainJFrame.getSeparadorPanel().validate();
     }else if(ConfigurationJPanel.getRestaurarRadioButton().isSelected()){
         Configuration.setPathTestSimples("./Simple Tests");  
         Configuration.setPathTestSparql("./Sparql Tests");
@@ -119,8 +122,10 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 "original.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
         ContentMainJFrame.getContentPanel().remove(0);
-        ContentMainJFrame.getContentPanel().add(new MainJPanel());
+        ContentMainJFrame.getSeparadorPanel().remove(0);
+        ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
         ContentMainJFrame.getContentPanel().getParent().validate();
+        ContentMainJFrame.getSeparadorPanel().validate();
     }else{
        JOptionPane.showMessageDialog(frame,"Debe seleccionar una opcion para " +
                "continuar.","Warning Message",JOptionPane.ERROR_MESSAGE);
