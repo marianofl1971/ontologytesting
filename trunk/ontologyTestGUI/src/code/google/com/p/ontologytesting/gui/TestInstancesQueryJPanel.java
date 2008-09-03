@@ -23,6 +23,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     /** Creates new form TestInstancesQueryJPanel */
     public TestInstancesQueryJPanel() {
         initComponents();
+        setBorrado(false);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
@@ -125,7 +126,10 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
+    frameComent.setComent("");
+    this.setQuery("");
+    this.setQueryResult("");
+    this.setComment(frameComent);
     setBorrado(true);
 }//GEN-LAST:event_borrarButtonActionPerformed
 

@@ -772,7 +772,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                     if (n == JOptionPane.YES_OPTION) {
                         setInstances(instancias);
-                        crearArchivoDeInstancias(getNombreFichero());
+                        crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
                         this.setVisible(false);
                     }else if (n == JOptionPane.NO_OPTION) {
                         crearArchivoDeInstancias(instancias); 
@@ -810,7 +810,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
                     if (n == JOptionPane.YES_OPTION) {
                         setInstances(instancias);
-                        crearArchivoDeInstancias(getNombreFichero());
+                        crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
                         this.setVisible(false);
                     }else if (n == JOptionPane.NO_OPTION) {
                         crearArchivoDeInstancias(instancias); 

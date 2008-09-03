@@ -119,6 +119,14 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     public static void setSinConsultas(boolean aSinConsultas) {
         sinConsultas = aSinConsultas;
     }
+    private static boolean noHayTest=false;
+
+    public static boolean getNoHayTest() {
+        return noHayTest;
+    }
+    public static void setNoHayTest(boolean b) {
+        noHayTest=b;
+    }
     private boolean nombreTestsValidos=true;
     private static boolean testsValidos=true;
     private static boolean instTextName=true, retTextName=true, clasTextName=true,
@@ -1256,6 +1264,7 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         setValidoReal(true);
         setValidoRet(true);
         setValidoSat(true);
+        setNoHayTest(false);
         nombreVacio=false;
         varAux=0;
     }
@@ -1476,7 +1485,6 @@ public static void asociarInstancias(int sel){
             getInst().add(0,0);
             if(getTabbedPaneInst()==0){
                 descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-                String s = descPanel.getNombreTextField();
                     for(int i=1;i<totalInst;i++){
                     if(getSinConsultas()==false){
                     if(getInstTextName()==true){
@@ -1536,11 +1544,10 @@ public static void asociarInstancias(int sel){
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
-                            }else{
-                                JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
-                                "No has completado ningun test.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                                setSinConsultas(true);
+                            }else if(AddInstancesJPanel.isStateNuevo()==true){
+                                if(descPanel.getNombreTextField().equals("")){
+                                    setNoHayTest(true);
+                                }
                             }
                         }
                     }
@@ -1554,18 +1561,20 @@ public static void asociarInstancias(int sel){
                 setTestYaExiste(true);
             }     
                 if(AddInstancesJPanel.isStateNuevo()==true){
-                    if(getInstTextName()==true){
-                        if(getTestYaExiste()==false){
-                            if(getSinConsultas()==false){
-                                if(getAmbosNecesarios()==false){
-                                    if(getValidoInst()==true){
-                                        tratarNuevoTest(sel);
-                                    }else{
-                                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
-                                            "El formato de los datos marcados en rojo no es correcto." +
-                                            "\nPor favor, consulte la ayuda acerca del formato " +
-                                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                                        formatoIncorrecto(0);
+                    if(getNoHayTest()==false){
+                        if(getInstTextName()==true){
+                            if(getTestYaExiste()==false){
+                                if(getSinConsultas()==false){
+                                    if(getAmbosNecesarios()==false){
+                                        if(getValidoInst()==true){
+                                            tratarNuevoTest(sel);
+                                        }else{
+                                            JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                                                "El formato de los datos marcados en rojo no es correcto." +
+                                                "\nPor favor, consulte la ayuda acerca del formato " +
+                                                "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                            formatoIncorrecto(0);
+                                        }
                                     }
                                 }
                             }
@@ -1762,11 +1771,10 @@ public static void asociarInstancias(int sel){
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
-                            }else{
-                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
-                                "No has completado ningun test.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                                setSinConsultas(true);
+                            }else if(AddInstancesJPanel.isStateNuevo()==true){
+                                if(descPanel.getNombreTextField().equals("")){
+                                    setNoHayTest(true);
+                                }
                             }
                         }
                     }
@@ -1780,18 +1788,20 @@ public static void asociarInstancias(int sel){
                     setTestYaExiste(true);
                 } 
                 if(AddInstancesJPanel.isStateNuevo()==true){
-                    if(getRetTextName()==true){
-                        if(getTestYaExiste()==false){
-                            if(getSinConsultas()==false){
-                                if(getAmbosNecesarios()==false){
-                                    if(getValidoRet()==true){
-                                        tratarNuevoTest(sel);
-                                    }else{
-                                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
-                                        "El formato de los datos marcados en rojo no es correcto." +
-                                        "\nPor favor, consulte la ayuda acerca del formato " +
-                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                                        formatoIncorrecto(1);
+                    if(getNoHayTest()==false){
+                        if(getRetTextName()==true){
+                            if(getTestYaExiste()==false){
+                                if(getSinConsultas()==false){
+                                    if(getAmbosNecesarios()==false){
+                                        if(getValidoRet()==true){
+                                            tratarNuevoTest(sel);
+                                        }else{
+                                            JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                            "El formato de los datos marcados en rojo no es correcto." +
+                                            "\nPor favor, consulte la ayuda acerca del formato " +
+                                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                            formatoIncorrecto(1);
+                                        }
                                     }
                                 }
                             }
@@ -1988,11 +1998,10 @@ public static void asociarInstancias(int sel){
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
-                            }else{
-                                JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
-                                "No has completado ningun test.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                                setSinConsultas(true);
+                            }else if(AddInstancesJPanel.isStateNuevo()==true){
+                                if(descPanel.getNombreTextField().equals("")){
+                                    setNoHayTest(true);
+                                }
                             }
                         }
                     }
@@ -2007,18 +2016,20 @@ public static void asociarInstancias(int sel){
                 setTestYaExiste(true);
             }     
             if(AddInstancesJPanel.isStateNuevo()==true){
+                if(getNoHayTest()==false){
                     if(getRealTextName()==true){
-                        if(getTestYaExiste()==false){
-                            if(getSinConsultas()==false){
-                                if(getAmbosNecesarios()==false){
-                                    if(getValidoReal()==true){
-                                        tratarNuevoTest(sel);
-                                    }else{
-                                        JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
-                                        "El formato de los datos marcados en rojo no es correcto." +
-                                        "\nPor favor, consulte la ayuda acerca del formato " +
-                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                                        formatoIncorrecto(2);
+                            if(getTestYaExiste()==false){
+                                if(getSinConsultas()==false){
+                                    if(getAmbosNecesarios()==false){
+                                        if(getValidoReal()==true){
+                                            tratarNuevoTest(sel);
+                                        }else{
+                                            JOptionPane.showMessageDialog(frame,"Test de Realizacion: " +
+                                            "El formato de los datos marcados en rojo no es correcto." +
+                                            "\nPor favor, consulte la ayuda acerca del formato " +
+                                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                            formatoIncorrecto(2);
+                                        }
                                     }
                                 }
                             }
@@ -2208,11 +2219,10 @@ public static void asociarInstancias(int sel){
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
-                            }else{
-                                JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
-                                "No has completado ningun test.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                                setSinConsultas(true);
+                            }else if(AddInstancesJPanel.isStateNuevo()==true){
+                                if(descPanel.getNombreTextField().equals("")){
+                                    setNoHayTest(true);
+                                }
                             }
                         }
                     }
@@ -2226,18 +2236,20 @@ public static void asociarInstancias(int sel){
                 setTestYaExiste(true);
             }     
             if(AddInstancesJPanel.isStateNuevo()==true){
+                if(getNoHayTest()==false){
                     if(getSatTextName()==true){
-                        if(getTestYaExiste()==false){
-                            if(getSinConsultas()==false){
-                                if(getAmbosNecesarios()==false){
-                                    if(getValidoSat()==true){
-                                        tratarNuevoTest(sel);
-                                    }else{
-                                        JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
-                                        "El formato de los datos marcados en rojo no es correcto." +
-                                        "\nPor favor, consulte la ayuda acerca del formato " +
-                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                                        formatoIncorrecto(3);
+                            if(getTestYaExiste()==false){
+                                if(getSinConsultas()==false){
+                                    if(getAmbosNecesarios()==false){
+                                        if(getValidoSat()==true){
+                                            tratarNuevoTest(sel);
+                                        }else{
+                                            JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                                            "El formato de los datos marcados en rojo no es correcto." +
+                                            "\nPor favor, consulte la ayuda acerca del formato " +
+                                            "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                            formatoIncorrecto(3);
+                                        }
                                     }
                                 }
                             }
@@ -2435,11 +2447,10 @@ public static void asociarInstancias(int sel){
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
-                            }else{
-                                JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
-                                "No has completado ningun test.",
-                                "Warning Message",JOptionPane.WARNING_MESSAGE);
-                                setSinConsultas(true);
+                            }else if(AddInstancesJPanel.isStateNuevo()==true){
+                                if(descPanel.getNombreTextField().equals("")){
+                                    setNoHayTest(true);
+                                }
                             }
                         }
                     }
@@ -2453,18 +2464,20 @@ public static void asociarInstancias(int sel){
                 setTestYaExiste(true);
             }    
             if(AddInstancesJPanel.isStateNuevo()==true){
-                if(getClasTextName()==true){
-                    if(getTestYaExiste()==false){
-                        if(getSinConsultas()==false){
-                            if(getAmbosNecesarios()==false){
-                                if(getValidoClas()==true){
-                                    tratarNuevoTest(sel);
-                                }else{
-                                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
-                                    "El formato de los datos marcados en rojo no es correcto." +
-                                    "\nPor favor, consulte la ayuda acerca del formato " +
-                                    "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                                     formatoIncorrecto(4);
+                if(getNoHayTest()==false){
+                    if(getClasTextName()==true){
+                        if(getTestYaExiste()==false){
+                            if(getSinConsultas()==false){
+                                if(getAmbosNecesarios()==false){
+                                    if(getValidoClas()==true){
+                                        tratarNuevoTest(sel);
+                                    }else{
+                                        JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                                        "El formato de los datos marcados en rojo no es correcto." +
+                                        "\nPor favor, consulte la ayuda acerca del formato " +
+                                        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                                         formatoIncorrecto(4);
+                                    }
                                 }
                             }
                         }
@@ -2589,9 +2602,45 @@ public static void asociarInstancias(int sel){
     }
   }
     if(getNoHayInstancias()==false){
-        if(todosTienenNombre()==true && todosSonValidos()==true && 
-                getAmbosNecesarios()==false && getSinConsultas()==false && aux==1
-                && getTestYaExiste()==false){
+        if(AddSPARQLJPanel.isSeleccionado()==false){
+            if(todosTienenNombre()==true && todosSonValidos()==true && 
+                    getAmbosNecesarios()==false && getSinConsultas()==false && aux==1
+                    && getTestYaExiste()==false){
+                Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+                scenario.setInstancias(instancias);
+                ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
+                if(st.size()==0){
+                    st.add(scenario);
+                    MainJPanel.getCollectionTest().setScenariotest(st);
+                }else{
+                    MainJPanel.getCollectionTest().getScenariotest().add(scenario);
+                }
+                if(AddInstancesJPanel.isStateNuevo()==true){
+                    if(getTestYaExiste()==false){
+                        if(getNoHayInstancias()==false){
+                            ContentMainJFrame.setInstancias(sel,new Instancias());
+                            actulaizarTestsNuevos(sel);
+                        }
+                    }
+                }
+                if(AddInstancesJPanel.isStateNuevo()==false){
+                    if(sel==0){
+                        instCompletado=true;
+                    }else if(sel==1){
+                        retCompletado=true;
+                    }else if(sel==2){
+                        realCompletado=true;
+                    }else if(sel==3){
+                        satCompletado=true;
+                    }else if(sel==4){
+                        clasCompletado=true;
+                    }
+                }
+            }
+        }else {
+            if(todosTienenNombre()==true && todosSonValidos()==true &&
+                    getAmbosNecesarios()==false && getSinConsultas()==false && aux==1
+                    && getTestYaExiste()==false && getNoHayTest()==false){
             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
             scenario.setInstancias(instancias);
             ArrayList<ScenarioTest> st = MainJPanel.getCollectionTest().getScenariotest();
@@ -2622,6 +2671,7 @@ public static void asociarInstancias(int sel){
                     clasCompletado=true;
                 }
             }
+        }
         }
     }
 }
@@ -2692,25 +2742,25 @@ public static void actulaizarTestsNuevos(int sel){
 public static void tratarNuevoTest(int sel){
     Component comp = null;
     String test="";
-    if(sel==0){
-        test="Instanciacion";
-    }else if(sel==1){
-        test="Retrieval";
-    }else if(sel==2){
-        test="Realizacion";
-    }else if(sel==3){
-        test="Satisfactibilidad";
-    }else if(sel==4){
-        test="Clasificacion";
-    }
-    Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
-    if(hayInstanciasAsociadas(instancias)==false){
-        int n = JOptionPane.showConfirmDialog(comp, "El Test de "+test+" no tiene instancias asociadas. ¿Desea " +
-            "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.NO_OPTION){ 
-            setNoHayInstancias(true);
+        if(sel==0){
+            test="Instanciacion";
+        }else if(sel==1){
+            test="Retrieval";
+        }else if(sel==2){
+            test="Realizacion";
+        }else if(sel==3){
+            test="Satisfactibilidad";
+        }else if(sel==4){
+            test="Clasificacion";
         }
-    }
+        Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
+        if(hayInstanciasAsociadas(instancias)==false){
+            int n = JOptionPane.showConfirmDialog(comp, "El Test de "+test+" no tiene instancias asociadas. ¿Desea " +
+                "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION){ 
+                setNoHayInstancias(true);
+            }
+        }
         /*Component comp = null; 
         if(getNoHayInstancias()==true){
             int n = JOptionPane.showConfirmDialog(comp, "Este test no tiene " +

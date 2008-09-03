@@ -94,6 +94,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private Jena jena;
     private JenaInterface jenaInterface = new JenaInterface();
     private Component comp;
+    private static String archivoSeleccionado;
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -278,6 +279,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             nameFile = selectedFile.getPath();
+            setArchivoSeleccionado(nameFile);
             addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
@@ -425,7 +427,11 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
         }
     }
     }else{
-        GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());   
+        GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());
+        if(GroupTestsJPanel.getNoHayTest()==true){
+            JOptionPane.showMessageDialog(frame,"No ha creado ningun test para ejecutar.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
     }
     AddInstancesJPanel.setStateNuevo(false);
 }//GEN-LAST:event_SaveAndNewButtonActionPerformed
@@ -775,6 +781,14 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
 
     public void setTestCompatible(boolean testCompatible) {
         this.testCompatible = testCompatible;
+    }
+
+    public static String getArchivoSeleccionado() {
+        return archivoSeleccionado;
+    }
+
+    public static void setArchivoSeleccionado(String archivo) {
+        archivoSeleccionado = archivo;
     }
 
 }

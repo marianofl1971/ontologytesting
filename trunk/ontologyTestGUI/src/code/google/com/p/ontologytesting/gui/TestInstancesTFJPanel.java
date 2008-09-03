@@ -24,6 +24,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
         initComponents();
+        setBorrado(false);
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
@@ -124,6 +125,9 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
+    /*this.setQuery("");
+    frameComent.setComent("");
+    this.setComment(frameComent);*/
     this.setVisible(false);
     setBorrado(true);
 }//GEN-LAST:event_borrarButtonActionPerformed

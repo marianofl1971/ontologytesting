@@ -122,7 +122,10 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
+    frameComent.setComent("");
+    this.setQuery("");
+    this.setQueryResult("");
+    this.setComment(frameComent);
     setBorrado(true);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
