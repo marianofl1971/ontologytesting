@@ -9,7 +9,6 @@ package code.google.com.p.ontologytesting.gui;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.BorderLayout;
 
@@ -65,20 +64,20 @@ public class ContentMainJFrame extends javax.swing.JFrame {
     public static javax.swing.JPanel getSeparadorPanel() {
         return separadorPanel;
     }
-    private JFrame frame;
-    private AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(frame,true,8,0);
-    private AddSPARQLJPanel sparql;
-    private ConfigurationJPanel configurar;
     private static ArrayList paginas = new ArrayList();
     private static int actual=0;
     private static boolean botonAnte=false;
     
     /** Creates new form ContentMainJFrame */
-    public ContentMainJFrame() {
+    public ContentMainJFrame(int vez) {
         initComponents();
         getSeparadorPanel().setLayout(new BorderLayout());
         getSeparador().setVisible(false);
-        mainPanel = new MainJPanel();
+        if(vez==0){
+            mainPanel = new MainJPanel(0);
+        }else{
+            mainPanel = new MainJPanel(1);
+        }
         groupTests = new GroupTestsJPanel(8);
         this.setGroupTests(groupTests);
         for (int i = 0; i <= 5; i++) {
@@ -156,7 +155,16 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ContentMainJFrame().setVisible(true);
+                String simples="",sparql="",inst="";
+                simples = AlmacenPropiedadesConfig.getPropiedad("simpleTests");
+                sparql = AlmacenPropiedadesConfig.getPropiedad("sparqlTests");
+                inst = AlmacenPropiedadesConfig.getPropiedad("instancias");
+
+                if(simples.equals("") || sparql.equals("") || inst.equals("")){
+                    new ContentMainJFrame(0).setVisible(true);
+                }else{
+                    new ContentMainJFrame(1).setVisible(true);
+                }
             }
         });    
     }

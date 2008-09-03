@@ -69,11 +69,19 @@ public class MainJPanel extends javax.swing.JPanel {
     public static boolean seleccionado;
 
     /** Creates new form MainJPanel */
-    public MainJPanel() {
+    public MainJPanel(int vez) {
         initComponents();
         setSeleccionado(true);
-        namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
-        collectionTest = new CollectionTest();
+        if(vez==0){
+            newInstances.setEnabled(false);
+            newTest.setEnabled(false);
+            sparql.setEnabled(false);
+            namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
+            collectionTest = new CollectionTest();
+        }else{
+            namespaceOntologyTextField.setText("http://www.owl-ontologies.com/family.owl#");
+            collectionTest = new CollectionTest();
+        }
     }
 
     /** This method is called from within the constructor to
@@ -349,6 +357,18 @@ private void openFile(JTextField textfield){
     private javax.swing.JButton newTest;
     private javax.swing.JButton sparql;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getNewInstances() {
+        return newInstances;
+    }
+
+    public javax.swing.JButton getNewTest() {
+        return newTest;
+    }
+
+    public javax.swing.JButton getSparql() {
+        return sparql;
+    }
 
 
 }

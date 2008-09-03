@@ -37,6 +37,13 @@
      </void> 
     </object> 
    </void> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+     <void property="classInstance"> 
+      <string>Wife(sara)</string> 
+     </void> 
+    </object> 
+   </void> 
   </void> 
   <void property="descripcion"> 
    <string>Familia para las pruebas</string> 

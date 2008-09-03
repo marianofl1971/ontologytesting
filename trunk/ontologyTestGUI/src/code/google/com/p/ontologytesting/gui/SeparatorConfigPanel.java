@@ -73,7 +73,7 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
-    ContentMainJFrame.getContentPanel().add(new MainJPanel());
+    ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
     ContentMainJFrame.getSeparador().setVisible(false);
     ContentMainJFrame.getContentPanel().validate();
     ContentMainJFrame.getSeparadorPanel().validate();
@@ -89,6 +89,8 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
            Configuration.setPathTestSimples(ConfigurationJPanel.getTestsSimplesTextField());  
            Configuration.setPathTestSparql(ConfigurationJPanel.getTestsSparqlTextField());
            Configuration.setPathInstancias(ConfigurationJPanel.getInstanciasTextField());
+           AlmacenPropiedadesConfig.setConfiguracion(ConfigurationJPanel.getTestsSimplesTextField(),
+                   ConfigurationJPanel.getTestsSparqlTextField(),ConfigurationJPanel.getInstanciasTextField());
            JOptionPane.showMessageDialog(frame,"Su configuración ha sido " +
                    "guardada correctamente.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
            ConfigurationJPanel.setHaSidoConfigurado(true);
@@ -106,18 +108,24 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         Configuration.setPathTestSimples("./Simple Tests");  
         Configuration.setPathTestSparql("./Sparql Tests");
         Configuration.setPathInstancias("./Instancias");
+        AlmacenPropiedadesConfig.setConfiguracion("./Simple Tests", "./Sparql Tests", "./Instancias");
         JOptionPane.showMessageDialog(frame,"Se mantiene la configuracion establecida" +
                 "por defecto.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
         ContentMainJFrame.getContentPanel().remove(0);
         ContentMainJFrame.getSeparadorPanel().remove(0);
-        ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
+        MainJPanel panel = ContentMainJFrame.getMainPanel();
+        panel.getNewInstances().setEnabled(true);
+        panel.getNewTest().setEnabled(true);
+        panel.getSparql().setEnabled(true);
+        ContentMainJFrame.getContentPanel().add(panel);
         ContentMainJFrame.getContentPanel().getParent().validate();
         ContentMainJFrame.getSeparadorPanel().validate();
     }else if(ConfigurationJPanel.getRestaurarRadioButton().isSelected()){
         Configuration.setPathTestSimples("./Simple Tests");  
         Configuration.setPathTestSparql("./Sparql Tests");
         Configuration.setPathInstancias("./Instancias");
+        AlmacenPropiedadesConfig.setConfiguracion("./Simple Tests", "./Sparql Tests", "./Instancias");
         JOptionPane.showMessageDialog(frame,"Se ha restaurado la configuracion" +
                 "original.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
