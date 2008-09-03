@@ -28,6 +28,7 @@ import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
+import code.google.com.p.ontologytesting.model.ValidarTests;
 
 /**
  *
@@ -92,6 +93,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private boolean testCompatible=true;
     private Jena jena;
     private JenaInterface jenaInterface = new JenaInterface();
+    private Component comp;
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -312,8 +314,12 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed
 // TODO add your handling code here:
+    boolean noHayInsatncias=false,resultadoValido=true,nombreVacio=false,
+            testYaExiste=false,ambosNecesarios=false,
+    sinConsultas=false;
     AddInstancesJPanel.setStateNuevo(true);
     ScenarioTest scenarioSparql = new ScenarioTest();
+    ValidarTests validarTests = new ValidarTests();
     Instancias instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
     
     if(AddSPARQLJPanel.isSeleccionado()==true){
@@ -324,23 +330,58 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
         if(AddSPARQLJPanel.getTestNameTextField().equals("") && (!AddSPARQLJPanel.getSPARQLQuery().equals("") ||
                 !AddSPARQLJPanel.getResultTextArea().equals(""))){
             JOptionPane.showMessageDialog(frame,"El nombre del test es obligatorio.",
-                    "Warning Message",JOptionPane.WARNING_MESSAGE);    
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);  
+            nombreVacio=true;
         }else if(GroupTestsJPanel.testYaExiste(AddSPARQLJPanel.getTestNameTextField())==true){
             JOptionPane.showMessageDialog(frame,"Ya existe un test con ese nombre, por favor, " +
                     "introduzca uno distinto.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            testYaExiste=true;
         }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") && AddSPARQLJPanel.getResultTextArea().equals("") &&
                 !AddSPARQLJPanel.getTestNameTextField().equals("")){
             JOptionPane.showMessageDialog(frame,"Al menosdebe introducir una consulta para" +
                     "ejectuar el test","Warning Message",JOptionPane.WARNING_MESSAGE);
-        }else if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
+            sinConsultas=true;
+        }else if(resultadoValido==true){
+            if(validarTests.validarSparqlTest(AddSPARQLJPanel.getResultTextArea())==false){
+                JOptionPane.showMessageDialog(frame,"Algun formato para el Resultado Esperado " +
+                "es incorrecto. Por favor, revise el formato que ha utlizado para introducir la " +
+                "consulta esperada y revise cuales son los formatos posibles.",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                resultadoValido=false;
+            }
+            if(resultadoValido==true){
+                query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
+                query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
+                if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
+                    listSparqlQuerys.add(query);
+                }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
+                    listSparqlQuerys.remove(AddSPARQLJPanel.getPosListQuerysSel());
+                    listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
+                }
+                ArrayList<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
+                for(int i=0; i<querys.size();i++){
+                    if(validarTests.validarSparqlTest(querys.get(i).getResultexpected())==false){
+                        JOptionPane.showMessageDialog(frame,"Algun formato para el Resultado Esperado " +
+                        "es incorrecto. Por favor, revise el formato que ha utlizado para introducir la " +
+                        "consulta esperada y revise cuales son los formatos posibles.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                        resultadoValido=false;
+                    }
+                }
+            }
+        }
+            
+        if(testYaExiste==false && sinConsultas==false && nombreVacio==false && resultadoValido==true){  
+            if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
             jena = jenaInterface.getJena();
             if(!jena.validarSparqlQuery(AddSPARQLJPanel.getSPARQLQuery())){
-                throw new ExceptionsImplementation("La consulta introducida no es válida, por favor, " +
-                    "consulte el tutorial de SPARQL que se le facilita en esta misma pantalla.");
+                throw new ExceptionsImplementation("La consulta introducida no es válida.\nPor favor, " +
+                        "consulte el tutorial de SPARQL que se le facilita en esta misma pantalla.");
             }
-            query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
-            query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-            listSparqlQuerys.add(query);
+            if(!jena.validarSparqlQuerySelect(AddSPARQLJPanel.getSPARQLQuery())){
+                throw new ExceptionsImplementation("Solo estan permitidas las consultas de tipo SELECT");
+            }
+            
             scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
             scenarioSparql.setTestName("sparql");
             scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
@@ -348,27 +389,41 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             
             scenarioSparql.setInstancias(instancias);
                
-            instancias.setClassInstances(vaciaClase);
-            instancias.setPropertyInstances(vaciaPropiedad);
-            ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias);   
-        
-            ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-            if(scenarioT.size()==0){
-                scenarioT.add(scenarioSparql);
-                MainJPanel.getCollectionTest().setScenariotest(scenarioT);
-            }else{
-                MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+            if(GroupTestsJPanel.hayInstanciasAsociadas(instancias)==false){
+                int n = JOptionPane.showConfirmDialog(comp, "El test no tiene " +
+                        "instancias asociadas. ¿Desea continuar?", "Warning Message",
+                        JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.NO_OPTION){ 
+                    noHayInsatncias=true;
+                }
             }
-            AddSPARQLJPanel.setTestDescTextArea("");
-            AddSPARQLJPanel.setTestNameTextField("");
-            AddSPARQLJPanel.setSPARQLQuery("");
-            AddSPARQLJPanel.setResultTextArea("");
-            listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
-            AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
+            if(noHayInsatncias==false){
+                if(ambosNecesarios==false){
+                    instancias.setClassInstances(vaciaClase);
+                    instancias.setPropertyInstances(vaciaPropiedad);
+                    ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias); 
+
+                    ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
+                    if(scenarioT.size()==0){
+                        scenarioT.add(scenarioSparql);
+                        MainJPanel.getCollectionTest().setScenariotest(scenarioT);
+                    }else{
+                        MainJPanel.getCollectionTest().getScenariotest().add(scenarioSparql);
+                    }
+                    listSparqlQuerys = new ArrayList<SparqlQueryOntology>(); 
+                    AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
+                }
+                AddSPARQLJPanel.setTestDescTextArea("");
+                AddSPARQLJPanel.setTestNameTextField("");
+                AddSPARQLJPanel.setSPARQLQuery("");
+                AddSPARQLJPanel.setResultTextArea("");
+            }
+
         }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
         }
+    }
     }else{
         GroupTestsJPanel.asociarInstancias(GroupTestsJPanel.getSelectedTabed());   
     }
