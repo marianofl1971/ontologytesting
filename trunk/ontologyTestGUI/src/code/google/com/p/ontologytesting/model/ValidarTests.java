@@ -153,13 +153,25 @@ public class ValidarTests {
     }
     
     public boolean validarSparqlTest(String query){
-        String regexp1 = "[a-zA-Z]+[(]{1}[[a-zA-Z]+[,.;]]+[)]{1}[;]?";
+        String patron = ("[\\;|\\n|\\t|\\v|\\s]");
+        
+        String[] res = query.split(patron);
+        for(int i=0;i<res.length;i++){
+            if(validarQuerySparql(res[i])==false){
+                return false;
+            }
+        }
+        return true;    
+    }
+    
+    public boolean validarQuerySparql(String query){
+        String regexp1 = "[a-zA-Z]+[(]{1}([[a-zA-Z]+[,.]])+[)]{1}[;]?";
+        
         if(!query.matches(regexp1)){
             return false;
         }else{
             return true;
-        }
-        
+        }   
     }
     
 }

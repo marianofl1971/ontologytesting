@@ -244,9 +244,15 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             satCompletado=false,clasCompletado=false;
     private static int varAux=0;
     private Component comp;
+    private static int posicion;
+    private static TestInstancesTFJPanel pInst,pSat,testTF;
+    private static TestInstancesTextAreaJPanel pRet,pClas;
+    private static TestInstancesQueryJPanel pReal;
+    
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
+        posicion=1;
         initComponents(); 
         setState(true);
         frameHelp = new HelpJDialog(frame,true); 
@@ -280,11 +286,27 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testClasPanel.add(new DescripcionJPanel(),0);
         
         for (int i = 0; i <= num; i++) {
-            instAyudaPanel.add(new TestInstancesTFJPanel());
-            retAyudaPanel.add(new TestInstancesTextAreaJPanel());
-            realAyudaPanel.add(new TestInstancesQueryJPanel());
-            satAyudaPanel.add(new TestInstancesTFJPanel());
-            clasAyudaPanel.add(new TestInstancesTextAreaJPanel());
+            pInst = new TestInstancesTFJPanel();
+            pInst.setPosicion(posicion);
+            instAyudaPanel.add(pInst);
+            
+            pRet = new TestInstancesTextAreaJPanel();
+            pRet.setPosicion(posicion);
+            retAyudaPanel.add(pRet);        
+
+            pReal = new TestInstancesQueryJPanel();
+            pReal.setPosicion(posicion);
+            realAyudaPanel.add(pReal);
+            
+            pSat = new TestInstancesTFJPanel();
+            pSat.setPosicion(posicion);
+            satAyudaPanel.add(pSat);
+            
+            pClas = new TestInstancesTextAreaJPanel();
+            pClas.setPosicion(posicion);
+            clasAyudaPanel.add(pClas);
+            
+            posicion++;
         }
                 
         contentPanel.add(introduccionPanel,BorderLayout.NORTH);
@@ -293,8 +315,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentPanel.add(addInstances,BorderLayout.SOUTH);
     }
     
-    public GroupTestsJPanel(String path) {
-        
+    public GroupTestsJPanel(String path){
+        posicion=1;
         initComponents(); 
         int pos=0;
         setNewState(true);
@@ -330,7 +352,9 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                 qi = qO.listIterator();
                 while(qi.hasNext()){   
                     QueryOntology cI = (QueryOntology) qi.next();
-                    TestInstancesTFJPanel testTF = new TestInstancesTFJPanel();
+                    testTF = new TestInstancesTFJPanel();
+                    testTF.setPosicion(posicion);
+                    posicion++;
                     pos++;
                     TestInstancesQueryJPanel testQuery = new TestInstancesQueryJPanel();
                     if(s.getTestName().equals("Instanciación") || s.getTestName().equals("Satisfactibilidad")){   
@@ -366,11 +390,16 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
             decoder.close();    
         }catch(FileNotFoundException e){
+            /*JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo especificado.",
+            "Warning Message",JOptionPane.WARNING_MESSAGE);*/
         } 
 
         if(instAyudaPanel.getComponentCount()<8){
             while(instAyudaPanel.getComponentCount()<8){
-                instAyudaPanel.add(new TestInstancesTFJPanel());
+                pInst = new TestInstancesTFJPanel();
+                pInst.setPosicion(posicion);
+                instAyudaPanel.add(pInst);
+                posicion++;
                 pos++;
             }
         }
@@ -386,7 +415,10 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
         if(satAyudaPanel.getComponentCount()<8){
             while(satAyudaPanel.getComponentCount()<8){
-                satAyudaPanel.add(new TestInstancesTFJPanel());
+                pSat = new TestInstancesTFJPanel();
+                pSat.setPosicion(posicion);
+                instAyudaPanel.add(pSat);
+                posicion++;
                 pos++;
             }
         }
@@ -1512,7 +1544,6 @@ public static void asociarInstancias(int sel){
                                     var=1;
                                 }
                                 QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                                if(test.getBorrado()==false){
                                     if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                                         queryTest1.add(testQuery);
                                         scenario.setQueryTest(queryTest1);
@@ -1523,10 +1554,6 @@ public static void asociarInstancias(int sel){
                                         getInst().add(i, 1);
                                         setValidoInst(false);
                                     }
-                                }else{
-                                    test.remove(i);
-                                    getInst().add(i, 0);
-                                }
                             }else{
                                 i++;
                             }
@@ -1730,7 +1757,6 @@ public static void asociarInstancias(int sel){
                                 }
                                 aux=1;
                                 QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                                if(test2.getBorrado()==false){
                                         if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                             validarTests.validarResultado(testQuery.getResultexpected())==true){
                                             queryTest2.add(testQuery);
@@ -1750,10 +1776,6 @@ public static void asociarInstancias(int sel){
                                             getRet().add(i, 3);
                                             setValidoRet(false);
                                         }
-                                }else{
-                                    test2.remove(i);
-                                    getRet().add(i, 0);
-                                }
                             }else{
                                 i++;
                             }
@@ -1957,7 +1979,6 @@ public static void asociarInstancias(int sel){
                                 }
                                 aux=1;
                                 QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                                if(test1.getBorrado()==false){
                                     if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                         validarTests.validarQuery(testQuery.getResultexpected())==true){
                                         queryTest3.add(testQuery);
@@ -1977,10 +1998,6 @@ public static void asociarInstancias(int sel){
                                         getReal().add(i, 3);
                                         setValidoReal(false);
                                     }
-                                }else{
-                                    test1.remove(i);
-                                    getReal().add(i, 0);
-                                }
                             }else{
                                 i++;
                             }  
@@ -2187,7 +2204,6 @@ public static void asociarInstancias(int sel){
                                 }
                                 aux=1;
                                 QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
-                                if(test.getBorrado()==false){
                                     if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                                         queryTest4.add(testQuery);
                                         scenario.setQueryTest(queryTest4);
@@ -2198,10 +2214,6 @@ public static void asociarInstancias(int sel){
                                         getSat().add(i, 1);
                                         setValidoSat(false);
                                     }
-                                }else{
-                                    test.remove(i);
-                                    getSat().add(i, 0);
-                                }
                             }else{
                                 i++;
                             }   
@@ -2406,7 +2418,6 @@ public static void asociarInstancias(int sel){
                                 }
                                 aux=1;
                                 QueryOntology testQuery = new QueryOntology(query,queryExp,coment);
-                                if(test2.getBorrado()==false){
                                     if(validarTests.validarQuery(testQuery.getQuery())==true &&
                                         validarTests.validarResultado(testQuery.getResultexpected())==true){
                                         queryTest5.add(testQuery);
@@ -2426,10 +2437,6 @@ public static void asociarInstancias(int sel){
                                         getClas().add(i, 3);
                                         setValidoClas(false);
                                     }
-                                }else{
-                                    test2.remove(i);
-                                    getClas().add(i, 0);
-                                }
                             }else {
                                 i++;
                             }  
@@ -2705,7 +2712,10 @@ public static void actulaizarTestsNuevos(int sel){
         int c = instAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             instAyudaPanel.remove(instAyudaPanel.getComponent(i));
-            instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            pInst = new TestInstancesTFJPanel();
+            pInst.setPosicion(posicion); 
+            instAyudaPanel.add(pInst,i); 
+            posicion++;
         }
         instAyudaPanel.validate();
     }else if(sel==1){
@@ -2726,7 +2736,10 @@ public static void actulaizarTestsNuevos(int sel){
         int c = satAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             satAyudaPanel.remove(satAyudaPanel.getComponent(i));
-            satAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+            pSat = new TestInstancesTFJPanel();
+            pSat.setPosicion(posicion); 
+            satAyudaPanel.add(pSat,i); 
+            posicion++;
         }
         satAyudaPanel.validate();    
     }else if(sel==4){
@@ -2922,7 +2935,10 @@ public JPanel getContentPanel() {
             int c = instAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 instAyudaPanel.remove(instAyudaPanel.getComponent(i));
-                instAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+                pInst = new TestInstancesTFJPanel();
+                pInst.setPosicion(posicion); 
+                instAyudaPanel.add(pInst,i); 
+                posicion++;
             }
             instAyudaPanel.validate();
         }else if(tab==1){
@@ -3059,7 +3075,10 @@ public JPanel getContentPanel() {
             int c = satAyudaPanel.getComponentCount();
             for(int i=1;i<c;i++){
                 satAyudaPanel.remove(satAyudaPanel.getComponent(i));
-                satAyudaPanel.add(new TestInstancesTFJPanel(),i); 
+                pSat = new TestInstancesTFJPanel();
+                pSat.setPosicion(posicion); 
+                satAyudaPanel.add(pSat,i); 
+                posicion++;
             }
             satAyudaPanel.validate();
         }else if(tab==4){

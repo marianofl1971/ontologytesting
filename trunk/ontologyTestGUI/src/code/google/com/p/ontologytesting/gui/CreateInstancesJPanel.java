@@ -113,6 +113,14 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
+   int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
+   if(tab == 0){
+        AddInstancesClasPropJDialog.getClasPanel().remove(this);
+        AddInstancesClasPropJDialog.getClasPanel().add(new CreateInstancesJPanel());
+   }else if(tab == 1){
+        AddInstancesClasPropJDialog.getPropPanel().remove(this);
+        AddInstancesClasPropJDialog.getPropPanel().add(new CreateInstancesJPanel());
+   }
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed

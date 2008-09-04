@@ -19,6 +19,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent;
     private Frame frame;
     private boolean borrado=false,duplicado=false;
+    private int posicion;
     
     /** Creates new form TextInstancesTextAreaJPanel */
     public TestInstancesTextAreaJPanel() {
@@ -27,6 +28,21 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
+    public TestInstancesTextAreaJPanel(int i) {
+        initComponents();
+        posicion = i;
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+    
+    public TestInstancesTextAreaJPanel(String query, String result, String coment) {
+        initComponents();
+        queryTextField.setText(query);
+        resultTextArea.setText(result);
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setComent(coment);
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -122,16 +138,33 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    frameComent.setComent("");
-    this.setQuery("");
-    this.setQueryResult("");
-    this.setComment(frameComent);
-    setBorrado(true);
+    this.setVisible(false);
+    int sel = GroupTestsJPanel.getSelectedTabed();
+    /*String query = this.getQuery();
+    String result = this.getQueryResult();
+    String coment = this.frameComent.getComent();*/
+    if(sel==1){
+        GroupTestsJPanel.getRetAyudaPanel().remove(this);
+        GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
+    }else if(sel==4){
+        GroupTestsJPanel.getClasAyudaPanel().remove(this);
+        GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel());
+    }
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    setDuplicado(true);
+    String query = this.getQuery();
+    String result = this.getQueryResult();
+    String coment = frameComent.getComent();
+    GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesQueryJPanel(query,result,coment));
+    
+    int sel = GroupTestsJPanel.getSelectedTabed();
+    if(sel==1){
+        GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
+    }else if(sel==4){
+        GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel());
+    }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
@@ -201,6 +234,14 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
     public void setDuplicado(boolean duplicado) {
         this.duplicado = duplicado;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 }
 

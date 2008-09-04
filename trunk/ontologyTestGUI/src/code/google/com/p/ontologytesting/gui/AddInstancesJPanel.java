@@ -372,7 +372,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
                 }
             }
         }
-            
+
         if(testYaExiste==false && sinConsultas==false && nombreVacio==false && resultadoValido==true){  
             if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
             jena = jenaInterface.getJena();
@@ -383,14 +383,14 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
             if(!jena.validarSparqlQuerySelect(AddSPARQLJPanel.getSPARQLQuery())){
                 throw new ExceptionsImplementation("Solo estan permitidas las consultas de tipo SELECT");
             }
-            
+
             scenarioSparql.setNombre(AddSPARQLJPanel.getTestNameTextField());
             scenarioSparql.setTestName("sparql");
             scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
             scenarioSparql.setSparqlQuerys(listSparqlQuerys);
-            
+
             scenarioSparql.setInstancias(instancias);
-               
+
             if(GroupTestsJPanel.hayInstanciasAsociadas(instancias)==false){
                 int n = JOptionPane.showConfirmDialog(comp, "El test no tiene " +
                         "instancias asociadas. ¿Desea continuar?", "Warning Message",
@@ -439,6 +439,8 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
     if(AddSPARQLJPanel.isSeleccionado()==false){
+    //System.out.println("archivo confi: "+AlmacenPropiedadesConfig.getPropiedad("simpleTests"));
+    //System.out.println("clase: "+Configuration.getPathTestSimples());
     filechooser = new JFileChooser(Configuration.getPathTestSimples());
     setStateAbrirTest(true);
     

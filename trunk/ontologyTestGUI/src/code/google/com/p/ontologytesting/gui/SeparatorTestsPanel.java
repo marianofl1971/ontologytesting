@@ -7,12 +7,15 @@
 package code.google.com.p.ontologytesting.gui;
 
 import code.google.com.p.ontologytesting.jenainterfaz.ExceptionsImplementation;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author  sara.garcia
  */
 public class SeparatorTestsPanel extends javax.swing.JPanel {
+    private Component frame;
 
     /** Creates new form SeparatorTestsPanel */
     public SeparatorTestsPanel() {

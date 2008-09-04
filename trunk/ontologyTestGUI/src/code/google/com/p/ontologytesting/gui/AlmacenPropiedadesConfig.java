@@ -33,6 +33,7 @@ import java.util.HashMap;
       f.close();
       propiedades = new HashMap(propiedadesTemporales);
     } catch (Exception e) {
+        e.printStackTrace();
     }
   }
 

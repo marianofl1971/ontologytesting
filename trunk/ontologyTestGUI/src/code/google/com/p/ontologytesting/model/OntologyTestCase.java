@@ -28,7 +28,7 @@ public class OntologyTestCase implements OntologyTest{
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
     private static String patron1="[\\(|,|\n| ]",patron2="[\n| |\\)]",
-            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\\;|\n|\\t|\\v|\\s]",
+            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\n|\\t|\\v|\\s]",
             patron6="[.,\\s\\)]";
     private int fallo=0;
     
@@ -186,6 +186,7 @@ public class OntologyTestCase implements OntologyTest{
                 if(!res[k].equals(""))
                 {
                     ExecQuerySparql execQuery = new ExecQuerySparql();
+                    System.out.println("res "+res[k].split("\\("));
                     String[] select = res[k].trim().split("\\(");
                     execQuery.setNombreSelect(select[0]); 
                     for(int i=0;i<select.length;i++){

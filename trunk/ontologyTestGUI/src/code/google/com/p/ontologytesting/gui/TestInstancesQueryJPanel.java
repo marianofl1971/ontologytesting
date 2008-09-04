@@ -19,12 +19,33 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent;
     private Frame frame;
     private boolean borrado=false,duplicado=false;
+    private int posicion;
+    
     
     /** Creates new form TestInstancesQueryJPanel */
+    public TestInstancesQueryJPanel(int i) {
+        initComponents();
+        posicion = i;
+        setBorrado(false);
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+    
     public TestInstancesQueryJPanel() {
         initComponents();
         setBorrado(false);
         frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+    
+    public TestInstancesQueryJPanel(String query, String result, String coment) {
+        initComponents();
+        setBorrado(false);
+        
+        queryTextField.setText(query);
+        resultTextField.setText(result);
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setComent(coment);
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
@@ -126,16 +147,19 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    frameComent.setComent("");
-    this.setQuery("");
-    this.setQueryResult("");
-    this.setComment(frameComent);
-    setBorrado(true);
+    this.setVisible(false);
+    
+    GroupTestsJPanel.getRealAyudaPanel().remove(this);
+    GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    setDuplicado(true);
+    String query = this.getQuery();
+    String result = this.getQueryResult();
+    String coment = frameComent.getComent();
+    
+    GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel(query,result,coment));
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
@@ -203,5 +227,13 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 
     public void setDuplicado(boolean duplicado) {
         this.duplicado = duplicado;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 }

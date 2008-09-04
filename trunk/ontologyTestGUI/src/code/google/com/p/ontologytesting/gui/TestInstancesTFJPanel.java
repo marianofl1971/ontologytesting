@@ -17,18 +17,50 @@ import javax.swing.WindowConstants;
  */
 public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
+    public int getPosicion() {
+        return posicion;
+    }
+    public void setPosicion(int aPosicion) {
+        posicion = aPosicion;
+    }
     private AddComentJDialog frameComent;
     private Frame frame;
     private boolean borrado=false,duplicado=false;
+    private int posicion;
     
     /** Creates new form TestInstancesTFJPanel */
-    public TestInstancesTFJPanel() {
+    public TestInstancesTFJPanel(int i) {
         initComponents();
-        setBorrado(false);
+        posicion = i;
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
         frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+    
+    public TestInstancesTFJPanel() {
+        initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(trueRadioButton);
+        group.add(falseRadioButton);
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+    
+    public TestInstancesTFJPanel(String query,String result,String coment) {
+        initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(trueRadioButton);
+        group.add(falseRadioButton);
+        if(result.equals("true")){
+            trueRadioButton.setSelected(true);
+        }else{
+            falseRadioButton.setSelected(true);
+        }
+        queryTextField.setText(query);
+        frameComent = new AddComentJDialog(frame,true); 
+        frameComent.setComent(coment);
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
@@ -125,16 +157,37 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    /*this.setQuery("");
-    frameComent.setComent("");
-    this.setComment(frameComent);*/
     this.setVisible(false);
-    setBorrado(true);
+    int sel = GroupTestsJPanel.getSelectedTabed();
+    if(sel==0){
+        GroupTestsJPanel.getInstAyudaPanel().remove(this);
+        GroupTestsJPanel.getInstAyudaPanel().add(new TestInstancesTFJPanel());
+    }else if(sel==3){
+        GroupTestsJPanel.getSatAyudaPanel().remove(this);
+        GroupTestsJPanel.getSatAyudaPanel().add(new TestInstancesTFJPanel());
+    }
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    setDuplicado(false);
+    int sel = GroupTestsJPanel.getSelectedTabed();
+    String query = this.getQuery();
+    String result = this.isTestTrue();
+    String testComent = this.frameComent.getComent();
+    System.out.println("pos "+this.getPosicion());
+    if(sel==0){
+        TestInstancesTFJPanel nuevo = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(this.getPosicion()+1);
+        nuevo.setQuery(query);
+        if(result.equals("true")){
+            nuevo.setTrueTest(true);
+        }else{
+            nuevo.setFalseTest(true);
+        }
+        nuevo.getComment().setComent(testComent);
+        //GroupTestsJPanel.getInstAyudaPanel().add(new TestInstancesTFJPanel(query,result,testComent),this.getPosicion()+1);
+    }else if(sel==3){
+        //GroupTestsJPanel.getSatAyudaPanel().add(new TestInstancesTFJPanel(query,result,testComent));
+    }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked

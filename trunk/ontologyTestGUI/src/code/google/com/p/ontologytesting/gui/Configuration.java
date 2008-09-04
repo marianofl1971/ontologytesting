@@ -11,32 +11,44 @@ package code.google.com.p.ontologytesting.gui;
  */
 public class Configuration {
     
-    private static String pathTestSimples;
-    private static String pathTestSparql;
-    private static String pathInstancias;
+    private static String pathTestSimples="";
+    private static String pathTestSparql="";
+    private static String pathInstancias="";
 
     public static String getPathTestSimples() {
-        return pathTestSimples;
+        if(pathTestSimples.equals("")){
+            return AlmacenPropiedadesConfig.getPropiedad("simpleTests");
+        }else{
+            return pathTestSimples;
+        }
     }
 
-    public static void setPathTestSimples(String pathTestSimples) {
-        Configuration.pathTestSimples = pathTestSimples;
+    public static void setPathTestSimples(String apathTestSimples) {
+        pathTestSimples = apathTestSimples;
     }
 
     public static String getPathTestSparql() {
-        return pathTestSparql;
+        if(pathTestSparql.equals("")){
+            return AlmacenPropiedadesConfig.getPropiedad("sparqlTests");
+        }else{
+            return pathTestSparql;
+        }
     }
 
-    public static void setPathTestSparql(String pathTestSparql) {
-        Configuration.pathTestSparql = pathTestSparql;
+    public static void setPathTestSparql(String apathTestSparql) {
+        pathTestSparql = apathTestSparql;
     }
 
     public static String getPathInstancias() {
-        return pathInstancias;
+        if(pathInstancias.equals("")){
+            return AlmacenPropiedadesConfig.getPropiedad("instancias");
+        }else{
+            return pathInstancias;
+        }
     }
 
-    public static void setPathInstancias(String pathInstancias) {
-        Configuration.pathInstancias = pathInstancias;
+    public static void setPathInstancias(String apathInstancias) {
+        pathInstancias = apathInstancias;
     }
 
 }
