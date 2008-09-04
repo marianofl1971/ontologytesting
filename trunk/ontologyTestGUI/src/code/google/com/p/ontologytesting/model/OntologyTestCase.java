@@ -9,8 +9,10 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.exceptions.*;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,41 +33,51 @@ public class OntologyTestCase implements OntologyTest{
             patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\n|\\t|\\v|\\s]",
             patron6="[.,\\s\\)]";
     private int fallo=0;
+    private Component frame;
     
     public OntologyTestCase(){
     }
 
-    protected void setUpOntology(ScenarioTest st, String ont, String ns){  
-        
-    ListIterator liClass,liProperties;   
-    String ciClas[],ciInd[],piClas[],piInd[];   
-    
-    jena = jenaInterface.getJena();
-    jena.addReasoner(ont);
-   
-    Instancias instancias = st.getInstancias();
+    protected void setUpOntology(ScenarioTest st, String ont, String ns)  throws ExceptionReadOntology{  
+        //try {
 
-    List<ClassInstances> classInstances = instancias.getClassInstances();
-    List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
+            ListIterator liClass;
+            ListIterator liProperties;
+            String[] ciClas;
+            String[] ciInd;
+            String[] piClas;
+            String[] piInd;
 
-    liClass = classInstances.listIterator();
-    liProperties = propertyInstances.listIterator();
-        
-        while(liClass.hasNext()){
-            ClassInstances cla = (ClassInstances) liClass.next();
-            String ci = cla.getClassInstance();
-            ciClas = ci.split(patron1);
-            ciInd = ciClas[1].split(patron2);
-            jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
-        }
-        
-        while(liProperties.hasNext()){
-            PropertyInstances p = (PropertyInstances) liProperties.next();
-            String pi = p.getPropertyInstance();
-            piClas = pi.split(patron1);
-            piInd = piClas[1].split(patron2);
-            jena.addInstanceProperty(ns, piClas[0], piInd[0]);
-        }
+            jena = jenaInterface.getJena();
+            jena.addReasoner(ont);
+
+            Instancias instancias = st.getInstancias();
+
+            List<ClassInstances> classInstances = instancias.getClassInstances();
+            List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
+
+            liClass = classInstances.listIterator();
+            liProperties = propertyInstances.listIterator();
+
+            while (liClass.hasNext()) {
+                ClassInstances cla = (ClassInstances) liClass.next();
+                String ci = cla.getClassInstance();
+                ciClas = ci.split(patron1);
+                ciInd = ciClas[1].split(patron2);
+                jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
+            }
+
+            while (liProperties.hasNext()) {
+                PropertyInstances p = (PropertyInstances) liProperties.next();
+                String pi = p.getPropertyInstance();
+                piClas = pi.split(patron1);
+                piInd = piClas[1].split(patron2);
+                jena.addInstanceProperty(ns, piClas[0], piInd[0]);
+            }
+        /*} catch (ExceptionReadOntology ex) {
+            JOptionPane.showMessageDialog(frame,"No se puede leer la ontologia",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }*/
        
     }
     
@@ -74,7 +86,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
-            ScenarioTest scenariotest){
+            ScenarioTest scenariotest) throws ExceptionNotSelectQuery,ExceptionReadQuery{
           
         ArrayList<String> esperado = new ArrayList<String>();
         ArrayList<String> obtenido = new ArrayList<String>();
@@ -279,7 +291,8 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     @Override
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) { 
+    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology,
+        ExceptionNotSelectQuery,ExceptionReadQuery{ 
 
         String ont = baterytest.getOntology();
         String ns = baterytest.getNamespace();

@@ -9,12 +9,15 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.exceptions.*;
+
 /**
  *
  * @author Saruskas
  */
 public interface OntologyTest {
     
-    public void run(OntologyTestResult testresult, CollectionTest baterytest);
+    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology,
+            ExceptionNotSelectQuery,ExceptionReadQuery;
 
 }

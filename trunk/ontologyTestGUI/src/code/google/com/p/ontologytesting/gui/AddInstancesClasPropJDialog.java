@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import code.google.com.p.ontologytesting.model.Auxiliar;
@@ -19,6 +20,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -578,292 +581,274 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
+        try {
 // TODO add your handling code here:
-    jena = jenaInterface.getJena();
-    Auxiliar auxiliar = new Auxiliar();
-    jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
-    ValidarTests validar = new ValidarTests();
-    String[] ciClas=null,ciInd=null;
-    ArrayList failClas = new ArrayList();
-    ArrayList failProp = new ArrayList();
-    int failGroupClas=0,failGroupProp=0;
-    setInstanciaValida(true);
-    clasInst = new ArrayList<ClassInstances>();
-    propInst = new ArrayList<PropertyInstances>();
-    instancias = new Instancias();
-    int aux=0;
-    boolean instanciaSinNombre=false;
-    int totalClas = getClasPanel().getComponentCount();
-    
-    String nombreInstancias = nomInstanciasTextField.getText();
-    if(getInstancesTabbedPane()!=2){
-    setQueryValida(true);
-    if(nombreInstancias.equals("")){
-        instanciaSinNombre=true;
-    }else{
-        for(int i=0; i<totalClas; i++){
-            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
-            String query = panelInst.getQuery();
-            AddComentJDialog comentPane = panelInst.getComment();
-            String coment = comentPane.getComent();
-            if(!query.equals("")){
-                if(validar.validarInstanciaClase(query)==true){
-                    ciClas = query.split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), 
-                        ciClas[0], ciInd[0]);
-                    if(v==false){
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                        setInstanciaValida(false);
-                    }else{
-                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+            jena = jenaInterface.getJena();
+            Auxiliar auxiliar = new Auxiliar();
+            jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
+            ValidarTests validar = new ValidarTests();
+            String[] ciClas = null;
+            String[] ciInd = null;
+            ArrayList failClas = new ArrayList();
+            ArrayList failProp = new ArrayList();
+            int failGroupClas = 0;
+            int failGroupProp = 0;
+            setInstanciaValida(true);
+            clasInst = new ArrayList<ClassInstances>();
+            propInst = new ArrayList<PropertyInstances>();
+            instancias = new Instancias();
+            int aux = 0;
+            boolean instanciaSinNombre = false;
+            int totalClas = getClasPanel().getComponentCount();
+
+            String nombreInstancias = nomInstanciasTextField.getText();
+            if (getInstancesTabbedPane() != 2) {
+                setQueryValida(true);
+                if (nombreInstancias.equals("")) {
+                    instanciaSinNombre = true;
+                } else {
+                    for (int i = 0; i < totalClas; i++) {
+                        CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
+                        String query = panelInst.getQuery();
+                        AddComentJDialog comentPane = panelInst.getComment();
+                        String coment = comentPane.getComent();
+                        if (!query.equals("")) {
+                            if (validar.validarInstanciaClase(query) == true) {
+                                ciClas = query.split(patron1);
+                                ciInd = ciClas[1].split(patron2);
+                                boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), ciClas[0], ciInd[0]);
+                                if (v == false) {
+                                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                                    setInstanciaValida(false);
+                                } else {
+                                    panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                                }
+                            }
+                        }
+
+                        if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
+                            if (!query.equals("") && !coment.equals("")) {
+                                ClassInstances cI = new ClassInstances(query, coment);
+                                clasInst.add(cI);
+                            } else if (!query.equals("") && coment.equals("")) {
+                                ClassInstances cI = new ClassInstances(query);
+                                clasInst.add(cI);
+                            } else if (query.equals("") && !coment.equals("")) {
+                                aux = 1;
+                            }
+                            failClas.add(i, 0);
+                        } else if (validar.validarInstanciaClase(query) == false) {
+                            if (!query.equals("")) {
+                                failClas.add(i, 1);
+                                setQueryValida(false);
+                            }
+                        } else {
+                            failClas.add(i, 0);
+                        }
+                    }
+                    int totalProp = getPropPanel().getComponentCount();
+                    for (int i = 0; i < totalProp; i++) {
+                        CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
+                        String query = panelInst.getQuery();
+                        AddComentJDialog comentPane = panelInst.getComment();
+                        String coment = comentPane.getComent();
+                        if (!query.equals("")) {
+                            if (validar.validarInstanciaPropiedad(query) == true) {
+                                ciClas = query.split(patron1);
+                                ciInd = ciClas[1].split(patron2);
+                                boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), ciClas[0], ciInd[0]);
+                                if (v == false) {
+                                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                                    setInstanciaValida(false);
+                                } else {
+                                    panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                                }
+                            }
+                        }
+
+                        if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
+                            if (!query.equals("") && !coment.equals("")) {
+                                PropertyInstances pI = new PropertyInstances(query, coment);
+                                propInst.add(pI);
+                            } else if (!query.equals("") && coment.equals("")) {
+                                PropertyInstances pI = new PropertyInstances(query);
+                                propInst.add(pI);
+                            } else if (query.equals("") && !coment.equals("")) {
+                                aux = 1;
+                            }
+                            failProp.add(i, 0);
+                        } else if (validar.validarInstanciaPropiedad(query) == false) {
+                            if (!query.equals("")) {
+                                failProp.add(i, 1);
+                                setQueryValida(false);
+                            }
+                        } else {
+                            failProp.add(i, 0);
+                        }
+                    }
+                }
+            } else {
+                setQueryValida(true);
+                String patron = "\\\n";
+                CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+                String conjuntoClase = conjunto.getClaseTextArea().trim();
+                String conjuntoProp = conjunto.getPropiedadTextArea().trim();
+                String[] clas = conjuntoClase.split(patron);
+                String[] prop = conjuntoProp.split(patron);
+                if (nombreInstancias.equals("")) {
+                    instanciaSinNombre = true;
+                } else {
+                    for (int i = 0; i < clas.length; i++) {
+                        if (!clas[i].equals("")) {
+                            if (validar.validarInstanciaClase(clas[i]) == true) {
+                                ciClas = clas[i].split(patron1);
+                                ciInd = ciClas[1].split(patron2);
+                                boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), ciClas[0], ciInd[0]);
+                                if (v == false) {
+                                    conjunto.getClaseArea().setForeground(Color.RED);
+                                    setInstanciaValida(false);
+                                } else {
+                                    conjunto.getClaseArea().setForeground(Color.BLACK);
+                                }
+                            }
+                            if (validar.validarInstanciaClase(clas[i]) == true && isInstanciaValida() == true) {
+                                ClassInstances cI = new ClassInstances(clas[i]);
+                                clasInst.add(cI);
+                                failClas.add(i, 0);
+                            } else {
+                                failClas.add(i, 1);
+                                failGroupClas = 1;
+                                setQueryValida(false);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < prop.length; i++) {
+                        if (!prop[i].equals("")) {
+                            if (validar.validarInstanciaPropiedad(prop[i]) == true) {
+                                ciClas = prop[i].split(patron1);
+                                ciInd = ciClas[1].split(patron2);
+                                boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), ciClas[0], ciInd[0]);
+                                if (v == false) {
+                                    conjunto.getPropiedadArea().setForeground(Color.RED);
+                                    setInstanciaValida(false);
+                                } else {
+                                    conjunto.getPropiedadArea().setForeground(Color.BLACK);
+                                }
+                            }
+                            if (validar.validarInstanciaPropiedad(prop[i]) == true && isInstanciaValida() == true) {
+                                PropertyInstances pI = new PropertyInstances(prop[i]);
+                                propInst.add(pI);
+                                failProp.add(i, 0);
+                            } else {
+                                failProp.add(i, 1);
+                                failGroupProp = 1;
+                                setQueryValida(false);
+                            }
+                        }
                     }
                 }
             }
 
-            if(validar.validarInstanciaClase(query)==true && isInstanciaValida()==true){
-                if(!query.equals("") && !coment.equals("")){
-                    ClassInstances cI = new ClassInstances(query,coment);
-                    clasInst.add(cI);
-                }else if(!query.equals("") && coment.equals("")){
-                    ClassInstances cI = new ClassInstances(query);
-                    clasInst.add(cI);
-                }else if(query.equals("") && !coment.equals("")){
-                    aux=1;
-                }
-                failClas.add(i,0);
-            }else if(validar.validarInstanciaClase(query)==false){
-                if(!query.equals("")){
-                    failClas.add(i,1);
-                    setQueryValida(false);
-                }
-            }else{
-                failClas.add(i,0);
-            }
-        }
-        int totalProp = getPropPanel().getComponentCount();
-        for(int i=0; i< totalProp; i++){
-            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
-            String query = panelInst.getQuery();
-            AddComentJDialog comentPane = panelInst.getComment();
-            String coment = comentPane.getComent();
-            if(!query.equals("")){
-                if(validar.validarInstanciaPropiedad(query)==true){
-                    ciClas = query.split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), 
-                        ciClas[0], ciInd[0]);
-                    if(v==false){
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                        setInstanciaValida(false);
-                    }else{
-                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+            if (isQueryValida() == true && isInstanciaValida() == true && instanciaSinNombre == false) {
+                if (aux == 1) {
+                    JOptionPane.showMessageDialog(frame, "Si no añade ninguna instancia a sus comentarios," + "éstos se perderán", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    instancias.setClassInstances(clasInst);
+                    instancias.setPropertyInstances(propInst);
+                    instancias.setDescripcion(getDescInstanciasTextArea());
+                    instancias.setNombre(getNomInstanciasTextField());
+                    instancias.setType("Instancias");
+                    if (AddInstancesJPanel.isStateExaminar() == true) {
+                        if (compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)) {
+                            setInstances(instancias);
+                            this.setVisible(false);
+                        } else {
+                            Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
+                            int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                            if (n == JOptionPane.YES_OPTION) {
+                                setInstances(instancias);
+                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.NO_OPTION) {
+                                crearArchivoDeInstancias(instancias);
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.CANCEL_OPTION) {
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            }
+                            auxiliar.setYaEligioGuardarInstancias(true);
+                        }
+                    } else if (AddInstancesJPanel.isStateAsociar() == true) {
+                        if ((clasInst.size() > 0 || propInst.size() > 0) && (clasFinal == null || propFinal == null)) {
+                            Component comp = null;
+                            int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar " + "este conjunto de instancias para futuras pruebas?", "Guardar Instancias", JOptionPane.YES_NO_OPTION);
+                            if (n == JOptionPane.YES_OPTION) {
+                                auxiliar.crearArchivoDeInstancias(instancias);
+                                auxiliar.setInstances(instancias);
+                                this.setVisible(false);
+                            } else {
+                                auxiliar.setInstances(instancias);
+                                this.setVisible(false);
+                            }
+                        } else if ((clasInst.size() > 0 || propInst.size() > 0) && (!compararListaClase(clasInst, clasFinal) || !compararListaPropiedad(propInst, propFinal))) {
+                            Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
+                            int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                            if (n == JOptionPane.YES_OPTION) {
+                                setInstances(instancias);
+                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.NO_OPTION) {
+                                crearArchivoDeInstancias(instancias);
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.CANCEL_OPTION) {
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            }
+                        } else {
+                            this.setVisible(false);
+                        }
+                    } else {
+                        this.setVisible(false);
                     }
                 }
-            }
-
-            if(validar.validarInstanciaPropiedad(query)==true && isInstanciaValida()==true
-                && instanciaSinNombre==false){
-                if(!query.equals("") && !coment.equals("")){
-                    PropertyInstances pI = new PropertyInstances(query,coment);
-                    propInst.add(pI);
-                }else if(!query.equals("") && coment.equals("")){
-                    PropertyInstances pI = new PropertyInstances(query);
-                    propInst.add(pI);
-                }else if(query.equals("") && !coment.equals("")){
-                    aux=1;
-                }
-                failProp.add(i, 0);
-            }else if(validar.validarInstanciaPropiedad(query)==false){
-                if(!query.equals("")){
-                    failProp.add(i, 1);
-                    setQueryValida(false);
-                }
-            }else{
-                failProp.add(i, 0);
-            }
-        }
-    }
-    }else{
-        setQueryValida(true);
-        String patron="\\\n";
-        CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-        String conjuntoClase = conjunto.getClaseTextArea().trim();
-        String conjuntoProp = conjunto.getPropiedadTextArea().trim();
-        String[] clas = conjuntoClase.split(patron);
-        String[] prop = conjuntoProp.split(patron);
-        if(nombreInstancias.equals("")){
-            instanciaSinNombre=true;
-        }else{
-            for(int i=0;i<clas.length;i++){
-                if(!clas[i].equals("")){
-                    if(validar.validarInstanciaClase(clas[i])==true){
-                        ciClas = clas[i].split(patron1);
-                        ciInd = ciClas[1].split(patron2);
-                        boolean v = jena.addInstanceClass(MainJPanel.getNamespaceOntologyTextField(), 
-                            ciClas[0], ciInd[0]);
-                        if(v==false){
-                            conjunto.getClaseArea().setForeground(Color.RED);
-                            setInstanciaValida(false);
-                        }else{
-                            conjunto.getClaseArea().setForeground(Color.BLACK);
+            } else if (instanciaSinNombre == true) {
+                JOptionPane.showMessageDialog(frame, "El nombre para el conjunto de instancias" + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            } else if (isInstanciaValida() == false) {
+                JOptionPane.showMessageDialog(frame, "Las instancias marcadas" + "en rojo no se corresponden con la definicion de su ontologia. " + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            } else if (isQueryValida() == false) {
+                JOptionPane.showMessageDialog(frame, "El formato de las instancias marcadas" + "en rojo es incorrecto. Por favor, revise la documentación para ver" + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                if (getInstancesTabbedPane() != 2) {
+                    CreateInstancesJPanel panelInst = null;
+                    for (int j = 0; j < failClas.size(); j++) {
+                        if (failClas.get(j).equals(1)) {
+                            panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
+                            panelInst.getInstanciaTextField().setForeground(Color.RED);
                         }
                     }
-                    if(validar.validarInstanciaClase(clas[i])==true && 
-                            isInstanciaValida()==true){
-                            ClassInstances cI = new ClassInstances(clas[i]);
-                            clasInst.add(cI);
-                            failClas.add(i,0);
-                    }else{
-                            failClas.add(i,1);
-                            failGroupClas=1;
-                            setQueryValida(false);
-                    }
-                }
-            }
-            for(int i=0;i<prop.length;i++){
-                if(!prop[i].equals("")){
-                    if(validar.validarInstanciaPropiedad(prop[i])==true){
-                        ciClas = prop[i].split(patron1);
-                        ciInd = ciClas[1].split(patron2);
-                        boolean v = jena.addInstanceProperty(MainJPanel.getNamespaceOntologyTextField(), 
-                            ciClas[0], ciInd[0]);
-                        if(v==false){
-                            conjunto.getPropiedadArea().setForeground(Color.RED);
-                            setInstanciaValida(false);
-                        }else{
-                            conjunto.getPropiedadArea().setForeground(Color.BLACK);
+                    for (int j = 0; j < failProp.size(); j++) {
+                        if (failProp.get(j).equals(1)) {
+                            panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(j);
+                            panelInst.getInstanciaTextField().setForeground(Color.RED);
                         }
                     }
-                    if(validar.validarInstanciaPropiedad(prop[i])==true &&
-                            isInstanciaValida()==true){
-                        PropertyInstances pI = new PropertyInstances(prop[i]);
-                        propInst.add(pI);
-                        failProp.add(i,0);
-                    }else{
-                        failProp.add(i,1);
-                        failGroupProp=1;
-                        setQueryValida(false);
+                } else {
+                    CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+                    if (failGroupClas == 1 && failGroupProp == 1) {
+                        conjunto.getPropiedadArea().setForeground(Color.RED);
+                        conjunto.getClaseArea().setForeground(Color.RED);
+                    } else if (failGroupClas == 1) {
+                        conjunto.getClaseArea().setForeground(Color.RED);
+                    } else {
+                        conjunto.getPropiedadArea().setForeground(Color.RED);
                     }
                 }
             }
+        } catch (ExceptionReadOntology ex) {
+            JOptionPane.showMessageDialog(frame,"No se pueden asociar las instancias. La ontologia" +
+                    "no se puede leer.", "Warning Message",JOptionPane.WARNING_MESSAGE);
         }
-    }
-     
-    if(isQueryValida()==true && isInstanciaValida()==true && instanciaSinNombre==false){
-        if(aux==1){
-            JOptionPane.showMessageDialog(frame,"Si no añade ninguna instancia a sus comentarios," +
-                "éstos se perderán","Warning Message",JOptionPane.WARNING_MESSAGE);
-        }else{
-            instancias.setClassInstances(clasInst);
-            instancias.setPropertyInstances(propInst);
-            instancias.setDescripcion(getDescInstanciasTextArea());
-            instancias.setNombre(getNomInstanciasTextField());
-            instancias.setType("Instancias");
-            if(AddInstancesJPanel.isStateExaminar()==true){
-                if(compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)){
-                    setInstances(instancias);
-                    this.setVisible(false);
-                }else{
-                    Object[] options = {"Sobreescribir","Crear nuevo","No guardar"};
-                    int n = JOptionPane.showOptionDialog(frame,"El conjunto de " +
-                    "instancias ha cambiado. ¿Qué desea hacer?","Question",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
-                    if (n == JOptionPane.YES_OPTION) {
-                        setInstances(instancias);
-                        crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
-                        this.setVisible(false);
-                    }else if (n == JOptionPane.NO_OPTION) {
-                        crearArchivoDeInstancias(instancias); 
-                        setInstances(instancias);
-                        this.setVisible(false);
-                    }else if (n == JOptionPane.CANCEL_OPTION) {
-                        setInstances(instancias);
-                        this.setVisible(false);
-                    }
-                    auxiliar.setYaEligioGuardarInstancias(true);
-                }
-            }else if(AddInstancesJPanel.isStateAsociar()==true){
-                if((clasInst.size()>0 || propInst.size()>0) &&
-                        (clasFinal==null || propFinal==null)){
-                    Component comp = null;
-                    int n = JOptionPane.showConfirmDialog(comp,"¿Quiere guardar " +
-                            "este conjunto de instancias para futuras pruebas?", 
-                            "Guardar Instancias",
-                    JOptionPane.YES_NO_OPTION);
-                    if (n == JOptionPane.YES_OPTION) {
-                        auxiliar.crearArchivoDeInstancias(instancias);
-                        auxiliar.setInstances(instancias);
-                        this.setVisible(false);
-                    }else{
-                        auxiliar.setInstances(instancias);
-                        this.setVisible(false);
-                    }
-                }else if((clasInst.size()>0 || propInst.size()>0) && 
-                        (!compararListaClase(clasInst, clasFinal) || 
-                        !compararListaPropiedad(propInst, propFinal))){
-                    Object[] options = {"Sobreescribir","Crear nuevo","No guardar"};
-                    int n = JOptionPane.showOptionDialog(frame,"El conjunto de " +
-                    "instancias ha cambiado. ¿Qué desea hacer?","Question",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,null,options,options[2]);
-                    if (n == JOptionPane.YES_OPTION) {
-                        setInstances(instancias);
-                        crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
-                        this.setVisible(false);
-                    }else if (n == JOptionPane.NO_OPTION) {
-                        crearArchivoDeInstancias(instancias); 
-                        setInstances(instancias);
-                        this.setVisible(false);
-                    }else if (n == JOptionPane.CANCEL_OPTION) {
-                        setInstances(instancias);
-                        this.setVisible(false);
-                    }
-                }else{
-                    this.setVisible(false);
-                }
-            }else{
-                this.setVisible(false);
-            }   
-        }
-    }else if(instanciaSinNombre==true){
-        JOptionPane.showMessageDialog(frame,"El nombre para el conjunto de instancias" +
-                "es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
-    }else if(isInstanciaValida()==false){
-        JOptionPane.showMessageDialog(frame,"Las instancias marcadas" +
-                "en rojo no se corresponden con la definicion de su ontologia. " +
-                "Por favor, reviselas.","Warning Message",JOptionPane.WARNING_MESSAGE);
-    }else if(isQueryValida()==false){
-        JOptionPane.showMessageDialog(frame,"El formato de las instancias marcadas" +
-                "en rojo es incorrecto. Por favor, revise la documentación para ver" +
-                "los formatos permitidos.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        if(getInstancesTabbedPane()!=2){
-            CreateInstancesJPanel panelInst = null;
-            for(int j=0;j<failClas.size();j++){
-                if(failClas.get(j).equals(1)){
-                    panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
-                    panelInst.getInstanciaTextField().setForeground(Color.RED);
-                }
-            }
-            for(int j=0;j<failProp.size();j++){
-                if(failProp.get(j).equals(1)){
-                    panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(j);
-                    panelInst.getInstanciaTextField().setForeground(Color.RED);
-                }
-            }
-        }else{
-            CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-            if(failGroupClas==1 && failGroupProp==1){
-                conjunto.getPropiedadArea().setForeground(Color.RED);
-                conjunto.getClaseArea().setForeground(Color.RED);
-            }else if(failGroupClas==1){
-                conjunto.getClaseArea().setForeground(Color.RED);
-            }else{
-                conjunto.getPropiedadArea().setForeground(Color.RED);
-            }
-        }
-    }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
 public void crearArchivoDeInstancias(Instancias instancias){

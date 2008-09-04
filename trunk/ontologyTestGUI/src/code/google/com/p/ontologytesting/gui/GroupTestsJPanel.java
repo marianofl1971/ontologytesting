@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.exceptions.*;
 import code.google.com.p.ontologytesting.model.Auxiliar;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.OntologyTestResult;
@@ -1356,6 +1357,7 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
                     }catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     }
+                    try{
                     testcase.run(testresult, MainJPanel.getCollectionTest());
                     JPanel panel = new TreeResults(testresult);
                     GroupTestsJPanel.setPanelTree(panel);
@@ -1366,7 +1368,19 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
                     satCompletado=false;
                     clasCompletado=false;
                     return true;
+                    }catch (ExceptionReadOntology ex) {
+                        JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
+                        "introducida no se puede leer.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }catch(ExceptionReadQuery exq){
+                        JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }catch(ExceptionNotSelectQuery exs){
+                        JOptionPane.showMessageDialog(frame,"Solo estan permitidas consultas SPARQL" +
+                        "de tipo SELECT","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }
                 }else{
+                    try{
                     testcase.run(testresult, MainJPanel.getCollectionTest());
                     JPanel panel = new TreeResults(testresult);
                     setPanelTree(panel);
@@ -1377,6 +1391,17 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
                     satCompletado=false;
                     clasCompletado=false;
                     return true;
+                    }catch (ExceptionReadOntology ex) {
+                        JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
+                        "introducida no se puede leer.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }catch(ExceptionReadQuery exq){
+                        //JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida.",
+                        //"Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }catch(ExceptionNotSelectQuery exs){
+                        //JOptionPane.showMessageDialog(frame,"Solo estan permitidas consultas SPARQL" +
+                        //"de tipo SELECT","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(frame,"No ha creado ningun test para ejecutar.",

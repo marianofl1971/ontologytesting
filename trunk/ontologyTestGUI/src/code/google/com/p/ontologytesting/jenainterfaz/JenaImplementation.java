@@ -5,6 +5,9 @@
 
 package code.google.com.p.ontologytesting.jenainterfaz;
 
+import code.google.com.p.ontologytesting.exceptions.ExceptionNotSelectQuery;
+import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.exceptions.ExceptionReadQuery;
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
@@ -23,10 +26,9 @@ import com.hp.hpl.jena.sparql.syntax.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.mindswap.pellet.jena.NodeFormatter;
+import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
-import org.mindswap.pellet.output.TableData;
 import org.mindswap.pellet.utils.QNameProvider;
 
 /**
@@ -87,9 +89,13 @@ public class JenaImplementation implements Jena{
     }
 
     @Override
-    public void addReasoner(String ontologia) {
-        model.read(ontologia);  
-        model.prepare();
+    public void addReasoner(String ontologia) throws ExceptionReadOntology{
+        try {
+            model.read(ontologia);  
+            model.prepare();
+        }catch(Exception e){
+            throw new ExceptionReadOntology();
+        }
     }
 
     //Saber si un individuo pertenece a una clase
@@ -229,8 +235,9 @@ public class JenaImplementation implements Jena{
     //y(c,d,e)
     //z(f)
     @Override
-    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
-        
+    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML) throws ExceptionReadQuery,
+    ExceptionNotSelectQuery{
+        try{
         ArrayList<String> res = new ArrayList<String>();
 
         String expReg = "([\\?]{1}[a-zA-Z]+)";
@@ -347,26 +354,26 @@ public class JenaImplementation implements Jena{
         }*/
         
         return lista;
-    }
-    
-    @Override
-    public boolean validarSparqlQuery(String query){
-        try{    
-            QueryFactory.create(query);
-            return true;
-        }catch (QueryException ex){
-            return false;
+        }catch(QueryException qe){
+            throw new ExceptionReadQuery();
+        }catch(UnsupportedFeatureException ufe){
+            throw new ExceptionNotSelectQuery();
         }
     }
     
     @Override
-    public boolean validarSparqlQuerySelect(String query){ 
+    public void validarSparqlQuery(String query)throws Exception{   
+            Query queryStr = QueryFactory.create(query);
+            if(!queryStr.isSelectType()){
+            throw new Exception();
+        }
+    }
+    
+    /*@Override
+    public void validarSparqlQuerySelect(String query) throws Exception{ 
         Query queryStr = QueryFactory.create(query);
-        if(!queryStr.isSelectType()){
-            return false;
-        }
-        return true;
-    }
+        
+    }*/
     
     public boolean perteneceALista(String nombre, ArrayList<ExecQuerySparql> lista){
         for(int i=0;i<lista.size();i++){
