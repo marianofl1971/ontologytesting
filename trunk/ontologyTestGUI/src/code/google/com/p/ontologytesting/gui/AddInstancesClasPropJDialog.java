@@ -20,8 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -582,7 +580,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
         try {
-// TODO add your handling code here:
             jena = jenaInterface.getJena();
             Auxiliar auxiliar = new Auxiliar();
             jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
@@ -633,8 +630,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             } else if (!query.equals("") && coment.equals("")) {
                                 ClassInstances cI = new ClassInstances(query);
                                 clasInst.add(cI);
-                            } else if (query.equals("") && !coment.equals("")) {
-                                aux = 1;
                             }
                             failClas.add(i, 0);
                         } else if (validar.validarInstanciaClase(query) == false) {
@@ -673,9 +668,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             } else if (!query.equals("") && coment.equals("")) {
                                 PropertyInstances pI = new PropertyInstances(query);
                                 propInst.add(pI);
-                            } else if (query.equals("") && !coment.equals("")) {
-                                aux = 1;
-                            }
+                            } 
                             failProp.add(i, 0);
                         } else if (validar.validarInstanciaPropiedad(query) == false) {
                             if (!query.equals("")) {
@@ -750,9 +743,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             }
 
             if (isQueryValida() == true && isInstanciaValida() == true && instanciaSinNombre == false) {
-                if (aux == 1) {
-                    JOptionPane.showMessageDialog(frame, "Si no añade ninguna instancia a sus comentarios," + "éstos se perderán", "Warning Message", JOptionPane.WARNING_MESSAGE);
-                } else {
                     instancias.setClassInstances(clasInst);
                     instancias.setPropertyInstances(propInst);
                     instancias.setDescripcion(getDescInstanciasTextArea());
@@ -812,7 +802,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     } else {
                         this.setVisible(false);
                     }
-                }
             } else if (instanciaSinNombre == true) {
                 JOptionPane.showMessageDialog(frame, "El nombre para el conjunto de instancias" + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             } else if (isInstanciaValida() == false) {
@@ -1022,7 +1011,11 @@ private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void setInstances(Instancias instancias)
 {  
     int tab = GroupTestsJPanel.getSelectedTabed();
-    ContentMainJFrame.getInstancias().set(tab, instancias);
+    if(AddSPARQLJPanel.isSeleccionado()==false){
+        ContentMainJFrame.getInstancias().set(tab, instancias);
+    }else{
+        ContentMainJFrame.getInstancias().set(5, instancias);
+    }
 }
 
 public void copiarAInstancesTextArea(){

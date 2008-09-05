@@ -5,15 +5,12 @@
 
 package code.google.com.p.ontologytesting.jenainterfaz;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionNotSelectQuery;
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadQuery;
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.query.QueryException;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
@@ -26,7 +23,6 @@ import com.hp.hpl.jena.sparql.syntax.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.mindswap.pellet.exceptions.UnsupportedFeatureException;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.mindswap.pellet.utils.QNameProvider;
@@ -235,9 +231,8 @@ public class JenaImplementation implements Jena{
     //y(c,d,e)
     //z(f)
     @Override
-    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML) throws ExceptionReadQuery,
-    ExceptionNotSelectQuery{
-        try{
+    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
+
         ArrayList<String> res = new ArrayList<String>();
 
         String expReg = "([\\?]{1}[a-zA-Z]+)";
@@ -354,17 +349,12 @@ public class JenaImplementation implements Jena{
         }*/
         
         return lista;
-        }catch(QueryException qe){
-            throw new ExceptionReadQuery();
-        }catch(UnsupportedFeatureException ufe){
-            throw new ExceptionNotSelectQuery();
-        }
     }
     
     @Override
-    public void validarSparqlQuery(String query)throws Exception{   
-            Query queryStr = QueryFactory.create(query);
-            if(!queryStr.isSelectType()){
+    public void validarSparqlQuery(String query) throws Exception{   
+        Query queryStr = QueryFactory.create(query);
+        if(!queryStr.isSelectType()){
             throw new Exception();
         }
     }

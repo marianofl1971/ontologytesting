@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.gui.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.ContentMainJFrame;
 import code.google.com.p.ontologytesting.gui.GroupTestsJPanel;
@@ -50,7 +51,11 @@ public class Auxiliar {
     public void setInstances(Instancias instancias){  
         
         int tab = GroupTestsJPanel.getSelectedTabed();
-        ContentMainJFrame.getInstancias().set(tab, instancias);
+        if(AddSPARQLJPanel.isSeleccionado()==false){
+            ContentMainJFrame.getInstancias().set(tab, instancias);
+        }else{
+            ContentMainJFrame.getInstancias().set(5, instancias);
+        }
     }
     
     public void setYaEligioGuardarInstancias(boolean selec) {

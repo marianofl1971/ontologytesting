@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="code.google.com.p.ontologytesting.model.ScenarioTest"> 
+  <void property="descripcion"> 
+   <string>Descrip retrieval</string> 
+  </void> 
+  <void property="instancias"> 
+   <void property="classInstances"> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Male(johon)</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Male(tom)</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Female(marry)</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Wife(lee)</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+   <void property="descripcion"> 
+    <string>Conjunto instancias para retrieval</string> 
+   </void> 
+   <void property="nombre"> 
+    <string>Retrieval instances</string> 
+   </void> 
+   <void property="propertyInstances"> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
+      <void property="propertyInstance"> 
+       <string>hasChild(lee,tom)</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
+      <void property="propertyInstance"> 
+       <string>hasChild(marry,john)</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="nombre"> 
+   <string>Retrieval New</string> 
+  </void> 
+  <void property="queryTest"> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Wife</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>marry
+lee</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Female</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>lee</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Male</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>johon</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+  <void property="testName"> 
+   <string>Retrieval</string> 
+  </void> 
+ </object> 
+</java> 

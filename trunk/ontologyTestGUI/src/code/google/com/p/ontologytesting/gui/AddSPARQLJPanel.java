@@ -38,11 +38,15 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     public static javax.swing.JButton getAntQueryButton() {
         return antQueryButton;
     }
-
     public static javax.swing.JButton getSigQueryButton() {
         return sigQueryButton;
     }
-
+    public static javax.swing.JTextArea getSparqlTextArea() {
+        return sparqlTextArea;
+    }
+    public static void setListAux(ArrayList<SparqlQueryOntology> aListAux) {
+        listAux = aListAux;
+    }
     private boolean nombreVacio=false,testYaExiste=false,sinConsultas=false,
             ambosNecesarios=false,noHayInsatncias=false,resultadoValido=true,sinTest=false;
     private JPanel panelTree;
@@ -88,8 +92,15 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private int contador=0;
     private int index=0;
     private boolean isAntSelected=false, isSigSelected=false;
-    private static ArrayList<SparqlQueryOntology> listAux = new ArrayList<SparqlQueryOntology>();
+    private static ArrayList<SparqlQueryOntology> listAux;
     private Component comp;
+    private ScenarioTest scenarioSparql;
+    private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
+    private ArrayList<ClassInstances> vaciaClase;
+    private ArrayList<PropertyInstances> vaciaPropiedad;
+    private Instancias instancias;
+    private JenaInterface jenaInterface = new JenaInterface();   
+    private Jena jena;
     
     
     /** Creates new form AddSPARQLJPanel */
@@ -329,8 +340,8 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
             }
             AddSPARQLJPanel.setResultTextArea("");
             AddSPARQLJPanel.setSPARQLQuery("");
-                getAntQueryButton().setEnabled(true);
-                getSigQueryButton().setEnabled(false);
+            getAntQueryButton().setEnabled(true);
+            getSigQueryButton().setEnabled(false);
             AddSPARQLJPanel.setPosListQuerysSel(posSel+1);
             contador=0;
         }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")){
@@ -411,7 +422,7 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
     int posSel = getPosListQuerysSel();
     SparqlQueryOntology sparql;
-        getAntQueryButton().setEnabled(true);
+    getAntQueryButton().setEnabled(true);
     if(!getSPARQLQuery().equals("") && !getResultTextArea().equals("")){
             getListAux().get(posSel).setQuerySparql(getSPARQLQuery());
             getListAux().get(posSel).setResultexpected(getResultTextArea());
@@ -523,14 +534,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
 public boolean guardarDatos(){
     
+    jena = jenaInterface.getJena();
     noHayInsatncias=false;
     resultadoValido=true;
     nombreVacio=false;
     testYaExiste=false;
     sinConsultas=false;
     sinTest=false;
-    OntologyTestCase testcase = new OntologyTestCase();
-    OntologyTestResult testresult = new OntologyTestResult();
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
     
@@ -543,14 +553,13 @@ public boolean guardarDatos(){
         MainJPanel.getCollectionTest().setNamespace(ontologyURI.concat("#"));
     }   
     
-    ScenarioTest scenarioSparql = new ScenarioTest();
-    ArrayList<SparqlQueryOntology> listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
-    ArrayList<ClassInstances> vaciaClase = new ArrayList<ClassInstances>();
-    ArrayList<PropertyInstances> vaciaPropiedad = new ArrayList<PropertyInstances>();
-    Instancias instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
+    scenarioSparql = new ScenarioTest();
+    listSparqlQuerys = AddSPARQLJPanel.getListSparqlQuerys();
+    vaciaClase = new ArrayList<ClassInstances>();
+    vaciaPropiedad = new ArrayList<PropertyInstances>();
+    instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
     SparqlQueryOntology query = new SparqlQueryOntology();
     ValidarTests validarTests = new ValidarTests();
-    
     
     if(AddSPARQLJPanel.getTestNameTextField().equals("") && (!AddSPARQLJPanel.getSPARQLQuery().equals("") ||
             !AddSPARQLJPanel.getResultTextArea().equals(""))){
@@ -562,7 +571,7 @@ public boolean guardarDatos(){
                 "introduzca uno distinto.","Warning Message",JOptionPane.WARNING_MESSAGE);
         testYaExiste=true;
     }else if(AddSPARQLJPanel.getSPARQLQuery().equals("") && AddSPARQLJPanel.getResultTextArea().equals("") &&
-            !AddSPARQLJPanel.getTestNameTextField().equals("")){
+            !AddSPARQLJPanel.getTestNameTextField().equals("") && getListAux().size()==0){
         JOptionPane.showMessageDialog(frame,"Al menosdebe introducir una consulta para" +
                 "ejectuar el test","Warning Message",JOptionPane.WARNING_MESSAGE);
         sinConsultas=true;
@@ -572,35 +581,63 @@ public boolean guardarDatos(){
                 "Warning Message",JOptionPane.WARNING_MESSAGE);
         sinTest=true;    
     }else if(resultadoValido==true){
-        if(validarTests.validarSparqlTest(AddSPARQLJPanel.getResultTextArea())==false){
-            JOptionPane.showMessageDialog(frame,"Algun formato para el Resultado Esperado " +
-            "es incorrecto. Por favor, revise el formato que ha utlizado para introducir la " +
-            "consulta esperada y revise cuales son los formatos posibles.",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);
-            resultadoValido=false;
+        if(!AddSPARQLJPanel.getResultTextArea().equals("") && !AddSPARQLJPanel.getSPARQLQuery().equals("")){
+            if(validarTests.validarSparqlTest(AddSPARQLJPanel.getResultTextArea())==false){
+                JOptionPane.showMessageDialog(frame,"Algun formato introducido en el Resultado Esperado " +
+                        "es incorrecto. \n Para mas ayuda, consulte los formatos posibles.",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+                resultadoValido=false;
+            }
         }
         if(resultadoValido==true){
             query.setQuerySparql(AddSPARQLJPanel.getSPARQLQuery());
             query.setResultexpected(AddSPARQLJPanel.getResultTextArea());
-            if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
-                listSparqlQuerys.add(query);
-            }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
-                listSparqlQuerys.remove(AddSPARQLJPanel.getPosListQuerysSel());
-                listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
-            }
-            ArrayList<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
-            for(int i=0; i<querys.size();i++){
-                if(validarTests.validarSparqlTest(querys.get(i).getResultexpected())==false){
-                    JOptionPane.showMessageDialog(frame,"Algun formato para el Resultado Esperado " +
-                    "es incorrecto. Por favor, revise el formato que ha utlizado para introducir la " +
-                    "consulta esperada y revise cuales son los formatos posibles.",
-                    "Warning Message",JOptionPane.WARNING_MESSAGE);
-                    resultadoValido=false;
+            try{
+                if(!AddSPARQLJPanel.getResultTextArea().equals("") && !AddSPARQLJPanel.getSPARQLQuery().equals("")){
+                    jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
+                    jena.validarSparqlQuery(query.getQuerySparql()); 
+                    if(AddSPARQLJPanel.getListSparqlQuerys().size()==AddSPARQLJPanel.getPosListQuerysSel()){
+                        listSparqlQuerys.add(query);
+                    }else if(GroupTestsJPanel.inListSparqlQuerys(query)==false){
+                        listSparqlQuerys.remove(AddSPARQLJPanel.getPosListQuerysSel());
+                        listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
+                    }
                 }
+                ArrayList<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
+                for(int i=0; i<querys.size();i++){
+                    if(!querys.get(i).getQuerySparql().equals("") && !querys.get(i).getResultexpected().equals("")){
+                        if(validarTests.validarSparqlTest(querys.get(i).getResultexpected())==false){
+                            JOptionPane.showMessageDialog(frame,"Algun formato introducido en el Resultado Esperado " +
+                                "es incorrecto. \n Para mas ayuda, consulte los formatos posibles.",
+                                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                            resultadoValido=false;
+                        }else{
+                            jena.validarSparqlQuery(querys.get(i).getQuerySparql());
+                        }
+                    }
+                }
+            boolean result = asociarDatos();
+            instancias.setClassInstances(vaciaClase);
+            instancias.setPropertyInstances(vaciaPropiedad);
+            ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias);
+            return result;
+            }catch(ExceptionReadOntology ero){
+                    JOptionPane.showMessageDialog(frame,"La ontologia introducida no se puede leer." +
+                    "No se pueden asociar las consultas sparql.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+            }catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame,"Alguna de las consultas SPARQL no es valida",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
             }
         }
     }
-    try{
+    return false;   
+}   
+    
+public boolean asociarDatos(){
+
+    OntologyTestCase testcase = new OntologyTestCase();
+    OntologyTestResult testresult = new OntologyTestResult();
     if(testYaExiste==false && ambosNecesarios==false && sinConsultas==false && nombreVacio==false
     && resultadoValido==true && sinTest==false){
         if(!AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")){    
@@ -608,7 +645,6 @@ public boolean guardarDatos(){
             scenarioSparql.setTestName("sparql");
             scenarioSparql.setDescripcion(AddSPARQLJPanel.getTestDescTextArea());
             scenarioSparql.setSparqlQuerys(listSparqlQuerys);
-
             scenarioSparql.setInstancias(instancias);
 
             if(GroupTestsJPanel.hayInstanciasAsociadas(instancias)==false){
@@ -621,8 +657,6 @@ public boolean guardarDatos(){
             }
             if(noHayInsatncias==false){
                 if(ambosNecesarios==false){
-                    instancias.setClassInstances(vaciaClase);
-                    instancias.setPropertyInstances(vaciaPropiedad);
                     ContentMainJFrame.getInstancias().set(GroupTestsJPanel.getSelectedTabed(), instancias); 
 
                     ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
@@ -636,7 +670,8 @@ public boolean guardarDatos(){
                     AddSPARQLJPanel.setListSparqlQuerys(listSparqlQuerys);
                 }
             }
-        }else if((AddSPARQLJPanel.getSPARQLQuery().equals("") || AddSPARQLJPanel.getResultTextArea().equals("")) &&
+        }else if((!AddSPARQLJPanel.getSPARQLQuery().equals("") && AddSPARQLJPanel.getResultTextArea().equals(""))
+                || (AddSPARQLJPanel.getSPARQLQuery().equals("") && !AddSPARQLJPanel.getResultTextArea().equals("")) &&
                 (!AddSPARQLJPanel.getTestNameTextField().equals(""))){
             JOptionPane.showMessageDialog(frame,"Ambos campos CONSULTA y RESULTADO ESPERADO " +
                 "son obligatorios.", "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -666,10 +701,10 @@ public boolean guardarDatos(){
                         io.printStackTrace();
                     }
                     try{
-                    testcase.run(testresult, MainJPanel.getCollectionTest());
-                    JPanel panel = new TreeResults(testresult);
-                    setPanelTree(panel); 
-                    return true;
+                        testcase.run(testresult, MainJPanel.getCollectionTest());
+                        JPanel panel = new TreeResults(testresult);
+                        setPanelTree(panel); 
+                        return true;
                     }catch (ExceptionReadOntology ex) {
                         JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
                         "introducida no se puede leer.",
@@ -677,10 +712,10 @@ public boolean guardarDatos(){
                     }
                 }else{
                     try{
-                    testcase.run(testresult, MainJPanel.getCollectionTest());
-                    JPanel panel = new TreeResults(testresult);
-                    setPanelTree(panel); 
-                    return true;
+                        testcase.run(testresult, MainJPanel.getCollectionTest());
+                        JPanel panel = new TreeResults(testresult);
+                        setPanelTree(panel); 
+                        return true;
                     }catch (ExceptionReadOntology ex) {
                         JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
                         "introducida no se puede leer.",
@@ -694,16 +729,9 @@ public boolean guardarDatos(){
             }
         }
     }
-    }catch(ExceptionReadQuery exq){
-        JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida.",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-    }catch(ExceptionNotSelectQuery exs){
-        JOptionPane.showMessageDialog(frame,"Solo estan permitidas consultas SPARQL" +
-        "de tipo SELECT","Warning Message",JOptionPane.WARNING_MESSAGE);
-    }
-    return false;   
-}   
-    
+    return false;
+}
+
 public JPanel getPanelTree() {
     return panelTree;
 }
@@ -732,11 +760,11 @@ public void setPanelTree(JPanel aPanelTree) {
     }
 
     public static String getSPARQLQuery() {
-        return sparqlTextArea.getText();
+        return getSparqlTextArea().getText();
     }
 
     public static void setSPARQLQuery(String aSparqlTextArea) {
-        sparqlTextArea.setText(aSparqlTextArea);
+        getSparqlTextArea().setText(aSparqlTextArea);
     }
 
     public static String getTestDescTextArea() {
@@ -764,11 +792,11 @@ public void setPanelTree(JPanel aPanelTree) {
     }
     
     public static ArrayList<SparqlQueryOntology> getListSparqlQuerys() {
-        return listAux;
+        return getListAux();
     }
 
     public static void setListSparqlQuerys(ArrayList<SparqlQueryOntology> alistAux) {
-        listAux = alistAux;
+        setListAux(alistAux);
     }
 
     public int getIndex() {
@@ -779,12 +807,8 @@ public void setPanelTree(JPanel aPanelTree) {
         this.index = index;
     }
 
-    public ArrayList<SparqlQueryOntology> getListAux() {
+    public static ArrayList<SparqlQueryOntology> getListAux() {
         return listAux;
-    }
-
-    public void setListAux(ArrayList<SparqlQueryOntology> alistAux) {
-        listAux = alistAux;
     }
 
     public boolean isIsAntSelected() {

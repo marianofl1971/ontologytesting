@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <object class="code.google.com.p.ontologytesting.model.ScenarioTest"> 
+  <void property="descripcion"> 
+   <string>Desc</string> 
+  </void> 
+  <void property="instancias"> 
+   <void property="classInstances"> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Female(ana)</string> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.ClassInstances"> 
+      <void property="classInstance"> 
+       <string>Male(pablo)</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+   <void property="descripcion"> 
+    <string>Desc instancias</string> 
+   </void> 
+   <void property="nombre"> 
+    <string>Conjunto instancias</string> 
+   </void> 
+   <void property="propertyInstances"> 
+    <void method="add"> 
+     <object class="code.google.com.p.ontologytesting.model.PropertyInstances"> 
+      <void property="propertyInstance"> 
+       <string>hasChild(sara,pablo)</string> 
+      </void> 
+     </object> 
+    </void> 
+   </void> 
+  </void> 
+  <void property="nombre"> 
+   <string>Instanciacion2</string> 
+  </void> 
+  <void property="queryTest"> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Wife(ana)</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>false</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Male(diego)</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>true</string> 
+     </void> 
+    </object> 
+   </void> 
+   <void method="add"> 
+    <object class="code.google.com.p.ontologytesting.model.QueryOntology"> 
+     <void property="comment"> 
+      <string></string> 
+     </void> 
+     <void property="query"> 
+      <string>Male(pablo)</string> 
+     </void> 
+     <void property="resultexpected"> 
+      <string>false</string> 
+     </void> 
+    </object> 
+   </void> 
+  </void> 
+  <void property="testName"> 
+   <string>Instanciación</string> 
+  </void> 
+ </object> 
+</java> 

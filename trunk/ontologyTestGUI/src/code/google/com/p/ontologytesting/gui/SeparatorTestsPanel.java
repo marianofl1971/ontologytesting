@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.gui;
 
-import java.awt.Component;
 
 /**
  *

@@ -86,7 +86,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
-            ScenarioTest scenariotest) throws ExceptionNotSelectQuery,ExceptionReadQuery{
+            ScenarioTest scenariotest){
           
         ArrayList<String> esperado = new ArrayList<String>();
         ArrayList<String> obtenido = new ArrayList<String>();
@@ -291,8 +291,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     @Override
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology,
-        ExceptionNotSelectQuery,ExceptionReadQuery{ 
+    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology{ 
 
         String ont = baterytest.getOntology();
         String ns = baterytest.getNamespace();

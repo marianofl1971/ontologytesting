@@ -1372,12 +1372,6 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
                         JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
                         "introducida no se puede leer.",
                         "Warning Message",JOptionPane.WARNING_MESSAGE);
-                    }catch(ExceptionReadQuery exq){
-                        JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida.",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-                    }catch(ExceptionNotSelectQuery exs){
-                        JOptionPane.showMessageDialog(frame,"Solo estan permitidas consultas SPARQL" +
-                        "de tipo SELECT","Warning Message",JOptionPane.WARNING_MESSAGE);
                     }
                 }else{
                     try{
@@ -1395,12 +1389,6 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
                         JOptionPane.showMessageDialog(frame,"No se puede ejecutar el test. La ontologia " +
                         "introducida no se puede leer.",
                         "Warning Message",JOptionPane.WARNING_MESSAGE);
-                    }catch(ExceptionReadQuery exq){
-                        //JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida.",
-                        //"Warning Message",JOptionPane.WARNING_MESSAGE);
-                    }catch(ExceptionNotSelectQuery exs){
-                        //JOptionPane.showMessageDialog(frame,"Solo estan permitidas consultas SPARQL" +
-                        //"de tipo SELECT","Warning Message",JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }else{

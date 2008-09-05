@@ -33,8 +33,7 @@ public interface Jena {
 
     ArrayList<String> classification(String ns, String individuo);
     
-    ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML) throws ExceptionReadQuery,
-    ExceptionNotSelectQuery;
+    ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);
     
     void validarSparqlQuery(String query) throws Exception;
     
