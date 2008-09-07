@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" pref="435" max="-2" attributes="0"/>
-              <EmptySpace pref="298" max="32767" attributes="0"/>
+              <EmptySpace pref="290" max="32767" attributes="0"/>
           </Group>
           <Component id="contentDescPanel" alignment="1" max="32767" attributes="1"/>
           <Component id="contentPanel" alignment="0" max="32767" attributes="1"/>
@@ -60,21 +60,21 @@
                       <Component id="instancesTabbedPane" alignment="0" min="-2" pref="715" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" pref="344" max="-2" attributes="0"/>
-                          <EmptySpace pref="230" max="32767" attributes="0"/>
+                          <EmptySpace pref="222" max="32767" attributes="0"/>
                           <Component id="formatosButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="281" max="32767" attributes="0"/>
+                          <EmptySpace pref="273" max="32767" attributes="0"/>
                           <Component id="newClasButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="newPropButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="cancelarInstButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="581" max="32767" attributes="0"/>
+                          <EmptySpace pref="573" max="32767" attributes="0"/>
                           <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -322,7 +322,7 @@
                       <Component id="jLabel3" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" alignment="0" min="-2" pref="503" max="-2" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="230" max="32767" attributes="0"/>
+                  <EmptySpace pref="222" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

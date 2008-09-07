@@ -6,6 +6,10 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.ScenarioTest;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -76,6 +80,7 @@ private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     ContentMainJFrame.getSeparadorPanel().validate();
     MainJPanel.setSimpleTestSelect(false);
     MainJPanel.setSparqlTestsSelect(false);
+    AddSPARQLJPanel.setSeleccionado(false);
 }//GEN-LAST:event_volverButtonActionPerformed
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
@@ -86,7 +91,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if(group.guardarDatos()==true){
             ContentMainJFrame.getContentPanel().remove(0);
             ContentMainJFrame.getSeparadorPanel().remove(0);
-            ContentMainJFrame.getSeparadorPanel().add(new ResultTestsActionJPanel());
+            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getContentPanel().add(GroupTestsJPanel.getPanelTree());
             ContentMainJFrame.getContentPanel().validate();
             ContentMainJFrame.getSeparadorPanel().validate();
@@ -96,7 +101,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if(group.guardarDatos()==true){
             ContentMainJFrame.getContentPanel().remove(0);
             ContentMainJFrame.getSeparadorPanel().remove(0);
-            ContentMainJFrame.getSeparadorPanel().add(new ResultTestsActionJPanel());
+            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getContentPanel().add(group.getPanelTree());
             ContentMainJFrame.getContentPanel().validate();
             ContentMainJFrame.getSeparadorPanel().validate();

@@ -239,7 +239,7 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    AddInstancesJPanel.setStateSeeInst(false);
    instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
    int var=0;
-   if(AddSPARQLJPanel.isSeleccionado()==false) {
+   if(AddSPARQLJPanel.isSeleccionado()==false){
         ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
         ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();        
         clasInst = instancias.getClassInstances();
@@ -288,9 +288,14 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             File selectedFile = filechooser.getSelectedFile();
             nameFile = selectedFile.getPath();
             setArchivoSeleccionado(nameFile);
+            try{
             addInst = new AddInstancesClasPropJDialog(parent,true,nameFile);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(frame, "No se puede abrir el archivo " +
+                "especificado", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            }
         }
 }//GEN-LAST:event_examinarButtonActionPerformed
 
@@ -425,267 +430,268 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
-    if(AddSPARQLJPanel.isSeleccionado()==false){
+    if(MainJPanel.getSimpleTestSelect()==true){
     //System.out.println("archivo confi: "+AlmacenPropiedadesConfig.getPropiedad("simpleTests"));
     //System.out.println("clase: "+Configuration.getPathTestSimples());
     filechooser = new JFileChooser(Configuration.getPathTestSimples());
     setStateAbrirTest(true);
     
-      int option = filechooser.showOpenDialog(frame);
-      if (option == JFileChooser.APPROVE_OPTION) {
-          File selectedFile = filechooser.getSelectedFile();
-          nameFile = selectedFile.getPath();
-      }   
-
-    DescripcionJPanel descPanel = null;
-    TestInstancesTFJPanel test = null;
-    TestInstancesQueryJPanel test1 = null;
-    TestInstancesTextAreaJPanel test2 = null;
-    TestInstancesTextJPanel test3 = null;
-    
-    JPanel panelInst = GroupTestsJPanel.getTestInstPanel();
-    JPanel panelClas = GroupTestsJPanel.getTestClasPanel();
-    JPanel panelReal = GroupTestsJPanel.getTestRealPanel();
-    JPanel panelRet = GroupTestsJPanel.getTestRetPanel();
-    JPanel panelSat = GroupTestsJPanel.getTestSatPanel();
-    
-    JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
-    JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
-    JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
-    JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
-    JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
-    JPanel opcionTextInstPanel = GroupTestsJPanel.getOpcionTextInstPanel();
-    JPanel opcionTextRetPanel = GroupTestsJPanel.getOpcionTextRetPanel();
-    JPanel opcionTextSatPanel = GroupTestsJPanel.getOpcionTextSatPanel();
-    JPanel opcionTextClasPanel = GroupTestsJPanel.getOpcionTextClasPanel();
-    JPanel opcionTextRealPanel = GroupTestsJPanel.getOpcionTextRealPanel();
-    
-    int cont=1;
-    int tabSel = GroupTestsJPanel.getSelectedTabed();
-    try{
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-        ScenarioTest s = (ScenarioTest) decoder.readObject();
-        String nombre = s.getNombre();
-        String descrip = s.getDescripcion();  
-        String tab = s.getTestName();
-        ArrayList<QueryOntology> qO = s.getQueryTest(); 
-
-        ListIterator qi;
-        qi = qO.listIterator();
-
-        int ind = GroupTestsJPanel.getSelectedTabed();
-        ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
-
-        int var=0;
-        String textoQuery = "", textoResult="", textoComent="";
-        while(qi.hasNext()){   
-            QueryOntology cI = (QueryOntology) qi.next();
-            if(tab.equals("Instanciación") && tabSel==0){
-                if(GroupTestsJPanel.getTabbedPaneInst()==0){
-                    descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(cont);
-                    AddComentJDialog comentPane = test.getComment();
-                    comentPane.setComent(cI.getComment());
-                    test.setComment(comentPane);
-                    test.setQuery(cI.getQuery());
-                    String res = cI.getResultexpected();
-                    if(res.equals("true")){
-                        test.setTrueTest(true);
-                    }else{
-                        test.setFalseTest(true);
-                    }
-                    cont++;
-                }else{
-                    descPanel = (DescripcionJPanel) panelInst.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test3 = (TestInstancesTextJPanel) opcionTextInstPanel.getComponent(0);
-                    if(textoQuery.equals("")){
-                        textoQuery = cI.getQuery();
-                    }else{
-                        textoQuery = textoQuery+"\n"+cI.getQuery();
-                    }
-                    if(textoResult.equals("")){
-                        textoResult = cI.getResultexpected();
-                    }else{
-                        textoResult = textoResult+"\n"+cI.getResultexpected();
-                    }
-                    if(textoComent.equals("")){
-                        textoComent = cI.getComment();
-                    }else{
-                        textoComent = textoComent+"\n"+cI.getComment();
-                    }
-                    cont++;
-                    var=1;
-                }
-            }else if(tab.equals("Retrieval") && tabSel==1){
-                if(GroupTestsJPanel.getTabbedPaneRet()==0){
-                    descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(cont);
-                    AddComentJDialog comentPane = test2.getComment();
-                    comentPane.setComent(cI.getComment());
-                    test2.setComment(comentPane);
-                    test2.setQuery(cI.getQuery());
-                    test2.setQueryResult(cI.getResultexpected());
-                    cont++;
-                }else{
-                    descPanel = (DescripcionJPanel) panelRet.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test3 = (TestInstancesTextJPanel) opcionTextRetPanel.getComponent(0);
-                    if(textoQuery.equals("")){
-                        textoQuery = cI.getQuery();
-                    }else{
-                        textoQuery = textoQuery+"\n"+cI.getQuery();
-                    }
-                    if(textoResult.equals("")){
-                        textoResult = cI.getResultexpected();
-                    }else{
-                        textoResult = textoResult+"\n"+cI.getResultexpected();
-                    }
-                    if(textoComent.equals("")){
-                        textoComent = cI.getComment();
-                    }else{
-                        textoComent = textoComent+"\n"+cI.getComment();
-                    }
-                    cont++;
-                    var=1;
-                }
-            }else if(tab.equals("Realización") && tabSel==2){
-                if(GroupTestsJPanel.getTabbedPaneReal()==0){
-                    descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(cont);
-                    AddComentJDialog comentPane = test1.getComment();
-                    comentPane.setComent(cI.getComment());
-                    test1.setComment(comentPane);
-                    test1.setQuery(cI.getQuery());
-                    test1.setQueryResult(cI.getResultexpected());
-                    cont++;
-                }else{
-                    descPanel = (DescripcionJPanel) panelReal.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test3 = (TestInstancesTextJPanel) opcionTextRealPanel.getComponent(0);
-                    if(textoQuery.equals("")){
-                        textoQuery = cI.getQuery();
-                    }else{
-                        textoQuery = textoQuery+"\n"+cI.getQuery();
-                    }
-                    if(textoResult.equals("")){
-                        textoResult = cI.getResultexpected();
-                    }else{
-                        textoResult = textoResult+"\n"+cI.getResultexpected();
-                    }
-                    if(textoComent.equals("")){
-                        textoComent = cI.getComment();
-                    }else{
-                        textoComent = textoComent+"\n"+cI.getComment();
-                    }
-                    cont++;
-                    var=1;
-                }
-            }else if(tab.equals("Satisfactibilidad") && tabSel==3){
-                if(GroupTestsJPanel.getTabbedPaneSat()==0){
-                    descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(cont);
-                    AddComentJDialog comentPane = test.getComment();
-                    comentPane.setComent(cI.getComment());
-                    test.setComment(comentPane);
-                    test.setQuery(cI.getQuery());
-                    String res = cI.getResultexpected();
-                    if(res.equals("true")){
-                        test.setTrueTest(true);
-                    }else{
-                        test.setFalseTest(true);
-                    }
-                    cont++;
-                }else{
-                    descPanel = (DescripcionJPanel) panelSat.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test3 = (TestInstancesTextJPanel) opcionTextSatPanel.getComponent(0);
-                    if(textoQuery.equals("")){
-                        textoQuery = cI.getQuery();
-                    }else{
-                        textoQuery = textoQuery+"\n"+cI.getQuery();
-                    }
-                    if(textoResult.equals("")){
-                        textoResult = cI.getResultexpected();
-                    }else{
-                        textoResult = textoResult+"\n"+cI.getResultexpected();
-                    }
-                    if(textoComent.equals("")){
-                        textoComent = cI.getComment();
-                    }else{
-                        textoComent = textoComent+"\n"+cI.getComment();
-                    }
-                    cont++;
-                    var=1;
-                }
-            }else if(tab.equals("Clasificación") && tabSel==4){
-                if(GroupTestsJPanel.getTabbedPaneClas()==0){
-                    descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(cont);
-                    AddComentJDialog comentPane = test2.getComment();
-                    comentPane.setComent(cI.getComment());
-                    test2.setComment(comentPane);
-                    test2.setQuery(cI.getQuery());
-                    test2.setQueryResult(cI.getResultexpected());
-                    cont++;
-                }else{
-                    descPanel = (DescripcionJPanel) panelClas.getComponent(0);
-                    descPanel.setNombreTextField(nombre);
-                    descPanel.setDescTextArea(descrip);
-                    test3 = (TestInstancesTextJPanel) opcionTextClasPanel.getComponent(0);
-                    if(textoQuery.equals("")){
-                        textoQuery = cI.getQuery();
-                    }else{
-                        textoQuery = textoQuery+"\n"+cI.getQuery();
-                    }
-                    if(textoResult.equals("")){
-                        textoResult = cI.getResultexpected();
-                    }else{
-                        textoResult = textoResult+"\n"+cI.getResultexpected();
-                    }
-                    if(textoComent.equals("")){
-                        textoComent = cI.getComment();
-                    }else{
-                        textoComent = textoComent+"\n"+cI.getComment();
-                    }
-                    cont++;
-                    var=1;
-                }
-            }else{
-                setTestCompatible(false);
-            }
-        }  
-    if(getTestCompatible()==true){
-        if(var==1){
-            test3.setResultadoEsperado(textoResult);
-            test3.setComentTextArea(textoComent);
-            test3.setConsultaQuery(textoQuery);
-        }
-    }
-    decoder.close();    
-    }catch(FileNotFoundException e){
-    }
-    if(getTestCompatible()==false){
-        JOptionPane.showMessageDialog(frame,"El test que intenta abrir no es " +
-                "compatible con el tipo de test seleccionado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        setTestCompatible(true);
-    }
-    }else{
+    int option = filechooser.showOpenDialog(frame);
+    if (option == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = filechooser.getSelectedFile();
+        nameFile = selectedFile.getPath();
         
+        DescripcionJPanel descPanel = null;
+        TestInstancesTFJPanel test = null;
+        TestInstancesQueryJPanel test1 = null;
+        TestInstancesTextAreaJPanel test2 = null;
+        TestInstancesTextJPanel test3 = null;
+
+        JPanel panelInst = GroupTestsJPanel.getTestInstPanel();
+        JPanel panelClas = GroupTestsJPanel.getTestClasPanel();
+        JPanel panelReal = GroupTestsJPanel.getTestRealPanel();
+        JPanel panelRet = GroupTestsJPanel.getTestRetPanel();
+        JPanel panelSat = GroupTestsJPanel.getTestSatPanel();
+
+        JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
+        JPanel panelAyudaClas = GroupTestsJPanel.getClasAyudaPanel();
+        JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
+        JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
+        JPanel panelAyudaSat = GroupTestsJPanel.getSatAyudaPanel();
+        JPanel opcionTextInstPanel = GroupTestsJPanel.getOpcionTextInstPanel();
+        JPanel opcionTextRetPanel = GroupTestsJPanel.getOpcionTextRetPanel();
+        JPanel opcionTextSatPanel = GroupTestsJPanel.getOpcionTextSatPanel();
+        JPanel opcionTextClasPanel = GroupTestsJPanel.getOpcionTextClasPanel();
+        JPanel opcionTextRealPanel = GroupTestsJPanel.getOpcionTextRealPanel();
+
+        int cont=1;
+        int tabSel = GroupTestsJPanel.getSelectedTabed();
+        try{
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            ScenarioTest s = (ScenarioTest) decoder.readObject();
+            String nombre = s.getNombre();
+            String descrip = s.getDescripcion();  
+            String tab = s.getTestName();
+            ArrayList<QueryOntology> qO = s.getQueryTest(); 
+
+            ListIterator qi;
+            qi = qO.listIterator();
+
+            int ind = GroupTestsJPanel.getSelectedTabed();
+            ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
+
+            int var=0;
+            String textoQuery = "", textoResult="", textoComent="";
+            while(qi.hasNext()){   
+                QueryOntology cI = (QueryOntology) qi.next();
+                if(tab.equals("Instanciación") && tabSel==0){
+                    if(GroupTestsJPanel.getTabbedPaneInst()==0){
+                        descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(cont);
+                        AddComentJDialog comentPane = test.getComment();
+                        comentPane.setComent(cI.getComment());
+                        test.setComment(comentPane);
+                        test.setQuery(cI.getQuery());
+                        String res = cI.getResultexpected();
+                        if(res.equals("true")){
+                            test.setTrueTest(true);
+                        }else{
+                            test.setFalseTest(true);
+                        }
+                        cont++;
+                    }else{
+                        descPanel = (DescripcionJPanel) panelInst.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test3 = (TestInstancesTextJPanel) opcionTextInstPanel.getComponent(0);
+                        if(textoQuery.equals("")){
+                            textoQuery = cI.getQuery();
+                        }else{
+                            textoQuery = textoQuery+"\n"+cI.getQuery();
+                        }
+                        if(textoResult.equals("")){
+                            textoResult = cI.getResultexpected();
+                        }else{
+                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                        }
+                        if(textoComent.equals("")){
+                            textoComent = cI.getComment();
+                        }else{
+                            textoComent = textoComent+"\n"+cI.getComment();
+                        }
+                        cont++;
+                        var=1;
+                    }
+                }else if(tab.equals("Retrieval") && tabSel==1){
+                    if(GroupTestsJPanel.getTabbedPaneRet()==0){
+                        descPanel = (DescripcionJPanel) panelRet.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(cont);
+                        AddComentJDialog comentPane = test2.getComment();
+                        comentPane.setComent(cI.getComment());
+                        test2.setComment(comentPane);
+                        test2.setQuery(cI.getQuery());
+                        test2.setQueryResult(cI.getResultexpected());
+                        cont++;
+                    }else{
+                        descPanel = (DescripcionJPanel) panelRet.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test3 = (TestInstancesTextJPanel) opcionTextRetPanel.getComponent(0);
+                        if(textoQuery.equals("")){
+                            textoQuery = cI.getQuery();
+                        }else{
+                            textoQuery = textoQuery+"\n"+cI.getQuery();
+                        }
+                        if(textoResult.equals("")){
+                            textoResult = cI.getResultexpected();
+                        }else{
+                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                        }
+                        if(textoComent.equals("")){
+                            textoComent = cI.getComment();
+                        }else{
+                            textoComent = textoComent+"\n"+cI.getComment();
+                        }
+                        cont++;
+                        var=1;
+                    }
+                }else if(tab.equals("Realización") && tabSel==2){
+                    if(GroupTestsJPanel.getTabbedPaneReal()==0){
+                        descPanel = (DescripcionJPanel) panelReal.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(cont);
+                        AddComentJDialog comentPane = test1.getComment();
+                        comentPane.setComent(cI.getComment());
+                        test1.setComment(comentPane);
+                        test1.setQuery(cI.getQuery());
+                        test1.setQueryResult(cI.getResultexpected());
+                        cont++;
+                    }else{
+                        descPanel = (DescripcionJPanel) panelReal.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test3 = (TestInstancesTextJPanel) opcionTextRealPanel.getComponent(0);
+                        if(textoQuery.equals("")){
+                            textoQuery = cI.getQuery();
+                        }else{
+                            textoQuery = textoQuery+"\n"+cI.getQuery();
+                        }
+                        if(textoResult.equals("")){
+                            textoResult = cI.getResultexpected();
+                        }else{
+                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                        }
+                        if(textoComent.equals("")){
+                            textoComent = cI.getComment();
+                        }else{
+                            textoComent = textoComent+"\n"+cI.getComment();
+                        }
+                        cont++;
+                        var=1;
+                    }
+                }else if(tab.equals("Satisfactibilidad") && tabSel==3){
+                    if(GroupTestsJPanel.getTabbedPaneSat()==0){
+                        descPanel = (DescripcionJPanel) panelSat.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(cont);
+                        AddComentJDialog comentPane = test.getComment();
+                        comentPane.setComent(cI.getComment());
+                        test.setComment(comentPane);
+                        test.setQuery(cI.getQuery());
+                        String res = cI.getResultexpected();
+                        if(res.equals("true")){
+                            test.setTrueTest(true);
+                        }else{
+                            test.setFalseTest(true);
+                        }
+                        cont++;
+                    }else{
+                        descPanel = (DescripcionJPanel) panelSat.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test3 = (TestInstancesTextJPanel) opcionTextSatPanel.getComponent(0);
+                        if(textoQuery.equals("")){
+                            textoQuery = cI.getQuery();
+                        }else{
+                            textoQuery = textoQuery+"\n"+cI.getQuery();
+                        }
+                        if(textoResult.equals("")){
+                            textoResult = cI.getResultexpected();
+                        }else{
+                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                        }
+                        if(textoComent.equals("")){
+                            textoComent = cI.getComment();
+                        }else{
+                            textoComent = textoComent+"\n"+cI.getComment();
+                        }
+                        cont++;
+                        var=1;
+                    }
+                }else if(tab.equals("Clasificación") && tabSel==4){
+                    if(GroupTestsJPanel.getTabbedPaneClas()==0){
+                        descPanel = (DescripcionJPanel) panelClas.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(cont);
+                        AddComentJDialog comentPane = test2.getComment();
+                        comentPane.setComent(cI.getComment());
+                        test2.setComment(comentPane);
+                        test2.setQuery(cI.getQuery());
+                        test2.setQueryResult(cI.getResultexpected());
+                        cont++;
+                    }else{
+                        descPanel = (DescripcionJPanel) panelClas.getComponent(0);
+                        descPanel.setNombreTextField(nombre);
+                        descPanel.setDescTextArea(descrip);
+                        test3 = (TestInstancesTextJPanel) opcionTextClasPanel.getComponent(0);
+                        if(textoQuery.equals("")){
+                            textoQuery = cI.getQuery();
+                        }else{
+                            textoQuery = textoQuery+"\n"+cI.getQuery();
+                        }
+                        if(textoResult.equals("")){
+                            textoResult = cI.getResultexpected();
+                        }else{
+                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                        }
+                        if(textoComent.equals("")){
+                            textoComent = cI.getComment();
+                        }else{
+                            textoComent = textoComent+"\n"+cI.getComment();
+                        }
+                        cont++;
+                        var=1;
+                    }
+                }else{
+                    setTestCompatible(false);
+                }
+            }  
+        if(getTestCompatible()==true){
+            if(var==1){
+                test3.setResultadoEsperado(textoResult);
+                test3.setComentTextArea(textoComent);
+                test3.setConsultaQuery(textoQuery);
+            }
+        }
+        decoder.close();    
+        if(getTestCompatible()==false){
+            JOptionPane.showMessageDialog(frame,"El test que intenta abrir no es " +
+                    "compatible con el tipo de test seleccionado.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            setTestCompatible(true);
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo seleccionado",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }       
+        }
+    }else{
         filechooser = new JFileChooser(Configuration.getPathTestSparql());
         setStateAbrirTest(true);
     
@@ -693,9 +699,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           nameFile = selectedFile.getPath();
-        }   
-
-        try{
+            try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
             ScenarioTest s = (ScenarioTest) decoder.readObject();
             String nombre = s.getNombre();
@@ -705,12 +709,12 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             int ind = GroupTestsJPanel.getSelectedTabed();
             ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
             
-            AddSPARQLJPanel.setTestNameTextField(nombre);
-            AddSPARQLJPanel.setTestDescTextArea(descrip);
             AddSPARQLJPanel.setListSparqlQuerys(qO);
             AddSPARQLJPanel.setPosListQuerysSel(0);
             AddSPARQLJPanel.setSPARQLQuery(AddSPARQLJPanel.getListSparqlQuerys().get(0).getQuerySparql());
             AddSPARQLJPanel.setResultTextArea(AddSPARQLJPanel.getListSparqlQuerys().get(0).getResultexpected());
+            AddSPARQLJPanel.setTestNameTextField(nombre);
+            AddSPARQLJPanel.setTestDescTextArea(descrip);
             
             int tam = qO.size();
             if(tam >=2){
@@ -719,8 +723,11 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 AddSPARQLJPanel.setSigQueryButton(true);
             }
             
-        decoder.close();    
-        }catch(FileNotFoundException e){
+            decoder.close();    
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo seleccionado",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }//GEN-LAST:event_addTestExistButtonActionPerformed

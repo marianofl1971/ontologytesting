@@ -31,6 +31,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.WindowConstants;
 /**
  *
  * @author  Saruskas
@@ -253,7 +254,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         }
     }
     
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName) {
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal,String textName) throws Exception{
         
         super(parent, modal);
         this.setTitle("Asociar Instancias");
@@ -272,7 +273,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));  
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
-        try{
+
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(textName)));
             inst = (Instancias) decoder.readObject();
             setDescInstanciasTextArea(inst.getDescripcion());
@@ -304,9 +305,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 propFinal.add(pI);
             }
             decoder.close();    
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        } 
+        
         if(contC<8){
             for (int j=0; j<=(8-contC); j++) {
                 clasPanel.add(new CreateInstancesJPanel());
@@ -644,7 +643,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     int totalProp = getPropPanel().getComponentCount();
                     for (int i = 0; i < totalProp; i++) {
                         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
-                        String query = panelInst.getQuery();
+                        String query = panelInst.getQuery().trim();
                         AddComentJDialog comentPane = panelInst.getComment();
                         String coment = comentPane.getComent();
                         if (!query.equals("")) {
@@ -743,6 +742,15 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             }
 
             if (isQueryValida() == true && isInstanciaValida() == true && instanciaSinNombre == false) {
+                if(MainJPanel.getInstancesSelect()==true){
+                    instancias.setClassInstances(clasInst);
+                    instancias.setPropertyInstances(propInst);
+                    instancias.setDescripcion(getDescInstanciasTextArea());
+                    instancias.setNombre(getNomInstanciasTextField());
+                    instancias.setType("Instancias");
+                    crearArchivoDeInstancias(instancias);
+                    this.setVisible(false);
+                }else{
                     instancias.setClassInstances(clasInst);
                     instancias.setPropertyInstances(propInst);
                     instancias.setDescripcion(getDescInstanciasTextArea());
@@ -766,6 +774,8 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             } else if (n == JOptionPane.CANCEL_OPTION) {
                                 setInstances(instancias);
                                 this.setVisible(false);
+                            }else{
+                                this.setVisible(false);
                             }
                             auxiliar.setYaEligioGuardarInstancias(true);
                         }
@@ -777,8 +787,10 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                                 auxiliar.crearArchivoDeInstancias(instancias);
                                 auxiliar.setInstances(instancias);
                                 this.setVisible(false);
-                            } else {
+                            } else if(n ==  JOptionPane.NO_OPTION){
                                 auxiliar.setInstances(instancias);
+                                this.setVisible(false);
+                            }else{
                                 this.setVisible(false);
                             }
                         } else if ((clasInst.size() > 0 || propInst.size() > 0) && (!compararListaClase(clasInst, clasFinal) || !compararListaPropiedad(propInst, propFinal))) {
@@ -795,6 +807,25 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             } else if (n == JOptionPane.CANCEL_OPTION) {
                                 setInstances(instancias);
                                 this.setVisible(false);
+                            }else{
+                                this.setVisible(false);
+                            }
+                        }else if ((clasInst.size() == 0 || propInst.size() == 0) && (!compararListaClase(clasInst, clasFinal) || !compararListaPropiedad(propInst, propFinal))) {
+                            Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
+                            int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
+                            if (n == JOptionPane.YES_OPTION) {
+                                setInstances(instancias);
+                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.NO_OPTION) {
+                                crearArchivoDeInstancias(instancias);
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            } else if (n == JOptionPane.CANCEL_OPTION) {
+                                setInstances(instancias);
+                                this.setVisible(false);
+                            }else{
+                                this.setVisible(false);
                             }
                         } else {
                             this.setVisible(false);
@@ -802,12 +833,18 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     } else {
                         this.setVisible(false);
                     }
+            }
             } else if (instanciaSinNombre == true) {
-                JOptionPane.showMessageDialog(frame, "El nombre para el conjunto de instancias" + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "El nombre para el conjunto de instancias" 
+                        + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             } else if (isInstanciaValida() == false) {
-                JOptionPane.showMessageDialog(frame, "Las instancias marcadas" + "en rojo no se corresponden con la definicion de su ontologia. " + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Las instancias marcadas" + 
+                        "en rojo no se corresponden con la definicion de su ontologia. " 
+                        + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             } else if (isQueryValida() == false) {
-                JOptionPane.showMessageDialog(frame, "El formato de las instancias marcadas" + "en rojo es incorrecto. Por favor, revise la documentación para ver" + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "El formato de las instancias marcadas" 
+                        + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
+                        + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
                 if (getInstancesTabbedPane() != 2) {
                     CreateInstancesJPanel panelInst = null;
                     for (int j = 0; j < failClas.size(); j++) {

@@ -558,7 +558,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionAyudaInstPanelLayout.setVerticalGroup(
@@ -574,7 +574,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
         opcionTextInstPanelLayout.setHorizontalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 899, Short.MAX_VALUE)
+            .addGap(0, 820, Short.MAX_VALUE)
         );
         opcionTextInstPanelLayout.setVerticalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,9 +587,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
         contentInstTabedPanelLayout.setHorizontalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 904, Short.MAX_VALUE)
+            .addGap(0, 835, Short.MAX_VALUE)
             .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tabbedPaneInst))
+                .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
+                    .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         contentInstTabedPanelLayout.setVerticalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,7 +609,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(testInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
         testInstPanelLayout.setVerticalGroup(
             testInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,8 +908,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaSatPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+                .addContainerGap())
         );
         opcionAyudaSatPanelLayout.setVerticalGroup(
             opcionAyudaSatPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1104,7 +1106,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, introduccionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
                 .addComponent(helpButton)
                 .addContainerGap())
         );
@@ -1126,7 +1128,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(introduccionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testsTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE))
+                    .addComponent(testsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -1279,6 +1281,7 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private static javax.swing.JPanel testRetPanel;
     private static javax.swing.JPanel testSatPanel;
     private static javax.swing.JTabbedPane testsTabbedPane;
+
     // End of variables declaration//GEN-END:variables
 
     public static void inicializarVariables(){

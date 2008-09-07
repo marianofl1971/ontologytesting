@@ -14,6 +14,7 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -67,6 +68,7 @@ public class MainJPanel extends javax.swing.JPanel {
     private JFileChooser filechooser;
     private Component frame;
     public static boolean seleccionado;
+    public AddInstancesClasPropJDialog addInst;  
 
     /** Creates new form MainJPanel */
     public MainJPanel(int vez) {
@@ -297,6 +299,7 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
         ContentMainJFrame.getContentPanel().getParent().validate();
         setSimpleTestSelect(true);
+        AddSPARQLJPanel.setSeleccionado(false);
     }
 }//GEN-LAST:event_newTestActionPerformed
 
@@ -321,12 +324,18 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 private void newInstancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newInstancesActionPerformed
 // TODO add your handling code here:
-    AddInstancesClasPropJDialog addInstances = new AddInstancesClasPropJDialog(parent,true,8,0);
-    ContentMainJFrame.getContentPanel().remove(0);
-    ContentMainJFrame.getContentPanel().add(addInstances.getContentPanel());
-    ContentMainJFrame.getSeparador().setVisible(true);
-    ContentMainJFrame.getContentPanel().getParent().validate();
-    setInstancesSelect(true);
+    if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
+        JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
+                "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else if(!getFisicalOntologyTextField().endsWith(".owl")){
+         JOptionPane.showMessageDialog(frame,"La ontologia debe de ser un archivo " +
+                 ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else{
+        addInst = new AddInstancesClasPropJDialog(parent,true,8,0);
+        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        addInst.setVisible(true);
+        setInstancesSelect(true);
+    }
 }//GEN-LAST:event_newInstancesActionPerformed
 
 

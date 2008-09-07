@@ -24,7 +24,7 @@
               <Component id="newSimpleTestButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="newSparqlTestButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Component id="printButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="printButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Imprimir Informe"/>
+        <Property name="text" type="java.lang.String" value="Ver Tests Realizados"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printButtonActionPerformed"/>

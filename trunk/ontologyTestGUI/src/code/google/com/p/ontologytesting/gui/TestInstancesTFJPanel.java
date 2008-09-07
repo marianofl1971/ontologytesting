@@ -7,8 +7,13 @@
 package code.google.com.p.ontologytesting.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Frame;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -27,6 +32,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     private Frame frame;
     private boolean borrado=false,duplicado=false;
     private int posicion;
+    private static final ArrayList<TestInstancesTFJPanel> listaContenido = new ArrayList<TestInstancesTFJPanel>();;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel(int i) {
@@ -174,17 +180,42 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     String query = this.getQuery();
     String result = this.isTestTrue();
     String testComent = this.frameComent.getComent();
-    System.out.println("pos "+this.getPosicion());
-    if(sel==0){
-        TestInstancesTFJPanel nuevo = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(this.getPosicion()+1);
-        nuevo.setQuery(query);
-        if(result.equals("true")){
-            nuevo.setTrueTest(true);
-        }else{
-            nuevo.setFalseTest(true);
+    int count = GroupTestsJPanel.getInstAyudaPanel().getComponentCount();
+    for(int i=1;i<count;i++){
+        TestInstancesTFJPanel comp = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(i);
+        if(!comp.getQuery().equals("") && !comp.isTestFalse().equals(comp.isTestTrue())){
+            listaContenido.add(i-1,comp);
         }
-        nuevo.getComment().setComent(testComent);
-        //GroupTestsJPanel.getInstAyudaPanel().add(new TestInstancesTFJPanel(query,result,testComent),this.getPosicion()+1);
+    }
+    if(sel==0){
+        TestInstancesTFJPanel sig = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(this.getPosicion()+1);
+        if(sig.getQuery().equals("") && sig.isTestFalse().equals(sig.isTestTrue())){
+            sig.setQuery(query);
+            if(result.equals("true")){
+                sig.setTrueTest(true);
+            }else{
+                sig.setFalseTest(true);
+            }
+            sig.getComment().setComent(testComent);
+            sig.setPosicion(posicion+1);
+        }else{
+            for(int j=0;j<listaContenido.size();j++){
+                TestInstancesTFJPanel testComp = listaContenido.get(j);
+                String q = testComp.getQuery();
+                String r = testComp.isTestTrue();
+                String t = testComp.frameComent.getComent();
+                TestInstancesTFJPanel aux = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(posicion+1);
+                aux.setQuery(q);
+                if(r.equals("true")){
+                    aux.setTrueTest(true);
+                }else{
+                    aux.setFalseTest(true);
+                }
+                aux.getComment().setComent(t);
+                aux.setPosicion(posicion++);
+                posicion++;
+            }
+        }
     }else if(sel==3){
         //GroupTestsJPanel.getSatAyudaPanel().add(new TestInstancesTFJPanel(query,result,testComent));
     }
@@ -204,6 +235,37 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JRadioButton trueRadioButton;
     // End of variables declaration//GEN-END:variables
 
+    public void copiarComponente(int index){
+        
+        /*JPanel p = GroupTestsJPanel.getInstAyudaPanel();
+        TestInstancesTFJPanel sig = (TestInstancesTFJPanel)  p.getComponent(index+1);
+        String query = this.getQuery();
+        String result = this.isTestTrue();
+        String testComent = this.frameComent.getComent();
+        sig.setQuery(query);
+        if(result.equals("true")){
+            sig.setTrueTest(true);
+        }else{
+            sig.setFalseTest(true);
+        }
+        sig.getComment().setComent(testComent);
+        sig.setPosicion(index+1);
+        for(int i=index+1;i<count;i++){
+            TestInstancesTFJPanel sigBis = (TestInstancesTFJPanel)  panelCopia.getComponent(i);
+            TestInstancesTFJPanel sigAux = (TestInstancesTFJPanel) p.getComponent(i+1);
+            String queryBis = sigBis.getQuery();
+            String resultBis = sigBis.isTestTrue();
+            String testComentBis = sigBis.frameComent.getComent();
+            sigAux.setQuery(queryBis);
+            if(resultBis.equals("true")){
+                sigAux.setTrueTest(true);
+            }else{
+                sigAux.setFalseTest(true);
+            }
+            sigAux.getComment().setComent(testComentBis);
+            sigAux.setPosicion(i+1); 
+        }*/
+    }
     
     public void setQuery(String query){
         getQueryTextField().setText(query);

@@ -173,7 +173,7 @@ public class JenaImplementation implements Jena{
        
        ArrayList<String> clasesConcepto = classification(ns,concepto);
 
-       if(clasesConcepto.equals("")){
+       if(clasesConcepto==null){
             return "true";
        }else{
            for(int i=0;i<clasesConcepto.size();i++){

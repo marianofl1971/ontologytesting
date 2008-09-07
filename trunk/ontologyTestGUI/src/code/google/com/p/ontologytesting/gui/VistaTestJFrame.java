@@ -34,13 +34,18 @@ public class VistaTestJFrame extends javax.swing.JFrame {
         this.setSize(new Dimension(600,600));
         abrirFichero(path);
     }
+    
+    public VistaTestJFrame() {
+        initComponents();
+        this.setSize(new Dimension(600,600));
+    }
 
     public void abrirFichero(String path){
     try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
             
             if(AbrirTestsJDialog.getFicherosComboBox()==0){
-                testEditorPane.setContentType("text/html");
+                getTestEditorPane().setContentType("text/html");
                 
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
@@ -85,7 +90,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 }
 
                 if(sizeClas == 0 && sizeProp == 0){
-                    testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Nombre del Test: </b>"+nombreTest+"<br><br>"+
                         "<b>Descripción:</b>"+descripTest+"<br><br>"+
                         "<b>Instancias asociadas: </b><br><br>" +
@@ -97,7 +102,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                             "<td><i><u>Resultado</u></i></td>" +
                         "</tr>"+consulta+"</table>");  
                 }else{
-                    testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Nombre del Test: </b>"+nombreTest+"<br><br>"+
                         "<b>Descripción:</b>"+descripTest+"<br><br>"+
                         "<b>Instancias asociadas: </b><br><br>" +
@@ -115,7 +120,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 }
                 
             }else if(AbrirTestsJDialog.getFicherosComboBox()==1){
-                testEditorPane.setContentType("text/html");
+                getTestEditorPane().setContentType("text/html");
                 Instancias inst = (Instancias) decoder.readObject();
                 ArrayList<ClassInstances> clasInst = inst.getClassInstances();
                 ArrayList<PropertyInstances> propInst = inst.getPropertyInstances();
@@ -146,11 +151,11 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                     }
                 }
                 if(sizeClas == 0 && sizeProp == 0){
-                    testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Instancias asociadas al test: </b><br><br>" +
                         "No hay instancias.");  
                 }else{
-                testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Instancias asociadas al test: </b><br><br>" +
                         "<table border=1>" +
                         "<tr>" +
@@ -160,7 +165,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 }
             }else if(AbrirTestsJDialog.getFicherosComboBox()==2){
                 
-                testEditorPane.setContentType("text/html");
+                getTestEditorPane().setContentType("text/html");
                 
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
@@ -208,7 +213,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                             "<td><font face=\"arial\">"+result+"</font></td></tr>"; 
                 }
                 if(sizeClas == 0 && sizeProp == 0){
-                    testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Nombre del Test: </b>"+nombreTest+"<br><br>"+
                         "<b>Descripción:</b>"+descripTest+"<br><br>"+
                         "<b>Instancias asociadas: </b><br><br>" +
@@ -220,7 +225,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                             "<td><i><u>Resultado</u></i></td>" +
                         "</tr>"+consulta+"</table>");
                 }else{
-                testEditorPane.setText(
+                    getTestEditorPane().setText(
                         "<b>Nombre del Test: </b>"+nombreTest+"<br><br>"+
                         "<b>Descripción:</b>"+descripTest+"<br><br>"+
                         "<b>Instancias asociadas: </b><br><br>" +
@@ -242,7 +247,7 @@ public class VistaTestJFrame extends javax.swing.JFrame {
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }    
-        testEditorPane.setEditable(false);
+        getTestEditorPane().setEditable(false);
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -256,19 +261,10 @@ public class VistaTestJFrame extends javax.swing.JFrame {
         testScrollPane = new javax.swing.JScrollPane();
         testEditorPane = new javax.swing.JEditorPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         testScrollPane.setViewportView(testEditorPane);
-
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("Imprimir");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -280,18 +276,24 @@ public class VistaTestJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(testScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+            .addComponent(testScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JEditorPane testEditorPane;
     private javax.swing.JScrollPane testScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JEditorPane getTestEditorPane() {
+        return testEditorPane;
+    }
+
+    public void setTestEditorPane(javax.swing.JEditorPane testEditorPane) {
+        this.testEditorPane = testEditorPane;
+    }
 
 }

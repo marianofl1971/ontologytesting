@@ -109,32 +109,84 @@ public class OntologyTestFailure extends Object{
         return result;
     }
     
-    public String showSparqlTest() {
-        
+    public String mostrarResultadoSparql(){
         ArrayList<ExecQuerySparql> execQ = this.fressparqlobtenido;
         if(execQ.size()>0){
-        String resultadoTotal="";
-        for(int i=0;i<execQ.size();i++){
-            String resultado = "";
-            String nombre = execQ.get(i).getNombreSelect();
-            ArrayList<String> datos = execQ.get(i).getDatos();
-            resultado = nombre+"(";
-            for(int j=0;j<datos.size();j++){
-                if(j!=datos.size()-1){
-                    resultado = resultado+datos.get(j)+",";
-                }else{
-                     resultado = resultado+datos.get(j)+")";
+            String resultadoTotal="";
+            for(int i=0;i<execQ.size();i++){
+                String resultado = "";
+                String nombre = execQ.get(i).getNombreSelect();
+                ArrayList<String> datos = execQ.get(i).getDatos();
+                resultado = nombre+"(";
+                for(int j=0;j<datos.size();j++){
+                    if(j!=datos.size()-1){
+                        resultado = resultado+datos.get(j)+",";
+                    }else{
+                         resultado = resultado+datos.get(j)+")";
+                    }
                 }
+                resultadoTotal=resultadoTotal+resultado+"\n";
             }
-            resultadoTotal=resultadoTotal+resultado+"\n";
-        }
-            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
-                    +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>" +resultadoTotal;
-        
+            return resultadoTotal;
         }else{
-            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b>" 
-                    +this.fresultsparqlexpected+"<br><b>Resultado obtenido: </b>No se han producido resultados";    
+            return "No se han producido resultados";    
         }
-        return result;    
     }
+    
+    public String showSparqlTest() {
+        
+        ArrayList<ExecQuerySparql> execQObte = this.fressparqlobtenido;
+        ArrayList<ExecQuerySparql> execQEspe = OntologyTestCase.getListaResultEsperada();
+        String resultadoTotalObte="";
+        String nombreObte = "";
+        String datosObte = "";
+        String resultadoTotalEspe="";
+        String nombreEspe = "";
+        String datosEspe = "";
+        
+        if(execQObte.size()>0 && execQEspe.size()>0){
+        
+            for(int i=0;i<execQObte.size();i++){
+                nombreObte = nombreObte + execQObte.get(i).getNombreSelect() + "&nbsp;&nbsp;&nbsp;";
+            }
+            nombreObte = nombreObte + "<br>------------------------------------------<br>";
+
+            int tam = execQObte.get(0).getDatos().size();
+            for(int i=0; i<tam;i++){
+                for(int j=0;j<execQObte.size();j++){
+                        datosObte = datosObte + execQObte.get(j).getDatos().get(i) + "&nbsp;&nbsp;&nbsp;";
+                }
+                datosObte = datosObte + "<br>";
+            }
+            resultadoTotalObte = nombreObte + datosObte;
+
+            for(int i=0;i<execQEspe.size();i++){
+                nombreEspe = nombreEspe + execQEspe.get(i).getNombreSelect() + "&nbsp;&nbsp;&nbsp;";
+            }
+            nombreEspe = nombreEspe + "<br>------------------------------------------<br>";
+
+            int tamEsp = execQEspe.get(0).getDatos().size();
+            for(int i=0; i<tamEsp;i++){
+                for(int j=0;j<execQEspe.size();j++){
+                        datosEspe = datosEspe + execQEspe.get(j).getDatos().get(i) + "&nbsp;&nbsp;&nbsp;";
+                }
+                datosEspe = datosEspe + "<br>";
+            }
+            resultadoTotalEspe = nombreEspe + datosEspe;
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>" 
+                        +resultadoTotalEspe+"<br><b>Resultado obtenido: </b><br>" +resultadoTotalObte;
+        }else if(execQObte.size()==0 && execQEspe.size()>0){
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>" 
+                    +resultadoTotalEspe+"<br><b>Resultado obtenido: </b><br>No se han producido resultados"; 
+        }else if(execQObte.size()>0 && execQEspe.size()==0){
+        result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>No se han producido resultados."+
+                    "<br><b>Resultado obtenido: </b><br>" +resultadoTotalObte;
+        }else{
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>No se han producido resultados"+
+                    "<br><b>Resultado obtenido: </b><br>No se han producido resultados";   
+        }
+        
+        return result; 
+    }
+
 }

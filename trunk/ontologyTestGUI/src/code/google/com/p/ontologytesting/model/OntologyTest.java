@@ -17,7 +17,6 @@ import code.google.com.p.ontologytesting.exceptions.*;
  */
 public interface OntologyTest {
     
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology,
-            ExceptionNotSelectQuery,ExceptionReadQuery;
+    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology;
 
 }

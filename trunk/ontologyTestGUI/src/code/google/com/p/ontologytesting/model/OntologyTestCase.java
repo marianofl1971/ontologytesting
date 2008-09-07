@@ -10,9 +10,9 @@
 package code.google.com.p.ontologytesting.model;
 
 import code.google.com.p.ontologytesting.exceptions.*;
+import code.google.com.p.ontologytesting.gui.MainJPanel;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,13 +33,13 @@ public class OntologyTestCase implements OntologyTest{
             patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\n|\\t|\\v|\\s]",
             patron6="[.,\\s\\)]";
     private int fallo=0;
-    private Component frame;
+    private static String muestra="";
+    private static ArrayList<ExecQuerySparql> listaResultEsperada;
     
     public OntologyTestCase(){
     }
 
     protected void setUpOntology(ScenarioTest st, String ont, String ns)  throws ExceptionReadOntology{  
-        //try {
 
             ListIterator liClass;
             ListIterator liProperties;
@@ -73,12 +73,7 @@ public class OntologyTestCase implements OntologyTest{
                 piClas = pi.split(patron1);
                 piInd = piClas[1].split(patron2);
                 jena.addInstanceProperty(ns, piClas[0], piInd[0]);
-            }
-        /*} catch (ExceptionReadOntology ex) {
-            JOptionPane.showMessageDialog(frame,"No se puede leer la ontologia",
-                "Warning Message",JOptionPane.WARNING_MESSAGE);
-        }*/
-       
+            }       
     }
     
     protected void tearDownOntology(){
@@ -103,8 +98,6 @@ public class OntologyTestCase implements OntologyTest{
                 resObtenidoSatisf="";
         ArrayList<String> resObtenidoRet = new ArrayList<String>();
         ArrayList<String> resObtenidoClas = new ArrayList<String>();
-        ArrayList<String> sparqlExp = new ArrayList<String>();
-        ArrayList<String> resSparql = new ArrayList<String>();
         QueryOntology qo = null;
         SparqlQueryOntology sparqlquery = null;
                 
@@ -124,6 +117,8 @@ public class OntologyTestCase implements OntologyTest{
                         inst=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoInst);
+                    }else{
+                        testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
                     }
                 }else if(testName.equals("Retrieval")){
                     resObtenidoRet = jena.retieval(ns, query);
@@ -144,6 +139,8 @@ public class OntologyTestCase implements OntologyTest{
                             ret=1;
                             testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo,resObtenidoRet.toString());
+                        }else{
+                            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
                         }
                     }
                 }else if(testName.equals("Realización")){
@@ -152,6 +149,8 @@ public class OntologyTestCase implements OntologyTest{
                         real=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoRealiz);
+                    }else{
+                        testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
                     }
                 }else if(testName.equals("Satisfactibilidad")){
                     res = query.split(patron3);
@@ -162,6 +161,8 @@ public class OntologyTestCase implements OntologyTest{
                         sat=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoSatisf);
+                    }else{
+                        testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
                     }
                 }else if(testName.equals("Clasificación")){
                     String[] queryMod = resQueryExpected.split(patron4);
@@ -182,6 +183,8 @@ public class OntologyTestCase implements OntologyTest{
                             clas=1;
                             testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoClas.toString());
+                        }else{
+                            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
                         }
                     }  
                 }
@@ -189,7 +192,7 @@ public class OntologyTestCase implements OntologyTest{
         
         while(liSparql.hasNext()){ 
             
-            ArrayList<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
+            setListaResultEsperada(new ArrayList<ExecQuerySparql>());
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
@@ -208,11 +211,11 @@ public class OntologyTestCase implements OntologyTest{
                     for(int s=0; s<subRes.length;s++){
                         execQuery.getDatos().add(subRes[s]);
                     }
-                    listaResultEsperada.add(execQuery);
+                    getListaResultEsperada().add(execQuery);
                 }
             }
-        
             
+            setListaResultEsperada(listaResultEsperada);
             ArrayList<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
             listaResultObtenida = jena.testSPARQL(sparqlQuery, true);
             if(listaResultObtenida.size()>0){
@@ -220,13 +223,13 @@ public class OntologyTestCase implements OntologyTest{
                 obtenido = new ArrayList<String>();
                 String contenidoObtenido = "",contenidoEsperado="";
                 int tam = listaResultObtenida.get(0).getDatos().size();
-                int tamBis = listaResultEsperada.get(0).getDatos().size();
+                int tamBis = getListaResultEsperada().get(0).getDatos().size();
                 fallo=0;
-                if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
+                if((getListaResultEsperada().size()==listaResultObtenida.size()) && (tam==tamBis)){
                     for(int s=0;s<tam;s++){
                         for(int t=0; t<listaResultObtenida.size(); t++){
                             contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(s);
-                            contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(s);
+                            contenidoEsperado = contenidoEsperado+getListaResultEsperada().get(t).getDatos().get(s);
                         } 
                         esperado.add(contenidoEsperado);
                         obtenido.add(contenidoObtenido);
@@ -241,21 +244,9 @@ public class OntologyTestCase implements OntologyTest{
                 testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
                 sparqlquery,listaResultObtenida);
                 sparql=1;
+            }else{
+                testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
             }
-        }
-
-        if(inst==0){
-            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
-        }else if(ret==0){
-            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
-        }else if(real==0){
-            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
-        }else if(sat==0){
-            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
-        }else if(clas==0){
-            testresult.addOntologyPassedTestQuery(nombreTestUsuario, testName);
-        }else if(sparql==0){
-            testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
         }
     } 
 
@@ -307,7 +298,8 @@ public class OntologyTestCase implements OntologyTest{
                 runOntologyTest(testresult,ns,scenariotest);
                 tearDownOntology(); 
         }
-        //showResultTests(testresult);
+        String datos = crearFicheroDeResultados(testresult);
+        setMuestra(datos);
     }
     
     public boolean comparaArray(ArrayList<String> array1, ArrayList<String> array2){
@@ -323,50 +315,305 @@ public class OntologyTestCase implements OntologyTest{
         return true;
     }
 
-    public void showResultTests(OntologyTestResult testresult){
+    public String crearFicheroDeResultados(OntologyTestResult testresult){
         
         ListIterator liFailures,liSparql;
         ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
         ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
+        int varInst=0,varRet=0,varReal=0,varSat=0,varClas=0,varSparql=0,auxInst=0,
+                auxRet=0,auxReal=0,auxSat=0,auxClas=0,auxSparql=0;
         liFailures = failures.listIterator();
         liSparql = failuresSparql.listIterator();
+        String testInstFailed="",testInstInstancias="",testInstIntro="",testInstTotal="";
+        String testRetFailed="",testRetInstancias="",testRetIntro="",testRetTotal="";
+        String testRealFailed="",testRealInstancias="",testRealIntro="",testRealTotal="";
+        String testSatFailed="",testSatInstancias="",testSatIntro="",testSatTotal="";
+        String testClasFailed="",testClasInstancias="",testClasIntro="",testClasTotal="";
+        String testSparqlFailed="",testSparqlInstancias="",testSparqlIntro="",testSparqlTotal="";
+        String resumen=""; 
+        String actualInst="",actualRet="",actualReal="",actualClas="",actualSat="",actualSparql="";
+        
+        if(MainJPanel.getSimpleTestSelect()==true){
         if(liFailures.hasNext()){
-          System.out.println("De las pruebas introducidas han fallado las siguientes:");
         while(liFailures.hasNext()){
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();
-            
             if(otf.getTestName().equals("Instanciación")){
-                System.out.println("HAN FALLADO DE LOS TEST DE INSTANCIACION:");
+                if(varInst==0){
+                    testInstIntro="TESTS DE INSTANCIACION\r\n\r\n";
+                    varInst=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxInst==0){
+                    actualInst = otf.getTestNameUsuario();
+                    testInstIntro= testInstIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testInstInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testInstFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxInst=1;
+                }
+                if(!actualInst.equals(otf.getTestNameUsuario())){
+                    testInstTotal = testInstTotal + testInstIntro + testInstInstancias + testInstFailed;
+                    testInstTotal = testInstTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testInstTotal = testInstTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testInstTotal = testInstTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualInst = otf.getTestNameUsuario();
+                    testInstFailed="";
+                }
+                testInstFailed = testInstFailed + "Prueba realizada: " +otf.getfQuery() +
+                        "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
+                        otf.getResultQueryObtenido()+"\r\n";
             }else if(otf.getTestName().equals("Retrieval")){
-                System.out.println("HAN FALLADO DE LOS TEST RETRIEVAL:");
+                if(varRet==0){
+                    testRetIntro="TESTS DE RECUPERACION\r\n\r\n";
+                    varRet=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxRet==0){
+                    actualRet = otf.getTestNameUsuario();
+                    testRetIntro= testRetIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testRetInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testRetFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxRet=1;
+                }
+                if(!actualRet.equals(otf.getTestNameUsuario())){
+                    testRetTotal = testRetTotal + testRetIntro + testRetInstancias + testRetFailed;
+                    testRetTotal = testRetTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testRetTotal = testRetTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testRetTotal = testRetTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualRet = otf.getTestNameUsuario();
+                    testRetFailed="";
+                }
+                testRetFailed = testRetFailed + "Prueba realizada: " +otf.getfQuery() +
+                        "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
+                        otf.getResultQueryObtenido()+"\r\n";
             }else if(otf.getTestName().equals("Realización")){
-                System.out.println("HAN FALLADO DE LOS TESTS DE REALIZACIÓN:");
-            }else if(otf.getTestName().equals("Clasificación")){
-                System.out.println("HAN FALLADO DE LOS TESTS DE CLASIFICACIÓN:");
+                if(varReal==0){
+                    testRealIntro="TESTS DE REALIZACION\r\n\r\n";
+                    varReal=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxReal==0){
+                    actualReal = otf.getTestNameUsuario();
+                    testRealIntro= testRealIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testRealInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testRealFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxReal=1;
+                }
+                if(!actualReal.equals(otf.getTestNameUsuario())){
+                    testRealTotal = testRealTotal + testRealIntro + testRealInstancias + testRealFailed;
+                    testRealTotal = testRealTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testRealTotal = testRealTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testRealTotal = testRealTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualReal = otf.getTestNameUsuario();
+                    testRealFailed="";
+                }
+                testRealFailed = testRealFailed + "Prueba realizada: " +otf.getfQuery() +
+                        "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
+                        otf.getResultQueryObtenido()+"\r\n";
             }else if(otf.getTestName().equals("Satisfactibilidad")){
-                System.out.println("HAN FALLADO DE LOS TESTS DE SATISFACTIBILIDAD:");
-            }else if(otf.getTestName().equals("sparql")){
-                System.out.println("HAN FALLADO DE LAS CONSULTAS SPARQL:");
+                if(varSat==0){
+                    testSatIntro="TESTS DE SATISFACTIBILIDAD\r\n\r\n";
+                    varSat=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxSat==0){
+                    actualSat = otf.getTestNameUsuario();
+                    testSatIntro= testSatIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testSatInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testSatFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxSat=1;
+                }
+                if(!actualSat.equals(otf.getTestNameUsuario())){
+                    testSatTotal = testSatTotal + testSatIntro + testSatInstancias + testSatFailed;
+                    testSatTotal = testSatTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testSatTotal = testInstTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testSatTotal = testInstTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualSat = otf.getTestNameUsuario();
+                    testSatFailed="";
+                }
+                testSatFailed = testSatFailed + "Prueba realizada: " +otf.getfQuery() +
+                        "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
+                        otf.getResultQueryObtenido()+"\r\n";
+            }else if(otf.getTestName().equals("Clasificación")){
+                if(varClas==0){
+                    testClasIntro="TESTS DE CLASIFICACION\r\n\r\n";
+                    varClas=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxClas==0){
+                    actualClas = otf.getTestNameUsuario();
+                    testClasIntro= testClasIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testClasInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testClasFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxClas=1;
+                }
+                if(!actualClas.equals(otf.getTestNameUsuario())){
+                    testClasTotal = testClasTotal + testClasIntro + testClasInstancias + testClasFailed;
+                    testClasTotal = testInstTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testClasTotal = testInstTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testClasTotal = testInstTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualClas = otf.getTestNameUsuario();
+                    testClasFailed="";
+                }
+                testClasFailed = testClasFailed + "Prueba realizada: " +otf.getfQuery() +
+                        "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
+                        otf.getResultQueryObtenido()+"\r\n";
             }
-                System.out.println("De la query introducida " +otf.getfQuery());
-                System.out.println("Se esperaba obtener : " +otf.getfResultExpected());
-                System.out.println("Pero se obtuvo: " +otf.getResultQueryObtenido());
         }
+        String inst="",ret="",real="",sat="",clas="";
+        if(testInstTotal.equals("")){
+            inst = testInstIntro + testInstInstancias + testInstFailed + "\r\n";
         }else{
-            System.out.println("No se han producido errores.");
+            inst = testInstTotal + testInstFailed + "\r\n";
         }
+        if(testRetTotal.equals("")){
+            ret = testRetIntro + testRetInstancias + testRetFailed + "\r\n";
+        }else{
+            ret = testRetTotal + testRetFailed + "\r\n";
+        }
+        if(testRealTotal.equals("")){
+            real = testRealIntro + testRealInstancias + testRealFailed + "\r\n";
+        }else{
+            real = testRealTotal + testRealFailed + "\r\n";
+        }
+        if(testSatTotal.equals("")){
+            sat = testSatIntro + testSatInstancias + testSatFailed + "\r\n";
+        }else{
+            sat = testSatTotal + testSatFailed + "\r\n";
+        }
+        if(testClasTotal.equals("")){
+            clas = testClasIntro + testClasInstancias + testClasFailed + "\r\n";
+        }else{
+            clas = testClasTotal + testClasFailed + "\r\n";
+        }
+        resumen =  inst + "\r\n" + ret + "\r\n" + real + "\r\n" + sat + "\r\n" + clas;
         
-        if(liSparql.hasNext()){
-          System.out.println("De las pruebas introducidas han fallado las siguientes:");
-            while(liSparql.hasNext()){
-                OntologyTestFailure otf = (OntologyTestFailure) liSparql.next();
-                System.out.println("De la query introducida " +otf.getfSparqlQuery());
-                System.out.println("Se esperaba obtener : " +otf.getfResultSparqlExpected());
-                System.out.println("Pero se obtuvo: " +otf.getResultSparqlQueryObtenido());      
-            }
         }else{
-            System.out.println("No se han producido errores.");
+            resumen = "null";
         } 
+      }else if(MainJPanel.getSparqlTestsSelect()==true){  
+      if(liSparql.hasNext()){
+        while(liSparql.hasNext()){
+            OntologyTestFailure otf = (OntologyTestFailure) liSparql.next();
+            if(otf.getTestName().equals("sparql")){
+                if(varSparql==0){
+                    testSparqlIntro="TESTS SPARQL\r\n\r\n";
+                    varSparql=1;
+                }
+                ScenarioTest scenario = buscarScenario(otf.getTestNameUsuario());
+                if(auxSparql==0){
+                    actualSparql = otf.getTestNameUsuario();
+                    testSparqlIntro= testSparqlIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testSparqlInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testSparqlFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    auxSparql=1;
+                }
+                if(!actualSparql.equals(otf.getTestNameUsuario())){
+                    testSparqlTotal = testSparqlTotal + testSparqlIntro + testSparqlInstancias + testSparqlFailed;
+                    testSparqlTotal = testSparqlTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    scenario.getDescripcion()+"\r\n\r\n";
+                    testSparqlTotal = testSparqlTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testInstTotal = testInstTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    actualSparql = otf.getTestNameUsuario();
+                    testSparqlFailed="";
+                }
+                testSparqlFailed = testSparqlFailed + "Prueba realizada:\r\n" +otf.getfSparqlQuery() +
+                        "\r\n\r\nResultado esperado: "+otf.getfResultSparqlExpected()+"\r\n\r\nResultado Obtenido: "+
+                        otf.mostrarResultadoSparql()+"\r\n";
+            }
+        }
+       String sparql="";
+       if(testSparqlTotal.equals("")){
+            sparql = testSparqlIntro + testSparqlInstancias + testSparqlFailed + "\r\n";
+       }else{
+            sparql = testSparqlTotal + testSparqlFailed + "\r\n";
+       } 
+       resumen = sparql;
+      }else{
+        resumen = "null";
+      }
+      }  
+      return resumen;
+    }
+    
+    public ScenarioTest buscarScenario(String name){
+        ArrayList<ScenarioTest> scenario = MainJPanel.getCollectionTest().getScenariotest();
+        for(int i=0;i<scenario.size();i++){
+            String nombre = scenario.get(i).getNombre();
+            if(nombre.equals(name)){
+                return scenario.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public String instanciasAsociadas(ScenarioTest scenario){
+        String instClas="",instProp="",instTotal="";
+        Instancias inst = scenario.getInstancias();
+        ArrayList<ClassInstances> clas = inst.getClassInstances();
+        ArrayList<PropertyInstances> prop = inst.getPropertyInstances();
+        if(clas.size()!=0){
+        instTotal = "Instancias de Clase";
+        for(int j=0;j<clas.size();j++){
+            String clase = clas.get(j).getClassInstance();
+            String coment = clas.get(j).getComment();
+            if(!clase.equals("")){
+                instClas = instClas + clase;
+            }
+            if(!coment.equals("")){
+                instClas = instClas + "  " + coment + "\r\n";
+            }else{
+                instClas = instClas + "\r\n";
+            }
+        }
+        }else{
+            instClas = instTotal + "\r\nTest sin instancias de clase\r\n";
+        }
+        instTotal = instTotal + "\r\n" + instClas + "\r\nInstancias de Propiedad";
+        if(prop.size()!=0){
+        for(int j=0;j<prop.size();j++){
+            String propiedad = prop.get(j).getPropertyInstance();
+            String coment = prop.get(j).getComment();
+            if(!propiedad.equals("")){
+                instProp = instProp + propiedad;
+            }
+            if(!coment.equals("")){
+                instProp = instProp + "  " + coment + "\r\n";
+            }else{
+                instProp = instProp + "\r\n";
+            }
+        }
+        }else{
+            instProp = "Test sin instancias de propiedad\r\n";
+        }
+        instTotal = instTotal + "\r\n" + instProp +"\r\n";
+        return instTotal;
+    }
+
+    public static String getMuestra() {
+        return muestra;
+    }
+
+    public static void setMuestra(String amuestra) {
+        muestra = amuestra;
+    }
+
+    public static ArrayList<ExecQuerySparql> getListaResultEsperada() {
+        return listaResultEsperada;
+    }
+
+    public static  void setListaResultEsperada(ArrayList<ExecQuerySparql> alistaResultEsperada) {
+        listaResultEsperada = alistaResultEsperada;
     }
 }    
 
