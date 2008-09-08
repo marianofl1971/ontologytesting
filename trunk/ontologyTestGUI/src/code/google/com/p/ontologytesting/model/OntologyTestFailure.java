@@ -23,6 +23,7 @@ public class OntologyTestFailure extends Object{
     protected String fresultexpected;
     protected String fresultsparqlexpected;
     protected ArrayList<ExecQuerySparql> fressparqlobtenido;
+    protected ArrayList<ExecQuerySparql> fressparqlesperado;
     protected String fcommentsparqlquery;
     protected String fquerysparql;
     protected String testName;
@@ -30,7 +31,8 @@ public class OntologyTestFailure extends Object{
     private String result="";
     
     public OntologyTestFailure(String testNameUsuario, String testName,QueryOntology query, String resQueryObte, 
-            SparqlQueryOntology querysparql, ArrayList<ExecQuerySparql> resSparqlQueryObte){
+            SparqlQueryOntology querysparql, ArrayList<ExecQuerySparql> resSparqlQueryEspe, 
+            ArrayList<ExecQuerySparql> resSparqlQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquery = query.getQuery();
@@ -40,6 +42,7 @@ public class OntologyTestFailure extends Object{
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resSparqlQueryObte;
+        this.fressparqlesperado = resSparqlQueryEspe;
     }
     
     public OntologyTestFailure(){
@@ -55,12 +58,13 @@ public class OntologyTestFailure extends Object{
     }
     
     void addOntologyTestFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
-            ArrayList<ExecQuerySparql> resQueryObte){
+            ArrayList<ExecQuerySparql> resQueryEspe,ArrayList<ExecQuerySparql> resQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
+        this.fressparqlesperado = resQueryEspe;
     }
     
     public String getResultQueryObtenido() {    
@@ -69,6 +73,10 @@ public class OntologyTestFailure extends Object{
     
     public ArrayList<ExecQuerySparql> getResultSparqlQueryObtenido() {    
          return this.fressparqlobtenido;    
+     }
+    
+    public ArrayList<ExecQuerySparql> getResultSparqlQueryEsperado() {    
+         return this.fressparqlesperado;    
      }
     
     public String getQueryfComment(){
@@ -136,7 +144,7 @@ public class OntologyTestFailure extends Object{
     public String showSparqlTest() {
         
         ArrayList<ExecQuerySparql> execQObte = this.fressparqlobtenido;
-        ArrayList<ExecQuerySparql> execQEspe = OntologyTestCase.getListaResultEsperada();
+        ArrayList<ExecQuerySparql> execQEspe = this.fressparqlesperado;
         String resultadoTotalObte="";
         String nombreObte = "";
         String datosObte = "";
@@ -149,7 +157,7 @@ public class OntologyTestFailure extends Object{
             for(int i=0;i<execQObte.size();i++){
                 nombreObte = nombreObte + execQObte.get(i).getNombreSelect() + "&nbsp;&nbsp;&nbsp;";
             }
-            nombreObte = nombreObte + "<br>------------------------------------------<br>";
+            nombreObte = nombreObte + "<br>--------------------<br>";
 
             int tam = execQObte.get(0).getDatos().size();
             for(int i=0; i<tam;i++){

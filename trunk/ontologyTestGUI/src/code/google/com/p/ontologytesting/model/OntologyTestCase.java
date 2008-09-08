@@ -35,6 +35,7 @@ public class OntologyTestCase implements OntologyTest{
     private int fallo=0;
     private static String muestra="";
     private static ArrayList<ExecQuerySparql> listaResultEsperada;
+    private ArrayList<ExecQuerySparql> listaResultObtenida;
     
     public OntologyTestCase(){
     }
@@ -91,6 +92,7 @@ public class OntologyTestCase implements OntologyTest{
         String nombreTestUsuario = scenariotest.getNombre();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         List<SparqlQueryOntology> sparqlTest = scenariotest.getSparqlQuerys();
+        listaResultObtenida = new ArrayList<ExecQuerySparql>();
         
         int inst=0, sat=0, clas=0, ret=0, real=0, sparql=0;
         
@@ -192,7 +194,7 @@ public class OntologyTestCase implements OntologyTest{
         
         while(liSparql.hasNext()){ 
             
-            setListaResultEsperada(new ArrayList<ExecQuerySparql>());
+            listaResultEsperada = new ArrayList<ExecQuerySparql>();
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
             resQueryExpected = sparqlquery.getResultexpected();
@@ -211,25 +213,23 @@ public class OntologyTestCase implements OntologyTest{
                     for(int s=0; s<subRes.length;s++){
                         execQuery.getDatos().add(subRes[s]);
                     }
-                    getListaResultEsperada().add(execQuery);
+                    listaResultEsperada.add(execQuery);
                 }
             }
             
-            setListaResultEsperada(listaResultEsperada);
-            ArrayList<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
             listaResultObtenida = jena.testSPARQL(sparqlQuery, true);
             if(listaResultObtenida.size()>0){
                 esperado = new ArrayList<String>();
                 obtenido = new ArrayList<String>();
                 String contenidoObtenido = "",contenidoEsperado="";
                 int tam = listaResultObtenida.get(0).getDatos().size();
-                int tamBis = getListaResultEsperada().get(0).getDatos().size();
+                int tamBis = listaResultEsperada.get(0).getDatos().size();
                 fallo=0;
-                if((getListaResultEsperada().size()==listaResultObtenida.size()) && (tam==tamBis)){
+                if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
                     for(int s=0;s<tam;s++){
                         for(int t=0; t<listaResultObtenida.size(); t++){
                             contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(s);
-                            contenidoEsperado = contenidoEsperado+getListaResultEsperada().get(t).getDatos().get(s);
+                            contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(s);
                         } 
                         esperado.add(contenidoEsperado);
                         obtenido.add(contenidoObtenido);
@@ -242,7 +242,7 @@ public class OntologyTestCase implements OntologyTest{
             }
             if(contieneTodosIguales(esperado, obtenido)==false || fallo==1){
                 testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
-                sparqlquery,listaResultObtenida);
+                sparqlquery,listaResultEsperada,listaResultObtenida);
                 sparql=1;
             }else{
                 testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
@@ -606,14 +606,6 @@ public class OntologyTestCase implements OntologyTest{
 
     public static void setMuestra(String amuestra) {
         muestra = amuestra;
-    }
-
-    public static ArrayList<ExecQuerySparql> getListaResultEsperada() {
-        return listaResultEsperada;
-    }
-
-    public static  void setListaResultEsperada(ArrayList<ExecQuerySparql> alistaResultEsperada) {
-        listaResultEsperada = alistaResultEsperada;
     }
 }    
 

@@ -89,6 +89,7 @@ public class JenaImplementation implements Jena{
         try {
             model.read(ontologia);  
             model.prepare();
+            model.validate();
         }catch(Exception e){
             throw new ExceptionReadOntology();
         }
@@ -278,6 +279,7 @@ public class JenaImplementation implements Jena{
                     ExecQuerySparql eq = seleccionarLista(var, lista);
                     eq.getDatos().add(dato);
                 }
+                
                 if(!res.contains(dato)){
                     if(!dato.equals("Nothing") && 
                             !dato.equals("Thing")){

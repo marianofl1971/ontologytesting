@@ -1675,28 +1675,32 @@ public static void asociarInstancias(int sel){
                         }
                         QueryOntology testQuery = new QueryOntology();
                         for(int i=0; i<cQuery.length;i++){
-                            if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
-                            if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                                testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                            if(!cQuery[i].equals("") && !cResult[i].equals("")){
+                                if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                        validarTests.validarResultadoInstSatis(cResult[i])==true){
+                                if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
+                                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                                }else{
+                                    testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                                }
+                                queryTest1.add(testQuery);
+                                scenario.setQueryTest(queryTest1);
+                                aux=1;
+                                getInst().add(i, 0);
+                                }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
+                                        validarTests.validarResultadoInstSatis(cResult[i])==true){
+                                    getInst().add(i, 1);
+                                    setValidoInst(false);
+                                }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
+                                        validarTests.validarResultadoInstSatis(cResult[i])==false){
+                                    getInst().add(i, 2);
+                                    setValidoInst(false);
+                                }else{
+                                    getInst().add(i, 3);
+                                    setValidoInst(false);
+                                }
                             }else{
-                                testQuery = new QueryOntology(cQuery[i],cResult[i]);
-                            }
-                            queryTest1.add(testQuery);
-                            scenario.setQueryTest(queryTest1);
-                            aux=1;
-                            getInst().add(i, 0);
-                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
-                                getInst().add(i, 1);
-                                setValidoInst(false);
-                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==false){
-                                getInst().add(i, 2);
-                                setValidoInst(false);
-                            }else{
-                                getInst().add(i, 3);
-                                setValidoInst(false);
+                                getInst().add(i, 0);
                             }
                         } 
                     }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
@@ -1897,6 +1901,7 @@ public static void asociarInstancias(int sel){
                     }
                     QueryOntology testQuery = new QueryOntology();
                     for(int i=0; i<cQuery.length;i++){
+                        if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQuery(cQuery[i])==true &&
                            validarTests.validarResultado(cResult[i])==true){
                             if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
@@ -1920,7 +1925,10 @@ public static void asociarInstancias(int sel){
                             getRet().add(i, 3);
                             setValidoRet(false);
                         }
+                    }else{
+                        getRet().add(i, 0);
                     }
+                }
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
                         "Al menos debe introducir una consulta para ejecutar el test.",
@@ -2120,6 +2128,7 @@ public static void asociarInstancias(int sel){
                     }
                     QueryOntology testQuery = new QueryOntology();
                     for(int i=0; i<cQuery.length;i++){
+                        if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQuery(cQuery[i])==true &&
                             validarTests.validarQuery(cResult[i])==true){
                             if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
@@ -2143,6 +2152,9 @@ public static void asociarInstancias(int sel){
                             getReal().add(i, 3);
                             setValidoReal(false);
                         } 
+                    }else{
+                        getReal().add(i, 0);
+                    }
                     } 
 
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
@@ -2335,6 +2347,7 @@ public static void asociarInstancias(int sel){
                     }
                     QueryOntology testQuery = new QueryOntology();
                     for(int i=0; i<cQuery.length;i++){
+                        if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
                                 validarTests.validarResultadoInstSatis(cResult[i])==true){
                         if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
@@ -2358,6 +2371,9 @@ public static void asociarInstancias(int sel){
                                 getSat().add(i, 3);
                                 setValidoSat(false);
                         }
+                    }else{
+                        getSat().add(i, 0);
+                    }
                     }
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
@@ -2558,6 +2574,7 @@ public static void asociarInstancias(int sel){
                     }
                     QueryOntology testQuery = new QueryOntology();
                     for(int i=0; i<cQuery.length;i++){
+                        if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQuery(cQuery[i])==true &&
                            validarTests.validarResultado(cResult[i])==true){
                             if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
@@ -2581,6 +2598,9 @@ public static void asociarInstancias(int sel){
                             getClas().add(i, 3);
                             setValidoClas(false);
                         }
+                    }else{
+                        getClas().add(i, 0);
+                    }
                     }
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +

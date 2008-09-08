@@ -154,7 +154,6 @@ public class ValidarTests {
     
     public boolean validarSparqlTest(String query){
         String patron = ("[\\;|\\n|\\t|\\v|\\s]");
-        
         String[] res = query.split(patron);
         for(int i=0;i<res.length;i++){
             if(validarQuerySparql(res[i])==false){

@@ -36,8 +36,6 @@ public interface Jena {
     ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);
     
     void validarSparqlQuery(String query) throws Exception;
-    
-    //void validarSparqlQuerySelect(String query)throws Exception;
 
 }
 

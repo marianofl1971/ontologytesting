@@ -117,10 +117,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         antQueryButton.setEnabled(false);
         sigQueryButton.setEnabled(false);
         listAux = new ArrayList<SparqlQueryOntology>();
-        //scenarioTestQuery = new ScenarioTest();
-        //ArrayList<ScenarioTest> scenarioT = MainJPanel.getCollectionTest().getScenariotest();
-        //scenarioT.add(scenarioTestQuery);
-        //MainJPanel.getCollectionTest().setScenariotest(scenarioT);
         
         instancesPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         instancesPanel.add(new AddInstancesJPanel());

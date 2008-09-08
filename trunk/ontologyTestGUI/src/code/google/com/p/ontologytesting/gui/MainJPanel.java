@@ -6,6 +6,9 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -69,6 +72,8 @@ public class MainJPanel extends javax.swing.JPanel {
     private Component frame;
     public static boolean seleccionado;
     public AddInstancesClasPropJDialog addInst;  
+    private JenaInterface jenaInterface = new JenaInterface();   
+    private Jena jena;
 
     /** Creates new form MainJPanel */
     public MainJPanel(int vez) {
@@ -286,6 +291,7 @@ private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTestActionPerformed
 // TODO add your handling code here:
+    
     if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
         JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
                 "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -293,6 +299,9 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
          JOptionPane.showMessageDialog(frame,"La ontologia debe de ser un archivo " +
                  ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
+        try{
+        jena = jenaInterface.getJena();
+        jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         ContentMainJFrame.getContentPanel().remove(0);
         ContentMainJFrame.getContentPanel().add(new GroupTestsJPanel(8));
         ContentMainJFrame.getSeparador().setVisible(true);
@@ -300,6 +309,11 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         ContentMainJFrame.getContentPanel().getParent().validate();
         setSimpleTestSelect(true);
         AddSPARQLJPanel.setSeleccionado(false);
+        }catch (ExceptionReadOntology ex){
+            JOptionPane.showMessageDialog(frame,"La ontologia introducida no es valida." +
+                    "\nSolo pueden realizarse tests sobre documentos owl consistentes",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
     }
 }//GEN-LAST:event_newTestActionPerformed
 
@@ -312,6 +326,9 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
          JOptionPane.showMessageDialog(frame,"La ontologia debe de ser un archivo " +
                  ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
+        try{
+        jena = jenaInterface.getJena();
+        jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         AddSPARQLJPanel.setSeleccionado(true);
         ContentMainJFrame.getContentPanel().remove(0);
         ContentMainJFrame.getContentPanel().add(new AddSPARQLJPanel());
@@ -319,6 +336,11 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
         ContentMainJFrame.getContentPanel().getParent().validate();
         setSparqlTestsSelect(true);
+        }catch (ExceptionReadOntology ex){
+            JOptionPane.showMessageDialog(frame,"La ontologia introducida no es valida." +
+                    "\nSolo pueden realizarse tests sobre documentos owl consistentes",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
     }
 }//GEN-LAST:event_sparqlActionPerformed
 

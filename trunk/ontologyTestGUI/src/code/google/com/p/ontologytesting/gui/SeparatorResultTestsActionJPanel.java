@@ -31,6 +31,7 @@ import javax.swing.WindowConstants;
  */
 public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
     private Component frame;
+    private Component comp;
 
     /** Creates new form ResultTestsActionJPanel */
     public SeparatorResultTestsActionJPanel() {
@@ -211,7 +212,10 @@ private void newSimpleTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
 
 private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
 // TODO add your handling code here:
-    System.exit(0);
+    int n = JOptionPane.showConfirmDialog(comp, "¿Desea salir de la aplicacion?", "Exit",JOptionPane.YES_NO_OPTION);
+    if (n == JOptionPane.YES_OPTION){
+        System.exit(0);
+    }
 }//GEN-LAST:event_salirButtonActionPerformed
 
 private void inicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioButtonActionPerformed

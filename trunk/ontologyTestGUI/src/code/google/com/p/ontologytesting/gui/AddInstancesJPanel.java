@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,6 +31,10 @@ import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
 import code.google.com.p.ontologytesting.model.ValidarTests;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JEditorPane;
 
 /**
  *
@@ -103,6 +109,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
     private ArrayList<SparqlQueryOntology> listSparqlQuerys;
     private JenaInterface jenaInterface = new JenaInterface();   
     private Jena jena;
+    private VistaTestJFrame fram;
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -131,6 +138,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
         SaveAndNewButton = new javax.swing.JButton();
         addTestExistButton = new javax.swing.JButton();
         seeTestButton = new javax.swing.JButton();
+        seeOntologyButton = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione las instancias que desea asociar:");
 
@@ -178,6 +186,13 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        seeOntologyButton.setText("Ver Ontologia");
+        seeOntologyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeOntologyButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +210,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(seeAsociadasButton)
-                                .add(367, 367, 367)
+                                .add(276, 276, 276)
+                                .add(seeOntologyButton)
+                                .add(18, 18, 18)
                                 .add(addTestExistButton)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(seeTestButton))
@@ -203,9 +220,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .add(layout.createSequentialGroup()
                         .add(asociarButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 604, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 650, Short.MAX_VALUE)
                         .add(SaveAndNewButton)
-                        .add(56, 56, 56))))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -224,7 +241,8 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(seeAsociadasButton)
                     .add(seeTestButton)
-                    .add(addTestExistButton))
+                    .add(addTestExistButton)
+                    .add(seeOntologyButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -740,6 +758,36 @@ private void seeTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 }//GEN-LAST:event_seeTestButtonActionPerformed
 
+private void seeOntologyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeOntologyButtonActionPerformed
+// TODO add your handling code here:
+    
+    FileReader fr = null;
+    String linea;
+    String result="";
+    fram = new VistaTestJFrame();
+    fram.setTitle("Ontologia Asociada");
+    fram.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    JEditorPane editor = fram.getTestEditorPane();
+    editor.setContentType("text");
+    
+        try {//GEN-LAST:event_seeOntologyButtonActionPerformed
+            fr = new FileReader(MainJPanel.getFisicalOntologyTextField());
+            BufferedReader bf = new BufferedReader(fr);
+            
+            while ((linea = bf.readLine())!=null) {
+                result = result + linea  + "\r\n";
+            }
+            System.out.println(result);
+            editor.setText(result);
+            editor.setEditable(false);
+            fram.setTestEditorPane(editor);
+            fram.setVisible(true);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
+}
+
 public void setSelectedTabbed(int index){
     this.index = index;
 }
@@ -760,6 +808,7 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton seeAsociadasButton;
+    private javax.swing.JButton seeOntologyButton;
     private javax.swing.JButton seeTestButton;
     // End of variables declaration//GEN-END:variables
 
