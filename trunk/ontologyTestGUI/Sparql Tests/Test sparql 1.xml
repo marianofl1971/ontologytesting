@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <object class="code.google.com.p.ontologytesting.model.ScenarioTest"> 
   <void property="instancias"> 
    <void property="classInstances"> 
@@ -71,7 +71,8 @@ FROM &lt;data/family.owl&gt;
 WHERE {?subject rdfs:subClassOf ?object }</string> 
      </void> 
      <void property="resultexpected"> 
-      <string>Female(bbb)</string> 
+      <string>Female(Vasken,Sara)
+Male(pablo,daniel)</string> 
      </void> 
     </object> 
    </void> 
@@ -84,7 +85,8 @@ FROM &lt;data/family.owl&gt;
 WHERE {?subject rdfs:subClassOf ?object }</string> 
      </void> 
      <void property="resultexpected"> 
-      <string>Female(ddd)</string> 
+      <string>Female(Ana,Manolo)
+Male(lucas,pedro,gabriel)</string> 
      </void> 
     </object> 
    </void> 
@@ -97,7 +99,8 @@ FROM &lt;data/family.owl&gt;
 WHERE {?subject rdfs:subClassOf ?object }</string> 
      </void> 
      <void property="resultexpected"> 
-      <string>Female(eee)</string> 
+      <string>Female(Floren,JoseLuis)
+Male(jose,arman,pablo,luis)</string> 
      </void> 
     </object> 
    </void> 
