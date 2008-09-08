@@ -11,7 +11,7 @@ import code.google.com.p.ontologytesting.gui.TestInstancesTFJPanel;
 import code.google.com.p.ontologytesting.gui.TestInstancesTextAreaJPanel;
 import code.google.com.p.ontologytesting.gui.TestInstancesTextJPanel;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -20,11 +20,11 @@ import javax.swing.JPanel;
  */
 public class ValidarConsultas {
     
-    private ArrayList listInst = GroupTestsJPanel.getInst();
-    private ArrayList listRet = GroupTestsJPanel.getRet();
-    private ArrayList listReal = GroupTestsJPanel.getReal();
-    private ArrayList listSat = GroupTestsJPanel.getSat();
-    private ArrayList listClas = GroupTestsJPanel.getClas();
+    private List listInst = GroupTestsJPanel.getInst();
+    private List listRet = GroupTestsJPanel.getRet();
+    private List listReal = GroupTestsJPanel.getReal();
+    private List listSat = GroupTestsJPanel.getSat();
+    private List listClas = GroupTestsJPanel.getClas();
     private JPanel panelAyudaInst = GroupTestsJPanel.getInstAyudaPanel();
     private JPanel panelAyudaRet = GroupTestsJPanel.getRetAyudaPanel();
     private JPanel panelAyudaReal = GroupTestsJPanel.getRealAyudaPanel();
@@ -38,10 +38,6 @@ public class ValidarConsultas {
     
     public boolean comprovarErrorEnAyudaInst(){
         
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
         int var=0;
         for(int j=0;j<listInst.size();j++){
             if(listInst.get(j).equals(1)){
@@ -58,10 +54,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorEnAyudaRet(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         for(int j=0;j<listRet.size();j++){
             if(listRet.get(j).equals(1)){
@@ -87,10 +80,7 @@ public class ValidarConsultas {
     }
 
     public boolean comprovarErrorEnAyudaReal(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         for(int j=0;j<listReal.size();j++){   
             if(listReal.get(j).equals(1)){
@@ -116,10 +106,7 @@ public class ValidarConsultas {
     }
 
     public boolean comprovarErrorEnAyudaSat(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         for(int j=0;j<listSat.size();j++){  
             if(listSat.get(j).equals(1)){
@@ -136,10 +123,7 @@ public class ValidarConsultas {
     }
 
     public boolean comprovarErrorEnAyudaClas(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         for(int j=0;j<listClas.size();j++){
             if(listClas.get(j).equals(1)){
@@ -165,10 +149,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorQuerysInst(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelInst.getComponent(0); 
         for(int j=0;j<listInst.size();j++){
@@ -192,10 +173,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorQuerysRet(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelRet.getComponent(0);
         for(int j=0;j<listRet.size();j++){
@@ -219,10 +197,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorQuerysReal(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelReal.getComponent(0);
         for(int j=0;j<listReal.size();j++){   
@@ -246,10 +221,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorQuerysSat(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelSat.getComponent(0);
         for(int j=0;j<listSat.size();j++){  
@@ -273,10 +245,7 @@ public class ValidarConsultas {
     }
     
     public boolean comprovarErrorQuerysClas(){
-        /*JOptionPane.showMessageDialog(frame,"La query " +
-        "introducida no es correcta. Los formatos posibles son:\n" +
-        "clase,individuo\nclase.individuo\n" +
-        "clase individuo\nclase(individuo)","Warning Message",JOptionPane.WARNING_MESSAGE);*/
+
         int var=0;
         TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelClas.getComponent(0);
         for(int j=0;j<listClas.size();j++){

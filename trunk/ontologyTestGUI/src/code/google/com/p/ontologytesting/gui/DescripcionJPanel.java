@@ -44,7 +44,7 @@ public class DescripcionJPanel extends javax.swing.JPanel {
         descTextArea.setRows(5);
         jScrollPane1.setViewportView(descTextArea);
 
-        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/information.png"))); // NOI18N
         formatosButton.setText("Formatos Permitidos");
         formatosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

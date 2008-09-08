@@ -31,7 +31,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.WindowConstants;
+import java.util.List;
 /**
  *
  * @author  Saruskas
@@ -43,24 +43,18 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     static JFrame frame,parent;
     private XMLDecoder decoder;
     private AddComentJDialog commentPane;
-    private ArrayList<ClassInstances> clasInst,clasFinal;
-    private ArrayList<PropertyInstances> propInst,propFinal;
+    private List<ClassInstances> clasInst,clasFinal;
+    private List<PropertyInstances> propInst,propFinal;
     private int indexVect;
     private String nombreFichero;
-    public static boolean isSeleccionado() {
-        return seleccionado;
-    }
-    public static void setSeleccionado(boolean aSeleccionado) {
-        seleccionado = aSeleccionado;
-    }
-    Instancias instancias;
+    private Instancias instancias;
     public static boolean seleccionado;
     private int tabActual=0;
     private boolean queryValida=true;
-    private JenaInterface jenaInterface = new JenaInterface();   
+    private JenaInterface jenaInterface;   
     private Jena jena;
     private boolean instanciaValida=true;
-    private String patron1="[\\(|,|\n| ]",patron2="[,|\n| |\\)]";
+    private String patron1,patron2;
 
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var){
         
@@ -265,8 +259,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         int contP=0,contC=0;
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
-        ArrayList<ClassInstances> al;
-        ArrayList<PropertyInstances> la;
+        List<ClassInstances> al;
+        List<PropertyInstances> la;
         Instancias inst;
         ListIterator li,il;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
@@ -455,7 +449,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
         instancesTabbedPane.addTab("Introducir ambas en forma de texto", textAreaScrollPane);
 
-        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/information.png"))); // NOI18N
         formatosButton.setText("Formatos Permitidos");
         formatosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -475,19 +469,19 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                     .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                         .addComponent(formatosButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                         .addComponent(limpiarInstButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
                         .addComponent(newClasButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(newPropButton))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(cancelarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 581, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 573, Short.MAX_VALUE)
                         .addComponent(guardarInstButton)))
                 .addContainerGap())
         );
@@ -533,7 +527,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                         .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         contentDescPanelLayout.setVerticalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,7 +552,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
             .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -578,7 +572,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
-        try {
+    patron1="[\\(|,|\n| ]";
+    patron2="[,|\n| |\\)]";    
+    try {
+            jenaInterface = new JenaInterface();
             jena = jenaInterface.getJena();
             Auxiliar auxiliar = new Auxiliar();
             jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
@@ -748,7 +745,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     instancias.setDescripcion(getDescInstanciasTextArea());
                     instancias.setNombre(getNomInstanciasTextField());
                     instancias.setType("Instancias");
-                    crearArchivoDeInstancias(instancias);
+                    auxiliar.crearArchivoDeInstancias(instancias);
                     this.setVisible(false);
                 }else{
                     instancias.setClassInstances(clasInst);
@@ -758,21 +755,21 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     instancias.setType("Instancias");
                     if (AddInstancesJPanel.isStateExaminar() == true) {
                         if (compararListaClase(clasInst, clasFinal) && compararListaPropiedad(propInst, propFinal)) {
-                            setInstances(instancias);
+                            auxiliar.setInstances(instancias);
                             this.setVisible(false);
                         } else {
                             Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
                             int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                             if (n == JOptionPane.YES_OPTION) {
-                                setInstances(instancias);
-                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                auxiliar.setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado(),instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.NO_OPTION) {
-                                crearArchivoDeInstancias(instancias);
-                                setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.CANCEL_OPTION) {
-                                setInstances(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             }else{
                                 this.setVisible(false);
@@ -797,15 +794,15 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
                             int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                             if (n == JOptionPane.YES_OPTION) {
-                                setInstances(instancias);
-                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                auxiliar.setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado(),instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.NO_OPTION) {
-                                crearArchivoDeInstancias(instancias);
-                                setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.CANCEL_OPTION) {
-                                setInstances(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             }else{
                                 this.setVisible(false);
@@ -814,15 +811,15 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             Object[] options = {"Sobreescribir", "Crear nuevo", "No guardar"};
                             int n = JOptionPane.showOptionDialog(frame, "El conjunto de " + "instancias ha cambiado. ¿Qué desea hacer?", "Question", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
                             if (n == JOptionPane.YES_OPTION) {
-                                setInstances(instancias);
-                                crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado());
+                                auxiliar.setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(AddInstancesJPanel.getArchivoSeleccionado(),instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.NO_OPTION) {
-                                crearArchivoDeInstancias(instancias);
-                                setInstances(instancias);
+                                auxiliar.crearArchivoDeInstancias(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             } else if (n == JOptionPane.CANCEL_OPTION) {
-                                setInstances(instancias);
+                                auxiliar.setInstances(instancias);
                                 this.setVisible(false);
                             }else{
                                 this.setVisible(false);
@@ -877,31 +874,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
-public void crearArchivoDeInstancias(Instancias instancias){
-    
-    String nombreArch=null;
-    String nameInstances=null;
-    
-    nombreArch = JOptionPane.showInputDialog(null,"Introduzca el nombre para el " +
-                "archivo con este conjunto de instancias","Nombre del archivo",
-                JOptionPane.QUESTION_MESSAGE);
-            
-    if(nombreArch.endsWith(".xml")){
-        nameInstances=nombreArch;
-    }else{
-        nameInstances=nombreArch.concat(".xml");
-    }
-            
-    try{
-        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(Configuration.getPathInstancias()+"/"+nameInstances)));
-        e.writeObject(instancias);
-        e.close();
-    }catch (FileNotFoundException ex) {
-        ex.printStackTrace();
-     }
-}
-
 public boolean yaExisteInstancia(String nombre){
     ArrayList<ScenarioTest> listaEsce = MainJPanel.getCollectionTest().getScenariotest();
         for(int i=0;i<listaEsce.size();i++){
@@ -912,18 +884,6 @@ public boolean yaExisteInstancia(String nombre){
             }
         }
     return false;
-}
-
-public void crearArchivoDeInstancias(String nombreFichero){
-        
-    try{
-        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(nombreFichero)));
-        e.writeObject(instancias);
-        e.close();
-    }catch (FileNotFoundException ex) {
-        ex.printStackTrace();
-     }
 }
 
 public void crearArchivoDeTests(String nombreFichero){
@@ -938,8 +898,8 @@ public void crearArchivoDeTests(String nombreFichero){
      }
 }
 
-private boolean compararListaClase(ArrayList<ClassInstances> arrayList1, 
-        ArrayList<ClassInstances> arrayList2) {
+private boolean compararListaClase(List<ClassInstances> arrayList1, 
+        List<ClassInstances> arrayList2) {
       
     if(arrayList1!=null && arrayList2!=null){
         if(arrayList1.size() == arrayList2.size()){
@@ -964,8 +924,8 @@ private boolean compararListaClase(ArrayList<ClassInstances> arrayList1,
     return true;
 }  
 
-private boolean compararListaPropiedad(ArrayList<PropertyInstances> arrayList1, 
-        ArrayList<PropertyInstances> arrayList2) {
+private boolean compararListaPropiedad(List<PropertyInstances> arrayList1, 
+        List<PropertyInstances> arrayList2) {
          
     if(arrayList1.size() == arrayList2.size()){
         for(int i=0;i<arrayList1.size();i++){
@@ -1044,55 +1004,38 @@ private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
 
-
-private void setInstances(Instancias instancias)
-{  
-    int tab = GroupTestsJPanel.getSelectedTabed();
-    if(AddSPARQLJPanel.isSeleccionado()==false){
-        ContentMainJFrame.getInstancias().set(tab, instancias);
-    }else{
-        ContentMainJFrame.getInstancias().set(5, instancias);
-    }
-}
-
 public void copiarAInstancesTextArea(){
     String textoClase="",textoProp="";
     
     CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
-    int aux=0;
+
     int totalClas = getClasPanel().getComponentCount();
     
     for(int i=0; i<totalClas; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
         String query = panelInst.getQuery();
-        AddComentJDialog comentPane = panelInst.getComment();
-        String coment = comentPane.getComent();
+
         if(!query.equals("")){
             if(textoClase.equals("")){
                 textoClase = query+"\n";
             }else{
                 textoClase = textoClase+query+"\n";
             }
-        }else if(query.equals("") && !coment.equals("")){
-            aux=1;
         }
     }
     int totalProp = getPropPanel().getComponentCount();
     for(int i=0; i< totalProp; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
         String query = panelInst.getQuery();
-        AddComentJDialog comentPane = panelInst.getComment();
-        String coment = comentPane.getComent();
+
         if(!query.equals("")){
             if(textoProp.equals("")){
                 textoProp = query+"\n";
             }else{
                 textoProp = textoProp+query+"\n";
             }
-        }else if(query.equals("") && !coment.equals("")){
-            aux=1;
         }
     }
     conjunto.setClaseTextArea(textoClase);
@@ -1251,6 +1194,13 @@ public void copiarAInstancesAyuda(){
 
     public static javax.swing.JPanel getPropPanel() {
         return propPanel;
+    }
+    
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
     }
 
 }

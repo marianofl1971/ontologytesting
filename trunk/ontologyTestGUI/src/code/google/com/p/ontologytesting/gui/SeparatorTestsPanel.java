@@ -6,11 +6,6 @@
 
 package code.google.com.p.ontologytesting.gui;
 
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
-import java.util.ArrayList;
-
-
 /**
  *
  * @author  sara.garcia
@@ -34,6 +29,7 @@ public class SeparatorTestsPanel extends javax.swing.JPanel {
         volverButton = new javax.swing.JButton();
         ejecutarButton = new javax.swing.JButton();
 
+        volverButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/arrow_left.png"))); // NOI18N
         volverButton.setText("Volver");
         volverButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,6 +37,7 @@ public class SeparatorTestsPanel extends javax.swing.JPanel {
             }
         });
 
+        ejecutarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cog.png"))); // NOI18N
         ejecutarButton.setText("Ejectuar Tests");
         ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +52,7 @@ public class SeparatorTestsPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(volverButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(ejecutarButton)
                 .addContainerGap())
         );

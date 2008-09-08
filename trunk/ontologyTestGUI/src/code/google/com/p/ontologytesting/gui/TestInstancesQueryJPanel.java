@@ -18,7 +18,6 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog frameComent;
     private Frame frame;
-    private boolean borrado=false,duplicado=false;
     private int posicion;
     
     
@@ -26,21 +25,18 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     public TestInstancesQueryJPanel(int i) {
         initComponents();
         posicion = i;
-        setBorrado(false);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
     
     public TestInstancesQueryJPanel() {
         initComponents();
-        setBorrado(false);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
     
     public TestInstancesQueryJPanel(String query, String result, String coment) {
         initComponents();
-        setBorrado(false);
         
         queryTextField.setText(query);
         resultTextField.setText(result);
@@ -71,7 +67,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             }
         });
 
-        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment.gif"))); // NOI18N
+        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
         comentarioButton.setText("Comentario");
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +76,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             }
         });
 
-        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.gif"))); // NOI18N
+        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         borrarButton.setText("Borrar");
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -211,22 +207,6 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 
     public javax.swing.JTextField getResultTextField() {
         return resultTextField;
-    }
-    
-    public boolean getBorrado() {
-        return borrado;
-    }
-
-    public void setBorrado(boolean borrado) {
-        this.borrado = borrado;
-    }
-    
-    public boolean getDuplicado() {
-        return duplicado;
-    }
-
-    public void setDuplicado(boolean duplicado) {
-        this.duplicado = duplicado;
     }
 
     public int getPosicion() {

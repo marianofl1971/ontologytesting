@@ -24,18 +24,13 @@ import java.util.ListIterator;
  */
 public class OntologyTestCase implements OntologyTest{
     
-    public String ontologyname;
-    boolean namepropIsUsed=false;
-    boolean nameclasIsUsed=false;
-    private JenaInterface jenaInterface = new JenaInterface();   
+    private JenaInterface jenaInterface;   
     private Jena jena;
-    private static String patron1="[\\(|,|\n| ]",patron2="[\n| |\\)]",
-            patron3="[\\(|\\)|,| |.]",patron4="[,|\n| ]",patron5="[\n|\\t|\\v|\\s]",
-            patron6="[.,\\s\\)]";
-    private int fallo=0;
+    private String patron1,patron2,patron3,patron4,patron5,patron6;
+    private int fallo;
     private static String muestra="";
-    private static ArrayList<ExecQuerySparql> listaResultEsperada;
-    private ArrayList<ExecQuerySparql> listaResultObtenida;
+    private List<ExecQuerySparql> listaResultEsperada;
+    private List<ExecQuerySparql> listaResultObtenida;
     
     public OntologyTestCase(){
     }
@@ -49,6 +44,9 @@ public class OntologyTestCase implements OntologyTest{
             String[] piClas;
             String[] piInd;
 
+            patron1 = "[\\(|,|\n| ]";
+            patron2 = "[\n| |\\)]";
+            jenaInterface = new JenaInterface();
             jena = jenaInterface.getJena();
             jena.addReasoner(ont);
 
@@ -84,6 +82,10 @@ public class OntologyTestCase implements OntologyTest{
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
             ScenarioTest scenariotest){
           
+        patron3="[\\(|\\)|,| |.]";
+        patron4="[,|\n| ]";
+        patron5="[\n|\\t|\\v|\\s]";
+        patron6="[.,\\s\\)]";
         ArrayList<String> esperado = new ArrayList<String>();
         ArrayList<String> obtenido = new ArrayList<String>();
         ListIterator liQuery,liSparql;
@@ -93,8 +95,6 @@ public class OntologyTestCase implements OntologyTest{
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
         List<SparqlQueryOntology> sparqlTest = scenariotest.getSparqlQuerys();
         listaResultObtenida = new ArrayList<ExecQuerySparql>();
-        
-        int inst=0, sat=0, clas=0, ret=0, real=0, sparql=0;
         
         String resObtenidoInst="",resQueryExpected="", resObtenidoRealiz="",
                 resObtenidoSatisf="";
@@ -116,7 +116,6 @@ public class OntologyTestCase implements OntologyTest{
                     indF = res[1];
                     resObtenidoInst = jena.instantiation(ns, clasF, indF);
                     if(!resObtenidoInst.equals(resQueryExpected)){
-                        inst=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoInst);
                     }else{
@@ -130,7 +129,6 @@ public class OntologyTestCase implements OntologyTest{
                         queryRet.add(queryMod[k]);
                     }
                     if(resObtenidoRet==null){
-                        ret=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo,"La clase introducida no es una " +
                                 "instancia para el modelo");
@@ -138,7 +136,6 @@ public class OntologyTestCase implements OntologyTest{
                         Collections.sort(resObtenidoRet);
                         Collections.sort(queryRet);
                         if(!this.comparaArray(resObtenidoRet, queryRet)){
-                            ret=1;
                             testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo,resObtenidoRet.toString());
                         }else{
@@ -148,7 +145,6 @@ public class OntologyTestCase implements OntologyTest{
                 }else if(testName.equals("Realización")){
                     resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
-                        real=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoRealiz);
                     }else{
@@ -160,7 +156,6 @@ public class OntologyTestCase implements OntologyTest{
                     loincluye = res[1];
                     resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
                     if(!resObtenidoSatisf.equals(resQueryExpected)){
-                        sat=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoSatisf);
                     }else{
@@ -174,7 +169,6 @@ public class OntologyTestCase implements OntologyTest{
                     }
                     resObtenidoClas = jena.classification(ns, query);
                     if(resObtenidoClas==null){
-                        clas=1;
                         testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, "El individuo introducido no es una" +
                                 "instancia para el modelo");
@@ -182,7 +176,6 @@ public class OntologyTestCase implements OntologyTest{
                         Collections.sort(resObtenidoClas);
                         Collections.sort(querySat);
                         if(!this.comparaArray(querySat, resObtenidoClas)){
-                            clas=1;
                             testresult.addOntologyFailureQuery(nombreTestUsuario, 
                                 testName,qo, resObtenidoClas.toString());
                         }else{
@@ -243,14 +236,13 @@ public class OntologyTestCase implements OntologyTest{
             if(contieneTodosIguales(esperado, obtenido)==false || fallo==1){
                 testresult.addOntologyFailureSparql(nombreTestUsuario, testName,
                 sparqlquery,listaResultEsperada,listaResultObtenida);
-                sparql=1;
             }else{
                 testresult.addOntologyPassedTestSparql(nombreTestUsuario, testName);
             }
         }
     } 
 
-    public boolean contieneTodosIguales(ArrayList<String> array1, ArrayList<String> array2){
+    public boolean contieneTodosIguales(List<String> array1, List<String> array2){
         if(array1.size()==array2.size()){
             for(int i=0;i<array1.size();i++){
                 String dato1 = array1.get(i);
@@ -262,7 +254,7 @@ public class OntologyTestCase implements OntologyTest{
         return true;
     }
     
-    public ExecQuerySparql seleccionarLista(String nombreSelect,ArrayList<ExecQuerySparql> lista){
+    public ExecQuerySparql seleccionarLista(String nombreSelect,List<ExecQuerySparql> lista){
         for(int i=0;i<lista.size();i++){
             if(lista.get(i).getNombreSelect().equals(nombreSelect)){
                 return lista.get(i);
@@ -271,7 +263,7 @@ public class OntologyTestCase implements OntologyTest{
         return new ExecQuerySparql();
     }
     
-    public boolean perteneceALista(String nombre, ArrayList<ExecQuerySparql> lista){
+    public boolean perteneceALista(String nombre, List<ExecQuerySparql> lista){
         for(int i=0;i<lista.size();i++){
             String nombreAux = lista.get(i).getNombreSelect();
             if(nombreAux.equals(nombre)){
@@ -302,7 +294,7 @@ public class OntologyTestCase implements OntologyTest{
         setMuestra(datos);
     }
     
-    public boolean comparaArray(ArrayList<String> array1, ArrayList<String> array2){
+    public boolean comparaArray(List<String> array1, List<String> array2){
         if(array1.size() == array2.size()){
             for(int i=0;i<array1.size();i++){
                 if(!array1.get(i).equals(array2.get(i))){
@@ -318,8 +310,8 @@ public class OntologyTestCase implements OntologyTest{
     public String crearFicheroDeResultados(OntologyTestResult testresult){
         
         ListIterator liFailures,liSparql;
-        ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
-        ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
+        List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
+        List<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
         int varInst=0,varRet=0,varReal=0,varSat=0,varClas=0,varSparql=0,auxInst=0,
                 auxRet=0,auxReal=0,auxSat=0,auxClas=0,auxSparql=0;
         liFailures = failures.listIterator();
@@ -560,8 +552,8 @@ public class OntologyTestCase implements OntologyTest{
     public String instanciasAsociadas(ScenarioTest scenario){
         String instClas="",instProp="",instTotal="";
         Instancias inst = scenario.getInstancias();
-        ArrayList<ClassInstances> clas = inst.getClassInstances();
-        ArrayList<PropertyInstances> prop = inst.getPropertyInstances();
+        List<ClassInstances> clas = inst.getClassInstances();
+        List<PropertyInstances> prop = inst.getPropertyInstances();
         if(clas.size()!=0){
         instTotal = "Instancias de Clase";
         for(int j=0;j<clas.size();j++){

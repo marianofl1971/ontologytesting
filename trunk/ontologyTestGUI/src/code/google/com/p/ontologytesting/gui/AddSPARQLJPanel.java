@@ -27,6 +27,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -35,71 +36,26 @@ import javax.swing.JPanel;
  */
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
-    public static javax.swing.JButton getAntQueryButton() {
-        return antQueryButton;
-    }
-    public static javax.swing.JButton getSigQueryButton() {
-        return sigQueryButton;
-    }
-    public static javax.swing.JTextArea getSparqlTextArea() {
-        return sparqlTextArea;
-    }
-    public static void setListAux(ArrayList<SparqlQueryOntology> aListAux) {
-        listAux = aListAux;
-    }
-    private boolean nombreVacio=false,testYaExiste=false,sinConsultas=false,
-            ambosNecesarios=false,noHayInsatncias=false,resultadoValido=true,sinTest=false;
+    private boolean nombreVacio,testYaExiste,sinConsultas,
+            ambosNecesarios,noHayInsatncias,resultadoValido,sinTest;
     private JPanel panelTree;
     static final int desktopWidth = 700;
     static final int desktopHeight = 600;
     static JFrame frame;
-    public static boolean isSeleccionado() {
-        return seleccionado;
-    }
-    public static void setSeleccionado(boolean aSeleccionado) {
-        seleccionado = aSeleccionado;
-    }
     private static int posListQuerysSel = 0;
     public static boolean seleccionado;
     public static ScenarioTest scenarioTestQuery;
-    public static int getContadorAnt() {
-        return contadorAnt;
-    }
-    public static void setContadorAnt(int aContadorAnt) {
-        contadorAnt = aContadorAnt;
-    }
-    public static int getContadorSig() {
-        return contadorSig;
-    }
-    public static void setContadorSig(int aContadorSig) {
-        contadorSig = aContadorSig;
-    }
-    public static void setAntQueryButton(boolean state) {
-        getAntQueryButton().setEnabled(state);
-    }
-     public static void setSigQueryButton(boolean state) {
-        getSigQueryButton().setEnabled(state);
-    }
-    private int aux=0;
-    private static int contadorAnt = -1;
-    private static int contadorSig = 1;
-    public static int getPosListQuerysSel() {
-            return posListQuerysSel;
-    }
-    public static void setPosListQuerysSel(int aPosListQuerysSel) {
-        posListQuerysSel = aPosListQuerysSel;
-    }
     private int contador=0;
     private int index=0;
     private boolean isAntSelected=false, isSigSelected=false;
-    private static ArrayList<SparqlQueryOntology> listAux;
+    private static List<SparqlQueryOntology> listAux;
     private Component comp;
     private ScenarioTest scenarioSparql;
-    private static ArrayList<SparqlQueryOntology> listSparqlQuerys;
-    private ArrayList<ClassInstances> vaciaClase;
-    private ArrayList<PropertyInstances> vaciaPropiedad;
+    private static List<SparqlQueryOntology> listSparqlQuerys;
+    private List<ClassInstances> vaciaClase;
+    private List<PropertyInstances> vaciaPropiedad;
     private Instancias instancias;
-    private JenaInterface jenaInterface = new JenaInterface();   
+    private JenaInterface jenaInterface;
     private Jena jena;
     
     
@@ -156,6 +112,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
+        nuevaConsultaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
         nuevaConsultaButton.setText("Nueva Consulta");
         nuevaConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,14 +156,14 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             .add(0, 153, Short.MAX_VALUE)
         );
 
-        sigQueryButton.setText(">>");
+        sigQueryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/resultset_next.png"))); // NOI18N
         sigQueryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sigQueryButtonActionPerformed(evt);
             }
         });
 
-        antQueryButton.setText("<<");
+        antQueryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/resultset_previous.png"))); // NOI18N
         antQueryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 antQueryButtonActionPerformed(evt);
@@ -220,6 +177,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        borrarConsultaJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         borrarConsultaJButton.setText("Borrar Consulta");
         borrarConsultaJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +185,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/help.gif"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/information.png"))); // NOI18N
         jButton1.setText("Formatos Permitidos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +211,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 86, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
                                         .add(antQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)
@@ -269,15 +227,15 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                         .add(limpiarResultButton)
                                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 192, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(instancesPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 480, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 200, Short.MAX_VALUE)
-                        .add(jButton1)))
+                        .add(jButton1))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -295,13 +253,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel1)
-                            .add(jLabel4)))
+                            .add(jLabel4)
+                            .add(jLabel1)))
                     .add(jButton1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(limpiarButton)
@@ -530,6 +488,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
 public boolean guardarDatos(){
     
+    jenaInterface = new JenaInterface();   
     jena = jenaInterface.getJena();
     noHayInsatncias=false;
     resultadoValido=true;
@@ -537,6 +496,7 @@ public boolean guardarDatos(){
     testYaExiste=false;
     sinConsultas=false;
     sinTest=false;
+    ambosNecesarios=false;
 
     String ontologyFisical=MainJPanel.getFisicalOntologyTextField();
     
@@ -599,7 +559,7 @@ public boolean guardarDatos(){
                         listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
                     }
                 }
-                ArrayList<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
+                List<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
                 for(int i=0; i<querys.size();i++){
                     if(!querys.get(i).getQuerySparql().equals("") && !querys.get(i).getResultexpected().equals("")){
                         if(validarTests.validarSparqlTest(querys.get(i).getResultexpected())==false){
@@ -787,11 +747,11 @@ public void setPanelTree(JPanel aPanelTree) {
        scenarioTestQuery = ascenarioTestQuery;
     }
     
-    public static ArrayList<SparqlQueryOntology> getListSparqlQuerys() {
+    public static List<SparqlQueryOntology> getListSparqlQuerys() {
         return getListAux();
     }
 
-    public static void setListSparqlQuerys(ArrayList<SparqlQueryOntology> alistAux) {
+    public static void setListSparqlQuerys(List<SparqlQueryOntology> alistAux) {
         setListAux(alistAux);
     }
 
@@ -803,7 +763,7 @@ public void setPanelTree(JPanel aPanelTree) {
         this.index = index;
     }
 
-    public static ArrayList<SparqlQueryOntology> getListAux() {
+    public static List<SparqlQueryOntology> getListAux() {
         return listAux;
     }
 
@@ -821,6 +781,46 @@ public void setPanelTree(JPanel aPanelTree) {
 
     public void setIsSigSelected(boolean isSigSelected) {
         this.isSigSelected = isSigSelected;
+    }
+    
+    public static javax.swing.JButton getAntQueryButton() {
+        return antQueryButton;
+    }
+    
+    public static javax.swing.JButton getSigQueryButton() {
+        return sigQueryButton;
+    }
+    
+    public static javax.swing.JTextArea getSparqlTextArea() {
+        return sparqlTextArea;
+    }
+    
+    public static void setListAux(List<SparqlQueryOntology> aListAux) {
+        listAux = aListAux;
+    }
+    
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
+    }
+    
+    public static void setAntQueryButton(boolean state) {
+        getAntQueryButton().setEnabled(state);
+    }
+    
+    public static void setSigQueryButton(boolean state) {
+        getSigQueryButton().setEnabled(state);
+    }
+    
+    public static int getPosListQuerysSel() {
+            return posListQuerysSel;
+    }
+    
+    public static void setPosListQuerysSel(int aPosListQuerysSel) {
+        posListQuerysSel = aPosListQuerysSel;
     }
 
 }

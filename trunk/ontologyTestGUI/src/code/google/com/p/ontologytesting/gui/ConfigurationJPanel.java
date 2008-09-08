@@ -17,23 +17,12 @@ import javax.swing.JFileChooser;
  */
 public class ConfigurationJPanel extends javax.swing.JPanel {
 
-    public static boolean isHaSidoConfigurado() {
-        return haSidoConfigurado;
-    }
+    
     private static boolean conf=false;
-    public static void setHaSidoConfigurado(boolean aHaSidoConfigurado) {
-        haSidoConfigurado = aHaSidoConfigurado;
-    }
-    public static boolean getConf() {
-        return conf;
-    }
-    public static void setConf(boolean aConf) {
-        conf = aConf;
-    }
-    private String inicio="";
+    private String inicio;
     private JFileChooser filechooser;
     private Component frame;
-    private static boolean haSidoConfigurado=true;
+    private static boolean haSidoConfigurado;
     
     /** Creates new form ConfigurationJPanel */
     public ConfigurationJPanel() {
@@ -108,6 +97,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
 
         instanciasTextField.setEnabled(false);
 
+        examinarTestsSimplesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
         examinarTestsSimplesButton.setText("Examinar");
         examinarTestsSimplesButton.setEnabled(false);
         examinarTestsSimplesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +106,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
             }
         });
 
+        examinarTestsSparqlButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
         examinarTestsSparqlButton.setText("Examinar");
         examinarTestsSparqlButton.setEnabled(false);
         examinarTestsSparqlButton.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +115,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
             }
         });
 
+        examinarInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
         examinarInstanciasButton.setText("Examinar");
         examinarInstanciasButton.setEnabled(false);
         examinarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
@@ -168,14 +160,14 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
                         .addGap(303, 303, 303))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(248, Short.MAX_VALUE))
+                        .addContainerGap(268, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(497, Short.MAX_VALUE))))
+                        .addContainerGap(517, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                .addGap(384, 384, 384))
+                .addGap(404, 404, 404))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +183,7 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(179, 179, 179))
+                .addGap(199, 199, 199))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(siRadioButton)
@@ -199,11 +191,11 @@ public class ConfigurationJPanel extends javax.swing.JPanel {
                 .addComponent(noRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
                 .addComponent(restaurarRadioButton)
-                .addGap(273, 273, 273))
+                .addGap(293, 293, 293))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(567, Short.MAX_VALUE))
+                .addContainerGap(587, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(testsSimplesTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
@@ -367,5 +359,18 @@ private void examinarInstanciasButtonActionPerformed(java.awt.event.ActionEvent 
     public static javax.swing.JRadioButton getSiRadioButton() {
         return siRadioButton;
     }
+    
+    public static boolean isHaSidoConfigurado() {
+        return haSidoConfigurado;
+    }
 
+    public static void setHaSidoConfigurado(boolean aHaSidoConfigurado) {
+        haSidoConfigurado = aHaSidoConfigurado;
+    }
+    public static boolean getConf() {
+        return conf;
+    }
+    public static void setConf(boolean aConf) {
+        conf = aConf;
+    }
 }

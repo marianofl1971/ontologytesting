@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.gui;
 
 import code.google.com.p.ontologytesting.exceptions.*;
-import code.google.com.p.ontologytesting.model.Auxiliar;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.OntologyTestResult;
 import java.awt.BorderLayout;
@@ -36,6 +35,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
 import code.google.com.p.ontologytesting.model.ValidarConsultas;
 import code.google.com.p.ontologytesting.model.ValidarTests;
+import java.util.List;
 
 /**
  *
@@ -43,7 +43,6 @@ import code.google.com.p.ontologytesting.model.ValidarTests;
  */
 public class GroupTestsJPanel extends javax.swing.JPanel {
 
-    private static boolean nombreVacio=false;
     private static ValidarTests validarTests;
     private static TestInstancesTFJPanel test;
     private static TestInstancesQueryJPanel test1;
@@ -55,87 +54,13 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static JPanel panelSat;
     private static DescripcionJPanel descPanel = null;
     private static TestInstancesTextJPanel texto = null;
-    public static ArrayList getInst() {
-        return inst;
-    }
-    public static ArrayList getRet() {
-        return ret;
-    }
-    public static ArrayList getReal() {
-        return real;
-    }
-    public static ArrayList getSat() {
-        return sat;
-    }
-    public static ArrayList getClas() {
-        return clas;
-    }
-    public static boolean getNoHayInstancias() {
-        return noHayInstancias;
-    }
-    public static void setNoHayInstancias(boolean aNoHayInstancias) {
-        noHayInstancias = aNoHayInstancias;
-    }
-    public static boolean isInstGuardado() {
-        return instGuardado;
-    }
-    public static void setInstGuardado(boolean aInstGuardado) {
-        instGuardado = aInstGuardado;
-    }
-    public static boolean isRetGuardado() {
-        return retGuardado;
-    }
-    public static void setRetGuardado(boolean aRetGuardado) {
-        retGuardado = aRetGuardado;
-    }
-    public static boolean isRealGuardado() {
-        return realGuardado;
-    }
-    public static void setRealGuardado(boolean aRealGuardado) {
-        realGuardado = aRealGuardado;
-    }
-    public static boolean isSatGuardado() {
-        return satGuardado;
-    }
-    public static void setSatGuardado(boolean aSatGuardado) {
-        satGuardado = aSatGuardado;
-    }
-    public static boolean isClasGuardado() {
-        return clasGuardado;
-    }
-    public static void setClasGuardado(boolean aClasGuardado) {
-        clasGuardado = aClasGuardado;
-    }
-    public static boolean getTestYaExiste() {
-        return testYaExiste;
-    }
-    public static void setTestYaExiste(boolean aTestYaExiste) {
-        testYaExiste = aTestYaExiste;
-    }
-
-    public static boolean getSinConsultas() {
-        return sinConsultas;
-    }
-
-    public static void setSinConsultas(boolean aSinConsultas) {
-        sinConsultas = aSinConsultas;
-    }
-    private static boolean noHayTest=false;
-
-    public static boolean getNoHayTest() {
-        return noHayTest;
-    }
-    public static void setNoHayTest(boolean b) {
-        noHayTest=b;
-    }
-    private boolean nombreTestsValidos=true;
-    private static boolean testsValidos=true;
-    private static boolean instTextName=true, retTextName=true, clasTextName=true,
-            realTextName=true, satTextName=true;
+    private boolean nombreTestsValidos;
+    private static boolean testsValidos;
+    private static boolean instTextName, retTextName, clasTextName,
+            realTextName, satTextName;
     private static int actualSubTabInst=0, actualSubTabRet=0, actualSubTabClas=0,
             actualSubTabSat=0, actualSubTabReal=0;
-    private static boolean validoInst=true,validoRet=true,validoClas=true,validoSat=true,
-            validoReal=true;
+    private static boolean validoInst,validoRet,validoClas,validoSat,validoReal;
     private static JPanel panelAyudaInst;
     private static int totalInst;
     private static JPanel panelAyudaClas;
@@ -146,87 +71,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static int totalRet;
     private static JPanel panelAyudaSat;
     private static int totalSat;
-    
     static final int desktopWidth = 750;
     static final int desktopHeight = 600;
     static JFrame frame;
-    private boolean nombreSparqlRep=false;
-
-    public static ScenarioTest getScenarioTest() {
-        return scenarioTest;
-    }
-    public static void setScenarioTest(ScenarioTest aScenarioTest) {
-        scenarioTest = aScenarioTest;
-    }
-    public static JPanel getPanelTree() {
-        return panelTree;
-    }
-    public static void setPanelTree(JPanel aPanelTree) {
-        panelTree = aPanelTree;
-    }
-
-    public static int getActualSubTabInst() {
-        return actualSubTabInst;
-    }
-
-    public static void setActualSubTabInst(int aActualSubTabInst) {
-        actualSubTabInst = aActualSubTabInst;
-    }
-
-    public static int getActualSubTabRet() {
-        return actualSubTabRet;
-    }
-
-    public static void setActualSubTabRet(int aActualSubTabRet) {
-        actualSubTabRet = aActualSubTabRet;
-    }
-
-    public static int getActualSubTabClas() {
-        return actualSubTabClas;
-    }
-
-    public static void setActualSubTabClas(int aActualSubTabClas) {
-        actualSubTabClas = aActualSubTabClas;
-    }
-
-    public static int getActualSubTabSat() {
-        return actualSubTabSat;
-    }
-
-    public static void setActualSubTabSat(int aActualSubTabSat) {
-        actualSubTabSat = aActualSubTabSat;
-    }
-
-    public static int getActualSubTabReal() {
-        return actualSubTabReal;
-    }
-
-    public static void setActualSubTabReal(int aActualSubTabReal) {
-        actualSubTabReal = aActualSubTabReal;
-    }
-    private HelpJDialog frameHelp;
-    public static boolean isState() {
-        return seleccionado;
-    }
-    public static void setState(boolean aState) {
-        seleccionado = aState;
-    }
-    public static boolean isNewState() {
-        return seleccionado;
-    }
-    public static void setNewState(boolean aState) {
-        seleccionado = aState;
-    }
-    public static boolean isDatosGuardados() {
-        return datosGuardados;
-    }
-    public static void setDatosGuardados(boolean aDatosGuardados) {
-        datosGuardados = aDatosGuardados;
-    }
-    public static OntologyTestResult getTestresult() {
-        return testresult;
-    }
-    private static boolean ambosNecesarios=false,sinConsultas=false;
+    private boolean nombreSparqlRep;
+    private static boolean ambosNecesarios,sinConsultas;
     private AddInstancesJPanel addInstances;
     public static boolean seleccionado;
     private static boolean datosGuardados;
@@ -236,19 +85,18 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static ScenarioTest scenarioTest;
     private static JPanel panelTree;
     private static int nameTest=0;
-    private static ArrayList inst,ret,real,sat,clas;
+    private static List inst,ret,real,sat,clas;
     private static boolean noHayInstancias;
-    private static boolean instGuardado=false,retGuardado=false,realGuardado=false,
-            satGuardado=false,clasGuardado=false;
-    private static boolean testYaExiste=false;
-    private static boolean instCompletado=false,retCompletado=false,realCompletado=false,
-            satCompletado=false,clasCompletado=false;
+    private static boolean instGuardado,retGuardado,realGuardado,satGuardado,clasGuardado;
+    private static boolean testYaExiste;
+    private static boolean instCompletado,retCompletado,realCompletado,satCompletado,clasCompletado;
     private static int varAux=0;
     private Component comp;
     private static int posicion;
     private static TestInstancesTFJPanel pInst,pSat,testTF;
     private static TestInstancesTextAreaJPanel pRet,pClas;
     private static TestInstancesQueryJPanel pReal;
+    private static List<QueryOntology> queryTest1,queryTest2,queryTest3,queryTest4,queryTest5;
     
     
     /** Creates new form GroupTestQueryJPanel */
@@ -347,7 +195,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         it = scenario.listIterator();
         while(it.hasNext()){
                 ScenarioTest s = (ScenarioTest) it.next();
-                ArrayList<QueryOntology> qO = s.getQueryTest();
+                List<QueryOntology> qO = s.getQueryTest();
                 
                 ListIterator qi;
                 qi = qO.listIterator();
@@ -391,8 +239,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
             decoder.close();    
         }catch(FileNotFoundException e){
-            /*JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo especificado.",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);*/
+            JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo especificado.",
+            "Warning Message",JOptionPane.WARNING_MESSAGE);
         } 
 
         if(instAyudaPanel.getComponentCount()<8){
@@ -540,7 +388,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
         );
         instAyudaPanelLayout.setVerticalGroup(
             instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -558,8 +406,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+                .addContainerGap())
         );
         opcionAyudaInstPanelLayout.setVerticalGroup(
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +422,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
         opcionTextInstPanelLayout.setHorizontalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addGap(0, 961, Short.MAX_VALUE)
         );
         opcionTextInstPanelLayout.setVerticalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,11 +435,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
         contentInstTabedPanelLayout.setHorizontalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 835, Short.MAX_VALUE)
+            .addGap(0, 1020, Short.MAX_VALUE)
             .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
-                    .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 966, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(54, Short.MAX_VALUE)))
         );
         contentInstTabedPanelLayout.setVerticalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,7 +587,7 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         test2ScrollPane.setViewportView(testRetPanel);
         testRetPanel.getAccessibleContext().setAccessibleName("1");
 
-        testsTabbedPane.addTab("Retrieval", test2ScrollPane);
+        testsTabbedPane.addTab("Recuperación", test2ScrollPane);
 
         test3ScrollPane.setToolTipText("Deduce dado un individuo, cual es la clase más exacta a la que pertenece.");
 
@@ -1301,12 +1149,11 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         setValidoRet(true);
         setValidoSat(true);
         setNoHayTest(false);
-        nombreVacio=false;
         varAux=0;
     }
      
     public boolean guardarDatos(){
-    Auxiliar auxiliar = new Auxiliar();  
+ 
     inicializarVariables();
     
     OntologyTestCase testcase = new OntologyTestCase();
@@ -1405,8 +1252,8 @@ private void tabbedPaneClasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 public static boolean hayInstanciasAsociadas(Instancias instancias){
 
-    ArrayList<ClassInstances> clasI = instancias.getClassInstances();
-    ArrayList<PropertyInstances> propI = instancias.getPropertyInstances();
+    List<ClassInstances> clasI = instancias.getClassInstances();
+    List<PropertyInstances> propI = instancias.getPropertyInstances();
     if(clasI.size()==0 && propI.size()==0){
         return false;
     }
@@ -1416,10 +1263,10 @@ public static boolean hayInstanciasAsociadas(Instancias instancias){
 
 public boolean isScenarioEmpty(ScenarioTest scenarioTest){
     
-    ArrayList<ClassInstances> classInstances = scenarioTest.getInstancias().getClassInstances();
-    ArrayList<PropertyInstances> propertyInstances = scenarioTest.getInstancias().getPropertyInstances();
-    ArrayList<QueryOntology> queryTest = scenarioTest.getQueryTest();
-    ArrayList<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
+    List<ClassInstances> classInstances = scenarioTest.getInstancias().getClassInstances();
+    List<PropertyInstances> propertyInstances = scenarioTest.getInstancias().getPropertyInstances();
+    List<QueryOntology> queryTest = scenarioTest.getQueryTest();
+    List<SparqlQueryOntology> sparqlQuerys = scenarioTest.getSparqlQuerys();
     if(classInstances.isEmpty() && propertyInstances.isEmpty() && 
         queryTest.isEmpty() && sparqlQuerys.isEmpty()){
         return true;
@@ -1433,51 +1280,41 @@ public static void formatoIncorrecto(int tab){
     if(tab==0){
         if(GroupTestsJPanel.getActualSubTabInst()==0){
             if(validar.comprovarErrorEnAyudaInst()==false){
-                ContentMainJFrame.setActual(1);
             }
         }else{
             if(validar.comprovarErrorQuerysInst()==false){
-                ContentMainJFrame.setActual(1);
             }
         }
     }else if(tab==1){
         if(GroupTestsJPanel.getActualSubTabRet()==0){
             if(validar.comprovarErrorEnAyudaRet()==false){
-                ContentMainJFrame.setActual(1);
             }
         }else{
             if(validar.comprovarErrorQuerysRet()==false){
-                ContentMainJFrame.setActual(1);
             }
         }
     }else if(tab==2){
         if(GroupTestsJPanel.getActualSubTabReal()==0){
             if(validar.comprovarErrorEnAyudaReal()==false){
-                ContentMainJFrame.setActual(1);
             }
         }else{
             if(validar.comprovarErrorQuerysReal()==false){
-                ContentMainJFrame.setActual(1);
             }
         }
     }else if(tab==3){
         if(GroupTestsJPanel.getActualSubTabSat()==0){
             if(validar.comprovarErrorEnAyudaSat()==false){
-                ContentMainJFrame.setActual(1);
             }
         }else{
             if(validar.comprovarErrorQuerysSat()==false){
-                ContentMainJFrame.setActual(1);
             }
         }
     }else if(tab==4){
         if(GroupTestsJPanel.getActualSubTabClas()==0){
             if(validar.comprovarErrorEnAyudaClas()==false){
-                ContentMainJFrame.setActual(1);
             } 
         }else{
             if(validar.comprovarErrorQuerysClas()==false){
-                ContentMainJFrame.setActual(1);
             }
         } 
     }
@@ -1487,13 +1324,13 @@ public static void asociarInstancias(int sel){
      
     inicializarVariables();
     ScenarioTest scenario = new ScenarioTest();
-    
+
     String nombreTest = "",descTest = "";
-    ArrayList<QueryOntology> queryTest1 = new ArrayList<QueryOntology>();
-    ArrayList<QueryOntology> queryTest2 = new ArrayList<QueryOntology>();
-    ArrayList<QueryOntology> queryTest3 = new ArrayList<QueryOntology>();
-    ArrayList<QueryOntology> queryTest4 = new ArrayList<QueryOntology>();
-    ArrayList<QueryOntology> queryTest5 = new ArrayList<QueryOntology>();
+    queryTest1 = new ArrayList<QueryOntology>();
+    queryTest2 = new ArrayList<QueryOntology>();
+    queryTest3 = new ArrayList<QueryOntology>();
+    queryTest4 = new ArrayList<QueryOntology>();
+    queryTest5 = new ArrayList<QueryOntology>();
     
     test = null;
     test1 = null;
@@ -2810,15 +2647,6 @@ public static void tratarNuevoTest(int sel){
                 setNoHayInstancias(true);
             }
         }
-        /*Component comp = null; 
-        if(getNoHayInstancias()==true){
-            int n = JOptionPane.showConfirmDialog(comp, "Este test no tiene " +
-                    "instancias asociadas. ¿Desea continuar?", "Warning Message"
-                    ,JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION){
-                setNoHayInstancias(true);
-            }
-        } */
 }
 
 public static boolean inListSparqlQuerys(SparqlQueryOntology query){
@@ -2832,79 +2660,6 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
     }
     return true;
 }
-
-
-public static JPanel getTestClasPanel() {
-    return testClasPanel;
-}
-
-public static JPanel getTestInstPanel() {
-    return testInstPanel;
-}
-
-public static JPanel getTestRealPanel() {
-    return testRealPanel;
-}
-
-public static JPanel getTestRetPanel() {
-    return testRetPanel;
-}
-
-public static JPanel getTestSatPanel() {
-    return testSatPanel;
-}
-    
-public static int getSelectedTabed(){
-    if(AddSPARQLJPanel.isSeleccionado()==true){
-        return 5;
-    }else{
-        return testsTabbedPane.getSelectedIndex();
-    }
-}
-
-public JPanel getContentPanel() {
-    return contentPanel;
-}
-
-    public static JPanel getClasAyudaPanel() {
-        return clasAyudaPanel;
-    }
-
-    public static JPanel getInstAyudaPanel() {
-        return instAyudaPanel;
-    }
-
-    public static JPanel getRealAyudaPanel() {
-        return realAyudaPanel;
-    }
-
-    public static JPanel getRetAyudaPanel() {
-        return retAyudaPanel;
-    }
-
-    public static JPanel getSatAyudaPanel() {
-        return satAyudaPanel;
-    }
-
-    public static int getTabbedPaneClas() {
-        return tabbedPaneClas.getSelectedIndex();
-    }
-    
-    public static int getTabbedPaneInst() {
-        return tabbedPaneInst.getSelectedIndex();
-    }
-
-    public static int getTabbedPaneReal() {
-        return tabbedPaneReal.getSelectedIndex();
-    }
-
-    public static int getTabbedPaneRet() {
-        return tabbedPaneRet.getSelectedIndex();
-    }
-
-    public static int getTabbedPaneSat() {
-        return tabbedPaneSat.getSelectedIndex();
-    }
 
     public void copiarDeAyudaATexto(int tab){
         
@@ -2935,7 +2690,6 @@ public JPanel getContentPanel() {
         if(tab==0){
             for(int i=1;i<totalInst;i++){
                 test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
-                if(test.getBorrado()==false){
                     if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
                         String query = test.getQuery();
                         String resExpT = test.isTestTrue();
@@ -2960,9 +2714,6 @@ public JPanel getContentPanel() {
                             }
                         } 
                     }
-                }else{
-                    test.remove(i);
-                }
             }
             t = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
             t.setConsultaQuery(conjuntoQuerysInst);
@@ -2980,7 +2731,6 @@ public JPanel getContentPanel() {
         }else if(tab==1){
             for(int i=1;i<totalRet;i++){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
-                if(test2.getBorrado()==false){
                     if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
                         String query = test2.getQuery();
                         String queryExp = test2.getQueryResult();
@@ -3017,9 +2767,6 @@ public JPanel getContentPanel() {
                             }
                         } 
                     }
-                }else{
-                    test2.remove(i);
-                }
             }
             t = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
             t.setConsultaQuery(conjuntoQuerysRet);
@@ -3034,7 +2781,6 @@ public JPanel getContentPanel() {
         }else if(tab==2){
             for(int i=1;i<totalReal;i++){
                 test1 = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
-                if(test1.getBorrado()==false){
                     if(!test1.getQuery().equals("") || !test1.getQueryResult().equals("")){
                         String query = test1.getQuery();
                         String queryExp = test1.getQueryResult();
@@ -3058,9 +2804,6 @@ public JPanel getContentPanel() {
                             }
                         } 
                     }
-                }else{
-                    test1.remove(i);
-                }
             }
             t = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
             t.setConsultaQuery(conjuntoQuerysReal);
@@ -3075,7 +2818,6 @@ public JPanel getContentPanel() {
         }else if(tab==3){
             for(int i=1;i<totalSat;i++){
                 test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(i);
-                if(test.getBorrado()==false){
                     if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
                         String query = test.getQuery();
                         String resExpT = test.isTestTrue();
@@ -3100,9 +2842,6 @@ public JPanel getContentPanel() {
                             }
                         } 
                     }
-                }else{
-                    test.remove(i);
-                }
             }
             t = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
             t.setConsultaQuery(conjuntoQuerysSat);
@@ -3120,7 +2859,6 @@ public JPanel getContentPanel() {
         }else if(tab==4){
             for(int i=1;i<totalClas;i++){
                 test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(i);
-                if(test2.getBorrado()==false){
                     if(!test2.getQuery().equals("") || !test2.getQueryResult().equals("")){
                         String query = test2.getQuery();
                         String queryExp = test2.getQueryResult();
@@ -3157,9 +2895,6 @@ public JPanel getContentPanel() {
                             }
                         } 
                     }
-                }else{
-                    test2.remove(i);
-                }
             }
             t = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
             t.setConsultaQuery(conjuntoQuerysClas);
@@ -3557,6 +3292,227 @@ public JPanel getContentPanel() {
 
     public static void setAmbosNecesarios(boolean a) {
         ambosNecesarios = a;
+    }
+    
+    public static List getInst() {
+        return inst;
+    }
+    public static List getRet() {
+        return ret;
+    }
+    public static List getReal() {
+        return real;
+    }
+    public static List getSat() {
+        return sat;
+    }
+    public static List getClas() {
+        return clas;
+    }
+    public static boolean getNoHayInstancias() {
+        return noHayInstancias;
+    }
+    public static void setNoHayInstancias(boolean aNoHayInstancias) {
+        noHayInstancias = aNoHayInstancias;
+    }
+    public static boolean isInstGuardado() {
+        return instGuardado;
+    }
+    public static void setInstGuardado(boolean aInstGuardado) {
+        instGuardado = aInstGuardado;
+    }
+    public static boolean isRetGuardado() {
+        return retGuardado;
+    }
+    public static void setRetGuardado(boolean aRetGuardado) {
+        retGuardado = aRetGuardado;
+    }
+    public static boolean isRealGuardado() {
+        return realGuardado;
+    }
+    public static void setRealGuardado(boolean aRealGuardado) {
+        realGuardado = aRealGuardado;
+    }
+    public static boolean isSatGuardado() {
+        return satGuardado;
+    }
+    public static void setSatGuardado(boolean aSatGuardado) {
+        satGuardado = aSatGuardado;
+    }
+    public static boolean isClasGuardado() {
+        return clasGuardado;
+    }
+    public static void setClasGuardado(boolean aClasGuardado) {
+        clasGuardado = aClasGuardado;
+    }
+    public static boolean getTestYaExiste() {
+        return testYaExiste;
+    }
+    public static void setTestYaExiste(boolean aTestYaExiste) {
+        testYaExiste = aTestYaExiste;
+    }
+
+    public static boolean getSinConsultas() {
+        return sinConsultas;
+    }
+
+    public static void setSinConsultas(boolean aSinConsultas) {
+        sinConsultas = aSinConsultas;
+    }
+    private static boolean noHayTest=false;
+
+    public static boolean getNoHayTest() {
+        return noHayTest;
+    }
+    public static void setNoHayTest(boolean b) {
+        noHayTest=b;
+    }
+    
+    public static ScenarioTest getScenarioTest() {
+        return scenarioTest;
+    }
+    public static void setScenarioTest(ScenarioTest aScenarioTest) {
+        scenarioTest = aScenarioTest;
+    }
+    public static JPanel getPanelTree() {
+        return panelTree;
+    }
+    public static void setPanelTree(JPanel aPanelTree) {
+        panelTree = aPanelTree;
+    }
+
+    public static int getActualSubTabInst() {
+        return actualSubTabInst;
+    }
+
+    public static void setActualSubTabInst(int aActualSubTabInst) {
+        actualSubTabInst = aActualSubTabInst;
+    }
+
+    public static int getActualSubTabRet() {
+        return actualSubTabRet;
+    }
+
+    public static void setActualSubTabRet(int aActualSubTabRet) {
+        actualSubTabRet = aActualSubTabRet;
+    }
+
+    public static int getActualSubTabClas() {
+        return actualSubTabClas;
+    }
+
+    public static void setActualSubTabClas(int aActualSubTabClas) {
+        actualSubTabClas = aActualSubTabClas;
+    }
+
+    public static int getActualSubTabSat() {
+        return actualSubTabSat;
+    }
+
+    public static void setActualSubTabSat(int aActualSubTabSat) {
+        actualSubTabSat = aActualSubTabSat;
+    }
+
+    public static int getActualSubTabReal() {
+        return actualSubTabReal;
+    }
+
+    public static void setActualSubTabReal(int aActualSubTabReal) {
+        actualSubTabReal = aActualSubTabReal;
+    }
+    private HelpJDialog frameHelp;
+    public static boolean isState() {
+        return seleccionado;
+    }
+    public static void setState(boolean aState) {
+        seleccionado = aState;
+    }
+    public static boolean isNewState() {
+        return seleccionado;
+    }
+    public static void setNewState(boolean aState) {
+        seleccionado = aState;
+    }
+    public static boolean isDatosGuardados() {
+        return datosGuardados;
+    }
+    public static void setDatosGuardados(boolean aDatosGuardados) {
+        datosGuardados = aDatosGuardados;
+    }
+    public static OntologyTestResult getTestresult() {
+        return testresult;
+    }
+    
+        public static JPanel getTestClasPanel() {
+        return testClasPanel;
+    }
+
+    public static JPanel getTestInstPanel() {
+        return testInstPanel;
+    }
+
+    public static JPanel getTestRealPanel() {
+        return testRealPanel;
+    }
+
+    public static JPanel getTestRetPanel() {
+        return testRetPanel;
+    }
+
+    public static JPanel getTestSatPanel() {
+        return testSatPanel;
+    }
+
+    public static int getSelectedTabed(){
+        if(AddSPARQLJPanel.isSeleccionado()==true){
+            return 5;
+        }else{
+            return testsTabbedPane.getSelectedIndex();
+        }
+    }
+
+    public JPanel getContentPanel() {
+        return contentPanel;
+    }
+
+    public static JPanel getClasAyudaPanel() {
+        return clasAyudaPanel;
+    }
+
+    public static JPanel getInstAyudaPanel() {
+        return instAyudaPanel;
+    }
+
+    public static JPanel getRealAyudaPanel() {
+        return realAyudaPanel;
+    }
+
+    public static JPanel getRetAyudaPanel() {
+        return retAyudaPanel;
+    }
+
+    public static JPanel getSatAyudaPanel() {
+        return satAyudaPanel;
+    }
+
+    public static int getTabbedPaneClas() {
+        return tabbedPaneClas.getSelectedIndex();
+    }
+    
+    public static int getTabbedPaneInst() {
+        return tabbedPaneInst.getSelectedIndex();
+    }
+
+    public static int getTabbedPaneReal() {
+        return tabbedPaneReal.getSelectedIndex();
+    }
+
+    public static int getTabbedPaneRet() {
+        return tabbedPaneRet.getSelectedIndex();
+    }
+
+    public static int getTabbedPaneSat() {
+        return tabbedPaneSat.getSelectedIndex();
     }
     
 }

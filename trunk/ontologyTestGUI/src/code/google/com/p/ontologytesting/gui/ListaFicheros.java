@@ -14,7 +14,7 @@ import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -25,12 +25,6 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 
 public class ListaFicheros extends JPanel implements ListSelectionListener {
 
-    public static String getPathFicheroAbrir() {
-        return pathFicheroAbrir;
-    }
-    public static void setPathFicheroAbrir(String aPathFicheroAbrir) {
-        pathFicheroAbrir = aPathFicheroAbrir;
-    } 
     private JTextArea descripcion = new JTextArea();
     private JList list;
     private JSplitPane splitPane;
@@ -40,7 +34,7 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     private static String pathFicheroAbrir;
     
     public ListaFicheros(String[] listaFicheros) {
-
+        
         list = new JList(listaFicheros);
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         list.setSelectedIndex(0);
@@ -89,8 +83,8 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
                 descripcion.setEditable(false);         
             }else if(AbrirTestsJDialog.getFicherosComboBox()==1){ 
                 Instancias inst = (Instancias) decoder.readObject();
-                ArrayList<ClassInstances> clasInst = inst.getClassInstances();
-                ArrayList<PropertyInstances> propInst = inst.getPropertyInstances();
+                List<ClassInstances> clasInst = inst.getClassInstances();
+                List<PropertyInstances> propInst = inst.getPropertyInstances();
                 ListIterator cI,pI;
                 cI = clasInst.listIterator();
                 pI = propInst.listIterator();
@@ -127,5 +121,13 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     public JSplitPane getSplitPane(){
         return splitPane;
     }
+    
+    public static String getPathFicheroAbrir() {
+        return pathFicheroAbrir;
+    }
+    
+    public static void setPathFicheroAbrir(String aPathFicheroAbrir) {
+        pathFicheroAbrir = aPathFicheroAbrir;
+    } 
 
 }

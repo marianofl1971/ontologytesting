@@ -14,11 +14,8 @@ import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -34,6 +31,7 @@ import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.JEditorPane;
 
 /**
@@ -42,74 +40,37 @@ import javax.swing.JEditorPane;
  */
 public class AddInstancesJPanel extends javax.swing.JPanel {
 
-    public static boolean isStateAsociar() {
-        return stateAsociar;
-    }
-    public static void setStateAsociar(boolean aStateAsociar) {
-        stateAsociar = aStateAsociar;
-    }
-    public static boolean isStateExaminar() {
-        return stateExaminar;
-    }
-    public static void setStateExaminar(boolean aStateExaminar) {
-        stateExaminar = aStateExaminar;
-    }
-    public static boolean isStateSeeInst() {
-        return stateSeeInst;
-    }
-    public static void setStateSeeInst(boolean aStateSeeInst) {
-        stateSeeInst = aStateSeeInst;
-    }
     private static boolean stateNuevo;
-
-    public static boolean isStateNuevo() {
-        return stateNuevo;
-    }
-    public static void setStateNuevo(boolean aStateNuevo) {
-        stateNuevo = aStateNuevo;
-    }
     private static String[] ficheros;
     private static String pathFichero;
-    
-    public static String[] getFicheros() {
-        return ficheros;
-    }
-    public static void setFicheros(String[] aFicheros) {
-        ficheros = aFicheros;
-    }
-    public static String getPathFichero() {
-        return pathFichero;
-    }
-    public static void setPathFichero(String aPathFichero) {
-        pathFichero = aPathFichero;
-    }
     private static boolean stateAbrirTest;
-    public AddInstancesClasPropJDialog addInst;  
+    private AddInstancesClasPropJDialog addInst;  
     private JFileChooser filechooser;
     private Component frame;
     private JFrame parent;
     private int index;
     private GroupTestsJPanel jpanel;
-    static ArrayList<ScenarioTest> scte;
     private static boolean stateAsociar;
     private static boolean stateExaminar;
     private static boolean stateSeeInst;
     private XMLDecoder decoder;
-    private String nameFile="";
+    private String nameFile;
     private boolean testCompatible=true;
     private Component comp;
     private static String archivoSeleccionado;
-    private boolean noHayInsatncias=false,resultadoValido=true,nombreVacio=false,
-            testYaExiste=false,ambosNecesarios=false,sinConsultas=false;
+    private boolean noHayInsatncias,resultadoValido,nombreVacio,
+            testYaExiste,ambosNecesarios,sinConsultas;
     private ScenarioTest scenarioSparql;
     private ValidarTests validarTests;
     private Instancias instancias;
-    private ArrayList<ClassInstances> vaciaClase;
-    private ArrayList<PropertyInstances> vaciaPropiedad;
-    private ArrayList<SparqlQueryOntology> listSparqlQuerys;
-    private JenaInterface jenaInterface = new JenaInterface();   
+    private List<ClassInstances> vaciaClase;
+    private List<PropertyInstances> vaciaPropiedad;
+    private List<SparqlQueryOntology> listSparqlQuerys;
+    private JenaInterface jenaInterface;  
     private Jena jena;
     private VistaTestJFrame fram;
+    private List<ClassInstances> clasInst;
+    private List<PropertyInstances> propInst; 
     
     /** Creates new form AddInstancesJPanel */
     public AddInstancesJPanel(GroupTestsJPanel panel) {
@@ -142,6 +103,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Seleccione las instancias que desea asociar:");
 
+        examinarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
         examinarButton.setText("Examinar");
         examinarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +113,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Crear y asociar nuevas instancias:");
 
+        asociarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_edit.png"))); // NOI18N
         asociarButton.setText("Asociar");
         asociarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +121,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        seeAsociadasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/eye.png"))); // NOI18N
         seeAsociadasButton.setText("Ver instancias asociadas");
         seeAsociadasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +129,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        SaveAndNewButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
         SaveAndNewButton.setText("Añadir y Crear Nuevo");
         SaveAndNewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +137,15 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
-        addTestExistButton.setText("Añadir Test Existente");
+        addTestExistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_white_magnify.png"))); // NOI18N
+        addTestExistButton.setText("Abrir Test Existente");
         addTestExistButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addTestExistButtonActionPerformed(evt);
             }
         });
 
+        seeTestButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/eye.png"))); // NOI18N
         seeTestButton.setText("Ver Tests Guardados");
         seeTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +153,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
+        seeOntologyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/eye.png"))); // NOI18N
         seeOntologyButton.setText("Ver Ontologia");
         seeOntologyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,9 +170,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 229, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(635, Short.MAX_VALUE))
+                        .addContainerGap(671, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
                         .add(339, 339, 339))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -220,7 +188,7 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
                         .addContainerGap())
                     .add(layout.createSequentialGroup()
                         .add(asociarButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 650, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 646, Short.MAX_VALUE)
                         .add(SaveAndNewButton)
                         .addContainerGap())))
         );
@@ -258,8 +226,8 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
    instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
    int var=0;
    if(AddSPARQLJPanel.isSeleccionado()==false){
-        ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-        ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();        
+        clasInst = new ArrayList<ClassInstances>();
+        propInst = new ArrayList<PropertyInstances>();        
         clasInst = instancias.getClassInstances();
         propInst = instancias.getPropertyInstances();
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
@@ -275,8 +243,8 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             addInst.setVisible(true);
         }
    }else{
-        ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-        ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
+        clasInst = new ArrayList<ClassInstances>();
+        propInst = new ArrayList<PropertyInstances>();
         clasInst = instancias.getClassInstances();
         propInst = instancias.getPropertyInstances();
         if(!clasInst.isEmpty() || !propInst.isEmpty()){
@@ -322,8 +290,8 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
     AddInstancesJPanel.setStateExaminar(false);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(true);
-    ArrayList<ClassInstances> clasInst = new ArrayList<ClassInstances>();
-    ArrayList<PropertyInstances> propInst = new ArrayList<PropertyInstances>();
+    clasInst = new ArrayList<ClassInstances>();
+    propInst = new ArrayList<PropertyInstances>();
     
     instancias = ContentMainJFrame.getInstancias().get(GroupTestsJPanel.getSelectedTabed());
     clasInst = instancias.getClassInstances();
@@ -347,7 +315,7 @@ private void seeAsociadasButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveAndNewButtonActionPerformed
 // TODO add your handling code here:
-    
+    jenaInterface = new JenaInterface(); 
     jena = jenaInterface.getJena();
     noHayInsatncias=false;
     resultadoValido=true;
@@ -406,7 +374,7 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
                             listSparqlQuerys.add(AddSPARQLJPanel.getPosListQuerysSel(),query);
                         }
                     }
-                    ArrayList<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
+                    List<SparqlQueryOntology> querys = AddSPARQLJPanel.getListSparqlQuerys();
                         for(int i=0; i<querys.size();i++){
                             if(!querys.get(i).getQuerySparql().equals("") && !querys.get(i).getResultexpected().equals("")){
                                 if(validarTests.validarSparqlTest(querys.get(i).getResultexpected())==false){
@@ -449,8 +417,8 @@ private void SaveAndNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestExistButtonActionPerformed
 // TODO add your handling code here:
     if(MainJPanel.getSimpleTestSelect()==true){
-    //System.out.println("archivo confi: "+AlmacenPropiedadesConfig.getPropiedad("simpleTests"));
-    //System.out.println("clase: "+Configuration.getPathTestSimples());
+    System.out.println("archivo confi: "+AlmacenPropiedadesConfig.getPropiedad("simpleTests"));
+    System.out.println("clase: "+Configuration.getPathTestSimples());
     filechooser = new JFileChooser(Configuration.getPathTestSimples());
     setStateAbrirTest(true);
     
@@ -490,7 +458,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             String nombre = s.getNombre();
             String descrip = s.getDescripcion();  
             String tab = s.getTestName();
-            ArrayList<QueryOntology> qO = s.getQueryTest(); 
+            List<QueryOntology> qO = s.getQueryTest(); 
 
             ListIterator qi;
             qi = qO.listIterator();
@@ -722,7 +690,7 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             ScenarioTest s = (ScenarioTest) decoder.readObject();
             String nombre = s.getNombre();
             String descrip = s.getDescripcion();  
-            ArrayList<SparqlQueryOntology> qO = s.getSparqlQuerys();
+            List<SparqlQueryOntology> qO = s.getSparqlQuerys();
 
             int ind = GroupTestsJPanel.getSelectedTabed();
             ContentMainJFrame.getInstancias().set(ind, s.getInstancias());
@@ -736,8 +704,6 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
             
             int tam = qO.size();
             if(tam >=2){
-                AddSPARQLJPanel.setContadorAnt(-1);
-                AddSPARQLJPanel.setContadorSig(1);
                 AddSPARQLJPanel.setSigQueryButton(true);
             }
             
@@ -752,9 +718,14 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void seeTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeTestButtonActionPerformed
 // TODO add your handling code here:
+    try{
     AbrirTestsJDialog testDialog = new AbrirTestsJDialog(parent,true);
     testDialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     testDialog.setVisible(true);
+    }catch(Exception ex){
+        JOptionPane.showMessageDialog(frame,"No se puede abrir el directorio de archivos",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }
 
 }//GEN-LAST:event_seeTestButtonActionPerformed
 
@@ -883,6 +854,45 @@ public void setGroupPanel(GroupTestsJPanel jpanel){
 
     public static void setArchivoSeleccionado(String archivo) {
         archivoSeleccionado = archivo;
+    }
+    
+    public static boolean isStateAsociar() {
+        return stateAsociar;
+    }
+    public static void setStateAsociar(boolean aStateAsociar) {
+        stateAsociar = aStateAsociar;
+    }
+    public static boolean isStateExaminar() {
+        return stateExaminar;
+    }
+    public static void setStateExaminar(boolean aStateExaminar) {
+        stateExaminar = aStateExaminar;
+    }
+    public static boolean isStateSeeInst() {
+        return stateSeeInst;
+    }
+    public static void setStateSeeInst(boolean aStateSeeInst) {
+        stateSeeInst = aStateSeeInst;
+    }
+
+    public static boolean isStateNuevo() {
+        return stateNuevo;
+    }
+    public static void setStateNuevo(boolean aStateNuevo) {
+        stateNuevo = aStateNuevo;
+    }
+    
+    public static String[] getFicheros() {
+        return ficheros;
+    }
+    public static void setFicheros(String[] aFicheros) {
+        ficheros = aFicheros.clone();
+    }
+    public static String getPathFichero() {
+        return pathFichero;
+    }
+    public static void setPathFichero(String aPathFichero) {
+        pathFichero = aPathFichero;
     }
 
 }

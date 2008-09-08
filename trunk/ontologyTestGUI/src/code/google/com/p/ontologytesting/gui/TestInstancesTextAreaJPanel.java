@@ -18,7 +18,6 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog frameComent;
     private Frame frame;
-    private boolean borrado=false,duplicado=false;
     private int posicion;
     
     /** Creates new form TextInstancesTextAreaJPanel */
@@ -74,7 +73,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(resultTextArea);
 
-        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment.gif"))); // NOI18N
+        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
         comentarioButton.setText("Comentario");
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +82,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.gif"))); // NOI18N
+        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         borrarButton.setText("Borrar");
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -140,9 +139,6 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     this.setVisible(false);
     int sel = GroupTestsJPanel.getSelectedTabed();
-    /*String query = this.getQuery();
-    String result = this.getQueryResult();
-    String coment = this.frameComent.getComent();*/
     if(sel==1){
         GroupTestsJPanel.getRetAyudaPanel().remove(this);
         GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
@@ -218,22 +214,6 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
     public javax.swing.JTextArea getResultTextArea() {
         return resultTextArea;
-    }
-
-    public boolean getBorrado() {
-        return borrado;
-    }
-
-    public void setBorrado(boolean borrado) {
-        this.borrado = borrado;
-    }
-
-    public boolean getDuplicado() {
-        return duplicado;
-    }
-
-    public void setDuplicado(boolean duplicado) {
-        this.duplicado = duplicado;
     }
 
     public int getPosicion() {

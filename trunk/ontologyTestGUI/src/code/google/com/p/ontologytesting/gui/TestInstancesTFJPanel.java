@@ -7,13 +7,9 @@
 package code.google.com.p.ontologytesting.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Frame;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -22,17 +18,10 @@ import javax.swing.WindowConstants;
  */
 public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
-    public int getPosicion() {
-        return posicion;
-    }
-    public void setPosicion(int aPosicion) {
-        posicion = aPosicion;
-    }
     private AddComentJDialog frameComent;
     private Frame frame;
-    private boolean borrado=false,duplicado=false;
     private int posicion;
-    private static final ArrayList<TestInstancesTFJPanel> listaContenido = new ArrayList<TestInstancesTFJPanel>();;
+    private static ArrayList<TestInstancesTFJPanel> listaContenido;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel(int i) {
@@ -97,7 +86,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
         falseRadioButton.setText("False");
 
-        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment.gif"))); // NOI18N
+        comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
         comentarioButton.setText("Comentario");
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +95,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
             }
         });
 
-        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.gif"))); // NOI18N
+        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         borrarButton.setText("Borrar");
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +165,7 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
+    listaContenido = new ArrayList<TestInstancesTFJPanel>();
     int sel = GroupTestsJPanel.getSelectedTabed();
     String query = this.getQuery();
     String result = this.isTestTrue();
@@ -234,38 +224,6 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JTextField queryTextField;
     private javax.swing.JRadioButton trueRadioButton;
     // End of variables declaration//GEN-END:variables
-
-    public void copiarComponente(int index){
-        
-        /*JPanel p = GroupTestsJPanel.getInstAyudaPanel();
-        TestInstancesTFJPanel sig = (TestInstancesTFJPanel)  p.getComponent(index+1);
-        String query = this.getQuery();
-        String result = this.isTestTrue();
-        String testComent = this.frameComent.getComent();
-        sig.setQuery(query);
-        if(result.equals("true")){
-            sig.setTrueTest(true);
-        }else{
-            sig.setFalseTest(true);
-        }
-        sig.getComment().setComent(testComent);
-        sig.setPosicion(index+1);
-        for(int i=index+1;i<count;i++){
-            TestInstancesTFJPanel sigBis = (TestInstancesTFJPanel)  panelCopia.getComponent(i);
-            TestInstancesTFJPanel sigAux = (TestInstancesTFJPanel) p.getComponent(i+1);
-            String queryBis = sigBis.getQuery();
-            String resultBis = sigBis.isTestTrue();
-            String testComentBis = sigBis.frameComent.getComent();
-            sigAux.setQuery(queryBis);
-            if(resultBis.equals("true")){
-                sigAux.setTrueTest(true);
-            }else{
-                sigAux.setFalseTest(true);
-            }
-            sigAux.getComment().setComent(testComentBis);
-            sigAux.setPosicion(i+1); 
-        }*/
-    }
     
     public void setQuery(String query){
         getQueryTextField().setText(query);
@@ -310,20 +268,12 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     public javax.swing.JTextField getQueryTextField() {
         return queryTextField;
     }
-
-    public boolean getBorrado() {
-        return borrado;
-    }
-
-    public void setBorrado(boolean borrado) {
-        this.borrado = borrado;
+    
+    public int getPosicion() {
+        return posicion;
     }
     
-    public boolean getDuplicado() {
-        return duplicado;
-    }
-
-    public void setDuplicado(boolean duplicado) {
-        this.duplicado = duplicado;
+    public void setPosicion(int aPosicion) {
+        posicion = aPosicion;
     }
 }

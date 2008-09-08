@@ -23,24 +23,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
 public class TreeResults extends JPanel {
 
-    public static OntologyTestFailure getActualScenarioFailure() {
-        return actualScenarioFailure;
-    }
-    public static void setActualScenarioFailure(OntologyTestFailure aActualScenarioFailure) {
-        actualScenarioFailure = aActualScenarioFailure;
-    }    
     private JEditorPane htmlPane;
     private static boolean DEBUG = false;
-    private DefaultMutableTreeNode inst=null, ret=null, clas=null, sat=null, 
-            real=null, sparql=null;
-    private DefaultMutableTreeNode inst_hijo=null, ret_hijo=null, clas_hijo=null, 
-            sat_hijo=null, real_hijo=null, sparql_hijo=null;
+    private DefaultMutableTreeNode inst,ret,clas,sat,real,sparql;
+    private DefaultMutableTreeNode inst_hijo,ret_hijo,clas_hijo, sat_hijo,real_hijo,sparql_hijo;
     private static OntologyTestFailure actualScenarioFailure;
 
     public TreeResults(final OntologyTestResult testresult) {
@@ -118,8 +111,8 @@ public class TreeResults extends JPanel {
         ListIterator liFailures,liSparql;
         String resultado="";
         int var=0;
-        ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
-        ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();   
+        List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
+        List<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();   
         
         liFailures = failures.listIterator();
         liSparql = failuresSparql.listIterator(); 
@@ -159,13 +152,26 @@ public class TreeResults extends JPanel {
     
     private void createNodes(DefaultMutableTreeNode top, OntologyTestResult testresult) {
         
-        ListIterator liFailures,liSparql, liPassedQuery, liPassedSparql;
-        ArrayList<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
-        ArrayList<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
-        ArrayList<OntologyTestPassed> passedTests = testresult.getOntologyTestPassedQuery();
-        ArrayList<OntologyTestPassed> passedTestsSparql = testresult.getOntologyTestPassedSparql();
+        inst=null;
+        ret=null;
+        clas=null;
+        sat=null;
+        real=null; 
+        sparql=null;
+        inst_hijo=null;
+        ret_hijo=null;
+        clas_hijo=null;
+        sat_hijo=null;
+        real_hijo=null;
+        sparql_hijo=null;
         
-        ArrayList<String> list_clas = new ArrayList<String>(), list_ret = new ArrayList<String>(), 
+        ListIterator liFailures,liSparql, liPassedQuery, liPassedSparql;
+        List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
+        List<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();
+        List<OntologyTestPassed> passedTests = testresult.getOntologyTestPassedQuery();
+        List<OntologyTestPassed> passedTestsSparql = testresult.getOntologyTestPassedSparql();
+        
+        List<String> list_clas = new ArrayList<String>(), list_ret = new ArrayList<String>(), 
                 list_inst = new ArrayList<String>(), list_sat = new ArrayList<String>(), 
                 list_real = new ArrayList<String>(),list_sparql = new ArrayList<String>();
         liFailures = failures.listIterator();
@@ -431,4 +437,12 @@ public class TreeResults extends JPanel {
         }
         }
     }
+    
+    public static OntologyTestFailure getActualScenarioFailure() {
+        return actualScenarioFailure;
+    }
+    
+    public static void setActualScenarioFailure(OntologyTestFailure aActualScenarioFailure) {
+        actualScenarioFailure = aActualScenarioFailure;
+    }   
 }

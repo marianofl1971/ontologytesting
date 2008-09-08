@@ -31,7 +31,7 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
         AddInstancesJPanel.setPathFichero(Configuration.getPathTestSimples());
         dir = new File(Configuration.getPathTestSimples());
         AddInstancesJPanel.setFicheros(dir.list());
-        //Aquí pondría la ruta de configuración creada por el usuario
+
         ficherosComboBox.addItem("Simple Tests");
         ficherosComboBox.addItem("Instancias");
         ficherosComboBox.addItem("Sparql Tests");

@@ -10,6 +10,7 @@
 package code.google.com.p.ontologytesting.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,10 +18,10 @@ import java.util.ArrayList;
  */
 public class OntologyTestResult extends Object{
 
-    protected ArrayList<OntologyTestFailure> ontologyfailuresquerys;
-    protected ArrayList<OntologyTestFailure> ontologyfailuressparql;
-    protected ArrayList<OntologyTestPassed> ontologypassedquerys;
-    protected ArrayList<OntologyTestPassed> ontologypassedsparql;
+    protected List<OntologyTestFailure> ontologyfailuresquerys;
+    protected List<OntologyTestFailure> ontologyfailuressparql;
+    protected List<OntologyTestPassed> ontologypassedquerys;
+    protected List<OntologyTestPassed> ontologypassedsparql;
     
     public OntologyTestResult(){
         ontologyfailuresquerys = new ArrayList<OntologyTestFailure>();
@@ -37,7 +38,7 @@ public class OntologyTestResult extends Object{
     }
     
     public void addOntologyFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology sparqlquery, 
-            ArrayList<ExecQuerySparql> resEspe, ArrayList<ExecQuerySparql> resObte){
+            List<ExecQuerySparql> resEspe, List<ExecQuerySparql> resObte){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
         ontologytestfailure.addOntologyTestFailureSparql(testNameUsuario, testName,sparqlquery,resEspe,resObte);
@@ -56,46 +57,22 @@ public class OntologyTestResult extends Object{
         ontologypassedsparql.add(ontologytestpassedsparql);
     }
     
-    public ArrayList<OntologyTestFailure> getOntologyTestFailureQuery(){
+    public List<OntologyTestFailure> getOntologyTestFailureQuery(){
         return this.ontologyfailuresquerys;
     }
    
-    public ArrayList<OntologyTestFailure> getOntologyTestFailureSparql(){
+    public List<OntologyTestFailure> getOntologyTestFailureSparql(){
         return this.ontologyfailuressparql;
     }
     
-    public ArrayList<OntologyTestPassed> getOntologyTestPassedQuery(){
+    public List<OntologyTestPassed> getOntologyTestPassedQuery(){
         return this.ontologypassedquerys;
     }
     
-    public ArrayList<OntologyTestPassed> getOntologyTestPassedSparql(){
+    public List<OntologyTestPassed> getOntologyTestPassedSparql(){
         return this.ontologypassedsparql;
     }
     
-    public int ontologyFailuresCountQuery() {
-    
-         return ontologyfailuresquerys.size();
-    }
-    
-     public int ontologyFailuresCountSparql() {
-    
-         return ontologyfailuressparql.size();
-    }
-
-    public boolean wasSuccessfulOntologyQuery() {
-    
-         return ontologyFailuresCountQuery() == 0;
-    }
-    
-    public boolean wasSuccessfulOntologySparql() {
-    
-         return ontologyFailuresCountSparql() == 0;
-    }
-    
-    public void createFileResults(ArrayList<OntologyTestFailure> ontologyfailures){
-    
-    }
-        
 }
     
 

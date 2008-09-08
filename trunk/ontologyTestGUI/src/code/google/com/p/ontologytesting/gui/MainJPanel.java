@@ -25,54 +25,15 @@ import javax.swing.WindowConstants;
  */
 public class MainJPanel extends javax.swing.JPanel {
 
-    public static String getFisicalOntologyTextField() {
-        return fisicalOntologyTextField.getText();
-    }
-    public static String getNamespaceOntologyTextField() {
-        return namespaceOntologyTextField.getText();
-    }
-    public static boolean isSeleccionado() {
-        return seleccionado;
-    }
-    public static void setSeleccionado(boolean aSeleccionado) {
-        seleccionado = aSeleccionado;
-    }
-    public static CollectionTest getCollectionTest() {
-        return collectionTest;
-    }
-    public static void setCollectionTest(CollectionTest aCollectionTest) {
-        collectionTest = aCollectionTest;
-    }
+    
     private static CollectionTest collectionTest;
-    private static boolean simpleTestSelect=false, sparqlTestsSelect=false,
-            instancesSelect=false;
-
-    public static boolean getSimpleTestSelect() {
-        return simpleTestSelect;
-    }
-
-    public static void setSimpleTestSelect(boolean aSimpleTestSelect) {
-        simpleTestSelect = aSimpleTestSelect;
-    }
-
-    public static boolean getSparqlTestsSelect() {
-        return sparqlTestsSelect;
-    }
-    public static void setSparqlTestsSelect(boolean aSparqlTestsSelect) {
-        sparqlTestsSelect = aSparqlTestsSelect;
-    }
-    public static boolean getInstancesSelect() {
-        return instancesSelect;
-    }
-    public static void setInstancesSelect(boolean aInstancesSelect) {
-        instancesSelect = aInstancesSelect;
-    }
-    Frame parent;
+    private static boolean simpleTestSelect=false, sparqlTestsSelect=false,instancesSelect=false;
+    private Frame parent;
     private JFileChooser filechooser;
     private Component frame;
     public static boolean seleccionado;
     public AddInstancesClasPropJDialog addInst;  
-    private JenaInterface jenaInterface = new JenaInterface();   
+    private JenaInterface jenaInterface;   
     private Jena jena;
 
     /** Creates new form MainJPanel */
@@ -124,6 +85,7 @@ public class MainJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Introduzca la ubicación de la ontología a evaluar:");
 
+        examinarFisicalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
         examinarFisicalButton.setText("Examinar");
         examinarFisicalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +253,6 @@ private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTestActionPerformed
 // TODO add your handling code here:
-    
     if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
         JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
                 "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -300,6 +261,7 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                  ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
         try{
+        jenaInterface = new JenaInterface();
         jena = jenaInterface.getJena();
         jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         ContentMainJFrame.getContentPanel().remove(0);
@@ -327,6 +289,7 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                  ".owl","Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
         try{
+        jenaInterface = new JenaInterface();
         jena = jenaInterface.getJena();
         jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         AddSPARQLJPanel.setSeleccionado(true);
@@ -401,5 +364,44 @@ private void openFile(JTextField textfield){
         return sparql;
     }
 
+    public static String getFisicalOntologyTextField() {
+        return fisicalOntologyTextField.getText();
+    }
+    public static String getNamespaceOntologyTextField() {
+        return namespaceOntologyTextField.getText();
+    }
+    public static boolean isSeleccionado() {
+        return seleccionado;
+    }
+    public static void setSeleccionado(boolean aSeleccionado) {
+        seleccionado = aSeleccionado;
+    }
+    public static CollectionTest getCollectionTest() {
+        return collectionTest;
+    }
+    public static void setCollectionTest(CollectionTest aCollectionTest) {
+        collectionTest = aCollectionTest;
+    }
+    
+    public static boolean getSimpleTestSelect() {
+        return simpleTestSelect;
+    }
+
+    public static void setSimpleTestSelect(boolean aSimpleTestSelect) {
+        simpleTestSelect = aSimpleTestSelect;
+    }
+
+    public static boolean getSparqlTestsSelect() {
+        return sparqlTestsSelect;
+    }
+    public static void setSparqlTestsSelect(boolean aSparqlTestsSelect) {
+        sparqlTestsSelect = aSparqlTestsSelect;
+    }
+    public static boolean getInstancesSelect() {
+        return instancesSelect;
+    }
+    public static void setInstancesSelect(boolean aInstancesSelect) {
+        instancesSelect = aInstancesSelect;
+    }
 
 }

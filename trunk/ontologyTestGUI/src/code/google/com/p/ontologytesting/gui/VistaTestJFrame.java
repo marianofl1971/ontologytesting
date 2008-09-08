@@ -11,7 +11,6 @@ import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.ListIterator;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.Instancias;
@@ -19,6 +18,7 @@ import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
+import java.util.List;
 /**
  *
  * @author  sara.garcia
@@ -50,9 +50,9 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
                 String descripTest = scenario.getDescripcion();
-                ArrayList<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
-                ArrayList<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
-                ArrayList<QueryOntology> queryOnt = scenario.getQueryTest();
+                List<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
+                List<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
+                List<QueryOntology> queryOnt = scenario.getQueryTest();
                 ListIterator qo;
                 qo = queryOnt.listIterator();
                 String clas = "", consulta="";  
@@ -122,8 +122,8 @@ public class VistaTestJFrame extends javax.swing.JFrame {
             }else if(AbrirTestsJDialog.getFicherosComboBox()==1){
                 getTestEditorPane().setContentType("text/html");
                 Instancias inst = (Instancias) decoder.readObject();
-                ArrayList<ClassInstances> clasInst = inst.getClassInstances();
-                ArrayList<PropertyInstances> propInst = inst.getPropertyInstances();
+                List<ClassInstances> clasInst = inst.getClassInstances();
+                List<PropertyInstances> propInst = inst.getPropertyInstances();
                 String clas = "";  
               
                 int sizeClas = clasInst.size();
@@ -170,9 +170,9 @@ public class VistaTestJFrame extends javax.swing.JFrame {
                 scenario = (ScenarioTest) decoder.readObject(); 
                 String nombreTest = scenario.getNombre();
                 String descripTest = scenario.getDescripcion();
-                ArrayList<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
-                ArrayList<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
-                ArrayList<SparqlQueryOntology> queryOnt = scenario.getSparqlQuerys();
+                List<ClassInstances> clasInst = scenario.getInstancias().getClassInstances();
+                List<PropertyInstances> propInst = scenario.getInstancias().getPropertyInstances();
+                List<SparqlQueryOntology> queryOnt = scenario.getSparqlQuerys();
                 ListIterator qo;
                 qo = queryOnt.listIterator();
                 String clas = "", consulta="";  

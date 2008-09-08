@@ -20,10 +20,9 @@ public class ScenarioTest {
     private String testName;
     private String nombre="";
     private String descripcion="";
-    private Instancias instancias = new Instancias();
-    private ArrayList<QueryOntology> queryTest = new ArrayList<QueryOntology>();
-    private ArrayList<SparqlQueryOntology> sparqlQuerys = new 
-            ArrayList<SparqlQueryOntology>();
+    private Instancias instancias;
+    private List<QueryOntology> queryTest;
+    private List<SparqlQueryOntology> sparqlQuerys;
     
     public ScenarioTest(Instancias instancias, List<QueryOntology> tests, String testName,
             List<SparqlQueryOntology> sparqlquerys,String nombre,String descripcion){
@@ -55,15 +54,13 @@ public class ScenarioTest {
         this.descripcion=descripcion;
     }    
     
-    public ScenarioTest(){
-        
+    public ScenarioTest(){  
         this.instancias = new Instancias();
         this.queryTest = new ArrayList<QueryOntology>();
         this.testName = null;
         this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
         this.nombre = "";
         this.descripcion = "";
-    
     }
 
     public String getTestName() {
@@ -74,30 +71,22 @@ public class ScenarioTest {
         this.testName = test_name;
     }
 
-    public ArrayList<QueryOntology> getQueryTest() {
+    public List<QueryOntology> getQueryTest() {
         return queryTest;
     }
 
-    public void setQueryTest(ArrayList<QueryOntology> queryTest) {
+    public void setQueryTest(List<QueryOntology> queryTest) {
         this.queryTest = queryTest;
     }
 
-    public ArrayList<SparqlQueryOntology> getSparqlQuerys() {
+    public List<SparqlQueryOntology> getSparqlQuerys() {
         return sparqlQuerys;
     }
 
-    public void setSparqlQuerys(ArrayList<SparqlQueryOntology> sparqlQuerys) {
+    public void setSparqlQuerys(List<SparqlQueryOntology> sparqlQuerys) {
         this.sparqlQuerys = sparqlQuerys;
     } 
     
-    /*public void clearClasInstances(){
-        this.classInstances.clear();
-    }
-    
-    public void clearPropInstances(){
-        this.classInstances.clear();
-    }*/
-
     public String getNombre() {
         return nombre;
     }

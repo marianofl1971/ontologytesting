@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.BorderLayout;
+import java.util.List;
 
 /**
  *
@@ -18,59 +19,14 @@ import java.awt.BorderLayout;
  */
 public class ContentMainJFrame extends javax.swing.JFrame {
 
-    public static ArrayList getPaginas() {
-        return paginas;
-    }
-    public static void setPaginas(ArrayList aPaginas) {
-        paginas = aPaginas;
-    }
-    public static int getActual() {
-        return actual;
-    }
-    public static void setActual(int aActual) {
-        actual = aActual;
-    }
-    private static boolean heVueltoGroupTest=false,heVueltoSparql=false;
-    private static ArrayList<Instancias> instancias = new ArrayList<Instancias>();
-    public static boolean isHeVueltoGroupTest() {
-        return heVueltoGroupTest;
-    }
-    public static void setHeVueltoGroupTest(boolean aHeVueltoGroupTest) {
-        heVueltoGroupTest = aHeVueltoGroupTest;
-    }
-    public static boolean isHeVueltoSparql() {
-        return heVueltoSparql;
-    }
-    public static void setHeVueltoSparql(boolean aHeVueltoSparql) {
-        heVueltoSparql = aHeVueltoSparql;
-    }
+    private static List<Instancias> instancias;
     private static MainJPanel mainPanel;
     private static GroupTestsJPanel groupTests;
-    public static ArrayList<Instancias> getInstancias() {
-        return instancias;
-    }
-    public static void setInstancias(int index,Instancias aInstancias) {
-        instancias.set(index, aInstancias);
-    }
-
-    public static MainJPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public static javax.swing.JSeparator getSeparador() {
-        return separador;
-    }
-
-    public static javax.swing.JPanel getSeparadorPanel() {
-        return separadorPanel;
-    }
-    private static ArrayList paginas = new ArrayList();
-    private static int actual=0;
-    private static boolean botonAnte=false;
     
     /** Creates new form ContentMainJFrame */
     public ContentMainJFrame(int vez) {
         initComponents();
+        instancias = new ArrayList<Instancias>();
         getSeparadorPanel().setLayout(new BorderLayout());
         getSeparador().setVisible(false);
         if(vez==0){
@@ -85,7 +41,7 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         }
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
-        this.setSize(new Dimension(980,720));
+        this.setSize(new Dimension(1030,720));
         contentPanel.add(mainPanel);
     }
 
@@ -183,19 +139,32 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         ContentMainJFrame.groupTests = groupTests;
     }
 
-    public static boolean getBotonAnte() {
-        return botonAnte;
-    }
-    public static void setBotonAnte(boolean abotonAnte) {
-        botonAnte = abotonAnte;
-    }
-
     public static javax.swing.JPanel getContentPanel() {
         return contentPanel;
     }
     
     public ContentMainJFrame getContentMainJFrame(){
         return this;
+    }
+    
+    public static List<Instancias> getInstancias() {
+        return instancias;
+    }
+    
+    public static void setInstancias(int index,Instancias aInstancias) {
+        instancias.set(index, aInstancias);
+    }
+
+    public static MainJPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public static javax.swing.JSeparator getSeparador() {
+        return separador;
+    }
+
+    public static javax.swing.JPanel getSeparadorPanel() {
+        return separadorPanel;
     }
     /*for(int i=1; i<panelAyudaInst.getComponentCount();i++){
                     TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);

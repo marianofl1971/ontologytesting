@@ -25,10 +25,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" pref="229" max="-2" attributes="0"/>
-                      <EmptySpace pref="635" max="32767" attributes="0"/>
+                      <EmptySpace pref="671" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" pref="525" max="32767" attributes="1"/>
+                      <Component id="jLabel1" pref="561" max="32767" attributes="1"/>
                       <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -48,7 +48,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="asociarButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="650" max="32767" attributes="0"/>
+                      <EmptySpace pref="646" max="32767" attributes="0"/>
                       <Component id="SaveAndNewButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -90,6 +90,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="examinarButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/folder_explore.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Examinar"/>
       </Properties>
       <Events>
@@ -103,6 +106,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="asociarButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/page_edit.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Asociar"/>
       </Properties>
       <Events>
@@ -111,6 +117,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="seeAsociadasButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/eye.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ver instancias asociadas"/>
       </Properties>
       <Events>
@@ -119,6 +128,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="SaveAndNewButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/add.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir y Crear Nuevo"/>
       </Properties>
       <Events>
@@ -127,7 +139,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="addTestExistButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="A&#xf1;adir Test Existente"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/page_white_magnify.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Abrir Test Existente"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTestExistButtonActionPerformed"/>
@@ -135,6 +150,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="seeTestButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/eye.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ver Tests Guardados"/>
       </Properties>
       <Events>
@@ -143,6 +161,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="seeOntologyButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/eye.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ver Ontologia"/>
       </Properties>
       <Events>

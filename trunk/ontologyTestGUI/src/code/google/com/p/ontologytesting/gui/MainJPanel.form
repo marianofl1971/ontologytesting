@@ -157,6 +157,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="examinarFisicalButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/folder_explore.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Examinar"/>
       </Properties>
       <Events>

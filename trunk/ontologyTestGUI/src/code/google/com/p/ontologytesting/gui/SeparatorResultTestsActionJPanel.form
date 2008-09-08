@@ -24,7 +24,7 @@
               <Component id="newSimpleTestButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="newSparqlTestButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="printButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
@@ -52,6 +52,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="inicioButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/arrow_left.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ir a Inicio"/>
       </Properties>
       <Events>
@@ -76,6 +79,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="printButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/eye.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ver Tests Realizados"/>
       </Properties>
       <Events>
@@ -92,6 +98,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="guardarButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/disk.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Guardar Informe"/>
       </Properties>
       <Events>

@@ -41,7 +41,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
 
     private String generarFormatoPermitidoInstanciacion(){
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE INSTANCIACIÓN</h></b><br><br>" +
+                "<h><b>FORMATOS PARA EL TEST DE INSTANCIACION</h></b><br><br>" +
                 "<b>CONSULTAS</b><br><br>" +
                 "Clase,individuo<br>" +
                 "Clase.individuo<br>" +
@@ -54,7 +54,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     
     private String generarFormatoPermitidoRetrieval(){
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE RETRIEVAL</h></b><br><br>" +
+                "<h><b>FORMATOS PARA EL TEST DE RECUPERACION</h></b><br><br>" +
                 "<b>CONSULTAS</b><br><br>" +
                 "Clase<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
@@ -102,10 +102,11 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>CONSULTAS</b><br><br>" +
                 "Serán validas aquellas consultas que sean" +
                 "gramaticalmente correctas siguiendo la sintaxis de SPARQL." +
-                "Sólo estan permitidas consultas SELECT.<br><br>" +
+                "Sólo estan permitidas consultas tipo SELECT.<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
-                "En caso de un SELECT simple, el resultado deberá de ser una lista " +
-                "de objetos separados por coma, punto o espacio.<br><br>" +
+                "En caso de un SELECT simple, el resultado deberá de ser el objeto" +
+                "que se indico en el SELECT, seguido de una lista " +
+                "de objetos separados por coma o punto.<br><br>" +
                 "En caso de un SELECT multiple el resultado deberá de especificar" +
                 "en primer lugar el objeto al que se refiere en SELECT y entre " +
                 "parentesis el resultado o la lista de resultados separados por " +
@@ -116,8 +117,12 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "FROM 'ruta a la ontologia' <br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
                 "El resultado se debe de mostrar de la siguient forma:<br><br>" +
-                "subject(a,b,c) | subject(a b c) | subject(a.b.c) <br>" +
-                "object(a,b,c) | object(a b c) | object(a.b.c)";    
+                "subject(a,b,c) | subject(a.b.c) <br>" +
+                "object(a,b,c) | object(a.b.c)"+
+                "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados" +
+                "por un salto de linea o un punto y coma, es decir:" +
+                "subject(a,b.c)" +
+                "object(a.b,c)";    
         return formato;
     }
 

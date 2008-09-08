@@ -6,6 +6,7 @@
 package code.google.com.p.ontologytesting.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,19 +17,19 @@ public class Instancias {
     private String nombre;
     private String descripcion;
     private String type="Instancias";
-    private ArrayList<ClassInstances> classInstances = new ArrayList<ClassInstances>();
-    private ArrayList<PropertyInstances> propertyInstances = new ArrayList<PropertyInstances>();
+    private List<ClassInstances> classInstances;
+    private List<PropertyInstances> propertyInstances;
     
     public Instancias(){
         this.nombre="";
         this.descripcion="";
-        this.type="";
+        this.type="Instancias";
         this.classInstances = new ArrayList<ClassInstances>();
         this.propertyInstances = new ArrayList<PropertyInstances>();
     }
     
     public Instancias(String nombre, String descripcion, String type,
-            ArrayList<ClassInstances> clasInstances, ArrayList<PropertyInstances> propInstances){
+            List<ClassInstances> clasInstances, List<PropertyInstances> propInstances){
         this.nombre=nombre;
         this.type=type;
         this.descripcion=descripcion;
@@ -36,19 +37,19 @@ public class Instancias {
         this.propertyInstances.addAll(propInstances);
     }
     
-    public ArrayList<ClassInstances> getClassInstances() {
+    public List<ClassInstances> getClassInstances() {
         return classInstances;
     }
 
-    public void setClassInstances(ArrayList<ClassInstances> classInstances) {
+    public void setClassInstances(List<ClassInstances> classInstances) {
         this.classInstances = classInstances;
     }
 
-    public ArrayList<PropertyInstances> getPropertyInstances() {
+    public List<PropertyInstances> getPropertyInstances() {
         return propertyInstances;
     }
 
-    public void setPropertyInstances(ArrayList<PropertyInstances> propertyInstances) {
+    public void setPropertyInstances(List<PropertyInstances> propertyInstances) {
         this.propertyInstances = propertyInstances;
     }
 

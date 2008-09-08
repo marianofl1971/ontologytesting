@@ -9,7 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,8 +22,8 @@ public class OntologyTestFailure extends Object{
     protected String fcommentquery;
     protected String fresultexpected;
     protected String fresultsparqlexpected;
-    protected ArrayList<ExecQuerySparql> fressparqlobtenido;
-    protected ArrayList<ExecQuerySparql> fressparqlesperado;
+    protected List<ExecQuerySparql> fressparqlobtenido;
+    protected List<ExecQuerySparql> fressparqlesperado;
     protected String fcommentsparqlquery;
     protected String fquerysparql;
     protected String testName;
@@ -31,8 +31,8 @@ public class OntologyTestFailure extends Object{
     private String result="";
     
     public OntologyTestFailure(String testNameUsuario, String testName,QueryOntology query, String resQueryObte, 
-            SparqlQueryOntology querysparql, ArrayList<ExecQuerySparql> resSparqlQueryEspe, 
-            ArrayList<ExecQuerySparql> resSparqlQueryObte){
+            SparqlQueryOntology querysparql, List<ExecQuerySparql> resSparqlQueryEspe, 
+            List<ExecQuerySparql> resSparqlQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquery = query.getQuery();
@@ -58,7 +58,7 @@ public class OntologyTestFailure extends Object{
     }
     
     void addOntologyTestFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
-            ArrayList<ExecQuerySparql> resQueryEspe,ArrayList<ExecQuerySparql> resQueryObte){
+            List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte){
         this.ftestNameUsuario=testNameUsuario;
         this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
@@ -71,11 +71,11 @@ public class OntologyTestFailure extends Object{
          return this.fresqueryobtenido;    
      }  
     
-    public ArrayList<ExecQuerySparql> getResultSparqlQueryObtenido() {    
+    public List<ExecQuerySparql> getResultSparqlQueryObtenido() {    
          return this.fressparqlobtenido;    
      }
     
-    public ArrayList<ExecQuerySparql> getResultSparqlQueryEsperado() {    
+    public List<ExecQuerySparql> getResultSparqlQueryEsperado() {    
          return this.fressparqlesperado;    
      }
     
@@ -118,13 +118,13 @@ public class OntologyTestFailure extends Object{
     }
     
     public String mostrarResultadoSparql(){
-        ArrayList<ExecQuerySparql> execQ = this.fressparqlobtenido;
+        List<ExecQuerySparql> execQ = this.fressparqlobtenido;
         if(execQ.size()>0){
             String resultadoTotal="";
             for(int i=0;i<execQ.size();i++){
                 String resultado = "";
                 String nombre = execQ.get(i).getNombreSelect();
-                ArrayList<String> datos = execQ.get(i).getDatos();
+                List<String> datos = execQ.get(i).getDatos();
                 resultado = nombre+"(";
                 for(int j=0;j<datos.size();j++){
                     if(j!=datos.size()-1){
@@ -143,8 +143,8 @@ public class OntologyTestFailure extends Object{
     
     public String showSparqlTest() {
         
-        ArrayList<ExecQuerySparql> execQObte = this.fressparqlobtenido;
-        ArrayList<ExecQuerySparql> execQEspe = this.fressparqlesperado;
+        List<ExecQuerySparql> execQObte = this.fressparqlobtenido;
+        List<ExecQuerySparql> execQEspe = this.fressparqlesperado;
         String resultadoTotalObte="";
         String nombreObte = "";
         String datosObte = "";

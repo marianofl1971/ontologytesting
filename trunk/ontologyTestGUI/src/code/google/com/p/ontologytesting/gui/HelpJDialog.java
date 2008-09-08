@@ -25,7 +25,7 @@ public class HelpJDialog extends javax.swing.JDialog {
 
     private String generarTextoAyuda() {
         String help="<html>" +
-                "<h><b>TEST DE INSTANCIACIÓN</h></b><br><br>" +
+                "<h><b>TEST DE INSTANCIACION</h></b><br><br>" +
                 "Este test consiste en deducir si dado un individuo, " +
                 "éste pertenece a una clase.<br><br>" +
                 "Ejemplo:<br>" +
@@ -33,7 +33,7 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "En este caso el test no fallaría, ya que el individuo" +
                 " 'marry' aparece definido como Wife en el conjunto de instancias " +
                 "de la ontología. <br><br>" +
-                "<h><b>TEST DE RETRIEVAL</h></b><br><br>" +
+                "<h><b>TEST DE RECUPERACION</h></b><br><br>" +
                 "Este test deduce, dada una clase, todos los individuos que " +
                 "pertenecen a dicha clase (todos los individuos que son instancias " +
                 "de ese concepto).<br><br>" +
@@ -42,7 +42,7 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "En este caso el test no fallaría, ya que para la clase 'Wife'" +
                 " todos los individuos que le pertenecen son los contemplados" +
                 "'marry,lee'.<br><br>" +
-                "<h><b>TEST DE REALIZACIÓN</h></b><br><br>" +
+                "<h><b>TEST DE REALIZACION</h></b><br><br>" +
                 "Este test deduce, dado un individuo, cual es la clase más exacta " +
                 "o específica a la que pertenece (dado un individuo, encuentra el concepto " +
                 "más específico que lo contiene).<br><br>" +
@@ -58,7 +58,7 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "<b>Consulta: </b>sara,Wife <br> <b>Resultado esperado: </b>True<br><br>" +
                 "En este caso el test no fallaría, ya que el individuo" +
                 " 'sara' no estaba aun definido en la ontologia. <br><br>" +
-                "<h><b>TEST DE CLASIFICACIÓN</h></b><br><br>" +
+                "<h><b>TEST DE CLASIFICACION</h></b><br><br>" +
                 "Este test deduce dado un individuo, todas las clases a las que pertenece<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>marry <br> <b>Resultado esperado: </b>Wife,Female,Person<br><br>" +

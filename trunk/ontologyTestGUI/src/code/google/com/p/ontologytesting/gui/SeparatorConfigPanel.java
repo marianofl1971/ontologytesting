@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author  sara.garcia
  */
 public class SeparatorConfigPanel extends javax.swing.JPanel {
+    
     private Component frame;
 
     /** Creates new form SeparatorConfigPanel */
@@ -33,6 +34,7 @@ public class SeparatorConfigPanel extends javax.swing.JPanel {
         cancelarButton = new javax.swing.JButton();
         aceptarButton = new javax.swing.JButton();
 
+        cancelarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
         cancelarButton.setText("Cancelar");
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,6 +42,7 @@ public class SeparatorConfigPanel extends javax.swing.JPanel {
             }
         });
 
+        aceptarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/accept.png"))); // NOI18N
         aceptarButton.setText("Aceptar");
         aceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +57,7 @@ public class SeparatorConfigPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cancelarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(aceptarButton)
                 .addContainerGap())
         );
@@ -81,11 +84,9 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
-    //setConf(true);
     if(ConfigurationJPanel.getSiRadioButton().isSelected()){
        if(!ConfigurationJPanel.getInstanciasTextField().equals("") && !ConfigurationJPanel.getTestsSimplesTextField().equals("") 
                && !ConfigurationJPanel.getTestsSparqlTextField().equals("")){
-           //Si es valida la ruta
            Configuration.setPathTestSimples(ConfigurationJPanel.getTestsSimplesTextField());  
            Configuration.setPathTestSparql(ConfigurationJPanel.getTestsSparqlTextField());
            Configuration.setPathInstancias(ConfigurationJPanel.getInstanciasTextField());

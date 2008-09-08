@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -31,7 +32,6 @@ import javax.swing.WindowConstants;
  */
 public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
     private Component frame;
-    private Component comp;
 
     /** Creates new form ResultTestsActionJPanel */
     public SeparatorResultTestsActionJPanel() {
@@ -54,6 +54,7 @@ public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
         salirButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
 
+        inicioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/arrow_left.png"))); // NOI18N
         inicioButton.setText("Ir a Inicio");
         inicioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +76,7 @@ public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
             }
         });
 
+        printButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/eye.png"))); // NOI18N
         printButton.setText("Ver Tests Realizados");
         printButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +91,7 @@ public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
             }
         });
 
+        guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setText("Guardar Informe");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +112,7 @@ public class SeparatorResultTestsActionJPanel extends javax.swing.JPanel {
                 .addComponent(newSimpleTestButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newSparqlTestButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(printButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarButton)
@@ -144,6 +147,10 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             PrintWriter writer = null;
                 try {
                     writer = new PrintWriter(fichero);
+                    writer.print(resultado);
+                    writer.close();
+                    JOptionPane.showMessageDialog(frame,"Los datos se han guardado correctamente",
+                            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
                     JOptionPane.showMessageDialog(frame,"No se puede guardar el fichero",
                             "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -151,8 +158,6 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     JOptionPane.showMessageDialog(frame,"No se puede guardar el fichero",
                             "Warning Message",JOptionPane.WARNING_MESSAGE);
                 }
-            writer.print(resultado);
-            writer.close();
         }
     }
 }//GEN-LAST:event_guardarButtonActionPerformed
@@ -178,9 +183,8 @@ private void newSparqlTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
     MainJPanel.setSparqlTestsSelect(true);
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
-    //Para que no te conserve los anteriores
     MainJPanel.setCollectionTest(new CollectionTest());
-    ArrayList<Instancias> instancias = ContentMainJFrame.getInstancias();
+    List<Instancias> instancias = ContentMainJFrame.getInstancias();
     for(int i=0;i<instancias.size();i++){
         instancias.set(i, new Instancias());
     }
@@ -198,7 +202,7 @@ private void newSimpleTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
     MainJPanel.setSparqlTestsSelect(false);
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
-    ArrayList<Instancias> instancias = ContentMainJFrame.getInstancias();
+    List<Instancias> instancias = ContentMainJFrame.getInstancias();
     for(int i=0;i<instancias.size();i++){
         instancias.set(i, new Instancias());
     }
@@ -212,7 +216,7 @@ private void newSimpleTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
 
 private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
 // TODO add your handling code here:
-    int n = JOptionPane.showConfirmDialog(comp, "¿Desea salir de la aplicacion?", "Exit",JOptionPane.YES_NO_OPTION);
+    int n = JOptionPane.showConfirmDialog(frame, "¿Desea salir de la aplicacion?", "Exit",JOptionPane.YES_NO_OPTION);
     if (n == JOptionPane.YES_OPTION){
         System.exit(0);
     }
@@ -244,8 +248,8 @@ public String generarInforme(){
         res = res + "<br><br><b>Descripcion: </b>"+scenario.get(i).getDescripcion();
         res = res + "<br><br><b>Instancias Asociadas</b><br>";
         Instancias inst = scenario.get(i).getInstancias();
-        ArrayList<ClassInstances> clas = inst.getClassInstances();
-        ArrayList<PropertyInstances> prop = inst.getPropertyInstances();
+        List<ClassInstances> clas = inst.getClassInstances();
+        List<PropertyInstances> prop = inst.getPropertyInstances();
         if(clas.size()!=0){
         res = res + "<br><u>Instancias de Clase</u><br>";
         for(int j=0;j<clas.size();j++){
@@ -280,7 +284,7 @@ public String generarInforme(){
         }else{
             res = res + "Test sin instancias de propiedad<br>";
         }
-        ArrayList<QueryOntology> simpleT = scenario.get(i).getQueryTest();
+        List<QueryOntology> simpleT = scenario.get(i).getQueryTest();
         if(simpleT.size()!=0){
             res = res + "<br><b>Tests Simples</b><br><br>";
             for(int l=0;l<simpleT.size();l++){
@@ -294,7 +298,7 @@ public String generarInforme(){
                 }
             }
         }
-        ArrayList<SparqlQueryOntology> sparqlT = scenario.get(i).getSparqlQuerys();
+        List<SparqlQueryOntology> sparqlT = scenario.get(i).getSparqlQuerys();
         if(sparqlT.size()!=0){
             res = res + "<br><b>Tests Sparql</b><br><br>";
             for(int l=0;l<sparqlT.size();l++){

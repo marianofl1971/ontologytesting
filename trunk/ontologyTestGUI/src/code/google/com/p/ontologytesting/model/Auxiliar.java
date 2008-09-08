@@ -48,6 +48,18 @@ public class Auxiliar {
         }
     }
     
+    public void crearArchivoDeInstancias(String nombreFichero, Instancias instancias){
+        
+    try{
+        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                            FileOutputStream(nombreFichero)));
+        e.writeObject(instancias);
+        e.close();
+    }catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+     }
+}
+    
     public void setInstances(Instancias instancias){  
         
         int tab = GroupTestsJPanel.getSelectedTabed();

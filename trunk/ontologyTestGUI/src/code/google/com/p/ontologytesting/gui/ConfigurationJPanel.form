@@ -30,18 +30,18 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="669" max="-2" attributes="0"/>
-                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                      <EmptySpace pref="268" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel6" min="-2" pref="420" max="-2" attributes="0"/>
-                      <EmptySpace pref="497" max="32767" attributes="0"/>
+                      <EmptySpace pref="517" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" pref="533" max="32767" attributes="1"/>
-              <EmptySpace min="-2" pref="384" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -61,7 +61,7 @@
               <Component id="jLabel1" min="-2" pref="312" max="-2" attributes="0"/>
               <EmptySpace pref="219" max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" pref="207" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -70,12 +70,12 @@
               <Component id="noRadioButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="471" max="32767" attributes="0"/>
               <Component id="restaurarRadioButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="273" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" pref="350" max="-2" attributes="0"/>
-              <EmptySpace pref="567" max="32767" attributes="0"/>
+              <EmptySpace pref="587" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -182,6 +182,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="examinarTestsSimplesButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/folder_explore.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Examinar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -191,6 +194,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="examinarTestsSparqlButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/folder_explore.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Examinar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -200,6 +206,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="examinarInstanciasButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/folder_explore.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Examinar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
