@@ -326,8 +326,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         guardarInstButton = new javax.swing.JButton();
         cancelarInstButton = new javax.swing.JButton();
         limpiarInstButton = new javax.swing.JButton();
-        newClasButton = new javax.swing.JButton();
-        newPropButton = new javax.swing.JButton();
         instancesTabbedPane = new javax.swing.JTabbedPane();
         classScrollPane = new javax.swing.JScrollPane();
         clasPanel = new javax.swing.JPanel();
@@ -349,6 +347,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Añada las instancias que quiera a su ontología:");
 
+        guardarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/accept.png"))); // NOI18N
         guardarInstButton.setText("Asociar");
         guardarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,6 +355,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
+        cancelarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
         cancelarInstButton.setText("Cancelar");
         cancelarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,20 +367,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarInstButtonActionPerformed(evt);
-            }
-        });
-
-        newClasButton.setText("Nueva clase");
-        newClasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newClasButtonActionPerformed(evt);
-            }
-        });
-
-        newPropButton.setText("Nueva propiedad");
-        newPropButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newPropButtonActionPerformed(evt);
             }
         });
 
@@ -457,6 +443,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         jButton1.setText("Borrar Seleccion");
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
@@ -465,24 +452,20 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                         .addComponent(formatosButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                        .addComponent(limpiarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
-                        .addComponent(newClasButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newPropButton))
-                    .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(cancelarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 573, Short.MAX_VALUE)
-                        .addComponent(guardarInstButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
+                        .addComponent(guardarInstButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
+                        .addComponent(limpiarInstButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -496,8 +479,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newPropButton)
-                    .addComponent(newClasButton)
                     .addComponent(limpiarInstButton)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
@@ -572,8 +553,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarInstButtonActionPerformed
-    patron1="[\\(|,|\n| ]";
-    patron2="[,|\n| |\\)]";    
+    patron1="[\\(|,]";
+    patron2="[,|\\)]";    
     try {
             jenaInterface = new JenaInterface();
             jena = jenaInterface.getJena();
@@ -618,23 +599,24 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                                 }
                             }
                         }
-
-                        if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
-                            if (!query.equals("") && !coment.equals("")) {
-                                ClassInstances cI = new ClassInstances(query, coment);
-                                clasInst.add(cI);
-                            } else if (!query.equals("") && coment.equals("")) {
-                                ClassInstances cI = new ClassInstances(query);
-                                clasInst.add(cI);
-                            }
-                            failClas.add(i, 0);
-                        } else if (validar.validarInstanciaClase(query) == false) {
+                        if(!query.equals("")){
+                            if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
+                                if (!query.equals("") && !coment.equals("")) {
+                                    ClassInstances cI = new ClassInstances(query, coment);
+                                    clasInst.add(cI);
+                                } else if (!query.equals("") && coment.equals("")) {
+                                    ClassInstances cI = new ClassInstances(query);
+                                    clasInst.add(cI);
+                                }
+                                failClas.add(i, 0);
+                            }else if (validar.validarInstanciaClase(query) == false) {
                             if (!query.equals("")) {
                                 failClas.add(i, 1);
                                 setQueryValida(false);
                             }
-                        } else {
-                            failClas.add(i, 0);
+                            } else {
+                                failClas.add(i, 0);
+                            }
                         }
                     }
                     int totalProp = getPropPanel().getComponentCount();
@@ -777,7 +759,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             auxiliar.setYaEligioGuardarInstancias(true);
                         }
                     } else if (AddInstancesJPanel.isStateAsociar() == true) {
-                        if ((clasInst.size() > 0 || propInst.size() > 0) && (clasFinal == null || propFinal == null)) {
+                        if ((clasInst.size() > 0 || propInst.size() > 0) && (clasFinal == null || propFinal == null)){
                             Component comp = null;
                             int n = JOptionPane.showConfirmDialog(comp, "¿Quiere guardar " + "este conjunto de instancias para futuras pruebas?", "Guardar Instancias", JOptionPane.YES_NO_OPTION);
                             if (n == JOptionPane.YES_OPTION) {
@@ -972,18 +954,6 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         propInst.add(pI);
     }
 }//GEN-LAST:event_limpiarInstButtonActionPerformed
-
-private void newClasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newClasButtonActionPerformed
-// TODO add your handling code here:
-    getClasPanel().add(new CreateInstancesJPanel(0));
-    this.validate();
-}//GEN-LAST:event_newClasButtonActionPerformed
-
-private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPropButtonActionPerformed
-// TODO add your handling code here:
-        getPropPanel().add(new CreateInstancesJPanel(1));
-    this.validate();
-}//GEN-LAST:event_newPropButtonActionPerformed
 
 private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instancesTabbedPaneMouseClicked
 // TODO add your handling code here:   

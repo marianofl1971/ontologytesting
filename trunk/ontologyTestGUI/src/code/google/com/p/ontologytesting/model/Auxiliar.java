@@ -9,6 +9,7 @@ import code.google.com.p.ontologytesting.gui.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.ContentMainJFrame;
 import code.google.com.p.ontologytesting.gui.GroupTestsJPanel;
+import code.google.com.p.ontologytesting.gui.MainJPanel;
 import java.awt.Component;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
@@ -28,22 +29,47 @@ public class Auxiliar {
     
     public void crearArchivoDeInstancias(Instancias instancias){
     
-        try{ 
-            if(!instancias.getNombre().equals("")){
-                XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                FileOutputStream(Configuration.getPathInstancias()+"/"+instancias.getNombre()+".xml")));
-                e.writeObject(instancias);
-                e.close();
-                JOptionPane.showMessageDialog(frame,"Las instancias han sido guardadas con el " +
-                        "nombre que les asigno",
-                        "Warning Message",JOptionPane.WARNING_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
-                        "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }
-        }catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }    
+        if(MainJPanel.getInstancesSelect()==true){
+        int n = JOptionPane.showConfirmDialog(frame, "El conjunto de instancias se guardara " +
+                "¿Desea continuar?", "Guardar Instancias",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            try{ 
+                if(!instancias.getNombre().equals("")){
+                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                    FileOutputStream(Configuration.getPathInstancias()+"/"+instancias.getNombre()+".xml")));
+                    e.writeObject(instancias);
+                    e.close();
+                    JOptionPane.showMessageDialog(frame,"Las instancias han sido guardadas con el " +
+                            "nombre que les asigno",
+                            "Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
+                            "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }
+            }catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } 
+        }else if(n == JOptionPane.NO_OPTION){
+            
+        }
+        }else{
+            try{ 
+                if(!instancias.getNombre().equals("")){
+                    XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                    FileOutputStream(Configuration.getPathInstancias()+"/"+instancias.getNombre()+".xml")));
+                    e.writeObject(instancias);
+                    e.close();
+                    JOptionPane.showMessageDialog(frame,"Las instancias han sido guardadas con el " +
+                            "nombre que les asigno",
+                            "Warning Message",JOptionPane.WARNING_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
+                            "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                }
+            }catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } 
+        }
     }
     
     public void crearArchivoDeInstancias(String nombreFichero, Instancias instancias){

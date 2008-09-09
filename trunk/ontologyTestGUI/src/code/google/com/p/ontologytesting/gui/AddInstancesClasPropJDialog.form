@@ -56,26 +56,22 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="instancesTabbedPane" alignment="0" min="-2" pref="715" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" pref="344" max="-2" attributes="0"/>
                           <EmptySpace pref="222" max="32767" attributes="0"/>
                           <Component id="formatosButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="273" max="32767" attributes="0"/>
-                          <Component id="newClasButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="newPropButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="cancelarInstButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="573" max="32767" attributes="0"/>
+                          <EmptySpace pref="533" max="32767" attributes="0"/>
                           <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="471" max="32767" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -94,8 +90,6 @@
                   <Component id="instancesTabbedPane" min="-2" pref="316" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="newPropButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="newClasButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="limpiarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -116,6 +110,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="guardarInstButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/accept.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Asociar"/>
           </Properties>
           <Events>
@@ -124,6 +121,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="cancelarInstButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/cancel.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
@@ -136,22 +136,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarInstButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="newClasButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nueva clase"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newClasButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="newPropButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nueva propiedad"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newPropButtonActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JTabbedPane" name="instancesTabbedPane">
@@ -298,6 +282,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/delete.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Borrar Seleccion"/>
           </Properties>
         </Component>
