@@ -9,6 +9,7 @@ package code.google.com.p.ontologytesting.gui;
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -271,6 +272,8 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         ContentMainJFrame.getContentPanel().getParent().validate();
         setSimpleTestSelect(true);
         AddSPARQLJPanel.setSeleccionado(false);
+        setSparqlTestsSelect(false);
+        setInstancesSelect(false);
         }catch (ExceptionReadOntology ex){
             JOptionPane.showMessageDialog(frame,"La ontologia introducida no es valida." +
                     "\nSolo pueden realizarse tests sobre documentos owl consistentes",
@@ -299,6 +302,9 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
         ContentMainJFrame.getContentPanel().getParent().validate();
         setSparqlTestsSelect(true);
+        setSimpleTestSelect(false);
+        setInstancesSelect(false);
+        AddSPARQLJPanel.setSeleccionado(true);
         }catch (ExceptionReadOntology ex){
             JOptionPane.showMessageDialog(frame,"La ontologia introducida no es valida." +
                     "\nSolo pueden realizarse tests sobre documentos owl consistentes",
@@ -309,6 +315,8 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 private void newInstancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newInstancesActionPerformed
 // TODO add your handling code here:
+    Auxiliar.setContadorClas(0);
+    Auxiliar.setContadorProp(0);
     if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
         JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
                 "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -320,6 +328,9 @@ private void newInstancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
         setInstancesSelect(true);
+        setSimpleTestSelect(false);
+        setSparqlTestsSelect(false);
+        AddSPARQLJPanel.setSeleccionado(false);
     }
 }//GEN-LAST:event_newInstancesActionPerformed
 

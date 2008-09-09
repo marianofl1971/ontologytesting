@@ -41,7 +41,7 @@ public class ContentMainJFrame extends javax.swing.JFrame {
         }
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setTitle("EVALUADOR DE ONTOLOGÍAS");
-        this.setSize(new Dimension(1030,720));
+        this.setSize(new Dimension(1040,720));
         contentPanel.add(mainPanel);
     }
 

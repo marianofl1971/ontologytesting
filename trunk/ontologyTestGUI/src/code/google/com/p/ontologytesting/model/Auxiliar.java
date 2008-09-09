@@ -9,6 +9,7 @@ import code.google.com.p.ontologytesting.gui.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.ContentMainJFrame;
 import code.google.com.p.ontologytesting.gui.GroupTestsJPanel;
+import java.awt.Component;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -22,30 +23,27 @@ import javax.swing.JOptionPane;
 public class Auxiliar {
 
     private boolean yaEligioGuardarInstancias=false;
+    private static int contadorClas=0,contadorProp=0;
+    private Component frame;
     
     public void crearArchivoDeInstancias(Instancias instancias){
     
-        String nombreArch=null;
-        String nameInstances=null;
-
-        nombreArch = JOptionPane.showInputDialog(null,"Introduzca el nombre para el " +
-                    "archivo con este conjunto de instancias","Nombre del archivo",
-                    JOptionPane.QUESTION_MESSAGE);
-
-        if(nombreArch.endsWith(".xml")){
-            nameInstances=nombreArch;
-        }else{
-            nameInstances=nombreArch.concat(".xml");
-        }
-
-        try{
-            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                                FileOutputStream(Configuration.getPathInstancias()+"/"+nameInstances)));
-            e.writeObject(instancias);
-            e.close();
+        try{ 
+            if(!instancias.getNombre().equals("")){
+                XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+                FileOutputStream(Configuration.getPathInstancias()+"/"+instancias.getNombre()+".xml")));
+                e.writeObject(instancias);
+                e.close();
+                JOptionPane.showMessageDialog(frame,"Las instancias han sido guardadas con el " +
+                        "nombre que les asigno",
+                        "Warning Message",JOptionPane.WARNING_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
+                        "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            }
         }catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        }
+        }    
     }
     
     public void crearArchivoDeInstancias(String nombreFichero, Instancias instancias){
@@ -78,5 +76,20 @@ public class Auxiliar {
         return yaEligioGuardarInstancias;
     }
     
+    public static int getContadorClas() {
+        return contadorClas;
+    }
+    
+    public static void setContadorClas(int aContador) {
+        contadorClas = aContador;
+    }
+
+    public static int getContadorProp() {
+        return contadorProp;
+    }
+
+    public static void setContadorProp(int aContadorProp) {
+        contadorProp = aContadorProp;
+    }
     
 }

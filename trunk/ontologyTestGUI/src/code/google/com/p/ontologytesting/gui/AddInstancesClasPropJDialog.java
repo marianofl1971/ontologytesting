@@ -70,9 +70,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
         if(var==0){
             for (int i = 0; i <= num; i++) {
-                clasPanel.add(new CreateInstancesJPanel());
-                propPanel.add(new CreateInstancesJPanel());
-        } 
+                clasPanel.add(new CreateInstancesJPanel(0));  
+                propPanel.add(new CreateInstancesJPanel(1));
+            }
         }else if(var==1){
             clasFinal = new ArrayList<ClassInstances>();
             propFinal = new ArrayList<PropertyInstances>();
@@ -87,7 +87,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             ci = clasInst.listIterator();
             while(ci.hasNext()){ 
                 ClassInstances cI = (ClassInstances) ci.next();
-                CreateInstancesJPanel instClas = new CreateInstancesJPanel();
+                CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
                 instClas.setInstance(cI.getClassInstance());
                 commentPane = instClas.getComment();
                 commentPane.setComent(cI.getComment());
@@ -106,7 +106,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             pi = propInst.listIterator();
             while(pi.hasNext()){
                 PropertyInstances pI = (PropertyInstances) pi.next();
-                CreateInstancesJPanel instProp = new CreateInstancesJPanel();
+                CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
                 instProp.setInstance(pI.getPropertyInstance());
                 commentPane = instProp.getComment();
                 commentPane.setComent(pI.getComment());
@@ -121,10 +121,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
             if(AddInstancesJPanel.isStateSeeInst()==false){
                 for (int j = 0; j <= (num-contI); j++) {
-                    clasPanel.add(new CreateInstancesJPanel());
+                    clasPanel.add(new CreateInstancesJPanel(0));
                 }
                 for (int k = 0; k <= (num-contP); k++) {
-                    propPanel.add(new CreateInstancesJPanel());
+                    propPanel.add(new CreateInstancesJPanel(1));
                 }
             }else{
                 formatosButton.setEnabled(false);
@@ -161,7 +161,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         ci = clasInst.listIterator();
         while(ci.hasNext()){ 
             ClassInstances cI = (ClassInstances) ci.next();
-            CreateInstancesJPanel instClas = new CreateInstancesJPanel();
+            CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
             instClas.setInstance(cI.getClassInstance());
             commentPane = instClas.getComment();
             commentPane.setComent(cI.getComment());
@@ -175,7 +175,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         pi = propInst.listIterator();
         while(pi.hasNext()){
             PropertyInstances pI = (PropertyInstances) pi.next();
-            CreateInstancesJPanel instProp = new CreateInstancesJPanel();
+            CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
             instProp.setInstance(pI.getPropertyInstance());
             commentPane = instProp.getComment();
             commentPane.setComent(pI.getComment());
@@ -186,10 +186,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         }
             
         for (int j = 0; j <= (num-contI); j++) {
-            clasPanel.add(new CreateInstancesJPanel());
+            clasPanel.add(new CreateInstancesJPanel(0));
         }
         for (int k = 0; k <= (num-contP); k++) {
-            propPanel.add(new CreateInstancesJPanel());
+            propPanel.add(new CreateInstancesJPanel(1));
         }
     }  
     
@@ -216,7 +216,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         ci = clasInst.listIterator();
         while(ci.hasNext()){ 
             ClassInstances cI = (ClassInstances) ci.next();
-            CreateInstancesJPanel instClas = new CreateInstancesJPanel();
+            CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
             instClas.setInstance(cI.getClassInstance());
             commentPane = instClas.getComment();
             commentPane.setComent(cI.getComment());
@@ -230,7 +230,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         pi = propInst.listIterator();
         while(pi.hasNext()){
             PropertyInstances pI = (PropertyInstances) pi.next();
-            CreateInstancesJPanel instProp = new CreateInstancesJPanel();
+            CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
             instProp.setInstance(pI.getPropertyInstance());
             commentPane = instProp.getComment();
             commentPane.setComent(pI.getComment());
@@ -241,10 +241,10 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         }
             
         for (int j = 0; j <= (num-contI); j++) {
-            clasPanel.add(new CreateInstancesJPanel());
+            clasPanel.add(new CreateInstancesJPanel(0));
         }
         for (int k = 0; k <= (num-contP); k++) {
-            propPanel.add(new CreateInstancesJPanel());
+            propPanel.add(new CreateInstancesJPanel(1));
         }
     }
     
@@ -276,7 +276,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             li = al.listIterator();
             while(li.hasNext()){   
                 ClassInstances cI = (ClassInstances) li.next();
-                CreateInstancesJPanel instClas = new CreateInstancesJPanel();
+                CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
                 contC++;
                 instClas.setInstance(cI.getClassInstance());
                 commentPane = instClas.getComment();
@@ -289,7 +289,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             il = la.listIterator();
             while(il.hasNext()){   
                 PropertyInstances pI = (PropertyInstances) il.next();
-                CreateInstancesJPanel instProp = new CreateInstancesJPanel();
+                CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
                 contP++;
                 instProp.setInstance(pI.getPropertyInstance());
                 commentPane = instProp.getComment();
@@ -302,12 +302,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         
         if(contC<8){
             for (int j=0; j<=(8-contC); j++) {
-                clasPanel.add(new CreateInstancesJPanel());
+                clasPanel.add(new CreateInstancesJPanel(0));
             }
         }
         if(contP<8){
             for (int k=0; k<=(8-contP); k++) {
-                propPanel.add(new CreateInstancesJPanel());
+                propPanel.add(new CreateInstancesJPanel(1));
             }
         }
     }
@@ -975,13 +975,13 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void newClasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newClasButtonActionPerformed
 // TODO add your handling code here:
-        getClasPanel().add(new CreateInstancesJPanel());
+    getClasPanel().add(new CreateInstancesJPanel(0));
     this.validate();
 }//GEN-LAST:event_newClasButtonActionPerformed
 
 private void newPropButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPropButtonActionPerformed
 // TODO add your handling code here:
-        getPropPanel().add(new CreateInstancesJPanel());
+        getPropPanel().add(new CreateInstancesJPanel(1));
     this.validate();
 }//GEN-LAST:event_newPropButtonActionPerformed
 
@@ -1044,50 +1044,90 @@ public void copiarAInstancesTextArea(){
         conjunto.getClaseArea().setEditable(false);
         conjunto.getPropiedadArea().setEditable(false);
     }
-    this.validate();
     
-    for(int i=0;i<totalClas;i++){
-            getClasPanel().remove(getClasPanel().getComponent(i));
-            getClasPanel().add(new CreateInstancesJPanel(),i);
+    int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
+    int tamProp = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+    for(int i=0;i<tamClas;i++){
+        CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(i);
+        panelClas.setInstance("");
+        panelClas.getComment().setComent("");
     }
-        getClasPanel().validate();
-    for(int i=0;i<totalProp;i++){
-            getPropPanel().remove(getPropPanel().getComponent(i));
-            getPropPanel().add(new CreateInstancesJPanel(),i);
+    for(int i=0;i<tamProp;i++){
+        CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(i);
+        panelProp.setInstance("");
+        panelProp.getComment().setComent("");
     }
-        getPropPanel().validate();
-    
+    this.validate();   
 }
 
 public void copiarAInstancesAyuda(){
-    String patron="\\\n";
+    String patron="[\\n|\\t|\\s]";
     CreateInstancesTextAreaJPanel conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-    String conjuntoClase = conjunto.getClaseTextArea().trim();
+    String conjuntoClase = conjunto.getClaseTextArea().toString().trim();
     String conjuntoProp = conjunto.getPropiedadTextArea().trim();
     String[] clas = conjuntoClase.split(patron);
     String[] prop = conjuntoProp.split(patron);
-    int j=0;
+    int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
+    int tamProp = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+    int contClas=0,contProp=0;
     for(int i=0;i<clas.length;i++){
         if(!clas[i].equals("")){
-            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
-            panelInst.setInstance(clas[i]);
-            if(AddInstancesJPanel.isStateSeeInst()==true){
-                panelInst.getInstanciaTextField().setEditable(false);
+            if(i<tamClas){
+                CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(contClas);
+                panelClas.setInstance(clas[i]);
+                if(AddInstancesJPanel.isStateSeeInst()==true){
+                    panelClas.getInstanciaTextField().setEditable(false);
+                }
+                contClas++;
+            }else{
+                if(contClas<tamClas){
+                    CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(contClas);
+                    panelClas.setInstance(clas[i]);
+                    if(AddInstancesJPanel.isStateSeeInst()==true){
+                        panelClas.getInstanciaTextField().setEditable(false);
+                    }
+                    contClas++;
+                }else{
+                    CreateInstancesJPanel panelClas = new CreateInstancesJPanel(0);
+                    panelClas.setInstance(clas[i]);
+                    if(AddInstancesJPanel.isStateSeeInst()==true){
+                        panelClas.getInstanciaTextField().setEditable(false);
+                    }
+                    AddInstancesClasPropJDialog.getClasPanel().add(panelClas);
+                }
             }
-            j++;
         }
     }
-    j=0;
+    this.validate();
     for(int i=0;i<prop.length;i++){
         if(!prop[i].equals("")){
-            CreateInstancesJPanel panelProp = (CreateInstancesJPanel) getPropPanel().getComponent(j);
-            panelProp.setInstance(prop[i]);
-            if(AddInstancesJPanel.isStateSeeInst()==true){
-                panelProp.getInstanciaTextField().setEditable(false);
+            if(i<tamProp){
+                CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(contProp);
+                panelProp.setInstance(prop[i]);
+                if(AddInstancesJPanel.isStateSeeInst()==true){
+                    panelProp.getInstanciaTextField().setEditable(false);
+                }
+                contProp++;
+            }else{
+                if(contProp<tamProp){
+                    CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(contProp);
+                    panelProp.setInstance(prop[i]);
+                    if(AddInstancesJPanel.isStateSeeInst()==true){
+                        panelProp.getInstanciaTextField().setEditable(false);
+                    }
+                    contProp++;
+                }else{
+                    CreateInstancesJPanel panelProp = new CreateInstancesJPanel(1);
+                    panelProp.setInstance(prop[i]);
+                    if(AddInstancesJPanel.isStateSeeInst()==true){
+                        panelProp.getInstanciaTextField().setEditable(false);
+                    }
+                    AddInstancesClasPropJDialog.getPropPanel().add(panelProp);
+                }
             }
-            j++;
         }
-    }      
+    }   
+    this.validate();
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
