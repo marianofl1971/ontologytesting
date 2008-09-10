@@ -120,6 +120,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        limpiarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
         limpiarButton.setText("Limpiar");
         limpiarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +171,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        limpiarResultButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
         limpiarResultButton.setText("Limpiar");
         limpiarResultButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +213,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                     .add(layout.createSequentialGroup()
                                         .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 46, Short.MAX_VALUE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 26, Short.MAX_VALUE)
                                         .add(antQueryButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)

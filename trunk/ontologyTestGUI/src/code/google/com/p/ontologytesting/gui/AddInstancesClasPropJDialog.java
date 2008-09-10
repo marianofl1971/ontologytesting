@@ -31,7 +31,12 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.awt.Color;
 import java.awt.Component;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import javax.swing.JEditorPane;
+import javax.swing.WindowConstants;
 /**
  *
  * @author  Saruskas
@@ -55,6 +60,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private Jena jena;
     private boolean instanciaValida=true;
     private String patron1,patron2;
+    private VistaTestJFrame fram;
 
     public AddInstancesClasPropJDialog(Frame parent, boolean modal,int num, int var){
         
@@ -130,9 +136,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 formatosButton.setEnabled(false);
                 guardarInstButton.setVisible(false);
                 limpiarInstButton.setVisible(false);
-                newClasButton.setVisible(false);
-                newPropButton.setVisible(false);
-                jButton1.setVisible(false);
+                borrarSelecButton.setVisible(false);
             }
         }
     }
@@ -334,7 +338,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         textAreaScrollPane = new javax.swing.JScrollPane();
         clasPropPanel = new javax.swing.JPanel();
         formatosButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        borrarSelecButton = new javax.swing.JButton();
+        seeOntoJButton = new javax.swing.JButton();
         contentDescPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descInstanciasTextArea = new javax.swing.JTextArea();
@@ -363,6 +368,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
+        limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
         limpiarInstButton.setText(" Limpiar Seleccion");
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,8 +449,21 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        jButton1.setText("Borrar Seleccion");
+        borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
+        borrarSelecButton.setText("Borrar Seleccion");
+        borrarSelecButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarSelecButtonActionPerformed(evt);
+            }
+        });
+
+        seeOntoJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/eye.png"))); // NOI18N
+        seeOntoJButton.setText("Ver Ontologia");
+        seeOntoJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeOntoJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -462,10 +481,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                         .addComponent(cancelarInstButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
                         .addComponent(guardarInstButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
+                    .addGroup(contentPanelLayout.createSequentialGroup()
+                        .addComponent(seeOntoJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                         .addComponent(limpiarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGap(18, 18, 18)
+                        .addComponent(borrarSelecButton)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -479,8 +500,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(borrarSelecButton)
                     .addComponent(limpiarInstButton)
-                    .addComponent(jButton1))
+                    .addComponent(seeOntoJButton))
                 .addGap(18, 18, 18)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarInstButton)
@@ -571,7 +593,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             clasInst = new ArrayList<ClassInstances>();
             propInst = new ArrayList<PropertyInstances>();
             instancias = new Instancias();
-            int aux = 0;
+
             boolean instanciaSinNombre = false;
             int totalClas = getClasPanel().getComponentCount();
 
@@ -617,6 +639,8 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                             } else {
                                 failClas.add(i, 0);
                             }
+                        }else{
+                            failClas.add(i, 0);
                         }
                     }
                     int totalProp = getPropPanel().getComponentCount();
@@ -638,22 +662,25 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                                 }
                             }
                         }
-
-                        if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
-                            if (!query.equals("") && !coment.equals("")) {
-                                PropertyInstances pI = new PropertyInstances(query, coment);
-                                propInst.add(pI);
-                            } else if (!query.equals("") && coment.equals("")) {
-                                PropertyInstances pI = new PropertyInstances(query);
-                                propInst.add(pI);
-                            } 
-                            failProp.add(i, 0);
-                        } else if (validar.validarInstanciaPropiedad(query) == false) {
-                            if (!query.equals("")) {
-                                failProp.add(i, 1);
-                                setQueryValida(false);
+                        if(!query.equals("")){
+                            if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
+                                if (!query.equals("") && !coment.equals("")) {
+                                    PropertyInstances pI = new PropertyInstances(query, coment);
+                                    propInst.add(pI);
+                                } else if (!query.equals("") && coment.equals("")) {
+                                    PropertyInstances pI = new PropertyInstances(query);
+                                    propInst.add(pI);
+                                } 
+                                failProp.add(i, 0);
+                            } else if (validar.validarInstanciaPropiedad(query) == false) {
+                                if (!query.equals("")) {
+                                    failProp.add(i, 1);
+                                    setQueryValida(false);
+                                }
+                            } else {
+                                failProp.add(i, 0);
                             }
-                        } else {
+                        }else{
                             failProp.add(i, 0);
                         }
                     }
@@ -935,23 +962,39 @@ private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
 // TODO add your handling code here:
-    int totalClas = getClasPanel().getComponentCount();
-    for(int i=0; i<totalClas; i++){
-        CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
-        panelInst.setInstance("");
-        AddComentJDialog comentPane = panelInst.getComment();
-        comentPane.setComent("");
-        ClassInstances cI = new ClassInstances();
-        clasInst.add(cI);
-    }
-    int totalProp = getClasPanel().getComponentCount();
-    for(int i=0; i<totalProp; i++){
-        CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
-        panelInst.setInstance("");
-        AddComentJDialog comentPane = panelInst.getComment();
-        comentPane.setComent("");
-        PropertyInstances pI = new PropertyInstances();
-        propInst.add(pI);
+    int auxClas=0,auxProp=0;
+    if(getInstancesTabbedPane()==0){
+        int totalClas = getClasPanel().getComponentCount();
+        for(int i=0; i<totalClas; i++){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
+            if(panelInst.getSelectedCheckBox()==true){
+                panelInst.setInstance("");
+                AddComentJDialog comentPane = panelInst.getComment();
+                comentPane.setComent("");
+                auxClas=1;
+            }
+        }
+        getClasPanel().validate();
+        if(auxClas==0){
+            JOptionPane.showMessageDialog(frame,"No ha seleccionado ninguna clase para limpiar",
+                    "Warning Message",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }else if(getInstancesTabbedPane()==1){
+        int totalProp = getPropPanel().getComponentCount();
+        for(int i=0; i<totalProp; i++){
+            CreateInstancesJPanel panelProp = (CreateInstancesJPanel) getPropPanel().getComponent(i);
+            if(panelProp.getSelectedCheckBox()==true){
+                panelProp.setInstance("");
+                AddComentJDialog comentPane = panelProp.getComment();
+                comentPane.setComent("");
+                auxProp=1;
+            }
+        }
+        getPropPanel().validate();
+        if(auxProp==0){
+            JOptionPane.showMessageDialog(frame,"No ha seleccionado ninguna propiedad para limpiar",
+                    "Warning Message",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 }//GEN-LAST:event_limpiarInstButtonActionPerformed
 
@@ -973,6 +1016,100 @@ private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     format.setModal(false);
     format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
+
+private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarSelecButtonActionPerformed
+// TODO add your handling code here:
+    int auxClas=0,auxProp=0;
+    if(getInstancesTabbedPane()==0){
+        int totalClas = getClasPanel().getComponentCount();
+        for(int i=0; i<totalClas; i++){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
+            if(panelInst.getSelectedCheckBox()==true){
+                AddInstancesClasPropJDialog.getClasPanel().remove(panelInst);
+                decrementarPosicion(i,0);
+                CreateInstancesJPanel nuevo = new CreateInstancesJPanel(0);
+                AddInstancesClasPropJDialog.getClasPanel().add(nuevo);
+                i--;
+                auxClas=1;
+            }
+        }
+        getClasPanel().validate();
+        if(auxClas==0){
+            JOptionPane.showMessageDialog(frame,"No ha seleccionado ninguna clase para borrar",
+                    "Warning Message",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }else if(getInstancesTabbedPane()==1){
+        int totalProp = getClasPanel().getComponentCount();
+        for(int i=0; i<totalProp; i++){
+            CreateInstancesJPanel panelProp = (CreateInstancesJPanel) getPropPanel().getComponent(i);
+            if(panelProp.getSelectedCheckBox()==true){
+                AddInstancesClasPropJDialog.getPropPanel().remove(panelProp);
+                decrementarPosicion(i,1);
+                CreateInstancesJPanel nuevo = new CreateInstancesJPanel(1);
+                AddInstancesClasPropJDialog.getPropPanel().add(nuevo);
+                i--;
+                auxProp=1;
+            }
+        }
+        getPropPanel().validate();
+        if(auxProp==0){
+            JOptionPane.showMessageDialog(frame,"No ha seleccionado ninguna propiedad para borrar",
+                    "Warning Message",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+}//GEN-LAST:event_borrarSelecButtonActionPerformed
+
+private void seeOntoJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeOntoJButtonActionPerformed
+// TODO add your handling code here:
+    FileReader fr = null;
+    String linea;
+    String result="";
+    fram = new VistaTestJFrame();
+    fram.setTitle("Ontologia Asociada");
+    fram.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    JEditorPane editor = fram.getTestEditorPane();
+    editor.setContentType("text");
+    
+        try {                                                 
+            fr = new FileReader(MainJPanel.getFisicalOntologyTextField());
+            BufferedReader bf = new BufferedReader(fr);
+            
+            while ((linea = bf.readLine())!=null) {
+                result = result + linea  + "\r\n";
+            }
+            editor.setText(result);
+            editor.setEditable(false);
+            fram.setTestEditorPane(editor);
+            fram.setVisible(true);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(frame,"No se puede abrir el archivo.",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+        }
+}//GEN-LAST:event_seeOntoJButtonActionPerformed
+
+void decrementarPosicion(int j,int type){
+    if(type==0){
+        int pos=0,posN=0;
+        int totalClas = getClasPanel().getComponentCount();
+        for(int i=j; i<totalClas; i++){
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
+            pos = panelInst.getPosicion();
+            posN = pos-1;
+            panelInst.setPosicion(posN);
+        } 
+        Auxiliar.setContadorClas(posN+1);
+    }else if(type==1){
+        int pos=0,posN=0;
+        int totalProp = getPropPanel().getComponentCount();
+        for(int i=j; i<totalProp; i++){
+            CreateInstancesJPanel panelProp = (CreateInstancesJPanel) getPropPanel().getComponent(i);
+            pos = panelProp.getPosicion();
+            posN = pos-1;
+            panelProp.setPosicion(posN);
+        } 
+        Auxiliar.setContadorProp(posN+1);
+    }
+}
 
 public void copiarAInstancesTextArea(){
     String textoClase="",textoProp="";
@@ -1101,6 +1238,7 @@ public void copiarAInstancesAyuda(){
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton borrarSelecButton;
     private javax.swing.JButton cancelarInstButton;
     private static javax.swing.JPanel clasPanel;
     private javax.swing.JPanel clasPropPanel;
@@ -1111,18 +1249,16 @@ public void copiarAInstancesAyuda(){
     private javax.swing.JButton formatosButton;
     private javax.swing.JButton guardarInstButton;
     private static javax.swing.JTabbedPane instancesTabbedPane;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiarInstButton;
-    private javax.swing.JButton newClasButton;
-    private javax.swing.JButton newPropButton;
     private javax.swing.JTextField nomInstanciasTextField;
     private static javax.swing.JPanel propPanel;
     private javax.swing.JScrollPane propScrollPane;
+    private javax.swing.JButton seeOntoJButton;
     private javax.swing.JScrollPane textAreaScrollPane;
     // End of variables declaration//GEN-END:variables
 

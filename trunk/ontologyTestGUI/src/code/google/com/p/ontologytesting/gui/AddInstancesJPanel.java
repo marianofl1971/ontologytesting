@@ -9,6 +9,7 @@ package code.google.com.p.ontologytesting.gui;
 import code.google.com.p.ontologytesting.exceptions.*;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import java.awt.Component;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
@@ -220,6 +221,9 @@ public class AddInstancesJPanel extends javax.swing.JPanel {
 private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarButtonActionPerformed
 // TODO add your handling code here:
     
+   Auxiliar.setContadorClas(0);
+   Auxiliar.setContadorProp(0); 
+   
    AddInstancesJPanel.setStateAsociar(true);
    AddInstancesJPanel.setStateExaminar(false);
    AddInstancesJPanel.setStateSeeInst(false);
@@ -265,6 +269,10 @@ private void asociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
+    
+    Auxiliar.setContadorClas(0);
+    Auxiliar.setContadorProp(0);
+        
     AddInstancesJPanel.setStateExaminar(true);
     AddInstancesJPanel.setStateAsociar(false);
     AddInstancesJPanel.setStateSeeInst(false);
@@ -748,7 +756,6 @@ private void seeOntologyButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             while ((linea = bf.readLine())!=null) {
                 result = result + linea  + "\r\n";
             }
-            System.out.println(result);
             editor.setText(result);
             editor.setEditable(false);
             fram.setTestEditorPane(editor);

@@ -266,6 +266,7 @@ private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         jena = jenaInterface.getJena();
         jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         ContentMainJFrame.getContentPanel().remove(0);
+        ContentMainJFrame.getSeparadorPanel().remove(0);
         ContentMainJFrame.getContentPanel().add(new GroupTestsJPanel(8));
         ContentMainJFrame.getSeparador().setVisible(true);
         ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);
@@ -297,6 +298,7 @@ private void sparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         jena.addReasoner("file:".concat(MainJPanel.getFisicalOntologyTextField()));
         AddSPARQLJPanel.setSeleccionado(true);
         ContentMainJFrame.getContentPanel().remove(0);
+        ContentMainJFrame.getSeparadorPanel().remove(0);
         ContentMainJFrame.getContentPanel().add(new AddSPARQLJPanel());
         ContentMainJFrame.getSeparador().setVisible(true);
         ContentMainJFrame.getSeparadorPanel().add(new SeparatorTestsPanel(),BorderLayout.CENTER);

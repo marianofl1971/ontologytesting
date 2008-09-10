@@ -226,6 +226,7 @@ private void inicioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
     CollectionTest coll = new CollectionTest();
     coll.setScenariotest(new ArrayList<ScenarioTest>());
     coll.setNamespace("");

@@ -68,10 +68,12 @@
                           <EmptySpace pref="533" max="32767" attributes="0"/>
                           <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="seeOntoJButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="316" max="32767" attributes="0"/>
                           <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="471" max="32767" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="borrarSelecButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -90,8 +92,9 @@
                   <Component id="instancesTabbedPane" min="-2" pref="316" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="borrarSelecButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="limpiarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="seeOntoJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -132,6 +135,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="limpiarInstButton">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/paintbrush.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value=" Limpiar Seleccion"/>
           </Properties>
           <Events>
@@ -280,13 +286,27 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="formatosButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="borrarSelecButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/code/google/com/p/ontologytesting/images/delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Borrar Seleccion"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarSelecButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="seeOntoJButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/eye.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ver Ontologia"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seeOntoJButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

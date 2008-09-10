@@ -54,7 +54,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        selectedCheckBox = new javax.swing.JCheckBox();
 
         setName("instances"); // NOI18N
 
@@ -103,7 +103,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
                 .add(18, 18, 18)
                 .add(duplicarButton)
                 .add(18, 18, 18)
-                .add(jCheckBox1)
+                .add(selectedCheckBox)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -118,7 +118,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
                         .add(comentarioButton))
                     .add(layout.createSequentialGroup()
                         .add(2, 2, 2)
-                        .add(jCheckBox1)))
+                        .add(selectedCheckBox)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -127,13 +127,11 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
-    System.out.println("Pos "+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    System.out.println("Pos "+this.getPosicion());
    this.setVisible(false);
    int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
    if(tab == 0){
@@ -241,7 +239,7 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
     private javax.swing.JButton comentarioButton;
     private javax.swing.JButton duplicarButton;
     private javax.swing.JTextField instanciaTextField;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox selectedCheckBox;
     // End of variables declaration//GEN-END:variables
 
     public void setInstance(String instance){
@@ -278,5 +276,9 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
-    }    
+    }
+
+    public boolean getSelectedCheckBox() {
+        return selectedCheckBox.isSelected();
+    }
 }

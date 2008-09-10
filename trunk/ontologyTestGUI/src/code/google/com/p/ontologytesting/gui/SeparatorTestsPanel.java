@@ -6,6 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author  sara.garcia
@@ -71,6 +73,7 @@ private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
     ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
     ContentMainJFrame.getSeparador().setVisible(false);
     ContentMainJFrame.getContentPanel().validate();
