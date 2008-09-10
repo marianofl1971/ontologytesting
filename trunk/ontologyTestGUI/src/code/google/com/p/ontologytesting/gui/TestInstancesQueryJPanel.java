@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
@@ -22,15 +23,12 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     
     
     /** Creates new form TestInstancesQueryJPanel */
-    public TestInstancesQueryJPanel(int i) {
-        initComponents();
-        posicion = i;
-        frameComent = new AddComentJDialog(frame,true); 
-        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    }
-    
     public TestInstancesQueryJPanel() {
         initComponents();
+        int pos = Auxiliar.getContadorReal();
+        this.setPosicion(pos);
+        int cont = pos+1;
+        Auxiliar.setContadorReal(cont);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
@@ -105,16 +103,16 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
+                .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 214, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(54, 54, 54)
                 .add(resultTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 157, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 50, Short.MAX_VALUE)
                 .add(comentarioButton)
-                .add(18, 18, 18)
+                .add(39, 39, 39)
                 .add(borrarButton)
-                .add(18, 18, 18)
+                .add(33, 33, 33)
                 .add(duplicarButton)
-                .addContainerGap())
+                .add(20, 20, 20))
         );
 
         layout.linkSize(new java.awt.Component[] {queryTextField, resultTextField}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
@@ -124,11 +122,11 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(resultTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(duplicarButton)
+                    .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(comentarioButton)
                     .add(borrarButton)
-                    .add(comentarioButton))
+                    .add(duplicarButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -138,34 +136,92 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
+    System.out.println("Pos "+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
-    
-    GroupTestsJPanel.getRealAyudaPanel().remove(this);
-    GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
+   this.setVisible(false);
+   int tab = GroupTestsJPanel.getSelectedTabed();
+   if(tab == 2){
+       int finalPos=0;
+       int p = this.getPosicion();
+       int total = GroupTestsJPanel.getRealAyudaPanel().getComponentCount();
+       for(int i=p+1;i<total;i++){
+            TestInstancesQueryJPanel panel = (TestInstancesQueryJPanel) GroupTestsJPanel.getRealAyudaPanel().getComponent(i);
+            int pos = panel.getPosicion();
+            panel.setPosicion(pos-1);
+            finalPos=pos-1;
+       }
+       GroupTestsJPanel.getRealAyudaPanel().remove(this);
+       TestInstancesQueryJPanel pa = new TestInstancesQueryJPanel();
+       pa.setPosicion(finalPos+1);
+       GroupTestsJPanel.getRealAyudaPanel().add(pa);
+   }
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    String query = this.getQuery();
-    String result = this.getQueryResult();
-    String coment = frameComent.getComent();
-    
-    GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel(query,result,coment));
+     int tab = GroupTestsJPanel.getSelectedTabed();
+     int pos = this.getPosicion();
+     if(tab==2){
+         int tam = GroupTestsJPanel.getRealAyudaPanel().getComponentCount();
+         String query = this.getQuery();
+         String result = this.getQueryResult();
+         TestInstancesQueryJPanel panel = new TestInstancesQueryJPanel();
+         panel.setQuery(query);
+         panel.setQueryResult(result);
+         panel.setComment(this.frameComent);
+         panel.setPosicion(pos+1);
+         if(pos+2==tam){
+             GroupTestsJPanel.getRealAyudaPanel().add(panel);
+         }else{
+            GroupTestsJPanel.getRealAyudaPanel().add(panel, pos+2);
+         }
+         int total = GroupTestsJPanel.getRealAyudaPanel().getComponentCount();
+         for(int i=pos+3;i<total;i++){
+                TestInstancesQueryJPanel p = (TestInstancesQueryJPanel) GroupTestsJPanel.getRealAyudaPanel().getComponent(i);
+                int po = p.getPosicion();
+                p.setPosicion(po+1);
+           }  
+         GroupTestsJPanel.getRealAyudaPanel().getParent().validate();
+         GroupTestsJPanel.getRealAyudaPanel().validate();
+    }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
     getQueryTextField().setForeground(Color.BLACK);
+    
+    int pos = this.getPosicion();
+    int tamReal = GroupTestsJPanel.getRealAyudaPanel().getComponentCount();
+    int tab = GroupTestsJPanel.getSelectedTabed();
+    if(tab == 2){
+        if(pos+2==tamReal){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
+             }
+        }
+        GroupTestsJPanel.getRealAyudaPanel().getParent().validate();
+    }
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
 private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextFieldMouseClicked
 // TODO add your handling code here:
      getResultTextField().setForeground(Color.BLACK);
+     
+    int pos = this.getPosicion();
+    int tamReal = GroupTestsJPanel.getRealAyudaPanel().getComponentCount();
+    int tab = GroupTestsJPanel.getSelectedTabed();
+    if(tab == 2){
+        if(pos+2==tamReal){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
+             }
+        }
+        GroupTestsJPanel.getRealAyudaPanel().getParent().validate();
+    }
 }//GEN-LAST:event_resultTextFieldMouseClicked
 
 

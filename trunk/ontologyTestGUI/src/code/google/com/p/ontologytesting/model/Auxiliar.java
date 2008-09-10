@@ -23,26 +23,11 @@ import javax.swing.JOptionPane;
  */
 public class Auxiliar {
 
-    public static int getContadorRet() {
-        return contadorRet;
-    }
-
-    public static void setContadorRet(int aContadorRet) {
-        contadorRet = aContadorRet;
-    }
-
-    public static int getContadorClasi() {
-        return contadorClasi;
-    }
-
-    public static void setContadorClasi(int aContadorClasi) {
-        contadorClasi = aContadorClasi;
-    }
-
     private boolean yaEligioGuardarInstancias=false;
     private static int contadorClas=0,contadorProp=0;
     private static int contadorInst=0,contadorSat=0;
     private static int contadorRet=0,contadorClasi=0;
+    private static int contadorReal=0;
     private Component frame;
     
     public void crearArchivoDeInstancias(Instancias instancias){
@@ -150,6 +135,30 @@ public class Auxiliar {
 
     public static void setContadorSat(int aContadorSat) {
         contadorSat = aContadorSat;
+    }
+    
+    public static int getContadorRet() {
+        return contadorRet;
+    }
+
+    public static void setContadorRet(int aContadorRet) {
+        contadorRet = aContadorRet;
+    }
+
+    public static int getContadorClasi() {
+        return contadorClasi;
+    }
+
+    public static void setContadorClasi(int aContadorClasi) {
+        contadorClasi = aContadorClasi;
+    }
+    
+    public static int getContadorReal() {
+        return contadorReal;
+    }
+
+    public static void setContadorReal(int aContadorReal) {
+        contadorReal = aContadorReal;
     }
     
 }

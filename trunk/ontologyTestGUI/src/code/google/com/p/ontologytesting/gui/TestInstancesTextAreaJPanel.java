@@ -38,15 +38,6 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
-
-    public TestInstancesTextAreaJPanel(int type,String query, String result, String coment) {
-        initComponents();
-        queryTextField.setText(query);
-        resultTextArea.setText(result);
-        frameComent = new AddComentJDialog(frame,true); 
-        frameComent.setComent(coment);
-        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -137,7 +128,6 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
-    System.out.println("Pos "+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
@@ -178,17 +168,102 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    
+    int tab = GroupTestsJPanel.getSelectedTabed();
+     if(tab==1){
+         int tam = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+         String query = this.getQuery();
+         String result = this.getQueryResult();
+         TestInstancesTextAreaJPanel panel = new TestInstancesTextAreaJPanel(0);
+         panel.setQuery(query);
+         panel.setQueryResult(result);
+         panel.setComment(this.frameComent);
+         int pos = this.getPosicion();
+         panel.setPosicion(pos+1);
+         if(pos+2==tam){
+             GroupTestsJPanel.getRetAyudaPanel().add(panel);
+         }else{
+            GroupTestsJPanel.getRetAyudaPanel().add(panel, pos+2);
+         }
+         int total = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+         for(int i=pos+3;i<total;i++){
+                TestInstancesTextAreaJPanel p = (TestInstancesTextAreaJPanel) GroupTestsJPanel.getRetAyudaPanel().getComponent(i);
+                int po = p.getPosicion();
+                p.setPosicion(po+1);
+           }  
+         GroupTestsJPanel.getRetAyudaPanel().getParent().validate();
+    }else if(tab==4){
+         int tam = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+         String query = this.getQuery();
+         String result = this.getQueryResult();
+         TestInstancesTextAreaJPanel panel = new TestInstancesTextAreaJPanel(1);
+         panel.setQuery(query);
+         panel.setQueryResult(result);
+         panel.setComment(this.frameComent);
+         int pos = this.getPosicion();
+         panel.setPosicion(pos+1);
+         if(pos+2==tam){
+             GroupTestsJPanel.getClasAyudaPanel().add(panel);
+         }else{
+            GroupTestsJPanel.getClasAyudaPanel().add(panel, pos+2);
+         }
+         int total = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+         for(int i=pos+3;i<total;i++){
+                TestInstancesTextAreaJPanel p = (TestInstancesTextAreaJPanel) GroupTestsJPanel.getClasAyudaPanel().getComponent(i);
+                int po = p.getPosicion();
+                p.setPosicion(po+1);
+           }  
+         GroupTestsJPanel.getClasAyudaPanel().getParent().validate();
+    }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
     getQueryTextField().setForeground(Color.BLACK);
+    
+    int tab = GroupTestsJPanel.getSelectedTabed();
+    int pos = this.getPosicion();
+    int tamRet = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+    int tamClas = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+    if(tab == 1){
+        if(pos+2==tamRet){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel(0));
+             }
+        }
+        GroupTestsJPanel.getRetAyudaPanel().getParent().validate();
+    }else if(tab==4){
+        if(pos+2==tamClas){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel(1));
+             }
+        }
+        GroupTestsJPanel.getClasAyudaPanel().getParent().validate();
+    }
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
 private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextAreaMouseClicked
 // TODO add your handling code here:
     getResultTextArea().setForeground(Color.BLACK);
+    
+    int tab = GroupTestsJPanel.getSelectedTabed();
+    int pos = this.getPosicion();
+    int tamRet = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+    int tamClas = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+    if(tab == 1){
+        if(pos+2==tamRet){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel(0));
+             }
+        }
+        GroupTestsJPanel.getRetAyudaPanel().getParent().validate();
+    }else if(tab==4){
+        if(pos+2==tamClas){
+             for(int i=0;i<9;i++){
+                GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel(1));
+             }
+        }
+        GroupTestsJPanel.getClasAyudaPanel().getParent().validate();
+    }
 }//GEN-LAST:event_resultTextAreaMouseClicked
 
 

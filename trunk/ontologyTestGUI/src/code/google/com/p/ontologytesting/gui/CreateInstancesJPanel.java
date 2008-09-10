@@ -166,7 +166,6 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-     System.out.println("Pos "+this.getPosicion());
      int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
      if(tab==0){
          int tam = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();

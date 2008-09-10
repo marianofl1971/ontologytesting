@@ -91,20 +91,24 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if(group.guardarDatos()==true){
             ContentMainJFrame.getContentPanel().remove(0);
             ContentMainJFrame.getSeparadorPanel().remove(0);
-            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getContentPanel().add(GroupTestsJPanel.getPanelTree());
             ContentMainJFrame.getContentPanel().validate();
+            ContentMainJFrame.getContentPanel().getParent().validate();
+            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getSeparadorPanel().validate();
+            ContentMainJFrame.getSeparadorPanel().getParent().validate();
         }
     }else{
         AddSPARQLJPanel group = (AddSPARQLJPanel) ContentMainJFrame.getContentPanel().getComponent(0);
         if(group.guardarDatos()==true){
             ContentMainJFrame.getContentPanel().remove(0);
             ContentMainJFrame.getSeparadorPanel().remove(0);
-            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getContentPanel().add(group.getPanelTree());
             ContentMainJFrame.getContentPanel().validate();
+            ContentMainJFrame.getContentPanel().getParent().validate();
+            ContentMainJFrame.getSeparadorPanel().add(new SeparatorResultTestsActionJPanel());
             ContentMainJFrame.getSeparadorPanel().validate();
+            ContentMainJFrame.getSeparadorPanel().getParent().validate();
         }
     }
 }//GEN-LAST:event_ejecutarButtonActionPerformed

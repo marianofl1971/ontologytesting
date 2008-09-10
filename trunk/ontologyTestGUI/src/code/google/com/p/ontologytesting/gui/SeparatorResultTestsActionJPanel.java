@@ -202,6 +202,7 @@ private void newSimpleTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
     Auxiliar.setContadorSat(0);
     Auxiliar.setContadorClasi(0);
     Auxiliar.setContadorRet(0);
+    Auxiliar.setContadorReal(0);
     AddSPARQLJPanel.setSeleccionado(false);
     MainJPanel.setSimpleTestSelect(true);
     MainJPanel.setSparqlTestsSelect(false);
