@@ -15,9 +15,9 @@ package code.google.com.p.ontologytesting.model;
  */
 public class QueryOntology {
     
-    private String query;
-    private String resultexpected;
-    private String comment;
+    private String query="";
+    private String resultexpected="";
+    private String comment="";
 
     
     public QueryOntology(String query, String resultexpected,String comment){
@@ -27,9 +27,9 @@ public class QueryOntology {
     }
 
     public QueryOntology(){
-        this.query=null;
-        this.resultexpected=null;
-        this.comment=null;
+        this.query="";
+        this.resultexpected="";
+        this.comment="";
     }
     
     public QueryOntology(String query, String resultexpected){

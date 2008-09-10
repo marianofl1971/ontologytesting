@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ExecQuerySparql {
     private List<String> datos;
-    private String nombreSelect;
+    private String nombreSelect="";
 
     public ExecQuerySparql(){
         datos = new ArrayList<String>();

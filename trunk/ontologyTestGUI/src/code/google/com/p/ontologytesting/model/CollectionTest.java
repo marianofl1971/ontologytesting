@@ -19,8 +19,8 @@ import java.util.List;
 public class CollectionTest {
 
     private ArrayList<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
-    private String ontology;
-    private String namespace;
+    private String ontology="";
+    private String namespace="";
     
     public CollectionTest(List<ScenarioTest> scenariotest, String ontology, 
             String namespace){

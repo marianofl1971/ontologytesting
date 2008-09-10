@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ScenarioTest {
     
-    private String testName;
+    private String testName="";
     private String nombre="";
     private String descripcion="";
     private Instancias instancias;
@@ -57,7 +57,7 @@ public class ScenarioTest {
     public ScenarioTest(){  
         this.instancias = new Instancias();
         this.queryTest = new ArrayList<QueryOntology>();
-        this.testName = null;
+        this.testName = "";
         this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
         this.nombre = "";
         this.descripcion = "";

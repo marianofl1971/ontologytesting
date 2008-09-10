@@ -18,7 +18,6 @@ import code.google.com.p.ontologytesting.model.Auxiliar;
 public class CreateInstancesJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog frameComent; 
-    private String identifier="";
     private Frame frame;
     private int posicion;
     
@@ -256,10 +255,6 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
 
     public void setComment(AddComentJDialog comment) {
         this.frameComent = comment;
-    }
-
-    public String getIdentifier() {
-        return identifier;
     }
 
     public void setInstanciaTextField(javax.swing.JTextField instanciaTextField) {

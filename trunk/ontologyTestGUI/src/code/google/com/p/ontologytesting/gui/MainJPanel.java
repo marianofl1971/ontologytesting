@@ -254,6 +254,10 @@ private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void newTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTestActionPerformed
 // TODO add your handling code here:
+    Auxiliar.setContadorInst(0);
+    Auxiliar.setContadorSat(0);
+    Auxiliar.setContadorClasi(0);
+    Auxiliar.setContadorRet(0);
     if(getFisicalOntologyTextField().equals("") || getNamespaceOntologyTextField().equals("")){
         JOptionPane.showMessageDialog(frame,"Ambos campos Ubicacion Fisica y Namespace " +
                 "son obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);

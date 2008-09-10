@@ -11,8 +11,8 @@ package code.google.com.p.ontologytesting.model;
  */
 public class SparqlQueryOntology {
 
-    private String resultexpected;
-    private String querySparql;
+    private String resultexpected="";
+    private String querySparql="";
 
     
     public SparqlQueryOntology(String querySparql, String resultexpected){
@@ -21,8 +21,8 @@ public class SparqlQueryOntology {
     }
     
     public SparqlQueryOntology(){
-        this.querySparql=null;
-        this.resultexpected = null;
+        this.querySparql="";
+        this.resultexpected = "";
     }
 
     public String getResultexpected() {

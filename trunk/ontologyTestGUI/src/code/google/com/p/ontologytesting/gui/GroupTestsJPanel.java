@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.gui;
 
 import code.google.com.p.ontologytesting.exceptions.*;
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.OntologyTestResult;
 import java.awt.BorderLayout;
@@ -92,16 +93,12 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     private static boolean instCompletado,retCompletado,realCompletado,satCompletado,clasCompletado;
     private static int varAux=0;
     private Component comp;
-    private static int posicion;
     private static TestInstancesTFJPanel pInst,pSat,testTF;
-    private static TestInstancesTextAreaJPanel pRet,pClas;
-    private static TestInstancesQueryJPanel pReal;
     private static List<QueryOntology> queryTest1,queryTest2,queryTest3,queryTest4,queryTest5;
     
     
     /** Creates new form GroupTestQueryJPanel */
     public GroupTestsJPanel(int num) {
-        posicion=1;
         initComponents(); 
         setState(true);
         frameHelp = new HelpJDialog(frame,true); 
@@ -135,27 +132,11 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         testClasPanel.add(new DescripcionJPanel(),0);
         
         for (int i = 0; i <= num; i++) {
-            pInst = new TestInstancesTFJPanel();
-            pInst.setPosicion(posicion);
-            instAyudaPanel.add(pInst);
-            
-            pRet = new TestInstancesTextAreaJPanel();
-            pRet.setPosicion(posicion);
-            retAyudaPanel.add(pRet);        
-
-            pReal = new TestInstancesQueryJPanel();
-            pReal.setPosicion(posicion);
-            realAyudaPanel.add(pReal);
-            
-            pSat = new TestInstancesTFJPanel();
-            pSat.setPosicion(posicion);
-            satAyudaPanel.add(pSat);
-            
-            pClas = new TestInstancesTextAreaJPanel();
-            pClas.setPosicion(posicion);
-            clasAyudaPanel.add(pClas);
-            
-            posicion++;
+            instAyudaPanel.add(new TestInstancesTFJPanel(0));
+            retAyudaPanel.add(new TestInstancesTextAreaJPanel(0));        
+            realAyudaPanel.add(new TestInstancesQueryJPanel());
+            satAyudaPanel.add(new TestInstancesTFJPanel(1));
+            clasAyudaPanel.add(new TestInstancesTextAreaJPanel(1));
         }
                 
         contentPanel.add(introduccionPanel,BorderLayout.NORTH);
@@ -165,7 +146,6 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
     }
     
     public GroupTestsJPanel(String path){
-        posicion=1;
         initComponents(); 
         int pos=0;
         setNewState(true);
@@ -181,8 +161,8 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         satAyudaPanel.setLayout(new BoxLayout(getSatAyudaPanel(), BoxLayout.Y_AXIS));
         realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());    
-        opcionTextRetPanel.add(new TestInstancesTextAreaJPanel());
-        opcionTextClasPanel.add(new TestInstancesTextAreaJPanel());
+        opcionTextRetPanel.add(new TestInstancesTextAreaJPanel(0));
+        opcionTextClasPanel.add(new TestInstancesTextAreaJPanel(1));
         opcionTextSatPanel.add(new TestInstancesTextJPanel());
         opcionTextRealPanel.add(new TestInstancesTextJPanel());
 
@@ -201,12 +181,14 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
                 qi = qO.listIterator();
                 while(qi.hasNext()){   
                     QueryOntology cI = (QueryOntology) qi.next();
-                    testTF = new TestInstancesTFJPanel();
-                    testTF.setPosicion(posicion);
-                    posicion++;
                     pos++;
                     TestInstancesQueryJPanel testQuery = new TestInstancesQueryJPanel();
-                    if(s.getTestName().equals("Instanciación") || s.getTestName().equals("Satisfactibilidad")){   
+                    if(s.getTestName().equals("Instanciación") || s.getTestName().equals("Satisfactibilidad")){
+                        if(s.getTestName().equals("Instanciación")){
+                            testTF = new TestInstancesTFJPanel(0);
+                        }else if(s.getTestName().equals("Satisfactibilidad")){
+                            testTF = new TestInstancesTFJPanel(1);
+                        }
                         testTF.setQuery(cI.getQuery());
                         String resultExp = cI.getResultexpected();
                         if(resultExp.equals("true")){
@@ -245,16 +227,14 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
 
         if(instAyudaPanel.getComponentCount()<8){
             while(instAyudaPanel.getComponentCount()<8){
-                pInst = new TestInstancesTFJPanel();
-                pInst.setPosicion(posicion);
+                pInst = new TestInstancesTFJPanel(0);
                 instAyudaPanel.add(pInst);
-                posicion++;
                 pos++;
             }
         }
         if(retAyudaPanel.getComponentCount()<8){
             while(retAyudaPanel.getComponentCount()<8){
-                retAyudaPanel.add(new TestInstancesTextAreaJPanel());
+                retAyudaPanel.add(new TestInstancesTextAreaJPanel(0));
             }
         }
         if(realAyudaPanel.getComponentCount()<8){
@@ -264,16 +244,14 @@ public class GroupTestsJPanel extends javax.swing.JPanel {
         }
         if(satAyudaPanel.getComponentCount()<8){
             while(satAyudaPanel.getComponentCount()<8){
-                pSat = new TestInstancesTFJPanel();
-                pSat.setPosicion(posicion);
+                pSat = new TestInstancesTFJPanel(1);
                 instAyudaPanel.add(pSat);
-                posicion++;
                 pos++;
             }
         }
         if(clasAyudaPanel.getComponentCount()<8){
             while(clasAyudaPanel.getComponentCount()<8){
-                clasAyudaPanel.add(new TestInstancesTextAreaJPanel());
+                clasAyudaPanel.add(new TestInstancesTextAreaJPanel(1));
             }
         }
         
@@ -1482,6 +1460,7 @@ public static void asociarInstancias(int sel){
                     }
                 }
             }else{
+                setInstTextName(true);
                 descPanel = (DescripcionJPanel) panelInst.getComponent(0);
                 texto = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
                 conjuntoQuerys = texto.getConsultaQuery();
@@ -1491,17 +1470,20 @@ public static void asociarInstancias(int sel){
                     JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
                     "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);        
                     setInstTextName(false);
+                }else if(descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))
+                        && MainJPanel.getCollectionTest().getScenariotest().size()==0){
+                    JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                    "No ha creado ningun test para ejecutar.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setInstTextName(false);
+                }else if(!descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                    "Al menos debe introducir una consulta para ejecutar el test.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setInstTextName(false);
                 }else{
                     cQuery = conjuntoQuerys.split("\\\n");
                     cResult = conjuntoResult.split("\\\n");
                     cComent = conjuntoComent.split("\\\n");
-                    if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
-                            "Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                            "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                            setAmbosNecesarios(true);
-                    }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                    if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
                         if(var==0){
                             nombreTest = descPanel.getNombreTextField();
                             descTest = descPanel.getDescTextArea();
@@ -1511,7 +1493,10 @@ public static void asociarInstancias(int sel){
                             var=1;
                         }
                         QueryOntology testQuery = new QueryOntology();
-                        for(int i=0; i<cQuery.length;i++){
+                        int tamQ = cQuery.length;
+                        int tamR = cResult.length;
+                        if(tamQ==tamR){
+                        for(int i=0; i<tamQ;i++){
                             if(!cQuery[i].equals("") && !cResult[i].equals("")){
                                 if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
                                         validarTests.validarResultadoInstSatis(cResult[i])==true){
@@ -1536,10 +1521,20 @@ public static void asociarInstancias(int sel){
                                     getInst().add(i, 3);
                                     setValidoInst(false);
                                 }
-                            }else{
-                                getInst().add(i, 0);
                             }
                         } 
+                    }else{
+                        JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
+                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
+                    }
+                    }else if((!conjuntoQuerys.equals("") && conjuntoResult.equals("")) ||
+                        (conjuntoQuerys.equals("") && !conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test Instanciacion: " +
+                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
                     }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Instanciacion: " +
                         "Al menos debe introducir una consulta para ejecutar el test.",
@@ -1592,7 +1587,7 @@ public static void asociarInstancias(int sel){
                     test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
                     descPanel = (DescripcionJPanel) panelRet.getComponent(0);
                     if(descPanel.getNombreTextField().equals("") && (!test2.getQuery().equals("") || !test2.getQueryResult().equals(""))){
-                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                         "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);
                         setRetTextName(false);
                     }else if(!test2.getQuery().equals("") && !test2.getQueryResult().equals("")){
@@ -1639,14 +1634,14 @@ public static void asociarInstancias(int sel){
                     }else if((!test2.getQuery().equals("") && test2.getQueryResult().equals("")) ||
                             ((test2.getQuery().equals("") && !test2.getQueryResult().equals("")))){
                                 varAux=1;
-                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                                         "Ambos campos CONSULTA y RESULTADO ESPERADO " +
                                         "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setAmbosNecesarios(true);
                     }else if(test2.getQuery().equals("") && test2.getQueryResult().equals("")){
                         if(varAux==0){
                             if(!descPanel.getNombreTextField().equals("")){
-                                JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                                 "Al menos debe introducir una consulta para ejecutar el test.",
                                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                                 setSinConsultas(true);
@@ -1661,7 +1656,7 @@ public static void asociarInstancias(int sel){
                 }
                 }
                 if(testYaExiste(scenario.getNombre())==true){
-                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                    JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                     "Ya existe un test con ese nombre, por favor, introduzca uno nuevo.",
                     "Warning Message",JOptionPane.WARNING_MESSAGE);
                     setTestYaExiste(true);
@@ -1675,7 +1670,7 @@ public static void asociarInstancias(int sel){
                                         if(getValidoRet()==true){
                                             tratarNuevoTest(sel);
                                         }else{
-                                            JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                                            JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                                             "El formato de los datos marcados en rojo no es correcto." +
                                             "\nPor favor, consulte la ayuda acerca del formato " +
                                             "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1692,7 +1687,7 @@ public static void asociarInstancias(int sel){
                             Instancias instancias = ContentMainJFrame.getInstancias().get(sel);
                             if(hayInstanciasAsociadas(instancias)==false){
                                 int n = JOptionPane.showConfirmDialog(comp, "El Test de " +
-                                    "Retrieval no tiene instancias asociadas. ¿Desea " +
+                                    "Recuperacion no tiene instancias asociadas. ¿Desea " +
                                     "continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
                                 if (n == JOptionPane.NO_OPTION){    
                                     setNoHayInstancias(true);
@@ -1700,7 +1695,7 @@ public static void asociarInstancias(int sel){
                             }
                         }
                     }else if(getValidoRet()==false){
-                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                         "El formato de los datos marcados en rojo no es correcto." +
                         "\nPor favor, consulte la ayuda acerca del formato " +
                         "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -1708,14 +1703,24 @@ public static void asociarInstancias(int sel){
                     }
                 }
         }else{
+                setRetTextName(true);
                 descPanel = (DescripcionJPanel) panelRet.getComponent(0);
                 texto = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
                 conjuntoQuerys = texto.getConsultaQuery();
                 conjuntoResult = texto.getResultadoEsperado();
                 conjuntoComent = texto.getComentTextArea();
-                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("")) || (!conjuntoResult.equals(""))){
-                    JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                if(descPanel.getNombreTextField().equals("") && (!conjuntoQuerys.equals("") || (!conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                     "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);        
+                    setRetTextName(false);
+                }else if(descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))
+                        && MainJPanel.getCollectionTest().getScenariotest().size()==0){
+                    JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
+                    "No ha creado ningun test para ejecutar.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setRetTextName(false);
+                }else if(!descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
+                    "Al menos debe introducir una consulta para ejecutar el test.","Warning Message",JOptionPane.WARNING_MESSAGE); 
                     setRetTextName(false);
                 }else{
                 cQuery = conjuntoQuerys.split("\\\n");
@@ -1723,7 +1728,7 @@ public static void asociarInstancias(int sel){
                 cComent = conjuntoComent.split("\\\n");
                 if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
                         (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                        JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
+                        JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
                                 "Ambos campos CONSULTA y RESULTADO ESPERADO " +
                                 "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
                         setAmbosNecesarios(true);
@@ -1737,6 +1742,9 @@ public static void asociarInstancias(int sel){
                         var=1;
                     }
                     QueryOntology testQuery = new QueryOntology();
+                    int tamQ = cQuery.length;
+                    int tamR = cResult.length;
+                    if(tamQ==tamR){
                     for(int i=0; i<cQuery.length;i++){
                         if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQuery(cQuery[i])==true &&
@@ -1765,6 +1773,12 @@ public static void asociarInstancias(int sel){
                     }else{
                         getRet().add(i, 0);
                     }
+                }
+                }else{
+                        JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
+                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
                 }
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Retrieval: " +
@@ -2154,6 +2168,7 @@ public static void asociarInstancias(int sel){
                     }
                 }
             }else{
+                setSatTextName(true);
                 descPanel = (DescripcionJPanel) panelSat.getComponent(0);
                 texto = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
                 conjuntoQuerys = texto.getConsultaQuery();
@@ -2163,17 +2178,20 @@ public static void asociarInstancias(int sel){
                     JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
                     "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);         
                     setSatTextName(false);
+                }else if(descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))
+                        && MainJPanel.getCollectionTest().getScenariotest().size()==0){
+                    JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                    "No ha creado ningun test para ejecutar.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setSatTextName(false);
+                }else if(!descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
+                    "Al menos debe introducir una consulta para ejecutar el test.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setSatTextName(false);
                 }else{
                 cQuery = conjuntoQuerys.split("\\\n");
                 cResult = conjuntoResult.split("\\\n");
                 cComent = conjuntoComent.split("\\\n");
-                if((conjuntoQuerys.equals("") && !conjuntoResult.equals("")) || 
-                        (!conjuntoQuerys.equals("") && conjuntoResult.equals(""))){
-                        JOptionPane.showMessageDialog(frame,"Test Satisfactibilidad: " +
-                                "Ambos campos CONSULTA y RESULTADO ESPERADO " +
-                                "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
-                        setAmbosNecesarios(true);
-                }else if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
+                if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
                     if(var==0){
                         nombreTest = descPanel.getNombreTextField();
                         descTest = descPanel.getDescTextArea();
@@ -2183,6 +2201,9 @@ public static void asociarInstancias(int sel){
                         var=1;
                     }
                     QueryOntology testQuery = new QueryOntology();
+                    int tamQ = cQuery.length;
+                    int tamR = cResult.length;
+                    if(tamQ==tamR){
                     for(int i=0; i<cQuery.length;i++){
                         if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
@@ -2212,6 +2233,18 @@ public static void asociarInstancias(int sel){
                         getSat().add(i, 0);
                     }
                     }
+                }else{
+                        JOptionPane.showMessageDialog(frame,"Test Satisfactibilidad: " +
+                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
+                    }
+                }else if((!conjuntoQuerys.equals("") && conjuntoResult.equals("")) ||
+                        (conjuntoQuerys.equals("") && !conjuntoResult.equals(""))){
+                        JOptionPane.showMessageDialog(frame,"Test Satisfactibilidad: " +
+                        "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                        "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                        setAmbosNecesarios(true);
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Satisfactibilidad: " +
                         "Al menos debe introducir una consulta para ejecutar el test.",
@@ -2390,6 +2423,15 @@ public static void asociarInstancias(int sel){
                     JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
                     "El nombre del test es obligatorio.","Warning Message",JOptionPane.WARNING_MESSAGE);         
                     setClasTextName(false);
+                }else if(descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))
+                        && MainJPanel.getCollectionTest().getScenariotest().size()==0){
+                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                    "No ha creado ningun test para ejecutar.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setClasTextName(false);
+                }else if(!descPanel.getNombreTextField().equals("") && (conjuntoQuerys.equals("") && (conjuntoResult.equals("")))){
+                    JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
+                    "Al menos debe introducir una consulta para ejecutar el test.","Warning Message",JOptionPane.WARNING_MESSAGE); 
+                    setClasTextName(false);
                 }else{ 
                 cQuery = conjuntoQuerys.split("\\\n");
                 cResult = conjuntoResult.split("\\\n");
@@ -2410,6 +2452,9 @@ public static void asociarInstancias(int sel){
                         var=1;
                     }
                     QueryOntology testQuery = new QueryOntology();
+                    int tamQ = cQuery.length;
+                    int tamR = cResult.length;
+                    if(tamQ==tamR){
                     for(int i=0; i<cQuery.length;i++){
                         if(!cQuery[i].equals("") && !cResult[i].equals("")){
                         if(validarTests.validarQuery(cQuery[i])==true &&
@@ -2435,10 +2480,16 @@ public static void asociarInstancias(int sel){
                             getClas().add(i, 3);
                             setValidoClas(false);
                         }
-                    }else{
+                    }else{  
                         getClas().add(i, 0);
                     }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Test de Recuperacion: " +
+                    "Ambos campos CONSULTA y RESULTADO ESPERADO " +
+                    "son obligatorios.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                    setAmbosNecesarios(true);
+                }
                 }else if(conjuntoQuerys.equals("") && conjuntoResult.equals("")){
                         JOptionPane.showMessageDialog(frame,"Test de Clasificacion: " +
                         "Al menos debe introducir una consulta para ejecutar el test.",
@@ -2585,17 +2636,15 @@ public static void actulaizarTestsNuevos(int sel){
         int c = instAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             instAyudaPanel.remove(instAyudaPanel.getComponent(i));
-            pInst = new TestInstancesTFJPanel();
-            pInst.setPosicion(posicion); 
+            pInst = new TestInstancesTFJPanel(0);
             instAyudaPanel.add(pInst,i); 
-            posicion++;
         }
         instAyudaPanel.validate();
     }else if(sel==1){
         int c = retAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             retAyudaPanel.remove(retAyudaPanel.getComponent(i));
-            retAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
+            retAyudaPanel.add(new TestInstancesTextAreaJPanel(0),i); 
         }
         retAyudaPanel.validate();
     }else if(sel==2){
@@ -2609,17 +2658,15 @@ public static void actulaizarTestsNuevos(int sel){
         int c = satAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             satAyudaPanel.remove(satAyudaPanel.getComponent(i));
-            pSat = new TestInstancesTFJPanel();
-            pSat.setPosicion(posicion); 
+            pSat = new TestInstancesTFJPanel(1);
             satAyudaPanel.add(pSat,i); 
-            posicion++;
         }
         satAyudaPanel.validate();    
     }else if(sel==4){
         int c = clasAyudaPanel.getComponentCount();
         for (int i = 1; i < c; i++) {
             clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
-            clasAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
+            clasAyudaPanel.add(new TestInstancesTextAreaJPanel(1),i); 
         }
         clasAyudaPanel.validate();        
     }
@@ -2720,12 +2767,11 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
             t.setResultadoEsperado(conjuntoResExpInst);
             t.setComentTextArea(conjuntoComentInst);
             int c = instAyudaPanel.getComponentCount();
+            Auxiliar.setContadorInst(0);
             for(int i=1;i<c;i++){
                 instAyudaPanel.remove(instAyudaPanel.getComponent(i));
-                pInst = new TestInstancesTFJPanel();
-                pInst.setPosicion(posicion); 
+                pInst = new TestInstancesTFJPanel(0);
                 instAyudaPanel.add(pInst,i); 
-                posicion++;
             }
             instAyudaPanel.validate();
         }else if(tab==1){
@@ -2773,9 +2819,10 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
             t.setResultadoEsperado(conjuntoResExpRet);
             t.setComentTextArea(conjuntoComentRet);
             int c = retAyudaPanel.getComponentCount();
+            Auxiliar.setContadorRet(0);
             for(int i=1;i<c;i++){
                 retAyudaPanel.remove(retAyudaPanel.getComponent(i));
-                retAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
+                retAyudaPanel.add(new TestInstancesTextAreaJPanel(0),i); 
             }
             retAyudaPanel.validate();
         }else if(tab==2){
@@ -2848,12 +2895,11 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
             t.setResultadoEsperado(conjuntoResExpSat);
             t.setComentTextArea(conjuntoComentSat);
             int c = satAyudaPanel.getComponentCount();
+            Auxiliar.setContadorSat(0);
             for(int i=1;i<c;i++){
                 satAyudaPanel.remove(satAyudaPanel.getComponent(i));
-                pSat = new TestInstancesTFJPanel();
-                pSat.setPosicion(posicion); 
+                pSat = new TestInstancesTFJPanel(1);
                 satAyudaPanel.add(pSat,i); 
-                posicion++;
             }
             satAyudaPanel.validate();
         }else if(tab==4){
@@ -2901,14 +2947,15 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
             t.setResultadoEsperado(conjuntoResExpClas);
             t.setComentTextArea(conjuntoComentClas);
             int c = clasAyudaPanel.getComponentCount();
+            Auxiliar.setContadorClasi(0);
             for(int i=1;i<c;i++){
                 clasAyudaPanel.remove(clasAyudaPanel.getComponent(i));
-                clasAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
+                clasAyudaPanel.add(new TestInstancesTextAreaJPanel(1),i); 
             }
             clasAyudaPanel.validate();
         }
     }
-    
+   
     public void copiarDeTextoAAyuda(int tab){
 
     test = null;
@@ -2941,14 +2988,30 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
         conjuntoQuerysInst = ti.getConsultaQuery().trim();
         conjuntoResultInst = ti.getResultadoEsperado().trim();
         conjuntoComentInst = ti.getComentTextArea().trim();
-        cQuery = conjuntoQuerysInst.split("\\\n");
-        cResult = conjuntoResultInst.split("\\\n");
-        cComent = conjuntoComentInst.split("\\\n");
+        cQuery = conjuntoQuerysInst.split("\\n");
+        cResult = conjuntoResultInst.split("\\n");
+        cComent = conjuntoComentInst.split("\\n");
+        int tamI = GroupTestsJPanel.getInstAyudaPanel().getComponentCount();
+        int tamInst = tamI-1;
         int j=1;
         for(int i=0; i<cQuery.length; i++){
             if(!cQuery[i].equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                test.setQuery(cQuery[i]);
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                    test.setQuery(cQuery[i]);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                        test.setQuery(cQuery[i]);
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(0);
+                        instP.setQuery(cQuery[i]);
+                        GroupTestsJPanel.getInstAyudaPanel().add(instP);
+                    }
+                }
+            }else{
                 j++;
             }
         }
@@ -2956,23 +3019,61 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
         for(int i=0; i<cResult.length; i++){
             String res = cResult[i];
             if(!res.equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                if(res.equals("true")){
-                    test.setTrueTest(true);
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                    if(res.equals("true")){
+                        test.setTrueTest(true);
+                    }else{
+                        test.setFalseTest(true);
+                    }
+                    j++;
                 }else{
-                    test.setFalseTest(true);
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                        if(res.equals("true")){
+                            test.setTrueTest(true);
+                        }else{
+                            test.setFalseTest(true);
+                        }
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(0);
+                        if(res.equals("true")){
+                            instP.setTrueTest(true);
+                        }else{
+                            instP.setFalseTest(true);
+                        }
+                        GroupTestsJPanel.getInstAyudaPanel().add(instP);
+                    }
                 }
+            }else{
                 j++;
             }
         }
         j=1;
         for(int i=0; i<cComent.length; i++){
             if(!cComent[i].equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                AddComentJDialog comentPane = test.getComment();
-                comentPane.setComent(cComent[i]);
-                test.setComment(comentPane);
-                j++;
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                    AddComentJDialog comentPane = test.getComment();
+                    comentPane.setComent(cComent[i]);
+                    test.setComment(comentPane);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
+                        AddComentJDialog comentPane = test.getComment();
+                        comentPane.setComent(cComent[i]);
+                        test.setComment(comentPane);
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(0);
+                        AddComentJDialog comentPane = instP.getComment();
+                        comentPane.setComent(cComent[i]);
+                        instP.setComment(comentPane);
+                        GroupTestsJPanel.getInstAyudaPanel().add(instP);
+                    }
+                }
             }
         }
      }else if(tab==1){
@@ -2980,38 +3081,88 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
         conjuntoQuerysRet = ti.getConsultaQuery();
         conjuntoResultRet = ti.getResultadoEsperado();
         conjuntoComentRet = ti.getComentTextArea();
-        cQuery = conjuntoQuerysRet.split("\\\n");
-        cResult = conjuntoResultRet.split("\\\n");
-        cComent = conjuntoComentRet.split("\\\n");
+        cQuery = conjuntoQuerysRet.split("\\n");
+        cResult = conjuntoResultRet.split("\\n");
+        cComent = conjuntoComentRet.split("\\n");
+        int tamI = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+        int tamInst = tamI-1;
         int j=1;
         for(int i=0; i<cQuery.length; i++){
             if(!cQuery[i].equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                test2.setQuery(cQuery[i]);
-                j++;
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                    test2.setQuery(cQuery[i]);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                        test2.setQuery(cQuery[i]);
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(0);
+                        instP.setQuery(cQuery[i]);
+                        GroupTestsJPanel.getRetAyudaPanel().add(instP);
+                    }
+                }
             }
         }
         j=1;
         for(int i=0; i<cResult.length; i++){
             String res = cResult[i];
             if(!res.equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                if(res.equals(",") || res.endsWith(" ")){
-                    test2.setQueryResult("\n");
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                    if(res.equals(",") || res.endsWith(" ")){
+                        test2.setQueryResult("\n");
+                    }else{
+                        test2.setQueryResult(res);
+                    }
+                    j++;
                 }else{
-                    test2.setQueryResult(res);
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                        if(res.equals(",") || res.endsWith(" ")){
+                            test2.setQueryResult("\n");
+                        }else{
+                            test2.setQueryResult(res);
+                        }
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(0);
+                        if(res.equals(",") || res.endsWith(" ")){
+                            instP.setQueryResult("\n");
+                        }else{
+                            instP.setQueryResult(res);
+                        }
+                        GroupTestsJPanel.getRetAyudaPanel().add(instP);
+                    }
                 }
-                j++;
             }
         }
         j=1;
         for(int i=0; i<cComent.length; i++){
             if(!cComent[i].equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                AddComentJDialog comentPane = test2.getComment();
-                comentPane.setComent(cComent[i]);
-                test2.setComment(comentPane);
-                j++;
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                    AddComentJDialog comentPane = test2.getComment();
+                    comentPane.setComent(cComent[i]);
+                    test2.setComment(comentPane);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
+                        AddComentJDialog comentPane = test2.getComment();
+                        comentPane.setComent(cComent[i]);
+                        test2.setComment(comentPane);
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(0);
+                        AddComentJDialog comentPane = instP.getComment();
+                        comentPane.setComent(cComent[i]);
+                        instP.setComment(comentPane);
+                        GroupTestsJPanel.getRetAyudaPanel().add(instP);
+                    }
+                }
             }
         }
       }else if(tab==2){
@@ -3051,17 +3202,33 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
         }  
       }else if(tab==3){
         ti = (TestInstancesTextJPanel) getOpcionTextSatPanel().getComponent(0);
-        conjuntoQuerysSat = ti.getConsultaQuery().trim();
-        conjuntoResultSat = ti.getResultadoEsperado().trim();
-        conjuntoComentSat = ti.getComentTextArea().trim();
-        cQuery = conjuntoQuerysSat.split("\\\n");
-        cResult = conjuntoResultSat.split("\\\n");
-        cComent = conjuntoComentSat.split("\\\n");
+        conjuntoQuerysInst = ti.getConsultaQuery().trim();
+        conjuntoResultInst = ti.getResultadoEsperado().trim();
+        conjuntoComentInst = ti.getComentTextArea().trim();
+        cQuery = conjuntoQuerysInst.split("\\n");
+        cResult = conjuntoResultInst.split("\\n");
+        cComent = conjuntoComentInst.split("\\n");
+        int tamI = GroupTestsJPanel.getSatAyudaPanel().getComponentCount();
+        int tamInst = tamI-1;
         int j=1;
         for(int i=0; i<cQuery.length; i++){
             if(!cQuery[i].equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
-                test.setQuery(cQuery[i]);
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                    test.setQuery(cQuery[i]);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                        test.setQuery(cQuery[i]);
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(1);
+                        instP.setQuery(cQuery[i]);
+                        GroupTestsJPanel.getSatAyudaPanel().add(instP);
+                    }
+                }
+            }else{
                 j++;
             }
         }
@@ -3069,58 +3236,150 @@ public static boolean inListSparqlQuerys(SparqlQueryOntology query){
         for(int i=0; i<cResult.length; i++){
             String res = cResult[i];
             if(!res.equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
-                if(res.equals("true")){
-                    test.setTrueTest(true);
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                    if(res.equals("true")){
+                        test.setTrueTest(true);
+                    }else{
+                        test.setFalseTest(true);
+                    }
+                    j++;
                 }else{
-                    test.setFalseTest(true);
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                        if(res.equals("true")){
+                            test.setTrueTest(true);
+                        }else{
+                            test.setFalseTest(true);
+                        }
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(1);
+                        if(res.equals("true")){
+                            instP.setTrueTest(true);
+                        }else{
+                            instP.setFalseTest(true);
+                        }
+                        GroupTestsJPanel.getSatAyudaPanel().add(instP);
+                    }
                 }
+            }else{
                 j++;
             }
         }
         j=1;
         for(int i=0; i<cComent.length; i++){
             if(!cComent[i].equals("")){
-                test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
-                AddComentJDialog comentPane = test.getComment();
-                comentPane.setComent(cComent[i]);
-                test.setComment(comentPane);
-                j++;
+                if(i<tamInst){
+                    test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                    AddComentJDialog comentPane = test.getComment();
+                    comentPane.setComent(cComent[i]);
+                    test.setComment(comentPane);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test = (TestInstancesTFJPanel) panelAyudaSat.getComponent(j);
+                        AddComentJDialog comentPane = test.getComment();
+                        comentPane.setComent(cComent[i]);
+                        test.setComment(comentPane);
+                        j++;
+                    }else{
+                        TestInstancesTFJPanel instP = new TestInstancesTFJPanel(1);
+                        AddComentJDialog comentPane = instP.getComment();
+                        comentPane.setComent(cComent[i]);
+                        instP.setComment(comentPane);
+                        GroupTestsJPanel.getSatAyudaPanel().add(instP);
+                    }
+                }
             }
         }
       }else if(tab==4){
         ti = (TestInstancesTextJPanel) getOpcionTextClasPanel().getComponent(0);
-        conjuntoQuerysClas = ti.getConsultaQuery().trim();
-        conjuntoResultClas = ti.getResultadoEsperado().trim();
-        conjuntoComentClas = ti.getComentTextArea().trim();
-        cQuery = conjuntoQuerysClas.split("\\\n");
-        cResult = conjuntoResultClas.split("\\\n");
-        cComent = conjuntoComentClas.split("\\\n");
+        conjuntoQuerysRet = ti.getConsultaQuery();
+        conjuntoResultRet = ti.getResultadoEsperado();
+        conjuntoComentRet = ti.getComentTextArea();
+        cQuery = conjuntoQuerysRet.split("\\n");
+        cResult = conjuntoResultRet.split("\\n");
+        cComent = conjuntoComentRet.split("\\n");
+        int tamI = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+        int tamInst = tamI-1;
         int j=1;
         for(int i=0; i<cQuery.length; i++){
             if(!cQuery[i].equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
-                test2.setQuery(cQuery[i]);
-                j++;
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                    test2.setQuery(cQuery[i]);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                        test2.setQuery(cQuery[i]);
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(1);
+                        instP.setQuery(cQuery[i]);
+                        GroupTestsJPanel.getClasAyudaPanel().add(instP);
+                    }
+                }
             }
         }
         j=1;
         for(int i=0; i<cResult.length; i++){
             String res = cResult[i];
             if(!res.equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
-                test2.setQueryResult(res);
-                j++;
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                    if(res.equals(",") || res.endsWith(" ")){
+                        test2.setQueryResult("\n");
+                    }else{
+                        test2.setQueryResult(res);
+                    }
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                        if(res.equals(",") || res.endsWith(" ")){
+                            test2.setQueryResult("\n");
+                        }else{
+                            test2.setQueryResult(res);
+                        }
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(1);
+                        if(res.equals(",") || res.endsWith(" ")){
+                            instP.setQueryResult("\n");
+                        }else{
+                            instP.setQueryResult(res);
+                        }
+                        GroupTestsJPanel.getClasAyudaPanel().add(instP);
+                    }
+                }
             }
         }
         j=1;
         for(int i=0; i<cComent.length; i++){
             if(!cComent[i].equals("")){
-                test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
-                AddComentJDialog comentPane = test2.getComment();
-                comentPane.setComent(cComent[i]);
-                test2.setComment(comentPane);
-                j++;
+                if(i<tamInst){
+                    test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                    AddComentJDialog comentPane = test2.getComment();
+                    comentPane.setComent(cComent[i]);
+                    test2.setComment(comentPane);
+                    j++;
+                }else{
+                    if(j<tamInst){
+                        test2 = (TestInstancesTextAreaJPanel) panelAyudaClas.getComponent(j);
+                        AddComentJDialog comentPane = test2.getComment();
+                        comentPane.setComent(cComent[i]);
+                        test2.setComment(comentPane);
+                        j++;
+                    }else{
+                        TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel(1);
+                        AddComentJDialog comentPane = instP.getComment();
+                        comentPane.setComent(cComent[i]);
+                        instP.setComment(comentPane);
+                        GroupTestsJPanel.getClasAyudaPanel().add(instP);
+                    }
+                }
             }
         }     
       }

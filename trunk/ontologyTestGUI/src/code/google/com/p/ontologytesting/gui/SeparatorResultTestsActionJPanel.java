@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
@@ -197,6 +198,10 @@ private void newSparqlTestButtonActionPerformed(java.awt.event.ActionEvent evt) 
 
 private void newSimpleTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newSimpleTestButtonActionPerformed
 // TODO add your handling code here:
+    Auxiliar.setContadorInst(0);
+    Auxiliar.setContadorSat(0);
+    Auxiliar.setContadorClasi(0);
+    Auxiliar.setContadorRet(0);
     AddSPARQLJPanel.setSeleccionado(false);
     MainJPanel.setSimpleTestSelect(true);
     MainJPanel.setSparqlTestsSelect(false);

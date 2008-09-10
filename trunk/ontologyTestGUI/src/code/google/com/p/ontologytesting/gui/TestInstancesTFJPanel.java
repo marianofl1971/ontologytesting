@@ -6,9 +6,9 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
-import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.WindowConstants;
 
@@ -21,12 +21,21 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     private AddComentJDialog frameComent;
     private Frame frame;
     private int posicion;
-    private static ArrayList<TestInstancesTFJPanel> listaContenido;
     
     /** Creates new form TestInstancesTFJPanel */
-    public TestInstancesTFJPanel(int i) {
+    public TestInstancesTFJPanel(int type) {
         initComponents();
-        posicion = i;
+        if(type==0){
+            int pos = Auxiliar.getContadorInst();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorInst(cont);
+        }else if(type==1){
+            int pos = Auxiliar.getContadorSat();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorSat(cont);
+        }
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
@@ -34,17 +43,19 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
     
-    public TestInstancesTFJPanel() {
+    public TestInstancesTFJPanel(int type, String query,String result,String coment) {
         initComponents();
-        ButtonGroup group = new ButtonGroup();
-        group.add(trueRadioButton);
-        group.add(falseRadioButton);
-        frameComent = new AddComentJDialog(frame,true); 
-        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    }
-    
-    public TestInstancesTFJPanel(String query,String result,String coment) {
-        initComponents();
+        if(type==0){
+            int pos = Auxiliar.getContadorInst();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorInst(cont);
+        }else if(type==1){
+            int pos = Auxiliar.getContadorSat();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorSat(cont);
+        }
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
@@ -147,68 +158,48 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
+    System.out.println("Pos " +this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
-    int sel = GroupTestsJPanel.getSelectedTabed();
-    if(sel==0){
-        GroupTestsJPanel.getInstAyudaPanel().remove(this);
-        GroupTestsJPanel.getInstAyudaPanel().add(new TestInstancesTFJPanel());
-    }else if(sel==3){
-        GroupTestsJPanel.getSatAyudaPanel().remove(this);
-        GroupTestsJPanel.getSatAyudaPanel().add(new TestInstancesTFJPanel());
-    }
+   this.setVisible(false);
+   int tab = GroupTestsJPanel.getSelectedTabed();
+   if(tab == 0){
+       int finalPos=0;
+       int p = this.getPosicion();
+       int total = GroupTestsJPanel.getInstAyudaPanel().getComponentCount();
+       for(int i=p+1;i<total;i++){
+            TestInstancesTFJPanel panel = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(i);
+            int pos = panel.getPosicion();
+            panel.setPosicion(pos-1);
+            finalPos=pos-1;
+       }
+       GroupTestsJPanel.getInstAyudaPanel().remove(this);
+       TestInstancesTFJPanel pa = new TestInstancesTFJPanel(0);
+       pa.setPosicion(finalPos+1);
+       GroupTestsJPanel.getInstAyudaPanel().add(pa);
+   }else if(tab == 3){
+       int finalPos=0;
+       int p = this.getPosicion();
+       int total = GroupTestsJPanel.getSatAyudaPanel().getComponentCount();
+       for(int i=p+1;i<total;i++){
+            TestInstancesTFJPanel panel = (TestInstancesTFJPanel) GroupTestsJPanel.getSatAyudaPanel().getComponent(i);
+            int pos = panel.getPosicion();
+            panel.setPosicion(pos-1);
+            finalPos=pos-1;
+       }
+       GroupTestsJPanel.getSatAyudaPanel().remove(this);
+       TestInstancesTFJPanel pa = new TestInstancesTFJPanel(1);
+       pa.setPosicion(finalPos+1);
+       GroupTestsJPanel.getSatAyudaPanel().add(pa);
+   }  
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    listaContenido = new ArrayList<TestInstancesTFJPanel>();
-    int sel = GroupTestsJPanel.getSelectedTabed();
-    String query = this.getQuery();
-    String result = this.isTestTrue();
-    String testComent = this.frameComent.getComent();
-    int count = GroupTestsJPanel.getInstAyudaPanel().getComponentCount();
-    for(int i=1;i<count;i++){
-        TestInstancesTFJPanel comp = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(i);
-        if(!comp.getQuery().equals("") && !comp.isTestFalse().equals(comp.isTestTrue())){
-            listaContenido.add(i-1,comp);
-        }
-    }
-    if(sel==0){
-        TestInstancesTFJPanel sig = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(this.getPosicion()+1);
-        if(sig.getQuery().equals("") && sig.isTestFalse().equals(sig.isTestTrue())){
-            sig.setQuery(query);
-            if(result.equals("true")){
-                sig.setTrueTest(true);
-            }else{
-                sig.setFalseTest(true);
-            }
-            sig.getComment().setComent(testComent);
-            sig.setPosicion(posicion+1);
-        }else{
-            for(int j=0;j<listaContenido.size();j++){
-                TestInstancesTFJPanel testComp = listaContenido.get(j);
-                String q = testComp.getQuery();
-                String r = testComp.isTestTrue();
-                String t = testComp.frameComent.getComent();
-                TestInstancesTFJPanel aux = (TestInstancesTFJPanel) GroupTestsJPanel.getInstAyudaPanel().getComponent(posicion+1);
-                aux.setQuery(q);
-                if(r.equals("true")){
-                    aux.setTrueTest(true);
-                }else{
-                    aux.setFalseTest(true);
-                }
-                aux.getComment().setComent(t);
-                aux.setPosicion(posicion++);
-                posicion++;
-            }
-        }
-    }else if(sel==3){
-        //GroupTestsJPanel.getSatAyudaPanel().add(new TestInstancesTFJPanel(query,result,testComent));
-    }
+
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked

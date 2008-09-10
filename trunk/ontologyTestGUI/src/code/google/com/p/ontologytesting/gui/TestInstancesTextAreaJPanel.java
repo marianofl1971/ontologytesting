@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.model.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
@@ -21,20 +22,24 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
     private int posicion;
     
     /** Creates new form TextInstancesTextAreaJPanel */
-    public TestInstancesTextAreaJPanel() {
+    public TestInstancesTextAreaJPanel(int type) {
         initComponents();
+        if(type==0){
+            int pos = Auxiliar.getContadorRet();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorRet(cont);
+        }else if(type==1){
+            int pos = Auxiliar.getContadorClasi();
+            this.setPosicion(pos);
+            int cont = pos+1;
+            Auxiliar.setContadorClasi(cont);
+        }
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
 
-    public TestInstancesTextAreaJPanel(int i) {
-        initComponents();
-        posicion = i;
-        frameComent = new AddComentJDialog(frame,true); 
-        frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    }
-    
-    public TestInstancesTextAreaJPanel(String query, String result, String coment) {
+    public TestInstancesTextAreaJPanel(int type,String query, String result, String coment) {
         initComponents();
         queryTextField.setText(query);
         resultTextArea.setText(result);
@@ -132,35 +137,48 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
+    System.out.println("Pos "+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);
-    int sel = GroupTestsJPanel.getSelectedTabed();
-    if(sel==1){
-        GroupTestsJPanel.getRetAyudaPanel().remove(this);
-        GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
-    }else if(sel==4){
-        GroupTestsJPanel.getClasAyudaPanel().remove(this);
-        GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel());
-    }
+   this.setVisible(false);
+   int tab = GroupTestsJPanel.getSelectedTabed();
+   if(tab == 1){
+       int finalPos=0;
+       int p = this.getPosicion();
+       int total = GroupTestsJPanel.getRetAyudaPanel().getComponentCount();
+       for(int i=p+1;i<total;i++){
+            TestInstancesTextAreaJPanel panel = (TestInstancesTextAreaJPanel) GroupTestsJPanel.getRetAyudaPanel().getComponent(i);
+            int pos = panel.getPosicion();
+            panel.setPosicion(pos-1);
+            finalPos=pos-1;
+       }
+       GroupTestsJPanel.getRetAyudaPanel().remove(this);
+       TestInstancesTextAreaJPanel pa = new TestInstancesTextAreaJPanel(0);
+       pa.setPosicion(finalPos+1);
+       GroupTestsJPanel.getRetAyudaPanel().add(pa);
+   }else if(tab == 4){
+       int finalPos=0;
+       int p = this.getPosicion();
+       int total = GroupTestsJPanel.getClasAyudaPanel().getComponentCount();
+       for(int i=p+1;i<total;i++){
+            TestInstancesTextAreaJPanel panel = (TestInstancesTextAreaJPanel) GroupTestsJPanel.getClasAyudaPanel().getComponent(i);
+            int pos = panel.getPosicion();
+            panel.setPosicion(pos-1);
+            finalPos=pos-1;
+       }
+       GroupTestsJPanel.getClasAyudaPanel().remove(this);
+       TestInstancesTextAreaJPanel pa = new TestInstancesTextAreaJPanel(1);
+       pa.setPosicion(finalPos+1);
+       GroupTestsJPanel.getClasAyudaPanel().add(pa);
+   }  
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    String query = this.getQuery();
-    String result = this.getQueryResult();
-    String coment = frameComent.getComent();
-    GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesQueryJPanel(query,result,coment));
     
-    int sel = GroupTestsJPanel.getSelectedTabed();
-    if(sel==1){
-        GroupTestsJPanel.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
-    }else if(sel==4){
-        GroupTestsJPanel.getClasAyudaPanel().add(new TestInstancesTextAreaJPanel());
-    }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked

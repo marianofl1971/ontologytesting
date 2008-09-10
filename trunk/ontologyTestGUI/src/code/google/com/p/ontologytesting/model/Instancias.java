@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Instancias {
 
-    private String nombre;
-    private String descripcion;
+    private String nombre="";
+    private String descripcion="";
     private String type="Instancias";
     private List<ClassInstances> classInstances;
     private List<PropertyInstances> propertyInstances;
