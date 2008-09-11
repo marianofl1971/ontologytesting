@@ -45,8 +45,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>CONSULTAS</b><br><br>" +
                 "Clase,individuo<br>" +
                 "Clase.individuo<br>" +
-                "Clase(individuo)<br>" +
-                "Clase individuo<br><br>" +
+                "Clase(individuo)<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
                 "True/False";
         return formato;
@@ -58,7 +57,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>CONSULTAS</b><br><br>" +
                 "Clase<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
-                "Lista de individuos separados por coma, punto o un espacio en blanco";
+                "Lista de individuos separados por coma o punto";
         return formato;
     }
     
@@ -78,8 +77,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>CONSULTAS</b><br><br>" +
                 "Individuo,Clase<br>" +
                 "Individuo.Clase<br>" +
-                "Individuo(Clase)<br>" +
-                "Individuo Clase<br><br>" +
+                "Individuo(Clase)<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
                 "True/False";
         return formato;
@@ -91,7 +89,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>CONSULTAS</b><br><br>" +
                 "Individuo<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
-                "Lista de clases separados por coma, punto o un espacio en blanco";
+                "Lista de clases separados por coma o punto";
         return formato;
     }
     
@@ -104,13 +102,13 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "gramaticalmente correctas siguiendo la sintaxis de SPARQL." +
                 "Sólo estan permitidas consultas tipo SELECT.<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
-                "En caso de un SELECT simple, el resultado deberá de ser el objeto" +
+                "En caso de un SELECT simple, el resultado deberá de ser el sujeto" +
                 "que se indico en el SELECT, seguido de una lista " +
                 "de objetos separados por coma o punto.<br><br>" +
                 "En caso de un SELECT multiple el resultado deberá de especificar" +
-                "en primer lugar el objeto al que se refiere en SELECT y entre " +
+                "en primer lugar el sujeto al que se refiere en SELECT y entre " +
                 "parentesis el resultado o la lista de resultados separados por " +
-                "coma, punto o espacio que se espera obtener.<br><br>" +
+                "coma o punto que se espera obtener.<br><br>" +
                 "Por ejemplo, para la consulta:<br><br>" +
                 "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> <br>" +
                 "SELECT ?subject ?object <br>" +
@@ -120,7 +118,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "subject(a,b,c) | subject(a.b.c) <br>" +
                 "object(a,b,c) | object(a.b.c)"+
                 "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados" +
-                "por un salto de linea o un punto y coma, es decir:" +
+                "por un salto de linea o por un punto y coma, es decir:" +
                 "subject(a,b.c)" +
                 "object(a.b,c)";    
         return formato;

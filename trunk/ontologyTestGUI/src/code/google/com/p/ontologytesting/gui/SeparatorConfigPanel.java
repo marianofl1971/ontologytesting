@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 
@@ -76,8 +77,9 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
     ContentMainJFrame.getContentPanel().remove(0);
     ContentMainJFrame.getSeparadorPanel().remove(0);
+    ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
     ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
-    ContentMainJFrame.getSeparador().setVisible(false);
+    ContentMainJFrame.getSeparador().setVisible(true);
     ContentMainJFrame.getContentPanel().validate();
     ContentMainJFrame.getSeparadorPanel().validate();
 }//GEN-LAST:event_cancelarButtonActionPerformed
@@ -87,9 +89,6 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     if(ConfigurationJPanel.getSiRadioButton().isSelected()){
        if(!ConfigurationJPanel.getInstanciasTextField().equals("") && !ConfigurationJPanel.getTestsSimplesTextField().equals("") 
                && !ConfigurationJPanel.getTestsSparqlTextField().equals("")){
-           Configuration.setPathTestSimples(ConfigurationJPanel.getTestsSimplesTextField());  
-           Configuration.setPathTestSparql(ConfigurationJPanel.getTestsSparqlTextField());
-           Configuration.setPathInstancias(ConfigurationJPanel.getInstanciasTextField());
            AlmacenPropiedadesConfig.setConfiguracion(ConfigurationJPanel.getTestsSimplesTextField(),
                    ConfigurationJPanel.getTestsSparqlTextField(),ConfigurationJPanel.getInstanciasTextField());
            JOptionPane.showMessageDialog(frame,"Su configuración ha sido " +
@@ -97,6 +96,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
            ConfigurationJPanel.setHaSidoConfigurado(true);
            ContentMainJFrame.getContentPanel().remove(0);
            ContentMainJFrame.getSeparadorPanel().remove(0);
+           ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
            ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
            ContentMainJFrame.getSeparador().setVisible(false);
            ContentMainJFrame.getSeparadorPanel().validate();
@@ -106,15 +106,13 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     "para coninuar","Warning Message",JOptionPane.WARNING_MESSAGE);
        }
     }else if(ConfigurationJPanel.getNoRadioButton().isSelected()){
-        Configuration.setPathTestSimples("./Simple Tests");  
-        Configuration.setPathTestSparql("./Sparql Tests");
-        Configuration.setPathInstancias("./Instancias");
         AlmacenPropiedadesConfig.setConfiguracion("./Simple Tests", "./Sparql Tests", "./Instancias");
         JOptionPane.showMessageDialog(frame,"Se mantiene la configuracion establecida" +
                 "por defecto.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
         ContentMainJFrame.getContentPanel().remove(0);
         ContentMainJFrame.getSeparadorPanel().remove(0);
+        ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
         MainJPanel panel = ContentMainJFrame.getMainPanel();
         panel.getNewInstances().setEnabled(true);
         panel.getNewTest().setEnabled(true);
@@ -123,15 +121,13 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         ContentMainJFrame.getContentPanel().getParent().validate();
         ContentMainJFrame.getSeparadorPanel().validate();
     }else if(ConfigurationJPanel.getRestaurarRadioButton().isSelected()){
-        Configuration.setPathTestSimples("./Simple Tests");  
-        Configuration.setPathTestSparql("./Sparql Tests");
-        Configuration.setPathInstancias("./Instancias");
         AlmacenPropiedadesConfig.setConfiguracion("./Simple Tests", "./Sparql Tests", "./Instancias");
         JOptionPane.showMessageDialog(frame,"Se ha restaurado la configuracion" +
                 "original.","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         ConfigurationJPanel.setHaSidoConfigurado(true);
         ContentMainJFrame.getContentPanel().remove(0);
         ContentMainJFrame.getSeparadorPanel().remove(0);
+        ContentMainJFrame.getSeparadorPanel().add(new SeparatorExitJPanel(),BorderLayout.EAST);
         ContentMainJFrame.getContentPanel().add(ContentMainJFrame.getMainPanel());
         ContentMainJFrame.getContentPanel().getParent().validate();
         ContentMainJFrame.getSeparadorPanel().validate();

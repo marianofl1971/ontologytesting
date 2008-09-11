@@ -246,6 +246,7 @@ private void examinarFisicalButtonActionPerformed(java.awt.event.ActionEvent evt
 private void configurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configurarActionPerformed
 // TODO add your handling code here:
     ContentMainJFrame.getContentPanel().remove(0);//GEN-LAST:event_configurarActionPerformed
+    ContentMainJFrame.getSeparadorPanel().remove(0);  
     ContentMainJFrame.getContentPanel().add(new ConfigurationJPanel());
     ContentMainJFrame.getSeparador().setVisible(true);
     ContentMainJFrame.getSeparadorPanel().add(new SeparatorConfigPanel(),BorderLayout.CENTER);

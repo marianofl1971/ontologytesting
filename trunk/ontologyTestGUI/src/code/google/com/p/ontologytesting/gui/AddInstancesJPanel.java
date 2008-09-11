@@ -540,10 +540,26 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                         }else{
                             textoQuery = textoQuery+"\n"+cI.getQuery();
                         }
+                        if(!textoResult.equals("")){
+                            textoResult = textoResult.concat("\n");
+                        }
+                        String[] aux = cI.getResultexpected().split("\n");
                         if(textoResult.equals("")){
-                            textoResult = cI.getResultexpected();
+                            for(int i=0;i<aux.length;i++){
+                                if(i==aux.length-1){
+                                    textoResult = textoResult.concat(aux[i]);
+                                }else{
+                                    textoResult = textoResult.concat(aux[i]).concat(",");
+                                }
+                            }
                         }else{
-                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                            for(int i=0;i<aux.length;i++){
+                                if(i==aux.length-1){
+                                    textoResult = textoResult.concat(aux[i]);
+                                }else{
+                                    textoResult = textoResult.concat(aux[i]).concat(",");
+                                }
+                            }
                         }
                         if(textoComent.equals("")){
                             textoComent = cI.getComment();
@@ -650,10 +666,26 @@ private void addTestExistButtonActionPerformed(java.awt.event.ActionEvent evt) {
                         }else{
                             textoQuery = textoQuery+"\n"+cI.getQuery();
                         }
+                        if(!textoResult.equals("")){
+                            textoResult = textoResult.concat("\n");
+                        }
+                        String[] aux = cI.getResultexpected().split("\n");
                         if(textoResult.equals("")){
-                            textoResult = cI.getResultexpected();
+                            for(int i=0;i<aux.length;i++){
+                                if(i==aux.length-1){
+                                    textoResult = textoResult.concat(aux[i]);
+                                }else{
+                                    textoResult = textoResult.concat(aux[i]).concat(",");
+                                }
+                            }
                         }else{
-                            textoResult = textoResult+"\n"+cI.getResultexpected();
+                            for(int i=0;i<aux.length;i++){
+                                if(i==aux.length-1){
+                                    textoResult = textoResult.concat(aux[i]);
+                                }else{
+                                    textoResult = textoResult.concat(aux[i]).concat(",");
+                                }
+                            }
                         }
                         if(textoComent.equals("")){
                             textoComent = cI.getComment();

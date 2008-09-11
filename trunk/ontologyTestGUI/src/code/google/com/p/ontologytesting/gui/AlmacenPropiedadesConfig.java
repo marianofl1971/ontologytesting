@@ -45,7 +45,7 @@ import java.util.HashMap;
     return valor;
   }
   
-  public static void setConfiguracion(String simple,String sparql,String inst){
+  /*public static void setConfiguracion(String simple,String sparql,String inst){
     String dataConfig = "simpleTests = "+simple+"\n"+"sparqlTests = "+sparql+"\n"+"instancias = "+inst;
       try {
         config = new FileWriter(configurationFile);
@@ -54,6 +54,12 @@ import java.util.HashMap;
     } catch (IOException e) { 
         e.printStackTrace();
     }
+  }*/
+  
+  public static void setConfiguracion(String simple,String sparql,String inst){
+    propiedades.put("simpleTests", simple);
+    propiedades.put("sparqlTests", sparql);
+    propiedades.put("instancias", inst);
   }
 
 

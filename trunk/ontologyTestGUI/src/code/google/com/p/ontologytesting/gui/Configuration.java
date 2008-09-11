@@ -11,44 +11,16 @@ package code.google.com.p.ontologytesting.gui;
  */
 public class Configuration {
     
-    private static String pathTestSimples="";
-    private static String pathTestSparql="";
-    private static String pathInstancias="";
 
     public static String getPathTestSimples() {
-        if(pathTestSimples.equals("")){
-            return AlmacenPropiedadesConfig.getPropiedad("simpleTests");
-        }else{
-            return pathTestSimples;
-        }
-    }
-
-    public static void setPathTestSimples(String apathTestSimples) {
-        pathTestSimples = apathTestSimples;
+        return AlmacenPropiedadesConfig.getPropiedad("simpleTests");
     }
 
     public static String getPathTestSparql() {
-        if(pathTestSparql.equals("")){
-            return AlmacenPropiedadesConfig.getPropiedad("sparqlTests");
-        }else{
-            return pathTestSparql;
-        }
-    }
-
-    public static void setPathTestSparql(String apathTestSparql) {
-        pathTestSparql = apathTestSparql;
+        return AlmacenPropiedadesConfig.getPropiedad("sparqlTests");
     }
 
     public static String getPathInstancias() {
-        if(pathInstancias.equals("")){
-            return AlmacenPropiedadesConfig.getPropiedad("instancias");
-        }else{
-            return pathInstancias;
-        }
+        return AlmacenPropiedadesConfig.getPropiedad("instancias");
     }
-
-    public static void setPathInstancias(String apathInstancias) {
-        pathInstancias = apathInstancias;
-    }
-
 }
