@@ -49,7 +49,7 @@ public class MainApplication extends javax.swing.JFrame {
     public MainApplication() {
         initComponents();
         this.setTitle("EVALUADOR DE ONTOLOGIAS");
-        this.setSize(new Dimension(890,720));
+        this.setSize(new Dimension(895,720));
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         contentTestsJPanel.setLayout(new BorderLayout());

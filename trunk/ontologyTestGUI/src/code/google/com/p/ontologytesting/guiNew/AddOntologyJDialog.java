@@ -178,7 +178,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         setOntologiaAsociada(true);
         this.setVisible(false);
         JOptionPane.showMessageDialog(this.getParent(),"La ontologia ha sido guardada",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
     }else{
         setOntologiaAsociada(false);
         JOptionPane.showMessageDialog(this,"Ambos campos son obligatorios",

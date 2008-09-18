@@ -347,35 +347,43 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
     String r = this.getResultTextArea();
     this.inicializarVariables();
     
-    this.consultaCompleta(q, r);
     this.consultaVacia(q, r);
-    continuar = consultaOK(q, r);
-    
-    if(continuar==true){
-        this.validarConsulta(q);
-        this.validarResultado(r);
-    }
-    
-    if(continuar==true){
-        SparqlQueryOntology query = new SparqlQueryOntology(q,r);
-        if((this.getListaDeConsultas().size()==0) || (posListQuerysSel==listaDeConsultas.size())){
-            listaDeConsultas.add(query);
-            this.prepararNuevaConsultaVacia();
-            antQueryButton.setEnabled(true);
-            sigQueryButton.setEnabled(false);
-            posListQuerysSel++;
-        }else{
-            this.reemplazarConsulta(query, posListQuerysSel);
-            this.prepararNuevaConsultaVacia();
-            sigQueryButton.setEnabled(false);
-            posListQuerysSel = listaDeConsultas.size();
-            antQueryButton.setEnabled(true);
+    if(sinConsultas==false){
+        this.consultaCompleta(q, r);
+
+        continuar = consultaOK(q, r);
+
+        if(continuar==true){
+            this.validarConsulta(q);
+            if(continuar==true){
+                this.validarResultado(r);
+            }
         }
-   }else if(resultValido==false){
-        JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
+
+        if(continuar==true){
+            SparqlQueryOntology query = new SparqlQueryOntology(q,r);
+            if((this.getListaDeConsultas().size()==0) || (posListQuerysSel==listaDeConsultas.size())){
+                listaDeConsultas.add(query);
+                this.prepararNuevaConsultaVacia();
+                antQueryButton.setEnabled(true);
+                sigQueryButton.setEnabled(false);
+                posListQuerysSel++;
+            }else{
+                this.reemplazarConsulta(query, posListQuerysSel);
+                this.prepararNuevaConsultaVacia();
+                sigQueryButton.setEnabled(false);
+                posListQuerysSel = listaDeConsultas.size();
+                antQueryButton.setEnabled(true);
+            }
+       }else if(resultValido==false){
+            JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
+            "Warning Message",JOptionPane.WARNING_MESSAGE);
+            continuar=false;
+       }
+    }else{
+        JOptionPane.showMessageDialog(this,"Actualmente tiene una consulta nueva para añadir",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-   }
+    }
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
 public void reemplazarConsulta(SparqlQueryOntology query,int pos){
@@ -438,7 +446,7 @@ public void validarConsulta(String query){
     try{
         jena.validarSparqlQuery(query); 
     }catch(Exception ex){
-        JOptionPane.showMessageDialog(frame,"La consulta SPARQL no es valida",
+        JOptionPane.showMessageDialog(this,"La consulta SPARQL no es valida",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
         queryValida=false;
         continuar=false;
@@ -464,11 +472,17 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     String q = this.getSPARQLQuery();
     String r = this.getResultTextArea();
 
-    this.consultaCompleta(q, r);
     this.consultaVacia(q, r);
-    this.validarConsulta(q);
-    this.validarResultado(r);
-    continuar = consultaOK(q, r);
+    if(sinConsultas==false){
+        this.consultaCompleta(q, r);
+        continuar = consultaOK(q, r);
+        if(continuar==true){
+            this.validarConsulta(q);
+            if(continuar==true){
+                this.validarResultado(r);
+            }
+        } 
+    }
     
     if(continuar==true){
         SparqlQueryOntology query = new SparqlQueryOntology(q,r);
@@ -494,13 +508,17 @@ private void sigQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     inicializarVariables();
     String q = this.getSPARQLQuery();
     String r = this.getResultTextArea();
-
-    this.consultaCompleta(q, r);
     this.consultaVacia(q, r);
-    this.validarConsulta(q);
-    this.validarResultado(r);
-    continuar = consultaOK(q, r);
-    
+    if(sinConsultas==false){
+        this.consultaCompleta(q, r);
+        continuar = consultaOK(q, r);
+        if(continuar==true){
+            this.validarConsulta(q);
+            if(continuar==true){
+                this.validarResultado(r);
+            }
+        } 
+    }
     if(continuar==true){ 
         SparqlQueryOntology query = new SparqlQueryOntology(q,r);
         this.reemplazarConsulta(query, posListQuerysSel);
@@ -524,7 +542,10 @@ private void limpiarResultButtonActionPerformed(java.awt.event.ActionEvent evt) 
 private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarConsultaJButtonActionPerformed
 // TODO add your handling code here:
     inicializarVariables();
-    if(listaDeConsultas.size()==1){
+    if(listaDeConsultas.size()==0 || (this.getSPARQLQuery().equals("") && this.getResultTextArea().equals(""))){
+        JOptionPane.showMessageDialog(this.getParent(),"No hay ninguna consulta que borrar",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }else if(listaDeConsultas.size()==1){
         this.prepararNuevaConsultaVacia();
         setListaDeConsultas(new ArrayList<SparqlQueryOntology>());
         setPosListQuerysSel(0);
@@ -776,39 +797,42 @@ public void prepararGuardar(){
     if(testVacio(nombreTest)==true){
         testSinNombre=true;
     }
-    if(!this.inListSparqlQuerys(q)){
+    //if(!this.inListSparqlQuerys(q)){
         this.consultaCompleta(query, result);
         this.consultaVacia(query, result);
         continuar = this.consultaOK(query, result);
         if(continuar==true){
             this.validarConsulta(query);
-            this.validarResultado(result);
+            if(continuar==true){
+                this.validarResultado(result);
+                if(continuar==true){
+                    this.reemplazarConsulta(q, posListQuerysSel);
+                }else{
+                    JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
+                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    continuar=false;
+                }
+            }
         }
-        if(continuar==true){
-            this.reemplazarConsulta(q, posListQuerysSel);
-        }else{
-            JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);
+    //}
+    if(continuar==true){
+        if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
+            preguntarSiContinuarSinInstancias(scenario);
+            if(continuarSinInstancias==true){
+                scenario.setTestName("sparql"); 
+                scenario.setDescripcion(descTest);
+                scenario.setNombre(nombreTest);
+                scenario.setSparqlQuerys(this.getListaDeConsultas()); 
+            }
+        }else if(testSinNombre==true){
+                JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
+                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                continuar=false;
+        }else if(listaDeConsultas.size()==0 && testSinNombre==false){
+            JOptionPane.showMessageDialog(this.getParent(),"Al menos debe introducir una consulta " +
+            "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
             continuar=false;
         }
-        
-    }
-    if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
-            scenario.setTestName("sparql"); 
-            scenario.setDescripcion(descTest);
-            scenario.setNombre(nombreTest);
-            scenario.setSparqlQuerys(this.getListaDeConsultas()); 
-        }
-    }else if(testSinNombre==true){
-            JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);
-            continuar=false;
-    }else if(listaDeConsultas.size()==0 && testSinNombre==false){
-        JOptionPane.showMessageDialog(this.getParent(),"Al menos debe introducir una consulta " +
-        "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
     }
 }
 
@@ -862,7 +886,7 @@ public void inicializarVariables(){
     public boolean inListSparqlQuerys(SparqlQueryOntology query){
         String queryq = query.getQuerySparql();
         String queryres = query.getResultexpected();
-        SparqlQueryOntology sparql = this.getScenarioAEditar().getSparqlQuerys().get(this.getPosListQuerysSel());
+        SparqlQueryOntology sparql = this.getScenario().getSparqlQuerys().get(this.getPosListQuerysSel());
         String qquery = sparql.getQuerySparql();
         String qresult = sparql.getResultexpected();
         if(!qquery.equals(queryq) || !qresult.equals(queryres)){
