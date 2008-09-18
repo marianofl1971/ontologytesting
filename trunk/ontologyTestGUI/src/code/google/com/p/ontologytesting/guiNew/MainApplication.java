@@ -234,6 +234,11 @@ public class MainApplication extends javax.swing.JFrame {
         testsSparqlMenu.add(importarTestSparql);
 
         editarTestSparql.setText("Editar");
+        editarTestSparql.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarTestSparqlActionPerformed(evt);
+            }
+        });
         testsSparqlMenu.add(editarTestSparql);
 
         verTestSparql.setText("Ver");
@@ -398,7 +403,16 @@ private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSparqlActionPerformed
 // TODO add your handling code here:
-   
+   menuOp = new MenuOperations();
+    try{
+        if(menuOp.importarTest()){
+            JOptionPane.showMessageDialog(this,"El test se ha importado correctamente",
+            "Information Message",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }catch(FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,"No se ha importado el test",                                                  
+            "Error Message",JOptionPane.ERROR_MESSAGE);
+    }
 }//GEN-LAST:event_importarTestSparqlActionPerformed
 
 private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasActionPerformed
@@ -613,31 +627,42 @@ private void verTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//G
 private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlActionPerformed
 // TODO add your handling code here:
 if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){//GEN-LAST:event_nuevoTestSparqlActionPerformed
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestSparqlGuardado(false);
-        ControladorTests.setTestSparqlSelect(true);
-        aniadirTestsSparql();
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                if(guardarAntesDeSeguir()){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestClasGuardado(false);
-                    ControladorTests.setTestClasSelect(true);
-                    aniadirTestsSparql();
-                }
-            }else{
+    ControladorTests.inicializarGuardados();
+    ControladorTests.inicializarSeleccionados();
+    ControladorTests.setTestSparqlGuardado(false);
+    ControladorTests.setTestSparqlSelect(true);
+    aniadirTestsSparql();
+}else{
+    int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
+            "Guardar Tests",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            if(guardarAntesDeSeguir()){
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestClasGuardado(false);
                 ControladorTests.setTestClasSelect(true);
                 aniadirTestsSparql();
             }
+        }else{
+            ControladorTests.inicializarGuardados();
+            ControladorTests.inicializarSeleccionados();
+            ControladorTests.setTestClasGuardado(false);
+            ControladorTests.setTestClasSelect(true);
+            aniadirTestsSparql();
+        }
+}
+}
+
+private void editarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestSparqlActionPerformed
+// TODO add your handling code here:
+    try {//GEN-LAST:event_editarTestSparqlActionPerformed
+        editarTests();
+    } catch (FileNotFoundException ex) {
+         JOptionPane.showMessageDialog(this,"No se puede abrir el test para su edicion",                                                  
+            "Error Message",JOptionPane.ERROR_MESSAGE);
     }
 }
+
                                        
 public void aniadirTestsInst(){ 
     int cont = getContentTestsJPanel().getComponentCount();
@@ -709,7 +734,7 @@ public void editarTests() throws FileNotFoundException{
     ControladorTests.inicializarGuardados();
     ControladorTests.inicializarSeleccionados();
     filechooser = new JFileChooser(MainApplication.getProyecto());
-    int option = filechooser.showOpenDialog(frame);
+    int option = filechooser.showOpenDialog(this);
     if (option == JFileChooser.APPROVE_OPTION) {
         File selectedFile = filechooser.getSelectedFile();
         String nameFile = selectedFile.getPath();
@@ -778,7 +803,18 @@ public void editarTests() throws FileNotFoundException{
                 getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
             getContentTestsJPanel().getParent().validate();
-
+        }else if(tipoTest.equals("sparql")){
+            ControladorTests.setTestSparqlGuardado(false);
+            ControladorTests.setTestSparqlSelect(true);
+            AddSPARQLJPanel testSparql = new AddSPARQLJPanel(5, s);
+            int cont = getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
+            }else{
+                getContentTestsJPanel().remove(0);
+                getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
+            }
+            getContentTestsJPanel().getParent().validate();
         }
     }   
 }
@@ -786,7 +822,9 @@ public void editarTests() throws FileNotFoundException{
 public void editarInstancias(){
     int cont = getContentTestsJPanel().getComponentCount();
     if(cont==0){
-        editarInstanciasTest();
+        //Aqui abrir las instancia para editarlas
+        //JOptionPane.showMessageDialog(this,"No hay ningun test abierto para editar sus instancias",
+        //"Information Message",JOptionPane.INFORMATION_MESSAGE);
     }else{
         editarInstanciasAsociadasTest();
     }
@@ -806,7 +844,7 @@ public void importarInstancias(){
         }else if(sel==2){
             scenario = Auxiliar.getTestSimpleReal().getScenario();
         }else if(sel==5){
-
+            scenario = Auxiliar.getTestSparql().getScenario();
         } 
         menuOp = new MenuOperations();
         try{
@@ -830,7 +868,7 @@ public void editarInstanciasAsociadasTest(){
     }else if(sel==2){
         instancias = Auxiliar.getTestSimpleReal().getScenario().getInstancias();
     }else if(sel==5){
-    
+        instancias = Auxiliar.getTestSparql().getScenario().getInstancias();
     }
     if(instancias.getPropertyInstances().size()==0 &&  instancias.getClassInstances().size()==0){
         JOptionPane.showMessageDialog(this,"Este test no tiene instancias asociadas",
@@ -840,10 +878,6 @@ public void editarInstanciasAsociadasTest(){
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }
-}
-
-public void editarInstanciasTest(){
-
 }
 
     /**

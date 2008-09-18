@@ -412,6 +412,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
  
     jenaInterface = new JenaInterface();
     jena = jenaInterface.getJena();
+    saveTest = new SaveTest();
     jena.addReasoner(MainApplication.getCollection().getOntology());
     validar = new ValidarTests();
     ciClas = null;
@@ -470,9 +471,14 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
         if(aux==0){
             saveTest.saveInstanciasInMemory(getInstancias());
-            if(getTypePanel()==0){
+            if(getTypePanel()==0 || getTypePanel()==3){
                 Auxiliar.getTestSimpleInstSat().getScenario().setInstancias(getInstancias());
-                setInstanciasInstGuardadas(true);
+            }else if(getTypePanel()==1 || getTypePanel()==4){
+                Auxiliar.getTestSimpleRetClas().getScenario().setInstancias(getInstancias());
+            }else if(getTypePanel()==2){
+                Auxiliar.getTestSimpleReal().getScenario().setInstancias(getInstancias());
+            }else if(getTypePanel()==5){
+                Auxiliar.getTestSparql().getScenario().setInstancias(getInstancias());
             }
         }
         this.setVisible(false);
@@ -521,19 +527,21 @@ public void guardar(int typePanel){
         Auxiliar.getTestSimpleInstSat().getScenarioAEditar().setInstancias(getInstanciasAEditar());
         saveTest = new SaveTest();
         saveTest.replaceTestLocally(Auxiliar.getTestSimpleInstSat().getScenario());
-        setInstanciasInstGuardadas(true);
     }else if(typePanel==1 || typePanel==4){
         Auxiliar.getTestSimpleRetClas().getScenario().setInstancias(getInstancias());
         Auxiliar.getTestSimpleRetClas().getScenarioAEditar().setInstancias(getInstanciasAEditar());
         saveTest = new SaveTest();
         saveTest.replaceTestLocally(Auxiliar.getTestSimpleRetClas().getScenario());
-        setInstanciasInstGuardadas(true);
     }else if(typePanel==2){
         Auxiliar.getTestSimpleReal().getScenario().setInstancias(getInstancias());
         Auxiliar.getTestSimpleReal().getScenarioAEditar().setInstancias(getInstanciasAEditar());
         saveTest = new SaveTest();
         saveTest.replaceTestLocally(Auxiliar.getTestSimpleReal().getScenario());
-        setInstanciasInstGuardadas(true);
+    }else if(typePanel==5){
+        Auxiliar.getTestSparql().getScenario().setInstancias(getInstancias());
+        Auxiliar.getTestSparql().getScenarioAEditar().setInstancias(getInstanciasAEditar());
+        saveTest = new SaveTest();
+        saveTest.replaceTestLocally(Auxiliar.getTestSparql().getScenario());
     }
 }
 public void prepararInstSinAyuda(){
@@ -854,13 +862,12 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         getInstancias().setType("Instancias");
         if(getTypePanel()==0 || getTypePanel()==3){
             Auxiliar.getTestSimpleInstSat().getScenario().setInstancias(getInstancias());
-            setInstanciasInstGuardadas(true);
         }else if(getTypePanel()==1 || getTypePanel()==4){
             Auxiliar.getTestSimpleRetClas().getScenario().setInstancias(getInstancias());
-            setInstanciasInstGuardadas(true);
         }else if(getTypePanel()==2){
             Auxiliar.getTestSimpleReal().getScenario().setInstancias(getInstancias());
-            setInstanciasInstGuardadas(true);
+        }else if(getTypePanel()==5){
+            Auxiliar.getTestSparql().getScenario().setInstancias(getInstancias());
         }
         JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);

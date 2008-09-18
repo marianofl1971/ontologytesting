@@ -5,16 +5,8 @@
 
 package code.google.com.p.ontologytesting.controller;
 
-import code.google.com.p.ontologytesting.guiNew.AddSPARQLJPanel;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleInstSat;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleReal;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleRetClas;
-import code.google.com.p.ontologytesting.model.ClassInstances;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.PropertyInstances;
-import code.google.com.p.ontologytesting.model.QueryOntology;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
-import java.awt.Component;
+import code.google.com.p.ontologytesting.guiNew.*;
+import code.google.com.p.ontologytesting.model.*;
 import java.util.List;
 
 /**
@@ -32,7 +24,50 @@ public class Auxiliar {
     private static TestSimpleRetClas testSimpleRetClas;
     private static TestSimpleReal testSimpleReal;
     private static AddSPARQLJPanel testSparql;
-    private Component frame;
+    
+    public boolean mismoScenarioSparql (ScenarioTest s1, ScenarioTest s2){
+    if(s1.getDescripcion().equals(s2.getDescripcion())){
+        if(s1.getNombre().equals(s2.getNombre())){
+            if(s1.getTestName().equals(s2.getTestName())){
+                if(mismasQuerysSparql(s1.getSparqlQuerys(), s2.getSparqlQuerys())==true){
+                    Instancias i1 = s1.getInstancias();
+                    Instancias i2 = s2.getInstancias();
+                    if(i1.getDescripcion().equals(i2.getDescripcion())){
+                        if(i1.getNombre().equals(i2.getNombre())){
+                            if(i1.getType().equals(i2.getType())){
+                                if(mismasClases(i1.getClassInstances(), i2.getClassInstances())==true){
+                                    if(mismasProp(i1.getPropertyInstances(), i2.getPropertyInstances())==true){
+                                        return true;
+                                    }else{
+                                        return false;
+                                    }
+                                }else{
+                                    return false;
+                                }
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+    }
+    
+    
     
     public boolean mismoScenario(ScenarioTest s1, ScenarioTest s2){
     if(s1.getDescripcion().equals(s2.getDescripcion())){
@@ -94,6 +129,36 @@ public boolean mismasQuerys(List<QueryOntology> q1, List<QueryOntology> q2){
                     String query2 = q2.get(j).getQuery();
                     String result2 = q2.get(j).getResultexpected();
                     if(coment1.equals(coment2) && query2.equals(query1) && result2.equals(result1)){
+                        var=1;
+                    }
+                }
+            }else return false;
+        }
+        if(var==0 && tam1>0){
+            return false;
+        }
+    }else{
+        return false;
+    }
+    return true;
+}
+
+public boolean mismasQuerysSparql(List<SparqlQueryOntology> q1, List<SparqlQueryOntology> q2){
+    int var=0;
+    int cont=0;
+    if(q1.size()==q2.size()){
+        int tam1 = q1.size();
+        int tam2 = q2.size();
+        for(int i=0;i<tam1;i++){
+            if(var==1 || cont==0){
+                var=0;
+                cont=1;
+                String query1 = q1.get(i).getQuerySparql();
+                String result1 = q1.get(i).getResultexpected();
+                for(int j=0;j<tam2;j++){
+                    String query2 = q2.get(j).getQuerySparql();
+                    String result2 = q2.get(j).getResultexpected();
+                    if(query2.equals(query1) && result2.equals(result1)){
                         var=1;
                     }
                 }
