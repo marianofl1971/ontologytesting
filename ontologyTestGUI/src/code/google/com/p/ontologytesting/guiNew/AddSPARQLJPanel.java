@@ -388,8 +388,12 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
 public void reemplazarConsulta(SparqlQueryOntology query,int pos){
-    listaDeConsultas.remove(pos);
-    listaDeConsultas.add(pos, query);
+    if(pos==listaDeConsultas.size()){
+        listaDeConsultas.add(query);
+    }else{
+        listaDeConsultas.remove(pos);
+        listaDeConsultas.add(pos, query);
+    }
 }
 
 public void prepararNuevaConsultaVacia(){
