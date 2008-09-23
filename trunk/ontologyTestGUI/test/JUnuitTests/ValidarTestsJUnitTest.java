@@ -18,7 +18,8 @@ public class ValidarTestsJUnitTest extends TestCase {
     
     ScenarioTest scenario;
     ValidarTests validar = new ValidarTests();
-    QueryOntology query1;
+    String query1;
+    String result1;
     QueryOntology query2;
     QueryOntology query3;
     QueryOntology query4;
@@ -36,15 +37,16 @@ public class ValidarTestsJUnitTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         scenario = new ScenarioTest();
-        query1 = new QueryOntology("sara","true,maria","");
-        query2 = new QueryOntology("pedro","false.lucas,maria","");
-        query3 = new QueryOntology("paco","true lucas","");
-        query4 = new QueryOntology("sofia"," false.sofia","");
+        query1 = "sara female_200";
+        result1 = "true";
+        /*query2 = new QueryOntology("pedro juan","false","");
+        query3 = new QueryOntology("paco","true","");
+        query4 = new QueryOntology("sofia"," false","");
         query5 = new QueryOntology("sara lucas","false","");
         query6 = new QueryOntology("Wife paco lucia","false","");
-        query7 = new QueryOntology("Wife.marry","true laos","");
-        query8 = new QueryOntology("Wife marry)","truesar","");
-        /*ArrayList<QueryOntology> listQuerys = new ArrayList<QueryOntology>();
+        query7 = new QueryOntology("Wife.marry","true","");
+        query8 = new QueryOntology("Wife marry)","true","");
+        ArrayList<QueryOntology> listQuerys = new ArrayList<QueryOntology>();
         listQuerys.add(query1);
         listQuerys.add(query2);
         listQuerys.add(query3);
@@ -64,9 +66,9 @@ public class ValidarTestsJUnitTest extends TestCase {
 
     // TODO add test methods here. The name must begin with 'test'. For example:
     public void testInstanciacion() {
-        res = validar.validarTestInstanciacion(query1);
+        res = validar.validarQueryInstSatis(query1);
         assertTrue(res==true);
-        res = validar.validarTestInstanciacion(query2);
+        /*res = validar.validarTestInstanciacion(query2);
         assertTrue(res==true);
         res = validar.validarTestInstanciacion(query3);
         assertTrue(res==true);
@@ -79,10 +81,10 @@ public class ValidarTestsJUnitTest extends TestCase {
         res = validar.validarTestInstanciacion(query7);
         assertTrue(res==false);
         res = validar.validarTestInstanciacion(query8);
-        assertTrue(res==false);
+        assertTrue(res==false);*/
     }
     
-    public void testRetrieval() {
+    /*public void testRetrieval() {
         res = validar.validarTestRetrieval(query1);
         assertTrue(res==true);
         res = validar.validarTestRetrieval(query2);
@@ -156,6 +158,6 @@ public class ValidarTestsJUnitTest extends TestCase {
         assertTrue(res==false);
         res = validar.validarTestClasificacion(query8);
         assertTrue(res==false);
-    }
+    }*/
 
 }
