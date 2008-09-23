@@ -126,6 +126,7 @@ public class MainApplication extends javax.swing.JFrame {
         proyectoMenu.add(nuevoProyecto);
 
         abrirProyecto.setText("Abrir");
+        abrirProyecto.setEnabled(false);
         abrirProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirProyectoActionPerformed(evt);
@@ -160,6 +161,7 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(proyectoMenu);
 
         testsSimplesMenu.setText("Tests Simples");
+        testsSimplesMenu.setEnabled(false);
 
         nuevoTestSimple.setText("Nuevo");
 
@@ -232,6 +234,7 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(testsSimplesMenu);
 
         testsSparqlMenu.setText("Tests SPARQL");
+        testsSparqlMenu.setEnabled(false);
 
         nuevoTestSparql.setText("Nuevo");
         nuevoTestSparql.addActionListener(new java.awt.event.ActionListener() {
@@ -263,6 +266,7 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(testsSparqlMenu);
 
         instanciasMenu.setText("Instancias");
+        instanciasMenu.setEnabled(false);
 
         nuevoInstancias.setText("Nuevo");
         nuevoInstancias.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +303,7 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(instanciasMenu);
 
         ejecutarMenu.setText("Ejecutar");
+        ejecutarMenu.setEnabled(false);
 
         ejectuarTests.setText("Todos los Test");
         ejectuarTests.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +326,7 @@ public class MainApplication extends javax.swing.JFrame {
         helpMenu.add(tiposDeTestsMenuItem);
 
         aboutMenuItem.setText("About");
+        aboutMenuItem.setEnabled(false);
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);

@@ -254,8 +254,6 @@ public class JenaImplementation implements Jena{
     @Override
     public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
 
-        ArrayList<String> res = new ArrayList<String>();
-
         String expReg = "([\\?]{1}[a-zA-Z]+)";
         int cont=0;
         ArrayList<String> sel = new ArrayList<String>();
@@ -273,14 +271,9 @@ public class JenaImplementation implements Jena{
         try{
         QueryExecution qexec = new PelletQueryExecution(query, model);
         ResultSet results = qexec.execSelect();
-       
-        // Create a node formatter
-        //NodeFormatter formatter = new NodeFormatter(model, formatHTML); 
-        //Variables used in SELECT
+
         List resultVars = query.getResultVars();
-        res = new ArrayList<String>();
-        //Store the formatted results an a table 
-        //TableData table = new TableData( resultVars );
+
         ArrayList<ExecQuerySparql> lista = new ArrayList<ExecQuerySparql>();
         while(results.hasNext()){
             QuerySolution binding = results.nextSolution();
@@ -289,24 +282,19 @@ public class JenaImplementation implements Jena{
                 
                 String var = (String) resultVars.get(i);
                 RDFNode result = binding.get(var);
-                String aux = result.toString();
-                String dato = aux.substring(aux.indexOf("#")+1);
-                
-                if(perteneceALista(var,lista)==false){
-                    e.setNombreSelect(var);
-                    lista.add(e);
-                    lista.get(i).getDatos().add(dato);
-                }else{
-                    ExecQuerySparql eq = seleccionarLista(var, lista);
-                    eq.getDatos().add(dato);
+                if(result!=null){
+                    String aux = result.toString();
+                    String dato = aux.substring(aux.indexOf("#")+1);
+
+                    if(perteneceALista(var,lista)==false){
+                        e.setNombreSelect(var);
+                        lista.add(e);
+                        lista.get(i).getDatos().add(dato);
+                    }else{
+                        ExecQuerySparql eq = seleccionarLista(var, lista);
+                        eq.getDatos().add(dato);
+                    }  
                 }
-                
-                if(!res.contains(dato)){
-                    if(!dato.equals("Nothing") && 
-                            !dato.equals("Thing")){
-                        res.add(dato);
-                    }
-                }       
             }
         }
         return lista;

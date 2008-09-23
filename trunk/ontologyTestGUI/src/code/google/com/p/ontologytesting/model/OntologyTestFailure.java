@@ -181,16 +181,16 @@ public class OntologyTestFailure extends Object{
                 datosEspe = datosEspe + "<br>";
             }
             resultadoTotalEspe = nombreEspe + datosEspe;
-            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>" 
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><br><b>Resultado esperado: </b><br>" 
                         +resultadoTotalEspe+"<br><b>Resultado obtenido: </b><br>" +resultadoTotalObte;
         }else if(execQObte.size()==0 && execQEspe.size()>0){
-            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>" 
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><br><b>Resultado esperado: </b><br>" 
                     +resultadoTotalEspe+"<br><b>Resultado obtenido: </b><br>No se han producido resultados"; 
         }else if(execQObte.size()>0 && execQEspe.size()==0){
         result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>No se han producido resultados."+
                     "<br><b>Resultado obtenido: </b><br>" +resultadoTotalObte;
         }else{
-            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><b>Resultado esperado: </b><br>No se han producido resultados"+
+            result = "<b>Consulta: </b>" +this.fquerysparql+"<br><br><b>Resultado esperado: </b><br>No se han producido resultados"+
                     "<br><b>Resultado obtenido: </b><br>No se han producido resultados";   
         }
         

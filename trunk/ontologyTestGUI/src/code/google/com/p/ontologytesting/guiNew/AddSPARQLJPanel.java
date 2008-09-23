@@ -54,7 +54,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private OntologyTestCase testcase;
     private ResultTests resultTests;
     private OntologyTestResult testresult;
-    
+    private boolean soloEjectuar;
     
     /** Creates new form AddSPARQLJPanel */
     public AddSPARQLJPanel(int tipo) {
@@ -78,6 +78,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         setImportado(false);
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         setPosListQuerysSel(0);
+        setSoloEjectuar(false);
     }
     
     public AddSPARQLJPanel(int tipo, ScenarioTest s) {
@@ -111,7 +112,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setTipo(tipo);
-        
+        setSoloEjectuar(false);
         setPosListQuerysSel(0);
     }
 
@@ -611,6 +612,7 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
 private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarJButtonActionPerformed
 // TODO add your handling code here:
     Auxiliar.setTestSparql(this);//GEN-LAST:event_ejecutarJButtonActionPerformed
+    setSoloEjectuar(true);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -668,6 +670,14 @@ public void guardarYEjecutarTest(){
 }
 
 public void ejecutar(int cuantos){
+    if(isSoloEjectuar()==true){
+        auxiliar = new Auxiliar();
+        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+            saveTest.replaceTestLocally(scenario);
+        }else{
+            saveTest.saveTestLocally(scenario);
+        }
+    }
     try{
         if(cuantos==0){
             testcase.runScenario(testresult, MainApplication.getCollection(),getScenario());   
@@ -1057,6 +1067,14 @@ public void inicializarVariables(){
 
     public void setImportado(boolean importado) {
         this.importado = importado;
+    }
+    
+    public boolean isSoloEjectuar() {
+        return soloEjectuar;
+    }
+
+    public void setSoloEjectuar(boolean soloEjectuar) {
+        this.soloEjectuar = soloEjectuar;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

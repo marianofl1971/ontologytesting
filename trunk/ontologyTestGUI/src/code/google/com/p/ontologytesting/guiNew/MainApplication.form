@@ -20,6 +20,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="abrirProyecto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Abrir"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abrirProyectoActionPerformed"/>
@@ -54,6 +55,7 @@
         <Menu class="javax.swing.JMenu" name="testsSimplesMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests Simples"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="nuevoTestSimple">
@@ -132,6 +134,7 @@
         <Menu class="javax.swing.JMenu" name="testsSparqlMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests SPARQL"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoTestSparql">
@@ -168,6 +171,7 @@
         <Menu class="javax.swing.JMenu" name="instanciasMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Instancias"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoInstancias">
@@ -207,6 +211,7 @@
         <Menu class="javax.swing.JMenu" name="ejecutarMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ejecutar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="ejectuarTests">
@@ -235,6 +240,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="About"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </MenuItem>
           </SubComponents>
