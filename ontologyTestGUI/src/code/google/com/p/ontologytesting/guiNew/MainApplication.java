@@ -11,12 +11,7 @@ import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -34,13 +29,10 @@ public class MainApplication extends javax.swing.JFrame {
     private JFileChooser filechooser;
     private MenuOperations menuOp;
     private static String proyecto,nombreProyecto;
-    private Component frame;
-    private XMLDecoder decoder;
     private AddInstancesClasPropJDialog addInst;
     private OntologyTestCase testcase;
     private ResultTests resultTests;
     private OntologyTestResult testresult;
-    private SeeTestJDialog seeTest;
     private SaveTest saveTest;
     private HelpJDialog helpDialog;
     
@@ -85,16 +77,19 @@ public class MainApplication extends javax.swing.JFrame {
         nuevoTestCla = new javax.swing.JMenuItem();
         importarTestSimple = new javax.swing.JMenuItem();
         editarTestSimple = new javax.swing.JMenuItem();
-        verTestMenuItem = new javax.swing.JMenuItem();
+        explorarTestSimple = new javax.swing.JMenuItem();
+        verTestSimpleMenuItem = new javax.swing.JMenuItem();
         testsSparqlMenu = new javax.swing.JMenu();
         nuevoTestSparql = new javax.swing.JMenuItem();
         importarTestSparql = new javax.swing.JMenuItem();
         editarTestSparql = new javax.swing.JMenuItem();
+        explorarTestSparql = new javax.swing.JMenuItem();
         verTestSparql = new javax.swing.JMenuItem();
         instanciasMenu = new javax.swing.JMenu();
         nuevoInstancias = new javax.swing.JMenuItem();
         importarInstancias = new javax.swing.JMenuItem();
         editarInstancias = new javax.swing.JMenuItem();
+        explorarInstancias = new javax.swing.JMenuItem();
         verInstancias = new javax.swing.JMenuItem();
         ejecutarMenu = new javax.swing.JMenu();
         ejectuarTests = new javax.swing.JMenuItem();
@@ -223,13 +218,21 @@ public class MainApplication extends javax.swing.JFrame {
         });
         testsSimplesMenu.add(editarTestSimple);
 
-        verTestMenuItem.setText("Ver");
-        verTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        explorarTestSimple.setText("Explorar");
+        explorarTestSimple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verTestMenuItemActionPerformed(evt);
+                explorarTestSimpleActionPerformed(evt);
             }
         });
-        testsSimplesMenu.add(verTestMenuItem);
+        testsSimplesMenu.add(explorarTestSimple);
+
+        verTestSimpleMenuItem.setText("Ver");
+        verTestSimpleMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTestSimpleMenuItemActionPerformed(evt);
+            }
+        });
+        testsSimplesMenu.add(verTestSimpleMenuItem);
 
         menuBar.add(testsSimplesMenu);
 
@@ -260,7 +263,20 @@ public class MainApplication extends javax.swing.JFrame {
         });
         testsSparqlMenu.add(editarTestSparql);
 
+        explorarTestSparql.setText("Explorar");
+        explorarTestSparql.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                explorarTestSparqlActionPerformed(evt);
+            }
+        });
+        testsSparqlMenu.add(explorarTestSparql);
+
         verTestSparql.setText("Ver");
+        verTestSparql.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTestSparqlActionPerformed(evt);
+            }
+        });
         testsSparqlMenu.add(verTestSparql);
 
         menuBar.add(testsSparqlMenu);
@@ -291,6 +307,14 @@ public class MainApplication extends javax.swing.JFrame {
             }
         });
         instanciasMenu.add(editarInstancias);
+
+        explorarInstancias.setText("Explorar");
+        explorarInstancias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                explorarInstanciasActionPerformed(evt);
+            }
+        });
+        instanciasMenu.add(explorarInstancias);
 
         verInstancias.setText("Ver");
         verInstancias.addActionListener(new java.awt.event.ActionListener() {
@@ -479,27 +503,19 @@ private void editarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//
     menuOp.editarInstancias();
 }//GEN-LAST:event_editarInstanciasActionPerformed
 
-private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasActionPerformed
+private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarInstanciasActionPerformed
 // TODO add your handling code here:
-    filechooser = new JFileChooser(MainApplication.getProyecto());                                               
-    int option = filechooser.showOpenDialog(frame);
-    if (option == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = filechooser.getSelectedFile();
-        String nameFile = selectedFile.getPath();
-        try {
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-            Instancias inst = (Instancias) decoder.readObject();
-            seeTest = new SeeTestJDialog(this, false, inst);
-            seeTest.setVisible(true);
-        }catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-        }catch(ClassCastException ce){
-            JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-            "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }  
-}//GEN-LAST:event_verInstanciasActionPerformed
+    menuOp = new MenuOperations();
+    try{
+        menuOp.explorarInstancias();
+    }catch (FileNotFoundException ex) {
+        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE);
+    }catch(ClassCastException ce){
+        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
+        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
+    }
+}//GEN-LAST:event_explorarInstanciasActionPerformed
 
 private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecActionPerformed
 // TODO add your handling code here:
@@ -648,27 +664,21 @@ private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
 }
     
-private void verTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestMenuItemActionPerformed
+private void explorarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
-    filechooser = new JFileChooser(MainApplication.getProyecto());//GEN-LAST:event_verTestMenuItemActionPerformed
-    int option = filechooser.showOpenDialog(frame);
-    if (option == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = filechooser.getSelectedFile();
-        String nameFile = selectedFile.getPath();
-        try {
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-            ScenarioTest s = (ScenarioTest) decoder.readObject();
-            seeTest = new SeeTestJDialog(this, false, s);
-            seeTest.setVisible(true);
-        }catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-        }catch(ClassCastException ce){
-            JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-            "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-        }
+    menuOp = new MenuOperations();
+    try{
+        menuOp.explorarTests();
+    }catch (FileNotFoundException ex) {
+        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE);
+    }catch(ClassCastException ce){
+        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
+        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
     }
 }
+  
+
 private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlActionPerformed
 // TODO add your handling code here:
     menuOp = new MenuOperations();
@@ -764,9 +774,56 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
         JOptionPane.showMessageDialog(this,"No se pudo guardar el proyecto",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
     }
-}                                                   
+}
+    
+private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSimpleMenuItemActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_verTestSimpleMenuItemActionPerformed
+    menuOp = new MenuOperations();
+    boolean res = menuOp.verTests();
+    if(res==false){
+        JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }
+}
 
-                                     
+private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarTestSparqlActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_explorarTestSparqlActionPerformed
+    menuOp = new MenuOperations();
+    try{
+        menuOp.explorarTests();
+    }catch (FileNotFoundException ex) {
+        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE);
+    }catch(ClassCastException ce){
+        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
+        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSparqlActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_verTestSparqlActionPerformed
+    menuOp = new MenuOperations();
+    boolean res = menuOp.verTests();
+    if(res==false){
+        JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }
+}
+
+private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_verInstanciasActionPerformed
+    menuOp = new MenuOperations();
+    boolean res = menuOp.verInstancias();
+    if(res==false){
+        JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+    }
+}
+                                                                                   
     /**
     * @param args the command line arguments
     */
@@ -774,7 +831,8 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainApplication().setVisible(true);
+                MainApplication app = new MainApplication();
+                app.setVisible(true);
             }
         });
     }
@@ -832,6 +890,9 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem editarTestSparql;
     private javax.swing.JMenuItem ejectuarTests;
     private javax.swing.JMenu ejecutarMenu;
+    private javax.swing.JMenuItem explorarInstancias;
+    private javax.swing.JMenuItem explorarTestSimple;
+    private javax.swing.JMenuItem explorarTestSparql;
     private javax.swing.JMenuItem guardarProyecto;
     private javax.swing.JMenuItem guardarProyectoComo;
     private javax.swing.JMenu helpMenu;
@@ -855,7 +916,7 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenu testsSparqlMenu;
     private javax.swing.JMenuItem tiposDeTestsMenuItem;
     private javax.swing.JMenuItem verInstancias;
-    private javax.swing.JMenuItem verTestMenuItem;
+    private javax.swing.JMenuItem verTestSimpleMenuItem;
     private javax.swing.JMenuItem verTestSparql;
     // End of variables declaration//GEN-END:variables
 

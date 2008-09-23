@@ -5,15 +5,8 @@
 
 package code.google.com.p.ontologytesting.controller;
 
-import code.google.com.p.ontologytesting.guiNew.AddInstancesClasPropJDialog;
-import code.google.com.p.ontologytesting.guiNew.AddSPARQLJPanel;
-import code.google.com.p.ontologytesting.guiNew.MainApplication;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleInstSat;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleReal;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleRetClas;
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.guiNew.*;
+import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.beans.XMLDecoder;
@@ -32,20 +25,21 @@ import javax.swing.WindowConstants;
  */
 public class MenuOperations {
     
+    private SeeTestJDialog seeTest;
     private ScenarioTest scenario;
     private MenuOperations menuOp;
     private AddInstancesClasPropJDialog addInst;
     private JFileChooser filechooser;
     private Auxiliar auxiliar;
-    private JFrame frame;
     private XMLDecoder decoder;
     private SaveTest saveTest;
     private Instancias instancias;
+    private JFrame frame;
 
     public boolean importarTest() throws FileNotFoundException,ClassCastException{
         filechooser = new JFileChooser(MainApplication.getProyecto());
         saveTest = new SaveTest();
-        int option = filechooser.showOpenDialog(frame);
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             String nameFile = selectedFile.getPath();
@@ -58,10 +52,79 @@ public class MenuOperations {
         return false;
     }
     
+    public void explorarTests() throws FileNotFoundException,ClassCastException{
+        frame = new JFrame();
+        filechooser = new JFileChooser(MainApplication.getProyecto());
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());                                                  
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            ScenarioTest s = (ScenarioTest) decoder.readObject();
+            seeTest = new SeeTestJDialog(frame, false, s);
+            seeTest.setVisible(true);
+        }
+    }
+    
+    public void explorarInstancias() throws FileNotFoundException,ClassCastException{
+        filechooser = new JFileChooser(MainApplication.getProyecto());                                               
+        frame = new JFrame();
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            Instancias inst = (Instancias) decoder.readObject();
+            seeTest = new SeeTestJDialog(frame, false, inst);
+            seeTest.setVisible(true);
+        }
+    }
+    
+    public boolean verTests(){
+        frame = new JFrame();
+        int sel = ControladorTests.testSeleccionado();
+        if(sel!=10){
+            if(sel==0 || sel==3){
+                scenario = Auxiliar.getTestSimpleInstSat().getScenario();
+            }else if(sel==1 || sel==4){
+                scenario = Auxiliar.getTestSimpleRetClas().getScenario();
+            }else if(sel==2){
+                scenario = Auxiliar.getTestSimpleReal().getScenario();
+            }else if(sel==5){
+                scenario = Auxiliar.getTestSparql().getScenario();
+            } 
+            seeTest = new SeeTestJDialog(frame, false, scenario);
+            seeTest.setVisible(true);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean verInstancias(){
+        frame = new JFrame();
+        int sel = ControladorTests.testSeleccionado();
+        if(sel!=10){
+            if(sel==0 || sel==3){
+                instancias = Auxiliar.getTestSimpleInstSat().getScenario().getInstancias();
+            }else if(sel==1 || sel==4){
+                instancias = Auxiliar.getTestSimpleRetClas().getScenario().getInstancias();
+            }else if(sel==2){
+                instancias = Auxiliar.getTestSimpleReal().getScenario().getInstancias();
+            }else if(sel==5){
+                instancias = Auxiliar.getTestSparql().getScenario().getInstancias();
+            }
+            seeTest = new SeeTestJDialog(frame, false, instancias);
+            seeTest.setVisible(true);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public boolean openProject() throws FileNotFoundException,ClassCastException{
         filechooser = new JFileChooser();
-        frame = new JFrame();
-        int option = filechooser.showOpenDialog(frame.getParent());
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             String nameFile = selectedFile.getPath();
@@ -77,7 +140,7 @@ public class MenuOperations {
     public boolean importarInstancias(ScenarioTest s) throws FileNotFoundException,ClassCastException{
         filechooser = new JFileChooser(MainApplication.getProyecto());
         saveTest = new SaveTest();
-        int option = filechooser.showOpenDialog(frame);
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             String nameFile = selectedFile.getPath();
@@ -90,6 +153,7 @@ public class MenuOperations {
     }
     
     public boolean editarInstanciasAsociadasTest(){
+        frame = new JFrame();
         int sel = ControladorTests.testSeleccionado();
         if(sel==0 || sel==3){
             instancias = Auxiliar.getTestSimpleInstSat().getScenario().getInstancias();
@@ -115,7 +179,7 @@ public class MenuOperations {
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         filechooser = new JFileChooser(MainApplication.getProyecto());
-        int option = filechooser.showOpenDialog(frame);
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
             String nameFile = selectedFile.getPath();
@@ -128,11 +192,12 @@ public class MenuOperations {
     }
 
     public void editarInstancias(){
+        frame = new JFrame();
         int cont = MainApplication.getContentTestsJPanel().getComponentCount();
         if(cont==0){
             auxiliar = new Auxiliar();
             filechooser = new JFileChooser(MainApplication.getProyecto());
-            int option = filechooser.showOpenDialog(frame);
+            int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
             if (option == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = filechooser.getSelectedFile();
                 String nameFile = selectedFile.getPath();
@@ -142,10 +207,10 @@ public class MenuOperations {
                     addInst = new AddInstancesClasPropJDialog(frame, true, inst);
                     addInst.setVisible(true);
                 } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(frame,"No se pudo abrir el archivo",                                                  
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No se pudo abrir el archivo",                                                  
                     "Error Message",JOptionPane.ERROR_MESSAGE);
                 } catch(ClassCastException ce){
-                    JOptionPane.showMessageDialog(frame,"El archivo no es compatible con la accion que " +
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"El archivo no es compatible con la accion que " +
                     "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
                 } 
             }   
@@ -153,7 +218,7 @@ public class MenuOperations {
             menuOp = new MenuOperations();
             boolean edit = menuOp.editarInstanciasAsociadasTest();
             if(edit==false){
-                JOptionPane.showMessageDialog(frame,"Este test no tiene instancias asociadas",
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"Este test no tiene instancias asociadas",
                 "Information Message",JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -162,7 +227,7 @@ public class MenuOperations {
     public void importarInstancias(){
         int cont = MainApplication.getContentTestsJPanel().getComponentCount();
         if(cont==0){
-            JOptionPane.showMessageDialog(frame,"No hay ningun test abierto al que " +
+            JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No hay ningun test abierto al que " +
                     "importar las instancias","Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }else{
             int sel = ControladorTests.testSeleccionado();
@@ -178,14 +243,14 @@ public class MenuOperations {
             menuOp = new MenuOperations();
             try{
                 if(menuOp.importarInstancias(scenario)){
-                    JOptionPane.showMessageDialog(frame,"Las instancias se ha importado correctamente",
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"Las instancias se ha importado correctamente",
                     "Information Message",JOptionPane.INFORMATION_MESSAGE);
                 }
             }catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(frame,"No se ha importado el test",                                                  
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No se ha importado el test",                                                  
                 "Error Message",JOptionPane.ERROR_MESSAGE);
             }catch(ClassCastException ce){
-                JOptionPane.showMessageDialog(frame,"El archivo no es compatible con la accion que " +
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"El archivo no es compatible con la accion que " +
                 "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
             }
         }
