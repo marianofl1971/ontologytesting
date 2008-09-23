@@ -73,7 +73,6 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
         }else if(tipoTest.equals("Retrieval")){
             ControladorTests.setTestRetGuardado(false);
             ControladorTests.setTestRetSelect(true);
@@ -85,7 +84,6 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
         }else if(tipoTest.equals("Realizacion")){
             ControladorTests.setTestRealGuardado(false);
             ControladorTests.setTestRealSelect(true);
@@ -97,8 +95,6 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
-
         }else if(tipoTest.equals("Satisfactibilidad")){
             ControladorTests.setTestSatGuardado(false);
             ControladorTests.setTestSatSelect(true);
@@ -110,8 +106,6 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
-
         }else if(tipoTest.equals("Clasificacion")){
             ControladorTests.setTestClasGuardado(false);
             ControladorTests.setTestClasSelect(true);
@@ -123,11 +117,10 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
         }else if(tipoTest.equals("sparql")){
             ControladorTests.setTestSparqlGuardado(false);
             ControladorTests.setTestSparqlSelect(true);
-            AddSPARQLJPanel testSparql = new AddSPARQLJPanel(5, s);
+            testSparql = new AddSPARQLJPanel(5, s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
                 MainApplication.getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
@@ -135,8 +128,9 @@ public class Auxiliar {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
             }
-            MainApplication.getContentTestsJPanel().getParent().validate();
         }
+        MainApplication.getContentTestsJPanel().setVisible(true);
+        MainApplication.getContentTestsJPanel().getParent().validate();
     }
     
     public boolean mismoScenarioSparql (ScenarioTest s1, ScenarioTest s2){

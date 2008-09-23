@@ -299,6 +299,7 @@ public class OntologyTestCase implements OntologyTest{
         setUpOntology(scenariotest, ont, ns);
         runOntologyTest(testresult,ns,scenariotest);
         tearDownOntology(); 
+        crearFicheroDeResultados(testresult);
     }
     
     public boolean comparaArray(List<String> array1, List<String> array2){
@@ -526,15 +527,15 @@ public class OntologyTestCase implements OntologyTest{
                     testSparqlIntro= testSparqlIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
                     scenario.getDescripcion()+"\r\n\r\n";
                     testSparqlInstancias = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
-                    testSparqlFailed = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    testSparqlTotal = testSparqlTotal + testSparqlIntro + testSparqlInstancias + testSparqlFailed;
                     auxSparql=1;
                 }
                 if(!actualSparql.equals(otf.getTestNameUsuario())){
-                    testSparqlTotal = testSparqlTotal + testSparqlIntro + testSparqlInstancias + testSparqlFailed;
-                    testSparqlTotal = testSparqlTotal + "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
+                    testSparqlTotal = testSparqlTotal + testSparqlFailed;
+                    testSparqlTotal = "\r\nNombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
                     scenario.getDescripcion()+"\r\n\r\n";
-                    testSparqlTotal = testSparqlTotal + "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
-                    testInstTotal = testInstTotal + "PRUEBAS QUE HAN FALLADO\r\n\r\n";
+                    testSparqlTotal = "INSTANCIAS ASOCIADAS\r\n\r\n" + instanciasAsociadas(scenario);
+                    testInstTotal = "PRUEBAS QUE HAN FALLADO\r\n\r\n";
                     actualSparql = otf.getTestNameUsuario();
                     testSparqlFailed="";
                 }
