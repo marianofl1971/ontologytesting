@@ -35,8 +35,10 @@ public class ControladorTests {
             return 3;
         }else if(getTestClasSelect()==true){
             return 4;
-        }else{
+        }else if(getTestSparqlSelect()==true){
             return 5;
+        }else{
+            return 10;
         }
     }
     

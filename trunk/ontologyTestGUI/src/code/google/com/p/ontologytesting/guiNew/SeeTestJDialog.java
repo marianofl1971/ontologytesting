@@ -17,7 +17,7 @@ import java.util.List;
 public class SeeTestJDialog extends javax.swing.JDialog {
 
     /** Creates new form SeeTestJDialog */
-    public SeeTestJDialog(java.awt.Frame parent, boolean modal, ScenarioTest scenario) {
+    public SeeTestJDialog(javax.swing.JFrame parent, boolean modal, ScenarioTest scenario) {
         super(parent, modal);
         initComponents();
         this.setTitle("Ver Test");

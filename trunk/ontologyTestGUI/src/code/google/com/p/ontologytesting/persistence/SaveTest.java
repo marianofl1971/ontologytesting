@@ -91,14 +91,15 @@ public class SaveTest {
                 e.writeObject(instancias);
                 e.close();
                 JOptionPane.showMessageDialog(frame,"Instancias guardadas con el " +
-                        "nombre que les asigno y asociadas al test",
-                        "Information Message",JOptionPane.INFORMATION_MESSAGE);
+                "nombre que les asigno y asociadas al test",
+                "Information Message",JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
-                        "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
+                "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
             }
         }catch (FileNotFoundException ex) {
-           JOptionPane.showMessageDialog(frame,"No se ha podido guardar el archivo","Error Message",JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(frame,"No se ha podido guardar el archivo",
+           "Error Message",JOptionPane.ERROR_MESSAGE);
         } 
     }
 
