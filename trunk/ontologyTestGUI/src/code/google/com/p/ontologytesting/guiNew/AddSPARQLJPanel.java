@@ -8,7 +8,6 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
-import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
@@ -49,7 +48,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ValidarTests validarTest;
     private int tipo;
     private SaveTest saveTest;
-    private Auxiliar auxiliar;
     private AddInstancesClasPropJDialog addInst;
     private OntologyTestCase testcase;
     private ResultTests resultTests;
@@ -74,7 +72,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         setTipo(tipo);
         setScenarioAEditar(null);
         setScenario(new ScenarioTest()); 
-        Auxiliar.setTestSparql(this);
         setImportado(false);
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         setPosListQuerysSel(0);
@@ -91,7 +88,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         resultTextArea.setLineWrap(true);
         resultTextArea.setWrapStyleWord(true);
         
-        Auxiliar.setTestSparql(this);
         setImportado(true);
         List<SparqlQueryOntology> lista = s.getSparqlQuerys();
         for(int i=0; i<lista.size();i++){
@@ -586,15 +582,13 @@ private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {
     format.setVisible(true);
 }//GEN-LAST:event_formatosPermitidosActionPerformed
 
-private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarJButtonActionPerformed
+private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    Auxiliar.setTestSparql(this);//GEN-LAST:event_guardarJButtonActionPerformed
     guardarTest();
 }                                              
 
-private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarJButtonActionPerformed
+private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
 // TODO add your handling code here:
-    Auxiliar.setTestSparql(this);//GEN-LAST:event_guardarEjecutarJButtonActionPerformed
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -608,14 +602,10 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSparql(this);
-
-
 }                                                      
 
-private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarJButtonActionPerformed
+private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
-    Auxiliar.setTestSparql(this);//GEN-LAST:event_ejecutarJButtonActionPerformed
     setSoloEjectuar(true);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
@@ -625,12 +615,10 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     if(continuar==true){
         if(continuarSinInstancias==true){
             ejecutar(0);
-            Auxiliar.setTestSparql(this);
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
-            Auxiliar.setTestSparql(this);
         }
     }
 }                                               
@@ -640,7 +628,6 @@ public boolean guardarTest(){
     if(continuar==true){
         if(continuarSinInstancias==true){
             guardar();
-            Auxiliar.setTestSparql(this);
             return true;
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
@@ -654,7 +641,6 @@ public boolean guardarTest(){
 }
 
 public void guardarYEjecutarTest(){
-    Auxiliar.setTestSparql(this);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -663,20 +649,17 @@ public void guardarYEjecutarTest(){
     if(continuar==true){
         if(continuarSinInstancias==true){
             guardarYEjecutar();
-            Auxiliar.setTestSparql(this);
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
-            Auxiliar.setTestSparql(this);
         }
     }
 }
 
 public void ejecutar(int cuantos){
     if(isSoloEjectuar()==true){
-        auxiliar = new Auxiliar();
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             saveTest.replaceTestLocally(scenario);
         }else{
             saveTest.saveTestLocally(scenario);
@@ -700,9 +683,8 @@ public void ejecutar(int cuantos){
 }
 
 public void guardarYEjecutar(){
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || getImportado()==true){
-        if(auxiliar.mismoScenarioSparql(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -752,9 +734,8 @@ public void guardarYEjecutar(){
 
 public void guardar(){
     saveTest = new SaveTest();
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || getImportado()==true){
-        if(auxiliar.mismoScenarioSparql(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

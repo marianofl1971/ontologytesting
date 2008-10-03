@@ -20,16 +20,16 @@ public class ScenarioTest {
     private String testName="";
     private String nombre="";
     private String descripcion="";
-    private Instancias instancias;
-    private List<QueryOntology> queryTest;
-    private List<SparqlQueryOntology> sparqlQuerys;
-    
+    private Instancias instancias = new Instancias();
+    private List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
+    private List<SparqlQueryOntology> sparqlQuerys = new ArrayList<SparqlQueryOntology>();
+
     public ScenarioTest(Instancias instancias, List<QueryOntology> tests, String testName,
             List<SparqlQueryOntology> sparqlquerys,String nombre,String descripcion){
 
+        this.testName=testName;
         this.sparqlQuerys.addAll(sparqlquerys);
         this.queryTest.addAll(tests);   
-        this.testName=testName;   
         this.nombre=nombre;
         this.descripcion=descripcion;
         this.instancias = instancias;
@@ -120,4 +120,41 @@ public class ScenarioTest {
         this.instancias = instancias;
     }
 
+    @Override
+    public boolean equals(Object object){
+        if((object != null) && (object instanceof ScenarioTest)){
+            ScenarioTest s2 = (ScenarioTest) object;
+            for(int i=0; i<this.getQueryTest().size(); i++){
+                if(!this.getQueryTest().get(i).equals(s2.getQueryTest().get(i)))
+                    return false;
+            }
+            for(int i=0; i<this.getSparqlQuerys().size(); i++){
+                if(!this.getSparqlQuerys().get(i).equals(s2.getSparqlQuerys().get(i)))
+                    return false;
+            }
+            if(!this.getInstancias().equals(s2.getInstancias())){
+                return false;
+            }
+            if(this.getDescripcion().equals(s2.getDescripcion())){
+                if(this.getNombre().equals(s2.getNombre())){
+                    if(this.getTestName().equals(s2.getTestName())){
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }else return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + (this.testName != null ? this.testName.hashCode() : 0);
+        hash = 61 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        hash = 61 * hash + (this.descripcion != null ? this.descripcion.hashCode() : 0);
+        hash = 61 * hash + (this.instancias != null ? this.instancias.hashCode() : 0);
+        hash = 61 * hash + (this.queryTest != null ? this.queryTest.hashCode() : 0);
+        hash = 61 * hash + (this.sparqlQuerys != null ? this.sparqlQuerys.hashCode() : 0);
+        return hash;
+    }
 }

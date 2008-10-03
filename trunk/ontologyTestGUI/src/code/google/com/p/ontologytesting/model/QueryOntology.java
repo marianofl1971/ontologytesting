@@ -61,7 +61,30 @@ public class QueryOntology {
         this.comment = comment;
     }
     
+    @Override
+    public boolean equals(Object object){
+        if((object!=null) && (object instanceof QueryOntology) ) {
+            QueryOntology comp = (QueryOntology)object;
+            if(this.getQuery().equals(comp.getQuery())){
+               if(this.getResultexpected().equals(comp.getResultexpected())){
+                    if(this.getComment().equals(comp.getComment())){
+                        return true;
+                    }
+               }
+            }
+            return false;
+        }
+        return false;
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + (this.query != null ? this.query.hashCode() : 0);
+        hash = 29 * hash + (this.resultexpected != null ? this.resultexpected.hashCode() : 0);
+        hash = 29 * hash + (this.comment != null ? this.comment.hashCode() : 0);
+        return hash;
+    }
 }
 
 

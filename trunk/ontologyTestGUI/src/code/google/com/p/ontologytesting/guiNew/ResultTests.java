@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.BorderLayout;
@@ -23,7 +22,6 @@ import javax.swing.JOptionPane;
  */
 public class ResultTests extends javax.swing.JFrame {
 
-    private Auxiliar auxiliar;
     private ScenarioTest scenario;
     private String tipoTest;
     private SeeTestJDialog seeTest;
@@ -141,9 +139,9 @@ public class ResultTests extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    String resultado = OntologyTestCase.getMuestra();//GEN-LAST:event_saveAsMenuItemActionPerformed
+    String resultado = OntologyTestCase.getMuestra();
     JFileChooser fileChooser = new JFileChooser();
     int seleccion = fileChooser.showSaveDialog(this);
     if(seleccion == JFileChooser.APPROVE_OPTION){
@@ -165,9 +163,9 @@ private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
 }
 
-private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
-    String resultado = OntologyTestCase.getMuestra();//GEN-LAST:event_saveMenuItemActionPerformed
+    String resultado = OntologyTestCase.getMuestra();
     String fichero = "Resultado Tests.doc";
     PrintWriter writer = null;
         try {
@@ -185,21 +183,19 @@ private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
 }
 
-private void editarTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestButtonActionPerformed
+private void editarTestButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
-    auxiliar  = new Auxiliar();//GEN-LAST:event_editarTestButtonActionPerformed
-    tipoTest = TreeResults.getTestSeleccionado();
+    /*tipoTest = TreeResults.getTestSeleccionado();
     scenario = auxiliar.buscarScenario(tipoTest);
-    auxiliar.editarTest(scenario, scenario.getTestName());
+    auxiliar.editarTest(scenario, scenario.getTestName());*/
 }
 
-private void verInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasButtonActionPerformed
+private void verInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
 // TODO add your handling code here:
-    auxiliar  = new Auxiliar();//GEN-LAST:event_verInstanciasButtonActionPerformed
-    tipoTest = TreeResults.getTestSeleccionado();
+    /*tipoTest = TreeResults.getTestSeleccionado();
     scenario = auxiliar.buscarScenario(tipoTest);
     seeTest = new SeeTestJDialog(this, false, scenario.getInstancias());
-    seeTest.setVisible(true);
+    seeTest.setVisible(true);*/
 }
 
 

@@ -8,7 +8,6 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import java.awt.Frame;
 import javax.swing.WindowConstants;
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 
 
 /**
@@ -20,21 +19,22 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent; 
     private Frame frame;
     private int posicion;
+    private static int contadorClas=0,contadorProp=0;
     
     /** Creates new form CreateInstancesJPanel */
     public CreateInstancesJPanel(int type) {
         initComponents();
         frame = new Frame();
         if(type==0){
-            int pos = Auxiliar.getContadorClas();
+            int pos = CreateInstancesJPanel.getContadorClas();
             this.setPosicion(pos);
             int cont = pos+1;
-            Auxiliar.setContadorClas(cont);
+            CreateInstancesJPanel.setContadorClas(cont);
         }else if(type==1){
-            int pos = Auxiliar.getContadorProp();
+            int pos = CreateInstancesJPanel.getContadorProp();
             this.setPosicion(pos);
             int cont = pos+1;
-            Auxiliar.setContadorProp(cont);
+            CreateInstancesJPanel.setContadorProp(cont);
         }
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -136,98 +136,98 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
    if(tab == 0){
        int finalPos=0;
        int p = this.getPosicion();
-       int total = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
+       int total = this.getParent().getComponentCount();
        for(int i=p+1;i<total;i++){
-            CreateInstancesJPanel panel = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(i);
+            CreateInstancesJPanel panel = (CreateInstancesJPanel) this.getParent().getComponent(i);
             int pos = panel.getPosicion();
             panel.setPosicion(pos-1);
             finalPos=pos-1;
        }
-       AddInstancesClasPropJDialog.getClasPanel().remove(this);
        CreateInstancesJPanel pa = new CreateInstancesJPanel(0);
        pa.setPosicion(finalPos+1);
-       AddInstancesClasPropJDialog.getClasPanel().add(pa);
+       this.getParent().add(pa);
+       this.getParent().remove(this);
    }else if(tab == 1){
        int finalPos=0;
        int p = this.getPosicion();
-       int total = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+       int total = this.getParent().getComponentCount();
        for(int i=p+1;i<total;i++){
-            CreateInstancesJPanel panel = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(i);
+            CreateInstancesJPanel panel = (CreateInstancesJPanel) this.getParent().getComponent(i);
             int pos = panel.getPosicion();
             panel.setPosicion(pos-1);
             finalPos=pos-1;
        }
-       AddInstancesClasPropJDialog.getPropPanel().remove(this);
        CreateInstancesJPanel pa = new CreateInstancesJPanel(1);
        pa.setPosicion(finalPos+1);
-       AddInstancesClasPropJDialog.getPropPanel().add(pa);
+       this.getParent().add(pa);
+       this.getParent().remove(this);
    }
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-     int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
-     if(tab==0){
-         int tam = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
+    int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
+    if(tab==0){
+         int tam = this.getParent().getComponentCount();
          String query = this.getQuery();
          CreateInstancesJPanel panel = new CreateInstancesJPanel(0);
          panel.setInstance(query);
          int pos = this.getPosicion();
          panel.setPosicion(pos+1);
          if(pos+1==tam){
-             AddInstancesClasPropJDialog.getClasPanel().add(panel);
+             this.getParent().add(panel);
          }else{
-            AddInstancesClasPropJDialog.getClasPanel().add(panel, pos+1);
+            this.getParent().add(panel, pos+1);
          }
-         int total = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
+         int total = this.getParent().getComponentCount();
          for(int i=pos+2;i<total;i++){
-                CreateInstancesJPanel p = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(i);
+                CreateInstancesJPanel p = (CreateInstancesJPanel) this.getParent().getComponent(i);
                 int po = p.getPosicion();
                 p.setPosicion(po+1);
            }  
-         AddInstancesClasPropJDialog.getClasPanel().validate();
+         this.getParent().validate();
     }else if(tab==1){
-         int tam = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+         int tam = this.getParent().getComponentCount();
          String query = this.getQuery();
          CreateInstancesJPanel panel = new CreateInstancesJPanel(1);
          panel.setInstance(query);
          int pos = this.getPosicion();
          panel.setPosicion(pos+1);
          if(pos+1==tam){
-             AddInstancesClasPropJDialog.getPropPanel().add(panel);
+             this.getParent().add(panel);
          }else{
-            AddInstancesClasPropJDialog.getPropPanel().add(panel, pos+1);
+            this.getParent().add(panel, pos+1);
          }
-         int total = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+         int total = this.getParent().getComponentCount();
          for(int i=pos+2;i<total;i++){
-                CreateInstancesJPanel p = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(i);
+                CreateInstancesJPanel p = (CreateInstancesJPanel) this.getParent().getComponent(i);
                 int po = p.getPosicion();
                 p.setPosicion(po+1);
            }  
-         AddInstancesClasPropJDialog.getPropPanel().validate();
+         this.getParent().validate();
     }
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciaTextFieldMouseClicked
 // TODO add your handling code here:
     int pos = this.getPosicion();
-    int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
-    int tamProp = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+    int tamClas = this.getParent().getComponentCount();
+    int tamProp = this.getParent().getComponentCount();
     int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
     if(tab == 0){
         if(pos+1==tamClas){
              for(int i=0;i<9;i++){
-                AddInstancesClasPropJDialog.getClasPanel().add(new CreateInstancesJPanel(0));
+                this.getParent().add(new CreateInstancesJPanel(0));
              }
         }
-        AddInstancesClasPropJDialog.getClasPanel().getParent().validate();
+        this.getParent().validate();
     }else if(tab == 1){
         if(pos+1==tamProp){
              for(int i=0;i<9;i++){
-                AddInstancesClasPropJDialog.getPropPanel().add(new CreateInstancesJPanel(1));
+                this.getParent().add(new CreateInstancesJPanel(1));
              }
         }
-        AddInstancesClasPropJDialog.getPropPanel().getParent().validate();
+        this.getParent().validate();
     }
 }//GEN-LAST:event_instanciaTextFieldMouseClicked
 
@@ -274,5 +274,21 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
 
     public boolean getSelectedCheckBox() {
         return selectedCheckBox.isSelected();
+    }
+    
+    public static int getContadorClas() {
+        return contadorClas;
+    }
+    
+    public static void setContadorClas(int aContador) {
+        contadorClas = aContador;
+    }
+
+    public static int getContadorProp() {
+        return contadorProp;
+    }
+
+    public static void setContadorProp(int aContadorProp) {
+        contadorProp = aContadorProp;
     }
 }

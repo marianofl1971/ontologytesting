@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
@@ -20,15 +19,15 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent;
     private Frame frame;
     private int posicion;
-    private TestSimpleRetClas ts;
+    private static int contadorRetClas=0;
     
     /** Creates new form TextInstancesTextAreaJPanel */
     public TestInstancesTextAreaJPanel() {
         initComponents();
-        int pos = Auxiliar.getContadorRetClas();
+        int pos = TestInstancesTextAreaJPanel.getContadorRetClas();
         this.setPosicion(pos);
         int cont = pos+1;
-        Auxiliar.setContadorRetClas(cont);
+        TestInstancesTextAreaJPanel.setContadorRetClas(cont);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
@@ -127,27 +126,25 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-    ts = Auxiliar.getTestSimpleRetClas();
     this.setVisible(false);
     int finalPos=0;
     int p = this.getPosicion();
-    int total = ts.getRetAyudaPanel().getComponentCount();
+    int total = this.getParent().getComponentCount();
     for(int i=p+1;i<total;i++){
-        TestInstancesTextAreaJPanel panel = (TestInstancesTextAreaJPanel) ts.getRetAyudaPanel().getComponent(i);
+        TestInstancesTextAreaJPanel panel = (TestInstancesTextAreaJPanel) this.getParent().getComponent(i);
         int pos = panel.getPosicion();
         panel.setPosicion(pos-1);
         finalPos=pos-1;
     }
-    ts.getRetAyudaPanel().remove(this);
     TestInstancesTextAreaJPanel pa = new TestInstancesTextAreaJPanel();
     pa.setPosicion(finalPos+1);
-    ts.getRetAyudaPanel().add(pa);
+    this.getParent().add(pa);
+    this.getParent().remove(this);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-     ts = Auxiliar.getTestSimpleRetClas();
-     int tam = ts.getRetAyudaPanel().getComponentCount();
+     int tam = this.getParent().getComponentCount();
      String query = this.getQuery();
      String result = this.getQueryResult();
      TestInstancesTextAreaJPanel panel = new TestInstancesTextAreaJPanel();
@@ -157,47 +154,45 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
      int pos = this.getPosicion();
      panel.setPosicion(pos+1);
      if(pos+2==tam){
-         ts.getRetAyudaPanel().add(panel);
+         this.getParent().add(panel);
      }else{
-        ts.getRetAyudaPanel().add(panel, pos+2);
+        this.getParent().add(panel, pos+2);
      }
-     int total = ts.getRetAyudaPanel().getComponentCount();
+     int total = this.getParent().getComponentCount();
      for(int i=pos+3;i<total;i++){
-            TestInstancesTextAreaJPanel p = (TestInstancesTextAreaJPanel) ts.getRetAyudaPanel().getComponent(i);
+            TestInstancesTextAreaJPanel p = (TestInstancesTextAreaJPanel) this.getParent().getComponent(i);
             int po = p.getPosicion();
             p.setPosicion(po+1);
        }  
-     ts.getRetAyudaPanel().getParent().validate();   
+     this.getParent().validate();   
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
-    ts = Auxiliar.getTestSimpleRetClas();
     getQueryTextField().setForeground(Color.BLACK);
     
     int pos = this.getPosicion();
-    int tamInst = ts.getRetAyudaPanel().getComponentCount();
+    int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){
          for(int i=0;i<9;i++){
-            ts.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
+            this.getParent().add(new TestInstancesTextAreaJPanel());
          }
     }
-    ts.getRetAyudaPanel().getParent().validate();
+    this.getParent().validate();
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
 private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextAreaMouseClicked
 // TODO add your handling code here:
-   ts = Auxiliar.getTestSimpleRetClas();
     getQueryTextField().setForeground(Color.BLACK);
     
     int pos = this.getPosicion();
-    int tamInst = ts.getRetAyudaPanel().getComponentCount();
+    int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){
          for(int i=0;i<9;i++){
-            ts.getRetAyudaPanel().add(new TestInstancesTextAreaJPanel());
+            this.getParent().add(new TestInstancesTextAreaJPanel());
          }
     }
-    ts.getRetAyudaPanel().getParent().validate();
+    this.getParent().getParent().validate();
 }//GEN-LAST:event_resultTextAreaMouseClicked
 
 
@@ -249,6 +244,14 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+    
+    public static int getContadorRetClas() {
+        return contadorRetClas;
+    }
+
+    public static void setContadorRetClas(int aContadorRetClas) {
+        contadorRetClas = aContadorRetClas;
     }
 }
 

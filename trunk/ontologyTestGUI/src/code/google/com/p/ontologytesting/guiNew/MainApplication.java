@@ -7,13 +7,17 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -27,7 +31,6 @@ public class MainApplication extends javax.swing.JFrame {
     private static CollectionTest collection;
     private AddOntologyJDialog ontologia;
     private JFileChooser filechooser;
-    private MenuOperations menuOp;
     private static String proyecto,nombreProyecto;
     private AddInstancesClasPropJDialog addInst;
     private OntologyTestCase testcase;
@@ -35,6 +38,12 @@ public class MainApplication extends javax.swing.JFrame {
     private OntologyTestResult testresult;
     private SaveTest saveTest;
     private HelpJDialog helpDialog;
+    private XMLDecoder decoder;
+    private JFrame frame;
+    private ScenarioTest scenario;
+    private AddSPARQLJPanel testSparql;
+    private Instancias instancias;
+    private SeeTestJDialog seeTest;
     
 
     /** Creates new form MainApplication */
@@ -390,7 +399,7 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         setProyecto(filechooser.getSelectedFile().getAbsolutePath());
         setNombreProyecto(filechooser.getSelectedFile().getName());
         collection = new CollectionTest();
-        Auxiliar.inicializarContadores();
+        this.inicializarContadores();
         ontologia = new AddOntologyJDialog(this,true);
         ontologia.setVisible(true);
         if(ontologia.getOntologiaAsociada()==true){
@@ -404,40 +413,36 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstActionPerformed
 // TODO add your handling code here:
-    Auxiliar.inicializarContadores();
-    menuOp = new MenuOperations();
+    this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         ControladorTests.setTestInstGuardado(false);
         ControladorTests.setTestInstSelect(true);
-        menuOp.aniadirTestsInst();
+        this.aniadirTestsInst();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                if(Auxiliar.guardarAntesDeSeguir()){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
                     ControladorTests.setTestInstGuardado(false);
                     ControladorTests.setTestInstSelect(true);
-                    menuOp.aniadirTestsInst();
-                }
+                    this.aniadirTestsInst();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestInstGuardado(false);
                 ControladorTests.setTestInstSelect(true);
-                menuOp.aniadirTestsInst();
+                this.aniadirTestsInst();
             }
     }
 }//GEN-LAST:event_nuevoTestInstActionPerformed
 
 private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSimpleActionPerformed
 // TODO add your handling code here:        
-    menuOp = new MenuOperations();
     try{
-        if(menuOp.importarTest()){
+        if(this.importarTest()){
             JOptionPane.showMessageDialog(this,"El test se ha importado correctamente",
             "Information Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -451,10 +456,9 @@ private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
 }                                                  
 
 private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-    Auxiliar.inicializarContadores();
-    menuOp = new MenuOperations();
+    this.inicializarContadores();
     try {
-        menuOp.editarTests();
+        this.editarTests();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se puede abrir el test para su edición",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -466,9 +470,8 @@ private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSparqlActionPerformed
 // TODO add your handling code here:
-   menuOp = new MenuOperations();
     try{
-        if(menuOp.importarTest()){
+        if(this.importarTest()){
             JOptionPane.showMessageDialog(this,"El test se ha importado correctamente",
             "Information Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -483,7 +486,7 @@ private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasActionPerformed
 // TODO add your handling code here:
-    Auxiliar.inicializarContadores();
+    this.inicializarContadores();
     int sel = ControladorTests.testSeleccionado();
     addInst = new AddInstancesClasPropJDialog(this,true,sel);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -492,22 +495,19 @@ private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void importarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    menuOp.importarInstancias();
+    this.importarInstancias();
 }//GEN-LAST:event_importarInstanciasActionPerformed
 
 private void editarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    Auxiliar.inicializarContadores();
-    menuOp.editarInstancias();
+    this.inicializarContadores();
+    this.editarInstancias();
 }//GEN-LAST:event_editarInstanciasActionPerformed
 
 private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarInstanciasActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
     try{
-        menuOp.explorarInstancias();
+        this.explorarInstancias();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -519,124 +519,112 @@ private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    Auxiliar.inicializarContadores();
+    this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         ControladorTests.setTestRetGuardado(false);
         ControladorTests.setTestRetSelect(true);
-        menuOp.aniadirTestsRet();
+        this.aniadirTestsRet();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                if(Auxiliar.guardarAntesDeSeguir()){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
                     ControladorTests.setTestRetGuardado(false);
                     ControladorTests.setTestRetSelect(true);
-                    menuOp.aniadirTestsRet();
-                }
+                    this.aniadirTestsRet();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestRetGuardado(false);
                 ControladorTests.setTestRetSelect(true);
-                menuOp.aniadirTestsRet();
+                this.aniadirTestsRet();
             }
     }
 }//GEN-LAST:event_nuevoTestRecActionPerformed
 
 private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRealActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    Auxiliar.inicializarContadores();
+    this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         ControladorTests.setTestRealGuardado(false);
         ControladorTests.setTestRealSelect(true);
-        menuOp.aniadirTestsReal();
+        this.aniadirTestsReal();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                if(Auxiliar.guardarAntesDeSeguir()){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
                     ControladorTests.setTestRealGuardado(false);
                     ControladorTests.setTestRealSelect(true);
-                    menuOp.aniadirTestsReal();
-                }
+                    this.aniadirTestsReal();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestRealGuardado(false);
                 ControladorTests.setTestRealSelect(true);
-                menuOp.aniadirTestsReal();
+                this.aniadirTestsReal();
             }
     }
 }//GEN-LAST:event_nuevoTestRealActionPerformed
 
 private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSatActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    Auxiliar.inicializarContadores();
+    this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         ControladorTests.setTestSatGuardado(false);
         ControladorTests.setTestSatSelect(true);
-        menuOp.aniadirTestsSat();
+        this.aniadirTestsSat();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                if(Auxiliar.guardarAntesDeSeguir()){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
                     ControladorTests.setTestSatGuardado(false);
                     ControladorTests.setTestSatSelect(true);
-                    menuOp.aniadirTestsSat();
-                }
+                    this.aniadirTestsSat();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestSatGuardado(false);
                 ControladorTests.setTestSatSelect(true);
-                menuOp.aniadirTestsSat();
+                this.aniadirTestsSat();
             }
     }
 }//GEN-LAST:event_nuevoTestSatActionPerformed
 
 private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestClaActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
-    Auxiliar.inicializarContadores();
+    this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
         ControladorTests.setTestClasGuardado(false);
         ControladorTests.setTestClasSelect(true);
-        menuOp.aniadirTestsClas();
+        this.aniadirTestsClas();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                if(Auxiliar.guardarAntesDeSeguir()){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
                     ControladorTests.setTestClasGuardado(false);
                     ControladorTests.setTestClasSelect(true);
-                    menuOp.aniadirTestsClas();
-                }
+                    this.aniadirTestsClas();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestClasGuardado(false);
                 ControladorTests.setTestClasSelect(true);
-                menuOp.aniadirTestsClas();
+                this.aniadirTestsClas();
             }
     }
 }//GEN-LAST:event_nuevoTestClaActionPerformed
@@ -666,9 +654,8 @@ private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     
 private void explorarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
     try{
-        menuOp.explorarTests();
+        this.explorarTests();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -681,39 +668,35 @@ private void explorarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
 if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){//GEN-LAST:event_nuevoTestSparqlActionPerformed
     ControladorTests.inicializarGuardados();
     ControladorTests.inicializarSeleccionados();
     ControladorTests.setTestSparqlGuardado(false);
     ControladorTests.setTestSparqlSelect(true);
-    menuOp.aniadirTestsSparql();
+    this.aniadirTestsSparql();
 }else{
     int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
             "Guardar Tests",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
-            if(Auxiliar.guardarAntesDeSeguir()){
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
                 ControladorTests.setTestClasGuardado(false);
                 ControladorTests.setTestClasSelect(true);
-                menuOp.aniadirTestsSparql();
-            }
+                this.aniadirTestsSparql();
         }else{
             ControladorTests.inicializarGuardados();
             ControladorTests.inicializarSeleccionados();
             ControladorTests.setTestClasGuardado(false);
             ControladorTests.setTestClasSelect(true);
-            menuOp.aniadirTestsSparql();
+            this.aniadirTestsSparql();
         }
 }
 }
 
 private void editarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestSparqlActionPerformed
 // TODO add your handling code here:
-    menuOp = new MenuOperations();
     try {//GEN-LAST:event_editarTestSparqlActionPerformed
-        menuOp.editarTests();
+        this.editarTests();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se puede abrir el test para su edición",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -739,9 +722,8 @@ private void guardarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//G
 private void abrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_abrirProyectoActionPerformed
-    menuOp = new MenuOperations();
     try{
-        boolean result = menuOp.openProject();
+        boolean result = this.openProject();
         if(result==true){
             JOptionPane.showMessageDialog(this,"El proyecto se ha importado",
             "Information Message",JOptionPane.INFORMATION_MESSAGE);
@@ -779,8 +761,7 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
 private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSimpleMenuItemActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_verTestSimpleMenuItemActionPerformed
-    menuOp = new MenuOperations();
-    boolean res = menuOp.verTests();
+    boolean res = this.verTests();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
         "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -790,9 +771,8 @@ private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt
 private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarTestSparqlActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_explorarTestSparqlActionPerformed
-    menuOp = new MenuOperations();
     try{
-        menuOp.explorarTests();
+        this.explorarTests();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -805,8 +785,7 @@ private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {
 private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSparqlActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_verTestSparqlActionPerformed
-    menuOp = new MenuOperations();
-    boolean res = menuOp.verTests();
+    boolean res = this.verTests();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
         "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -816,8 +795,7 @@ private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_verInstanciasActionPerformed
-    menuOp = new MenuOperations();
-    boolean res = menuOp.verInstancias();
+    boolean res = this.verInstancias();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
         "Warning Message",JOptionPane.WARNING_MESSAGE);
@@ -880,6 +858,334 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     public static void setNombreProyecto(String aNombreProyecto) {
         nombreProyecto = aNombreProyecto;
     }
+    
+    public void inicializarContadores(){
+        CreateInstancesJPanel.setContadorClas(0);
+        CreateInstancesJPanel.setContadorProp(0);
+        TestInstancesQueryJPanel.setContadorReal(0);
+        TestInstancesTFJPanel.setContadorInstSat(0);
+        TestInstancesTextAreaJPanel.setContadorRetClas(0);
+    }
+    
+    public boolean importarTest() throws FileNotFoundException,ClassCastException{
+        filechooser = new JFileChooser(MainApplication.getProyecto());
+        saveTest = new SaveTest();
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+                decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+                ScenarioTest s = (ScenarioTest) decoder.readObject();
+                if(saveTest.saveTestLocally(s)){
+                   return true;
+                }
+            }
+        return false;
+    }
+    
+    public void explorarTests() throws FileNotFoundException,ClassCastException{
+        frame = new JFrame();
+        filechooser = new JFileChooser(MainApplication.getProyecto());
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());                                                  
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            ScenarioTest s = (ScenarioTest) decoder.readObject();
+            seeTest = new SeeTestJDialog(frame, false, s);
+            seeTest.setVisible(true);
+        }
+    }
+    
+    public void explorarInstancias() throws FileNotFoundException,ClassCastException{
+        filechooser = new JFileChooser(MainApplication.getProyecto());                                               
+        frame = new JFrame();
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            Instancias inst = (Instancias) decoder.readObject();
+            seeTest = new SeeTestJDialog(frame, false, inst);
+            seeTest.setVisible(true);
+        }
+    }
+    
+    public boolean verTests(){
+        frame = new JFrame();
+        int sel = ControladorTests.testSeleccionado();
+        if(sel!=10){
+            seeTest = new SeeTestJDialog(frame, false, scenario);
+            seeTest.setVisible(true);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean verInstancias(){
+        frame = new JFrame();
+        int sel = ControladorTests.testSeleccionado();
+        if(sel!=10){
+            seeTest = new SeeTestJDialog(frame, false, instancias);
+            seeTest.setVisible(true);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean openProject() throws FileNotFoundException,ClassCastException{
+        filechooser = new JFileChooser();
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            collection = (CollectionTest) decoder.readObject();
+            MainApplication.setCollection(collection);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean importarInstancias(ScenarioTest s) throws FileNotFoundException,ClassCastException{
+        filechooser = new JFileChooser(MainApplication.getProyecto());
+        saveTest = new SaveTest();
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            instancias = (Instancias) decoder.readObject();
+            s.setInstancias(instancias);
+            saveTest.replaceTestLocally(s);
+            return true;
+        }else return false;   
+    }
+    
+    public boolean editarInstanciasAsociadasTest(){
+        frame = new JFrame();
+        int sel = ControladorTests.testSeleccionado();
+        if(instancias.getPropertyInstances().size()==0 &&  instancias.getClassInstances().size()==0){
+            return false;
+        }else{
+            addInst = new AddInstancesClasPropJDialog(frame,true,instancias,sel);
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+            return true;
+        }
+    }
+    
+    public void editarTests() throws FileNotFoundException,ClassCastException{
+        ControladorTests.inicializarGuardados();
+        ControladorTests.inicializarSeleccionados();
+        filechooser = new JFileChooser(MainApplication.getProyecto());
+        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = filechooser.getSelectedFile();
+            String nameFile = selectedFile.getPath();
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+            ScenarioTest s = (ScenarioTest) decoder.readObject();
+            String tipoTest = s.getTestName();
+            this.editarTest(s, tipoTest);
+
+        }   
+    }
+
+    public void editarInstancias(){
+        frame = new JFrame();
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            filechooser = new JFileChooser(MainApplication.getProyecto());
+            int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
+            if (option == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = filechooser.getSelectedFile();
+                String nameFile = selectedFile.getPath();
+                try {
+                    decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
+                    Instancias inst = (Instancias) decoder.readObject();
+                    addInst = new AddInstancesClasPropJDialog(frame, true, inst);
+                    addInst.setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No se pudo abrir el archivo",                                                  
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                } catch(ClassCastException ce){
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"El archivo no es compatible con la accion que " +
+                    "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
+                } 
+            }   
+        }else{
+            boolean edit = this.editarInstanciasAsociadasTest();
+            if(edit==false){
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"Este test no tiene instancias asociadas",
+                "Information Message",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    public void importarInstancias(){
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No hay ningun test abierto al que " +
+                    "importar las instancias","Warning Message",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            int sel = ControladorTests.testSeleccionado();
+            try{
+                if(this.importarInstancias(scenario)){
+                    JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"Las instancias se ha importado correctamente",
+                    "Information Message",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No se ha importado el test",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+            }catch(ClassCastException ce){
+                JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"El archivo no es compatible con la accion que " +
+                "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public void aniadirTestsInst(){ 
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(0),BorderLayout.NORTH);
+        }else{
+            MainApplication.getContentTestsJPanel().remove(0);
+            MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(0),BorderLayout.NORTH);
+        }
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+    
+    public void aniadirTestsSat(){ 
+    int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+    if(cont==0){
+        MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(3),BorderLayout.NORTH);
+    }else{
+        MainApplication.getContentTestsJPanel().remove(0);
+        MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(3),BorderLayout.NORTH);
+    }
+    MainApplication.getContentTestsJPanel().getParent().validate();
+}
+
+    public void aniadirTestsRet(){ 
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(1),BorderLayout.CENTER);
+        }else{
+            MainApplication.getContentTestsJPanel().remove(0);
+            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(1),BorderLayout.CENTER);
+        }
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+
+    public void aniadirTestsClas(){ 
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(4),BorderLayout.NORTH);
+        }else{
+            MainApplication.getContentTestsJPanel().remove(0);
+            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(4),BorderLayout.NORTH);
+        }
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+
+    public void aniadirTestsSparql(){ 
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            MainApplication.getContentTestsJPanel().add(new AddSPARQLJPanel(5),BorderLayout.NORTH);
+        }else{
+            MainApplication.getContentTestsJPanel().remove(0);
+            MainApplication.getContentTestsJPanel().add(new AddSPARQLJPanel(5),BorderLayout.NORTH);
+        }
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+
+    public void aniadirTestsReal(){ 
+        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+        if(cont==0){
+            MainApplication.getContentTestsJPanel().add(new TestSimpleReal(2),BorderLayout.NORTH);
+        }else{
+            MainApplication.getContentTestsJPanel().remove(0);
+            MainApplication.getContentTestsJPanel().add(new TestSimpleReal(2),BorderLayout.NORTH);
+        }
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+    
+    public void editarTest(ScenarioTest s, String tipoTest){
+        //ArrayList<Tests> typeTest = Tests.newTests();
+        if(tipoTest.equals("Instanciacion")){
+            ControladorTests.setTestInstGuardado(false);
+            ControladorTests.setTestInstSelect(true);
+            TestSimpleInstSat testInst = new TestSimpleInstSat(0, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }
+        }else if(tipoTest.equals("Retrieval")){
+            ControladorTests.setTestRetGuardado(false);
+            ControladorTests.setTestRetSelect(true);
+            TestSimpleRetClas testInst = new TestSimpleRetClas(1, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }
+        }else if(tipoTest.equals("Realizacion")){
+            ControladorTests.setTestRealGuardado(false);
+            ControladorTests.setTestRealSelect(true);
+            TestSimpleReal testInst = new TestSimpleReal(2, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }
+        }else if(tipoTest.equals("Satisfactibilidad")){
+            ControladorTests.setTestSatGuardado(false);
+            ControladorTests.setTestSatSelect(true);
+            TestSimpleInstSat testInst = new TestSimpleInstSat(3, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }
+        }else if(tipoTest.equals("Clasificacion")){
+            ControladorTests.setTestClasGuardado(false);
+            ControladorTests.setTestClasSelect(true);
+            TestSimpleRetClas testInst = new TestSimpleRetClas(4, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
+            }
+        }else if(tipoTest.equals("sparql")){
+            ControladorTests.setTestSparqlGuardado(false);
+            ControladorTests.setTestSparqlSelect(true);
+            testSparql = new AddSPARQLJPanel(5, s);
+            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
+            if(cont==0){
+                MainApplication.getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
+            }else{
+                MainApplication.getContentTestsJPanel().remove(0);
+                MainApplication.getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);
+            }
+        }
+        MainApplication.getContentTestsJPanel().setVisible(true);
+        MainApplication.getContentTestsJPanel().getParent().validate();
+    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;

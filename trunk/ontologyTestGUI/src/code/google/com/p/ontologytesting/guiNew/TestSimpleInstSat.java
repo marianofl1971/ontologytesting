@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.validations.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
@@ -67,17 +66,15 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private OntologyTestCase testcase;
     private ResultTests resultTests;
     private ScenarioTest scenarioAEditar;
-    private Auxiliar auxiliar;
     private boolean importado;
     private boolean soloEjecutar;
-    
     private ProgressMonitor progressMonitor;
     private Task task;
     
     /** Creates new form contentInstTabedPanel */
     public TestSimpleInstSat(int type) {
         initComponents();
-        Auxiliar.setContadorInstSat(0);
+        TestInstancesTFJPanel.setContadorInstSat(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
@@ -89,14 +86,13 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         setTipo(type);
         setScenarioAEditar(null);
         setScenario(new ScenarioTest()); 
-        Auxiliar.setTestSimpleInstSat(this);
         setImportado(false);
         setSoloEjecutar(false);
     }
     
     public TestSimpleInstSat(int type,ScenarioTest s){
         initComponents();
-        Auxiliar.setContadorInstSat(0);
+        TestInstancesTFJPanel.setContadorInstSat(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
@@ -135,7 +131,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setTipo(type);
-        Auxiliar.setTestSimpleInstSat(this);
         setImportado(true);
         setSoloEjecutar(false);
     }
@@ -355,7 +350,6 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleInstSat(this);
     guardarTest();       
 }//GEN-LAST:event_guardarButtonActionPerformed
 
@@ -368,7 +362,6 @@ public boolean guardarTest(){
     if(continuar==true){
         if(continuarSinInstancias==true){
             guardar();
-            Auxiliar.setTestSimpleInstSat(this);
             return true;
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
@@ -383,9 +376,8 @@ public boolean guardarTest(){
 
 public void guardar(){
     saveTest = new SaveTest();
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -445,7 +437,6 @@ public void guardar(){
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleInstSat(this);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -464,7 +455,6 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSimpleInstSat(this);
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
@@ -479,7 +469,6 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     task.execute();
     ejecutarButton.setEnabled(false);*/
     
-    Auxiliar.setTestSimpleInstSat(this);
     setSoloEjecutar(true);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
@@ -493,12 +482,10 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     if(continuar==true){
         if(continuarSinInstancias==true){
             ejecutar(0);
-            Auxiliar.setTestSimpleInstSat(this);
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
-            Auxiliar.setTestSimpleInstSat(this);
         }
     }
     
@@ -506,8 +493,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 public void ejecutar(int cuantos){
     if(isSoloEjecutar()==true){
-        auxiliar = new Auxiliar();
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             saveTest.replaceTestLocally(scenario);
         }else{
             saveTest.saveTestLocally(scenario);
@@ -515,7 +501,7 @@ public void ejecutar(int cuantos){
     }
     try{
         if(cuantos==0){
-            testcase.runScenario(testresult, MainApplication.getCollection(),getScenario());   
+            testcase.runScenario(testresult, MainApplication.getCollection(), this.getScenario());   
         }else if(cuantos==1){
             testcase.run(testresult, MainApplication.getCollection());
         }
@@ -531,9 +517,8 @@ public void ejecutar(int cuantos){
 }
 
 public void guardarYEjecutar(){  
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -891,13 +876,13 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
 }
 
-public static void formatoIncorrecto(){
+public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
     if(TestSimpleInstSat.getActualSubTabInst()==0){
-        if(validar.comprovarErrorEnAyudaInst()==false){
+        if(validar.comprovarErrorEnAyudaInst(panelAyudaInst)==false){
         }
     }else{
-        if(validar.comprovarErrorQuerysInst()==false){
+        if(validar.comprovarErrorQuerysInst(opcionTextInstPanel)==false){
         }
     }
 }
@@ -945,7 +930,7 @@ public void copiarDeAyudaATexto(){
     t.setResultadoEsperado(conjuntoResExpInst);
     t.setComentTextArea(conjuntoComentInst);
     int c = getInstAyudaPanel().getComponentCount();
-    Auxiliar.setContadorInstSat(0);
+    TestInstancesTFJPanel.setContadorInstSat(0);
     for(int i=1;i<c;i++){
             getInstAyudaPanel().remove(getInstAyudaPanel().getComponent(i));
         pInst = new TestInstancesTFJPanel();
@@ -1202,6 +1187,10 @@ public void setImportado(boolean importado) {
                 ejecutarButton.setEnabled(true);
             }
         }
+    }
+    
+    public TestSimpleInstSat getPanel(){
+        return this;
     }
 
 }

@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.ButtonGroup;
@@ -21,15 +20,15 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     private AddComentJDialog frameComent;
     private Frame frame;
     private int posicion;
-    private TestSimpleInstSat ts;
+    private static int contadorInstSat=0;
     
     /** Creates new form TestInstancesTFJPanel */
     public TestInstancesTFJPanel() {
         initComponents();
-        int pos = Auxiliar.getContadorInstSat();
+        int pos = TestInstancesTFJPanel.getContadorInstSat();
         this.setPosicion(pos);
         int cont = pos+1;
-        Auxiliar.setContadorInstSat(cont);
+        TestInstancesTFJPanel.setContadorInstSat(cont);
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
@@ -126,32 +125,31 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
+    System.out.println("pos"+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-   ts = Auxiliar.getTestSimpleInstSat();
    this.setVisible(false);
    int finalPos=0;
    int p = this.getPosicion();
-   int total = ts.getInstAyudaPanel().getComponentCount();
+   int total = this.getParent().getComponentCount();
    for(int i=p+1;i<total;i++){
-        TestInstancesTFJPanel panel = (TestInstancesTFJPanel) ts.getInstAyudaPanel().getComponent(i);
+        TestInstancesTFJPanel panel = (TestInstancesTFJPanel) this.getParent().getComponent(i);
         int pos = panel.getPosicion();
         panel.setPosicion(pos-1);
         finalPos=pos-1;
    }
-   ts.getInstAyudaPanel().remove(this);
    TestInstancesTFJPanel pa = new TestInstancesTFJPanel();
    pa.setPosicion(finalPos+1);
-   ts.getInstAyudaPanel().add(pa);
+   this.getParent().add(pa);
+   this.getParent().remove(this);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-     ts = Auxiliar.getTestSimpleInstSat();
-     int tam = ts.getInstAyudaPanel().getComponentCount();
+     int tam = this.getParent().getComponentCount();
      String query = this.getQuery();
      String result = this.isTestTrue();
      TestInstancesTFJPanel panel = new TestInstancesTFJPanel();
@@ -165,32 +163,32 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
      int pos = this.getPosicion();
      panel.setPosicion(pos+1);
      if(pos+2==tam){
-         ts.getInstAyudaPanel().add(panel);
+         this.getParent().add(panel);
      }else{
-        ts.getInstAyudaPanel().add(panel, pos+2);
+        this.getParent().add(panel, pos+2);
      }
-     int total = ts.getInstAyudaPanel().getComponentCount();
+     int total = this.getParent().getComponentCount();
      for(int i=pos+3;i<total;i++){
-            TestInstancesTFJPanel p = (TestInstancesTFJPanel) ts.getInstAyudaPanel().getComponent(i);
+            TestInstancesTFJPanel p = (TestInstancesTFJPanel) this.getParent().getComponent(i);
             int po = p.getPosicion();
             p.setPosicion(po+1);
        }  
-     ts.getInstAyudaPanel().getParent().validate();
+     this.getParent().validate();
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
-    ts = Auxiliar.getTestSimpleInstSat();
+    //ts = Auxiliar.getTestSimpleInstSat();
     getQueryTextField().setForeground(Color.BLACK);
     
     int pos = this.getPosicion();
-    int tamInst = ts.getInstAyudaPanel().getComponentCount();
+    int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){
          for(int i=0;i<9;i++){
-            ts.getInstAyudaPanel().add(new TestInstancesTFJPanel());
+            this.getParent().add(new TestInstancesTFJPanel());
          }
     }
-    ts.getInstAyudaPanel().getParent().validate();
+    this.getParent().validate();
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,5 +258,13 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     
     public void setPosicion(int aPosicion) {
         posicion = aPosicion;
+    }
+    
+    public static int getContadorInstSat() {
+        return contadorInstSat;
+    }
+
+    public static void setContadorInstSat(int aContadorInst) {
+        contadorInstSat = aContadorInst;
     }
 }
