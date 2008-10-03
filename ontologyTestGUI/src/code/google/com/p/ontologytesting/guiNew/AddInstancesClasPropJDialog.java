@@ -9,7 +9,6 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.guiNew.AddComentJDialog;
 import code.google.com.p.ontologytesting.jenainterfaz.*;
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.validations.ValidarTests;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
@@ -63,7 +62,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private String[] clas,prop;
     private boolean instanciasInstGuardadas;
     private int typePanel;
-    private Auxiliar auxiliar;
     private Instancias instanciasAEditar;
     private boolean editado;
     private SaveTest saveTest;
@@ -504,7 +502,6 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             getInstancias().setDescripcion(getDescInstanciasTextArea());
             getInstancias().setNombre(getNomInstanciasTextField());
             getInstancias().setType("Instancias");
-            auxiliar = new Auxiliar();
 
             File dir = new File(MainApplication.getProyecto());
             String[] ficheros = dir.list();
@@ -512,7 +509,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             for(int i=0; i<ficheros.length;i++){
                 if(aux==0){
                     if(ficheros[i].equals(getInstancias().getNombre())){
-                        if(auxiliar.mismasInstancias(this.getInstancias(), this.getInstanciasAEditar())==false){
+                        if(this.getInstancias().equals(this.getInstanciasAEditar())==false){
                             Object[] options = {"Sobreescribir", "Cancelar"};
                             int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
                                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -531,7 +528,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             }
             if(aux==0){
                 saveTest.saveInstanciasInMemory(getInstancias());
-                if(getTypePanel()!=10){
+                /*if(getTypePanel()!=10){
                     if(getTypePanel()==0 || getTypePanel()==3){
                         Auxiliar.getTestSimpleInstSat().getScenario().setInstancias(getInstancias());
                     }else if(getTypePanel()==1 || getTypePanel()==4){
@@ -541,7 +538,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                     }else if(getTypePanel()==5){
                         Auxiliar.getTestSparql().getScenario().setInstancias(getInstancias());
                     }
-                }
+                }*/
             }
             this.setVisible(false);
         } else if (instanciaSinNombre == true) {
@@ -588,7 +585,7 @@ private void guardarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_guardarInstButtonActionPerformed
 
 public void guardar(int typePanel){
-    if(typePanel==0 || typePanel==3){
+    /*if(typePanel==0 || typePanel==3){
         Auxiliar.getTestSimpleInstSat().getScenario().setInstancias(getInstancias());
         Auxiliar.getTestSimpleInstSat().getScenarioAEditar().setInstancias(getInstanciasAEditar());
         saveTest = new SaveTest();
@@ -608,7 +605,7 @@ public void guardar(int typePanel){
         Auxiliar.getTestSparql().getScenarioAEditar().setInstancias(getInstanciasAEditar());
         saveTest = new SaveTest();
         saveTest.replaceTestLocally(Auxiliar.getTestSparql().getScenario());
-    }
+    }*/
 }
 public void prepararInstSinAyuda(){
     
@@ -927,7 +924,7 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             getInstancias().setDescripcion(getDescInstanciasTextArea());
             getInstancias().setNombre(getNomInstanciasTextField());
             getInstancias().setType("Instancias");
-            if(getTypePanel()==0 || getTypePanel()==3){
+            /*if(getTypePanel()==0 || getTypePanel()==3){
                 Auxiliar.getTestSimpleInstSat().getScenario().setInstancias(getInstancias());
             }else if(getTypePanel()==1 || getTypePanel()==4){
                 Auxiliar.getTestSimpleRetClas().getScenario().setInstancias(getInstancias());
@@ -935,7 +932,7 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
                 Auxiliar.getTestSimpleReal().getScenario().setInstancias(getInstancias());
             }else if(getTypePanel()==5){
                 Auxiliar.getTestSparql().getScenario().setInstancias(getInstancias());
-            }
+            }*/
             JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
             "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
@@ -992,7 +989,7 @@ void decrementarPosicion(int j,int type){
             posN = pos-1;
             panelInst.setPosicion(posN);
         } 
-        Auxiliar.setContadorClas(posN+1);
+        CreateInstancesJPanel.setContadorClas(posN+1);
     }else if(type==1){
         int pos=0,posN=0;
         int totalProp = getPropPanel().getComponentCount();
@@ -1002,7 +999,7 @@ void decrementarPosicion(int j,int type){
             posN = pos-1;
             panelProp.setPosicion(posN);
         } 
-        Auxiliar.setContadorProp(posN+1);
+        CreateInstancesJPanel.setContadorProp(posN+1);
     }
 }
 

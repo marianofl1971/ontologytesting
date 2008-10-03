@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.validations.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
@@ -59,14 +58,13 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private OntologyTestCase testcase;
     private ResultTests resultTests;
     private ScenarioTest scenarioAEditar;
-    private Auxiliar auxiliar;
     private boolean importado;
     private boolean soloEjecutar;
     
     /** Creates new form TestSimpleReal */
     public TestSimpleReal(int type) {
         initComponents();
-        Auxiliar.setContadorReal(0);
+        TestInstancesQueryJPanel.setContadorReal(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
@@ -78,14 +76,13 @@ public class TestSimpleReal extends javax.swing.JPanel {
         setTipo(type);
         setScenarioAEditar(null);
         setScenario(new ScenarioTest()); 
-        Auxiliar.setTestSimpleReal(this);
         setImportado(false);
         setSoloEjecutar(false);
     }
     
     public TestSimpleReal(int type,ScenarioTest s){
         initComponents();
-        Auxiliar.setContadorInstSat(0);
+        TestInstancesQueryJPanel.setContadorReal(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
@@ -119,7 +116,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setTipo(type);
-        Auxiliar.setTestSimpleReal(this);
         setImportado(true);
         setSoloEjecutar(false);
     }
@@ -336,13 +332,11 @@ private void tabbedPaneRealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleReal(this);
     guardarTest();
 }//GEN-LAST:event_guardarButtonActionPerformed
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleReal(this);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -361,13 +355,11 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSimpleReal(this);
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
 // TODO add your handling code here:
     setSoloEjecutar(true);
-    Auxiliar.setTestSimpleReal(this);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -386,13 +378,11 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSimpleReal(this);
 }//GEN-LAST:event_ejecutarButtonActionPerformed
 
 public void ejecutar(int cuantos){
     if(isSoloEjecutar()==true){
-        auxiliar = new Auxiliar();
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             saveTest.replaceTestLocally(scenario);
         }else{
             saveTest.saveTestLocally(scenario);
@@ -424,7 +414,6 @@ public boolean guardarTest(){
     if(continuar==true){
         if(continuarSinInstancias==true){
             guardar();
-            Auxiliar.setTestSimpleReal(this);
             return true;
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
@@ -439,9 +428,8 @@ public boolean guardarTest(){
 
 public void guardar(){
     saveTest = new SaveTest();
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -493,9 +481,8 @@ public void guardar(){
 }
 
 public void guardarYEjecutar(){  
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -843,13 +830,13 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
 }
 
-public static void formatoIncorrecto(){
+public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
     if(TestSimpleReal.getActualSubTabReal()==0){
-        if(validar.comprovarErrorEnAyudaReal()==false){
+        if(validar.comprovarErrorEnAyudaReal(panelAyudaReal)==false){
         }
     }else{
-        if(validar.comprovarErrorQuerysReal()==false){
+        if(validar.comprovarErrorQuerysReal(opcionTextRealPanel)==false){
         }
     }
 }
@@ -896,7 +883,7 @@ public void copiarDeAyudaATexto(){
     t.setResultadoEsperado(conjuntoResExpReal);
     t.setComentTextArea(conjuntoComentReal);
     int c = realAyudaPanel.getComponentCount();
-    Auxiliar.setContadorReal(0);
+    TestInstancesQueryJPanel.setContadorReal(0);
     for(int i=1;i<c;i++){
         realAyudaPanel.remove(realAyudaPanel.getComponent(i));
         realAyudaPanel.add(new TestInstancesQueryJPanel(),i); 

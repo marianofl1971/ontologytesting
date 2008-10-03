@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.controller.*;
 import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.validations.*;
@@ -60,14 +59,13 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private OntologyTestCase testcase;
     private ResultTests resultTests;
     private ScenarioTest scenarioAEditar;
-    private Auxiliar auxiliar;
     private boolean importado;
     private boolean soloEjecutar;
     
     /** Creates new form TestSimpleRetClas */
     public TestSimpleRetClas(int type) {
         initComponents();
-        Auxiliar.setContadorInstSat(0);
+        TestInstancesTextAreaJPanel.setContadorRetClas(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
@@ -79,14 +77,13 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         setTipo(type);
         setScenarioAEditar(null);
         setScenario(new ScenarioTest()); 
-        Auxiliar.setTestSimpleRetClas(this);
         setImportado(false);
         setSoloEjecutar(false);
     }
     
     public TestSimpleRetClas(int type,ScenarioTest s){
         initComponents();
-        Auxiliar.setContadorInstSat(0);
+        TestInstancesTextAreaJPanel.setContadorRetClas(0);
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
@@ -120,7 +117,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setTipo(type);
-        Auxiliar.setTestSimpleRetClas(this);
         setImportado(true);
         setSoloEjecutar(false);
     }
@@ -341,13 +337,11 @@ private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleRetClas(this);
     guardarTest();
 }//GEN-LAST:event_guardarButtonActionPerformed
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
 // TODO add your handling code here:
-    Auxiliar.setTestSimpleRetClas(this);
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -366,13 +360,11 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSimpleRetClas(this);
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
-private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
+private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
     setSoloEjecutar(true);
-    Auxiliar.setTestSimpleRetClas(this);//GEN-LAST:event_ejecutarButtonActionPerformed
     saveTest = new SaveTest();
     testcase = new OntologyTestCase();
     resultTests = new ResultTests();
@@ -391,13 +383,11 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             addInst.setVisible(true);
         }
     }
-    Auxiliar.setTestSimpleRetClas(this);
 }
 
 public void ejecutar(int cuantos){
     if(isSoloEjecutar()==true){
-        auxiliar = new Auxiliar();
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             saveTest.replaceTestLocally(scenario);
         }else{
             saveTest.saveTestLocally(scenario);
@@ -429,7 +419,6 @@ public boolean guardarTest(){
     if(continuar==true){
         if(continuarSinInstancias==true){
             guardar();
-            Auxiliar.setTestSimpleRetClas(this);
             return true;
         }else{
             addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
@@ -444,9 +433,8 @@ public boolean guardarTest(){
 
 public void guardar(){
     saveTest = new SaveTest();
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -505,9 +493,8 @@ public void guardar(){
 
 
 public void guardarYEjecutar(){  
-    auxiliar = new Auxiliar();
     if(testYaExiste==true || isImportado()==true){
-        if(auxiliar.mismoScenario(scenario, this.getScenarioAEditar())==false){
+        if(scenario.equals(this.getScenarioAEditar())==false){
             Object[] options = {"Sobreescribir", "Cancelar"};
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -920,7 +907,7 @@ public void copiarDeAyudaATexto(){
     t.setResultadoEsperado(conjuntoResExpRet);
     t.setComentTextArea(conjuntoComentRet);
     int c = retAyudaPanel.getComponentCount();
-    Auxiliar.setContadorRetClas(0);
+    TestInstancesTextAreaJPanel.setContadorRetClas(0);
     for(int i=1;i<c;i++){
         retAyudaPanel.remove(retAyudaPanel.getComponent(i));
         retAyudaPanel.add(new TestInstancesTextAreaJPanel(),i); 
@@ -1034,13 +1021,13 @@ public void copiarDeTextoAAyuda(){
     }
 }
 
-public static void formatoIncorrecto(){
+public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
     if(TestSimpleRetClas.getActualSubTabRet()==0){
-        if(validar.comprovarErrorEnAyudaRet()==false){
+        if(validar.comprovarErrorEnAyudaRet(panelAyudaRet)==false){
         }
     }else{
-        if(validar.comprovarErrorQuerysRet()==false){
+        if(validar.comprovarErrorQuerysRet(opcionTextRetPanel)==false){
         }
     }
 }

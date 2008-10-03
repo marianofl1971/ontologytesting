@@ -9,8 +9,8 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import code.google.com.p.ontologytesting.exceptions.*;
+import code.google.com.p.ontologytesting.guiNew.MainApplication;
 import code.google.com.p.ontologytesting.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ public class OntologyTestCase implements OntologyTest{
     private static String muestra="";
     private List<ExecQuerySparql> listaResultEsperada;
     private List<ExecQuerySparql> listaResultObtenida;
-    private Auxiliar auxiliar = new Auxiliar();
     
     public OntologyTestCase(){
     }
@@ -299,7 +298,7 @@ public class OntologyTestCase implements OntologyTest{
         setUpOntology(scenariotest, ont, ns);
         runOntologyTest(testresult,ns,scenariotest);
         tearDownOntology(); 
-        crearFicheroDeResultados(testresult);
+        //crearFicheroDeResultados(testresult);
     }
     
     public boolean comparaArray(List<String> array1, List<String> array2){
@@ -343,7 +342,7 @@ public class OntologyTestCase implements OntologyTest{
                     testInstIntro="TESTS DE INSTANCIACION\r\n\r\n";
                     varInst=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxInst==0){
                     actualInst = otf.getTestNameUsuario();
                     testInstIntro = testInstIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -370,7 +369,7 @@ public class OntologyTestCase implements OntologyTest{
                     testRetIntro="TESTS DE RECUPERACION\r\n\r\n";
                     varRet=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxRet==0){
                     actualRet = otf.getTestNameUsuario();
                     testRetIntro= testRetIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -397,7 +396,7 @@ public class OntologyTestCase implements OntologyTest{
                     testRealIntro="TESTS DE REALIZACION\r\n\r\n";
                     varReal=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxReal==0){
                     actualReal = otf.getTestNameUsuario();
                     testRealIntro= testRealIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -424,7 +423,7 @@ public class OntologyTestCase implements OntologyTest{
                     testSatIntro="TESTS DE SATISFACTIBILIDAD\r\n\r\n";
                     varSat=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxSat==0){
                     actualSat = otf.getTestNameUsuario();
                     testSatIntro= testSatIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -451,7 +450,7 @@ public class OntologyTestCase implements OntologyTest{
                     testClasIntro="TESTS DE CLASIFICACION\r\n\r\n";
                     varClas=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxClas==0){
                     actualClas = otf.getTestNameUsuario();
                     testClasIntro= testClasIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -521,7 +520,7 @@ public class OntologyTestCase implements OntologyTest{
                     testSparqlIntro="TESTS SPARQL\r\n\r\n";
                     varSparql=1;
                 }
-                ScenarioTest scenario = auxiliar.buscarScenario(otf.getTestNameUsuario());
+                ScenarioTest scenario = this.buscarScenario(otf.getTestNameUsuario());
                 if(auxSparql==0){
                     actualSparql = otf.getTestNameUsuario();
                     testSparqlIntro= testSparqlIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -619,6 +618,17 @@ public class OntologyTestCase implements OntologyTest{
         return listaOrdenada;
     }
     
+    public ScenarioTest buscarScenario(String name){
+        ArrayList<ScenarioTest> scenario = MainApplication.getCollection().getScenariotest();
+        for(int i=0;i<scenario.size();i++){
+            String nombre = scenario.get(i).getNombre();
+            if(nombre.equals(name)){
+                return scenario.get(i);
+            }
+        }
+        return null;
+    }
+
     public static String getMuestra() {
         return muestra;
     }

@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.guiNew.AddComentJDialog;
-import code.google.com.p.ontologytesting.controller.Auxiliar;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
@@ -21,16 +20,16 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent;
     private Frame frame;
     private int posicion;
-    private TestSimpleReal ts;
+    private static int contadorReal=0;
     
     
     /** Creates new form TestInstancesQueryJPanel */
     public TestInstancesQueryJPanel() {
         initComponents();
-        int pos = Auxiliar.getContadorReal();
+        int pos = TestInstancesQueryJPanel.getContadorReal();
         this.setPosicion(pos);
         int cont = pos+1;
-        Auxiliar.setContadorReal(cont);
+        TestInstancesQueryJPanel.setContadorReal(cont);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
@@ -134,27 +133,25 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
-   ts = Auxiliar.getTestSimpleReal();
    this.setVisible(false);
    int finalPos=0;
    int p = this.getPosicion();
-   int total = ts.getRealAyudaPanel().getComponentCount();
+   int total = this.getParent().getComponentCount();
    for(int i=p+1;i<total;i++){
-        TestInstancesQueryJPanel panel = (TestInstancesQueryJPanel) ts.getRealAyudaPanel().getComponent(i);
+        TestInstancesQueryJPanel panel = (TestInstancesQueryJPanel) this.getParent().getComponent(i);
         int pos = panel.getPosicion();
         panel.setPosicion(pos-1);
         finalPos=pos-1;
    }
-   ts.getRealAyudaPanel().remove(this);
    TestInstancesQueryJPanel pa = new TestInstancesQueryJPanel();
    pa.setPosicion(finalPos+1);
-   ts.getRealAyudaPanel().add(pa);
+   this.getParent().add(pa);
+   this.getParent().remove(this);
 }//GEN-LAST:event_borrarButtonActionPerformed
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-     ts = Auxiliar.getTestSimpleReal();
-     int tam = ts.getRealAyudaPanel().getComponentCount();
+     int tam = this.getParent().getComponentCount();
      String query = this.getQuery();
      String result = this.getQueryResult();
      TestInstancesQueryJPanel panel = new TestInstancesQueryJPanel();
@@ -164,47 +161,45 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
      int pos = this.getPosicion();
      panel.setPosicion(pos+1);
      if(pos+2==tam){
-         ts.getRealAyudaPanel().add(panel);
+         this.getParent().add(panel);
      }else{
-        ts.getRealAyudaPanel().add(panel, pos+2);
+        this.getParent().add(panel, pos+2);
      }
-     int total = ts.getRealAyudaPanel().getComponentCount();
+     int total = this.getParent().getComponentCount();
      for(int i=pos+3;i<total;i++){
-            TestInstancesQueryJPanel p = (TestInstancesQueryJPanel) ts.getRealAyudaPanel().getComponent(i);
+            TestInstancesQueryJPanel p = (TestInstancesQueryJPanel) this.getParent().getComponent(i);
             int po = p.getPosicion();
             p.setPosicion(po+1);
        }  
-     ts.getRealAyudaPanel().getParent().validate();
+     this.getParent().validate();
 }//GEN-LAST:event_duplicarButtonActionPerformed
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
-    ts = Auxiliar.getTestSimpleReal();
     getQueryTextField().setForeground(Color.BLACK);
 
     int pos = this.getPosicion();
-    int tamInst = ts.getRealAyudaPanel().getComponentCount();
+    int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){
          for(int i=0;i<9;i++){
-            ts.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
+            this.getParent().add(new TestInstancesQueryJPanel());
          }
     }
-    ts.getRealAyudaPanel().getParent().validate();
+    this.getParent().validate();
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
 private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTextFieldMouseClicked
 // TODO add your handling code here:
-    ts = Auxiliar.getTestSimpleReal();
     getQueryTextField().setForeground(Color.BLACK);
     
     int pos = this.getPosicion();
-    int tamInst = ts.getRealAyudaPanel().getComponentCount();
+    int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){
          for(int i=0;i<9;i++){
-            ts.getRealAyudaPanel().add(new TestInstancesQueryJPanel());
+            this.getParent().add(new TestInstancesQueryJPanel());
          }
     }
-    ts.getRealAyudaPanel().getParent().validate();
+    this.getParent().getParent().validate();
 }//GEN-LAST:event_resultTextFieldMouseClicked
 
 
@@ -255,4 +250,13 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
+    
+    public static int getContadorReal() {
+        return contadorReal;
+    }
+
+    public static void setContadorReal(int aContadorReal) {
+        contadorReal = aContadorReal;
+    }
+
 }

@@ -43,4 +43,26 @@ public class ClassInstances {
     public void setComment(String comment) {
         this.comment = comment;
     }
+    
+    @Override
+    public boolean equals(Object object){
+        if((object!=null) && (object instanceof ClassInstances) ) {
+            ClassInstances comp = (ClassInstances)object;
+            if(this.getClassInstance().equals(comp.getClassInstance())){
+               if(this.getComment().equals(comp.getComment())){
+                    return true;
+               }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + (this.classInstance != null ? this.classInstance.hashCode() : 0);
+        hash = 79 * hash + (this.comment != null ? this.comment.hashCode() : 0);
+        return hash;
+    }
 }

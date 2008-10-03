@@ -6,7 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.controller.ControladorTests;
+import code.google.com.p.ontologytesting.guiNew.ControladorTests;
 import java.awt.Dimension;
 
 /**
