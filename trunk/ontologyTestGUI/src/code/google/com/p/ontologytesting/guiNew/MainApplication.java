@@ -29,7 +29,6 @@ import javax.swing.WindowConstants;
 public class MainApplication extends javax.swing.JFrame {
 
     private static CollectionTest collection;
-    private AddOntologyJDialog ontologia;
     private JFileChooser filechooser;
     private static String proyecto,nombreProyecto;
     private AddInstancesClasPropJDialog addInst;
@@ -44,6 +43,8 @@ public class MainApplication extends javax.swing.JFrame {
     private AddSPARQLJPanel testSparql;
     private Instancias instancias;
     private SeeTestJDialog seeTest;
+    private ListAndTestsJPanel listTest;
+    private ListAndResultsJPanel panelTest;
     
 
     /** Creates new form MainApplication */
@@ -55,6 +56,7 @@ public class MainApplication extends javax.swing.JFrame {
         ControladorTests.inicializarSeleccionados();
         contentTestsJPanel.setLayout(new BorderLayout());
         collection = new CollectionTest();
+        panelTest = new ListAndResultsJPanel();
         //"http://www.owl-ontologies.com/family.owl#"
         //http://nlp.shef.ac.uk/abraxas/ontologies/animals.owl
         //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
@@ -165,7 +167,6 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(proyectoMenu);
 
         testsSimplesMenu.setText("Tests Simples");
-        testsSimplesMenu.setEnabled(false);
 
         nuevoTestSimple.setText("Nuevo");
 
@@ -246,7 +247,6 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(testsSimplesMenu);
 
         testsSparqlMenu.setText("Tests SPARQL");
-        testsSparqlMenu.setEnabled(false);
 
         nuevoTestSparql.setText("Nuevo");
         nuevoTestSparql.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +291,6 @@ public class MainApplication extends javax.swing.JFrame {
         menuBar.add(testsSparqlMenu);
 
         instanciasMenu.setText("Instancias");
-        instanciasMenu.setEnabled(false);
 
         nuevoInstancias.setText("Nuevo");
         nuevoInstancias.addActionListener(new java.awt.event.ActionListener() {
@@ -387,28 +386,28 @@ public class MainApplication extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirProyectoActionPerformed
-        System.exit(0);
+        int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?", 
+                "Salir",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
 }//GEN-LAST:event_salirProyectoActionPerformed
 
 private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoProyectoActionPerformed
 // TODO add your handling code here:
-    filechooser = new JFileChooser();
-    filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
-    int option = filechooser.showOpenDialog(this);
-      if (option == JFileChooser.APPROVE_OPTION) {
-        setProyecto(filechooser.getSelectedFile().getAbsolutePath());
-        setNombreProyecto(filechooser.getSelectedFile().getName());
-        collection = new CollectionTest();
+    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    newProject.setLocationRelativeTo(this);
+    newProject.setVisible(true);
+    if(newProject.getProyectoCreado()==true){
         this.inicializarContadores();
-        ontologia = new AddOntologyJDialog(this,true);
-        ontologia.setVisible(true);
-        if(ontologia.getOntologiaAsociada()==true){
-            this.getInstanciasMenu().setEnabled(true);
-            this.getTestsSimplesMenu().setEnabled(true);
-            this.getTestsSparqlMenu().setEnabled(true);
-            this.getEjecutarMenu().setEnabled(true);
-        }
-      }
+        this.getInstanciasMenu().setEnabled(true);
+        this.getTestsSimplesMenu().setEnabled(true);
+        this.getTestsSparqlMenu().setEnabled(true);
+        this.getEjecutarMenu().setEnabled(true);
+        collection = new CollectionTest();
+        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+        this.validate();
+    }
 }//GEN-LAST:event_nuevoProyectoActionPerformed
 
 private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstActionPerformed
@@ -1048,13 +1047,9 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
     
     public void aniadirTestsInst(){ 
-        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-        if(cont==0){
-            MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(0),BorderLayout.NORTH);
-        }else{
-            MainApplication.getContentTestsJPanel().remove(0);
-            MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(0),BorderLayout.NORTH);
-        }
+        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(0, new ScenarioTest()));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
     
@@ -1187,7 +1182,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
 
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirProyecto;
     private static javax.swing.JPanel contentTestsJPanel;
@@ -1224,6 +1219,6 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JMenuItem verInstancias;
     private javax.swing.JMenuItem verTestSimpleMenuItem;
     private javax.swing.JMenuItem verTestSparql;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
 }

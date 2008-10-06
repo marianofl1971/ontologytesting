@@ -6,6 +6,7 @@
 
 package gui;
 
+import code.google.com.p.ontologytesting.guiNew.ListAndResultsJPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 

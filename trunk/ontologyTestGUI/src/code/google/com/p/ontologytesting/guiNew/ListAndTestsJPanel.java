@@ -4,7 +4,7 @@
  * Created on 25 de septiembre de 2008, 11:39
  */
 
-package gui;
+package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.guiNew.TestSimpleInstSat;
 import java.awt.*;
@@ -17,20 +17,32 @@ import javax.swing.*;
 public class ListAndTestsJPanel extends javax.swing.JPanel {
 
     private JSplitPane splitPane;
-    private JScrollPane testsScrollPane;
-    private JPanel tabbedPane;
+    private JScrollPane testsPanel;
+    private JPanel listaPanel;
     
     /** Creates new form listAndTestsJPanel */
-    public ListAndTestsJPanel() {
+    public ListAndTestsJPanel(JPanel panel) {
         initComponents();
         this.setLayout(new BorderLayout());
-        testsScrollPane = new JScrollPane(new TestSimpleInstSat(0));
-        tabbedPane = new ListTestsJPanel();
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,tabbedPane, testsScrollPane);
+        testsPanel = new JScrollPane(panel);
+        this.setTestsPanel(testsPanel);
+        listaPanel = new ListTestsJPanel();
+        this.setListaPanel(listaPanel);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,getListaPanel(),getTestsPanel());
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(290);
         this.add(splitPane,BorderLayout.CENTER);
-        this.add(new EjecucionJPanel(),BorderLayout.SOUTH);
+    }
+    
+    public ListAndTestsJPanel() {
+        initComponents();
+        this.setLayout(new BorderLayout());
+        testsPanel = new JScrollPane();
+        listaPanel = new ListTestsJPanel();
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,getListaPanel(),getTestsPanel());
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(290);
+        this.add(splitPane,BorderLayout.CENTER);
     }
 
     /** This method is called from within the constructor to
@@ -53,6 +65,23 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+
+    public JPanel getListaPanel() {
+        return listaPanel;
+    }
+
+    public void setListaPanel(JPanel listaPanel) {
+        this.listaPanel = listaPanel;
+    }
+
+    public JScrollPane getTestsPanel() {
+        return testsPanel;
+    }
+
+    public void setTestsPanel(JScrollPane testsPanel) {
+        this.testsPanel = testsPanel;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
