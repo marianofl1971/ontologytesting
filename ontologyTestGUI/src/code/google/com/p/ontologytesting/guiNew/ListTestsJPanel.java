@@ -4,7 +4,7 @@
  * Created on 25 de septiembre de 2008, 12:19
  */
 
-package gui;
+package code.google.com.p.ontologytesting.guiNew;
 
 /**
  *

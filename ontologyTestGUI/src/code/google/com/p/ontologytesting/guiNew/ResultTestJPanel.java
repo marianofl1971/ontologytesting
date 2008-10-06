@@ -1,34 +1,21 @@
 /*
- * ListAndResultsJPanel.java
+ * resultTestJPanel.java
  *
- * Created on 25 de septiembre de 2008, 13:03
+ * Created on 25 de septiembre de 2008, 12:10
  */
 
-package gui;
+package code.google.com.p.ontologytesting.guiNew;
 
-import java.awt.*;
-import javax.swing.*;
 
 /**
  *
  * @author  sara.garcia
  */
-public class ListAndResultsJPanel extends javax.swing.JPanel {
+public class ResultTestJPanel extends javax.swing.JPanel {
 
-    private JSplitPane splitPane;
-    private JPanel testsScrollPane;
-    private JPanel tabbedPane;
-    
-    /** Creates new form ListAndResultsJPanel */
-    public ListAndResultsJPanel() {
+    /** Creates new form resultTestJPanel */
+    public ResultTestJPanel() {
         initComponents();
-        this.setLayout(new BorderLayout());
-        testsScrollPane = new ResultTestJPanel();
-        tabbedPane = new ListAndTestsJPanel();
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,tabbedPane, testsScrollPane);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(500);
-        this.add(splitPane,BorderLayout.CENTER);
     }
 
     /** This method is called from within the constructor to
@@ -40,20 +27,29 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 }

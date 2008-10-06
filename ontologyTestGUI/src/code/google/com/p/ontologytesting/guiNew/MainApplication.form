@@ -55,7 +55,6 @@
         <Menu class="javax.swing.JMenu" name="testsSimplesMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests Simples"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="nuevoTestSimple">
@@ -142,7 +141,6 @@
         <Menu class="javax.swing.JMenu" name="testsSparqlMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests SPARQL"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoTestSparql">
@@ -190,7 +188,6 @@
         <Menu class="javax.swing.JMenu" name="instanciasMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Instancias"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoInstancias">
