@@ -3,9 +3,8 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.jenainterfaz;
+package code.google.com.p.ontologytesting.model.jenainterfaz;
 
-import code.google.com.p.ontologytesting.exceptions.*;
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import java.util.ArrayList;
 

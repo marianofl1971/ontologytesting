@@ -13,7 +13,7 @@ import java.util.List;
  * @author saruskas
  */
 public class ExecQuerySparql {
-    private List<String> datos;
+    private List<String> datos = new ArrayList<String>();
     private String nombreSelect="";
 
     public ExecQuerySparql(){

@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.jenainterfaz;
+package code.google.com.p.ontologytesting.model.jenainterfaz;
+
+import code.google.com.p.ontologytesting.model.jenainterfaz.driverjena.JenaImplementation;
 
 /**
  *

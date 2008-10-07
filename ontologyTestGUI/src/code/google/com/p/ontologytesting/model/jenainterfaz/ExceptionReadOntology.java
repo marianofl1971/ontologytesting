@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.exceptions;
+package code.google.com.p.ontologytesting.model.jenainterfaz;
 
 import java.awt.Component;
 import javax.swing.JOptionPane;

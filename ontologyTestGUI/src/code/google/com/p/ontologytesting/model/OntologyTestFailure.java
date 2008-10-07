@@ -9,6 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,33 +18,18 @@ import java.util.List;
  */
 public class OntologyTestFailure extends Object{
 
-    protected String fresqueryobtenido;
-    protected String fquery;
-    protected String fcommentquery;
-    protected String fresultexpected;
-    protected String fresultsparqlexpected;
-    protected List<ExecQuerySparql> fressparqlobtenido;
-    protected List<ExecQuerySparql> fressparqlesperado;
-    protected String fcommentsparqlquery;
-    protected String fquerysparql;
-    protected String testName;
-    protected String ftestNameUsuario;
+    protected String fresqueryobtenido="";
+    protected String fquery="";
+    protected String fcommentquery="";
+    protected String fresultexpected="";
+    protected String fresultsparqlexpected="";
+    protected List<ExecQuerySparql> fressparqlobtenido = new ArrayList<ExecQuerySparql>();
+    protected List<ExecQuerySparql> fressparqlesperado = new ArrayList<ExecQuerySparql>();
+    protected String fcommentsparqlquery="";
+    protected String fquerysparql="";
+    protected String testName="";
+    protected String ftestNameUsuario="";
     private String result="";
-    
-    public OntologyTestFailure(String testNameUsuario, String testName,QueryOntology query, String resQueryObte, 
-            SparqlQueryOntology querysparql, List<ExecQuerySparql> resSparqlQueryEspe, 
-            List<ExecQuerySparql> resSparqlQueryObte){
-        this.ftestNameUsuario=testNameUsuario;
-        this.testName=testName;
-        this.fquery = query.getQuery();
-        this.fcommentquery = query.getComment();
-        this.fresultexpected = query.getResultexpected();
-        this.fresqueryobtenido = resQueryObte;
-        this.fquerysparql = querysparql.getQuerySparql();
-        this.fresultsparqlexpected = querysparql.getResultexpected();
-        this.fressparqlobtenido = resSparqlQueryObte;
-        this.fressparqlesperado = resSparqlQueryEspe;
-    }
     
     public OntologyTestFailure(){
     }   

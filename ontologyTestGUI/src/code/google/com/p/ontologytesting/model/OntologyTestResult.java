@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class OntologyTestResult extends Object{
 
-    protected List<OntologyTestFailure> ontologyfailuresquerys;
-    protected List<OntologyTestFailure> ontologyfailuressparql;
-    protected List<OntologyTestPassed> ontologypassedquerys;
-    protected List<OntologyTestPassed> ontologypassedsparql;
+    protected List<OntologyTestFailure> ontologyfailuresquerys = new ArrayList<OntologyTestFailure>();
+    protected List<OntologyTestFailure> ontologyfailuressparql = new ArrayList<OntologyTestFailure>();
+    protected List<OntologyTestPassed> ontologypassedquerys = new ArrayList<OntologyTestPassed>();
+    protected List<OntologyTestPassed> ontologypassedsparql = new ArrayList<OntologyTestPassed>();
     
     public OntologyTestResult(){
         ontologyfailuresquerys = new ArrayList<OntologyTestFailure>();
