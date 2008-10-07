@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.validations;
+package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.guiNew.TestInstancesQueryJPanel;
 import code.google.com.p.ontologytesting.guiNew.TestInstancesTFJPanel;

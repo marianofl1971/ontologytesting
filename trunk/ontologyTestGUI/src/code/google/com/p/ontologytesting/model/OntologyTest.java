@@ -9,7 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 
 /**
  *

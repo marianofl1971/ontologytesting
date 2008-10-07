@@ -7,7 +7,7 @@ package JUnuitTests;
 
 import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import code.google.com.p.ontologytesting.validations.ValidarTests;
+import code.google.com.p.ontologytesting.model.ValidarTests;
 import junit.framework.TestCase;
 
 /**

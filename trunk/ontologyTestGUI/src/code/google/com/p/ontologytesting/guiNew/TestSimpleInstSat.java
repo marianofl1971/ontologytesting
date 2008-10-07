@@ -6,10 +6,9 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.validations.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -103,7 +102,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         List<QueryOntology> listaQuerys = s.getQueryTest(); 
         ListIterator qi;
         qi = listaQuerys.listIterator();
-        
         descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
         descPanel.setNombreTextField(s.getNombre());
         descPanel.setDescTextArea(s.getDescripcion());
@@ -155,8 +153,8 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         descripcionJPanel = new javax.swing.JPanel();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
-        guardarEjecutarButton = new javax.swing.JButton();
         ejecutarButton = new javax.swing.JButton();
+        guardarEjecutarButton = new javax.swing.JButton();
 
         tabbedPaneInst.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,13 +270,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
             }
         });
 
-        guardarEjecutarButton.setText("Guardar y Ejecutar");
-        guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarEjecutarButtonActionPerformed(evt);
-            }
-        });
-
         ejecutarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cog.png"))); // NOI18N
         ejecutarButton.setText("Ejecutar");
         ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -287,25 +278,32 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
             }
         });
 
+        guardarEjecutarButton.setText("Guardar y Ejecutar");
+        guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarEjecutarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentGuardarEjecutarPanelLayout = new javax.swing.GroupLayout(contentGuardarEjecutarPanel);
         contentGuardarEjecutarPanel.setLayout(contentGuardarEjecutarPanelLayout);
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
+                .addContainerGap(463, Short.MAX_VALUE)
                 .addComponent(guardarButton)
                 .addGap(18, 18, 18)
                 .addComponent(ejecutarButton)
                 .addGap(18, 18, 18)
                 .addComponent(guardarEjecutarButton)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(guardarEjecutarButton)
+                .addComponent(guardarButton)
                 .addComponent(ejecutarButton)
-                .addComponent(guardarButton))
+                .addComponent(guardarEjecutarButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -331,7 +329,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
                 .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -350,8 +348,19 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    guardarTest();       
-}//GEN-LAST:event_guardarButtonActionPerformed
+//GEN-LAST:event_guardarButtonActionPerformed
+}
+
+private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_ejecutarButtonActionPerformed
+}
+
+private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_guardarEjecutarButtonActionPerformed
+}
+
 
 public boolean guardarTest(){
     if(getTabbedPaneInst()==0){
@@ -434,62 +443,6 @@ public void guardar(){
     }
 }
 
-
-private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
-// TODO add your handling code here:
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    resultTests = new ResultTests();
-    testresult = new OntologyTestResult();
-    if(getTabbedPaneInst()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneInst()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            guardarYEjecutar();
-        }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-        }
-    }
-}//GEN-LAST:event_guardarEjecutarButtonActionPerformed
-
-private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
-// TODO add your handling code here:
-    
-    /*progressMonitor = new ProgressMonitor(TestSimpleInstSat.this,
-                                  "Ejecutando los tests...",
-                                  "", 0, 100);
-    progressMonitor.setProgress(0);
-    task = new Task();
-    task.addPropertyChangeListener(this);
-    task.execute();
-    ejecutarButton.setEnabled(false);*/
-    
-    setSoloEjecutar(true);
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    resultTests = new ResultTests();
-    testresult = new OntologyTestResult();
-    if(getTabbedPaneInst()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneInst()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            ejecutar(0);
-        }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-        }
-    }
-    
-}//GEN-LAST:event_ejecutarButtonActionPerformed
 
 public void ejecutar(int cuantos){
     if(isSoloEjecutar()==true){
@@ -1073,7 +1026,7 @@ public JPanel getInstAyudaPanel() {
 }
 
 public JPanel getOpcionTextInstPanel() {
-        return opcionTextInstPanel;
+    return opcionTextInstPanel;
 }
 
 public ScenarioTest getScenario() {
@@ -1162,7 +1115,6 @@ public void setImportado(boolean importado) {
         @Override
         public void done() {
             Toolkit.getDefaultToolkit().beep();
-            ejecutarButton.setEnabled(true);
             progressMonitor.setProgress(0);
         }
     }
@@ -1184,7 +1136,6 @@ public void setImportado(boolean importado) {
                 } else {
                     //taskOutput.append("Ejecución completada.\n");
                 }
-                ejecutarButton.setEnabled(true);
             }
         }
     }

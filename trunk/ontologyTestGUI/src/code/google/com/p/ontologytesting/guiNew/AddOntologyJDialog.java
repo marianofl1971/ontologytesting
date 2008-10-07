@@ -6,8 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JFileChooser;

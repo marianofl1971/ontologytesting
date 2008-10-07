@@ -9,10 +9,8 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.exceptions.*;
 import code.google.com.p.ontologytesting.guiNew.MainApplication;
-import code.google.com.p.ontologytesting.jenainterfaz.Jena;
-import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,11 +24,11 @@ public class OntologyTestCase implements OntologyTest{
     
     private JenaInterface jenaInterface;   
     private Jena jena;
-    private String patron1,patron2,patron3,patron4,patron5,patron6;
-    private int fallo;
+    private String patron1="",patron2="",patron3="",patron4="",patron5="",patron6="";
+    private int fallo=0;
     private static String muestra="";
-    private List<ExecQuerySparql> listaResultEsperada;
-    private List<ExecQuerySparql> listaResultObtenida;
+    private List<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
+    private List<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
     
     public OntologyTestCase(){
     }

@@ -6,9 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.jenainterfaz.Jena;
-import code.google.com.p.ontologytesting.jenainterfaz.JenaInterface;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.BorderLayout;
 import java.io.File;
 import javax.swing.JOptionPane;

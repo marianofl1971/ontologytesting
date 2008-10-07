@@ -15,10 +15,6 @@ import javax.swing.*;
  */
 public class ListAndResultsJPanel extends javax.swing.JPanel {
 
-    public JPanel getTestsPanel() {
-        return testsPanel;
-    }
-
     private JSplitPane splitPane;
     private JPanel resultPanel;
     private JPanel testsPanel;
@@ -33,6 +29,10 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(500);
         this.add(splitPane,BorderLayout.CENTER);
+    }
+    
+    public JPanel getTestsPanel() {
+        return testsPanel;
     }
 
     /** This method is called from within the constructor to

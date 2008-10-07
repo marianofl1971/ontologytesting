@@ -6,8 +6,8 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.*;
+import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -385,15 +385,15 @@ public class MainApplication extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirProyectoActionPerformed
+    private void salirProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                              
         int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?", 
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             System.exit(0);
         }
-}//GEN-LAST:event_salirProyectoActionPerformed
+}
 
-private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoProyectoActionPerformed
+private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
@@ -408,9 +408,9 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
     }
-}//GEN-LAST:event_nuevoProyectoActionPerformed
+}
 
-private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstActionPerformed
+private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false){
@@ -436,7 +436,7 @@ private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 this.aniadirTestsInst();
             }
     }
-}//GEN-LAST:event_nuevoTestInstActionPerformed
+}
 
 private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSimpleActionPerformed
 // TODO add your handling code here:        
@@ -467,7 +467,7 @@ private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
     } 
 }                                                
 
-private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSparqlActionPerformed
+private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
     try{
         if(this.importarTest()){
@@ -481,29 +481,29 @@ private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {
             JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
             "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
     }
-}//GEN-LAST:event_importarTestSparqlActionPerformed
+}
 
-private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasActionPerformed
+private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
     this.inicializarContadores();
     int sel = ControladorTests.testSeleccionado();
     addInst = new AddInstancesClasPropJDialog(this,true,sel);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
-}//GEN-LAST:event_nuevoInstanciasActionPerformed
+}
 
-private void importarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasActionPerformed
+private void importarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
     this.importarInstancias();
-}//GEN-LAST:event_importarInstanciasActionPerformed
+}
 
-private void editarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasActionPerformed
+private void editarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
     this.inicializarContadores();
     this.editarInstancias();
-}//GEN-LAST:event_editarInstanciasActionPerformed
+}
 
-private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarInstanciasActionPerformed
+private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
     try{
         this.explorarInstancias();
@@ -514,9 +514,9 @@ private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
         JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
         "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
     }
-}//GEN-LAST:event_explorarInstanciasActionPerformed
+}
 
-private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecActionPerformed
+private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false){
@@ -542,9 +542,9 @@ private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 this.aniadirTestsRet();
             }
     }
-}//GEN-LAST:event_nuevoTestRecActionPerformed
+}
 
-private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRealActionPerformed
+private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
@@ -570,9 +570,9 @@ private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 this.aniadirTestsReal();
             }
     }
-}//GEN-LAST:event_nuevoTestRealActionPerformed
+}
 
-private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSatActionPerformed
+private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
@@ -598,9 +598,9 @@ private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 this.aniadirTestsSat();
             }
     }
-}//GEN-LAST:event_nuevoTestSatActionPerformed
+}
 
-private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestClaActionPerformed
+private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
@@ -626,28 +626,28 @@ private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 this.aniadirTestsClas();
             }
     }
-}//GEN-LAST:event_nuevoTestClaActionPerformed
+}
 
-private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejectuarTestsActionPerformed
+private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     if(MainApplication.getCollection().getScenariotest().size()==0){
         JOptionPane.showMessageDialog(this,"No tiene ningun test para ejecutar",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
-            try{
-	testcase = new OntologyTestCase();//GEN-LAST:event_ejectuarTestsActionPerformed
+	    testcase = new OntologyTestCase();
             resultTests = new ResultTests();
             testresult = new OntologyTestResult();
-            testcase.run(testresult, MainApplication.getCollection());
-            JPanel panel = new TreeResults(testresult);
-            resultTests.getContentPanelResults().add(panel);
-            resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            resultTests.setVisible(true);
-            resultTests.validate();
-        } catch (ExceptionReadOntology ex) {
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
-            "\nSolo pueden realizarse tests sobre documentos owl consistentes");
-        }
+            try {
+                testcase.run(testresult, MainApplication.getCollection());
+                JPanel panel = new TreeResults(testresult);
+                resultTests.getContentPanelResults().add(panel);
+                resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                resultTests.setVisible(true);
+                resultTests.validate();
+            }catch (ExceptionReadOntology ex) {
+                new ExceptionReadOntology("La ontologia introducida no es valida." +
+                "\nSolo pueden realizarse tests sobre documentos owl consistentes");
+            }
     }
 }
     
@@ -665,9 +665,9 @@ private void explorarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
 }
   
 
-private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlActionPerformed
+private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
-if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){//GEN-LAST:event_nuevoTestSparqlActionPerformed
+if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
     ControladorTests.inicializarGuardados();
     ControladorTests.inicializarSeleccionados();
     ControladorTests.setTestSparqlGuardado(false);
@@ -692,9 +692,9 @@ if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getC
 }
 }
 
-private void editarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestSparqlActionPerformed
+private void editarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
-    try {//GEN-LAST:event_editarTestSparqlActionPerformed
+    try {
         this.editarTests();
     }catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(this,"No se puede abrir el test para su edición",                                                  
@@ -705,9 +705,9 @@ private void editarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//
     } 
 }
 
-private void guardarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoActionPerformed
+private void guardarProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
-    saveTest = new SaveTest();//GEN-LAST:event_guardarProyectoActionPerformed
+    saveTest = new SaveTest();
     try {
         saveTest.saveProject();
         JOptionPane.showMessageDialog(this,"El proyecto se ha guardado",
@@ -718,9 +718,8 @@ private void guardarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
 }
 
-private void abrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoActionPerformed
+private void abrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-//GEN-LAST:event_abrirProyectoActionPerformed
     try{
         boolean result = this.openProject();
         if(result==true){
@@ -735,16 +734,15 @@ private void abrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
     } 
 }
-private void tiposDeTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiposDeTestsMenuItemActionPerformed
+private void tiposDeTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                     
 // TODO add your handling code here:
-//GEN-LAST:event_tiposDeTestsMenuItemActionPerformed
     helpDialog = new HelpJDialog(this,false);
     helpDialog.setVisible(true);
 }
 
-private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoActionPerformed
+private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) {                                                    
 // TODO add your handling code here:
-    saveTest = new SaveTest();//GEN-LAST:event_guardarProyectoComoActionPerformed
+    saveTest = new SaveTest();
     try {
         boolean result = saveTest.saveProjectAs();
         if(result==true){
@@ -757,9 +755,8 @@ private void guardarProyectoComoActionPerformed(java.awt.event.ActionEvent evt) 
     }
 }
     
-private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSimpleMenuItemActionPerformed
+private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-//GEN-LAST:event_verTestSimpleMenuItemActionPerformed
     boolean res = this.verTests();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
@@ -767,9 +764,8 @@ private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt
     }
 }
 
-private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_explorarTestSparqlActionPerformed
+private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:
-//GEN-LAST:event_explorarTestSparqlActionPerformed
     try{
         this.explorarTests();
     }catch (FileNotFoundException ex) {
@@ -781,9 +777,8 @@ private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {
     }
 }
 
-private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestSparqlActionPerformed
+private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-//GEN-LAST:event_verTestSparqlActionPerformed
     boolean res = this.verTests();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  
@@ -791,9 +786,8 @@ private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
 }
 
-private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasActionPerformed
+private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-//GEN-LAST:event_verInstanciasActionPerformed
     boolean res = this.verInstancias();
     if(res==false){
         JOptionPane.showMessageDialog(this,"No tiene ningún test abierto",                                                  

@@ -6,9 +6,8 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.validations.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.Component;
 import java.awt.FlowLayout;

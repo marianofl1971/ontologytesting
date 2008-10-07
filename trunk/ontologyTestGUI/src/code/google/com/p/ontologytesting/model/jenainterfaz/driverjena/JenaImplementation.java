@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.jenainterfaz;
+package code.google.com.p.ontologytesting.model.jenainterfaz.driverjena;
 
-import code.google.com.p.ontologytesting.exceptions.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.ontology.Individual;
