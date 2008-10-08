@@ -21,24 +21,20 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelectionListener{
 
-     private JList listTestSimple = new JList();
-     private JScrollPane listScrollPane = new JScrollPane();
+     private static JList listTestSimple = new JList();
+     private static JScrollPane listScrollPane = new JScrollPane();
+     private ScenarioTest scenario;
      
     /** Creates new form ListarTestsJPanel */
     public ListarTestsJPanel() {
         initComponents();
         this.testSimpleListPanel.setLayout(new FlowLayout());
-        this.listTestSimple = new JList();
-        this.listTestSimple.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        this.listTestSimple.setSelectedIndex(0);
-        this.listTestSimple.addListSelectionListener(this);
-        this.listScrollPane = new JScrollPane(getListTestSimple());
+        ListarTestsJPanel.listTestSimple = new JList();
+        ListarTestsJPanel.listTestSimple.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        ListarTestsJPanel.listTestSimple.setSelectedIndex(0);
+        ListarTestsJPanel.listTestSimple.addListSelectionListener(this);
+        ListarTestsJPanel.listScrollPane = new JScrollPane(ListarTestsJPanel.listTestSimple);
         this.testSimpleListPanel.add(listScrollPane);
-    }
-
-    public ListarTestsJPanel(ListarTestsJPanel panel){
-        panel.setListScrollPane(this.getListScrollPane());
-        panel.setListTestSimple(this.getListTestSimple());
     }
 
     @Override
@@ -48,10 +44,12 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         //updateLabel(lista[list.getSelectedIndex()]);
     }
     
-    public void aniadirTestSimple(ScenarioTest scenario){ 
+    public static void aniadirTestSimple(ScenarioTest scenario){ 
         DefaultListModel modelo = new DefaultListModel();  
         modelo.addElement(scenario.getNombre());  
-        getListTestSimple().setModel(modelo);
+        ListarTestsJPanel.listTestSimple.setModel(modelo);
+        ListarTestsJPanel.listScrollPane.remove(0);
+        ListarTestsJPanel.listScrollPane.add(listTestSimple);
     }
     
     public JList getListTestSimple() {
@@ -164,7 +162,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     // End of variables declaration//GEN-END:variables
 
     public void setListTestSimple(JList listTestSimple) {
-        this.listTestSimple = listTestSimple;
+        ListarTestsJPanel.listTestSimple = listTestSimple;
     }
 
     public JScrollPane getListScrollPane() {
@@ -172,7 +170,15 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     }
 
     public void setListScrollPane(JScrollPane listScrollPane) {
-        this.listScrollPane = listScrollPane;
+        ListarTestsJPanel.listScrollPane = listScrollPane;
+    }
+
+    public ScenarioTest getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(ScenarioTest scenario) {
+        this.scenario = scenario;
     }
 
 }
