@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.guiNew.TestSimpleInstSat;
 import java.awt.*;
 import javax.swing.*;
 
@@ -26,7 +25,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         this.setLayout(new BorderLayout());
         testsPanel = new JScrollPane(panel);
         this.setTestsPanel(testsPanel);
-        listaPanel = new ListTestsJPanel();
+        listaPanel = new ListarTestsJPanel();
         this.setListaPanel(listaPanel);
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,getListaPanel(),getTestsPanel());
         splitPane.setOneTouchExpandable(true);
@@ -38,7 +37,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         initComponents();
         this.setLayout(new BorderLayout());
         testsPanel = new JScrollPane();
-        listaPanel = new ListTestsJPanel();
+        listaPanel = new ListarTestsJPanel();
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,getListaPanel(),getTestsPanel());
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(290);

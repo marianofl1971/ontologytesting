@@ -440,7 +440,7 @@ private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSimpleActionPerformed
 // TODO add your handling code here:        
-    try{
+    /*try{
         if(this.importarTest()){
             JOptionPane.showMessageDialog(this,"El test se ha importado correctamente",
             "Information Message",JOptionPane.INFORMATION_MESSAGE);
@@ -451,7 +451,9 @@ private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
     }catch(ClassCastException ce){
         JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
         "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-    }
+    }*/
+    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, false, MainApplication.getCollection()); 
+    abrirTests.setVisible(true);
 }                                                  
 
 private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                 
