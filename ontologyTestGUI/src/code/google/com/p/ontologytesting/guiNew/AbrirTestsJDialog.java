@@ -33,7 +33,6 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
     private XMLDecoder decoder;
     private CollectionTest collection;
     private JFrame frame = new JFrame();
-    private ListarTestsJPanel list;
     
     /** Creates new form AbrirTestsJDialog */
     public AbrirTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
@@ -202,8 +201,8 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarButtonActionPerformed
 // TODO add your handling code here:
     ScenarioTest scenImp = listaFicheros.getScenarioActual();//GEN-LAST:event_importarButtonActionPerformed
-    list = new ListarTestsJPanel(new ListarTestsJPanel());
-    list.aniadirTestSimple(scenImp);
+
+    ListarTestsJPanel.aniadirTestSimple(scenImp);
 }
 
     private void openFile(JTextField textfield){
