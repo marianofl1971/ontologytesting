@@ -191,7 +191,6 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.prepararImport(collection.getScenariotest());
         decoder.close();    
     }catch(FileNotFoundException e){
-    
     }catch(ClassCastException e){
         System.out.println("Este no es un proyecto valido");
     }catch(Exception ex){
