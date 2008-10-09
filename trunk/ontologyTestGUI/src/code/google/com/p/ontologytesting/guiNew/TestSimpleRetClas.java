@@ -50,7 +50,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private static TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
-    private int tipo;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
@@ -62,7 +61,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private boolean soloEjecutar;
     
     /** Creates new form TestSimpleRetClas */
-    public TestSimpleRetClas(int type) {
+    /*public TestSimpleRetClas(int type) {
         initComponents();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
         descripcionJPanel.setLayout(new FlowLayout());
@@ -73,14 +72,17 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             retAyudaPanel.add(new TestInstancesTextAreaJPanel());   
         }
         opcionTextRetPanel.add(new TestInstancesTextJPanel());
-        setTipo(type);
         setScenarioAEditar(null);
-        setScenario(new ScenarioTest()); 
+        if(type==1){
+            setScenario(new ScenarioTest(TipoTest.RET)); 
+        }else if(type==4){
+            setScenario(new ScenarioTest(TipoTest.CLAS)); 
+        }
         setImportado(false);
         setSoloEjecutar(false);
-    }
+    }*/
     
-    public TestSimpleRetClas(int type,ScenarioTest s){
+    public TestSimpleRetClas(ScenarioTest s){
         initComponents();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
         descripcionJPanel.setLayout(new FlowLayout());
@@ -115,7 +117,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         }
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setTipo(type);
         setImportado(true);
         setSoloEjecutar(false);
     }
@@ -354,7 +355,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             guardarYEjecutar();
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,0);
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -377,7 +378,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             ejecutar(0);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,0);
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -420,7 +421,7 @@ public boolean guardarTest(){
             guardar();
             return true;
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
             return false;
@@ -447,11 +448,7 @@ public void guardar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    if(getTipo()==1){
-                        ControladorTests.setTestRetGuardado(true);
-                    }else if(getTipo()==4){
-                        ControladorTests.setTestClasGuardado(true);
-                    }
+                    ControladorTests.setTestRetClasGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
@@ -461,11 +458,7 @@ public void guardar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            if(getTipo()==1){
-                ControladorTests.setTestRetGuardado(true);
-            }else if(getTipo()==4){
-                ControladorTests.setTestClasGuardado(true);
-            }
+            ControladorTests.setTestRetClasGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -476,11 +469,7 @@ public void guardar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            if(getTipo()==1){
-                ControladorTests.setTestRetGuardado(true);
-            }else if(getTipo()==4){
-                ControladorTests.setTestClasGuardado(true);
-            }
+            ControladorTests.setTestRetClasGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
@@ -507,11 +496,7 @@ public void guardarYEjecutar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    if(getTipo()==1){
-                        ControladorTests.setTestRetGuardado(true);
-                    }else if(getTipo()==4){
-                        ControladorTests.setTestClasGuardado(true);
-                    }
+                    ControladorTests.setTestRetClasGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                     ejecutar(0);
@@ -522,11 +507,7 @@ public void guardarYEjecutar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            if(getTipo()==1){
-                ControladorTests.setTestRetGuardado(true);
-            }else if(getTipo()==4){
-                ControladorTests.setTestClasGuardado(true);
-            }
+            ControladorTests.setTestRetClasGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -538,11 +519,7 @@ public void guardarYEjecutar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            if(getTipo()==1){
-                ControladorTests.setTestRetGuardado(true);
-            }else if(getTipo()==4){
-                ControladorTests.setTestClasGuardado(true);
-            }
+            ControladorTests.setTestRetClasGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -638,7 +615,6 @@ public boolean tieneInstanciasAsociadas(ScenarioTest scenario){
 
 public void copiarTestAScenarioDesdeAyuda(){
 
-    int tipoT = getTipo();
     inicializarVariables();
 
     queryTest = new ArrayList<QueryOntology>();
@@ -692,11 +668,6 @@ public void copiarTestAScenarioDesdeAyuda(){
                 && hayUnaConsulta==1){  
         preguntarSiContinuarSinInstancias(scenario);
         if(continuarSinInstancias==true){
-            if(tipoT==1){
-                scenario.setTestName("Retrieval"); 
-            }else if(tipoT==4){
-                scenario.setTestName("Clasificacion");
-            }
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -740,7 +711,6 @@ public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
 
 public void copiarTestAScenarioDesdeSinAyuda(){
       
-    int tipoT = getTipo();
     inicializarVariables();
     
     String conjuntoQuerys;
@@ -821,11 +791,6 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         && hayUnaConsulta==1){
         preguntarSiContinuarSinInstancias(scenario);
         if(continuarSinInstancias==true){
-            if(tipoT==1){
-                scenario.setTestName("Retrieval");
-            }else if(tipoT==4){
-                scenario.setTestName("Clasificacion");
-            }
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
@@ -1057,14 +1022,6 @@ public void formatoIncorrecto(){
 
     public static void setRet(List aRet) {
         ret = aRet;
-    }
-    
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
     }
 
     public ScenarioTest getScenario() {

@@ -65,10 +65,12 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="cancelarInstButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="392" max="32767" attributes="0"/>
+                          <EmptySpace pref="311" max="32767" attributes="0"/>
                           <Component id="soloAsociarButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="guardarInstButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="guardarAsociarInstButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="limpiarInstButton" min="-2" max="-2" attributes="0"/>
@@ -98,7 +100,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cancelarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="guardarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="guardarAsociarInstButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="guardarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="soloAsociarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -111,15 +114,12 @@
             <Property name="text" type="java.lang.String" value="A&#xf1;ada las instancias que quiera a su ontolog&#xed;a:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="guardarInstButton">
+        <Component class="javax.swing.JButton" name="guardarAsociarInstButton">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/disk.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Guardar y Asociar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarInstButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarAsociarInstButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cancelarInstButton">
@@ -306,6 +306,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="soloAsociarButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="guardarButton">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/code/google/com/p/ontologytesting/images/disk.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Guardar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

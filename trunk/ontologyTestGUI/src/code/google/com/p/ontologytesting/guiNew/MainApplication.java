@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.*;
+import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
@@ -395,10 +396,10 @@ public class MainApplication extends javax.swing.JFrame {
 
 private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){
+    if(newProject.getProyectoCreado()==true){*/
         this.inicializarContadores();
         this.getInstanciasMenu().setEnabled(true);
         this.getTestsSimplesMenu().setEnabled(true);
@@ -407,7 +408,7 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {
         collection = new CollectionTest();
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
-    }
+    //}
 }
 
 private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -416,7 +417,7 @@ private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {
     if(ControladorTests.algunTestSinGuardar()==false){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestInstGuardado(false);
+        ControladorTests.setTestInstSatGuardado(false);
         ControladorTests.setTestInstSelect(true);
         this.aniadirTestsInst();
     }else{
@@ -425,13 +426,13 @@ private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {
             if (n == JOptionPane.YES_OPTION){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestInstGuardado(false);
+                    ControladorTests.setTestInstSatGuardado(false);
                     ControladorTests.setTestInstSelect(true);
                     this.aniadirTestsInst();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestInstGuardado(false);
+                ControladorTests.setTestInstSatGuardado(false);
                 ControladorTests.setTestInstSelect(true);
                 this.aniadirTestsInst();
             }
@@ -454,6 +455,7 @@ private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {
     }*/
     AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, false, MainApplication.getCollection()); 
     abrirTests.setVisible(true);
+    abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 }                                                  
 
 private void editarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                 
@@ -489,7 +491,7 @@ private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
     this.inicializarContadores();
     int sel = ControladorTests.testSeleccionado();
-    addInst = new AddInstancesClasPropJDialog(this,true,sel);
+    addInst = new AddInstancesClasPropJDialog(this,true);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
 }
@@ -524,7 +526,7 @@ private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {
     if(ControladorTests.algunTestSinGuardar()==false){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestRetGuardado(false);
+        ControladorTests.setTestRetClasGuardado(false);
         ControladorTests.setTestRetSelect(true);
         this.aniadirTestsRet();
     }else{
@@ -533,13 +535,13 @@ private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {
             if (n == JOptionPane.YES_OPTION){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestRetGuardado(false);
+                    ControladorTests.setTestRetClasGuardado(false);
                     ControladorTests.setTestRetSelect(true);
                     this.aniadirTestsRet();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestRetGuardado(false);
+                ControladorTests.setTestRetClasGuardado(false);
                 ControladorTests.setTestRetSelect(true);
                 this.aniadirTestsRet();
             }
@@ -580,7 +582,7 @@ private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestSatGuardado(false);
+        ControladorTests.setTestInstSatGuardado(false);
         ControladorTests.setTestSatSelect(true);
         this.aniadirTestsSat();
     }else{
@@ -589,13 +591,13 @@ private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {
             if (n == JOptionPane.YES_OPTION){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestSatGuardado(false);
+                    ControladorTests.setTestInstSatGuardado(false);
                     ControladorTests.setTestSatSelect(true);
                     this.aniadirTestsSat();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestSatGuardado(false);
+                ControladorTests.setTestInstSatGuardado(false);
                 ControladorTests.setTestSatSelect(true);
                 this.aniadirTestsSat();
             }
@@ -608,7 +610,7 @@ private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {
     if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
         ControladorTests.inicializarGuardados();
         ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestClasGuardado(false);
+        ControladorTests.setTestRetClasGuardado(false);
         ControladorTests.setTestClasSelect(true);
         this.aniadirTestsClas();
     }else{
@@ -617,13 +619,13 @@ private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {
             if (n == JOptionPane.YES_OPTION){
                     ControladorTests.inicializarGuardados();
                     ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestClasGuardado(false);
+                    ControladorTests.setTestRetClasGuardado(false);
                     ControladorTests.setTestClasSelect(true);
                     this.aniadirTestsClas();
             }else{
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestClasGuardado(false);
+                ControladorTests.setTestRetClasGuardado(false);
                 ControladorTests.setTestClasSelect(true);
                 this.aniadirTestsClas();
             }
@@ -681,13 +683,13 @@ if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getC
         if (n == JOptionPane.YES_OPTION){
                 ControladorTests.inicializarGuardados();
                 ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestClasGuardado(false);
+                ControladorTests.setTestRetClasGuardado(false);
                 ControladorTests.setTestClasSelect(true);
                 this.aniadirTestsSparql();
         }else{
             ControladorTests.inicializarGuardados();
             ControladorTests.inicializarSeleccionados();
-            ControladorTests.setTestClasGuardado(false);
+            ControladorTests.setTestRetClasGuardado(false);
             ControladorTests.setTestClasSelect(true);
             this.aniadirTestsSparql();
         }
@@ -983,9 +985,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
             String nameFile = selectedFile.getPath();
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
             ScenarioTest s = (ScenarioTest) decoder.readObject();
-            String tipoTest = s.getTestName();
-            this.editarTest(s, tipoTest);
-
+            this.editarTest(s);
         }   
     }
 
@@ -1026,7 +1026,6 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
             JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"No hay ningun test abierto al que " +
                     "importar las instancias","Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }else{
-            int sel = ControladorTests.testSeleccionado();
             try{
                 if(this.importarInstancias(scenario)){
                     JOptionPane.showMessageDialog(MainApplication.getContentTestsJPanel(),"Las instancias se ha importado correctamente",
@@ -1043,73 +1042,59 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     }
     
     public void aniadirTestsInst(){ 
-        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(0, new ScenarioTest()));
+        ScenarioTest s = new ScenarioTest(TipoTest.INST);
+        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
     
     public void aniadirTestsSat(){ 
-    int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-    if(cont==0){
-        MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(3),BorderLayout.NORTH);
-    }else{
-        MainApplication.getContentTestsJPanel().remove(0);
-        MainApplication.getContentTestsJPanel().add(new TestSimpleInstSat(3),BorderLayout.NORTH);
+        ScenarioTest s = new ScenarioTest(TipoTest.SAT);
+        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
+        MainApplication.getContentTestsJPanel().getParent().validate();
     }
-    MainApplication.getContentTestsJPanel().getParent().validate();
-}
 
     public void aniadirTestsRet(){ 
-        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-        if(cont==0){
-            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(1),BorderLayout.CENTER);
-        }else{
-            MainApplication.getContentTestsJPanel().remove(0);
-            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(1),BorderLayout.CENTER);
-        }
+        ScenarioTest s = new ScenarioTest(TipoTest.RET);
+        listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
 
     public void aniadirTestsClas(){ 
-        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-        if(cont==0){
-            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(4),BorderLayout.NORTH);
-        }else{
-            MainApplication.getContentTestsJPanel().remove(0);
-            MainApplication.getContentTestsJPanel().add(new TestSimpleRetClas(4),BorderLayout.NORTH);
-        }
+        ScenarioTest s = new ScenarioTest(TipoTest.CLAS);
+        listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
 
     public void aniadirTestsSparql(){ 
-        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-        if(cont==0){
-            MainApplication.getContentTestsJPanel().add(new AddSPARQLJPanel(5),BorderLayout.NORTH);
-        }else{
-            MainApplication.getContentTestsJPanel().remove(0);
-            MainApplication.getContentTestsJPanel().add(new AddSPARQLJPanel(5),BorderLayout.NORTH);
-        }
+        ScenarioTest s = new ScenarioTest(TipoTest.SPARQL);
+        listTest = new ListAndTestsJPanel(new AddSPARQLJPanel(s));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
 
     public void aniadirTestsReal(){ 
-        int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-        if(cont==0){
-            MainApplication.getContentTestsJPanel().add(new TestSimpleReal(2),BorderLayout.NORTH);
-        }else{
-            MainApplication.getContentTestsJPanel().remove(0);
-            MainApplication.getContentTestsJPanel().add(new TestSimpleReal(2),BorderLayout.NORTH);
-        }
+        ScenarioTest s = new ScenarioTest(TipoTest.REAL);
+        listTest = new ListAndTestsJPanel(new TestSimpleReal(s));
+        panelTest.getTestsPanel().remove(0);
+        panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
     
-    public void editarTest(ScenarioTest s, String tipoTest){
-        //ArrayList<Tests> typeTest = Tests.newTests();
-        if(tipoTest.equals("Instanciacion")){
-            ControladorTests.setTestInstGuardado(false);
+    public void editarTest(ScenarioTest s){
+        String tipo = s.getTipoTest().name();
+        if(tipo.equals("INST") || tipo.equals("SAT")){
+            ControladorTests.setTestInstSatGuardado(false);
             ControladorTests.setTestInstSelect(true);
-            TestSimpleInstSat testInst = new TestSimpleInstSat(0, s);
+            TestSimpleInstSat testInst = new TestSimpleInstSat(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
@@ -1117,10 +1102,10 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipoTest.equals("Retrieval")){
-            ControladorTests.setTestRetGuardado(false);
+        }else if(tipo.equals("RET") || tipo.equals("CLAS")){
+            ControladorTests.setTestRetClasGuardado(false);
             ControladorTests.setTestRetSelect(true);
-            TestSimpleRetClas testInst = new TestSimpleRetClas(1, s);
+            TestSimpleRetClas testInst = new TestSimpleRetClas(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
@@ -1128,10 +1113,10 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipoTest.equals("Realizacion")){
+        }else if(tipo.equals("REAL")){
             ControladorTests.setTestRealGuardado(false);
             ControladorTests.setTestRealSelect(true);
-            TestSimpleReal testInst = new TestSimpleReal(2, s);
+            TestSimpleReal testInst = new TestSimpleReal(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
@@ -1139,32 +1124,10 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipoTest.equals("Satisfactibilidad")){
-            ControladorTests.setTestSatGuardado(false);
-            ControladorTests.setTestSatSelect(true);
-            TestSimpleInstSat testInst = new TestSimpleInstSat(3, s);
-            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-            if(cont==0){
-                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
-            }else{
-                MainApplication.getContentTestsJPanel().remove(0);
-                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
-            }
-        }else if(tipoTest.equals("Clasificacion")){
-            ControladorTests.setTestClasGuardado(false);
-            ControladorTests.setTestClasSelect(true);
-            TestSimpleRetClas testInst = new TestSimpleRetClas(4, s);
-            int cont = MainApplication.getContentTestsJPanel().getComponentCount();
-            if(cont==0){
-                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
-            }else{
-                MainApplication.getContentTestsJPanel().remove(0);
-                MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
-            }
-        }else if(tipoTest.equals("sparql")){
+        }else if(tipo.equals("SPARQL")){
             ControladorTests.setTestSparqlGuardado(false);
             ControladorTests.setTestSparqlSelect(true);
-            testSparql = new AddSPARQLJPanel(5, s);
+            testSparql = new AddSPARQLJPanel(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
                 MainApplication.getContentTestsJPanel().add(testSparql,BorderLayout.NORTH);

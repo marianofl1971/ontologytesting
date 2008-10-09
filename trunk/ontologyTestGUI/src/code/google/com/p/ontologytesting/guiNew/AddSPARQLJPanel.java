@@ -44,7 +44,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private Jena jena;
     private boolean importado;
     private ValidarTests validarTest;
-    private int tipo;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private OntologyTestCase testcase;
@@ -53,7 +52,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private boolean soloEjectuar;
     
     /** Creates new form AddSPARQLJPanel */
-    public AddSPARQLJPanel(int tipo) {
+    /*public AddSPARQLJPanel(int tipo) {
         initComponents();
         
         sparqlTextArea.setLineWrap(true);
@@ -74,9 +73,9 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         setPosListQuerysSel(0);
         setSoloEjectuar(false);
-    }
+    }*/
     
-    public AddSPARQLJPanel(int tipo, ScenarioTest s) {
+    public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         sparqlTextArea.setLineWrap(true);
@@ -105,7 +104,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         this.inicializarVariables();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setTipo(tipo);
         setSoloEjectuar(false);
         setPosListQuerysSel(0);
     }
@@ -595,7 +593,7 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
         if(continuarSinInstancias==true){
             guardarYEjecutarTest();
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -614,7 +612,7 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             ejecutar(0);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -628,7 +626,7 @@ public boolean guardarTest(){
             guardar();
             return true;
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
             return false;
@@ -648,7 +646,7 @@ public void guardarYEjecutarTest(){
         if(continuarSinInstancias==true){
             guardarYEjecutar();
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -813,7 +811,6 @@ public void prepararGuardar(){
         if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
             preguntarSiContinuarSinInstancias(scenario);
             if(continuarSinInstancias==true){
-                scenario.setTestName("sparql"); 
                 scenario.setDescripcion(descTest);
                 scenario.setNombre(nombreTest);
                 scenario.setSparqlQuerys(this.getListaDeConsultas()); 
@@ -1034,14 +1031,6 @@ public void inicializarVariables(){
 
     public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
         this.scenarioAEditar = scenarioAEditar;
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int type) {
-        this.tipo = type;
     }
 
     public boolean getImportado() {

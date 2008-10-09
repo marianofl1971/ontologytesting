@@ -15,52 +15,39 @@ import java.util.List;
  *
  * @author Saruskas
  */
+
 public class ScenarioTest {
-    
+
+    public enum TipoTest{
+        INST(0),RET(1),REAL(2),SAT(3),CLAS(4),SPARQL(5);
+        private int tipo;
+        TipoTest(int tipo){
+            this.tipo=tipo;
+        }
+        public int getTipo(){
+            return this.tipo;
+        }
+        public void setTipo(int tipo){
+            this.tipo=tipo;
+        }
+    }
     private String testName="";
     private String nombre="";
     private String descripcion="";
     private Instancias instancias = new Instancias();
     private List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
     private List<SparqlQueryOntology> sparqlQuerys = new ArrayList<SparqlQueryOntology>();
+    private TipoTest tipoTest;
 
-    public ScenarioTest(Instancias instancias, List<QueryOntology> tests, String testName,
-            List<SparqlQueryOntology> sparqlquerys,String nombre,String descripcion){
-
-        this.testName=testName;
-        this.sparqlQuerys.addAll(sparqlquerys);
-        this.queryTest.addAll(tests);   
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-        this.instancias = instancias;
-    }
     
-    public ScenarioTest(Instancias instancias, List<QueryOntology> tests, 
-            String testName){
-        
-        this.instancias = instancias;
-        this.queryTest.addAll(tests);   
-        this.testName=testName;  
-    }    
-    
-    public ScenarioTest(Instancias instancias, String testName, 
-            List<SparqlQueryOntology> sparqlquerys, String nombre,
-            String descripcion){
-        
-        this.instancias = instancias;
-        this.sparqlQuerys.addAll(sparqlquerys);   
-        this.testName=testName; 
-        this.nombre=nombre;
-        this.descripcion=descripcion;
-    }    
-    
-    public ScenarioTest(){  
+    public ScenarioTest(TipoTest tipoTest){  
         this.instancias = new Instancias();
         this.queryTest = new ArrayList<QueryOntology>();
-        this.testName = "";
         this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
         this.nombre = "";
         this.descripcion = "";
+        this.testName="";
+        this.tipoTest=tipoTest;
     }
     
     public ScenarioTest(ScenarioTest nuevo){
@@ -69,9 +56,20 @@ public class ScenarioTest {
         this.setInstancias(nuevo.getInstancias());
         this.setQueryTest(nuevo.getQueryTest());
         this.setSparqlQuerys(nuevo.getSparqlQuerys());
-        this.setTestName(nuevo.getTestName());
+        //this.setTestName(nuevo.getTestName());
+    }
+    
+    public ScenarioTest(){
     }
 
+    public TipoTest getTipoTest() {
+        return tipoTest;
+    }
+
+    public void setTipoTest(TipoTest tipoTest) {
+        this.tipoTest = tipoTest;
+    }
+    
     public String getTestName() {
         return testName;
     }
@@ -157,4 +155,5 @@ public class ScenarioTest {
         hash = 61 * hash + (this.sparqlQuerys != null ? this.sparqlQuerys.hashCode() : 0);
         return hash;
     }
+
 }

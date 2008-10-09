@@ -39,7 +39,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     public static void aniadirTestSimple(List<ScenarioTest> scenario){ 
         modelo = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
-            modelo.addElement(scenario.get(i).getNombre());  
+            modelo.addElement(scenario.get(i));  
         }
         testSimplesList.setModel(modelo);
         listTestSimpleScrollPane.remove(0);
@@ -157,9 +157,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private static javax.swing.JScrollPane listTestSimpleScrollPane;
+    private javax.swing.JScrollPane listTestSimpleScrollPane;
     private javax.swing.JPanel testSimpleListPanel;
-    private static javax.swing.JList testSimplesList;
+    private javax.swing.JList testSimplesList;
     // End of variables declaration//GEN-END:variables
 
 }
