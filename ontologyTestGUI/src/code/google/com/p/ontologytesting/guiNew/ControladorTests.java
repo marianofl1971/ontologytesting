@@ -11,11 +11,9 @@ package code.google.com.p.ontologytesting.guiNew;
  */
 public class ControladorTests {
 
-    private static boolean testInstGuardado;
-    private static boolean testRetGuardado;
+    private static boolean testInstSatGuardado;
+    private static boolean testRetClasGuardado;
     private static boolean testRealGuardado;
-    private static boolean testSatGuardado;
-    private static boolean testClasGuardado;
     private static boolean testSparqlGuardado;
     private static boolean testInstSelect;
     private static boolean testRetSelect;
@@ -52,24 +50,22 @@ public class ControladorTests {
     }
     
     public static void inicializarGuardados(){
-        setTestClasGuardado(true);
-        setTestInstGuardado(true);
+        setTestInstSatGuardado(true);
         setTestRealGuardado(true);
-        setTestRetGuardado(true);
-        setTestSatGuardado(true);
+        setTestRetClasGuardado(true);
         setTestSparqlGuardado(true);
     }
     
     public static int cualSinGuardar(){
-        if(getTestInstGuardado()==false && getTestInstSelect()==true){
+        if(getTestInstSatGuardado()==false && getTestInstSelect()==true){
             return 0;
-        }else if(getTestRetGuardado()==false && getTestRetSelect()==true){
+        }else if(getTestRetClasGuardado()==false && getTestRetSelect()==true){
             return 1;
         }else if(getTestRealGuardado()==false && getTestRealSelect()==true){
             return 2;
-        }else if(getTestSatGuardado()==false && getTestSatSelect()==true){
+        }else if(getTestInstSatGuardado()==false && getTestSatSelect()==true){
             return 3;
-        }else if(getTestClasGuardado()==false && getTestClasSelect()==true){
+        }else if(getTestRetClasGuardado()==false && getTestClasSelect()==true){
             return 4;
         }else{
             return 5;
@@ -77,8 +73,7 @@ public class ControladorTests {
     }
     
     public static boolean algunTestSinGuardar(){
-        if(getTestClasGuardado()==false || getTestInstGuardado()==false || getTestRealGuardado()==false
-            || getTestRetGuardado()==false || getTestSatGuardado()==false
+        if(getTestRetClasGuardado()==false || getTestInstSatGuardado()==false || getTestRealGuardado()==false
             || getTestSparqlGuardado()==false){
             return true;    
         }else{
@@ -86,20 +81,20 @@ public class ControladorTests {
         }
     }
     
-    public static boolean getTestInstGuardado() {
-        return testInstGuardado;
+    public static boolean getTestInstSatGuardado() {
+        return testInstSatGuardado;
     }
 
-    public static void setTestInstGuardado(boolean aTestInstGuardado) {
-        testInstGuardado = aTestInstGuardado;
+    public static void setTestInstSatGuardado(boolean aTestInstGuardado) {
+        testInstSatGuardado = aTestInstGuardado;
     }
 
-    public static boolean getTestRetGuardado() {
-        return testRetGuardado;
+    public static boolean getTestRetClasGuardado() {
+        return testRetClasGuardado;
     }
 
-    public static void setTestRetGuardado(boolean aTestRetGuardado) {
-        testRetGuardado = aTestRetGuardado;
+    public static void setTestRetClasGuardado(boolean aTestRetGuardado) {
+        testRetClasGuardado = aTestRetGuardado;
     }
 
     public static boolean getTestRealGuardado() {
@@ -108,22 +103,6 @@ public class ControladorTests {
 
     public static void setTestRealGuardado(boolean aTestRealGuardado) {
         testRealGuardado = aTestRealGuardado;
-    }
-
-    public static boolean getTestSatGuardado() {
-        return testSatGuardado;
-    }
-
-    public static void setTestSatGuardado(boolean aTestSatGuardado) {
-        testSatGuardado = aTestSatGuardado;
-    }
-
-    public static boolean getTestClasGuardado() {
-        return testClasGuardado;
-    }
-
-    public static void setTestClasGuardado(boolean aTestClasGuardado) {
-        testClasGuardado = aTestClasGuardado;
     }
 
     public static boolean getTestSparqlGuardado() {

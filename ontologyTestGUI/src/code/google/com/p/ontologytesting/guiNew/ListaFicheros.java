@@ -31,7 +31,8 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     private JScrollPane descripcionScrollPane = null;
     private static String pathFicheroAbrir ="";
     private Utils util = new Utils();
-    private ScenarioTest scenarioActual = new ScenarioTest();
+    private List<ScenarioTest> listaScenarios = new ArrayList<ScenarioTest>();
+    private ScenarioTest scenarioSelect = new ScenarioTest();
     
     public ListaFicheros(ArrayList<ScenarioTest> listaFich) {
         
@@ -68,18 +69,25 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         }
     }
     
-    public ListaFicheros(){}
-    
     @Override
     public void valueChanged(ListSelectionEvent e) {
         list = (JList)e.getSource();
+        List<ScenarioTest> l = new ArrayList<ScenarioTest>();
         //setListaFicheros(this.obtenerListaDeTests(this.getListaFicheros()));
+        int[] index = list.getSelectedIndices();
+        for(int i=0; i<index.length; i++){
+            
+            //setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[i]));
+            //this.getListaDeScenarios().add(getScenarioSelect());
+            l.add(getScenarioSelect());
+        }
+        this.setListaDeScenarios(l);
         updateLabel(lista[list.getSelectedIndex()]);
     }
     
     public void updateLabel (String name) { 
         ScenarioTest scenario = util.buscarScenario(this.getListaFicheros(),name);
-        this.setScenarioActual(scenario);
+        this.setScenarioSelect(scenario);
         descripcion.setText("Nombre Test: "+scenario.getNombre()+
         "\n\nDescripción: "+scenario.getDescripcion());
         descripcion.setEditable(false);         
@@ -142,12 +150,20 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         this.listaFicheros = listaFicheros;
     }
 
-    public ScenarioTest getScenarioActual() {
-        return scenarioActual;
+    public List<ScenarioTest> getListaDeScenarios() {
+        return listaScenarios;
     }
 
-    public void setScenarioActual(ScenarioTest scenarioActual) {
-        this.scenarioActual = scenarioActual;
+    public void setListaDeScenarios(List<ScenarioTest> scenarioActual) {
+        this.listaScenarios = scenarioActual;
+    }
+
+    public ScenarioTest getScenarioSelect() {
+        return scenarioSelect;
+    }
+
+    public void setScenarioSelect(ScenarioTest scenarioSelect) {
+        this.scenarioSelect = scenarioSelect;
     }
 
 }

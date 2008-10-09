@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
+import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -49,7 +50,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private static TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
-    private int tipo;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
@@ -61,7 +61,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private boolean soloEjecutar;
     
     /** Creates new form TestSimpleReal */
-    public TestSimpleReal(int type) {
+    /*public TestSimpleReal() {
         initComponents();
         TestInstancesQueryJPanel.setContadorReal(0);
         descripcionJPanel.setLayout(new FlowLayout());
@@ -72,14 +72,13 @@ public class TestSimpleReal extends javax.swing.JPanel {
             realAyudaPanel.add(new TestInstancesQueryJPanel());   
         }
         opcionTextRealPanel.add(new TestInstancesTextJPanel());
-        setTipo(type);
         setScenarioAEditar(null);
-        setScenario(new ScenarioTest()); 
+        setScenario(new ScenarioTest(TipoTest.REAL)); 
         setImportado(false);
         setSoloEjecutar(false);
-    }
+    }*/
     
-    public TestSimpleReal(int type,ScenarioTest s){
+    public TestSimpleReal(ScenarioTest s){
         initComponents();
         TestInstancesQueryJPanel.setContadorReal(0);
         descripcionJPanel.setLayout(new FlowLayout());
@@ -114,7 +113,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
         }
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setTipo(type);
         setImportado(true);
         setSoloEjecutar(false);
     }
@@ -349,7 +347,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             guardarYEjecutar();
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -372,7 +370,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if(continuarSinInstancias==true){
             ejecutar(0);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -415,7 +413,7 @@ public boolean guardarTest(){
             guardar();
             return true;
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,getTipo());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
             return false;
@@ -442,9 +440,7 @@ public void guardar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    if(getTipo()==2){
-                        ControladorTests.setTestRealGuardado(true);
-                    }
+                   ControladorTests.setTestRealGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
@@ -454,9 +450,7 @@ public void guardar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            if(getTipo()==2){
-                ControladorTests.setTestRealGuardado(true);
-            }
+            ControladorTests.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -467,9 +461,7 @@ public void guardar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            if(getTipo()==2){
-                ControladorTests.setTestRealGuardado(true);
-            }
+            ControladorTests.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
@@ -495,9 +487,7 @@ public void guardarYEjecutar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    if(getTipo()==2){
-                        ControladorTests.setTestRealGuardado(true);
-                    }
+                    ControladorTests.setTestRealGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                     ejecutar(0);
@@ -508,9 +498,7 @@ public void guardarYEjecutar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            if(getTipo()==2){
-                ControladorTests.setTestRealGuardado(true);
-            }
+            ControladorTests.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -522,9 +510,7 @@ public void guardarYEjecutar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            if(getTipo()==2){
-                ControladorTests.setTestRealGuardado(true);
-            }
+            ControladorTests.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -620,7 +606,6 @@ public boolean tieneInstanciasAsociadas(ScenarioTest scenario){
 
 public void copiarTestAScenarioDesdeAyuda(){
 
-    int tipoT = getTipo();
     inicializarVariables();
 
     queryTest = new ArrayList<QueryOntology>();
@@ -674,9 +659,6 @@ public void copiarTestAScenarioDesdeAyuda(){
                 && hayUnaConsulta==1){  
         preguntarSiContinuarSinInstancias(scenario);
         if(continuarSinInstancias==true){
-            if(tipoT==2){
-                scenario.setTestName("Realizacion"); 
-            }
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -720,7 +702,6 @@ public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
 
 public void copiarTestAScenarioDesdeSinAyuda(){
       
-    int tipoT = getTipo();
     inicializarVariables();
     
     String conjuntoQuerys;
@@ -801,9 +782,6 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         && hayUnaConsulta==1){
         preguntarSiContinuarSinInstancias(scenario);
         if(continuarSinInstancias==true){
-            if(tipoT==2){
-                scenario.setTestName("Realizacion");
-            }
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
@@ -1020,14 +998,6 @@ public void setScenario(ScenarioTest aScenarioInst) {
 
 public  int getTabbedPaneReal() {
     return tabbedPaneReal.getSelectedIndex();
-}
-
-public int getTipo() {
-    return tipo;
-}
-
-public void setTipo(int tipo) {
-    this.tipo = tipo;
 }
 
 public JPanel panelActualReal(){

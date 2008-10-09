@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -170,7 +171,7 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
 
 private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
 // TODO add your handling code here:  
-    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, listaFicheros.getScenarioActual());
+    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, listaFicheros.getScenarioSelect());
     seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     seeTestCompleted.setVisible(true);
 }//GEN-LAST:event_abrirButtonActionPerformed
@@ -180,9 +181,9 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     this.setVisible(false);
 }//GEN-LAST:event_cancelarButtonActionPerformed
 
-private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
+private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    openFile(this.getPathProyectoTextField());//GEN-LAST:event_examinarButtonActionPerformed
+    openFile(this.getPathProyectoTextField());
     System.out.println(this.getPathProyect());
     try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
@@ -198,10 +199,9 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     }
 }
 
-private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarButtonActionPerformed
+private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    ScenarioTest scenImp = listaFicheros.getScenarioActual();//GEN-LAST:event_importarButtonActionPerformed
-
+    List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
     ListarTestsJPanel.aniadirTestSimple(scenImp);
 }
 
