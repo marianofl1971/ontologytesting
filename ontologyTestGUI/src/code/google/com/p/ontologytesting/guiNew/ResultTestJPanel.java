@@ -6,6 +6,9 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+
 
 /**
  *
@@ -16,8 +19,16 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     /** Creates new form resultTestJPanel */
     public ResultTestJPanel() {
         initComponents();
+        contentResultPanel.setLayout(new BoxLayout(contentResultPanel, BoxLayout.Y_AXIS));
     }
-
+    
+    public void aniadirResultado(JScrollPane result){
+        if(contentResultPanel.getComponentCount()>0){
+            contentResultPanel.remove(0);
+        }
+        contentResultPanel.add(result);
+        contentResultPanel.validate();
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -27,29 +38,34 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        contentResultPanel = new javax.swing.JPanel();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        javax.swing.GroupLayout contentResultPanelLayout = new javax.swing.GroupLayout(contentResultPanel);
+        contentResultPanel.setLayout(contentResultPanelLayout);
+        contentResultPanelLayout.setHorizontalGroup(
+            contentResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 354, Short.MAX_VALUE)
+        );
+        contentResultPanelLayout.setVerticalGroup(
+            contentResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 198, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+            .addComponent(contentResultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+            .addComponent(contentResultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JPanel contentResultPanel;
     // End of variables declaration//GEN-END:variables
 
 }

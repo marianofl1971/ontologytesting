@@ -8,7 +8,9 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -18,14 +20,17 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelectionListener{
 
-     private static DefaultListModel modelo;
+     private static DefaultListModel modeloSimles,modeloSparql,modeloInstancias;
      
     /** Creates new form ListarTestsJPanel */
     public ListarTestsJPanel() {
         initComponents();
-        //this.testSimpleListPanel.setLayout(new FlowLayout());
+        modeloSimles = new DefaultListModel();
+        modeloSparql = new DefaultListModel();
+        modeloInstancias = new DefaultListModel();
         testSimplesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         testSimplesList.setSelectedIndex(0);
+        resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
         testSimplesList.addListSelectionListener(this);
     }
 
@@ -37,13 +42,35 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     }
     
     public static void aniadirTestSimple(List<ScenarioTest> scenario){ 
-        modelo = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
-            modelo.addElement(scenario.get(i).getNombre());  
+            modeloSimles.addElement(scenario.get(i).getNombre());  
         }
-        testSimplesList.setModel(modelo);
-        listTestSimpleScrollPane.remove(0);
-        listTestSimpleScrollPane.add(testSimplesList);
+        testSimplesList.setModel(modeloSimles);
+        simplesPanel.validate();
+    }
+    
+    public static void aniadirTestSparql(List<ScenarioTest> scenario){ 
+        for(int i=0;i<scenario.size();i++){
+            modeloSparql.addElement(scenario.get(i).getNombre());  
+        }
+        testSparqlList.setModel(modeloSparql);
+        sparqlPanel.validate();
+    }
+    
+    public static void aniadirInstancias(List<ScenarioTest> scenario){ 
+        for(int i=0;i<scenario.size();i++){
+            modeloInstancias.addElement(scenario.get(i).getNombre());  
+        }
+        instanciasList.setModel(modeloInstancias);
+        instanciasPanel.validate();
+    }
+    
+    public static void aniadirTreeResult(JScrollPane treeView){
+        if(resultsPanel.getComponentCount()>0){
+            resultsPanel.remove(0);
+        }
+        resultsPanel.add(treeView);
+        resultsPanel.validate();
     }
     
     /** This method is called from within the constructor to
@@ -55,111 +82,144 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Sparql = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        tabbedTestsPanel = new javax.swing.JTabbedPane();
+        simplesPanel = new javax.swing.JPanel();
         testSimpleListPanel = new javax.swing.JPanel();
         listTestSimpleScrollPane = new javax.swing.JScrollPane();
         testSimplesList = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        sparqlPanel = new javax.swing.JPanel();
+        testSparqlPanel = new javax.swing.JPanel();
+        listSparqlScrollPane = new javax.swing.JScrollPane();
+        testSparqlList = new javax.swing.JList();
+        resultsPanel = new javax.swing.JPanel();
+        instanciasPanel = new javax.swing.JPanel();
+        instanciasContentPanel = new javax.swing.JPanel();
+        instanciasScrollPane = new javax.swing.JScrollPane();
+        instanciasList = new javax.swing.JList();
 
-        testSimplesList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         listTestSimpleScrollPane.setViewportView(testSimplesList);
 
         javax.swing.GroupLayout testSimpleListPanelLayout = new javax.swing.GroupLayout(testSimpleListPanel);
         testSimpleListPanel.setLayout(testSimpleListPanelLayout);
         testSimpleListPanelLayout.setHorizontalGroup(
             testSimpleListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
         );
         testSimpleListPanelLayout.setVerticalGroup(
             testSimpleListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout simplesPanelLayout = new javax.swing.GroupLayout(simplesPanel);
+        simplesPanel.setLayout(simplesPanelLayout);
+        simplesPanelLayout.setHorizontalGroup(
+            simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 171, Short.MAX_VALUE)
+            .addGroup(simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(testSimpleListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        simplesPanelLayout.setVerticalGroup(
+            simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(testSimpleListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Sparql.addTab("Tests Simples", jPanel1);
+        tabbedTestsPanel.addTab("Tests Simples", simplesPanel);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
-        );
+        listSparqlScrollPane.setViewportView(testSparqlList);
 
-        Sparql.addTab("Tests Sparql", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
+        javax.swing.GroupLayout testSparqlPanelLayout = new javax.swing.GroupLayout(testSparqlPanel);
+        testSparqlPanel.setLayout(testSparqlPanelLayout);
+        testSparqlPanelLayout.setHorizontalGroup(
+            testSparqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(listSparqlScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+        testSparqlPanelLayout.setVerticalGroup(
+            testSparqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(listSparqlScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
         );
 
-        Sparql.addTab("Resultados Ejecución", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 649, Short.MAX_VALUE)
+        javax.swing.GroupLayout sparqlPanelLayout = new javax.swing.GroupLayout(sparqlPanel);
+        sparqlPanel.setLayout(sparqlPanelLayout);
+        sparqlPanelLayout.setHorizontalGroup(
+            sparqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(testSparqlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
+        sparqlPanelLayout.setVerticalGroup(
+            sparqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(testSparqlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        Sparql.addTab("Instancias", jPanel4);
+        tabbedTestsPanel.addTab("Tests Sparql", sparqlPanel);
+
+        javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
+        resultsPanel.setLayout(resultsPanelLayout);
+        resultsPanelLayout.setHorizontalGroup(
+            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 171, Short.MAX_VALUE)
+        );
+        resultsPanelLayout.setVerticalGroup(
+            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+
+        tabbedTestsPanel.addTab("Resultados Ejecución", resultsPanel);
+
+        instanciasScrollPane.setViewportView(instanciasList);
+
+        javax.swing.GroupLayout instanciasContentPanelLayout = new javax.swing.GroupLayout(instanciasContentPanel);
+        instanciasContentPanel.setLayout(instanciasContentPanelLayout);
+        instanciasContentPanelLayout.setHorizontalGroup(
+            instanciasContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(instanciasScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+        );
+        instanciasContentPanelLayout.setVerticalGroup(
+            instanciasContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(instanciasScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout instanciasPanelLayout = new javax.swing.GroupLayout(instanciasPanel);
+        instanciasPanel.setLayout(instanciasPanelLayout);
+        instanciasPanelLayout.setHorizontalGroup(
+            instanciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(instanciasContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        instanciasPanelLayout.setVerticalGroup(
+            instanciasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(instanciasContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        tabbedTestsPanel.addTab("Instancias", instanciasPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Sparql, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+            .addComponent(tabbedTestsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Sparql, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(tabbedTestsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane Sparql;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private static javax.swing.JScrollPane listTestSimpleScrollPane;
+    private javax.swing.JPanel instanciasContentPanel;
+    private static javax.swing.JList instanciasList;
+    private static javax.swing.JPanel instanciasPanel;
+    private javax.swing.JScrollPane instanciasScrollPane;
+    private javax.swing.JScrollPane listSparqlScrollPane;
+    private javax.swing.JScrollPane listTestSimpleScrollPane;
+    private static javax.swing.JPanel resultsPanel;
+    private static javax.swing.JPanel simplesPanel;
+    private static javax.swing.JPanel sparqlPanel;
+    private javax.swing.JTabbedPane tabbedTestsPanel;
     private javax.swing.JPanel testSimpleListPanel;
     private static javax.swing.JList testSimplesList;
+    private static javax.swing.JList testSparqlList;
+    private javax.swing.JPanel testSparqlPanel;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -122,14 +122,18 @@ public class ScenarioTest {
     public boolean equals(Object object){
         if((object != null) && (object instanceof ScenarioTest)){
             ScenarioTest s2 = (ScenarioTest) object;
-            for(int i=0; i<this.getQueryTest().size(); i++){
-                if(!this.getQueryTest().get(i).equals(s2.getQueryTest().get(i)))
-                    return false;
-            }
-            for(int i=0; i<this.getSparqlQuerys().size(); i++){
-                if(!this.getSparqlQuerys().get(i).equals(s2.getSparqlQuerys().get(i)))
-                    return false;
-            }
+            if(this.getQueryTest().size()==s2.getQueryTest().size()){
+                for(int i=0; i<this.getQueryTest().size(); i++){
+                    if(!this.getQueryTest().get(i).equals(s2.getQueryTest().get(i)))
+                        return false;
+                }
+            }else return false;
+            if(this.getSparqlQuerys().size()==s2.getSparqlQuerys().size()){
+                for(int i=0; i<this.getSparqlQuerys().size(); i++){
+                    if(!this.getSparqlQuerys().get(i).equals(s2.getSparqlQuerys().get(i)))
+                        return false;
+                }
+            }else return false;
             if(!this.getInstancias().equals(s2.getInstancias())){
                 return false;
             }
@@ -154,6 +158,10 @@ public class ScenarioTest {
         hash = 61 * hash + (this.queryTest != null ? this.queryTest.hashCode() : 0);
         hash = 61 * hash + (this.sparqlQuerys != null ? this.sparqlQuerys.hashCode() : 0);
         return hash;
+    }
+    
+    public void esVacio(){
+        
     }
 
 }

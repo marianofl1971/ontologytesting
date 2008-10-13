@@ -59,6 +59,8 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ScenarioTest scenarioAEditar;
     private boolean importado;
     private boolean soloEjecutar;
+    private ControladorTests controlador;
+    private Utils utils;
     
     /** Creates new form TestSimpleReal */
     /*public TestSimpleReal() {
@@ -85,7 +87,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
         realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
-        
+        controlador = ControladorTests.getInstance();
         opcionTextRealPanel.add(new TestInstancesTextJPanel());
         int cont=1;
         List<QueryOntology> listaQuerys = s.getQueryTest(); 
@@ -111,6 +113,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
                 realAyudaPanel.add(new TestInstancesQueryJPanel());   
             }
         }
+        utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setImportado(true);
@@ -387,9 +390,9 @@ public void ejecutar(int cuantos){
     }
     try{
         if(cuantos==0){
-            testcase.runScenario(testresult, MainApplication.getCollection(),getScenario());   
+            testcase.runScenario(testresult, CollectionTest.getInstance(),getScenario());   
         }else if(cuantos==1){
-            testcase.run(testresult, MainApplication.getCollection());
+            testcase.run(testresult, CollectionTest.getInstance());
         }
         JPanel panel = new TreeResults(testresult);
         resultTests.getContentPanelResults().add(panel);
@@ -440,7 +443,7 @@ public void guardar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                   ControladorTests.setTestRealGuardado(true);
+                   controlador.setTestRealGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
@@ -450,7 +453,7 @@ public void guardar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestRealGuardado(true);
+            controlador.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -461,7 +464,7 @@ public void guardar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestRealGuardado(true);
+            controlador.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
@@ -487,7 +490,7 @@ public void guardarYEjecutar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    ControladorTests.setTestRealGuardado(true);
+                    controlador.setTestRealGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                     ejecutar(0);
@@ -498,7 +501,7 @@ public void guardarYEjecutar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestRealGuardado(true);
+            controlador.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -510,7 +513,7 @@ public void guardarYEjecutar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestRealGuardado(true);
+            controlador.setTestRealGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -531,23 +534,9 @@ public void inicializarVariables(){
     continuar=true;
 }
 
-public static boolean testYaExiste(String nombre){
-    ListIterator li;
-    ArrayList<ScenarioTest> lista = MainApplication.getCollection().getScenariotest();
-    li = lista.listIterator();
-    while(li.hasNext()){
-        ScenarioTest s = (ScenarioTest) li.next();
-        String n = s.getNombre();
-        if(n.equals(nombre)){
-            return true;
-        }
-    }
-    return false;
-}
-
 public static ScenarioTest scenarioTestExistente(String nombre){
     ListIterator li;
-    ArrayList<ScenarioTest> lista = MainApplication.getCollection().getScenariotest();
+    List<ScenarioTest> lista = CollectionTest.getInstance().getScenariotest();
     li = lista.listIterator();
     while(li.hasNext()){
         ScenarioTest s = (ScenarioTest) li.next();
@@ -622,7 +611,7 @@ public void copiarTestAScenarioDesdeAyuda(){
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
-    if(testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){
@@ -728,7 +717,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     
     real = new ArrayList();
     getReal().add(0,0);
-    if(testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){

@@ -46,6 +46,8 @@ public class MainApplication extends javax.swing.JFrame {
     private SeeTestJDialog seeTest;
     private ListAndTestsJPanel listTest;
     private ListAndResultsJPanel panelTest;
+    private ControladorTests controlador;
+    
     
 
     /** Creates new form MainApplication */
@@ -53,11 +55,10 @@ public class MainApplication extends javax.swing.JFrame {
         initComponents();
         this.setTitle("EVALUADOR DE ONTOLOGIAS");
         this.setSize(new Dimension(895,720));
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
+        controlador = ControladorTests.getInstance();
         contentTestsJPanel.setLayout(new BorderLayout());
-        collection = new CollectionTest();
-        panelTest = new ListAndResultsJPanel();
+        collection = CollectionTest.getInstance();
+        panelTest = ListAndResultsJPanel.getInstance();
         //"http://www.owl-ontologies.com/family.owl#"
         //http://nlp.shef.ac.uk/abraxas/ontologies/animals.owl
         //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
@@ -89,19 +90,16 @@ public class MainApplication extends javax.swing.JFrame {
         nuevoTestCla = new javax.swing.JMenuItem();
         importarTestSimple = new javax.swing.JMenuItem();
         editarTestSimple = new javax.swing.JMenuItem();
-        explorarTestSimple = new javax.swing.JMenuItem();
         verTestSimpleMenuItem = new javax.swing.JMenuItem();
         testsSparqlMenu = new javax.swing.JMenu();
         nuevoTestSparql = new javax.swing.JMenuItem();
         importarTestSparql = new javax.swing.JMenuItem();
         editarTestSparql = new javax.swing.JMenuItem();
-        explorarTestSparql = new javax.swing.JMenuItem();
         verTestSparql = new javax.swing.JMenuItem();
         instanciasMenu = new javax.swing.JMenu();
         nuevoInstancias = new javax.swing.JMenuItem();
         importarInstancias = new javax.swing.JMenuItem();
         editarInstancias = new javax.swing.JMenuItem();
-        explorarInstancias = new javax.swing.JMenuItem();
         verInstancias = new javax.swing.JMenuItem();
         ejecutarMenu = new javax.swing.JMenu();
         ejectuarTests = new javax.swing.JMenuItem();
@@ -229,14 +227,6 @@ public class MainApplication extends javax.swing.JFrame {
         });
         testsSimplesMenu.add(editarTestSimple);
 
-        explorarTestSimple.setText("Explorar");
-        explorarTestSimple.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                explorarTestSimpleActionPerformed(evt);
-            }
-        });
-        testsSimplesMenu.add(explorarTestSimple);
-
         verTestSimpleMenuItem.setText("Ver");
         verTestSimpleMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,14 +263,6 @@ public class MainApplication extends javax.swing.JFrame {
         });
         testsSparqlMenu.add(editarTestSparql);
 
-        explorarTestSparql.setText("Explorar");
-        explorarTestSparql.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                explorarTestSparqlActionPerformed(evt);
-            }
-        });
-        testsSparqlMenu.add(explorarTestSparql);
-
         verTestSparql.setText("Ver");
         verTestSparql.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,14 +298,6 @@ public class MainApplication extends javax.swing.JFrame {
             }
         });
         instanciasMenu.add(editarInstancias);
-
-        explorarInstancias.setText("Explorar");
-        explorarInstancias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                explorarInstanciasActionPerformed(evt);
-            }
-        });
-        instanciasMenu.add(explorarInstancias);
 
         verInstancias.setText("Ver");
         verInstancias.addActionListener(new java.awt.event.ActionListener() {
@@ -396,6 +370,8 @@ public class MainApplication extends javax.swing.JFrame {
 
 private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
+    collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
+    collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
     /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
@@ -405,7 +381,6 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {
         this.getTestsSimplesMenu().setEnabled(true);
         this.getTestsSparqlMenu().setEnabled(true);
         this.getEjecutarMenu().setEnabled(true);
-        collection = new CollectionTest();
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
     //}
@@ -414,46 +389,35 @@ private void nuevoProyectoActionPerformed(java.awt.event.ActionEvent evt) {
 private void nuevoTestInstActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     this.inicializarContadores();
-    if(ControladorTests.algunTestSinGuardar()==false){
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestInstSatGuardado(false);
-        ControladorTests.setTestInstSelect(true);
+    if(controlador.algunTestSinGuardar()==false){
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
+        controlador.setTestInstSatGuardado(false);
+        controlador.setTestInstSelect(true);
         this.aniadirTestsInst();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestInstSatGuardado(false);
-                    ControladorTests.setTestInstSelect(true);
+                    controlador.inicializarGuardados();
+                    controlador.inicializarSeleccionados();
+                    controlador.setTestInstSatGuardado(false);
+                    controlador.setTestInstSelect(true);
                     this.aniadirTestsInst();
             }else{
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestInstSatGuardado(false);
-                ControladorTests.setTestInstSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestInstSatGuardado(false);
+                controlador.setTestInstSelect(true);
                 this.aniadirTestsInst();
             }
     }
 }
 
-private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestSimpleActionPerformed
+private void importarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
 // TODO add your handling code here:        
-    /*try{
-        if(this.importarTest()){
-            JOptionPane.showMessageDialog(this,"El test se ha importado correctamente",
-            "Information Message",JOptionPane.INFORMATION_MESSAGE);
-        }
-    }catch(FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this,"No se ha importado el test",//GEN-LAST:event_importarTestSimpleActionPerformed
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-    }catch(ClassCastException ce){
-        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-    }*/
-    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, false, MainApplication.getCollection()); 
+    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, true,CollectionTest.getInstance()); 
+    abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 }                                                  
@@ -490,8 +454,9 @@ private void importarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {
 private void nuevoInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
     this.inicializarContadores();
-    int sel = ControladorTests.testSeleccionado();
+    int sel = controlador.testSeleccionado();
     addInst = new AddInstancesClasPropJDialog(this,true);
+    addInst.setLocationRelativeTo(this);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
 }
@@ -507,42 +472,29 @@ private void editarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     this.editarInstancias();
 }
 
-private void explorarInstanciasActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-// TODO add your handling code here:
-    try{
-        this.explorarInstancias();
-    }catch (FileNotFoundException ex) {
-        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE);
-    }catch(ClassCastException ce){
-        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-    }
-}
-
 private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
-    if(ControladorTests.algunTestSinGuardar()==false){
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestRetClasGuardado(false);
-        ControladorTests.setTestRetSelect(true);
+    if(controlador.algunTestSinGuardar()==false){
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
+        controlador.setTestRetClasGuardado(false);
+        controlador.setTestRetSelect(true);
         this.aniadirTestsRet();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestRetClasGuardado(false);
-                    ControladorTests.setTestRetSelect(true);
+                    controlador.inicializarGuardados();
+                    controlador.inicializarSeleccionados();
+                    controlador.setTestRetClasGuardado(false);
+                    controlador.setTestRetSelect(true);
                     this.aniadirTestsRet();
             }else{
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestRetClasGuardado(false);
-                ControladorTests.setTestRetSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestRetClasGuardado(false);
+                controlador.setTestRetSelect(true);
                 this.aniadirTestsRet();
             }
     }
@@ -551,26 +503,26 @@ private void nuevoTestRecActionPerformed(java.awt.event.ActionEvent evt) {
 private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     this.inicializarContadores();
-    if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestRealGuardado(false);
-        ControladorTests.setTestRealSelect(true);
+    if(controlador.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
+        controlador.setTestRealGuardado(false);
+        controlador.setTestRealSelect(true);
         this.aniadirTestsReal();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestRealGuardado(false);
-                    ControladorTests.setTestRealSelect(true);
+                    controlador.inicializarGuardados();
+                    controlador.inicializarSeleccionados();
+                    controlador.setTestRealGuardado(false);
+                    controlador.setTestRealSelect(true);
                     this.aniadirTestsReal();
             }else{
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestRealGuardado(false);
-                ControladorTests.setTestRealSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestRealGuardado(false);
+                controlador.setTestRealSelect(true);
                 this.aniadirTestsReal();
             }
     }
@@ -579,26 +531,26 @@ private void nuevoTestRealActionPerformed(java.awt.event.ActionEvent evt) {
 private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
-    if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestInstSatGuardado(false);
-        ControladorTests.setTestSatSelect(true);
+    if(controlador.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
+        controlador.setTestInstSatGuardado(false);
+        controlador.setTestSatSelect(true);
         this.aniadirTestsSat();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestInstSatGuardado(false);
-                    ControladorTests.setTestSatSelect(true);
+                    controlador.inicializarGuardados();
+                    controlador.inicializarSeleccionados();
+                    controlador.setTestInstSatGuardado(false);
+                    controlador.setTestSatSelect(true);
                     this.aniadirTestsSat();
             }else{
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestInstSatGuardado(false);
-                ControladorTests.setTestSatSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestInstSatGuardado(false);
+                controlador.setTestSatSelect(true);
                 this.aniadirTestsSat();
             }
     }
@@ -607,26 +559,26 @@ private void nuevoTestSatActionPerformed(java.awt.event.ActionEvent evt) {
 private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
     this.inicializarContadores();
-    if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
-        ControladorTests.setTestRetClasGuardado(false);
-        ControladorTests.setTestClasSelect(true);
+    if(controlador.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
+        controlador.setTestRetClasGuardado(false);
+        controlador.setTestClasSelect(true);
         this.aniadirTestsClas();
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    ControladorTests.inicializarGuardados();
-                    ControladorTests.inicializarSeleccionados();
-                    ControladorTests.setTestRetClasGuardado(false);
-                    ControladorTests.setTestClasSelect(true);
+                    controlador.inicializarGuardados();
+                    controlador.inicializarSeleccionados();
+                    controlador.setTestRetClasGuardado(false);
+                    controlador.setTestClasSelect(true);
                     this.aniadirTestsClas();
             }else{
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestRetClasGuardado(false);
-                ControladorTests.setTestClasSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestRetClasGuardado(false);
+                controlador.setTestClasSelect(true);
                 this.aniadirTestsClas();
             }
     }
@@ -634,7 +586,7 @@ private void nuevoTestClaActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-    if(MainApplication.getCollection().getScenariotest().size()==0){
+    if(CollectionTest.getInstance().getScenariotest().size()==0){
         JOptionPane.showMessageDialog(this,"No tiene ningun test para ejecutar",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
     }else{
@@ -642,7 +594,7 @@ private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {
             resultTests = new ResultTests();
             testresult = new OntologyTestResult();
             try {
-                testcase.run(testresult, MainApplication.getCollection());
+                testcase.run(testresult, CollectionTest.getInstance());
                 JPanel panel = new TreeResults(testresult);
                 resultTests.getContentPanelResults().add(panel);
                 resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -653,44 +605,30 @@ private void ejectuarTestsActionPerformed(java.awt.event.ActionEvent evt) {
                 "\nSolo pueden realizarse tests sobre documentos owl consistentes");
             }
     }
-}
-    
-private void explorarTestSimpleActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-// TODO add your handling code here:
-    try{
-        this.explorarTests();
-    }catch (FileNotFoundException ex) {
-        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE);
-    }catch(ClassCastException ce){
-        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-    }
-}
-  
+} 
 
 private void nuevoTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
-if(ControladorTests.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
-    ControladorTests.inicializarGuardados();
-    ControladorTests.inicializarSeleccionados();
-    ControladorTests.setTestSparqlGuardado(false);
-    ControladorTests.setTestSparqlSelect(true);
+if(controlador.algunTestSinGuardar()==false || getContentTestsJPanel().getComponentCount()==0){
+    controlador.inicializarGuardados();
+    controlador.inicializarSeleccionados();
+    controlador.setTestSparqlGuardado(false);
+    controlador.setTestSparqlSelect(true);
     this.aniadirTestsSparql();
 }else{
     int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
             "Guardar Tests",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
-                ControladorTests.inicializarGuardados();
-                ControladorTests.inicializarSeleccionados();
-                ControladorTests.setTestRetClasGuardado(false);
-                ControladorTests.setTestClasSelect(true);
+                controlador.inicializarGuardados();
+                controlador.inicializarSeleccionados();
+                controlador.setTestRetClasGuardado(false);
+                controlador.setTestClasSelect(true);
                 this.aniadirTestsSparql();
         }else{
-            ControladorTests.inicializarGuardados();
-            ControladorTests.inicializarSeleccionados();
-            ControladorTests.setTestRetClasGuardado(false);
-            ControladorTests.setTestClasSelect(true);
+            controlador.inicializarGuardados();
+            controlador.inicializarSeleccionados();
+            controlador.setTestRetClasGuardado(false);
+            controlador.setTestClasSelect(true);
             this.aniadirTestsSparql();
         }
 }
@@ -768,19 +706,6 @@ private void verTestSimpleMenuItemActionPerformed(java.awt.event.ActionEvent evt
     }
 }
 
-private void explorarTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-// TODO add your handling code here:
-    try{
-        this.explorarTests();
-    }catch (FileNotFoundException ex) {
-        JOptionPane.showMessageDialog(this,"No se pudo abrir el archivo",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE);
-    }catch(ClassCastException ce){
-        JOptionPane.showMessageDialog(this,"El archivo no es compatible con la accion que " +
-        "desea realizar","Error Message",JOptionPane.ERROR_MESSAGE);
-    }
-}
-
 private void verTestSparqlActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
     boolean res = this.verTests();
@@ -801,7 +726,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                                                                                    
     /**
     * @param args the command line arguments
-    */
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -810,52 +735,8 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 app.setVisible(true);
             }
         });
-    }
-    
-    public static CollectionTest getCollection() {
-        return collection;
-    }
-    
-    public static void setCollection(CollectionTest coll) {
-        collection = coll;
-    }
-    
-    public javax.swing.JMenu getInstanciasMenu() {
-        return instanciasMenu;
-    }
+    }*/
 
-    public javax.swing.JMenu getTestsSimplesMenu() {
-        return testsSimplesMenu;
-    }
-
-    public javax.swing.JMenu getTestsSparqlMenu() {
-        return testsSparqlMenu;
-    }
-    
-    public static javax.swing.JPanel getContentTestsJPanel() {
-        return contentTestsJPanel;
-    }
-    
-    public static String getProyecto() {
-        return proyecto;
-    }
-
-    public static void setProyecto(String aProyecto) {
-        proyecto = aProyecto;
-    }
-    
-    public javax.swing.JMenu getEjecutarMenu() {
-        return ejecutarMenu;
-    }
-    
-    public static String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
-    public static void setNombreProyecto(String aNombreProyecto) {
-        nombreProyecto = aNombreProyecto;
-    }
-    
     public void inicializarContadores(){
         CreateInstancesJPanel.setContadorClas(0);
         CreateInstancesJPanel.setContadorProp(0);
@@ -880,37 +761,9 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
         return false;
     }
     
-    public void explorarTests() throws FileNotFoundException,ClassCastException{
-        frame = new JFrame();
-        filechooser = new JFileChooser(MainApplication.getProyecto());
-        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());                                                  
-        if (option == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = filechooser.getSelectedFile();
-            String nameFile = selectedFile.getPath();
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-            ScenarioTest s = (ScenarioTest) decoder.readObject();
-            seeTest = new SeeTestJDialog(frame, false, s);
-            seeTest.setVisible(true);
-        }
-    }
-    
-    public void explorarInstancias() throws FileNotFoundException,ClassCastException{
-        filechooser = new JFileChooser(MainApplication.getProyecto());                                               
-        frame = new JFrame();
-        int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
-        if (option == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = filechooser.getSelectedFile();
-            String nameFile = selectedFile.getPath();
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(nameFile)));
-            Instancias inst = (Instancias) decoder.readObject();
-            seeTest = new SeeTestJDialog(frame, false, inst);
-            seeTest.setVisible(true);
-        }
-    }
-    
     public boolean verTests(){
         frame = new JFrame();
-        int sel = ControladorTests.testSeleccionado();
+        int sel = controlador.testSeleccionado();
         if(sel!=10){
             seeTest = new SeeTestJDialog(frame, false, scenario);
             seeTest.setVisible(true);
@@ -922,7 +775,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     
     public boolean verInstancias(){
         frame = new JFrame();
-        int sel = ControladorTests.testSeleccionado();
+        int sel = controlador.testSeleccionado();
         if(sel!=10){
             seeTest = new SeeTestJDialog(frame, false, instancias);
             seeTest.setVisible(true);
@@ -964,7 +817,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     
     public boolean editarInstanciasAsociadasTest(){
         frame = new JFrame();
-        int sel = ControladorTests.testSeleccionado();
+        int sel = controlador.testSeleccionado();
         if(instancias.getPropertyInstances().size()==0 &&  instancias.getClassInstances().size()==0){
             return false;
         }else{
@@ -976,8 +829,8 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     }
     
     public void editarTests() throws FileNotFoundException,ClassCastException{
-        ControladorTests.inicializarGuardados();
-        ControladorTests.inicializarSeleccionados();
+        controlador.inicializarGuardados();
+        controlador.inicializarSeleccionados();
         filechooser = new JFileChooser(MainApplication.getProyecto());
         int option = filechooser.showOpenDialog(MainApplication.getContentTestsJPanel());
         if (option == JFileChooser.APPROVE_OPTION) {
@@ -1043,7 +896,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     
     public void aniadirTestsInst(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.INST);
-        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
+        //listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
@@ -1051,7 +904,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     
     public void aniadirTestsSat(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.SAT);
-        listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
+        //listTest = new ListAndTestsJPanel(new TestSimpleInstSat(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
@@ -1059,7 +912,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 
     public void aniadirTestsRet(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.RET);
-        listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
+        //listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
@@ -1067,7 +920,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 
     public void aniadirTestsClas(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.CLAS);
-        listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
+        //listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
@@ -1075,7 +928,7 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 
     public void aniadirTestsSparql(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.SPARQL);
-        listTest = new ListAndTestsJPanel(new AddSPARQLJPanel(s));
+        //listTest = new ListAndTestsJPanel(new AddSPARQLJPanel(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
@@ -1083,17 +936,17 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
 
     public void aniadirTestsReal(){ 
         ScenarioTest s = new ScenarioTest(TipoTest.REAL);
-        listTest = new ListAndTestsJPanel(new TestSimpleReal(s));
+        //listTest = new ListAndTestsJPanel(new TestSimpleReal(s));
         panelTest.getTestsPanel().remove(0);
         panelTest.getTestsPanel().add(listTest);
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
     
     public void editarTest(ScenarioTest s){
-        String tipo = s.getTipoTest().name();
-        if(tipo.equals("INST") || tipo.equals("SAT")){
-            ControladorTests.setTestInstSatGuardado(false);
-            ControladorTests.setTestInstSelect(true);
+        int tipo = s.getTipoTest().getTipo();
+        if(tipo==0 || tipo==3){
+            controlador.setTestInstSatGuardado(false);
+            controlador.setTestInstSelect(true);
             TestSimpleInstSat testInst = new TestSimpleInstSat(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
@@ -1102,9 +955,9 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipo.equals("RET") || tipo.equals("CLAS")){
-            ControladorTests.setTestRetClasGuardado(false);
-            ControladorTests.setTestRetSelect(true);
+        }else if(tipo==1 || tipo==4){
+            controlador.setTestRetClasGuardado(false);
+            controlador.setTestRetSelect(true);
             TestSimpleRetClas testInst = new TestSimpleRetClas(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
@@ -1113,9 +966,9 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipo.equals("REAL")){
-            ControladorTests.setTestRealGuardado(false);
-            ControladorTests.setTestRealSelect(true);
+        }else if(tipo==2){
+            controlador.setTestRealGuardado(false);
+            controlador.setTestRealSelect(true);
             TestSimpleReal testInst = new TestSimpleReal(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
@@ -1124,9 +977,9 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
                 MainApplication.getContentTestsJPanel().remove(0);
                 MainApplication.getContentTestsJPanel().add(testInst,BorderLayout.NORTH);
             }
-        }else if(tipo.equals("SPARQL")){
-            ControladorTests.setTestSparqlGuardado(false);
-            ControladorTests.setTestSparqlSelect(true);
+        }else if(tipo==5){
+            controlador.setTestSparqlGuardado(false);
+            controlador.setTestSparqlSelect(true);
             testSparql = new AddSPARQLJPanel(s);
             int cont = MainApplication.getContentTestsJPanel().getComponentCount();
             if(cont==0){
@@ -1140,6 +993,49 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
         MainApplication.getContentTestsJPanel().getParent().validate();
     }
 
+    /*public static CollectionTest getCollection() {
+        return collection;
+    }*/
+    
+    public static void setCollection(CollectionTest coll) {
+        collection = coll;
+    }
+    
+    public javax.swing.JMenu getInstanciasMenu() {
+        return instanciasMenu;
+    }
+
+    public javax.swing.JMenu getTestsSimplesMenu() {
+        return testsSimplesMenu;
+    }
+
+    public javax.swing.JMenu getTestsSparqlMenu() {
+        return testsSparqlMenu;
+    }
+    
+    public static javax.swing.JPanel getContentTestsJPanel() {
+        return contentTestsJPanel;
+    }
+    
+    public static String getProyecto() {
+        return proyecto;
+    }
+
+    public static void setProyecto(String aProyecto) {
+        proyecto = aProyecto;
+    }
+    
+    public javax.swing.JMenu getEjecutarMenu() {
+        return ejecutarMenu;
+    }
+    
+    public static String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public static void setNombreProyecto(String aNombreProyecto) {
+        nombreProyecto = aNombreProyecto;
+    }
     
     // Variables declaration - do not modify
     private javax.swing.JMenuItem aboutMenuItem;
@@ -1150,9 +1046,6 @@ private void verInstanciasActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JMenuItem editarTestSparql;
     private javax.swing.JMenuItem ejectuarTests;
     private javax.swing.JMenu ejecutarMenu;
-    private javax.swing.JMenuItem explorarInstancias;
-    private javax.swing.JMenuItem explorarTestSimple;
-    private javax.swing.JMenuItem explorarTestSparql;
     private javax.swing.JMenuItem guardarProyecto;
     private javax.swing.JMenuItem guardarProyectoComo;
     private javax.swing.JMenu helpMenu;

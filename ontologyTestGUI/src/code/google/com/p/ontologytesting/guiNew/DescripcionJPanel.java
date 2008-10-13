@@ -104,9 +104,9 @@ public class DescripcionJPanel extends javax.swing.JPanel {
 
 private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(frame,true);
+    /*FormatTestsJDialog format = new FormatTestsJDialog(frame,true);
     format.setModal(false);
-    format.setVisible(true);
+    format.setVisible(true);*/
 }//GEN-LAST:event_formatosButtonActionPerformed
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed

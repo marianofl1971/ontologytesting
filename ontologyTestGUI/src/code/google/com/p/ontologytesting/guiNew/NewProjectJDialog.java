@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.BorderLayout;
 import java.io.File;
@@ -181,8 +182,8 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         ontology.setNsOnto(namespaceOnto);
          try{
             jena.addReasoner(ubicOnto);
-            MainApplication.getCollection().setNamespace(namespaceOnto);
-            MainApplication.getCollection().setOntology(ubicOnto);
+            CollectionTest.getInstance().setNamespace(namespaceOnto);
+            CollectionTest.getInstance().setOntology(ubicOnto);
             File directorio = new File(project.getCarpetaProyectoTextField());
             directorio.mkdir(); 
             MainApplication.setProyecto(project.getCarpetaProyectoTextField());

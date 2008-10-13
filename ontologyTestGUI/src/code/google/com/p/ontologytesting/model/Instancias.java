@@ -89,16 +89,20 @@ public class Instancias {
     public boolean equals(Object object){
         if((object!=null) && (object instanceof Instancias) ) {
             Instancias comp = (Instancias)object;
-            for(int i=0;i<this.getClassInstances().size();i++){
-                if(!this.getClassInstances().get(i).equals(comp.getClassInstances().get(i))){
-                    return false;
+            if(this.getClassInstances().size()==comp.getClassInstances().size()){
+                for(int i=0;i<this.getClassInstances().size();i++){
+                    if(!this.getClassInstances().get(i).equals(comp.getClassInstances().get(i))){
+                        return false;
+                    }
                 }
-            }
-            for(int i=0;i<this.getPropertyInstances().size();i++){
-                if(!this.getPropertyInstances().get(i).equals(comp.getPropertyInstances().get(i))){
-                    return false;
+            }else return false;
+            if(this.getPropertyInstances().size()==comp.getPropertyInstances().size()){
+                for(int i=0;i<this.getPropertyInstances().size();i++){
+                    if(!this.getPropertyInstances().get(i).equals(comp.getPropertyInstances().get(i))){
+                        return false;
+                    }
                 }
-            }
+            }else return false;
             if(this.getNombre().equals(comp.getNombre())){
                if(this.getDescripcion().equals(comp.getDescripcion())){
                     if(this.getType().equals(comp.getType())){

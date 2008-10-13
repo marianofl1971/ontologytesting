@@ -62,12 +62,13 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private String nombreTest = "",descTest = "";
     private static OntologyTestResult testresult;
     private OntologyTestCase testcase;
-    private ResultTests resultTests;
     private ScenarioTest scenarioAEditar;
     private boolean importado;
     private boolean soloEjecutar;
     private ProgressMonitor progressMonitor;
     private Task task;
+    private ControladorTests controlador;
+    private Utils utils;
     
     /** Creates new form contentInstTabedPanel */
     /*public TestSimpleInstSat(int type) {
@@ -94,6 +95,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
         TestInstancesTFJPanel.setContadorInstSat(0);
+        controlador = ControladorTests.getInstance();
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
@@ -128,6 +130,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
                 instAyudaPanel.add(new TestInstancesTFJPanel());   
             }
         }
+        utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setImportado(true);
@@ -347,19 +350,36 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     }
 }//GEN-LAST:event_tabbedPaneInstMouseClicked
 
-private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
+private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-//GEN-LAST:event_guardarButtonActionPerformed
+
 }
 
-private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
+private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-//GEN-LAST:event_ejecutarButtonActionPerformed
+    setSoloEjecutar(true);
+    saveTest = new SaveTest();
+    testcase = new OntologyTestCase();
+    testresult = new OntologyTestResult();
+    if(getTabbedPaneInst()==0){
+        copiarTestAScenarioDesdeAyuda();
+    }else if(getTabbedPaneInst()==1){
+        copiarTestAScenarioDesdeSinAyuda();
+    }
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            ejecutar(0);
+        }else{
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+        }
+    }
 }
 
-private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
+private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-//GEN-LAST:event_guardarEjecutarButtonActionPerformed
+
 }
 
 
@@ -401,7 +421,7 @@ public void guardar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    ControladorTests.setTestInstSatGuardado(true);
+                    controlador.setTestInstSatGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
@@ -411,7 +431,7 @@ public void guardar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestInstSatGuardado(true);
+            controlador.setTestInstSatGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -422,7 +442,7 @@ public void guardar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestInstSatGuardado(true);
+            controlador.setTestInstSatGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
@@ -443,15 +463,20 @@ public void ejecutar(int cuantos){
     }
     try{
         if(cuantos==0){
-            testcase.runScenario(testresult, MainApplication.getCollection(), this.getScenario());   
+            testcase.runScenario(testresult, CollectionTest.getInstance(), this.getScenario());   
         }else if(cuantos==1){
-            testcase.run(testresult, MainApplication.getCollection());
+            testcase.run(testresult, CollectionTest.getInstance());
         }
-        JPanel panel = new TreeResults(testresult);
-        resultTests.getContentPanelResults().add(panel);
+        new TreeResults(testresult);
+        //JScrollPane scrollResults = panel.getResultsView();
+        //JScrollPane scrollTree = panel.getTreeView();
+        //resultTestPanel.aniadirResultado(scrollResults);
+        //ListarTestsJPanel.aniadirTreeResult(scrollTree);
+        //resultTestPanel.validate();
+        /*resultTests.getContentPanelResults().add(panel);
         resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         resultTests.setVisible(true);
-        resultTests.validate();
+        resultTests.validate();*/
     } catch (ExceptionReadOntology ex) {
         new ExceptionReadOntology("La ontologia introducida no es valida." +
         "\nSolo pueden realizarse tests sobre documentos owl consistentes");
@@ -474,7 +499,7 @@ public void guardarYEjecutar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    ControladorTests.setTestInstSatGuardado(true);
+                    controlador.setTestInstSatGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                     ejecutar(0);
@@ -485,7 +510,7 @@ public void guardarYEjecutar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestInstSatGuardado(true);
+            controlador.setTestInstSatGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -497,7 +522,7 @@ public void guardarYEjecutar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestInstSatGuardado(true);
+            controlador.setTestInstSatGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -516,34 +541,6 @@ public void inicializarVariables(){
     validoInst=true;
     hayUnaConsulta=0;
     continuar=true;
-}
-
-public static boolean testYaExiste(String nombre){
-    ListIterator li;
-    ArrayList<ScenarioTest> lista = MainApplication.getCollection().getScenariotest();
-    li = lista.listIterator();
-    while(li.hasNext()){
-        ScenarioTest s = (ScenarioTest) li.next();
-        String n = s.getNombre();
-        if(n.equals(nombre)){
-            return true;
-        }
-    }
-    return false;
-}
-
-public static ScenarioTest scenarioTestExistente(String nombre){
-    ListIterator li;
-    ArrayList<ScenarioTest> lista = MainApplication.getCollection().getScenariotest();
-    li = lista.listIterator();
-    while(li.hasNext()){
-        ScenarioTest s = (ScenarioTest) li.next();
-        String n = s.getNombre();
-        if(n.equals(nombre)){
-            return s;
-        }
-    }
-    return null;
 }
 
 public boolean testVacio(String nombre){
@@ -609,7 +606,7 @@ public void copiarTestAScenarioDesdeAyuda(){
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
-    if(testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){
@@ -715,7 +712,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     
     inst = new ArrayList();
     getInst().add(0,0);
-    if(testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){

@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.guiNew.ControladorTests;
 import java.awt.Dimension;
 
 /**
@@ -16,11 +15,10 @@ import java.awt.Dimension;
 public class FormatTestsJDialog extends javax.swing.JDialog {
 
     /** Creates new form FormatTestsJDialog */
-    public FormatTestsJDialog(java.awt.Frame parent, boolean modal) {
+    public FormatTestsJDialog(java.awt.Frame parent, boolean modal, int tab) {
         super(parent, modal);
         initComponents();
         String formato="";
-        int tab = ControladorTests.testSeleccionado();
         descripcionEditorPane.setContentType("text/html");
         if(tab==0){
             formato = generarFormatoPermitidoInstanciacion();

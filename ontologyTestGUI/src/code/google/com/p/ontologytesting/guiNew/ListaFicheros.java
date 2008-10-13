@@ -11,12 +11,8 @@ package code.google.com.p.ontologytesting.guiNew;
  */
 import java.awt.*;
 import java.util.List;
-import java.util.ListIterator;
 import javax.swing.*;
 import javax.swing.event.*;
-import code.google.com.p.ontologytesting.model.ClassInstances;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.PropertyInstances;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.util.ArrayList;
 
@@ -27,19 +23,26 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     private JSplitPane splitPane = null;
     private List<ScenarioTest> listaFicheros = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> listaTests = new ArrayList<ScenarioTest>();
-    private String[] lista = new String[10];
+    private String[] lista = null;
     private JScrollPane descripcionScrollPane = null;
     private static String pathFicheroAbrir ="";
     private Utils util = new Utils();
     private List<ScenarioTest> listaScenarios = new ArrayList<ScenarioTest>();
     private ScenarioTest scenarioSelect = new ScenarioTest();
+    private List<ScenarioTest> l = new ArrayList<ScenarioTest>();
+    private List<String> listaDeNombres = new ArrayList<String>();
     
-    public ListaFicheros(ArrayList<ScenarioTest> listaFich) {
+    public ListaFicheros(List<ScenarioTest> listaFich) {
         
         this.setListaFicheros(listaFich);
         for(int i=0;i<listaFich.size();i++){
             String nombre = listaFich.get(i).getNombre();
-            lista[i] = nombre;
+            listaDeNombres.add(nombre);
+        }
+        int tam = listaDeNombres.size();
+        lista = new String[tam];
+        for(int j=0;j<tam;j++){
+            lista[j] = listaDeNombres.get(j);
         }
         list = new JList(lista);
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -54,16 +57,15 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         descripcionScrollPane = new JScrollPane(descripcion);
         descripcionScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                                   listScrollPane, descripcionScrollPane);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,listScrollPane, descripcionScrollPane);
         splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(150);
+        splitPane.setDividerLocation(170);
 
         Dimension minimumSize = new Dimension(100, 50);
         listScrollPane.setMinimumSize(minimumSize);
         descripcionScrollPane.setMinimumSize(minimumSize);
 
-        splitPane.setPreferredSize(new Dimension(400, 200));
+        splitPane.setPreferredSize(new Dimension(500, 200));
         if(listaFich.size()!=0){
             updateLabel(lista[list.getSelectedIndex()]);
         }
@@ -71,15 +73,17 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        list = (JList)e.getSource();
-        List<ScenarioTest> l = new ArrayList<ScenarioTest>();
-        //setListaFicheros(this.obtenerListaDeTests(this.getListaFicheros()));
+        l = new ArrayList<ScenarioTest>();
+        this.setListaDeScenarios(l);
         int[] index = list.getSelectedIndices();
-        for(int i=0; i<index.length; i++){
-            
-            //setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[i]));
-            //this.getListaDeScenarios().add(getScenarioSelect());
+        if(index.length==1){
+            setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[list.getSelectedIndex()]));
             l.add(getScenarioSelect());
+        }else{
+            for(int i=0; i<index.length; i++){
+                setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[index[i]]));
+                l.add(getScenarioSelect());
+            }  
         }
         this.setListaDeScenarios(l);
         updateLabel(lista[list.getSelectedIndex()]);
@@ -146,7 +150,7 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
         return listaFicheros;
     }
 
-    public void setListaFicheros(ArrayList<ScenarioTest> listaFicheros) {
+    public void setListaFicheros(List<ScenarioTest> listaFicheros) {
         this.listaFicheros = listaFicheros;
     }
 

@@ -11,18 +11,43 @@ package code.google.com.p.ontologytesting.guiNew;
  */
 public class ControladorTests {
 
-    private static boolean testInstSatGuardado;
-    private static boolean testRetClasGuardado;
-    private static boolean testRealGuardado;
-    private static boolean testSparqlGuardado;
-    private static boolean testInstSelect;
-    private static boolean testRetSelect;
-    private static boolean testRealSelect;
-    private static boolean testSatSelect;
-    private static boolean testClasSelect;
-    private static boolean testSparqlSelect;
-
-    public static int testSeleccionado(){
+    private boolean testInstSatGuardado;
+    private boolean testRetClasGuardado;
+    private boolean testRealGuardado;
+    private boolean testSparqlGuardado;
+    private boolean testInstSelect;
+    private boolean testRetSelect;
+    private boolean testRealSelect;
+    private boolean testSatSelect;
+    private boolean testClasSelect;
+    private boolean testSparqlSelect;
+    private static ControladorTests controlador = null;
+ 
+    private ControladorTests() {
+        this.testInstSatGuardado = false;
+        this.testRetClasGuardado = false;
+        this.testRealGuardado = false;
+        this.testSparqlGuardado = false;
+        this.testInstSelect = false;
+        this.testRetSelect = false;
+        this.testRealSelect = false;
+        this.testSatSelect = false;
+        this.testClasSelect = false;
+        this.testSparqlSelect = false;
+    }
+ 
+    private synchronized static void createControlador() {
+        if (controlador == null) { 
+            controlador = new ControladorTests();
+        }
+    }
+ 
+    public static ControladorTests getInstance() {
+        if (controlador == null) createControlador();
+        return controlador;
+    }
+    
+    public int testSeleccionado(){
         if(getTestInstSelect()==true){
             return 0;
         }else if(getTestRetSelect()==true){
@@ -40,7 +65,7 @@ public class ControladorTests {
         }
     }
     
-    public static void inicializarSeleccionados(){
+    public void inicializarSeleccionados(){
         setTestClasSelect(false);
         setTestInstSelect(false);
         setTestRealSelect(false);
@@ -49,14 +74,14 @@ public class ControladorTests {
         setTestSparqlSelect(false);
     }
     
-    public static void inicializarGuardados(){
+    public void inicializarGuardados(){
         setTestInstSatGuardado(true);
         setTestRealGuardado(true);
         setTestRetClasGuardado(true);
         setTestSparqlGuardado(true);
     }
     
-    public static int cualSinGuardar(){
+    public int cualSinGuardar(){
         if(getTestInstSatGuardado()==false && getTestInstSelect()==true){
             return 0;
         }else if(getTestRetClasGuardado()==false && getTestRetSelect()==true){
@@ -72,7 +97,7 @@ public class ControladorTests {
         }
     }
     
-    public static boolean algunTestSinGuardar(){
+    public boolean algunTestSinGuardar(){
         if(getTestRetClasGuardado()==false || getTestInstSatGuardado()==false || getTestRealGuardado()==false
             || getTestSparqlGuardado()==false){
             return true;    
@@ -81,86 +106,124 @@ public class ControladorTests {
         }
     }
     
-    public static boolean getTestInstSatGuardado() {
+    public void prepararTestInst(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        setTestInstSatGuardado(false);
+        setTestInstSelect(true);
+    }
+    
+    public void prepararTestRet(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        this.setTestRetClasGuardado(false);
+        setTestRetSelect(true);
+    }
+    public void prepararTestReal(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        setTestRealGuardado(false);
+        setTestRealSelect(true);
+    }
+    
+    public void prepararTestSat(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        setTestInstSatGuardado(false);
+        setTestSatSelect(true);
+    }
+    
+    public void prepararTestClas(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        setTestRetClasGuardado(false);
+        setTestClasSelect(true);
+    }
+    
+    public void prepararTestSparql(){
+        inicializarGuardados();
+        inicializarSeleccionados();
+        setTestSparqlGuardado(false);
+        setTestSparqlSelect(true);
+    }
+    
+    public boolean getTestInstSatGuardado() {
         return testInstSatGuardado;
     }
 
-    public static void setTestInstSatGuardado(boolean aTestInstGuardado) {
+    public void setTestInstSatGuardado(boolean aTestInstGuardado) {
         testInstSatGuardado = aTestInstGuardado;
     }
 
-    public static boolean getTestRetClasGuardado() {
+    public boolean getTestRetClasGuardado() {
         return testRetClasGuardado;
     }
 
-    public static void setTestRetClasGuardado(boolean aTestRetGuardado) {
+    public void setTestRetClasGuardado(boolean aTestRetGuardado) {
         testRetClasGuardado = aTestRetGuardado;
     }
 
-    public static boolean getTestRealGuardado() {
+    public boolean getTestRealGuardado() {
         return testRealGuardado;
     }
 
-    public static void setTestRealGuardado(boolean aTestRealGuardado) {
+    public void setTestRealGuardado(boolean aTestRealGuardado) {
         testRealGuardado = aTestRealGuardado;
     }
 
-    public static boolean getTestSparqlGuardado() {
+    public boolean getTestSparqlGuardado() {
         return testSparqlGuardado;
     }
 
-    public static void setTestSparqlGuardado(boolean aTestSparqlGuardado) {
+    public void setTestSparqlGuardado(boolean aTestSparqlGuardado) {
         testSparqlGuardado = aTestSparqlGuardado;
     }
 
-    public static boolean getTestInstSelect() {
+    public boolean getTestInstSelect() {
         return testInstSelect;
     }
 
-    public static void setTestInstSelect(boolean aTestInstSelect) {
+    public void setTestInstSelect(boolean aTestInstSelect) {
         testInstSelect = aTestInstSelect;
     }
 
-    public static boolean getTestRetSelect() {
+    public boolean getTestRetSelect() {
         return testRetSelect;
     }
 
-    public static void setTestRetSelect(boolean aTestRetSelect) {
+    public void setTestRetSelect(boolean aTestRetSelect) {
         testRetSelect = aTestRetSelect;
     }
 
-    public static boolean getTestRealSelect() {
+    public boolean getTestRealSelect() {
         return testRealSelect;
     }
 
-    public static void setTestRealSelect(boolean aTestRealSelect) {
+    public void setTestRealSelect(boolean aTestRealSelect) {
         testRealSelect = aTestRealSelect;
     }
 
-    public static boolean getTestSatSelect() {
+    public boolean getTestSatSelect() {
         return testSatSelect;
     }
 
-    public static void setTestSatSelect(boolean aTestSatSelect) {
+    public void setTestSatSelect(boolean aTestSatSelect) {
         testSatSelect = aTestSatSelect;
     }
 
-    public static boolean getTestClasSelect() {
+    public boolean getTestClasSelect() {
         return testClasSelect;
     }
 
-    public static void setTestClasSelect(boolean aTestClasSelect) {
+    public void setTestClasSelect(boolean aTestClasSelect) {
         testClasSelect = aTestClasSelect;
     }
 
-    public static boolean getTestSparqlSelect() {
+    public boolean getTestSparqlSelect() {
         return testSparqlSelect;
     }
 
-    public static void setTestSparqlSelect(boolean aTestSparqlSelect) {
+    public void setTestSparqlSelect(boolean aTestSparqlSelect) {
         testSparqlSelect = aTestSparqlSelect;
     }
-    
-
-
 }

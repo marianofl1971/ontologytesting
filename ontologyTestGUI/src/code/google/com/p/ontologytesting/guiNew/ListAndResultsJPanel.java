@@ -16,24 +16,40 @@ import javax.swing.*;
 public class ListAndResultsJPanel extends javax.swing.JPanel {
 
     private JSplitPane splitPane;
-    private JPanel resultPanel;
+    private static ResultTestJPanel resultPanel;
     private JPanel testsPanel;
-    
-    /** Creates new form ListAndResultsJPanel */
-    public ListAndResultsJPanel() {
+    private static ListAndResultsJPanel listAndResult = null;
+ 
+    private ListAndResultsJPanel() {
         initComponents();
         this.setLayout(new BorderLayout());
         resultPanel = new ResultTestJPanel();
-        testsPanel = new ListAndTestsJPanel();
+        testsPanel = ListAndTestsJPanel.getInstance();
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,getTestsPanel(),resultPanel);
         splitPane.setOneTouchExpandable(true);
         splitPane.setDividerLocation(500);
         this.add(splitPane,BorderLayout.CENTER);
     }
+ 
+    private synchronized static void createListAndResultPanel() {
+        if (listAndResult == null) { 
+            listAndResult = new ListAndResultsJPanel();
+        }
+    }
+ 
+    public static ListAndResultsJPanel getInstance() {
+        if (listAndResult == null) createListAndResultPanel();
+        return listAndResult;
+    }
     
     public JPanel getTestsPanel() {
         return testsPanel;
     }
+    
+    public static void mostrarResultado(JScrollPane result){
+        resultPanel.aniadirResultado(result);
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.

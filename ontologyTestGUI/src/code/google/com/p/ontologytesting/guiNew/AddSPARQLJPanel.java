@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import java.util.List;
-import java.util.ListIterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -50,6 +49,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ResultTests resultTests;
     private OntologyTestResult testresult;
     private boolean soloEjectuar;
+    private ControladorTests controlador;
+    private Utils utils;
     
     /** Creates new form AddSPARQLJPanel */
     /*public AddSPARQLJPanel(int tipo) {
@@ -77,6 +78,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
+        controlador = ControladorTests.getInstance();
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         sparqlTextArea.setLineWrap(true);
         sparqlTextArea.setWrapStyleWord(true);
@@ -84,24 +86,26 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         testDescTextArea.setWrapStyleWord(true);
         resultTextArea.setLineWrap(true);
         resultTextArea.setWrapStyleWord(true);
-        
+        frame = new JFrame();
         setImportado(true);
         List<SparqlQueryOntology> lista = s.getSparqlQuerys();
-        for(int i=0; i<lista.size();i++){
-            listaDeConsultas.add(lista.get(i));
+        if(lista.size()>0){
+            for(int i=0; i<lista.size();i++){
+                listaDeConsultas.add(lista.get(i));
+            }
+            if(lista.size()>1){
+                antQueryButton.setEnabled(false);
+                sigQueryButton.setEnabled(true);
+            }else{
+                antQueryButton.setEnabled(false);
+                sigQueryButton.setEnabled(false);
+            }
+            this.prepararNuevaConsultaCompleta(lista.get(0));
+            this.setTestNameTextField(s.getNombre());
+            this.setTestDescTextArea(s.getDescripcion());
         }
-        if(lista.size()>1){
-            antQueryButton.setEnabled(false);
-            sigQueryButton.setEnabled(true);
-        }else{
-            antQueryButton.setEnabled(false);
-            sigQueryButton.setEnabled(false);
-        }
-        this.prepararNuevaConsultaCompleta(lista.get(0));
-        this.setTestNameTextField(s.getNombre());
-        this.setTestDescTextArea(s.getDescripcion());
-        
         this.inicializarVariables();
+         utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setSoloEjectuar(false);
@@ -573,7 +577,8 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosPermitidosActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(frame,true);
+    FormatTestsJDialog format = new FormatTestsJDialog(frame,true,5);
+    format.setLocationRelativeTo(this);
     format.setModal(false);
     format.setVisible(true);
 }//GEN-LAST:event_formatosPermitidosActionPerformed
@@ -663,9 +668,9 @@ public void ejecutar(int cuantos){
     }
     try{
         if(cuantos==0){
-            testcase.runScenario(testresult, MainApplication.getCollection(),getScenario());   
+            testcase.runScenario(testresult, CollectionTest.getInstance(),getScenario());   
         }else if(cuantos==1){
-            testcase.run(testresult, MainApplication.getCollection());
+            testcase.run(testresult, CollectionTest.getInstance());
         }
         JPanel panel = new TreeResults(testresult);
         resultTests.getContentPanelResults().add(panel);
@@ -694,7 +699,7 @@ public void guardarYEjecutar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    ControladorTests.setTestSparqlGuardado(true);
+                    controlador.setTestSparqlGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                     ejecutar(0);
@@ -705,7 +710,7 @@ public void guardarYEjecutar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestSparqlGuardado(true);
+            controlador.setTestSparqlGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -717,7 +722,7 @@ public void guardarYEjecutar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestSparqlGuardado(true);
+            controlador.setTestSparqlGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             ejecutar(0);
@@ -745,7 +750,7 @@ public void guardar(){
                     }
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
-                    ControladorTests.setTestSparqlGuardado(true);
+                    controlador.setTestSparqlGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 } catch (FileNotFoundException ex) {
@@ -755,7 +760,7 @@ public void guardar(){
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
-            ControladorTests.setTestSparqlGuardado(true);
+            controlador.setTestSparqlGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -766,7 +771,7 @@ public void guardar(){
             saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
-            ControladorTests.setTestSparqlGuardado(true);
+            controlador.setTestSparqlGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException ex) {
@@ -783,7 +788,7 @@ public void prepararGuardar(){
     String query = this.getSPARQLQuery();
     String result = this.getResultTextArea();
     SparqlQueryOntology q = new SparqlQueryOntology(query,result);
-    if(testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){
@@ -859,20 +864,6 @@ public void inicializarVariables(){
     continuar=true;
     ambosNecesarios=false;
 }      
-
-    public static boolean testYaExiste(String nombre){
-        ListIterator li;
-        ArrayList<ScenarioTest> lista = MainApplication.getCollection().getScenariotest();
-        li = lista.listIterator();
-        while(li.hasNext()){
-            ScenarioTest s = (ScenarioTest) li.next();
-            String n = s.getNombre();
-            if(n.equals(nombre)){
-                return true;
-            }
-        }
-        return false;
-    }
 
     public boolean inListSparqlQuerys(SparqlQueryOntology query){
         String queryq = query.getQuerySparql();
