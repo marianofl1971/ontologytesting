@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import java.util.List;
 
 /**
@@ -16,23 +17,23 @@ public class OntologyTestPassed extends OntologyTestFailure{
     public OntologyTestPassed(){
     }   
     
-    void addOntologyTestPassedQuery(String testNameUsuario, String testName,QueryOntology query, String resQueryObte){
+    void addOntologyTestPassedQuery(String testNameUsuario, QueryOntology query, String resQueryObte,TipoTest tipoTest){
         this.ftestNameUsuario=testNameUsuario;
-        this.testName=testName;
         this.fquery = query.getQuery();
         this.fcommentquery = query.getComment();
         this.fresultexpected = query.getResultexpected();
         this.fresqueryobtenido = resQueryObte;
+        this.ftipoTest=tipoTest;
     }
     
-    void addOntologyTestPassedSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
-            List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte){
+    void addOntologyTestPassedSparql(String testNameUsuario, SparqlQueryOntology querysparql, 
+            List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte,TipoTest tipoTest){
         this.ftestNameUsuario=testNameUsuario;
-        this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
         this.fressparqlesperado = resQueryEspe;
+        this.ftipoTest=tipoTest;
     }
 
 }

@@ -35,6 +35,7 @@ public class TreeResults extends JPanel {
     private DefaultMutableTreeNode inst,ret,clas,sat,real,sparql;
     private DefaultMutableTreeNode inst_hijo,ret_hijo,clas_hijo, sat_hijo,real_hijo,sparql_hijo;
     private static String testSeleccionado;
+    private JScrollPane resultsView,treeView;
 
     public TreeResults(final OntologyTestResult testresult) {
 
@@ -75,35 +76,38 @@ public class TreeResults extends JPanel {
             String texto = new String((String)node.getUserObject());
 	    super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,
                      pIsExpanded, pIsLeaf, pRow, pHasFocus);
-                 if (texto.contains("passed"))
-                    setForeground(Color.green);
-                 else if (texto.contains("failed"))
-                    setForeground(Color.red);
+                 if (texto.contains("passed")){
+                     setForeground(Color.green);
+                 }else if (texto.contains("failed")){
+                     setForeground(Color.red);
+                 }
                  return (this);
 	}
         });
 
-        JScrollPane treeView = new JScrollPane(tree);
-
+        treeView = new JScrollPane(tree);
+        //treeView.setSize(new Dimension(700,500));
         htmlPane = new JEditorPane();
         htmlPane.setEditable(false);
-        JScrollPane htmlView = new JScrollPane(htmlPane);
+        resultsView = new JScrollPane(htmlPane);
 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+        /*JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane.setTopComponent(treeView);
-        splitPane.setBottomComponent(htmlView);
+        splitPane.setBottomComponent(resultsView);*/
 
-        Dimension minimumSize = new Dimension(100, 100);
-        htmlView.setMinimumSize(minimumSize);
+        ListAndResultsJPanel.mostrarResultado(resultsView);
+        ListarTestsJPanel.aniadirTreeResult(treeView);
+        /*Dimension minimumSize = new Dimension(100, 100);
+        resultsView.setMinimumSize(minimumSize);
         treeView.setMinimumSize(minimumSize);
         splitPane.setDividerLocation(200); 
 
         //treeView.setPreferredSize(new Dimension(100, 100)); 
 
-        splitPane.setPreferredSize(new Dimension(850, 590));
+        splitPane.setPreferredSize(new Dimension(850, 590));*/
 
         //Add the split pane to this frame
-        this.add(splitPane);
+        //this.add(splitPane);
     }
 
     private void displaySimpleTest(String test, OntologyTestResult testresult) {
@@ -218,7 +222,7 @@ public class TreeResults extends JPanel {
         
         while(liFailures.hasNext()){ 
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();   
-            if(otf.getTestName().equals("Instanciacion")){
+            if(otf.getTipoTest().getTipo()==0){
                 if(var_inst==0){
                     var_inst=1;
                     inst = new DefaultMutableTreeNode("Tests de Instanciación");
@@ -238,7 +242,7 @@ public class TreeResults extends JPanel {
                         }
                     }
                 }
-            }else if(otf.getTestName().equals("Retrieval")){
+            }else if(otf.getTipoTest().getTipo()==1){
                 if(var_ret==0){
                     var_ret=1;
                     ret = new DefaultMutableTreeNode("Tests de Recuperación");
@@ -256,7 +260,7 @@ public class TreeResults extends JPanel {
                             list_ret.add(ret_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Realizacion")){
+            }else if(otf.getTipoTest().getTipo()==2){
                 if(var_real==0){
                     var_real=1;
                     real = new DefaultMutableTreeNode("Tests de Realización");
@@ -274,7 +278,7 @@ public class TreeResults extends JPanel {
                             list_real.add(real_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Clasificacion")){
+            }else if(otf.getTipoTest().getTipo()==4){
                 if(var_clas==0){
                     var_clas=1;
                     clas = new DefaultMutableTreeNode("Tests de Clasificación");
@@ -292,7 +296,7 @@ public class TreeResults extends JPanel {
                             list_clas.add(clas_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Satisfactibilidad")){
+            }else if(otf.getTipoTest().getTipo()==3){
                 if(var_sat==0){
                     var_sat=1;
                     sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
@@ -315,7 +319,7 @@ public class TreeResults extends JPanel {
         
         while(liPassedQuery.hasNext()){ 
             OntologyTestPassed otf = (OntologyTestPassed) liPassedQuery.next();     
-            if(otf.getTestName().equals("Instanciacion")){
+            if(otf.getTipoTest().getTipo()==0){
                 if(var_inst==0){
                     var_inst=1;
                     inst = new DefaultMutableTreeNode("Tests de Instanciación");
@@ -335,7 +339,7 @@ public class TreeResults extends JPanel {
                         }
                     }
                 }
-            }else if(otf.getTestName().equals("Retrieval")){
+            }else if(otf.getTipoTest().getTipo()==1){
                 if(var_ret==0){
                     var_ret=1;
                     ret = new DefaultMutableTreeNode("Tests de Recuperación");
@@ -353,7 +357,7 @@ public class TreeResults extends JPanel {
                             list_ret.add(ret_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Realizacion")){
+            }else if(otf.getTipoTest().getTipo()==2){
                 if(var_real==0){
                     var_real=1;
                     real = new DefaultMutableTreeNode("Tests de Realización");
@@ -371,7 +375,7 @@ public class TreeResults extends JPanel {
                             list_real.add(real_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Clasificacion")){
+            }else if(otf.getTipoTest().getTipo()==4){
                 if(var_clas==0){
                     var_clas=1;
                     clas = new DefaultMutableTreeNode("Tests de Clasificación");
@@ -389,7 +393,7 @@ public class TreeResults extends JPanel {
                             list_clas.add(clas_hijo_var);
                         }
                 }
-            }else if(otf.getTestName().equals("Satisfactibilidad")){
+            }else if(otf.getTipoTest().getTipo()==3){
                 if(var_sat==0){
                     var_sat=1;
                     sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
@@ -467,6 +471,14 @@ public class TreeResults extends JPanel {
 
     public static void setTestSeleccionado(String aTestSeleccionado) {
         testSeleccionado = aTestSeleccionado;
+    }
+
+    public JScrollPane getResultsView() {
+        return this.resultsView;
+    }
+
+    public JScrollPane getTreeView() {
+        return this.treeView;
     }
      
 }

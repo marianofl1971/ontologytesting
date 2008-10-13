@@ -9,6 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,33 +31,33 @@ public class OntologyTestResult extends Object{
         ontologypassedsparql = new ArrayList<OntologyTestPassed>();
     }
     
-    public void addOntologyFailureQuery(String testNameUsuario, String testName,QueryOntology query, String resObte){
+    public void addOntologyFailureQuery(String testNameUsuario, QueryOntology query, String resObte,TipoTest tipoTest){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
-        ontologytestfailure.addOntologyTestFailureQuery(testNameUsuario, testName,query, resObte);
+        ontologytestfailure.addOntologyTestFailureQuery(testNameUsuario, query, resObte,tipoTest);
         ontologyfailuresquerys.add(ontologytestfailure);
     }
     
-    public void addOntologyFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology sparqlquery, 
-            List<ExecQuerySparql> resEspe, List<ExecQuerySparql> resObte){
+    public void addOntologyFailureSparql(String testNameUsuario, SparqlQueryOntology sparqlquery, 
+            List<ExecQuerySparql> resEspe, List<ExecQuerySparql> resObte, TipoTest tipoTest){
     
         OntologyTestFailure ontologytestfailure = new OntologyTestFailure();
-        ontologytestfailure.addOntologyTestFailureSparql(testNameUsuario, testName,sparqlquery,resEspe,resObte);
+        ontologytestfailure.addOntologyTestFailureSparql(testNameUsuario, sparqlquery,resEspe,resObte,tipoTest);
         ontologyfailuressparql.add(ontologytestfailure);
     }
     
-    public void addOntologyPassedQuery(String testNameUsuario, String testName,QueryOntology query, String resObte){
+    public void addOntologyPassedQuery(String testNameUsuario, QueryOntology query, String resObte, TipoTest tipoTest){
     
         OntologyTestPassed ontologytestpassed = new OntologyTestPassed();
-        ontologytestpassed.addOntologyTestPassedQuery(testNameUsuario, testName,query, resObte);
+        ontologytestpassed.addOntologyTestPassedQuery(testNameUsuario, query, resObte, tipoTest);
         ontologypassedquerys.add(ontologytestpassed);
     }
     
-    public void addOntologyPassedSparql(String testNameUsuario, String testName, SparqlQueryOntology sparqlquery, 
-            List<ExecQuerySparql> resEspe, List<ExecQuerySparql> resObte){
+    public void addOntologyPassedSparql(String testNameUsuario, SparqlQueryOntology sparqlquery, 
+            List<ExecQuerySparql> resEspe, List<ExecQuerySparql> resObte, TipoTest tipoTest){
     
         OntologyTestPassed ontologytestpassed = new OntologyTestPassed();
-        ontologytestpassed.addOntologyTestPassedSparql(testNameUsuario, testName,sparqlquery,resEspe,resObte);
+        ontologytestpassed.addOntologyTestPassedSparql(testNameUsuario, sparqlquery,resEspe,resObte, tipoTest);
         ontologypassedsparql.add(ontologytestpassed);
     }
     

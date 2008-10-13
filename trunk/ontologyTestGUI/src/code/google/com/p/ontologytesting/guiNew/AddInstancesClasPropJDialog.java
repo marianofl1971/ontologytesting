@@ -506,7 +506,7 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
     jena = jenaInterface.getJena();
     saveTest = new SaveTest();
     try{
-        jena.addReasoner(MainApplication.getCollection().getOntology());
+        jena.addReasoner(CollectionTest.getInstance().getOntology());
         validar = new ValidarTests();
         ciClas = null;
         ciInd = null;
@@ -631,7 +631,7 @@ public void prepararInstSinAyuda(){
                 if (validar.validarInstanciaClase(clas[i]) == true) {
                     ciClas = clas[i].split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(MainApplication.getCollection().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
                     if (v == false) {
                         conjunto.getClaseArea().setForeground(Color.RED);
                         instanciaValida=false;
@@ -655,7 +655,7 @@ public void prepararInstSinAyuda(){
                 if (validar.validarInstanciaPropiedad(prop[i]) == true) {
                     ciClas = prop[i].split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(MainApplication.getCollection().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
                     if (v == false) {
                         conjunto.getPropiedadArea().setForeground(Color.RED);
                         instanciaValida=false;
@@ -691,7 +691,7 @@ public void preparrarInstConAyuda(){
                 if (validar.validarInstanciaClase(query) == true) {
                     ciClas = query.split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(MainApplication.getCollection().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
                     if (v == false) {
                         panelInst.getInstanciaTextField().setForeground(Color.RED);
                         instanciaValida=false;
@@ -732,7 +732,7 @@ public void preparrarInstConAyuda(){
                 if (validar.validarInstanciaPropiedad(query) == true) {
                     ciClas = query.split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(MainApplication.getCollection().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
                     if (v == false) {
                         panelInst.getInstanciaTextField().setForeground(Color.RED);
                         instanciaValida=false;
@@ -767,9 +767,8 @@ public void preparrarInstConAyuda(){
 }
 
 public boolean yaExisteInstancia(String nombre){
-    ArrayList<ScenarioTest> listaEsce = MainApplication.getCollection().getScenariotest();
+    List<ScenarioTest> listaEsce = CollectionTest.getInstance().getScenariotest();
         for(int i=0;i<listaEsce.size();i++){
-            ScenarioTest scen = listaEsce.get(i);
             String n = scenario.getInstancias().getNombre();
             if(n.equals(nombre)){
                 return true;
@@ -783,7 +782,7 @@ public void crearArchivoDeTests(String nombreFichero){
     try{
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
                             FileOutputStream(nombreFichero)));
-        e.writeObject(MainApplication.getCollection());
+        e.writeObject(CollectionTest.getInstance());
         e.close();
     }catch (FileNotFoundException ex) {
         ex.printStackTrace();
@@ -900,7 +899,7 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
     jenaInterface = new JenaInterface();
     jena = jenaInterface.getJena();
     try{
-        jena.addReasoner(MainApplication.getCollection().getOntology());
+        jena.addReasoner(CollectionTest.getInstance().getOntology());
         validar = new ValidarTests();
         ciClas = null;
         ciInd = null;
@@ -1274,7 +1273,5 @@ public int getIndexVect() {
     public void setScenario(ScenarioTest scenario) {
         this.scenario = scenario;
     }
-
-    
 
 }

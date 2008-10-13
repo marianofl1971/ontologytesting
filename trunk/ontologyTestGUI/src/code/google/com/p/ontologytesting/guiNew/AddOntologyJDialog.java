@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;;
 import java.awt.Component;
 import java.io.File;
@@ -176,8 +177,8 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         jena = jenaInterface.getJena();
         try{
             jena.addReasoner(onto);
-            MainApplication.getCollection().setOntology(onto);
-            MainApplication.getCollection().setNamespace(ns);
+            CollectionTest.getInstance().setOntology(onto);
+            CollectionTest.getInstance().setNamespace(ns);
             setOntologiaAsociada(true);
             this.setVisible(false);
             JOptionPane.showMessageDialog(this.getParent(),"La ontologia ha sido guardada",

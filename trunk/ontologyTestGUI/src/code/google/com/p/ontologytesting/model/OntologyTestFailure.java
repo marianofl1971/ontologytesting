@@ -9,6 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,30 +28,30 @@ public class OntologyTestFailure extends Object{
     protected List<ExecQuerySparql> fressparqlesperado = new ArrayList<ExecQuerySparql>();
     protected String fcommentsparqlquery="";
     protected String fquerysparql="";
-    protected String testName="";
     protected String ftestNameUsuario="";
-    private String result="";
+    protected String result="";
+    protected TipoTest ftipoTest;
     
     public OntologyTestFailure(){
     }   
     
-    void addOntologyTestFailureQuery(String testNameUsuario, String testName,QueryOntology query, String resQueryObte){
+    void addOntologyTestFailureQuery(String testNameUsuario, QueryOntology query, String resQueryObte,TipoTest tipoTest){
         this.ftestNameUsuario=testNameUsuario;
-        this.testName=testName;
         this.fquery = query.getQuery();
         this.fcommentquery = query.getComment();
         this.fresultexpected = query.getResultexpected();
         this.fresqueryobtenido = resQueryObte;
+        this.ftipoTest=tipoTest;
     }
     
-    void addOntologyTestFailureSparql(String testNameUsuario, String testName, SparqlQueryOntology querysparql, 
-            List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte){
+    void addOntologyTestFailureSparql(String testNameUsuario, SparqlQueryOntology querysparql, 
+            List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte,TipoTest tipoTest){
         this.ftestNameUsuario=testNameUsuario;
-        this.testName=testName;
         this.fquerysparql = querysparql.getQuerySparql();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
         this.fressparqlesperado = resQueryEspe;
+        this.ftipoTest=tipoTest;
     }
     
     public String getResultQueryObtenido() {    
@@ -89,12 +90,16 @@ public class OntologyTestFailure extends Object{
         return this.fresultsparqlexpected;
     }
     
-    public String getTestName(){
-        return this.testName;
-    }
-    
     public String getTestNameUsuario(){
         return this.ftestNameUsuario;
+    }
+    
+    public TipoTest getTipoTest() {
+        return ftipoTest;
+    }
+
+    public void setTipoTest(TipoTest tipoTest) {
+        this.ftipoTest = tipoTest;
     }
     
     public String showSimpleTest() {

@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -28,7 +29,7 @@ public class SaveTest {
     private CollectionTest collection;
     
     public void saveProject() throws FileNotFoundException{
-        collection = MainApplication.getCollection();
+        collection = CollectionTest.getInstance();
         //String onto = collection.getOntology();
         //String[] o = onto.split("\\\\");
         //String ontoFinal = "./"+o[o.length-1];
@@ -40,7 +41,7 @@ public class SaveTest {
     }
     
     public boolean saveProjectAs() throws FileNotFoundException{
-        collection = MainApplication.getCollection();
+        collection = CollectionTest.getInstance();
         JFileChooser fileChooser = new JFileChooser();
         int seleccion = fileChooser.showSaveDialog(frame);
         if(seleccion == JFileChooser.APPROVE_OPTION){
@@ -56,7 +57,7 @@ public class SaveTest {
     }
     
     public boolean saveTestLocally(ScenarioTest scenarioTest){
-        ArrayList<ScenarioTest> scenario = MainApplication.getCollection().getScenariotest();
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
         if(scenario.add(scenarioTest)){
             return true;
         }else{
@@ -65,7 +66,7 @@ public class SaveTest {
     }
     
     public boolean replaceTestLocally(ScenarioTest scenarioTest){
-        ArrayList<ScenarioTest> scenario = MainApplication.getCollection().getScenariotest();
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
         for(int i=0; i<scenario.size(); i++){
             if(scenarioTest.getNombre().equals(scenario.get(i).getNombre())){
                 scenario.remove(i);

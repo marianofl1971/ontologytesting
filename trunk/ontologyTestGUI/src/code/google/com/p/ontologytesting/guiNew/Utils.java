@@ -5,8 +5,10 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -22,6 +24,20 @@ public class Utils {
             }
         }
         return null;
+    }
+    
+    public boolean testYaExiste(String nombre){
+        ListIterator li;
+        List<ScenarioTest> lista = CollectionTest.getInstance().getScenariotest();
+        li = lista.listIterator();
+        while(li.hasNext()){
+            ScenarioTest s = (ScenarioTest) li.next();
+            String n = s.getNombre();
+            if(n.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
     
     

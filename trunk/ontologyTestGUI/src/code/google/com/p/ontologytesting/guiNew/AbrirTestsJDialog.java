@@ -34,17 +34,17 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
     private XMLDecoder decoder;
     private CollectionTest collection;
     private JFrame frame = new JFrame();
+    private List<ScenarioTest> scenarioSparql = new ArrayList<ScenarioTest>();
+    private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
     
     /** Creates new form AbrirTestsJDialog */
     public AbrirTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
         super(parent, modal);
         initComponents();
-        this.setModal(false);
         this.setTitle("Descripción Tests");
     }
 
-    public void prepararImport(ArrayList<ScenarioTest> listaTests){
-        
+    public void prepararImport(List<ScenarioTest> listaTests){   
         contentPanel.setLayout(new FlowLayout());  
         listaFicheros = new ListaFicheros(listaTests);
         contentPanel.add(listaFicheros.getSplitPane());
@@ -79,11 +79,11 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
+            .addGap(0, 215, Short.MAX_VALUE)
         );
 
         abrirButton.setText("Ver Test Completo");
@@ -93,17 +93,17 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
             }
         });
 
-        cancelarButton.setText("Salir");
+        cancelarButton.setText("Cancelar");
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarButtonActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel2.setText("Ubicación de los Tests");
 
-        jLabel3.setText("Seleccione el proyecto:");
+        jLabel3.setText("Seleccione el proyecto desde donde quiere importar los tests:");
 
         examinarButton.setText("Examinar");
         examinarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -126,22 +126,29 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pathProyectoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(examinarButton))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(pathProyectoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(examinarButton)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancelarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
-                        .addComponent(abrirButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(importarButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(abrirButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(importarButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelarButton)))
+                        .addGap(21, 21, 21)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,18 +159,19 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(examinarButton)
-                    .addComponent(jLabel3)
-                    .addComponent(pathProyectoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(pathProyectoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(examinarButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(abrirButton)
                     .addComponent(importarButton)
-                    .addComponent(cancelarButton)
-                    .addComponent(abrirButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelarButton))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,8 +179,9 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
 
 private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
 // TODO add your handling code here:  
-    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, listaFicheros.getScenarioSelect());
+    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, listaFicheros.getScenarioSelect());
     seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    seeTestCompleted.setLocationRelativeTo(this);
     seeTestCompleted.setVisible(true);
 }//GEN-LAST:event_abrirButtonActionPerformed
 
@@ -184,7 +193,6 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
     openFile(this.getPathProyectoTextField());
-    System.out.println(this.getPathProyect());
     try{
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
         collection = (CollectionTest) decoder.readObject();
@@ -201,7 +209,20 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
     List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
-    ListarTestsJPanel.aniadirTestSimple(scenImp);
+    for(int i=0;i<scenImp.size();i++){
+        if(scenImp.get(i).getTipoTest().getTipo()==5){
+            scenarioSparql.add(scenImp.get(i));
+        }else{
+            scenarioSimple.add(scenImp.get(i));
+        }
+    }
+    if(scenarioSparql.size()>0){
+        ListarTestsJPanel.aniadirTestSparql(scenarioSparql);
+    }
+    if(scenarioSimple.size()>0)
+    {
+        ListarTestsJPanel.aniadirTestSimple(scenarioSimple);
+    }    
 }
 
     private void openFile(JTextField textfield){
