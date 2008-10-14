@@ -6,7 +6,9 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -20,10 +22,10 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelectionListener{
 
-     private static DefaultListModel modeloSimles,modeloSparql,modeloInstancias;
-     
-    /** Creates new form ListarTestsJPanel */
-    public ListarTestsJPanel() {
+    private DefaultListModel modeloSimles,modeloSparql,modeloInstancias;
+    private static ListarTestsJPanel listTests = null;
+ 
+    private ListarTestsJPanel() {
         initComponents();
         modeloSimles = new DefaultListModel();
         modeloSparql = new DefaultListModel();
@@ -33,6 +35,17 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
         testSimplesList.addListSelectionListener(this);
     }
+ 
+    private synchronized static void createListAndResultPanel() {
+        if (listTests == null) { 
+            listTests = new ListarTestsJPanel();
+        }
+    }
+
+    public static ListarTestsJPanel getInstance() {
+        if (listTests == null) createListAndResultPanel();
+        return listTests;
+    }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
@@ -41,7 +54,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         //updateLabel(lista[list.getSelectedIndex()]);
     }
     
-    public static void aniadirTestSimple(List<ScenarioTest> scenario){ 
+    public void aniadirTestSimple(List<ScenarioTest> scenario){ 
         for(int i=0;i<scenario.size();i++){
             modeloSimles.addElement(scenario.get(i).getNombre());  
         }
@@ -49,7 +62,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         simplesPanel.validate();
     }
     
-    public static void aniadirTestSparql(List<ScenarioTest> scenario){ 
+    public void aniadirTestSparql(List<ScenarioTest> scenario){ 
         for(int i=0;i<scenario.size();i++){
             modeloSparql.addElement(scenario.get(i).getNombre());  
         }
@@ -57,15 +70,13 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         sparqlPanel.validate();
     }
     
-    public static void aniadirInstancias(List<ScenarioTest> scenario){ 
-        for(int i=0;i<scenario.size();i++){
-            modeloInstancias.addElement(scenario.get(i).getNombre());  
-        }
+    public void aniadirInstancias(Instancias instancias){ 
+        modeloInstancias.addElement(instancias.getNombre());  
         instanciasList.setModel(modeloInstancias);
         instanciasPanel.validate();
     }
     
-    public static void aniadirTreeResult(JScrollPane treeView){
+    public void aniadirTreeResult(JScrollPane treeView){
         if(resultsPanel.getComponentCount()>0){
             resultsPanel.remove(0);
         }
@@ -107,7 +118,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         testSimpleListPanelLayout.setVerticalGroup(
             testSimpleListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+            .addComponent(listTestSimpleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout simplesPanelLayout = new javax.swing.GroupLayout(simplesPanel);
@@ -120,7 +131,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         simplesPanelLayout.setVerticalGroup(
             simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
             .addGroup(simplesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(testSimpleListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -137,7 +148,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         testSparqlPanelLayout.setVerticalGroup(
             testSparqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(listSparqlScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+            .addComponent(listSparqlScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout sparqlPanelLayout = new javax.swing.GroupLayout(sparqlPanel);
@@ -161,7 +172,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         resultsPanelLayout.setVerticalGroup(
             resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 274, Short.MAX_VALUE)
         );
 
         tabbedTestsPanel.addTab("Resultados Ejecución", resultsPanel);
@@ -176,7 +187,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         instanciasContentPanelLayout.setVerticalGroup(
             instanciasContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(instanciasScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+            .addComponent(instanciasScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout instanciasPanelLayout = new javax.swing.GroupLayout(instanciasPanel);
@@ -200,25 +211,25 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedTestsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+            .addComponent(tabbedTestsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel instanciasContentPanel;
-    private static javax.swing.JList instanciasList;
-    private static javax.swing.JPanel instanciasPanel;
+    private javax.swing.JList instanciasList;
+    private javax.swing.JPanel instanciasPanel;
     private javax.swing.JScrollPane instanciasScrollPane;
     private javax.swing.JScrollPane listSparqlScrollPane;
     private javax.swing.JScrollPane listTestSimpleScrollPane;
-    private static javax.swing.JPanel resultsPanel;
-    private static javax.swing.JPanel simplesPanel;
-    private static javax.swing.JPanel sparqlPanel;
+    private javax.swing.JPanel resultsPanel;
+    private javax.swing.JPanel simplesPanel;
+    private javax.swing.JPanel sparqlPanel;
     private javax.swing.JTabbedPane tabbedTestsPanel;
     private javax.swing.JPanel testSimpleListPanel;
-    private static javax.swing.JList testSimplesList;
-    private static javax.swing.JList testSparqlList;
+    private javax.swing.JList testSimplesList;
+    private javax.swing.JList testSparqlList;
     private javax.swing.JPanel testSparqlPanel;
     // End of variables declaration//GEN-END:variables
 

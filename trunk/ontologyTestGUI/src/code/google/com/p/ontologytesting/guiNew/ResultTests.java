@@ -165,7 +165,7 @@ private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                             
 // TODO add your handling code here:
-    String resultado = OntologyTestCase.getMuestra();
+    /*String resultado = OntologyTestCase.getMuestra();
     String fichero = "Resultado Tests.doc";
     PrintWriter writer = null;
         try {
@@ -180,7 +180,7 @@ private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         } catch(Exception e){
             JOptionPane.showMessageDialog(this,"No se puede guardar el fichero",
                     "Warning Message",JOptionPane.WARNING_MESSAGE);
-        }
+        }*/
 }
 
 private void editarTestButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 

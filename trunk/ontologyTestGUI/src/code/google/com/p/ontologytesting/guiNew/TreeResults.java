@@ -20,7 +20,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.TreeSelectionModel;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +35,13 @@ public class TreeResults extends JPanel {
     private DefaultMutableTreeNode inst_hijo,ret_hijo,clas_hijo, sat_hijo,real_hijo,sparql_hijo;
     private static String testSeleccionado;
     private JScrollPane resultsView,treeView;
+    private ListarTestsJPanel listT;
 
     public TreeResults(final OntologyTestResult testresult) {
 
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Resultado de sus Tests");
         createNodes(top,testresult);
-
+        listT = ListarTestsJPanel.getInstance();
         JTree tree = new JTree(top);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
@@ -86,28 +86,13 @@ public class TreeResults extends JPanel {
         });
 
         treeView = new JScrollPane(tree);
-        //treeView.setSize(new Dimension(700,500));
         htmlPane = new JEditorPane();
         htmlPane.setEditable(false);
         resultsView = new JScrollPane(htmlPane);
 
-        /*JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        splitPane.setTopComponent(treeView);
-        splitPane.setBottomComponent(resultsView);*/
-
-        ListAndResultsJPanel.mostrarResultado(resultsView);
-        ListarTestsJPanel.aniadirTreeResult(treeView);
-        /*Dimension minimumSize = new Dimension(100, 100);
-        resultsView.setMinimumSize(minimumSize);
-        treeView.setMinimumSize(minimumSize);
-        splitPane.setDividerLocation(200); 
-
-        //treeView.setPreferredSize(new Dimension(100, 100)); 
-
-        splitPane.setPreferredSize(new Dimension(850, 590));*/
-
-        //Add the split pane to this frame
-        //this.add(splitPane);
+        ListAndResultsJPanel listAndRes = ListAndResultsJPanel.getInstance();
+        listAndRes.mostrarResultado(resultsView);
+        listT.aniadirTreeResult(treeView);
     }
 
     private void displaySimpleTest(String test, OntologyTestResult testresult) {

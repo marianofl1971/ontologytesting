@@ -15,20 +15,23 @@ import javax.swing.*;
  */
 public class ListAndResultsJPanel extends javax.swing.JPanel {
 
-    private JSplitPane splitPane;
-    private static ResultTestJPanel resultPanel;
-    private JPanel testsPanel;
+    private ResultTestJPanel resultPanel;
+    private ListAndTestsJPanel testsPanel;
     private static ListAndResultsJPanel listAndResult = null;
+    private ListarTestsJPanel lista;
  
     private ListAndResultsJPanel() {
         initComponents();
-        this.setLayout(new BorderLayout());
-        resultPanel = new ResultTestJPanel();
+        this.setSize(new Dimension(895,720));
+        listAndTestsPanel.setLayout(new BorderLayout());
+        resultTestsPanel.setLayout(new BorderLayout());
+        resultPanel = ResultTestJPanel.getInstance();
         testsPanel = ListAndTestsJPanel.getInstance();
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,getTestsPanel(),resultPanel);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(500);
-        this.add(splitPane,BorderLayout.CENTER);
+        lista = ListarTestsJPanel.getInstance();
+        testsPanel.aniadirLista(lista);
+        listAndTestsPanel.add(testsPanel,BorderLayout.CENTER);
+        resultTestsPanel.add(resultPanel,BorderLayout.CENTER);
+        this.splitPane.setDividerLocation(500);
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -36,17 +39,17 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
             listAndResult = new ListAndResultsJPanel();
         }
     }
- 
+
     public static ListAndResultsJPanel getInstance() {
         if (listAndResult == null) createListAndResultPanel();
         return listAndResult;
     }
     
-    public JPanel getTestsPanel() {
-        return testsPanel;
+    public ListAndTestsJPanel getTestsPanel() {
+        return this.testsPanel;
     }
     
-    public static void mostrarResultado(JScrollPane result){
+    public void mostrarResultado(JScrollPane result){
         resultPanel.aniadirResultado(result);
     }
 
@@ -60,20 +63,59 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        splitPane = new javax.swing.JSplitPane();
+        listAndTestsPanel = new javax.swing.JPanel();
+        resultTestsPanel = new javax.swing.JPanel();
+
+        splitPane.setDividerLocation(500);
+        splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        splitPane.setOneTouchExpandable(true);
+
+        listAndTestsPanel.setPreferredSize(new java.awt.Dimension(895, 500));
+
+        javax.swing.GroupLayout listAndTestsPanelLayout = new javax.swing.GroupLayout(listAndTestsPanel);
+        listAndTestsPanel.setLayout(listAndTestsPanelLayout);
+        listAndTestsPanelLayout.setHorizontalGroup(
+            listAndTestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 643, Short.MAX_VALUE)
+        );
+        listAndTestsPanelLayout.setVerticalGroup(
+            listAndTestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 324, Short.MAX_VALUE)
+        );
+
+        splitPane.setLeftComponent(listAndTestsPanel);
+
+        javax.swing.GroupLayout resultTestsPanelLayout = new javax.swing.GroupLayout(resultTestsPanel);
+        resultTestsPanel.setLayout(resultTestsPanelLayout);
+        resultTestsPanelLayout.setHorizontalGroup(
+            resultTestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 643, Short.MAX_VALUE)
+        );
+        resultTestsPanelLayout.setVerticalGroup(
+            resultTestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 151, Short.MAX_VALUE)
+        );
+
+        splitPane.setRightComponent(resultTestsPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel listAndTestsPanel;
+    private javax.swing.JPanel resultTestsPanel;
+    private javax.swing.JSplitPane splitPane;
     // End of variables declaration//GEN-END:variables
 
 }

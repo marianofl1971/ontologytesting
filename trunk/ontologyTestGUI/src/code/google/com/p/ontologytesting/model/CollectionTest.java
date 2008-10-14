@@ -19,6 +19,7 @@ import java.util.List;
 public class CollectionTest {
 
     private List<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
+    private List<Instancias> instancias = new ArrayList<Instancias>();
     private String ontology="";
     private String namespace="";
     private static CollectionTest collection = null;
@@ -27,6 +28,7 @@ public class CollectionTest {
         this.scenariotest = new ArrayList<ScenarioTest>();
         this.ontology = "";
         this.namespace = "";
+        this.instancias= new ArrayList<Instancias>();
     }
  
     private synchronized static void createCollection() {
@@ -38,15 +40,6 @@ public class CollectionTest {
     public static CollectionTest getInstance() {
         if (collection == null) createCollection();
         return collection;
-    }
-    
-    
-    public CollectionTest(List<ScenarioTest> scenariotest, String ontology, 
-            String namespace){
-        
-        this.scenariotest.addAll(scenariotest);
-        this.ontology = ontology;
-        this.namespace = namespace;
     }
     
     public List<ScenarioTest> getScenariotest() {
@@ -71,6 +64,14 @@ public class CollectionTest {
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
-    }    
+    }
+
+    public List<Instancias> getInstancias() {
+        return instancias;
+    }
+
+    public void setInstancias(ArrayList<Instancias> instancias) {
+        this.instancias = instancias;
+    }
     
 }

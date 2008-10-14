@@ -24,16 +24,16 @@ public class ControladorTests {
     private static ControladorTests controlador = null;
  
     private ControladorTests() {
-        this.testInstSatGuardado = false;
-        this.testRetClasGuardado = false;
-        this.testRealGuardado = false;
-        this.testSparqlGuardado = false;
-        this.testInstSelect = false;
-        this.testRetSelect = false;
-        this.testRealSelect = false;
-        this.testSatSelect = false;
-        this.testClasSelect = false;
-        this.testSparqlSelect = false;
+        this.testInstSatGuardado = true;
+        this.testRetClasGuardado = true;
+        this.testRealGuardado = true;
+        this.testSparqlGuardado = true;
+        this.testInstSelect = true;
+        this.testRetSelect = true;
+        this.testRealSelect = true;
+        this.testSatSelect = true;
+        this.testClasSelect = true;
+        this.testSparqlSelect = true;
     }
  
     private synchronized static void createControlador() {

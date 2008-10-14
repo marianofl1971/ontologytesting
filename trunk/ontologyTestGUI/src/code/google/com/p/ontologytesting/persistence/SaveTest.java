@@ -5,7 +5,6 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
-import code.google.com.p.ontologytesting.guiNew.MainApplication;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -15,10 +14,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,15 +26,11 @@ public class SaveTest {
     private CollectionTest collection;
     
     public void saveProject() throws FileNotFoundException{
-        collection = CollectionTest.getInstance();
-        //String onto = collection.getOntology();
-        //String[] o = onto.split("\\\\");
-        //String ontoFinal = "./"+o[o.length-1];
-        //collection.setOntology(ontoFinal);
+        /*collection = CollectionTest.getInstance();
         XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
         FileOutputStream(MainApplication.getProyecto()+"/"+MainApplication.getNombreProyecto())));
         e.writeObject(collection);
-        e.close();
+        e.close();*/
     }
     
     public boolean saveProjectAs() throws FileNotFoundException{
@@ -78,30 +71,14 @@ public class SaveTest {
     }
     
     public void saveTestInMemory(ScenarioTest scenarioTest) throws FileNotFoundException{
-        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
+        /*XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
         FileOutputStream(MainApplication.getProyecto()+"/"+scenarioTest.getNombre())));
         e.writeObject(scenarioTest);
-        e.close();
+        e.close();*/
     }
     
     public void saveInstanciasInMemory(Instancias instancias){
-        try{ 
-            if(!instancias.getNombre().equals("")){
-                XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                FileOutputStream(MainApplication.getProyecto()+"/"+instancias.getNombre())));
-                e.writeObject(instancias);
-                e.close();
-                JOptionPane.showMessageDialog(frame,"Instancias guardadas con el " +
-                "nombre que les asigno y asociadas al test",
-                "Information Message",JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(frame,"Debe introducir un nombre para el " +
-                "conjunto de instancias.","Warning Message",JOptionPane.WARNING_MESSAGE);
-            }
-        }catch (FileNotFoundException ex) {
-           JOptionPane.showMessageDialog(frame,"No se ha podido guardar el archivo",
-           "Error Message",JOptionPane.ERROR_MESSAGE);
-        } 
+        CollectionTest.getInstance().getInstancias().add(instancias);
     }
 
 }

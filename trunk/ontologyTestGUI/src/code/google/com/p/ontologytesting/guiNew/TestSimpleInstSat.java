@@ -10,6 +10,7 @@ import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
@@ -100,7 +101,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
-        
+        this.setMaximumSize(new Dimension(400,500));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());
         int cont=1;
         List<QueryOntology> listaQuerys = s.getQueryTest(); 
@@ -468,15 +469,6 @@ public void ejecutar(int cuantos){
             testcase.run(testresult, CollectionTest.getInstance());
         }
         new TreeResults(testresult);
-        //JScrollPane scrollResults = panel.getResultsView();
-        //JScrollPane scrollTree = panel.getTreeView();
-        //resultTestPanel.aniadirResultado(scrollResults);
-        //ListarTestsJPanel.aniadirTreeResult(scrollTree);
-        //resultTestPanel.validate();
-        /*resultTests.getContentPanelResults().add(panel);
-        resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        resultTests.setVisible(true);
-        resultTests.validate();*/
     } catch (ExceptionReadOntology ex) {
         new ExceptionReadOntology("La ontologia introducida no es valida." +
         "\nSolo pueden realizarse tests sobre documentos owl consistentes");

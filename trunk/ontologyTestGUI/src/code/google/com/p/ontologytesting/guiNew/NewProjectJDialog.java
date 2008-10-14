@@ -186,8 +186,8 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             CollectionTest.getInstance().setOntology(ubicOnto);
             File directorio = new File(project.getCarpetaProyectoTextField());
             directorio.mkdir(); 
-            MainApplication.setProyecto(project.getCarpetaProyectoTextField());
-            MainApplication.setNombreProyecto(nombreProy);
+            //MainApplication.setProyecto(project.getCarpetaProyectoTextField());
+            //MainApplication.setNombreProyecto(nombreProy);
             setProyectoCreado(true);
             this.setVisible(false);
         }catch(ExceptionReadOntology ex){
@@ -202,6 +202,13 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
 }
 
+    public boolean getProyectoCreado() {
+        return proyectoCreado;
+    }
+
+    public void setProyectoCreado(boolean proyectoCreado) {
+        this.proyectoCreado = proyectoCreado;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -212,13 +219,5 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JButton sigButton;
     private javax.swing.JButton terminarButton;
     // End of variables declaration//GEN-END:variables
-
-    public boolean getProyectoCreado() {
-        return proyectoCreado;
-    }
-
-    public void setProyectoCreado(boolean proyectoCreado) {
-        this.proyectoCreado = proyectoCreado;
-    }
 
 }
