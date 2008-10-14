@@ -495,23 +495,13 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 }
 
-
-
-
-
-
 public void aniadirTestsInstSat(int tipo){ 
-    ListAndTestsJPanel listAndTest =  ListAndTestsJPanel.getInstance();
     if(tipo==0){
         s = new ScenarioTest(TipoTest.INST);
     }else if(tipo==3){
         s = new ScenarioTest(TipoTest.SAT);
     }
-    if(panelTest.getComponentCount()!=0){
-        panelTest.getTestsPanel().remove(0);
-    }
-    listAndTest.aniadirTest(new TestSimpleInstSat(s));
-    //panelTest.getTestsPanel().add(listTest);
+    panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
     this.validate();
 }
 
@@ -521,31 +511,19 @@ public void aniadirTestsRetClas(int tipo){
     }else if(tipo==4){
         s = new ScenarioTest(TipoTest.CLAS);
     }
-    //listTest = new ListAndTestsJPanel(new TestSimpleRetClas(s));
-    if(panelTest.getComponentCount()!=0){
-        panelTest.getTestsPanel().remove(0);
-    }
-    panelTest.getTestsPanel().add(listTest);
+    panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
     this.validate();
 }
 
 public void aniadirTestsReal(){ 
     s = new ScenarioTest(TipoTest.REAL);
-    //listTest = new ListAndTestsJPanel(new TestSimpleReal(s));
-    if(panelTest.getComponentCount()!=0){
-        panelTest.getTestsPanel().remove(0);
-    }
-    panelTest.getTestsPanel().add(listTest);
+    panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
     this.validate();
 }
 
 public void aniadirTestsSparql(){ 
     s = new ScenarioTest(TipoTest.SPARQL);
-    //listTest = new ListAndTestsJPanel(new AddSPARQLJPanel(s));
-    if(panelTest.getComponentCount()!=0){
-        panelTest.getTestsPanel().remove(0);
-    }
-    panelTest.getTestsPanel().add(listTest);
+    panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
     this.validate();
 }
 

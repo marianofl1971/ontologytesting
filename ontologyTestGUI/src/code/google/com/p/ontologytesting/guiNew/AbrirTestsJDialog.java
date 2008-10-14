@@ -36,11 +36,13 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
     private JFrame frame = new JFrame();
     private List<ScenarioTest> scenarioSparql = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
+    private ListarTestsJPanel listT;
     
     /** Creates new form AbrirTestsJDialog */
     public AbrirTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
         super(parent, modal);
         initComponents();
+        listT = ListarTestsJPanel.getInstance();
         this.setTitle("Descripción Tests");
     }
 
@@ -217,11 +219,11 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         }
     }
     if(scenarioSparql.size()>0){
-        ListarTestsJPanel.aniadirTestSparql(scenarioSparql);
+        listT.aniadirTestSparql(scenarioSparql);
     }
     if(scenarioSimple.size()>0)
     {
-        ListarTestsJPanel.aniadirTestSimple(scenarioSimple);
+        listT.aniadirTestSimple(scenarioSimple);
     }    
 }
 

@@ -11,19 +11,13 @@ import code.google.com.p.ontologytesting.guiNew.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.awt.BorderLayout;
 import java.awt.Frame;
-import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.io.File;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -60,19 +54,20 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private String conjuntoClase,conjuntoProp,patron;
     private String[] clas,prop;
     private boolean instanciasInstGuardadas;
-    //private int typePanel;
     private Instancias instanciasAEditar;
     private boolean editado;
     private SaveTest saveTest;
     private ScenarioTest scenario;
+    private ListarTestsJPanel listInst;
 
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,ScenarioTest scenario){
+    //Constructor para añadir las instancias a un test
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal, ScenarioTest scenario){
         
         super(parent, modal);
+        initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
-        //setTypePanel(typePanel);
-        initComponents();
+        
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -90,13 +85,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setEditado(false);
     } 
     
+    //Constructor para crear un conjunto nuevo de instancias
     public AddInstancesClasPropJDialog(Frame parent, boolean modal){
         
         super(parent, modal);
+        initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
 
-        initComponents();
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -113,16 +109,17 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setEditado(false);
     } 
     
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,Instancias inst,int typePanel){
+   //Constructor para editar un conjunto de instancias
+    public AddInstancesClasPropJDialog(Frame parent, boolean modal, Instancias inst){
         
         super(parent, modal);
+        initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
+        
         clasFinal = new ArrayList<ClassInstances>();
         propFinal = new ArrayList<PropertyInstances>();
         int contI=0,contP=0;
-        initComponents();
-        //setTypePanel(typePanel);
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -171,64 +168,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setInstancias(inst);
         setEditado(true);
         
-    }
-
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal,Instancias inst) {
-        super(parent, modal);
-        this.setTitle("Editar Instancias");
-        this.setModal(false);
-        int contI=0,contP=0;
-        initComponents();
-
-        clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
-        propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
-
-        guardarAsociarInstButton.setLayout(new BorderLayout());
-        guardarAsociarInstButton.setText("Guardar");
-        soloAsociarButton.setLayout(new BorderLayout());
-        soloAsociarButton.setVisible(false);
-
-        setNomInstanciasTextField(inst.getNombre());
-        setDescInstanciasTextArea(inst.getDescripcion());
-        ListIterator ci,pi;
-        clasInst = inst.getClassInstances();
-        ci = clasInst.listIterator();
-        while(ci.hasNext()){ 
-            ClassInstances cI = (ClassInstances) ci.next();
-            CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
-            instClas.setInstance(cI.getClassInstance());
-            commentPane = instClas.getComment();
-            commentPane.setComent(cI.getComment());
-            instClas.setComment(commentPane);
-            clasPanel.add(instClas);
-            contI++;
-        }
-  
-        propInst = inst.getPropertyInstances();
-        pi = propInst.listIterator();
-        while(pi.hasNext()){
-            PropertyInstances pI = (PropertyInstances) pi.next();
-            CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
-            instProp.setInstance(pI.getPropertyInstance());
-            commentPane = instProp.getComment();
-            commentPane.setComent(pI.getComment());
-            instProp.setComment(commentPane);
-            propPanel.add(instProp);
-            contP++;
-        }
-          
-        for (int j = 0; j <= (10-contI); j++) {
-            clasPanel.add(new CreateInstancesJPanel(0));
-        }
-        for (int k = 0; k <= (10-contP); k++) {
-            propPanel.add(new CreateInstancesJPanel(1));
-        }
-        
-        instanciasAEditar = new Instancias(inst);
-        setInstancias(inst);
-        //setTypePanel(10);
     }
 
     /** This method is called from within the constructor to
@@ -501,293 +440,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
- 
-    jenaInterface = new JenaInterface();
-    jena = jenaInterface.getJena();
-    saveTest = new SaveTest();
-    try{
-        jena.addReasoner(CollectionTest.getInstance().getOntology());
-        validar = new ValidarTests();
-        ciClas = null;
-        ciInd = null;
-        failClas = new ArrayList();
-        failProp = new ArrayList();
-        failGroupClas = 0;
-        failGroupProp = 0;
-        setInstanciaValida(true);
-        clasInst = new ArrayList<ClassInstances>();
-        propInst = new ArrayList<PropertyInstances>();
-        instanciaSinNombre = false;
-        totalClas = getClasPanel().getComponentCount();
-        nombreInstancias = nomInstanciasTextField.getText();
-
-        queryValida=true;  
-        patron1="[\\(|,]";
-        patron2="[,|\\)]"; 
-        patron = "\\\n";
-
-        if(getInstancesTabbedPane() != 2){
-            preparrarInstConAyuda();
-        }else{
-            prepararInstSinAyuda();
-        }
-        if (queryValida==true && instanciaValida==true && instanciaSinNombre==false){
-            getInstancias().setClassInstances(clasInst);
-            getInstancias().setPropertyInstances(propInst);
-            getInstancias().setDescripcion(getDescInstanciasTextArea());
-            getInstancias().setNombre(getNomInstanciasTextField());
-            getInstancias().setType("Instancias");
-
-            File dir = new File(MainApplication.getProyecto());
-            String[] ficheros = dir.list();
-            int aux=0;
-            for(int i=0; i<ficheros.length;i++){
-                if(aux==0){
-                    if(ficheros[i].equals(getInstancias().getNombre())){
-                        if(this.getInstancias().equals(this.getInstanciasAEditar())==false){
-                            Object[] options = {"Sobreescribir", "Cancelar"};
-                            int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
-                                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                            if (n == JOptionPane.YES_OPTION) {
-                                saveTest.saveInstanciasInMemory(getInstancias());
-                                guardar(this.getScenario());
-                                aux=1;
-                                setInstanciasAEditar(new Instancias(getInstancias()));
-                                setInstancias(new Instancias(getInstancias()));
-                            }else{
-                                aux=1;
-                            }
-                        }
-                    }
-                }
-            }
-            if(aux==0){
-                saveTest.saveInstanciasInMemory(this.getInstancias());
-                this.getScenario().setInstancias(this.getInstancias());
-            }
-            this.setVisible(false);
-        } else if (instanciaSinNombre == true) {
-            JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
-                    + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-        } else if (instanciaValida == false) {
-            JOptionPane.showMessageDialog(this, "Las instancias marcadas" + 
-                    "en rojo no se corresponden con la definicion de su ontologia. " 
-                    + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-        } else if (queryValida == false) {
-            JOptionPane.showMessageDialog(this, "El formato de las instancias marcadas" 
-                    + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
-                    + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-            if (getInstancesTabbedPane() != 2) {
-                CreateInstancesJPanel panelInst = null;
-                for (int j = 0; j < failClas.size(); j++) {
-                    if (failClas.get(j).equals(1)) {
-                        panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                    }
-                }
-                for (int j = 0; j < failProp.size(); j++) {
-                    if (failProp.get(j).equals(1)) {
-                        panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(j);
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                    }
-                }
-            } else {
-                conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-                if (failGroupClas == 1 && failGroupProp == 1) {
-                    conjunto.getPropiedadArea().setForeground(Color.RED);
-                    conjunto.getClaseArea().setForeground(Color.RED);
-                } else if (failGroupClas == 1) {
-                    conjunto.getClaseArea().setForeground(Color.RED);
-                } else {
-                    conjunto.getPropiedadArea().setForeground(Color.RED);
-                }
-            }
-        }
-    }catch(ExceptionReadOntology er){
-        new ExceptionReadOntology("La ontologia introducida no es valida." +
-            "\nSolo pueden realizarse tests sobre documentos owl consistentes");
+    boolean result = prepararInstancias(true,true);
+    if(result==true){
+        JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
+        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
     }
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
-
-public void guardar(ScenarioTest scenario){
-        scenario.setInstancias(getInstancias());
-        //Auxiliar.getTestSimpleInstSat().getScenarioAEditar().setInstancias(getInstanciasAEditar());
-        saveTest = new SaveTest();
-        saveTest.replaceTestLocally(scenario);
-}
-public void prepararInstSinAyuda(){
-    
-    conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-    conjuntoClase = conjunto.getClaseTextArea().trim();
-    conjuntoProp = conjunto.getPropiedadTextArea().trim();
-    clas = conjuntoClase.split(patron);
-    prop = conjuntoProp.split(patron);
-    
-    if (nombreInstancias.equals("")) {
-        instanciaSinNombre=true;
-    }else{
-        for (int i = 0; i < clas.length; i++) {
-            if (!clas[i].equals("")) {
-                if (validar.validarInstanciaClase(clas[i]) == true) {
-                    ciClas = clas[i].split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
-                    if (v == false) {
-                        conjunto.getClaseArea().setForeground(Color.RED);
-                        instanciaValida=false;
-                    } else {
-                        conjunto.getClaseArea().setForeground(Color.BLACK);
-                    }
-                }
-                if (validar.validarInstanciaClase(clas[i]) == true && isInstanciaValida() == true) {
-                    ClassInstances cI = new ClassInstances(clas[i]);
-                    clasInst.add(cI);
-                    failClas.add(i, 0);
-                } else {
-                    failClas.add(i, 1);
-                    failGroupClas = 1;
-                    queryValida=false;
-                }
-            }
-        }
-        for (int i = 0; i < prop.length; i++) {
-            if (!prop[i].equals("")) {
-                if (validar.validarInstanciaPropiedad(prop[i]) == true) {
-                    ciClas = prop[i].split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
-                    if (v == false) {
-                        conjunto.getPropiedadArea().setForeground(Color.RED);
-                        instanciaValida=false;
-                    } else {
-                        conjunto.getPropiedadArea().setForeground(Color.BLACK);
-                    }
-                }
-                if (validar.validarInstanciaPropiedad(prop[i]) == true && isInstanciaValida() == true) {
-                    PropertyInstances pI = new PropertyInstances(prop[i]);
-                    propInst.add(pI);
-                    failProp.add(i, 0);
-                } else {
-                    failProp.add(i, 1);
-                    failGroupProp = 1;
-                    queryValida=false;
-                }
-            }
-        }
-    }
-}
-
-public void preparrarInstConAyuda(){
-    
-    if (nombreInstancias.equals("")) {
-        instanciaSinNombre = true;
-    } else {
-        for (int i = 0; i < totalClas; i++) {
-            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
-            String query = panelInst.getQuery();
-            AddComentJDialog comentPane = panelInst.getComment();
-            String coment = comentPane.getComent();
-            if (!query.equals("")) {
-                if (validar.validarInstanciaClase(query) == true) {
-                    ciClas = query.split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
-                    if (v == false) {
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                        instanciaValida=false;
-                    } else {
-                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
-                    }
-                }
-            }
-            if(!query.equals("")){
-                if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
-                    if (!query.equals("") && !coment.equals("")) {
-                        ClassInstances cI = new ClassInstances(query, coment);
-                        clasInst.add(cI);
-                    } else if (!query.equals("") && coment.equals("")) {
-                        ClassInstances cI = new ClassInstances(query);
-                        clasInst.add(cI);
-                    }
-                    failClas.add(i, 0);
-                }else if (validar.validarInstanciaClase(query) == false) {
-                if (!query.equals("")) {
-                    failClas.add(i, 1);
-                    queryValida=false;
-                }
-                } else {
-                    failClas.add(i, 0);
-                }
-            }else{
-                failClas.add(i, 0);
-            }
-        }
-        int totalProp = getPropPanel().getComponentCount();
-        for (int i = 0; i < totalProp; i++) {
-            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
-            String query = panelInst.getQuery().trim();
-            AddComentJDialog comentPane = panelInst.getComment();
-            String coment = comentPane.getComent();
-            if (!query.equals("")) {
-                if (validar.validarInstanciaPropiedad(query) == true) {
-                    ciClas = query.split(patron1);
-                    ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
-                    if (v == false) {
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                        instanciaValida=false;
-                    } else {
-                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
-                    }
-                }
-            }
-            if(!query.equals("")){
-                if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
-                    if (!query.equals("") && !coment.equals("")) {
-                        PropertyInstances pI = new PropertyInstances(query, coment);
-                        propInst.add(pI);
-                    } else if (!query.equals("") && coment.equals("")) {
-                        PropertyInstances pI = new PropertyInstances(query);
-                        propInst.add(pI);
-                    } 
-                    failProp.add(i, 0);
-                } else if (validar.validarInstanciaPropiedad(query) == false) {
-                    if (!query.equals("")) {
-                        failProp.add(i, 1);
-                        queryValida=false;
-                    }
-                } else {
-                    failProp.add(i, 0);
-                }
-            }else{
-                failProp.add(i, 0);
-            }
-        }
-    }
-}
-
-public boolean yaExisteInstancia(String nombre){
-    List<ScenarioTest> listaEsce = CollectionTest.getInstance().getScenariotest();
-        for(int i=0;i<listaEsce.size();i++){
-            String n = scenario.getInstancias().getNombre();
-            if(n.equals(nombre)){
-                return true;
-            }
-        }
-    return false;
-}
-
-public void crearArchivoDeTests(String nombreFichero){
-    
-    try{
-        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-                            FileOutputStream(nombreFichero)));
-        e.writeObject(CollectionTest.getInstance());
-        e.close();
-    }catch (FileNotFoundException ex) {
-        ex.printStackTrace();
-     }
-} 
 
 private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstButtonActionPerformed
 // TODO add your handling code here:
@@ -895,9 +554,40 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
+    boolean result = prepararInstancias(false,true);
+    if(result==true){
+        JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
+        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
+    }
+}//GEN-LAST:event_soloAsociarButtonActionPerformed
 
+
+private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
+// TODO add your handling code here:
+//GEN-LAST:event_guardarButtonActionPerformed
+    boolean result = prepararInstancias(true,false);
+    if(result==true){
+        JOptionPane.showMessageDialog(this, "Instancias guardadas", 
+        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
+    }
+}
+
+public void guardarInstancias(){
+    listInst.aniadirInstancias(this.getInstancias());
+}
+
+public void asociarInstancias(){
+    this.getScenario().setInstancias(getInstancias());   
+}
+
+public boolean prepararInstancias(boolean guardar,boolean asociar){
+    listInst = ListarTestsJPanel.getInstance();
     jenaInterface = new JenaInterface();
     jena = jenaInterface.getJena();
+    saveTest = new SaveTest();
+    int aux=0;
     try{
         jena.addReasoner(CollectionTest.getInstance().getOntology());
         validar = new ValidarTests();
@@ -910,7 +600,6 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         setInstanciaValida(true);
         clasInst = new ArrayList<ClassInstances>();
         propInst = new ArrayList<PropertyInstances>();
-        setInstancias(new Instancias());
         instanciaSinNombre = false;
         totalClas = getClasPanel().getComponentCount();
         nombreInstancias = nomInstanciasTextField.getText();
@@ -931,10 +620,44 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             getInstancias().setDescripcion(getDescInstanciasTextArea());
             getInstancias().setNombre(getNomInstanciasTextField());
             getInstancias().setType("Instancias");
-            this.getScenario().setInstancias(getInstancias());
-            JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
-            "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-            this.setVisible(false);
+ 
+            if(aux==0){
+                if(this.getInstanciasAEditar()!= null && this.getInstancias().equals(this.getInstanciasAEditar())==false){
+                    Object[] options = {"Sobreescribir", "Cancelar"};
+                    int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
+                            "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (n == JOptionPane.YES_OPTION) {
+                        if(guardar==true){
+                            listInst.aniadirInstancias(this.getInstancias());
+                        }
+                        if(asociar==true){
+                            this.getScenario().setInstancias(this.getInstancias());
+                        }
+                        saveTest.saveInstanciasInMemory(getInstancias());
+                        aux=1;
+                        setInstanciasAEditar(new Instancias(getInstancias()));
+                        setInstancias(new Instancias(getInstancias()));
+                    }else{
+                        aux=1;
+                    }
+                }
+            }
+            if(aux==0){
+                if(this.yaExisteInstancia(this.getInstancias().getNombre())){
+                    JOptionPane.showMessageDialog(this, "Ya ha creado un conjunto de instancias" +
+                    "con este nombre. Por favor, introduzca uno nuevo.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }else{
+                    if(guardar==true){
+                        listInst.aniadirInstancias(this.getInstancias());
+                    }
+                    if(asociar==true){
+                        this.getScenario().setInstancias(this.getInstancias());
+                    }
+                    saveTest.saveInstanciasInMemory(getInstancias());
+                    return true;
+                }
+            }
         } else if (instanciaSinNombre == true) {
             JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
                     + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
@@ -976,12 +699,167 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
     }
-}//GEN-LAST:event_soloAsociarButtonActionPerformed
+    return false;
+}
 
-private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
-// TODO add your handling code here:
-//GEN-LAST:event_guardarButtonActionPerformed
+public boolean yaExisteInstancia(String nombre){
+    List<ScenarioTest> listaEsce = CollectionTest.getInstance().getScenariotest();
+        for(int i=0;i<listaEsce.size();i++){
+            String n = scenario.getInstancias().getNombre();
+            if(n.equals(nombre)){
+                return true;
+            }
+        }
+    return false;
+}
 
+public void prepararInstSinAyuda(){
+    conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+    conjuntoClase = conjunto.getClaseTextArea().trim();
+    conjuntoProp = conjunto.getPropiedadTextArea().trim();
+    clas = conjuntoClase.split(patron);
+    prop = conjuntoProp.split(patron);
+    
+    if (nombreInstancias.equals("")) {
+        instanciaSinNombre=true;
+    }else{
+        for (int i = 0; i < clas.length; i++) {
+            if (!clas[i].equals("")) {
+                if (validar.validarInstanciaClase(clas[i]) == true) {
+                    ciClas = clas[i].split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    if (v == false) {
+                        conjunto.getClaseArea().setForeground(Color.RED);
+                        instanciaValida=false;
+                    } else {
+                        conjunto.getClaseArea().setForeground(Color.BLACK);
+                    }
+                }
+                if (validar.validarInstanciaClase(clas[i]) == true && isInstanciaValida() == true) {
+                    ClassInstances cI = new ClassInstances(clas[i]);
+                    clasInst.add(cI);
+                    failClas.add(i, 0);
+                } else {
+                    failClas.add(i, 1);
+                    failGroupClas = 1;
+                    queryValida=false;
+                }
+            }
+        }
+        for (int i = 0; i < prop.length; i++) {
+            if (!prop[i].equals("")) {
+                if (validar.validarInstanciaPropiedad(prop[i]) == true) {
+                    ciClas = prop[i].split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    if (v == false) {
+                        conjunto.getPropiedadArea().setForeground(Color.RED);
+                        instanciaValida=false;
+                    } else {
+                        conjunto.getPropiedadArea().setForeground(Color.BLACK);
+                    }
+                }
+                if (validar.validarInstanciaPropiedad(prop[i]) == true && isInstanciaValida() == true) {
+                    PropertyInstances pI = new PropertyInstances(prop[i]);
+                    propInst.add(pI);
+                    failProp.add(i, 0);
+                } else {
+                    failProp.add(i, 1);
+                    failGroupProp = 1;
+                    queryValida=false;
+                }
+            }
+        }
+    }
+}
+
+public void preparrarInstConAyuda(){ 
+    if (nombreInstancias.equals("")) {
+        instanciaSinNombre = true;
+    } else {
+        for (int i = 0; i < totalClas; i++) {
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
+            String query = panelInst.getQuery();
+            AddComentJDialog comentPane = panelInst.getComment();
+            String coment = comentPane.getComent();
+            if (!query.equals("")) {
+                if (validar.validarInstanciaClase(query) == true) {
+                    ciClas = query.split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    if (v == false) {
+                        panelInst.getInstanciaTextField().setForeground(Color.RED);
+                        instanciaValida=false;
+                    } else {
+                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                    }
+                }
+            }
+            if(!query.equals("")){
+                if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
+                    if (!query.equals("") && !coment.equals("")) {
+                        ClassInstances cI = new ClassInstances(query, coment);
+                        clasInst.add(cI);
+                    } else if (!query.equals("") && coment.equals("")) {
+                        ClassInstances cI = new ClassInstances(query);
+                        clasInst.add(cI);
+                    }
+                    failClas.add(i, 0);
+                }else if (validar.validarInstanciaClase(query) == false) {
+                if (!query.equals("")) {
+                    failClas.add(i, 1);
+                    queryValida=false;
+                }
+                } else {
+                    failClas.add(i, 0);
+                }
+            }else{
+                failClas.add(i, 0);
+            }
+        }
+        int totalProp = getPropPanel().getComponentCount();
+        for (int i = 0; i < totalProp; i++) {
+            CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(i);
+            String query = panelInst.getQuery().trim();
+            AddComentJDialog comentPane = panelInst.getComment();
+            String coment = comentPane.getComent();
+            if (!query.equals("")) {
+                if (validar.validarInstanciaPropiedad(query) == true) {
+                    ciClas = query.split(patron1);
+                    ciInd = ciClas[1].split(patron2);
+                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    if (v == false) {
+                        panelInst.getInstanciaTextField().setForeground(Color.RED);
+                        instanciaValida=false;
+                    } else {
+                        panelInst.getInstanciaTextField().setForeground(Color.BLACK);
+                    }
+                }
+            }
+            if(!query.equals("")){
+                if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
+                    if (!query.equals("") && !coment.equals("")) {
+                        PropertyInstances pI = new PropertyInstances(query, coment);
+                        propInst.add(pI);
+                    } else if (!query.equals("") && coment.equals("")) {
+                        PropertyInstances pI = new PropertyInstances(query);
+                        propInst.add(pI);
+                    } 
+                    failProp.add(i, 0);
+                } else if (validar.validarInstanciaPropiedad(query) == false) {
+                    if (!query.equals("")) {
+                        failProp.add(i, 1);
+                        queryValida=false;
+                    }
+                } else {
+                    failProp.add(i, 0);
+                }
+            }else{
+                failProp.add(i, 0);
+            }
+        }
+    }
 }
 
 void decrementarPosicion(int j,int type){
@@ -1010,7 +888,6 @@ void decrementarPosicion(int j,int type){
 
 public void copiarAInstancesTextArea(){
     String textoClase="",textoProp="";
-    
     conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
@@ -1208,14 +1085,6 @@ public int getIndexVect() {
         this.instanciasInstGuardadas = instanciasGuardadas;
     }
 
-    /*public int getTypePanel() {
-        return typePanel;
-    }
-
-    public void setTypePanel(int typePanel) {
-        this.typePanel = typePanel;
-    }*/
-
     public Instancias getInstanciasAEditar() {
         return instanciasAEditar;
     }
@@ -1238,6 +1107,14 @@ public int getIndexVect() {
 
     public void setEditado(boolean editado) {
         this.editado = editado;
+    }
+    
+    public ScenarioTest getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(ScenarioTest scenario) {
+        this.scenario = scenario;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1265,13 +1142,5 @@ public int getIndexVect() {
     private javax.swing.JButton soloAsociarButton;
     private javax.swing.JScrollPane textAreaScrollPane;
     // End of variables declaration//GEN-END:variables
-
-    public ScenarioTest getScenario() {
-        return scenario;
-    }
-
-    public void setScenario(ScenarioTest scenario) {
-        this.scenario = scenario;
-    }
 
 }

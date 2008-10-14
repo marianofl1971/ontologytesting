@@ -16,11 +16,24 @@ import javax.swing.JScrollPane;
  */
 public class ResultTestJPanel extends javax.swing.JPanel {
 
-    /** Creates new form resultTestJPanel */
-    public ResultTestJPanel() {
-        initComponents();
-        contentResultPanel.setLayout(new BoxLayout(contentResultPanel, BoxLayout.Y_AXIS));
+    private static ResultTestJPanel result = null;
+ 
+    private ResultTestJPanel() {
+       initComponents();
+       contentResultPanel.setLayout(new BoxLayout(contentResultPanel, BoxLayout.Y_AXIS));
     }
+ 
+    private synchronized static void createListAndResultPanel() {
+        if (result == null) { 
+            result = new ResultTestJPanel();
+        }
+    }
+
+    public static ResultTestJPanel getInstance() {
+        if (result == null) createListAndResultPanel();
+        return result;
+    }
+    
     
     public void aniadirResultado(JScrollPane result){
         if(contentResultPanel.getComponentCount()>0){

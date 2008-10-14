@@ -19,16 +19,9 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
  
     private ListAndTestsJPanel() {
         initComponents();
-        listTestPanel.setLayout(new BorderLayout());
+        this.listTestPanel.setLayout(new BorderLayout());
+        this.testsPanel.setLayout(new FlowLayout());
         this.splitPane.setDividerLocation(235);
-        this.listTestPanel.add(new ListarTestsJPanel());
-        /*this.setLayout(new BorderLayout());
-        testsPanel = new JScrollPane();
-        listaPanel = new ListarTestsJPanel();
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.listaPanel,this.testsPanel);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(235);
-        this.add(this.splitPane,BorderLayout.CENTER);*/
     }
  
     private synchronized static void createListAndTestPanel() {
@@ -43,17 +36,16 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     public void aniadirTest(JPanel panel){
-        testsPanel.setLayout(new BorderLayout());
-        testsPanel.add(panel,BorderLayout.CENTER);
-        testsPanel.validate();
-        /*this.setLayout(new BorderLayout());
-        testsPanel = new JScrollPane(panel);
-        listaPanel = new ListarTestsJPanel();
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,this.listaPanel,this.testsPanel);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(235);
-        this.add(this.splitPane,BorderLayout.CENTER);  
-        this.splitPane.remove(this.testsPanel);*/
+        if(this.testsPanel.getComponentCount()>0){
+            this.testsPanel.remove(0);
+        }
+        this.testsPanel.add(panel,BorderLayout.CENTER); 
+        this.validate();
+    }
+    
+    public void aniadirLista(ListarTestsJPanel lista){
+         this.listTestPanel.add(lista,BorderLayout.CENTER); 
+         this.validate();
     }
 
     /** This method is called from within the constructor to
@@ -75,7 +67,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         listTestPanel.setLayout(listTestPanelLayout);
         listTestPanelLayout.setHorizontalGroup(
             listTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 129, Short.MAX_VALUE)
         );
         listTestPanelLayout.setVerticalGroup(
             listTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +80,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsPanel.setLayout(testsPanelLayout);
         testsPanelLayout.setHorizontalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 364, Short.MAX_VALUE)
+            .addGap(0, 635, Short.MAX_VALUE)
         );
         testsPanelLayout.setVerticalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +93,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,5 +106,6 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel testsPanel;
     // End of variables declaration//GEN-END:variables
+
 
 }
