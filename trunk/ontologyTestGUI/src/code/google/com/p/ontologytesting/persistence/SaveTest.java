@@ -72,13 +72,6 @@ public class SaveTest {
         return false;
     }
     
-    public void saveTestInMemory(ScenarioTest scenarioTest) throws FileNotFoundException{
-        /*XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-        FileOutputStream(MainApplication.getProyecto()+"/"+scenarioTest.getNombre())));
-        e.writeObject(scenarioTest);
-        e.close();*/
-    }
-    
     public void saveInstanciasInMemory(Instancias instancias){
         if(instanciasYaGuardadas(instancias)==false){
             CollectionTest.getInstance().getInstancias().add(instancias);
@@ -110,5 +103,43 @@ public class SaveTest {
     public void actualizarListaDeInstancias(){
         listInst = ListarTestsJPanel.getInstance();
         listInst.aniadirInstancias(CollectionTest.getInstance().getInstancias());
+    }
+    
+    public void saveTestInMemory(ScenarioTest scenario){
+        if(testYaGuardado(scenario)==false){
+            CollectionTest.getInstance().getScenariotest().add(scenario);
+        }
+    }
+    
+    public boolean testYaGuardado(ScenarioTest scen){
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
+        for(int i=0; i<scenario.size(); i++){
+            if(scen.getNombre().equals(scenario.get(i).getNombre())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean replaceScenarioLocally(ScenarioTest scen){
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
+        for(int i=0; i<scenario.size(); i++){
+            if(scen.getNombre().equals(scenario.get(i).getNombre())){
+                scenario.remove(i);
+                scenario.add(scen);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void actualizarListaDeTestsSimples(){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirTestSimple(CollectionTest.getInstance().getScenariotest());
+    }
+    
+    public void actualizarListaDeTestsSparql(){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirTestSparql(CollectionTest.getInstance().getScenariotest());
     }
 }

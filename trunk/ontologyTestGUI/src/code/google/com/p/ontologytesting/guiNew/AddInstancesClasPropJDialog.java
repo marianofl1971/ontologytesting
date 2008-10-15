@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.guiNew.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;

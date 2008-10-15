@@ -56,7 +56,7 @@ public class ScenarioTest {
         this.setInstancias(nuevo.getInstancias());
         this.setQueryTest(nuevo.getQueryTest());
         this.setSparqlQuerys(nuevo.getSparqlQuerys());
-        //this.setTestName(nuevo.getTestName());
+        this.setTipoTest(nuevo.getTipoTest());
     }
     
     public ScenarioTest(){
