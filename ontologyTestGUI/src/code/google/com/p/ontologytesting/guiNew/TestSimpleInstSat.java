@@ -15,7 +15,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -133,7 +132,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setImportado(true);
         setSoloEjecutar(false);
     }
 
@@ -368,10 +366,49 @@ private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent e
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-
+    saveTest = new SaveTest();
+    testcase = new OntologyTestCase();
+    testresult = new OntologyTestResult();
+    if(getTabbedPaneInst()==0){
+        copiarTestAScenarioDesdeAyuda();
+    }else if(getTabbedPaneInst()==1){
+        copiarTestAScenarioDesdeSinAyuda();
+    }
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+           realizarAccion(true, false);
+        }else{
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst.setLocationRelativeTo(this.getParent());
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+        }
+    }
 }
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    setSoloEjecutar(true);
+    saveTest = new SaveTest();
+    testcase = new OntologyTestCase();
+    testresult = new OntologyTestResult();
+    if(getTabbedPaneInst()==0){
+        copiarTestAScenarioDesdeAyuda();
+    }else if(getTabbedPaneInst()==1){
+        copiarTestAScenarioDesdeSinAyuda();
+    }
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            ejecutar();
+        }else{
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst.setLocationRelativeTo(this.getParent());
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+        }
+    }
+}
+
+private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
     setSoloEjecutar(true);
     saveTest = new SaveTest();
@@ -384,7 +421,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            ejecutar(0);
+            realizarAccion(true, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
@@ -394,94 +431,54 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 }
 
-private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-// TODO add your handling code here:
-
-}
-
-
-public boolean guardarTest(){
-    if(getTabbedPaneInst()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneInst()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            guardar();
-            return true;
-        }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-            return false;
-        }
-    }else{
-        return false;
-    }   
-}
-
-public void guardar(){
+public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
-    if(testYaExiste==true || isImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                try {
-                    saveTest.saveTestInMemory(scenario);
-                    if(testYaExiste==true){
-                        saveTest.replaceTestLocally(scenario);
-                    }else{
-                        saveTest.saveTestLocally(scenario);
-                    }
+    if(testYaExiste==true){
+        if(guardar==true){
+            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
+                    && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+                Object[] options = {"Sobreescribir", "Cancelar"};
+                int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
+                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                if (n == JOptionPane.YES_OPTION) {
+                    saveTest.replaceScenarioLocally(scenario);
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestInstSatGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
                 }
-            }else if (n == JOptionPane.NO_OPTION) {
+            }else{
+                saveTest.saveTestInMemory(scenario);
+                controlador.setTestInstSatGuardado(true);
+                JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }
-        }else{
-            controlador.setTestInstSatGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
-        setImportado(false);
+        if(ejecutar==true){
+            ejecutar();
+        }
     }else{ 
-        try {
+        if(guardar==true){
             saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestInstSatGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-            "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+        if(ejecutar==true){
+            ejecutar();
         }
     }
+    saveTest.actualizarListaDeTestsSimples();
 }
 
-
-public void ejecutar(int cuantos){
-    if(isSoloEjecutar()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            saveTest.replaceTestLocally(scenario);
-        }else{
-            saveTest.saveTestLocally(scenario);
-        }
-    }
+public void ejecutar(){
     try{
-        if(cuantos==0){
+        if(isSoloEjecutar()==true){
             testcase.runScenario(testresult, CollectionTest.getInstance(), this.getScenario());   
-        }else if(cuantos==1){
+        }else{
             testcase.run(testresult, CollectionTest.getInstance());
         }
         new TreeResults(testresult);
@@ -489,56 +486,6 @@ public void ejecutar(int cuantos){
         new ExceptionReadOntology("La ontologia introducida no es valida." +
         "\nSolo pueden realizarse tests sobre documentos owl consistentes");
     }
-}
-
-public void guardarYEjecutar(){  
-    if(testYaExiste==true || isImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                try {
-                    saveTest.saveTestInMemory(scenario);
-                    if(testYaExiste==true){
-                        saveTest.replaceTestLocally(scenario);
-                    }else{
-                        saveTest.saveTestLocally(scenario);
-                    }
-                    setScenarioAEditar(new ScenarioTest(scenario));
-                    setScenario(new ScenarioTest(scenario));
-                    controlador.setTestInstSatGuardado(true);
-                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                    ejecutar(0);
-                } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-                }
-            }else if (n == JOptionPane.NO_OPTION) {
-            }
-        }else{
-            controlador.setTestInstSatGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
-        }
-        setImportado(false);
-     }else{
-        try {
-            saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
-            setScenario(new ScenarioTest(scenario));
-            controlador.setTestInstSatGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
-        }catch (FileNotFoundException ex){
-            JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }    
 }
 
 public void inicializarVariables(){
@@ -1011,10 +958,6 @@ public  int getTabbedPaneInst() {
     return tabbedPaneInst.getSelectedIndex();
 }
 
-public JPanel panelActualInstSat(){
-    return this.getInstAyudaPanel();
-}
-
 public ScenarioTest getScenarioAEditar() {
     return scenarioAEditar;
 }
@@ -1023,12 +966,12 @@ public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
     this.scenarioAEditar = scenarioAEditar;
 }
 
-public boolean isImportado() {
-    return importado;
+public boolean isSoloEjecutar() {
+    return soloEjecutar;
 }
 
-public void setImportado(boolean importado) {
-    this.importado = importado;
+public void setSoloEjecutar(boolean soloEjecutar) {
+    this.soloEjecutar = soloEjecutar;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1047,14 +990,6 @@ public void setImportado(boolean importado) {
     private javax.swing.JPanel opcionTextInstPanel;
     private javax.swing.JTabbedPane tabbedPaneInst;
     // End of variables declaration//GEN-END:variables
-
-    public boolean isSoloEjecutar() {
-        return soloEjecutar;
-    }
-
-    public void setSoloEjecutar(boolean soloEjecutar) {
-        this.soloEjecutar = soloEjecutar;
-    }
 
     class Task extends SwingWorker<Void, Void> {
         @Override
@@ -1102,9 +1037,4 @@ public void setImportado(boolean importado) {
             }
         }
     }
-    
-    public TestSimpleInstSat getPanel(){
-        return this;
-    }
-
 }

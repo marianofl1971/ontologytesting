@@ -690,23 +690,18 @@ public void guardarYEjecutar(){
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             if (n == JOptionPane.YES_OPTION) {
-                try {
-                    saveTest.saveTestInMemory(scenario);
-                    if(testYaExiste==true){
-                        saveTest.replaceTestLocally(scenario);
-                    }else{
-                        saveTest.saveTestLocally(scenario);
-                    }
-                    setScenarioAEditar(new ScenarioTest(scenario));
-                    setScenario(new ScenarioTest(scenario));
-                    controlador.setTestSparqlGuardado(true);
-                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                    ejecutar(0);
-                } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                saveTest.saveTestInMemory(scenario);
+                if(testYaExiste==true){
+                    saveTest.replaceTestLocally(scenario);
+                }else{
+                    saveTest.saveTestLocally(scenario);
                 }
+                setScenarioAEditar(new ScenarioTest(scenario));
+                setScenario(new ScenarioTest(scenario));
+                controlador.setTestSparqlGuardado(true);
+                JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                ejecutar(0);
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
@@ -717,19 +712,14 @@ public void guardarYEjecutar(){
         }
         setImportado(false);
      }else{
-        try {
-            saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
-            setScenario(new ScenarioTest(scenario));
-            controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
-        }catch (FileNotFoundException ex){
-            JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
+        saveTest.saveTestInMemory(scenario);
+        saveTest.saveTestLocally(scenario);
+        setScenarioAEditar(new ScenarioTest(scenario));
+        setScenario(new ScenarioTest(scenario));
+        controlador.setTestSparqlGuardado(true);
+        JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        ejecutar(0);
     }    
 }
 
@@ -741,22 +731,17 @@ public void guardar(){
             int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             if (n == JOptionPane.YES_OPTION) {
-                try {
-                    saveTest.saveTestInMemory(scenario);
-                    if(testYaExiste==true){
-                        saveTest.replaceTestLocally(scenario);
-                    }else{
-                        saveTest.saveTestLocally(scenario);
-                    }
-                    setScenarioAEditar(new ScenarioTest(scenario));
-                    setScenario(new ScenarioTest(scenario));
-                    controlador.setTestSparqlGuardado(true);
-                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                } catch (FileNotFoundException ex) {
-                    JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                saveTest.saveTestInMemory(scenario);
+                if(testYaExiste==true){
+                    saveTest.replaceTestLocally(scenario);
+                }else{
+                    saveTest.saveTestLocally(scenario);
                 }
+                setScenarioAEditar(new ScenarioTest(scenario));
+                setScenario(new ScenarioTest(scenario));
+                controlador.setTestSparqlGuardado(true);
+                JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }else if (n == JOptionPane.NO_OPTION) {
             }
         }else{
@@ -766,18 +751,13 @@ public void guardar(){
         }
         setImportado(false);
     }else{ 
-        try {
-            saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
-            setScenario(new ScenarioTest(scenario));
-            controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this.getParent(),"El test no ha sido guardado",
-            "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
+        saveTest.saveTestInMemory(scenario);
+        saveTest.saveTestLocally(scenario);
+        setScenarioAEditar(new ScenarioTest(scenario));
+        setScenario(new ScenarioTest(scenario));
+        controlador.setTestSparqlGuardado(true);
+        JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
     }
 }
 

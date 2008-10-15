@@ -27,8 +27,6 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
  
     private ListarTestsJPanel() {
         initComponents();
-        modeloSimles = new DefaultListModel();
-        modeloSparql = new DefaultListModel();
         testSimplesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         testSimplesList.setSelectedIndex(0);
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
@@ -54,16 +52,22 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     }
     
     public void aniadirTestSimple(List<ScenarioTest> scenario){ 
+        modeloSimles = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
-            modeloSimles.addElement(scenario.get(i).getNombre());  
+            if(scenario.get(i).getTipoTest().getTipo()!=5){
+                modeloSimles.addElement(scenario.get(i).getNombre());  
+            }
         }
         testSimplesList.setModel(modeloSimles);
         simplesPanel.validate();
     }
     
     public void aniadirTestSparql(List<ScenarioTest> scenario){ 
+        modeloSparql = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
-            modeloSparql.addElement(scenario.get(i).getNombre());  
+            if(scenario.get(i).getTipoTest().getTipo()==5){
+                modeloSparql.addElement(scenario.get(i).getNombre());  
+            }
         }
         testSparqlList.setModel(modeloSparql);
         sparqlPanel.validate();
