@@ -11,12 +11,10 @@ import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.awt.Component;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -27,28 +25,16 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,testYaExiste,sinConsultas,
             ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
-    private JPanel panelTree;
-    static final int desktopWidth = 700;
-    static final int desktopHeight = 600;
-    static JFrame frame;
-    public static boolean seleccionado;
-    public static ScenarioTest scenarioTestQuery;
-    private int index=0;
-    private boolean isAntSelected=false, isSigSelected=false;
+    private static JFrame frame;
     private Component comp;
     private ScenarioTest scenario,scenarioAEditar;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
     private JenaInterface jenaInterface;
     private Jena jena;
-    private boolean importado;
     private ValidarTests validarTest;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
-    private OntologyTestCase testcase;
-    private ResultTests resultTests;
-    private OntologyTestResult testresult;
-    private boolean soloEjectuar;
     private ControladorTests controlador;
     private Utils utils;
     
@@ -87,7 +73,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         resultTextArea.setLineWrap(true);
         resultTextArea.setWrapStyleWord(true);
         frame = new JFrame();
-        setImportado(true);
         List<SparqlQueryOntology> lista = s.getSparqlQuerys();
         if(lista.size()>0){
             for(int i=0; i<lista.size();i++){
@@ -105,10 +90,9 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             this.setTestDescTextArea(s.getDescripcion());
         }
         this.inicializarVariables();
-         utils = new Utils();
+        utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setSoloEjectuar(false);
         setPosListQuerysSel(0);
     }
 
@@ -142,6 +126,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         guardarEjecutarJButton = new javax.swing.JButton();
         ejecutarJButton = new javax.swing.JButton();
         guardarJButton = new javax.swing.JButton();
+        asociarInstanciasButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -154,7 +139,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         limpiarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
-        limpiarButton.setText("Limpiar");
         limpiarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarButtonActionPerformed(evt);
@@ -194,7 +178,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         limpiarResultButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
-        limpiarResultButton.setText("Limpiar");
         limpiarResultButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarResultButtonActionPerformed(evt);
@@ -202,7 +185,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         borrarConsultaJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        borrarConsultaJButton.setText("Borrar");
         borrarConsultaJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarConsultaJButtonActionPerformed(evt);
@@ -240,6 +222,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        asociarInstanciasButton.setText("Asociar Instancias");
+        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asociarInstanciasButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,91 +238,85 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                            .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(layout.createSequentialGroup()
-                                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(160, 160, 160))
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(limpiarButton)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(borrarConsultaJButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 96, Short.MAX_VALUE)
+                                        .add(118, 118, 118)
                                         .add(antQueryButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(sigQueryButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(nuevaConsultaButton))
-                                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                                    .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane2)
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(layout.createSequentialGroup()
-                                                .add(jLabel4)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 134, Short.MAX_VALUE))
-                                            .add(layout.createSequentialGroup()
-                                                .add(guardarJButton)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                                .add(ejecutarJButton)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
-                                        .add(guardarEjecutarJButton))
-                                    .add(limpiarResultButton)))
-                            .add(layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 209, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 418, Short.MAX_VALUE)
-                                .add(formatosPermitidos)))
-                        .addContainerGap())
+                                    .add(jLabel4)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(limpiarResultButton)
+                                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 336, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(asociarInstanciasButton)))))
+                        .add(12, 12, 12))
                     .add(layout.createSequentialGroup()
-                        .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(593, Short.MAX_VALUE))
-                    .add(layout.createSequentialGroup()
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                        .add(380, 380, 380))))
+                        .add(guardarJButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(ejecutarJButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(guardarEjecutarJButton)
+                        .addContainerGap(467, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 209, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 375, Short.MAX_VALUE)
+                        .add(formatosPermitidos)
+                        .add(53, 53, 53))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(27, 27, 27)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(formatosPermitidos))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(layout.createSequentialGroup()
-                        .add(10, 10, 10)
-                        .add(jLabel2)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(11, 11, 11)
                         .add(jLabel3)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(23, 23, 23)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel1)
-                            .add(jLabel4)))
-                    .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(formatosPermitidos)))
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(asociarInstanciasButton))
+                .add(23, 23, 23)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(jLabel4))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(antQueryButton)
-                    .add(sigQueryButton)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(limpiarButton)
-                        .add(borrarConsultaJButton))
                     .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(limpiarButton)
+                                .add(borrarConsultaJButton))
+                            .add(nuevaConsultaButton)
+                            .add(sigQueryButton)
+                            .add(antQueryButton))
+                        .add(38, 38, 38)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(limpiarResultButton)
-                            .add(nuevaConsultaButton))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 75, Short.MAX_VALUE)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(guardarEjecutarJButton)
+                            .add(guardarJButton)
                             .add(ejecutarJButton)
-                            .add(guardarJButton))))
+                            .add(guardarEjecutarJButton)))
+                    .add(limpiarResultButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -383,84 +366,6 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
     }
 }//GEN-LAST:event_nuevaConsultaButtonActionPerformed
 
-public void reemplazarConsulta(SparqlQueryOntology query,int pos){
-    if(pos==listaDeConsultas.size()){
-        listaDeConsultas.add(query);
-    }else{
-        listaDeConsultas.remove(pos);
-        listaDeConsultas.add(pos, query);
-    }
-}
-
-public void prepararNuevaConsultaVacia(){
-    this.setSPARQLQuery("");
-    this.setResultTextArea("");
-}
-
-public void prepararNuevaConsultaCompleta(SparqlQueryOntology query){
-    this.setSPARQLQuery(query.getQuerySparql());
-    this.setResultTextArea(query.getResultexpected());
-}
-
-public void consultaVacia(String q, String r){
-    if(q.equals("") && r.equals("")){
-        sinConsultas=true;
-    }
-}
-
-public void consultaCompleta(String query, String result){
-    if((query.equals("") && !result.equals("")) || (!query.equals("") && result.equals(""))){
-        ambosNecesarios=true;
-    }
-}
-
-public boolean consultaOK(String query, String result){
-    if(resultValido==true && ambosNecesarios==false && sinConsultas==false){
-        continuar=true;
-    }else if(sinConsultas==true){
-        JOptionPane.showMessageDialog(this,"Debe introducir alguna consulta",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(this,"Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(queryValida==false && resultValido==false){
-        JOptionPane.showMessageDialog(this,"La consulta introducida y el resultado no son validos",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(queryValida==false){
-        JOptionPane.showMessageDialog(this,"La consulta introducida no es valida",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(resultValido==false){
-        JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }
-    return continuar;
-}
-
-public void validarConsulta(String query){
-    jenaInterface = new JenaInterface();   
-    jena = jenaInterface.getJena();
-    try{
-        jena.validarSparqlQuery(query); 
-    }catch(Exception ex){
-        JOptionPane.showMessageDialog(this,"La consulta SPARQL no es valida",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        queryValida=false;
-        continuar=false;
-    }
-}
-
-public void validarResultado(String resul){
-    validarTest = new ValidarTests();
-    if(!validarTest.validarSparqlResult(resul)){
-        resultValido=false;
-        continuar=false;
-    }
-}
 
 private void limpiarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarButtonActionPerformed
 // TODO add your handling code here:
@@ -575,28 +480,41 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
     
 }//GEN-LAST:event_borrarConsultaJButtonActionPerformed
 
-private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosPermitidosActionPerformed
+private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN FIRST:event_formatosPermitidosActionPerformed
 // TODO add your handling code here:
     FormatTestsJDialog format = new FormatTestsJDialog(frame,true,5);
     format.setLocationRelativeTo(this);
     format.setModal(false);
     format.setVisible(true);
-}//GEN-LAST:event_formatosPermitidosActionPerformed
+}                                                  
+
+private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
+// TODO add your handling code here:
+    addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());                                                       
+    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    addInst.setVisible(true);
+}//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    guardarTest();
+    prepararGuardar();
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            this.realizarAccion(true, false);
+        }else{
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+        }
+    }
 }                                              
 
 private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
 // TODO add your handling code here:
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    resultTests = new ResultTests();
-    testresult = new OntologyTestResult();  
+    prepararGuardar();
     if(continuar==true){
         if(continuarSinInstancias==true){
-            guardarYEjecutarTest();
+            this.realizarAccion(true, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -607,15 +525,10 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
 
 private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
-    setSoloEjectuar(true);
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    resultTests = new ResultTests();
-    testresult = new OntologyTestResult();
     prepararGuardar();
     if(continuar==true){
         if(continuarSinInstancias==true){
-            ejecutar(0);
+            this.realizarAccion(false, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -624,140 +537,125 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 }                                               
 
-public boolean guardarTest(){
-    prepararGuardar();
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            guardar();
-            return true;
-        }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-            return false;
-        }
-    }else{
-        return false;
-    }   
-}
-
-public void guardarYEjecutarTest(){
+public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    resultTests = new ResultTests();
-    testresult = new OntologyTestResult();
-    prepararGuardar();
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            guardarYEjecutar();
-        }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-        }
-    }
-}
-
-public void ejecutar(int cuantos){
-    if(isSoloEjectuar()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            saveTest.replaceTestLocally(scenario);
-        }else{
-            saveTest.saveTestLocally(scenario);
-        }
-    }
-    try{
-        if(cuantos==0){
-            testcase.runScenario(testresult, CollectionTest.getInstance(),getScenario());   
-        }else if(cuantos==1){
-            testcase.run(testresult, CollectionTest.getInstance());
-        }
-        JPanel panel = new TreeResults(testresult);
-        resultTests.getContentPanelResults().add(panel);
-        resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        resultTests.setVisible(true);
-        resultTests.validate();
-    } catch (ExceptionReadOntology ex) {
-        new ExceptionReadOntology("La ontologia introducida no es valida." +
-        "\nSolo pueden realizarse tests sobre documentos owl consistentes");
-    }
-}
-
-public void guardarYEjecutar(){
-    if(testYaExiste==true || getImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                saveTest.saveTestInMemory(scenario);
-                if(testYaExiste==true){
-                    saveTest.replaceTestLocally(scenario);
-                }else{
-                    saveTest.saveTestLocally(scenario);
+    if(testYaExiste==true){
+        if(guardar==true){
+            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
+                        && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+                Object[] options = {"Sobreescribir", "Cancelar"};
+                int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
+                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                if (n == JOptionPane.YES_OPTION) {
+                    saveTest.replaceScenarioLocally(scenario);
+                    setScenarioAEditar(new ScenarioTest(scenario));
+                    setScenario(new ScenarioTest(scenario));
+                    controlador.setTestSparqlGuardado(true);
+                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
                 }
-                setScenarioAEditar(new ScenarioTest(scenario));
-                setScenario(new ScenarioTest(scenario));
+            }else{
+                saveTest.saveTestInMemory(scenario);
                 controlador.setTestSparqlGuardado(true);
-                JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                ejecutar(0);
-            }else if (n == JOptionPane.NO_OPTION) {
             }
-        }else{
-            controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
         }
-        setImportado(false);
+        if(ejecutar==true){
+            utils.ejecutarUnTest(this.getScenario());
+        }
      }else{
-        saveTest.saveTestInMemory(scenario);
-        saveTest.saveTestLocally(scenario);
-        setScenarioAEditar(new ScenarioTest(scenario));
-        setScenario(new ScenarioTest(scenario));
-        controlador.setTestSparqlGuardado(true);
-        JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        ejecutar(0);
-    }    
-}
-
-public void guardar(){
-    saveTest = new SaveTest();
-    if(testYaExiste==true || getImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                saveTest.saveTestInMemory(scenario);
-                if(testYaExiste==true){
-                    saveTest.replaceTestLocally(scenario);
-                }else{
-                    saveTest.saveTestLocally(scenario);
-                }
-                setScenarioAEditar(new ScenarioTest(scenario));
-                setScenario(new ScenarioTest(scenario));
-                controlador.setTestSparqlGuardado(true);
-                JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            }else if (n == JOptionPane.NO_OPTION) {
-            }
-        }else{
+        if(guardar==true){
+            saveTest.saveTestInMemory(scenario);
+            setScenarioAEditar(new ScenarioTest(scenario));
+            setScenario(new ScenarioTest(scenario));
             controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
+            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
-        setImportado(false);
-    }else{ 
-        saveTest.saveTestInMemory(scenario);
-        saveTest.saveTestLocally(scenario);
-        setScenarioAEditar(new ScenarioTest(scenario));
-        setScenario(new ScenarioTest(scenario));
-        controlador.setTestSparqlGuardado(true);
-        JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-        "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+        if(ejecutar==true){
+            utils.ejecutarUnTest(this.getScenario());
+        }
+    }  
+    saveTest.actualizarListaDeTestsSparql();  
+}
+
+public void reemplazarConsulta(SparqlQueryOntology query,int pos){
+    if(pos==listaDeConsultas.size()){
+        listaDeConsultas.add(query);
+    }else{
+        listaDeConsultas.remove(pos);
+        listaDeConsultas.add(pos, query);
+    }
+}
+
+public void prepararNuevaConsultaVacia(){
+    this.setSPARQLQuery("");
+    this.setResultTextArea("");
+}
+
+public void prepararNuevaConsultaCompleta(SparqlQueryOntology query){
+    this.setSPARQLQuery(query.getQuerySparql());
+    this.setResultTextArea(query.getResultexpected());
+}
+
+public void consultaVacia(String q, String r){
+    if(q.equals("") && r.equals("")){
+        sinConsultas=true;
+    }
+}
+
+public void consultaCompleta(String query, String result){
+    if((query.equals("") && !result.equals("")) || (!query.equals("") && result.equals(""))){
+        ambosNecesarios=true;
+    }
+}
+
+public boolean consultaOK(String query, String result){
+    if(resultValido==true && ambosNecesarios==false && sinConsultas==false){
+        continuar=true;
+    }else if(sinConsultas==true){
+        JOptionPane.showMessageDialog(this,"Debe introducir alguna consulta",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        continuar=false;
+    }else if(ambosNecesarios==true){
+        JOptionPane.showMessageDialog(this,"Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        continuar=false;
+    }else if(queryValida==false && resultValido==false){
+        JOptionPane.showMessageDialog(this,"La consulta introducida y el resultado no son validos",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        continuar=false;
+    }else if(queryValida==false){
+        JOptionPane.showMessageDialog(this,"La consulta introducida no es valida",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        continuar=false;
+    }else if(resultValido==false){
+        JOptionPane.showMessageDialog(this,"El formato del resultado no es valido",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        continuar=false;
+    }
+    return continuar;
+}
+
+public void validarConsulta(String query){
+    jenaInterface = new JenaInterface();   
+    jena = jenaInterface.getJena();
+    try{
+        jena.validarSparqlQuery(query); 
+    }catch(Exception ex){
+        JOptionPane.showMessageDialog(this,"La consulta SPARQL no es valida",
+        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        queryValida=false;
+        continuar=false;
+    }
+}
+
+public void validarResultado(String resul){
+    validarTest = new ValidarTests();
+    if(!validarTest.validarSparqlResult(resul)){
+        resultValido=false;
+        continuar=false;
     }
 }
 
@@ -879,14 +777,6 @@ public void inicializarVariables(){
         }
         return false;
     }
-
-    public JPanel getPanelTree() {
-        return panelTree;
-    }
-
-    public void setPanelTree(JPanel aPanelTree) {
-        panelTree = aPanelTree;
-    }
     
     public List<SparqlQueryOntology> getListaDeConsultas() {
         return listaDeConsultas;
@@ -928,56 +818,16 @@ public void inicializarVariables(){
         testNameTextField.setText(aTestNameTextField);
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public boolean isIsAntSelected() {
-        return isAntSelected;
-    }
-
-    public void setIsAntSelected(boolean isAntSelected) {
-        this.isAntSelected = isAntSelected;
-    }
-
-    public boolean isIsSigSelected() {
-        return isSigSelected;
-    }
-
-    public void setIsSigSelected(boolean isSigSelected) {
-        this.isSigSelected = isSigSelected;
-    }
-
-    public javax.swing.JButton getAntQueryButton() {
-        return antQueryButton;
-    }
-
-    public  javax.swing.JButton getSigQueryButton() {
-        return sigQueryButton;
-    }
-
     public javax.swing.JTextArea getSparqlTextArea() {
         return sparqlTextArea;
     }
 
-    public static boolean isSeleccionado() {
-        return seleccionado;
-    }
-
-    public static void setSeleccionado(boolean aSeleccionado) {
-        seleccionado = aSeleccionado;
-    }
-
     public void setAntQueryButton(boolean state) {
-        getAntQueryButton().setEnabled(state);
+        antQueryButton.setEnabled(state);
     }
 
     public void setSigQueryButton(boolean state) {
-        getSigQueryButton().setEnabled(state);
+        sigQueryButton.setEnabled(state);
     }
 
     public int getPosListQuerysSel() {
@@ -1003,25 +853,10 @@ public void inicializarVariables(){
     public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
         this.scenarioAEditar = scenarioAEditar;
     }
-
-    public boolean getImportado() {
-        return importado;
-    }
-
-    public void setImportado(boolean importado) {
-        this.importado = importado;
-    }
-    
-    public boolean isSoloEjectuar() {
-        return soloEjectuar;
-    }
-
-    public void setSoloEjectuar(boolean soloEjectuar) {
-        this.soloEjectuar = soloEjectuar;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton antQueryButton;
+    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JButton borrarConsultaJButton;
     private javax.swing.JButton ejecutarJButton;
     private javax.swing.JButton formatosPermitidos;
