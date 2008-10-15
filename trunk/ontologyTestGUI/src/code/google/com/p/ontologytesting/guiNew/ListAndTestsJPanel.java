@@ -20,7 +20,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private ListAndTestsJPanel() {
         initComponents();
         this.listTestPanel.setLayout(new BorderLayout());
-        this.testsPanel.setLayout(new FlowLayout());
+        this.testsPanel.setLayout(new BorderLayout());
         this.splitPane.setDividerLocation(235);
     }
  
@@ -59,6 +59,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
 
         splitPane = new javax.swing.JSplitPane();
         listTestPanel = new javax.swing.JPanel();
+        testsScrollPane = new javax.swing.JScrollPane();
         testsPanel = new javax.swing.JPanel();
 
         splitPane.setOneTouchExpandable(true);
@@ -67,7 +68,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         listTestPanel.setLayout(listTestPanelLayout);
         listTestPanelLayout.setHorizontalGroup(
             listTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 129, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         listTestPanelLayout.setVerticalGroup(
             listTestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,14 +81,16 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsPanel.setLayout(testsPanelLayout);
         testsPanelLayout.setHorizontalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 635, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         testsPanelLayout.setVerticalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 298, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
         );
 
-        splitPane.setRightComponent(testsPanel);
+        testsScrollPane.setViewportView(testsPanel);
+
+        splitPane.setRightComponent(testsScrollPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,6 +108,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel listTestPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel testsPanel;
+    private javax.swing.JScrollPane testsScrollPane;
     // End of variables declaration//GEN-END:variables
 
 

@@ -36,6 +36,7 @@ public class TreeResults extends JPanel {
     private static String testSeleccionado;
     private JScrollPane resultsView,treeView;
     private ListarTestsJPanel listT;
+    private String resultado="";
 
     public TreeResults(final OntologyTestResult testresult) {
 
@@ -99,7 +100,6 @@ public class TreeResults extends JPanel {
         
         htmlPane.setContentType("text/html");
         ListIterator liFailures,liSparql,liFailuresPassed,liSparqlPassed;
-        String resultado="";
         int var=0;
         List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
         List<OntologyTestFailure> failuresSparql = testresult.getOntologyTestFailureSparql();

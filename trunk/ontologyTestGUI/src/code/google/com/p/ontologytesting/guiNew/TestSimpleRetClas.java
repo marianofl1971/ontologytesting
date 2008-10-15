@@ -356,7 +356,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             guardarYEjecutar();
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -378,7 +378,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             ejecutar(0);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -423,7 +423,7 @@ public boolean guardarTest(){
             guardar();
             return true;
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
             return false;

@@ -9,9 +9,9 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -43,9 +43,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private static boolean validoInst;
     private static JPanel panelAyudaInst;
     private static int totalInst;
-    static final int desktopWidth = 750;
-    static final int desktopHeight = 600;
-    static JFrame frame;
+    private static JFrame frame;
     private static boolean ambosNecesarios;
     public static boolean seleccionado;
     private static List inst;
@@ -95,10 +93,11 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
+        frame = new JFrame();
         TestInstancesTFJPanel.setContadorInstSat(0);
         controlador = ControladorTests.getInstance();
-        descripcionJPanel.setLayout(new FlowLayout());
-        descripcionJPanel.add(new DescripcionJPanel());
+        descripcionJPanel.setLayout(new BorderLayout());
+        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.CENTER);
         opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
         this.setMaximumSize(new Dimension(400,500));
@@ -155,6 +154,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         labelInstPanel = new javax.swing.JPanel();
         labelInstLabel = new javax.swing.JLabel();
         opcionTextInstPanel = new javax.swing.JPanel();
+        asociarInstanciasButton = new javax.swing.JButton();
         descripcionJPanel = new javax.swing.JPanel();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
@@ -236,31 +236,39 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
 
         tabbedPaneInst.addTab("Formato Texto", opcionTextInstPanel);
 
+        asociarInstanciasButton.setText("Asociar Instancias");
+        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asociarInstanciasButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentInstTabedPanelLayout = new javax.swing.GroupLayout(contentInstTabedPanel);
         contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
         contentInstTabedPanelLayout.setHorizontalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 832, Short.MAX_VALUE)
-            .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
-                    .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentInstTabedPanelLayout.createSequentialGroup()
+                .addContainerGap(645, Short.MAX_VALUE)
+                .addComponent(asociarInstanciasButton)
+                .addGap(86, 86, 86))
+            .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentInstTabedPanelLayout.setVerticalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-            .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
+                .addComponent(asociarInstanciasButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
         descripcionJPanel.setLayout(descripcionJPanelLayout);
         descripcionJPanelLayout.setHorizontalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
         descripcionJPanelLayout.setVerticalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,42 +303,42 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap(463, Short.MAX_VALUE)
+                .addContainerGap(415, Short.MAX_VALUE)
                 .addComponent(guardarButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ejecutarButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarEjecutarButton)
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(guardarButton)
+                .addComponent(guardarEjecutarButton)
                 .addComponent(ejecutarButton)
-                .addComponent(guardarEjecutarButton))
+                .addComponent(guardarButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,6 +358,13 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         setActualSubTabInst(subTab);
     }
 }//GEN-LAST:event_tabbedPaneInstMouseClicked
+
+private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
+// TODO add your handling code here:
+    addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());//GEN-LAST:event_asociarInstanciasButtonActionPerformed
+    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    addInst.setVisible(true);
+}
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
@@ -371,7 +386,8 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             ejecutar(0);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst.setLocationRelativeTo(this.getParent());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -395,7 +411,7 @@ public boolean guardarTest(){
             guardar();
             return true;
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
             return false;
@@ -1016,6 +1032,7 @@ public void setImportado(boolean importado) {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentInstTabedPanel;
     private javax.swing.JPanel descripcionJPanel;

@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
+import code.google.com.p.ontologytesting.guiNew.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -24,6 +25,7 @@ import javax.swing.JFileChooser;
 public class SaveTest {
     private Component frame;
     private CollectionTest collection;
+    private ListarTestsJPanel listInst;
     
     public void saveProject() throws FileNotFoundException{
         /*collection = CollectionTest.getInstance();
@@ -78,7 +80,35 @@ public class SaveTest {
     }
     
     public void saveInstanciasInMemory(Instancias instancias){
-        CollectionTest.getInstance().getInstancias().add(instancias);
+        if(instanciasYaGuardadas(instancias)==false){
+            CollectionTest.getInstance().getInstancias().add(instancias);
+        }
     }
-
+    
+    public boolean instanciasYaGuardadas(Instancias inst){
+        List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
+        for(int i=0; i<instancias.size(); i++){
+            if(inst.getNombre().equals(instancias.get(i).getNombre())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean replaceInstanciasLocally(Instancias inst){
+        List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
+        for(int i=0; i<instancias.size(); i++){
+            if(inst.getNombre().equals(instancias.get(i).getNombre())){
+                instancias.remove(i);
+                instancias.add(inst);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void actualizarListaDeInstancias(){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirInstancias(CollectionTest.getInstance().getInstancias());
+    }
 }
