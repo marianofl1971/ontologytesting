@@ -6,12 +6,10 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -35,9 +33,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private static boolean validoRet;
     private static JPanel panelAyudaRet;
     private static int totalRet;
-    static final int desktopWidth = 750;
-    static final int desktopHeight = 600;
-    static JFrame frame;
+    private static JFrame frame;
     private static boolean ambosNecesarios;
     public static boolean seleccionado;
     private static List ret;
@@ -53,11 +49,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
-    private static OntologyTestResult testresult;
-    private OntologyTestCase testcase;
     private ScenarioTest scenarioAEditar;
-    private boolean importado;
-    private boolean soloEjecutar;
     private ControladorTests controlador;
     private Utils utils;
     
@@ -119,8 +111,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setImportado(true);
-        setSoloEjecutar(false);
     }
 
 
@@ -141,6 +131,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         labelRetPanel = new javax.swing.JPanel();
         labelRetLabel = new javax.swing.JLabel();
         opcionTextRetPanel = new javax.swing.JPanel();
+        asociarInstanciasButton = new javax.swing.JButton();
         descripcionJPanel = new javax.swing.JPanel();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
@@ -196,9 +187,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         opcionAyudaRetPanelLayout.setHorizontalGroup(
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                .addContainerGap())
         );
         opcionAyudaRetPanelLayout.setVerticalGroup(
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +203,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         opcionTextRetPanel.setLayout(opcionTextRetPanelLayout);
         opcionTextRetPanelLayout.setHorizontalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 805, Short.MAX_VALUE)
         );
         opcionTextRetPanelLayout.setVerticalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,31 +212,38 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
 
         tabbedPaneRet.addTab("Formato Texto", opcionTextRetPanel);
 
+        asociarInstanciasButton.setText("Asociar Instancias");
+        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asociarInstanciasButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentRetTabedPanelLayout = new javax.swing.GroupLayout(contentRetTabedPanel);
         contentRetTabedPanel.setLayout(contentRetTabedPanelLayout);
         contentRetTabedPanelLayout.setHorizontalGroup(
             contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 840, Short.MAX_VALUE)
-            .addGroup(contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
-                    .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
+                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentRetTabedPanelLayout.createSequentialGroup()
+                .addContainerGap(647, Short.MAX_VALUE)
+                .addComponent(asociarInstanciasButton)
+                .addGap(54, 54, 54))
         );
         contentRetTabedPanelLayout.setVerticalGroup(
             contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-            .addGroup(contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentRetTabedPanelLayout.createSequentialGroup()
+                .addComponent(asociarInstanciasButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
         descripcionJPanel.setLayout(descripcionJPanelLayout);
         descripcionJPanelLayout.setHorizontalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+            .addGap(0, 670, Short.MAX_VALUE)
         );
         descripcionJPanelLayout.setVerticalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,47 +277,47 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         contentGuardarEjecutarPanel.setLayout(contentGuardarEjecutarPanelLayout);
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap(477, Short.MAX_VALUE)
+            .addGroup(contentGuardarEjecutarPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(guardarButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ejecutarButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarEjecutarButton)
-                .addContainerGap())
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(guardarEjecutarButton)
+                .addComponent(guardarButton)
                 .addComponent(ejecutarButton)
-                .addComponent(guardarButton))
+                .addComponent(guardarEjecutarButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -339,14 +336,6 @@ private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    guardarTest();
-}//GEN-LAST:event_guardarButtonActionPerformed
-
-private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
-// TODO add your handling code here:
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    testresult = new OntologyTestResult();
     if(getTabbedPaneRet()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneRet()==1){
@@ -354,7 +343,25 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            guardarYEjecutar();
+            this.realizarAccion(true, false);
+        }else{
+            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
+        }
+    }
+}//GEN-LAST:event_guardarButtonActionPerformed
+
+private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
+// TODO add your handling code here:
+    if(getTabbedPaneRet()==0){
+        copiarTestAScenarioDesdeAyuda();
+    }else if(getTabbedPaneRet()==1){
+        copiarTestAScenarioDesdeSinAyuda();
+    }
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            this.realizarAccion(true, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -363,12 +370,15 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
     }
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
+private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
+// TODO add your handling code here:
+    addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    addInst.setVisible(true);
+}
+
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    setSoloEjecutar(true);
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    testresult = new OntologyTestResult();
     if(getTabbedPaneRet()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneRet()==1){
@@ -376,7 +386,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            ejecutar(0);
+            this.realizarAccion(false, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -385,131 +395,47 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 }
 
-public void ejecutar(int cuantos){
-    if(isSoloEjecutar()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            saveTest.replaceTestLocally(scenario);
-        }else{
-            saveTest.saveTestLocally(scenario);
-        }
-    }
-    try{
-        if(cuantos==0){
-            testcase.runScenario(testresult, CollectionTest.getInstance(),getScenario());   
-        }else if(cuantos==1){
-            testcase.run(testresult, CollectionTest.getInstance());
-        }
-        new TreeResults(testresult);
-        //resultTestPanel.aniadirResultado(scrollResults);
-        //ListarTestsJPanel.aniadirTreeResult(scrollTree);
-        /*resultTests.getContentPanelResults().add(panel);
-        resultTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        resultTests.setVisible(true);
-        resultTests.validate();*/
-    }catch (ExceptionReadOntology ex) {
-        new ExceptionReadOntology("La ontologia introducida no es valida." +
-        "\nSolo pueden realizarse tests sobre documentos owl consistentes");
-    }
-}
-
-public boolean guardarTest(){
-    if(getTabbedPaneRet()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneRet()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            guardar();
-            return true;
-        }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
-            return false;
-        }
-    }else{
-        return false;
-    }  
-}
-
-public void guardar(){
+public void realizarAccion(boolean guardar, boolean ejecutar){  
     saveTest = new SaveTest();
-    if(testYaExiste==true || isImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                    saveTest.saveTestInMemory(scenario);
-                    if(testYaExiste==true){
-                        saveTest.replaceTestLocally(scenario);
-                    }else{
-                        saveTest.saveTestLocally(scenario);
-                    }
+    if(testYaExiste==true){
+        if(guardar==true){
+            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
+                        && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+                Object[] options = {"Sobreescribir", "Cancelar"};
+                int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
+                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                if (n == JOptionPane.YES_OPTION) {       
+                    saveTest.replaceScenarioLocally(scenario);
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestRetClasGuardado(true);
                     JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            }else if (n == JOptionPane.NO_OPTION) {
-            }
-        }else{
-            controlador.setTestRetClasGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        }
-        setImportado(false);
-    }else{ 
-            saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
-            setScenario(new ScenarioTest(scenario));
-            controlador.setTestRetClasGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-    }
-}
-
-
-public void guardarYEjecutar(){  
-    if(testYaExiste==true || isImportado()==true){
-        if(scenario.equals(this.getScenarioAEditar())==false){
-            Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                    "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            if (n == JOptionPane.YES_OPTION) {
-                saveTest.saveTestInMemory(scenario);
-                if(testYaExiste==true){
-                    saveTest.replaceTestLocally(scenario);
-                }else{
-                    saveTest.saveTestLocally(scenario);
                 }
-                setScenarioAEditar(new ScenarioTest(scenario));
-                setScenario(new ScenarioTest(scenario));
+            }else{
+                saveTest.saveTestInMemory(scenario);
                 controlador.setTestRetClasGuardado(true);
-                JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-                ejecutar(0);
-            }else if (n == JOptionPane.NO_OPTION) {
             }
-        }else{
-            controlador.setTestRetClasGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
         }
-        setImportado(false);
+        if(ejecutar==true){
+            utils.ejecutarUnTest(this.getScenario());
+        }
      }else{
+        if(guardar==true){
             saveTest.saveTestInMemory(scenario);
-            saveTest.saveTestLocally(scenario);
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestRetClasGuardado(true);
             JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            ejecutar(0);
-    }    
+        }
+        if(ejecutar==true){
+            utils.ejecutarUnTest(this.getScenario());
+        }
+    }  
+    saveTest.actualizarListaDeTestsSimples();
 }
 
 public void inicializarVariables(){
@@ -994,15 +920,8 @@ public void formatoIncorrecto(){
         this.scenarioAEditar = scenarioAEditar;
     }
 
-    public boolean isImportado() {
-        return importado;
-    }
-
-    public void setImportado(boolean importado) {
-        this.importado = importado;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentRetTabedPanel;
     private javax.swing.JPanel descripcionJPanel;
@@ -1017,15 +936,5 @@ public void formatoIncorrecto(){
     private javax.swing.JPanel retAyudaPanel;
     private javax.swing.JTabbedPane tabbedPaneRet;
     // End of variables declaration//GEN-END:variables
-
-    public boolean isSoloEjecutar() {
-        return soloEjecutar;
-    }
-
-    public void setSoloEjecutar(boolean soloEjecutar) {
-        this.soloEjecutar = soloEjecutar;
-    }
-
-    
 
 }

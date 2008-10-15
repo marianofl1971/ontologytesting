@@ -41,6 +41,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         //http://nlp.shef.ac.uk/abraxas/ontologies/animals.owl
         //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
         //C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
+        //C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
     }
  
     private synchronized static void createListAndTestPanel() {

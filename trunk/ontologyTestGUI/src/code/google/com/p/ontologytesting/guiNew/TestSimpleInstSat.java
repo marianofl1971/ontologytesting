@@ -8,7 +8,6 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -58,11 +57,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
-    private static OntologyTestResult testresult;
-    private OntologyTestCase testcase;
     private ScenarioTest scenarioAEditar;
-    private boolean importado;
-    private boolean soloEjecutar;
     private ProgressMonitor progressMonitor;
     private Task task;
     private ControladorTests controlador;
@@ -132,7 +127,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         utils = new Utils();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
-        setSoloEjecutar(false);
     }
 
     /** This method is called from within the constructor to
@@ -208,15 +202,14 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         opcionAyudaInstPanelLayout.setHorizontalGroup(
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionAyudaInstPanelLayout.setVerticalGroup(
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabbedPaneInst.addTab("Formato ayuda", opcionAyudaInstPanel);
@@ -225,11 +218,11 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
         opcionTextInstPanelLayout.setHorizontalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 807, Short.MAX_VALUE)
         );
         opcionTextInstPanelLayout.setVerticalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         tabbedPaneInst.addTab("Formato Texto", opcionTextInstPanel);
@@ -245,21 +238,20 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         contentInstTabedPanel.setLayout(contentInstTabedPanelLayout);
         contentInstTabedPanelLayout.setHorizontalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentInstTabedPanelLayout.createSequentialGroup()
-                .addContainerGap(645, Short.MAX_VALUE)
+                .addContainerGap(641, Short.MAX_VALUE)
                 .addComponent(asociarInstanciasButton)
-                .addGap(86, 86, 86))
-            .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
         contentInstTabedPanelLayout.setVerticalGroup(
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addComponent(asociarInstanciasButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
@@ -300,21 +292,21 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         contentGuardarEjecutarPanel.setLayout(contentGuardarEjecutarPanelLayout);
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap(415, Short.MAX_VALUE)
+            .addGroup(contentGuardarEjecutarPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(guardarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ejecutarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarEjecutarButton)
-                .addContainerGap())
+                .addContainerGap(415, Short.MAX_VALUE))
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(guardarEjecutarButton)
+                .addComponent(guardarButton)
                 .addComponent(ejecutarButton)
-                .addComponent(guardarButton))
+                .addComponent(guardarEjecutarButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -322,15 +314,12 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,9 +327,9 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
                 .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentInstTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -366,9 +355,6 @@ private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent e
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
-    saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    testresult = new OntologyTestResult();
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -387,10 +373,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-    setSoloEjecutar(true);
     saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    testresult = new OntologyTestResult();
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -398,7 +381,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            ejecutar();
+            utils.ejecutarUnTest(this.getScenario());
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
@@ -410,10 +393,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-    setSoloEjecutar(true);
     saveTest = new SaveTest();
-    testcase = new OntologyTestCase();
-    testresult = new OntologyTestResult();
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -456,7 +436,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            ejecutar();
+            utils.ejecutarUnTest(this.getScenario());
         }
     }else{ 
         if(guardar==true){
@@ -468,25 +448,12 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            ejecutar();
+            utils.ejecutarUnTest(this.getScenario());
         }
     }
     saveTest.actualizarListaDeTestsSimples();
 }
 
-public void ejecutar(){
-    try{
-        if(isSoloEjecutar()==true){
-            testcase.runScenario(testresult, CollectionTest.getInstance(), this.getScenario());   
-        }else{
-            testcase.run(testresult, CollectionTest.getInstance());
-        }
-        new TreeResults(testresult);
-    } catch (ExceptionReadOntology ex) {
-        new ExceptionReadOntology("La ontologia introducida no es valida." +
-        "\nSolo pueden realizarse tests sobre documentos owl consistentes");
-    }
-}
 
 public void inicializarVariables(){
     ambosNecesarios=false;
@@ -964,14 +931,6 @@ public ScenarioTest getScenarioAEditar() {
 
 public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
     this.scenarioAEditar = scenarioAEditar;
-}
-
-public boolean isSoloEjecutar() {
-    return soloEjecutar;
-}
-
-public void setSoloEjecutar(boolean soloEjecutar) {
-    this.soloEjecutar = soloEjecutar;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

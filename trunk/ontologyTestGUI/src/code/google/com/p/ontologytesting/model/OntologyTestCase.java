@@ -298,6 +298,20 @@ public class OntologyTestCase implements OntologyTest{
         //crearFicheroDeResultados(testresult);
     }
     
+    @Override
+    public void runListaScenario(OntologyTestResult testresult, CollectionTest baterytest, List<ScenarioTest> liScenario) throws ExceptionReadOntology{ 
+
+        String ont = baterytest.getOntology();
+        String ns = baterytest.getNamespace();
+ 
+        for(int i=0;i<liScenario.size();i++){
+                setUpOntology(liScenario.get(i), ont, ns);
+                runOntologyTest(testresult,ns,liScenario.get(i));
+                tearDownOntology(); 
+        }
+        //crearFicheroDeResultados(testresult);
+    }
+    
     public boolean comparaArray(List<String> array1, List<String> array2){
         if(array1.size() == array2.size()){
             for(int i=0;i<array1.size();i++){

@@ -10,6 +10,7 @@
 package code.google.com.p.ontologytesting.model;
 
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import java.util.List;
 
 /**
  *
@@ -20,5 +21,7 @@ public interface OntologyTest {
     public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology;
     
     public void runScenario(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenario) throws ExceptionReadOntology;
+    
+    public void runListaScenario(OntologyTestResult testresult, CollectionTest baterytest, List<ScenarioTest> scenario) throws ExceptionReadOntology;
 
 }
