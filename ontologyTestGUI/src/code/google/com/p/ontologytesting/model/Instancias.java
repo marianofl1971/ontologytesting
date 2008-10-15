@@ -125,4 +125,11 @@ public class Instancias {
         return hash;
     }
     
+    public boolean hayInstancias(){
+        if(this.getClassInstances().size()>0 || this.getPropertyInstances().size()>0){
+            return true;
+        }
+        return false;
+    }
+    
 }

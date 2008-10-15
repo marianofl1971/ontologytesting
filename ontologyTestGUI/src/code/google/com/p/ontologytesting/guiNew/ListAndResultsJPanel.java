@@ -49,8 +49,8 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
         return this.testsPanel;
     }
     
-    public void mostrarResultado(JScrollPane result){
-        resultPanel.aniadirResultado(result);
+    public void mostrarResultado(JScrollPane resultado){
+        resultPanel.aniadirResultado(resultado);
     }
 
 

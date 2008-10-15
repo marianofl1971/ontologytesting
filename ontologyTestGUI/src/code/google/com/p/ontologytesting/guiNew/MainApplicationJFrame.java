@@ -12,6 +12,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -22,12 +23,13 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     
     private CollectionTest collection;
     private ListAndResultsJPanel panelTest;
-    private ListAndTestsJPanel listTest;
     private ControladorTests controlador;
     private ScenarioTest s;
 
+    private static MainApplicationJFrame mainApp = null;
+    
     /** Creates new form MainApplicationJFrame */
-    public MainApplicationJFrame() {
+    private MainApplicationJFrame() {
         initComponents();
         this.setTitle("EVALUADOR DE ONTOLOGIAS");
         this.setSize(new Dimension(895,720));
@@ -39,6 +41,17 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         //http://nlp.shef.ac.uk/abraxas/ontologies/animals.owl
         //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
         //C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
+    }
+ 
+    private synchronized static void createListAndTestPanel() {
+        if (mainApp == null) { 
+            mainApp = new MainApplicationJFrame();
+        }
+    }
+ 
+    public static MainApplicationJFrame getInstance() {
+        if (mainApp == null) createListAndTestPanel();
+        return mainApp;
     }
 
     /** This method is called from within the constructor to
@@ -445,55 +458,56 @@ private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent e
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, true,CollectionTest.getInstance());//GEN-LAST:event_importarTestsMenuItemActionPerformed
+    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, true,CollectionTest.getInstance());
     abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-}
+}//GEN-LAST:event_importarTestsMenuItemActionPerformed
 
 private void editarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_editarTestsMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_editarTestsMenuItemActionPerformed
 
 private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestsMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_verTestsMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_verTestsMenuItemActionPerformed
 
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(this, true);//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
+    JPanel panel = new JPanel();
+    AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(panel, true);
     nuevoInst.setLocationRelativeTo(this);
     nuevoInst.setVisible(true);
     nuevoInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-}
+}//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_importarInstanciasMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_importarInstanciasMenuItemActionPerformed
 
 private void editarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_editarInstanciasMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_editarInstanciasMenuItemActionPerformed
 
 private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_verInstanciasMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_verInstanciasMenuItemActionPerformed
 
 private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarTodosMenuItemActionPerformed
 // TODO add your handling code here:
-//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
-}
+
+}//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
 public void aniadirTestsInstSat(int tipo){ 
     if(tipo==0){

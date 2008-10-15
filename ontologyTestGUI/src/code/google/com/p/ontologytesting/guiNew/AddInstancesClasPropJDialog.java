@@ -31,8 +31,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     static final int desktopHeight = 580;
     static JFrame frame,parent;
     private AddComentJDialog commentPane;
-    private List<ClassInstances> clasInst,clasFinal;
-    private List<PropertyInstances> propInst,propFinal;
+    private List<ClassInstances> clasInst;
+    private List<PropertyInstances> propInst;
     private int indexVect;
     private String nombreFichero;
     private Instancias instancias;
@@ -61,38 +61,81 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private ListarTestsJPanel listInst;
 
     //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal, ScenarioTest scenario){
+    public AddInstancesClasPropJDialog(JPanel parent, boolean modal, ScenarioTest scenario){
         
-        super(parent, modal);
+        //super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
-        
+        this.setLocationRelativeTo(ListAndResultsJPanel.getInstance());
         setSeleccionado(true);
+        int contI=0,contP=0;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
-        for (int i = 0; i <= 10; i++) {
-            clasPanel.add(new CreateInstancesJPanel(0));  
-            propPanel.add(new CreateInstancesJPanel(1));
+        if(scenario.getInstancias().hayInstancias()==true){
+            Instancias inst = scenario.getInstancias();
+            setNomInstanciasTextField(inst.getNombre());
+            setDescInstanciasTextArea(inst.getDescripcion());
+            ListIterator ci,pi;
+            clasInst = inst.getClassInstances();
+            ci = clasInst.listIterator();
+            while(ci.hasNext()){ 
+                ClassInstances cI = (ClassInstances) ci.next();
+                CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
+                instClas.setInstance(cI.getClassInstance());
+                commentPane = instClas.getComment();
+                commentPane.setComent(cI.getComment());
+                instClas.setComment(commentPane);
+                clasPanel.add(instClas);
+                contI++;
+            }
+
+            propInst = inst.getPropertyInstances();
+            pi = propInst.listIterator();
+            while(pi.hasNext()){
+                PropertyInstances pI = (PropertyInstances) pi.next();
+                CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
+                instProp.setInstance(pI.getPropertyInstance());
+                commentPane = instProp.getComment();
+                commentPane.setComent(pI.getComment());
+                instProp.setComment(commentPane);
+                propPanel.add(instProp);
+                contP++;
+            }
+
+            for (int j = 0; j <= (10-contI); j++) {
+                clasPanel.add(new CreateInstancesJPanel(0));
+            }
+            for (int k = 0; k <= (10-contP); k++) {
+                propPanel.add(new CreateInstancesJPanel(1));
+            }
+            instanciasAEditar = new Instancias(scenario.getInstancias());
+            setInstancias(new Instancias(scenario.getInstancias()));
+            this.setScenario(scenario);
+            setEditado(false);
+        }else{
+            for (int i = 0; i <= 10; i++) {
+                clasPanel.add(new CreateInstancesJPanel(0));  
+                propPanel.add(new CreateInstancesJPanel(1));
+            }
+            instanciasAEditar = new Instancias();
+            setInstancias(new Instancias());
+            this.setScenario(scenario);
+            setInstanciasAEditar(null);
+            setEditado(false);
         }
-        instanciasAEditar = new Instancias();
-        setInstancias(new Instancias());
-        this.setScenario(scenario);
-        setInstanciasAEditar(null);
-        setEditado(false);
     } 
     
     //Constructor para crear un conjunto nuevo de instancias
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal){
+    public AddInstancesClasPropJDialog(JPanel parent, boolean modal){
         
-        super(parent, modal);
+        //super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
-
         setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -110,15 +153,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     } 
     
    //Constructor para editar un conjunto de instancias
-    public AddInstancesClasPropJDialog(Frame parent, boolean modal, Instancias inst){
+    public AddInstancesClasPropJDialog(JPanel parent, boolean modal, Instancias inst){
         
-        super(parent, modal);
+        //super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
-        
-        clasFinal = new ArrayList<ClassInstances>();
-        propFinal = new ArrayList<PropertyInstances>();
+        this.setLocationRelativeTo(ListAndResultsJPanel.getInstance());
         int contI=0,contP=0;
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
@@ -139,7 +180,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             commentPane.setComent(cI.getComment());
             instClas.setComment(commentPane);
             clasPanel.add(instClas);
-            clasFinal.add(cI);
             contI++;
         }
   
@@ -153,7 +193,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             commentPane.setComent(pI.getComment());
             instProp.setComment(commentPane);
             propPanel.add(instProp);
-            propFinal.add(pI);
             contP++;
         }
           
@@ -574,14 +613,6 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
 }
 
-public void guardarInstancias(){
-    listInst.aniadirInstancias(this.getInstancias());
-}
-
-public void asociarInstancias(){
-    this.getScenario().setInstancias(getInstancias());   
-}
-
 public boolean prepararInstancias(boolean guardar,boolean asociar){
     listInst = ListarTestsJPanel.getInstance();
     jenaInterface = new JenaInterface();
@@ -621,43 +652,42 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             getInstancias().setNombre(getNomInstanciasTextField());
             getInstancias().setType("Instancias");
  
-            if(aux==0){
-                if(this.getInstanciasAEditar()!= null && this.getInstancias().equals(this.getInstanciasAEditar())==false){
-                    Object[] options = {"Sobreescribir", "Cancelar"};
-                    int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
-                            "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                    if (n == JOptionPane.YES_OPTION) {
-                        if(guardar==true){
-                            listInst.aniadirInstancias(this.getInstancias());
+            if((guardar==true && asociar==true) || (guardar==true)){
+                if(aux==0){
+                    if(this.getInstanciasAEditar()!= null && 
+                            this.getInstancias().equals(this.getInstanciasAEditar())==false
+                            && this.getInstancias().getNombre().equals(this.getInstanciasAEditar().getNombre())){
+                        Object[] options = {"Sobreescribir", "Cancelar"};
+                        int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
+                                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        if (n == JOptionPane.YES_OPTION) {
+                            if(guardar==true){
+                                saveTest.replaceInstanciasLocally(getInstancias());
+                                saveTest.actualizarListaDeInstancias();
+                            }
+                            if(asociar==true){
+                                this.getScenario().setInstancias(this.getInstancias());
+                            }
+                            aux=1;
+                            setInstanciasAEditar(new Instancias(getInstancias()));
+                            setInstancias(new Instancias(getInstancias()));
+                        }else{
+                            aux=1;
+                            return false;
                         }
-                        if(asociar==true){
-                            this.getScenario().setInstancias(this.getInstancias());
-                        }
-                        saveTest.saveInstanciasInMemory(getInstancias());
-                        aux=1;
-                        setInstanciasAEditar(new Instancias(getInstancias()));
-                        setInstancias(new Instancias(getInstancias()));
-                    }else{
-                        aux=1;
                     }
                 }
             }
             if(aux==0){
-                if(this.yaExisteInstancia(this.getInstancias().getNombre())){
-                    JOptionPane.showMessageDialog(this, "Ya ha creado un conjunto de instancias" +
-                    "con este nombre. Por favor, introduzca uno nuevo.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-                    return false;
-                }else{
-                    if(guardar==true){
-                        listInst.aniadirInstancias(this.getInstancias());
-                    }
-                    if(asociar==true){
-                        this.getScenario().setInstancias(this.getInstancias());
-                    }
+                if(guardar==true){
                     saveTest.saveInstanciasInMemory(getInstancias());
-                    return true;
+                    saveTest.actualizarListaDeInstancias();
                 }
+                if(asociar==true){
+                    this.getScenario().setInstancias(this.getInstancias());
+                }  
             }
+            return true;
         } else if (instanciaSinNombre == true) {
             JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
                     + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
