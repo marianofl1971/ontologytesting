@@ -24,14 +24,14 @@ public class CollectionTest {
     private String namespace="";
     private static CollectionTest collection = null;
  
-    private CollectionTest() {
+    public CollectionTest() {
         this.scenariotest = new ArrayList<ScenarioTest>();
         this.ontology = "";
         this.namespace = "";
         this.instancias= new ArrayList<Instancias>();
     }
  
-    private synchronized static void createCollection() {
+    public synchronized static void createCollection() {
         if (collection == null) { 
             collection = new CollectionTest();
         }

@@ -164,7 +164,6 @@ public class JenaImplementation implements Jena{
         try{
             Resource resource = individual.getRDFType(true); 
             String className = resource.toString().substring(resource.toString().indexOf("#")+1);
-
             return className;
         }catch(InconsistentOntologyException in){
             throw new ExceptionReadOntology();

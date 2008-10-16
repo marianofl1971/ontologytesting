@@ -63,28 +63,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private ControladorTests controlador;
     private Utils utils;
     
-    /** Creates new form contentInstTabedPanel */
-    /*public TestSimpleInstSat(int type) {
-        initComponents();
-        TestInstancesTFJPanel.setContadorInstSat(0);
-        descripcionJPanel.setLayout(new FlowLayout());
-        descripcionJPanel.add(new DescripcionJPanel());
-        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
-        instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
-        for (int i = 1; i <= 10; i++) {  
-            instAyudaPanel.add(new TestInstancesTFJPanel());   
-        }
-        opcionTextInstPanel.add(new TestInstancesTextJPanel());
-        setScenarioAEditar(null);
-        if(type==0){
-            setScenario(new ScenarioTest(TipoTest.INST)); 
-        }else{
-            setScenario(new ScenarioTest(TipoTest.SAT)); 
-        }
-        setImportado(false);
-        setSoloEjecutar(false);
-    }*/
-    
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
         frame = new JFrame();
