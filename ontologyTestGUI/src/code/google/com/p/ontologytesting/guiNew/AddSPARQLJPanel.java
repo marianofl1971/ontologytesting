@@ -38,30 +38,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ControladorTests controlador;
     private Utils utils;
     
-    /** Creates new form AddSPARQLJPanel */
-    /*public AddSPARQLJPanel(int tipo) {
-        initComponents();
-        
-        sparqlTextArea.setLineWrap(true);
-        sparqlTextArea.setWrapStyleWord(true);
-        testDescTextArea.setLineWrap(true);
-        testDescTextArea.setWrapStyleWord(true);
-        resultTextArea.setLineWrap(true);
-        resultTextArea.setWrapStyleWord(true);
-        
-        antQueryButton.setEnabled(false);
-        sigQueryButton.setEnabled(false);
-        
-        this.inicializarVariables();
-        setTipo(tipo);
-        setScenarioAEditar(null);
-        setScenario(new ScenarioTest()); 
-        setImportado(false);
-        listaDeConsultas = new ArrayList<SparqlQueryOntology>();
-        setPosListQuerysSel(0);
-        setSoloEjectuar(false);
-    }*/
-    
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
         controlador = ControladorTests.getInstance();
@@ -541,8 +517,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
-                        && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+            if((this.getScenarioAEditar() != null) && (scenario.equals(this.getScenarioAEditar())==false)
+                        && (this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre()))){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -555,7 +531,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
                 }
             }else{
-                saveTest.saveTestInMemory(scenario);
+                saveTest.saveTestInMemory(this.getScenario());
                 controlador.setTestSparqlGuardado(true);
                 JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
@@ -696,7 +672,8 @@ public void prepararGuardar(){
             if(continuarSinInstancias==true){
                 scenario.setDescripcion(descTest);
                 scenario.setNombre(nombreTest);
-                scenario.setSparqlQuerys(this.getListaDeConsultas()); 
+                List<SparqlQueryOntology> querys = new ArrayList<SparqlQueryOntology>(this.getListaDeConsultas());
+                scenario.setSparqlQuerys(querys); 
             }
         }else if(testSinNombre==true){
                 JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
@@ -878,5 +855,6 @@ public void inicializarVariables(){
     private javax.swing.JTextArea testDescTextArea;
     private javax.swing.JTextField testNameTextField;
     // End of variables declaration//GEN-END:variables
+
 
 }

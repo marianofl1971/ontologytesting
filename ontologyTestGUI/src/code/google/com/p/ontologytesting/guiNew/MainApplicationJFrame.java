@@ -42,6 +42,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
         //C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
         //C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
+        
+          /*PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          SELECT ?subject ?object 
+          WHERE {?subject rdfs:subClassOf ?object }*/
+         
     }
  
     private synchronized static void createListAndTestPanel() {
