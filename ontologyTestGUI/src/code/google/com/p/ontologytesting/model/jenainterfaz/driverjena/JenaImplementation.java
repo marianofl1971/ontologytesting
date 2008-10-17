@@ -93,7 +93,7 @@ public class JenaImplementation implements Jena{
             model.prepare(); //Aqui salta la inconsistencia
             model.validate();
         }catch(InconsistentOntologyException e){
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
+            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }catch(JenaException je){
             throw new ExceptionReadOntology();

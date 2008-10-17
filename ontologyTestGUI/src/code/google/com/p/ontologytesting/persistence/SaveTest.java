@@ -6,6 +6,7 @@
 package code.google.com.p.ontologytesting.persistence;
 
 import code.google.com.p.ontologytesting.guiNew.ListarTestsJPanel;
+import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -26,48 +27,26 @@ public class SaveTest {
     private Component frame;
     private CollectionTest collection;
     private ListarTestsJPanel listInst;
+    private XMLEncoder e;
     
-    public void saveProject() throws FileNotFoundException{
-        /*collection = CollectionTest.getInstance();
-        XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-        FileOutputStream(MainApplication.getProyecto()+"/"+MainApplication.getNombreProyecto())));
-        e.writeObject(collection);
-        e.close();*/
-    }
-    
-    public boolean saveProjectAs() throws FileNotFoundException{
+    public boolean saveProject(boolean as) throws FileNotFoundException{
         collection = CollectionTest.getInstance();
-        JFileChooser fileChooser = new JFileChooser();
-        int seleccion = fileChooser.showSaveDialog(frame);
-        if(seleccion == JFileChooser.APPROVE_OPTION){
-            File fichero = fileChooser.getSelectedFile();
-            XMLEncoder e = new XMLEncoder(new BufferedOutputStream(new 
-            FileOutputStream(fichero)));
+        if(as==true){
+            JFileChooser fileChooser = new JFileChooser();
+            int seleccion = fileChooser.showSaveDialog(frame);
+            if(seleccion == JFileChooser.APPROVE_OPTION){
+                File fichero = fileChooser.getSelectedFile();
+                e = new XMLEncoder(new BufferedOutputStream(new 
+                FileOutputStream(fichero)));
+                e.writeObject(collection);
+                e.close();
+                return true;
+            }
+        }else{
+            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
             e.writeObject(collection);
             e.close();
             return true;
-        }else{
-            return false;
-        }
-    }
-    
-    public boolean saveTestLocally(ScenarioTest scenarioTest){
-        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
-        if(scenario.add(scenarioTest)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    public boolean replaceTestLocally(ScenarioTest scenarioTest){
-        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
-        for(int i=0; i<scenario.size(); i++){
-            if(scenarioTest.getNombre().equals(scenario.get(i).getNombre())){
-                scenario.remove(i);
-                scenario.add(scenarioTest);
-                return true;
-            }
         }
         return false;
     }

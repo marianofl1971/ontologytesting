@@ -9,8 +9,10 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
+import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -24,8 +26,9 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private CollectionTest collection;
     private ListAndResultsJPanel panelTest;
     private ControladorTests controlador;
-    private ScenarioTest s;
-
+    private ScenarioTest s = new ScenarioTest();
+    private String carpetaProyecto,nombreProyecto;
+    private SaveTest saveTest = new SaveTest();
     private static MainApplicationJFrame mainApp = null;
     
     /** Creates new form MainApplicationJFrame */
@@ -127,6 +130,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         fileMenu.add(abrirProyectoMenuItem);
 
         guardarProyectoMenuItem.setText("Guardar");
+        guardarProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarProyectoMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(guardarProyectoMenuItem);
 
         guardarProyectoComoMenuItem.setText("Guardar Como");
@@ -312,6 +320,18 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
+        try {
+            boolean guardado = saveTest.saveProject(true);
+            if(guardado==true){
+                JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+            }else{
+                JOptionPane.showMessageDialog(this,"Error. Proyecto no guardado.",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE); 
+            }
+        } catch (FileNotFoundException ex) {
+            
+        }
         
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
@@ -515,6 +535,22 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
+private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
+// TODO add your handling code here:
+    try {//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
+        boolean guardado = saveTest.saveProject(false);
+        if(guardado==true){
+            JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
+            "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+        }else{
+            JOptionPane.showMessageDialog(this,"Error. Proyecto no guardado.",                                                  
+            "Error Message",JOptionPane.ERROR_MESSAGE); 
+        }
+    } catch (FileNotFoundException ex) {
+
+    }
+}
+
 public void aniadirTestsInstSat(int tipo){ 
     if(tipo==0){
         s = new ScenarioTest(TipoTest.INST);
@@ -567,6 +603,23 @@ public void inicializarContadores(){
             }
         });
     }
+    
+    public String getCarpetaProyecto() {
+        return carpetaProyecto;
+    }
+
+    public void setCarpetaProyecto(String carpetaProyecto) {
+        this.carpetaProyecto = carpetaProyecto;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;

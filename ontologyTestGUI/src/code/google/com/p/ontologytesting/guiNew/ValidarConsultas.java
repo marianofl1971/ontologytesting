@@ -5,13 +5,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.guiNew.TestInstancesQueryJPanel;
-import code.google.com.p.ontologytesting.guiNew.TestInstancesTFJPanel;
-import code.google.com.p.ontologytesting.guiNew.TestInstancesTextAreaJPanel;
-import code.google.com.p.ontologytesting.guiNew.TestInstancesTextJPanel;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleInstSat;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleReal;
-import code.google.com.p.ontologytesting.guiNew.TestSimpleRetClas;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;

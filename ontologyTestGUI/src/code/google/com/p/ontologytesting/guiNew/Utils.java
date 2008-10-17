@@ -64,7 +64,7 @@ public class Utils {
             testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
             new TreeResults(testResult);
         } catch (ExceptionReadOntology ex) {
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
+            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }
@@ -76,7 +76,7 @@ public class Utils {
             testCase.runListaScenario(testResult, CollectionTest.getInstance(), listScenario);
             new TreeResults(testResult);
         } catch (ExceptionReadOntology ex) {
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
+            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }
@@ -88,7 +88,7 @@ public class Utils {
             testCase.run(testResult, CollectionTest.getInstance());
             new TreeResults(testResult);
         } catch (ExceptionReadOntology ex) {
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
+            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }
