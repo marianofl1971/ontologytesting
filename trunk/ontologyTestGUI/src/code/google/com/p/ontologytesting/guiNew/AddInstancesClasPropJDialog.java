@@ -725,7 +725,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             }
         }
     }catch(ExceptionReadOntology er){
-        new ExceptionReadOntology("La ontologia introducida no es valida." +
+        throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
     }
     return false;

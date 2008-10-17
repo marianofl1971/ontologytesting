@@ -184,7 +184,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             JOptionPane.showMessageDialog(this.getParent(),"La ontologia ha sido guardada",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }catch(ExceptionReadOntology ex){
-            new ExceptionReadOntology("La ontologia introducida no es valida." +
+            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }else{

@@ -186,12 +186,12 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             CollectionTest.getInstance().setOntology(ubicOnto);
             File directorio = new File(project.getCarpetaProyectoTextField());
             directorio.mkdir(); 
-            //MainApplication.setProyecto(project.getCarpetaProyectoTextField());
-            //MainApplication.setNombreProyecto(nombreProy);
+            MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
+            MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
             setProyectoCreado(true);
             this.setVisible(false);
         }catch(ExceptionReadOntology ex){
-            new ExceptionReadOntology("No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
+            throw new ExceptionReadOntology("No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
                     "Introduzca una ontologia valida.");
         }
     }  
