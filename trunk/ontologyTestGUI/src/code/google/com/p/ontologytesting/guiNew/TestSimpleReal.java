@@ -51,6 +51,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ScenarioTest scenarioAEditar;
     private ControladorTests controlador;
     private Utils utils;
+    private OpcionesMenu menu;
     
     /** Creates new form TestSimpleReal */
     /*public TestSimpleReal() {
@@ -104,6 +105,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             }
         }
         utils = new Utils();
+        menu = new OpcionesMenu();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
     }
@@ -412,7 +414,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
      }else{
         if(guardar==true){
@@ -424,7 +426,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
     }
     saveTest.actualizarListaDeTestsSimples();

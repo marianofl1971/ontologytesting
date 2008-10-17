@@ -37,6 +37,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private AddInstancesClasPropJDialog addInst;
     private ControladorTests controlador;
     private Utils utils;
+    private OpcionesMenu menu;
     
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
@@ -67,6 +68,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         }
         this.inicializarVariables();
         utils = new Utils();
+        menu = new OpcionesMenu();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
         setPosListQuerysSel(0);
@@ -538,7 +540,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
      }else{
         if(guardar==true){
@@ -550,7 +552,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
     }  
     saveTest.actualizarListaDeTestsSparql();  

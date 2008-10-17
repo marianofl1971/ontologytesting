@@ -62,6 +62,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
     private Task task;
     private ControladorTests controlador;
     private Utils utils;
+    private OpcionesMenu menu;
     
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
@@ -103,6 +104,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyCha
             }
         }
         utils = new Utils();
+        menu = new OpcionesMenu();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
     }
@@ -359,7 +361,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }else{
             addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
@@ -414,7 +416,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
     }else{ 
         if(guardar==true){
@@ -426,7 +428,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
     }
     saveTest.actualizarListaDeTestsSimples();
