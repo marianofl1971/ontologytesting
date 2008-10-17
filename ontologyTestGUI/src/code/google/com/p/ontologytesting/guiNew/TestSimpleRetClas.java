@@ -52,6 +52,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private ScenarioTest scenarioAEditar;
     private ControladorTests controlador;
     private Utils utils;
+    private OpcionesMenu menu;
     
     /** Creates new form TestSimpleRetClas */
     /*public TestSimpleRetClas(int type) {
@@ -109,6 +110,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             }
         }
         utils = new Utils();
+        menu = new OpcionesMenu();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
     }
@@ -370,7 +372,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
     }
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
-private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
+private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
 // TODO add your handling code here:
     addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -420,7 +422,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
      }else{
         if(guardar==true){
@@ -432,7 +434,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            utils.ejecutarUnTest(this.getScenario());
+            menu.ejecutarUnTest(this.getScenario());
         }
     }  
     saveTest.actualizarListaDeTestsSimples();
