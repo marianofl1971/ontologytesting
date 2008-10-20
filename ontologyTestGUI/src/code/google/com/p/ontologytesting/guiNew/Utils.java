@@ -49,4 +49,17 @@ public class Utils {
         }
         return false;
     }
+    
+    public boolean instanciaYaExiste(List<Instancias> lista,String nombre){
+        ListIterator li;
+        li = lista.listIterator();
+        while(li.hasNext()){
+            Instancias s = (Instancias) li.next();
+            String n = s.getNombre();
+            if(n.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

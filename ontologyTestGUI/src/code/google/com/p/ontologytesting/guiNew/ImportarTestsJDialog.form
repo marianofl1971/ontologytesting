@@ -55,8 +55,10 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="abrirButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="editarButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="importarButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cancelarButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -85,9 +87,10 @@
               <Component id="contentPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="abrirButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="importarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="importarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="editarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="abrirButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
@@ -112,7 +115,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="abrirButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver Test Completo"/>
+        <Property name="text" type="java.lang.String" value="Ver Test "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abrirButtonActionPerformed"/>
@@ -138,7 +141,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccione el proyecto desde donde quiere importar los tests:"/>
+        <Property name="text" type="java.lang.String" value="Seleccione el proyecto que contiene los tests/instancias con los que desea trabajar:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="pathProyectoTextField">
@@ -157,6 +160,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importarButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="editarButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Editar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
