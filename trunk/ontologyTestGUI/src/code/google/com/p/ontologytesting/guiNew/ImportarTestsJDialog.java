@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.FlowLayout;
@@ -19,7 +20,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -29,28 +30,33 @@ import javax.swing.WindowConstants;
  */
 public class ImportarTestsJDialog extends javax.swing.JDialog {
 
-    private ListaFicheros listaFicheros;
+    private ListarTestInstancias listaFicheros;
     private JFileChooser filechooser;
     private String pathProyect;
     private XMLDecoder decoder;
     private CollectionTest collection;
-    private JFrame frame = new JFrame();
     private List<ScenarioTest> scenarioSparql = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
+    private List<Instancias> instancias = new ArrayList<Instancias>();
     private ListarTestsJPanel listT;
     private SaveTest saveTest = new SaveTest();
+    private OpcionesMenu opMenu = new OpcionesMenu();
+    private boolean importarTest=false;
+    private SeeTestJDialog verTest = null;
+    private JPanel panel = new JPanel();
     
     /** Creates new form AbrirTestsJDialog */
-    public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
+    public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection,boolean impTest) {
         super(parent, modal);
         initComponents();
+        this.setImportarTest(impTest);
         listT = ListarTestsJPanel.getInstance();
         this.setTitle("Importar Tests");
     }
 
     public void prepararImport(List<ScenarioTest> listaTests){   
         contentPanel.setLayout(new FlowLayout());  
-        listaFicheros = new ListaFicheros(listaTests);
+        listaFicheros = new ListarTestInstancias(listaTests,null);
         contentPanel.add(listaFicheros.getSplitPane());
         contentPanel.getParent().validate(); 
     }
@@ -74,6 +80,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         pathProyectoTextField = new javax.swing.JTextField();
         examinarButton = new javax.swing.JButton();
         importarButton = new javax.swing.JButton();
+        editarButton = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -90,7 +97,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
             .addGap(0, 215, Short.MAX_VALUE)
         );
 
-        abrirButton.setText("Ver Test Completo");
+        abrirButton.setText("Ver Test ");
         abrirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirButtonActionPerformed(evt);
@@ -107,7 +114,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel2.setText("Ubicación de los Tests");
 
-        jLabel3.setText("Seleccione el proyecto desde donde quiere importar los tests:");
+        jLabel3.setText("Seleccione el proyecto que contiene los tests/instancias con los que desea trabajar:");
 
         examinarButton.setText("Examinar");
         examinarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +127,13 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         importarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importarButtonActionPerformed(evt);
+            }
+        });
+
+        editarButton.setText("Editar");
+        editarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarButtonActionPerformed(evt);
             }
         });
 
@@ -149,8 +163,10 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(abrirButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(editarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(importarButton)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cancelarButton)))
                         .addGap(21, 21, 21)))
                 .addContainerGap())
@@ -172,9 +188,10 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(abrirButton)
+                    .addComponent(cancelarButton)
                     .addComponent(importarButton)
-                    .addComponent(cancelarButton))
+                    .addComponent(editarButton)
+                    .addComponent(abrirButton))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -183,16 +200,30 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
 
 private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
 // TODO add your handling code here:  
-    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, listaFicheros.getScenarioSelect());
-    seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    seeTestCompleted.setLocationRelativeTo(this);
-    seeTestCompleted.setVisible(true);
+    if(this.isImportarTest()==true){
+        verTest = opMenu.verTest(listaFicheros.getScenarioSelect());
+    }else{
+        verTest = opMenu.verInstancias(listaFicheros.getInstanciaSelect());
+    }
+    verTest.setLocationRelativeTo(this);
+    verTest.setVisible(true);
 }//GEN-LAST:event_abrirButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);
 }//GEN-LAST:event_cancelarButtonActionPerformed
+
+private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
+// TODO add your handling code here:
+    if(this.isImportarTest()==true){
+        opMenu.editarTest(listaFicheros.getScenarioSelect());//GEN-LAST:event_editarButtonActionPerformed
+    }else{
+        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(panel, false, listaFicheros.getInstanciaSelect());
+        editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        editInst.setVisible(true);
+    }
+}
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
@@ -212,22 +243,31 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
-    for(int i=0;i<scenImp.size();i++){
-        if(scenImp.get(i).getTipoTest().getTipo()==5){
-            scenarioSparql.add(scenImp.get(i));
-        }else{
-            scenarioSimple.add(scenImp.get(i));
+    if(this.isImportarTest()==true){
+        List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
+        for(int i=0;i<scenImp.size();i++){
+            if(scenImp.get(i).getTipoTest().getTipo()==5){
+                scenarioSparql.add(scenImp.get(i));
+            }else{
+                scenarioSimple.add(scenImp.get(i));
+            }
+            saveTest.saveTestInMemory(scenImp.get(i));
         }
-        saveTest.saveTestInMemory(scenImp.get(i));
+        if(scenarioSparql.size()>0){
+            listT.aniadirTestSparql(scenarioSparql);
+        }
+        if(scenarioSimple.size()>0)
+        {
+            listT.aniadirTestSimple(scenarioSimple);
+        }    
+    }else{
+        List<Instancias> instImp = listaFicheros.getListaInstancias();
+        for(int i=0;i<instImp.size();i++){
+            instancias.add(instImp.get(i));
+            saveTest.saveInstanciasInMemory(instImp.get(i));
+        }
+        listT.aniadirInstancias(instancias);
     }
-    if(scenarioSparql.size()>0){
-        listT.aniadirTestSparql(scenarioSparql);
-    }
-    if(scenarioSimple.size()>0)
-    {
-        listT.aniadirTestSimple(scenarioSimple);
-    }    
 }
 
     private void openFile(JTextField textfield){
@@ -242,20 +282,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
           this.setPathProyect(path);
         }
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton abrirButton;
-    private javax.swing.JButton cancelarButton;
-    private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton examinarButton;
-    private javax.swing.JButton importarButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField pathProyectoTextField;
-    // End of variables declaration//GEN-END:variables
-
+    
     public javax.swing.JTextField getPathProyectoTextField() {
         return pathProyectoTextField;
     }
@@ -266,6 +293,28 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
     public void setPathProyect(String pathProyect) {
         this.pathProyect = pathProyect;
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton abrirButton;
+    private javax.swing.JButton cancelarButton;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton editarButton;
+    private javax.swing.JButton examinarButton;
+    private javax.swing.JButton importarButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField pathProyectoTextField;
+    // End of variables declaration//GEN-END:variables
+
+    public boolean isImportarTest() {
+        return importarTest;
+    }
+
+    public void setImportarTest(boolean importarTest) {
+        this.importarTest = importarTest;
     }
 
 }

@@ -17,6 +17,8 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -28,6 +30,7 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
     private SaveTest saveTest;
+    private JFrame frame;
     
     public void ejecutarUnTest(ScenarioTest scenario){
         testCase = new OntologyTestCase();
@@ -89,6 +92,18 @@ public class OpcionesMenu {
         saveTest = new SaveTest();
         CollectionTest.getInstance().getInstancias().remove(inst);
         saveTest.actualizarListaDeInstancias();
+    }
+    
+    public SeeTestJDialog verTest(ScenarioTest scenario){
+        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, scenario);
+        seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        return seeTestCompleted;
+    }
+    
+    public SeeTestJDialog verInstancias(Instancias instancias){
+        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, instancias);
+        seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        return seeTestCompleted;
     }
   
 }

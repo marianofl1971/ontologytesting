@@ -22,7 +22,7 @@ import javax.swing.WindowConstants;
  */
 public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
-    private ListaFicheros listaFicheros;
+    private ListarTestInstancias listaFicheros;
     private JFrame frame = new JFrame();
     private Instancias instancias = new Instancias();
     
@@ -38,7 +38,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
     public void prepararImport(List<ScenarioTest> listaTests){   
         contentPanel.setLayout(new FlowLayout());  
-        listaFicheros = new ListaFicheros(listaTests);
+        listaFicheros = new ListarTestInstancias(listaTests,null);
         contentPanel.add(listaFicheros.getSplitPane());
         contentPanel.getParent().validate(); 
     }
