@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ListaFicheros extends JPanel implements ListSelectionListener {
 
     private JTextArea descripcion = new JTextArea();
-    private JList list = null;
+    private JList list = new JList();
     private JSplitPane splitPane = null;
     private List<ScenarioTest> listaFicheros = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> listaTests = new ArrayList<ScenarioTest>();
@@ -67,6 +67,9 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
 
         splitPane.setPreferredSize(new Dimension(500, 200));
         if(listaFich.size()!=0){
+            setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[list.getSelectedIndex()]));
+            l.add(getScenarioSelect());
+            this.setListaDeScenarios(l);
             updateLabel(lista[list.getSelectedIndex()]);
         }
     }
@@ -74,16 +77,12 @@ public class ListaFicheros extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         l = new ArrayList<ScenarioTest>();
-        this.setListaDeScenarios(l);
-        int[] index = list.getSelectedIndices();
-        if(index.length==1){
-            setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[list.getSelectedIndex()]));
-            l.add(getScenarioSelect());
-        }else{
-            for(int i=0; i<index.length; i++){
-                setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[index[i]]));
+        Object[] object = list.getSelectedValues();
+        for(int i=0;i<object.length;i++){
+            setScenarioSelect(util.buscarScenario(this.getListaFicheros(),(String) object[i]));
+            if(util.testYaExiste(l,(String) object[i])==false){
                 l.add(getScenarioSelect());
-            }  
+            }
         }
         this.setListaDeScenarios(l);
         updateLabel(lista[list.getSelectedIndex()]);

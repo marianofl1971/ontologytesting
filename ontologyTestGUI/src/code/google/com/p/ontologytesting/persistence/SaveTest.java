@@ -10,7 +10,6 @@ import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import java.awt.Component;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -24,7 +23,6 @@ import javax.swing.JFileChooser;
  * @author saruskas
  */
 public class SaveTest {
-    private Component frame;
     private CollectionTest collection;
     private ListarTestsJPanel listInst;
     private XMLEncoder e;
@@ -33,17 +31,18 @@ public class SaveTest {
         collection = CollectionTest.getInstance();
         if(as==true){
             JFileChooser fileChooser = new JFileChooser();
-            int seleccion = fileChooser.showSaveDialog(frame);
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int seleccion = fileChooser.showSaveDialog(MainApplicationJFrame.getInstance());
             if(seleccion == JFileChooser.APPROVE_OPTION){
                 File fichero = fileChooser.getSelectedFile();
-                e = new XMLEncoder(new BufferedOutputStream(new 
-                FileOutputStream(fichero)));
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
                 e.writeObject(collection);
                 e.close();
                 return true;
             }
         }else{
-            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
+            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
+            //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
             e.writeObject(collection);
             e.close();
             return true;
@@ -112,13 +111,13 @@ public class SaveTest {
         return false;
     }
     
-    public void actualizarListaDeTestsSimples(){
+    public void actualizarListaDeTestsSimples(List<ScenarioTest> scenario){
         listInst = ListarTestsJPanel.getInstance();
-        listInst.aniadirTestSimple(CollectionTest.getInstance().getScenariotest());
+        listInst.aniadirTestSimple(scenario);
     }
     
-    public void actualizarListaDeTestsSparql(){
+    public void actualizarListaDeTestsSparql(List<ScenarioTest> scenario){
         listInst = ListarTestsJPanel.getInstance();
-        listInst.aniadirTestSparql(CollectionTest.getInstance().getScenariotest());
+        listInst.aniadirTestSparql(scenario);
     }
 }

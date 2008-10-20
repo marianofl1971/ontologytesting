@@ -37,9 +37,8 @@ public class Utils {
         return null;
     }
     
-    public boolean testYaExiste(String nombre){
+    public boolean testYaExiste(List<ScenarioTest> lista,String nombre){
         ListIterator li;
-        List<ScenarioTest> lista = CollectionTest.getInstance().getScenariotest();
         li = lista.listIterator();
         while(li.hasNext()){
             ScenarioTest s = (ScenarioTest) li.next();
@@ -49,5 +48,5 @@ public class Utils {
             }
         }
         return false;
-    } 
+    }
 }

@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.beans.XMLDecoder;
@@ -26,7 +27,7 @@ import javax.swing.WindowConstants;
  *
  * @author  sara.garcia
  */
-public class AbrirTestsJDialog extends javax.swing.JDialog {
+public class ImportarTestsJDialog extends javax.swing.JDialog {
 
     private ListaFicheros listaFicheros;
     private JFileChooser filechooser;
@@ -37,13 +38,14 @@ public class AbrirTestsJDialog extends javax.swing.JDialog {
     private List<ScenarioTest> scenarioSparql = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
     private ListarTestsJPanel listT;
+    private SaveTest saveTest = new SaveTest();
     
     /** Creates new form AbrirTestsJDialog */
-    public AbrirTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
+    public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection) {
         super(parent, modal);
         initComponents();
         listT = ListarTestsJPanel.getInstance();
-        this.setTitle("Descripción Tests");
+        this.setTitle("Importar Tests");
     }
 
     public void prepararImport(List<ScenarioTest> listaTests){   
@@ -217,6 +219,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         }else{
             scenarioSimple.add(scenImp.get(i));
         }
+        saveTest.saveTestInMemory(scenImp.get(i));
     }
     if(scenarioSparql.size()>0){
         listT.aniadirTestSparql(scenarioSparql);
