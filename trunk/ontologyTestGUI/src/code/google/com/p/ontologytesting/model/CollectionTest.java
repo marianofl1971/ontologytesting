@@ -10,7 +10,6 @@
 package code.google.com.p.ontologytesting.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -18,8 +17,8 @@ import java.util.List;
  */
 public class CollectionTest {
 
-    private List<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
-    private List<Instancias> instancias = new ArrayList<Instancias>();
+    private ArrayList<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
+    private ArrayList<Instancias> instancias = new ArrayList<Instancias>();
     private String ontology="";
     private String namespace="";
     private static CollectionTest collection = null;
@@ -42,7 +41,7 @@ public class CollectionTest {
         return collection;
     }
     
-    public List<ScenarioTest> getScenariotest() {
+    public ArrayList<ScenarioTest> getScenariotest() {
         return scenariotest;
     }
 
@@ -66,7 +65,7 @@ public class CollectionTest {
         this.namespace = namespace;
     }
 
-    public List<Instancias> getInstancias() {
+    public ArrayList<Instancias> getInstancias() {
         return instancias;
     }
 

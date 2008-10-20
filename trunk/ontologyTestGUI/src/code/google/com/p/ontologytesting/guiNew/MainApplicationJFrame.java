@@ -29,6 +29,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
     private SaveTest saveTest = new SaveTest();
+    private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
     
     /** Creates new form MainApplicationJFrame */
@@ -484,7 +485,7 @@ private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent e
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    AbrirTestsJDialog abrirTests = new AbrirTestsJDialog(this, true,CollectionTest.getInstance());
+    ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this, true,CollectionTest.getInstance());
     abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -531,8 +532,7 @@ private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarTodosMenuItemActionPerformed
 // TODO add your handling code here:
-
-
+    opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed

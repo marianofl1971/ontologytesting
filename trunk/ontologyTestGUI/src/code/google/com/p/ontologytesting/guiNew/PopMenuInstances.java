@@ -37,7 +37,9 @@ public class PopMenuInstances implements ActionListener{
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else if(source.getText().equals("Asociar a un Test")){
-            
+            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(frame, true, inst);
+            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            asociarInst.setVisible(true);
         }else if(source.getText().equals("Ver")){
             frame = new JFrame();
             SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, inst);

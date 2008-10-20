@@ -431,7 +431,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             menu.ejecutarUnTest(this.getScenario());
         }
     }
-    saveTest.actualizarListaDeTestsSimples();
+    saveTest.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
 
 
@@ -508,7 +508,7 @@ public void copiarTestAScenarioDesdeAyuda(){
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
-    if(utils.testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){
@@ -614,7 +614,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     
     inst = new ArrayList();
     getInst().add(0,0);
-    if(utils.testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){

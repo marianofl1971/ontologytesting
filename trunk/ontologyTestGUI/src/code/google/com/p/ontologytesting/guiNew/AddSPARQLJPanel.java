@@ -555,7 +555,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             menu.ejecutarUnTest(this.getScenario());
         }
     }  
-    saveTest.actualizarListaDeTestsSparql();  
+    saveTest.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
 }
 
 public void reemplazarConsulta(SparqlQueryOntology query,int pos){
@@ -644,7 +644,7 @@ public void prepararGuardar(){
     String query = this.getSPARQLQuery();
     String result = this.getResultTextArea();
     SparqlQueryOntology q = new SparqlQueryOntology(query,result);
-    if(utils.testYaExiste(nombreTest)==true){
+    if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
     if(testVacio(nombreTest)==true){

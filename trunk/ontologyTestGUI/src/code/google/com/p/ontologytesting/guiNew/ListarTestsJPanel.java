@@ -249,25 +249,31 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
 private void testSimplesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSimplesListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_testSimplesListValueChanged
-    popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
-    MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
-    lista.addMouseListener(popupListener);
+    if(modeloSimples.getSize()>0){
+        popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+        MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
+        lista.addMouseListener(popupListener);
+    }
 }
 
 private void testSparqlListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSparqlListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_testSparqlListValueChanged
-    popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
-    MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
-    lista.addMouseListener(popupListener);
+    if(modeloSparql.getSize()>0){
+        popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+        MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
+        lista.addMouseListener(popupListener);
+    }
 }
 
 private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_instanciasListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_instanciasListValueChanged
-    popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
-    MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
-    lista.addMouseListener(popupListener);
+    if(modeloInstancias.getSize()>0){
+        popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
+        MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
+        lista.addMouseListener(popupListener);
+    }
 }
 
 

@@ -81,8 +81,8 @@ public class OpcionesMenu {
     public void eliminarTest(ScenarioTest scenario){
         saveTest = new SaveTest();
         CollectionTest.getInstance().getScenariotest().remove(scenario);
-        saveTest.actualizarListaDeTestsSimples();
-        saveTest.actualizarListaDeTestsSparql();
+        saveTest.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+        saveTest.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
     }
     
     public void eliminarInstancias(Instancias inst){
