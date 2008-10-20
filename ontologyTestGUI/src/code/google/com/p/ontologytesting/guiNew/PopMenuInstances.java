@@ -5,10 +5,15 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -16,34 +21,35 @@ import javax.swing.JPopupMenu;
  */
 public class PopMenuInstances implements ActionListener{
 
-    private String testSelec="";
-    
-    public void setTestSelec(String testSelec){
-        this.testSelec=testSelec;
-    }
-    
-    public String getTestSelec(){
-        return this.testSelec;
-    }
+    private String instSelec="";
+    private OpcionesMenu menu = new OpcionesMenu();
+    private Utils utils = new Utils();
+    private JFrame frame = new JFrame();
+    private JPanel panel = new JPanel();
     
     @Override
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem)(e.getSource());
-        
+        CollectionTest collection = CollectionTest.getInstance();
+        Instancias inst = utils.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
-            
+            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(panel, false, inst);
+            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst.setVisible(true);
         }else if(source.getText().equals("Asociar a un Test")){
-
+            
         }else if(source.getText().equals("Ver")){
-            
+            frame = new JFrame();
+            SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, inst);
+            seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            seeTestCompleted.setVisible(true);
         }else if(source.getText().equals("Eliminar")){
-            
+            menu.eliminarInstancias(inst);
         }
     }
     
     public JPopupMenu createPopupMenuForInstances() {
         JMenuItem menuItem;  
-        //Create the popup menu.
         JPopupMenu popup = new JPopupMenu();
         menuItem = new JMenuItem("Editar");
         menuItem.addActionListener(this);
@@ -59,6 +65,14 @@ public class PopMenuInstances implements ActionListener{
         popup.add(menuItem);
         
         return popup;
+    }
+    
+    public void setInstSelec(String instSelec){
+        this.instSelec=instSelec;
+    }
+    
+    public String getInstSelec(){
+        return this.instSelec;
     }
 
 }

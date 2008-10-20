@@ -10,6 +10,7 @@ package code.google.com.p.ontologytesting.guiNew;
  * @author sara.garcia
  */
 import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.OntologyTestCase;
 import code.google.com.p.ontologytesting.model.OntologyTestResult;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -82,6 +83,12 @@ public class OpcionesMenu {
         CollectionTest.getInstance().getScenariotest().remove(scenario);
         saveTest.actualizarListaDeTestsSimples();
         saveTest.actualizarListaDeTestsSparql();
+    }
+    
+    public void eliminarInstancias(Instancias inst){
+        saveTest = new SaveTest();
+        CollectionTest.getInstance().getInstancias().remove(inst);
+        saveTest.actualizarListaDeInstancias();
     }
   
 }
