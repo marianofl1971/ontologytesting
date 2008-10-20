@@ -9,6 +9,7 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.*;
 import java.awt.Dimension;
 import java.util.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,22 +18,19 @@ import java.util.List;
 public class SeeTestJDialog extends javax.swing.JDialog {
 
     /** Creates new form SeeTestJDialog */
-    public SeeTestJDialog(javax.swing.JFrame parent, boolean modal, ScenarioTest scenario) {
+    public SeeTestJDialog(JFrame parent, boolean modal, ScenarioTest scenario) {
         super(parent, modal);
         initComponents();
         this.setTitle("Ver Test");
         this.setSize(new Dimension(650,600));
+        this.setLocationRelativeTo(this.getParent());
         testDescriptionPane.setContentType("text/html");
-        int type = 0;
-        if(scenario.getTestName().equals("sparql")){
-            type=5;
-        }
-        String print = verTest(scenario,type);
+        String print = verTest(scenario);
         testDescriptionPane.setText(print);
         testDescriptionPane.setEditable(false);
     }
     
-    public SeeTestJDialog(java.awt.Frame parent, boolean modal, Instancias instancias) {
+    public SeeTestJDialog(JFrame parent, boolean modal, Instancias instancias) {
         super(parent, modal);
         initComponents();
         this.setTitle("Ver Instancias");
@@ -75,7 +73,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public String verTest(ScenarioTest scenario, int type){
+    public String verTest(ScenarioTest scenario){
         String verTest="<html>";
         String testName = scenario.getNombre();
         String desc = scenario.getDescripcion();
@@ -86,7 +84,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         verTest="<b>Nombre del Test:</b> "+testName + "<br><br><b>Descripcion:</b>"+desc+"<br><br>" +
                 "<b>Instancias Asociadas</b><br><br>";
         String instancias = generarInstancias(inst,0);
-        if(type!=5){
+        if(scenario.getTipoTest().getTipo()!=5){
             consultas = generarConsultasSimples(listQ);
         }else{
             consultas = generarConsultasSparql(listQSparql);

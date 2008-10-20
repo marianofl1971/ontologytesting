@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -28,10 +27,6 @@ import javax.swing.event.ListSelectionListener;
 public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelectionListener{
 
     private DefaultListModel modeloSimples,modeloSparql,modeloInstancias;
-    private String testSeleccionado,instanciasSelec;
-    private Utils utils;
-    private OpcionesMenu menu;
-    private JFrame frame;
     private PopMenuTests popTest;
     private PopMenuInstances popInst;
     private static ListarTestsJPanel listTests = null;
@@ -39,8 +34,6 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
     private ListarTestsJPanel() {
         initComponents();
         testSimplesList.setSelectedIndex(0);
-        utils = new Utils();
-        menu = new OpcionesMenu();
         popTest = new PopMenuTests();
         popInst = new PopMenuInstances();
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
@@ -75,47 +68,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         testSimplesList.setModel(modeloSimples);
         simplesPanel.validate();
     }
-    
-    /*public JPopupMenu createPopupMenuForTests() {
-        JMenuItem menuItem;  
-        //Create the popup menu.
-        JPopupMenu popup = new JPopupMenu();
-        menuItem = new JMenuItem("Editar");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Ejecutar");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Ver");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Eliminar");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        
-        return popup;
-    }
-    
-    public JPopupMenu createPopupMenuForInstances() {
-        JMenuItem menuItem;  
-        //Create the popup menu.
-        JPopupMenu popup = new JPopupMenu();
-        menuItem = new JMenuItem("Editar");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Asociar a un Test");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Ver");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        menuItem = new JMenuItem("Eliminar");
-        menuItem.addActionListener(this);
-        popup.add(menuItem);
-        
-        return popup;
-    }*/
-    
+
     public void aniadirTestSparql(List<ScenarioTest> scenario){ 
         modeloSparql = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
@@ -296,25 +249,25 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
 private void testSimplesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSimplesListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_testSimplesListValueChanged
+    popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
     MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
     lista.addMouseListener(popupListener);
-    this.setTestSeleccionado(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
 }
 
 private void testSparqlListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSparqlListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_testSparqlListValueChanged
+    popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
     MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
     lista.addMouseListener(popupListener);
-    this.setTestSeleccionado(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
 }
 
 private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_instanciasListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();//GEN-LAST:event_instanciasListValueChanged
+    popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
     MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
     lista.addMouseListener(popupListener);
-    this.setInstanciasSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
 }
 
 
@@ -335,46 +288,6 @@ private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt
     private javax.swing.JPanel testSparqlPanel;
     // End of variables declaration//GEN-END:variables
 
-    
-    /*@Override
-    public void actionPerformed(ActionEvent e) {
-        JMenuItem source = (JMenuItem)(e.getSource());
-        CollectionTest collection = CollectionTest.getInstance();
-        ScenarioTest scenario = utils.buscarScenario(collection.getScenariotest(), this.getTestSeleccionado());
-        if(source.getText().equals("Editar")){   
-            menu.editarTest(scenario);
-        }else if(source.getText().equals("Ejecutar")){
-            menu.ejecutarUnTest(scenario);
-        }else if(source.getText().equals("Ver")){
-            frame = new JFrame();
-            SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, scenario);
-            seeTestCompleted.setLocationRelativeTo(this);
-            seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            seeTestCompleted.setLocationRelativeTo(this);
-            seeTestCompleted.setVisible(true);
-        }else if(source.getText().equals("Eliminar")){
-            menu.eliminarTest(scenario);
-        }else if(source.getText().equals("Asociar a un Test")){
-        
-        }
-    }*/
-
-    public String getTestSeleccionado() {
-        return testSeleccionado;
-    }
-
-    public void setTestSeleccionado(String testSeleccionado) {
-        this.testSeleccionado = testSeleccionado;
-    }
-
-    public String getInstanciasSelec() {
-        return instanciasSelec;
-    }
-
-    public void setInstanciasSelec(String instanciasSelec) {
-        this.instanciasSelec = instanciasSelec;
-    }
-    
     class PopupListener extends MouseAdapter {
         JPopupMenu popup;
 
