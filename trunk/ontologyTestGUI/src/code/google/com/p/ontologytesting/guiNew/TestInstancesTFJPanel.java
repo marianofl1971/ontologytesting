@@ -32,6 +32,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         ButtonGroup group = new ButtonGroup();
         group.add(trueRadioButton);
         group.add(falseRadioButton);
+        frame = new Frame();
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }

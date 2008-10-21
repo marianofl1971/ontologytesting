@@ -235,9 +235,10 @@ public class JenaImplementation implements Jena{
                 }
             }
             if(aux==0){
-                pertenece = instantiation(ns, instanceName[1].toString(), individuo);
+                //instanceName[1].toString()
+                pertenece = instantiation(ns, instanceName[1], individuo);
                 if (pertenece.equals("true")) {
-                    clases.add(instanceName[1].toString());
+                    clases.add(instanceName[1]);
                 }
             }
         }       

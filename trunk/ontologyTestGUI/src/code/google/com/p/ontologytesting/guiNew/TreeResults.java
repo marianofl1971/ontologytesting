@@ -74,7 +74,8 @@ public class TreeResults extends JPanel {
                  boolean pIsLeaf, int pRow, boolean pHasFocus)
              {
 	    DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
-            String texto = new String((String)node.getUserObject());
+            //String texto = new String((String)node.getUserObject());
+            String texto = ((String)node.getUserObject());
 	    super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,
                      pIsExpanded, pIsLeaf, pRow, pHasFocus);
                  if (texto.contains("passed")){

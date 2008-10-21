@@ -11,19 +11,13 @@ import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.ProgressMonitor;
-import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 
 
@@ -31,35 +25,33 @@ import javax.swing.WindowConstants;
  *
  * @author  saruskas
  */
-public class TestSimpleInstSat extends javax.swing.JPanel implements PropertyChangeListener {
+public class TestSimpleInstSat extends javax.swing.JPanel{
 
-    private static ValidarTests validarTests;
-    private static TestInstancesTFJPanel test;
-    private static DescripcionJPanel descPanel = null;
-    private static boolean testSinNombre;
-    private static int actualSubTabInst=0;
-    private static boolean validoInst;
-    private static JPanel panelAyudaInst;
-    private static int totalInst;
-    private static JFrame frame;
-    private static boolean ambosNecesarios;
-    public static boolean seleccionado;
+    private ValidarTests validarTests;
+    private TestInstancesTFJPanel test;
+    private DescripcionJPanel descPanel = null;
+    private boolean testSinNombre;
+    private int actualSubTabInst=0;
+    private boolean validoInst;
+    private JPanel panelAyudaInst;
+    private int totalInst;
+    private JFrame frame;
+    private boolean ambosNecesarios;
     private static List inst;
-    private static boolean continuarSinInstancias;
-    private static boolean testYaExiste;
-    private static int hayUnaConsulta=0;
-    private Component comp;
-    private static TestInstancesTFJPanel pInst;
-    private static List<QueryOntology> queryTest;
-    private static TestInstancesTextJPanel texto;
+    private boolean continuarSinInstancias;
+    private boolean testYaExiste;
+    private int hayUnaConsulta=0;
+    private TestInstancesTFJPanel pInst;
+    private List<QueryOntology> queryTest;
+    private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
     private ScenarioTest scenarioAEditar;
-    private ProgressMonitor progressMonitor;
-    private Task task;
+    //private ProgressMonitor progressMonitor;
+    //private Task task;
     private ControladorTests controlador;
     private Utils utils;
     private OpcionesMenu menu;
@@ -543,8 +535,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
+        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -574,12 +566,12 @@ public void copiarTestAScenarioDesdeAyuda(){
 
 public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
     if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(comp, "El test no tiene instancias asociadas. " +
+        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
+            continuarSinInstancias = false;
         }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+            continuarSinInstancias = true;
         }
     }
 
@@ -666,8 +658,8 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
         && hayUnaConsulta==1){
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
+        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
@@ -695,7 +687,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
 
 public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
-    if(TestSimpleInstSat.getActualSubTabInst()==0){
+    if(this.getActualSubTabInst()==0){
         if(validar.comprovarErrorEnAyudaInst(panelAyudaInst)==false){
         }
     }else{
@@ -877,11 +869,11 @@ public static List getInst() {
     return inst;
 }
 
-public static int getActualSubTabInst() {
+public int getActualSubTabInst() {
     return actualSubTabInst;
 }
 
-public static void setActualSubTabInst(int aActualSubTabInst) {
+public void setActualSubTabInst(int aActualSubTabInst) {
     actualSubTabInst = aActualSubTabInst;
 }
 
@@ -930,7 +922,7 @@ public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
     private javax.swing.JTabbedPane tabbedPaneInst;
     // End of variables declaration//GEN-END:variables
 
-    class Task extends SwingWorker<Void, Void> {
+    /*class Task extends SwingWorker<Void, Void> {
         @Override
         public Void doInBackground() {
             Random random = new Random();
@@ -975,5 +967,5 @@ public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
                 }
             }
         }
-    }
+    }*/
 }

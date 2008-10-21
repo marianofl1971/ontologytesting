@@ -25,24 +25,23 @@ import javax.swing.WindowConstants;
  */
 public class TestSimpleReal extends javax.swing.JPanel {
 
-    private static ValidarTests validarTests;
-    private static TestInstancesQueryJPanel test;
-    private static DescripcionJPanel descPanel = null;
-    private static boolean testSinNombre;
-    private static int actualSubTabReal=0;
-    private static boolean validoReal;
-    private static JPanel panelAyudaReal;
-    private static int totalReal;
-    private static JFrame frame;
-    private static boolean ambosNecesarios;
-    public static boolean seleccionado;
+    private ValidarTests validarTests;
+    private TestInstancesQueryJPanel test;
+    private DescripcionJPanel descPanel = null;
+    private boolean testSinNombre;
+    private int actualSubTabReal=0;
+    private boolean validoReal;
+    private JPanel panelAyudaReal;
+    private int totalReal;
+    private JFrame frame;
+    private boolean ambosNecesarios;
+    public boolean seleccionado;
     private static List real;
-    private static boolean continuarSinInstancias;
-    private static boolean testYaExiste;
-    private static int hayUnaConsulta=0;
-    private Component comp;
-    private static List<QueryOntology> queryTest;
-    private static TestInstancesTextJPanel texto;
+    private boolean continuarSinInstancias;
+    private boolean testYaExiste;
+    private int hayUnaConsulta=0;
+    private List<QueryOntology> queryTest;
+    private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
     private SaveTest saveTest;
@@ -74,6 +73,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     public TestSimpleReal(ScenarioTest s){
         initComponents();
         TestInstancesQueryJPanel.setContadorReal(0);
+        frame = new JFrame();
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
@@ -554,8 +554,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
+        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -585,7 +585,7 @@ public void copiarTestAScenarioDesdeAyuda(){
 
 public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
     if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(comp, "El test no tiene instancias asociadas. " +
+        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
             continuarSinInstancias=false;
@@ -706,7 +706,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
 
 public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
-    if(TestSimpleReal.getActualSubTabReal()==0){
+    if(this.getActualSubTabReal()==0){
         if(validar.comprovarErrorEnAyudaReal(panelAyudaReal)==false){
         }
     }else{
@@ -869,11 +869,11 @@ public static List getReal() {
     return real;
 }
 
-public static int getActualSubTabReal() {
+public int getActualSubTabReal() {
     return actualSubTabReal;
 }
 
-public static void setActualSubTabReal(int aActualSubTabReal) {
+public void setActualSubTabReal(int aActualSubTabReal) {
     actualSubTabReal = aActualSubTabReal;
 }
 

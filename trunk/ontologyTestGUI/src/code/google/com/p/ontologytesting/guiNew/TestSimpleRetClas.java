@@ -25,25 +25,24 @@ import javax.swing.WindowConstants;
  */
 public class TestSimpleRetClas extends javax.swing.JPanel {
 
-    private static ValidarTests validarTests;
-    private static TestInstancesTextAreaJPanel test;
-    private static DescripcionJPanel descPanel = null;
-    private static boolean testSinNombre;
-    private static int actualSubTabRet=0;
-    private static boolean validoRet;
-    private static JPanel panelAyudaRet;
-    private static int totalRet;
-    private static JFrame frame;
-    private static boolean ambosNecesarios;
-    public static boolean seleccionado;
+    private ValidarTests validarTests;
+    private TestInstancesTextAreaJPanel test;
+    private DescripcionJPanel descPanel = null;
+    private boolean testSinNombre;
+    private int actualSubTabRet=0;
+    private boolean validoRet;
+    private JPanel panelAyudaRet;
+    private int totalRet;
+    private JFrame frame;
+    private boolean ambosNecesarios;
+    public boolean seleccionado;
     private static List ret;
-    private static boolean continuarSinInstancias;
-    private static boolean testYaExiste;
-    private static int hayUnaConsulta=0;
+    private boolean continuarSinInstancias;
+    private boolean testYaExiste;
+    private int hayUnaConsulta=0;
     private TestInstancesTextJPanel ti;
-    private Component comp;
-    private static List<QueryOntology> queryTest;
-    private static TestInstancesTextJPanel texto;
+    private List<QueryOntology> queryTest;
+    private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
     private SaveTest saveTest;
@@ -79,6 +78,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     public TestSimpleRetClas(ScenarioTest s){
         initComponents();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
+        frame = new JFrame();
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
@@ -548,8 +548,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoRet==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
+        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -579,7 +579,7 @@ public void copiarTestAScenarioDesdeAyuda(){
 
 public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
     if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(comp, "El test no tiene instancias asociadas. " +
+        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
             continuarSinInstancias=false;
@@ -671,8 +671,8 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
     if(testSinNombre==false && validoRet==true && ambosNecesarios==false
         && hayUnaConsulta==1){
-        preguntarSiContinuarSinInstancias(scenario);
-        if(continuarSinInstancias==true){
+        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
@@ -869,7 +869,7 @@ public void copiarDeTextoAAyuda(){
 
 public void formatoIncorrecto(){
     ValidarConsultas validar = new ValidarConsultas();
-    if(TestSimpleRetClas.getActualSubTabRet()==0){
+    if(this.getActualSubTabRet()==0){
         if(validar.comprovarErrorEnAyudaRet(panelAyudaRet)==false){
         }
     }else{
@@ -886,11 +886,11 @@ public void formatoIncorrecto(){
         return opcionTextRetPanel;
     }
 
-    public static int getActualSubTabRet() {
+    public int getActualSubTabRet() {
         return actualSubTabRet;
     }
     
-    public static void setActualSubTabRet(int aActualSubTabRet) {
+    public void setActualSubTabRet(int aActualSubTabRet) {
         actualSubTabRet= aActualSubTabRet;
     }
     

@@ -30,6 +30,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         this.setPosicion(pos);
         int cont = pos+1;
         TestInstancesQueryJPanel.setContadorReal(cont);
+        frame = new Frame();
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }

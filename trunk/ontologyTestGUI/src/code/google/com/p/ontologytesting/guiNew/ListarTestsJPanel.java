@@ -294,7 +294,7 @@ private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt
     private javax.swing.JPanel testSparqlPanel;
     // End of variables declaration//GEN-END:variables
 
-    class PopupListener extends MouseAdapter {
+    static class PopupListener extends MouseAdapter {
         JPopupMenu popup;
 
         PopupListener(JPopupMenu popupMenu) {

@@ -25,8 +25,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,testYaExiste,sinConsultas,
             ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
-    private static JFrame frame;
-    private Component comp;
+    private JFrame frame;
     private ScenarioTest scenario,scenarioAEditar;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
@@ -670,8 +669,8 @@ public void prepararGuardar(){
     //}
     if(continuar==true){
         if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
-            preguntarSiContinuarSinInstancias(scenario);
-            if(continuarSinInstancias==true){
+            boolean res = preguntarSiContinuarSinInstancias(scenario);
+            if(res==true){
                 scenario.setDescripcion(descTest);
                 scenario.setNombre(nombreTest);
                 List<SparqlQueryOntology> querys = new ArrayList<SparqlQueryOntology>(this.getListaDeConsultas());
@@ -699,15 +698,14 @@ public boolean testVacio(String nombre){
 
 public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
     if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(comp, "El test no tiene instancias asociadas. " +
+        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
+            continuarSinInstancias = false;
         }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+            continuarSinInstancias = true;
         }
     }
-
     return continuarSinInstancias;
 }
 

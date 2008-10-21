@@ -185,11 +185,16 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             CollectionTest.getInstance().setNamespace(namespaceOnto);
             CollectionTest.getInstance().setOntology(ubicOnto);
             File directorio = new File(project.getCarpetaProyectoTextField());
-            directorio.mkdir(); 
-            MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
-            MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
-            setProyectoCreado(true);
-            this.setVisible(false);
+            boolean res = directorio.mkdir(); 
+            if(res==true){
+                MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
+                MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
+                setProyectoCreado(true);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(this,"No se pudo crear el directorio para el proyecto",                                                  
+                "Warning Message",JOptionPane.WARNING_MESSAGE); 
+            }
         }catch(ExceptionReadOntology ex){
             throw new ExceptionReadOntology("No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
                     "Introduzca una ontologia valida.");
