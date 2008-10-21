@@ -25,6 +25,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="guardarProyectoMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarProyectoMenuItemActionPerformed"/>
@@ -33,6 +34,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="guardarProyectoComoMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar Como"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarProyectoComoMenuItemActionPerformed"/>
@@ -51,6 +53,7 @@
         <Menu class="javax.swing.JMenu" name="testsMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu3">
@@ -144,6 +147,7 @@
         <Menu class="javax.swing.JMenu" name="instanciasMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Instancias"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoInstanciasMenuItem">
@@ -183,6 +187,7 @@
         <Menu class="javax.swing.JMenu" name="ejecutarMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ejecutar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="ejecutarTodosMenuItem">
