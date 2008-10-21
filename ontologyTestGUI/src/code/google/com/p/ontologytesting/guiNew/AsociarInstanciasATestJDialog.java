@@ -6,15 +6,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
-
-/*
- * AsociarInstanciasATestJDialog.java
- *
- * Created on 20 de octubre de 2008, 10:20
- */
 
 /**
  *
@@ -22,24 +14,27 @@ import javax.swing.WindowConstants;
  */
 public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
-    private ListarTestInstancias listaFicheros;
-    private JFrame frame = new JFrame();
+    private ListarTestsInstanciasJPanel listaFicheros;
     private Instancias instancias = new Instancias();
+    private OpcionesMenu opMenu = new OpcionesMenu();
     
     /** Creates new form AsociarInstanciasATestJDialog */
     public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
         super(parent, modal);
         initComponents();
+        contentPanel.setLayout(new FlowLayout());  
+        contentPanel.add(new ListarTestsInstanciasJPanel());
+        contentPanel.getParent().validate();
         this.setInstancias(inst);
         this.setLocationRelativeTo(this.getParent());
         this.prepararImport(CollectionTest.getInstance().getScenariotest());
-        this.setTitle("Selección de Tests");
+        this.setTitle("Asociar Instancias a Test");
     }
 
     public void prepararImport(List<ScenarioTest> listaTests){   
-        contentPanel.setLayout(new FlowLayout());  
-        listaFicheros = new ListarTestInstancias(listaTests,null);
-        contentPanel.add(listaFicheros.getSplitPane());
+        listaFicheros = new ListarTestsInstanciasJPanel(listaTests,null,true);
+        contentPanel.remove(0);
+        contentPanel.add(listaFicheros);
         contentPanel.getParent().validate(); 
     }
     
@@ -62,7 +57,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("Asociar Tests");
 
         jLabel2.setText("Seleccione el test al que desea importar las instancias:");
@@ -107,7 +102,6 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +113,9 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
                                     .addComponent(aceptarButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(cancelarButton))
-                                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,22 +141,21 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
 private void verTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestButtonActionPerformed
 // TODO add your handling code here:
-    SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, listaFicheros.getScenarioSelect());//GEN-LAST:event_verTestButtonActionPerformed
-    seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    seeTestCompleted.setLocationRelativeTo(this);
-    seeTestCompleted.setVisible(true);
-}
+    SeeTestJDialog seeTest = opMenu.verTest(listaFicheros.getScenarioSelect());
+    seeTest.setLocationRelativeTo(this);
+    seeTest.setVisible(true);
+}//GEN-LAST:event_verTestButtonActionPerformed
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
-    List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();//GEN-LAST:event_aceptarButtonActionPerformed
+    List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
     for(int i=0;i<scenImp.size();i++){
         scenImp.get(i).setInstancias(this.getInstancias());
     }
     JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
     this.setVisible(false);
-}
+}//GEN-LAST:event_aceptarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:

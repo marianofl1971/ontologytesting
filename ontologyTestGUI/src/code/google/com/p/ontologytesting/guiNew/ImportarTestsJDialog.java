@@ -30,7 +30,7 @@ import javax.swing.WindowConstants;
  */
 public class ImportarTestsJDialog extends javax.swing.JDialog {
 
-    private ListarTestInstancias listaFicheros;
+    private ListarTestsInstanciasJPanel listaFicheros;
     private JFileChooser filechooser;
     private String pathProyect;
     private XMLDecoder decoder;
@@ -49,16 +49,12 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
     public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection,boolean impTest) {
         super(parent, modal);
         initComponents();
+        contentPanel.setLayout(new FlowLayout());  
+        contentPanel.add(new ListarTestsInstanciasJPanel());
+        contentPanel.getParent().validate(); 
         this.setImportarTest(impTest);
         listT = ListarTestsJPanel.getInstance();
-        this.setTitle("Importar Tests");
-    }
-
-    public void prepararImport(List<ScenarioTest> listaTests){   
-        contentPanel.setLayout(new FlowLayout());  
-        listaFicheros = new ListarTestInstancias(listaTests,null);
-        contentPanel.add(listaFicheros.getSplitPane());
-        contentPanel.getParent().validate(); 
+        this.setTitle("Importar");
     }
     
     /** This method is called from within the constructor to
@@ -90,14 +86,14 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 537, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGap(0, 252, Short.MAX_VALUE)
         );
 
-        abrirButton.setText("Ver Test ");
+        abrirButton.setText("Ver");
         abrirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirButtonActionPerformed(evt);
@@ -144,32 +140,32 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(pathProyectoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(examinarButton)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(abrirButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(editarButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(importarButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancelarButton)))
-                        .addGap(21, 21, 21)))
-                .addContainerGap())
+                                        .addComponent(examinarButton)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(abrirButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(editarButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(importarButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cancelarButton))
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
+                                .addGap(21, 21, 21)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,14 +181,14 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
                     .addComponent(pathProyectoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(examinarButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton)
                     .addComponent(importarButton)
                     .addComponent(editarButton)
                     .addComponent(abrirButton))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -227,17 +223,24 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    openFile(this.getPathProyectoTextField());
-    try{
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
-        collection = (CollectionTest) decoder.readObject();
-        this.prepararImport(collection.getScenariotest());
-        decoder.close();    
-    }catch(FileNotFoundException e){
-    }catch(ClassCastException e){
-        System.out.println("Este no es un proyecto valido");
-    }catch(Exception ex){
-        System.out.println("Este no es un proyecto valido");
+    boolean result = openFile(this.getPathProyectoTextField());
+    if(result==true){
+        try{
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
+            collection = (CollectionTest) decoder.readObject();
+            if(this.isImportarTest()==true){
+                listaFicheros = new ListarTestsInstanciasJPanel(collection.getScenariotest(),null,true);
+            }else{
+                listaFicheros = new ListarTestsInstanciasJPanel(null,collection.getInstancias(),false);
+            }
+            decoder.close();    
+        }catch(FileNotFoundException e){
+        }catch(ClassCastException e){
+            System.out.println("Este no es un proyecto valido");
+        }
+        contentPanel.remove(0);
+        contentPanel.add(listaFicheros);
+        contentPanel.getParent().validate();    
     }
 }
 
@@ -270,7 +273,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 }
 
-    private void openFile(JTextField textfield){
+    private boolean openFile(JTextField textfield){
         String path="";
         filechooser = new JFileChooser("");
         filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -280,7 +283,9 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
           path = selectedFile.getAbsolutePath();
           textfield.setText(path);
           this.setPathProyect(path);
+          return true;
         }
+        return false;
     }
     
     public javax.swing.JTextField getPathProyectoTextField() {

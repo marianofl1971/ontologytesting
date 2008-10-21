@@ -1,14 +1,11 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ListarTestsInstanciasJPanel.java
+ *
+ * Created on 21 de octubre de 2008, 10:54
  */
 
 package code.google.com.p.ontologytesting.guiNew;
 
-/**
- *
- * @author sara.garcia
- */
 import code.google.com.p.ontologytesting.model.ClassInstances;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.PropertyInstances;
@@ -20,15 +17,15 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class ListarTestInstancias extends JPanel implements ListSelectionListener {
+/**
+ *
+ * @author  sara.garcia
+ */
+public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements ListSelectionListener{
 
-    private JTextArea descripcion = new JTextArea();
-    private JList list = new JList();
     private JSplitPane splitPane = null;
     private List<ScenarioTest> listaFicheros = new ArrayList<ScenarioTest>();
     private List<ScenarioTest> listaTests = new ArrayList<ScenarioTest>();
-    private String[] lista = null;
-    private JScrollPane descripcionScrollPane = null;
     private static String pathFicheroAbrir ="";
     private Utils util = new Utils();
     private List<ScenarioTest> listaScenarios = new ArrayList<ScenarioTest>();
@@ -37,73 +34,66 @@ public class ListarTestInstancias extends JPanel implements ListSelectionListene
     private List<Instancias> listaInstancias = new ArrayList<Instancias>();
     private Instancias instanciaSelect = new Instancias();
     private List<Instancias> linst = new ArrayList<Instancias>();
-    private List<String> listaDeNombres = new ArrayList<String>();
     private boolean isTest=false;
+    private DefaultListModel modeloTests,modeloInstancias;
     
-    public ListarTestInstancias(List<ScenarioTest> listaFich,List<Instancias> listaInst, boolean isTest) {
+    /** Creates new form ListarTestsInstanciasJPanel */
+    public ListarTestsInstanciasJPanel() {
+        initComponents();
+    }
+    
+    public ListarTestsInstanciasJPanel(List<ScenarioTest> listaFich,List<Instancias> listaInst, boolean isTest) {
+        initComponents();
         this.setIsTest(isTest);
+        modeloTests = new DefaultListModel();
+        modeloInstancias = new DefaultListModel();
         if(isTest==true){
             this.setListaFicheros(listaFich);
             for(int i=0;i<listaFich.size();i++){
                 String nombre = listaFich.get(i).getNombre();
-                listaDeNombres.add(nombre);
+                modeloTests.addElement(nombre);
             }
-            int tam = listaDeNombres.size();
-            lista = new String[tam];
-            for(int j=0;j<tam;j++){
-                lista[j] = listaDeNombres.get(j);
-            }
+            list.setModel(modeloTests);
         }else{
             this.setListaInstancias(listaInst);
             for(int i=0;i<listaInst.size();i++){
                 String nombre = listaInst.get(i).getNombre();
-                listaDeNombres.add(nombre);
+                modeloInstancias.addElement(nombre);
             }
-            int tam = listaDeNombres.size();
-            lista = new String[tam];
-            for(int j=0;j<tam;j++){
-                lista[j] = listaDeNombres.get(j);
-            }
+            list.setModel(modeloInstancias);
         }
-        list = new JList(lista);
-        list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
         list.setSelectedIndex(0);
         list.addListSelectionListener(this);
        
-        JScrollPane listScrollPane = new JScrollPane(list);
         descripcion.setFont(descripcion.getFont().deriveFont(Font.BOLD));
         descripcion.setLineWrap(true);
         descripcion.setWrapStyleWord(true);
         
-        descripcionScrollPane = new JScrollPane(descripcion);
-        descripcionScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,listScrollPane, descripcionScrollPane);
-        splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(170);
+        descScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         Dimension minimumSize = new Dimension(100, 50);
         listScrollPane.setMinimumSize(minimumSize);
-        descripcionScrollPane.setMinimumSize(minimumSize);
+        descScrollPane.setMinimumSize(minimumSize);
 
-        splitPane.setPreferredSize(new Dimension(500, 200));
-        
         if(isTest==true){
             if(listaFich.size()>0){
-                setScenarioSelect(util.buscarScenario(this.getListaFicheros(), lista[list.getSelectedIndex()]));
+                setScenarioSelect(util.buscarScenario(this.getListaFicheros(),modeloTests.get(list.getLeadSelectionIndex()).toString()));
                 l.add(getScenarioSelect());
                 this.setListaDeScenarios(l);
+                updateLabel(modeloTests.get(list.getLeadSelectionIndex()).toString());
             }
         }else{
             if(listaInst.size()>0){
-                setInstanciaSelect(util.buscarInstancias(this.getListaInstancias(), lista[list.getSelectedIndex()]));
+                setInstanciaSelect(util.buscarInstancias(this.getListaInstancias(), modeloInstancias.get(list.getLeadSelectionIndex()).toString()));
                 linst.add(getInstanciaSelect());
                 this.setListaInstancias(linst);
+                updateLabel(modeloInstancias.get(list.getLeadSelectionIndex()).toString());
             }
         }
-        updateLabel(lista[list.getSelectedIndex()]);
+        
     }
-    
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
         l = new ArrayList<ScenarioTest>();
@@ -124,10 +114,12 @@ public class ListarTestInstancias extends JPanel implements ListSelectionListene
         }
         if(this.getIsTest()==true){
             this.setListaDeScenarios(l);
+            updateLabel(modeloTests.get(list.getLeadSelectionIndex()).toString());
         }else{
             this.setListaInstancias(linst);
+            updateLabel(modeloInstancias.get(list.getLeadSelectionIndex()).toString());
         }
-        updateLabel(lista[list.getSelectedIndex()]);
+        
     }
     
     public void updateLabel (String name) { 
@@ -246,5 +238,72 @@ public class ListarTestInstancias extends JPanel implements ListSelectionListene
     public void setIsTest(boolean isTest) {
         this.isTest = isTest;
     }
+    
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel2 = new javax.swing.JPanel();
+        descScrollPane = new javax.swing.JScrollPane();
+        descripcion = new javax.swing.JTextArea();
+        listScrollPane = new javax.swing.JScrollPane();
+        list = new javax.swing.JList();
+
+        jSplitPane1.setDividerLocation(170);
+        jSplitPane1.setOneTouchExpandable(true);
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(500, 200));
+
+        descripcion.setColumns(20);
+        descripcion.setRows(5);
+        descScrollPane.setViewportView(descripcion);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 265, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(descScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 229, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(descScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+        );
+
+        jSplitPane1.setRightComponent(jPanel2);
+
+        listScrollPane.setViewportView(list);
+
+        jSplitPane1.setLeftComponent(listScrollPane);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane descScrollPane;
+    private javax.swing.JTextArea descripcion;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JList list;
+    private javax.swing.JScrollPane listScrollPane;
+    // End of variables declaration//GEN-END:variables
 
 }
