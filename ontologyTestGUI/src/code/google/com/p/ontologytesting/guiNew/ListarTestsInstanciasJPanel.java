@@ -25,6 +25,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
 
     private JSplitPane splitPane = null;
     private List<ScenarioTest> listaFicheros = new ArrayList<ScenarioTest>();
+    private List<Instancias> listaFicherosInst = new ArrayList<Instancias>();
     private List<ScenarioTest> listaTests = new ArrayList<ScenarioTest>();
     private static String pathFicheroAbrir ="";
     private Utils util = new Utils();
@@ -55,7 +56,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
             }
             list.setModel(modeloTests);
         }else{
-            this.setListaInstancias(listaInst);
+            this.setListaFicherosInst(listaInst);
             for(int i=0;i<listaInst.size();i++){
                 String nombre = listaInst.get(i).getNombre();
                 modeloInstancias.addElement(nombre);
@@ -85,7 +86,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
             }
         }else{
             if(listaInst.size()>0){
-                setInstanciaSelect(util.buscarInstancias(this.getListaInstancias(), modeloInstancias.get(list.getLeadSelectionIndex()).toString()));
+                setInstanciaSelect(util.buscarInstancias(this.getListaFicherosInst(), modeloInstancias.get(list.getLeadSelectionIndex()).toString()));
                 linst.add(getInstanciaSelect());
                 this.setListaInstancias(linst);
                 updateLabel(modeloInstancias.get(list.getLeadSelectionIndex()).toString());
@@ -101,7 +102,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
         Object[] object = list.getSelectedValues();
         for(int i=0;i<object.length;i++){
             if(this.getIsTest()==false){
-                setInstanciaSelect(util.buscarInstancias(this.getListaInstancias(),(String) object[i]));
+                setInstanciaSelect(util.buscarInstancias(this.getListaFicherosInst(),(String) object[i]));
                 if(util.instanciaYaExiste(linst,(String) object[i])==false){
                     linst.add(getInstanciaSelect());
                 }
@@ -124,7 +125,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
     
     public void updateLabel (String name) { 
         if(this.getIsTest()==false){
-            Instancias inst = util.buscarInstancias(this.getListaInstancias(),name);
+            Instancias inst = util.buscarInstancias(this.getListaFicherosInst(),name);
             this.setInstanciaSelect(inst);
             List<ClassInstances> clasInst = inst.getClassInstances();
             List<PropertyInstances> propInst = inst.getPropertyInstances();
@@ -305,5 +306,13 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
     private javax.swing.JList list;
     private javax.swing.JScrollPane listScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public List<Instancias> getListaFicherosInst() {
+        return listaFicherosInst;
+    }
+
+    public void setListaFicherosInst(List<Instancias> listaFicherosInst) {
+        this.listaFicherosInst = listaFicherosInst;
+    }
 
 }

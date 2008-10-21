@@ -8,7 +8,6 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private JFrame frame;
     private boolean ambosNecesarios;
     public boolean seleccionado;
-    private static List ret;
+    private List ret;
     private boolean continuarSinInstancias;
     private boolean testYaExiste;
     private int hayUnaConsulta=0;
@@ -52,6 +51,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private ControladorTests controlador;
     private Utils utils;
     private OpcionesMenu menu;
+    private ValidarConsultas validarConsultas = new ValidarConsultas();
     
     /** Creates new form TestSimpleRetClas */
     /*public TestSimpleRetClas(int type) {
@@ -509,7 +509,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     int cont=0;
     
     ret = new ArrayList();
-    getRet().add(0,0);
+    this.ret.add(0,0);
+    validarConsultas.setListRet(this.ret);
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
@@ -535,9 +536,11 @@ public void copiarTestAScenarioDesdeAyuda(){
                         if(validarTests.validarQuery(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
-                            getRet().add(i, 0);
+                            this.ret.add(i, 0);
+                            validarConsultas.setListRet(this.ret);
                         }else{
-                            getRet().add(i, 1);
+                            this.ret.add(i, 1);
+                            validarConsultas.setListRet(this.ret);
                             validoRet=false;
                         }
                     }
@@ -618,7 +621,8 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     descTest = descPanel.getDescTextArea();
     
     ret = new ArrayList();
-    getRet().add(0,0);
+    this.ret.add(0,0);
+    validarConsultas.setListRet(this.ret);
     if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
@@ -642,17 +646,21 @@ public void copiarTestAScenarioDesdeSinAyuda(){
                                     testQuery = new QueryOntology(cQuery[i],cResult[i]);
                                 }
                                 queryTest.add(testQuery);
-                                getRet().add(i, 0);
+                                this.ret.add(i, 0);
+                                validarConsultas.setListRet(this.ret);
                             }else if(validarTests.validarQuery(cQuery[i])==false &&
                                     validarTests.validarResultado(cResult[i])==true){
-                                getRet().add(i, 1);
+                                this.ret.add(i, 1);
+                                validarConsultas.setListRet(this.ret);
                                 validoRet=false;
                             }else if(validarTests.validarQuery(cQuery[i])==true &&
                                     validarTests.validarResultado(cResult[i])==false){
-                                getRet().add(i, 2);
+                                this.ret.add(i, 2);
+                                validarConsultas.setListRet(this.ret);
                                 validoRet=false;
                             }else{
-                                getRet().add(i, 3);
+                                this.ret.add(i, 3);
+                                validarConsultas.setListRet(this.ret);
                                 validoRet=false;
                             }
                         }
@@ -896,14 +904,6 @@ public void formatoIncorrecto(){
     
     public  int getTabbedPaneRet() {
         return tabbedPaneRet.getSelectedIndex();
-    }
-    
-    public static List getRet() {
-        return ret;
-    }
-
-    public static void setRet(List aRet) {
-        ret = aRet;
     }
 
     public ScenarioTest getScenario() {

@@ -8,7 +8,6 @@ package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,10 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private JFrame frame;
     private boolean ambosNecesarios;
     public boolean seleccionado;
-    private static List real;
+    private List real;
     private boolean continuarSinInstancias;
     private boolean testYaExiste;
     private int hayUnaConsulta=0;
-    private List<QueryOntology> queryTest;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private boolean continuar;
@@ -51,6 +49,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ControladorTests controlador;
     private Utils utils;
     private OpcionesMenu menu;
+    private ValidarConsultas validarConsultas = new ValidarConsultas();
     
     /** Creates new form TestSimpleReal */
     /*public TestSimpleReal() {
@@ -505,7 +504,7 @@ public void copiarTestAScenarioDesdeAyuda(){
 
     inicializarVariables();
 
-    queryTest = new ArrayList<QueryOntology>();
+    List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
     test = null; 
     
     panelAyudaReal= this.getRealAyudaPanel();
@@ -515,7 +514,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     int cont=0;
     
     real = new ArrayList();
-    getReal().add(0,0);
+    this.real.add(0,0);
+    validarConsultas.setListReal(this.real);
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
@@ -541,9 +541,11 @@ public void copiarTestAScenarioDesdeAyuda(){
                         if(validarTests.validarQuery(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
-                            getReal().add(i, 0);
+                            this.real.add(i, 0);
+                            validarConsultas.setListReal(this.real);
                         }else{
-                            getReal().add(i, 1);
+                            this.real.add(i, 1);
+                            validarConsultas.setListReal(this.real);
                             validoReal=false;
                         }
                     }
@@ -610,7 +612,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     texto = null;
     
     validarTests = new ValidarTests();
-    queryTest = new ArrayList<QueryOntology>();
+    List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
     conjuntoQuerys = texto.getConsultaQuery();
@@ -624,7 +626,8 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     descTest = descPanel.getDescTextArea();
     
     real = new ArrayList();
-    getReal().add(0,0);
+    this.real.add(0,0);
+    validarConsultas.setListReal(this.real);
     if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
@@ -648,17 +651,21 @@ public void copiarTestAScenarioDesdeSinAyuda(){
                                     testQuery = new QueryOntology(cQuery[i],cResult[i]);
                                 }
                                 queryTest.add(testQuery);
-                                getReal().add(i, 0);
+                                this.real.add(i, 0);
+                                validarConsultas.setListReal(this.real);
                             }else if(validarTests.validarQuery(cQuery[i])==false &&
                                     validarTests.validarQuery(cResult[i])==true){
-                                getReal().add(i, 1);
+                                this.real.add(i, 1);
+                                validarConsultas.setListReal(this.real);
                                 validoReal=false;
                             }else if(validarTests.validarQuery(cQuery[i])==true &&
                                     validarTests.validarQuery(cResult[i])==false){
-                                getReal().add(i, 2);
+                                this.real.add(i, 2);
+                                validarConsultas.setListReal(this.real);
                                 validoReal=false;
                             }else{
-                                getReal().add(i, 3);
+                                this.real.add(i, 3);
+                                validarConsultas.setListReal(this.real);
                                 validoReal=false;
                             }
                         }
@@ -863,10 +870,6 @@ public void copiarDeTextoAAyuda(){
         }  
         test.validate();
         }
-}
-
-public static List getReal() {
-    return real;
 }
 
 public int getActualSubTabReal() {

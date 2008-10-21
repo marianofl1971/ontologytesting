@@ -9,7 +9,6 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private int totalInst;
     private JFrame frame;
     private boolean ambosNecesarios;
-    private static List inst;
+    private List inst;
     private boolean continuarSinInstancias;
     private boolean testYaExiste;
     private int hayUnaConsulta=0;
@@ -55,6 +54,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private ControladorTests controlador;
     private Utils utils;
     private OpcionesMenu menu;
+    private ValidarConsultas validarConsultas = new ValidarConsultas();
     
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
@@ -496,7 +496,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     int cont=0;
     
     inst = new ArrayList();
-    getInst().add(0,0);
+    this.inst.add(0,0);
+    validarConsultas.setListInst(this.inst);
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
@@ -522,9 +523,11 @@ public void copiarTestAScenarioDesdeAyuda(){
                         if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
-                            getInst().add(i, 0);
+                            this.inst.add(i, 0);
+                            validarConsultas.setListInst(this.inst);
                         }else{
-                            getInst().add(i, 1);
+                            this.inst.add(i, 1);
+                            validarConsultas.setListInst(this.inst);
                             validoInst=false;
                         }
                     }
@@ -605,7 +608,8 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     descTest = descPanel.getDescTextArea();
     
     inst = new ArrayList();
-    getInst().add(0,0);
+    this.inst.add(0,0);
+    validarConsultas.setListInst(this.inst);
     if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
@@ -629,17 +633,21 @@ public void copiarTestAScenarioDesdeSinAyuda(){
                                     testQuery = new QueryOntology(cQuery[i],cResult[i]);
                                 }
                                 queryTest.add(testQuery);
-                                getInst().add(i, 0);
+                                this.inst.add(i, 0);
+                                validarConsultas.setListInst(this.inst);
                             }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
                                     validarTests.validarResultadoInstSatis(cResult[i])==true){
-                                getInst().add(i, 1);
+                                this.inst.add(i, 1);
+                                validarConsultas.setListInst(this.inst);
                                 validoInst=false;
                             }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
                                     validarTests.validarResultadoInstSatis(cResult[i])==false){
-                                getInst().add(i, 2);
+                                this.inst.add(i, 2);
+                                validarConsultas.setListInst(this.inst);
                                 validoInst=false;
                             }else{
-                                getInst().add(i, 3);
+                                this.inst.add(i, 3);
+                                validarConsultas.setListInst(this.inst);
                                 validoInst=false;
                             }
                         }
@@ -863,10 +871,6 @@ public void copiarDeTextoAAyuda(){
         }
         test.validate();
     }
-}
-
-public static List getInst() {
-    return inst;
 }
 
 public int getActualSubTabInst() {
