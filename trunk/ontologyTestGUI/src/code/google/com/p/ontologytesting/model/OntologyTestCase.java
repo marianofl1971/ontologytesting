@@ -180,10 +180,8 @@ public class OntologyTestCase implements OntologyTest{
                         }
                     }  
                 }
-        }
-        
-        while(liSparql.hasNext()){ 
-            
+        }        
+        while(liSparql.hasNext()){    
             listaResultEsperada = new ArrayList<ExecQuerySparql>();
             sparqlquery = (SparqlQueryOntology) liSparql.next();
             String sparqlQuery = sparqlquery.getQuerySparql();
@@ -202,7 +200,6 @@ public class OntologyTestCase implements OntologyTest{
                     listaResultEsperada.add(execQuery);
                 }
             }
-            
             listaResultObtenida = jena.testSPARQL(sparqlQuery, true);
             if(listaResultObtenida.size()>0){
                 esperado = new ArrayList<String>();
