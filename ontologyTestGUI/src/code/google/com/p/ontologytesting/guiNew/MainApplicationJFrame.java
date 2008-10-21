@@ -131,6 +131,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         fileMenu.add(abrirProyectoMenuItem);
 
         guardarProyectoMenuItem.setText("Guardar");
+        guardarProyectoMenuItem.setEnabled(false);
         guardarProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarProyectoMenuItemActionPerformed(evt);
@@ -139,6 +140,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         fileMenu.add(guardarProyectoMenuItem);
 
         guardarProyectoComoMenuItem.setText("Guardar Como");
+        guardarProyectoComoMenuItem.setEnabled(false);
         guardarProyectoComoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarProyectoComoMenuItemActionPerformed(evt);
@@ -157,6 +159,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         testsMenu.setText("Tests");
+        testsMenu.setEnabled(false);
 
         jMenu3.setText("Nuevo");
 
@@ -241,6 +244,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         menuBar.add(testsMenu);
 
         instanciasMenu.setText("Instancias");
+        instanciasMenu.setEnabled(false);
 
         nuevoInstanciasMenuItem.setText("Nuevo");
         nuevoInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +281,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         menuBar.add(instanciasMenu);
 
         ejecutarMenu.setText("Ejecutar");
+        ejecutarMenu.setEnabled(false);
 
         ejecutarTodosMenuItem.setText("Todos los Tests");
         ejecutarTodosMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -340,19 +345,21 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
-    collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
-    /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
+    //collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){*/
+    if(newProject.getProyectoCreado()==true){
         this.inicializarContadores();
+        guardarProyectoComoMenuItem.setEnabled(true);
+        guardarProyectoMenuItem.setEnabled(true);
         instanciasMenu.setEnabled(true);
         testsMenu.setEnabled(true);
         ejecutarMenu.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
-    //}
+    }
 
 }
 
