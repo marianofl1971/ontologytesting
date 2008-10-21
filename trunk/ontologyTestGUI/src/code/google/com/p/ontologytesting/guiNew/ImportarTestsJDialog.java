@@ -19,10 +19,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -76,7 +76,6 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         pathProyectoTextField = new javax.swing.JTextField();
         examinarButton = new javax.swing.JButton();
         importarButton = new javax.swing.JButton();
-        editarButton = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -93,7 +92,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
             .addGap(0, 252, Short.MAX_VALUE)
         );
 
-        abrirButton.setText("Ver");
+        abrirButton.setText("Ver Completo");
         abrirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirButtonActionPerformed(evt);
@@ -126,13 +125,6 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
             }
         });
 
-        editarButton.setText("Editar");
-        editarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,9 +149,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(abrirButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(editarButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(importarButton)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cancelarButton))
@@ -186,7 +176,6 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarButton)
                     .addComponent(importarButton)
-                    .addComponent(editarButton)
                     .addComponent(abrirButton))
                 .addContainerGap())
         );
@@ -210,17 +199,6 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     this.setVisible(false);
 }//GEN-LAST:event_cancelarButtonActionPerformed
 
-private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
-// TODO add your handling code here:
-    if(this.isImportarTest()==true){
-        opMenu.editarTest(listaFicheros.getScenarioSelect());//GEN-LAST:event_editarButtonActionPerformed
-    }else{
-        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(panel, false, listaFicheros.getInstanciaSelect());
-        editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        editInst.setVisible(true);
-    }
-}
-
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
     boolean result = openFile(this.getPathProyectoTextField());
@@ -233,14 +211,16 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
             }else{
                 listaFicheros = new ListarTestsInstanciasJPanel(null,collection.getInstancias(),false);
             }
-            decoder.close();    
+            decoder.close(); 
+            contentPanel.remove(0);
+            contentPanel.add(listaFicheros);
+            contentPanel.getParent().validate(); 
         }catch(FileNotFoundException e){
         }catch(ClassCastException e){
             System.out.println("Este no es un proyecto valido");
-        }
-        contentPanel.remove(0);
-        contentPanel.add(listaFicheros);
-        contentPanel.getParent().validate();    
+        }catch(NoSuchElementException e){
+            System.out.println("Este no es un proyecto valido");
+        }  
     }
 }
 
@@ -304,7 +284,6 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JButton abrirButton;
     private javax.swing.JButton cancelarButton;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton editarButton;
     private javax.swing.JButton examinarButton;
     private javax.swing.JButton importarButton;
     private javax.swing.JLabel jLabel1;
@@ -321,5 +300,14 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     public void setImportarTest(boolean importarTest) {
         this.importarTest = importarTest;
     }
+    
+    /*Boton Editar
+            if(this.isImportarTest()==true){
+        opMenu.editarTest(listaFicheros.getScenarioSelect());
+    }else{
+        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(panel, true, listaFicheros.getInstanciaSelect());
+        editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        editInst.setVisible(true);
+    }*/
 
 }

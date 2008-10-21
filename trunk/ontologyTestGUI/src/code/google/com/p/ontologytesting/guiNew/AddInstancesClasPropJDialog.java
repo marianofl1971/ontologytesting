@@ -26,7 +26,7 @@ import java.util.ListIterator;
  */
 public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
-    private static JFrame frame;
+    private JFrame frame;
     private AddComentJDialog commentPane;
     private List<ClassInstances> clasInst;
     private List<PropertyInstances> propInst;
