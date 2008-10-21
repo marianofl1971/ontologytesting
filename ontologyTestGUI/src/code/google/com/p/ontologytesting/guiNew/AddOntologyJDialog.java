@@ -7,7 +7,8 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;;
+import code.google.com.p.ontologytesting.model.jenainterfaz.*;import javax.swing.JFrame;
+;
 import java.awt.Component;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -30,6 +31,7 @@ public class AddOntologyJDialog extends javax.swing.JDialog {
     public AddOntologyJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        frame = new JFrame();
         this.setTitle("Añadir Ontología");
     }
 

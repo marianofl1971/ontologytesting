@@ -568,46 +568,48 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     public String instanciasAsociadas(ScenarioTest scenario){
-        String instClas="",instProp="",instTotal="";
+        StringBuffer bufInstClas = new StringBuffer();
+        StringBuffer bufInstProp = new StringBuffer();
+        StringBuffer bufInstTotal = new StringBuffer();
         Instancias inst = scenario.getInstancias();
         List<ClassInstances> clas = inst.getClassInstances();
         List<PropertyInstances> prop = inst.getPropertyInstances();
         if(clas.size()!=0){
-        instTotal = "Instancias de Clase";
-        for(int j=0;j<clas.size();j++){
-            String clase = clas.get(j).getClassInstance();
-            String coment = clas.get(j).getComment();
-            if(!clase.equals("")){
-                instClas = instClas + clase;
+            bufInstTotal.append("Instancias de Clase");
+            for(int j=0;j<clas.size();j++){
+                String clase = clas.get(j).getClassInstance();
+                String coment = clas.get(j).getComment();
+                if(!clase.equals("")){
+                    bufInstClas.append(clase);
+                }
+                if(!coment.equals("")){
+                    bufInstClas.append("  ").append(coment).append("\r\n");
+                }else{
+                    bufInstClas.append("\r\n");
+                }
             }
-            if(!coment.equals("")){
-                instClas = instClas + "  " + coment + "\r\n";
-            }else{
-                instClas = instClas + "\r\n";
-            }
-        }
         }else{
-            instClas = instTotal + "\r\nTest sin instancias de clase\r\n";
+            bufInstClas.append(bufInstTotal).append("\r\nTest sin instancias de clase\r\n");
         }
-        instTotal = instTotal + "\r\n" + instClas + "\r\nInstancias de Propiedad";
+        bufInstTotal.append("\r\n").append(bufInstClas).append("\r\nInstancias de Propiedad");
         if(prop.size()!=0){
-        for(int j=0;j<prop.size();j++){
-            String propiedad = prop.get(j).getPropertyInstance();
-            String coment = prop.get(j).getComment();
-            if(!propiedad.equals("")){
-                instProp = instProp + propiedad;
+            for(int j=0;j<prop.size();j++){
+                String propiedad = prop.get(j).getPropertyInstance();
+                String coment = prop.get(j).getComment();
+                if(!propiedad.equals("")){
+                    bufInstProp.append(propiedad);
+                }
+                if(!coment.equals("")){
+                    bufInstProp.append("  ").append(coment).append("\r\n");
+                }else{
+                    bufInstProp.append("\r\n");
+                }
             }
-            if(!coment.equals("")){
-                instProp = instProp + "  " + coment + "\r\n";
-            }else{
-                instProp = instProp + "\r\n";
-            }
-        }
         }else{
-            instProp = "Test sin instancias de propiedad\r\n";
+            bufInstProp.append("Test sin instancias de propiedad\r\n");
         }
-        instTotal = instTotal + "\r\n" + instProp +"\r\n";
-        return instTotal;
+        bufInstTotal.append("\r\n").append(bufInstProp).append("\r\n");
+        return bufInstTotal.toString();
     }
 
     public List<OntologyTestFailure> ordenarLista(List<OntologyTestFailure> lista){

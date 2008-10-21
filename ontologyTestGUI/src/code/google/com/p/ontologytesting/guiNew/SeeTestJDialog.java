@@ -103,69 +103,72 @@ public class SeeTestJDialog extends javax.swing.JDialog {
     public String generarInstancias(Instancias instancias, int tipo){ 
         String desc = instancias.getDescripcion();
         String nom = instancias.getNombre();
-        String prop="",clas="";
+        StringBuffer bufProp = new StringBuffer();
+        StringBuffer bufClas = new StringBuffer();
+        StringBuffer bufRes = new StringBuffer();
         List<PropertyInstances> propInst = instancias.getPropertyInstances();
         List<ClassInstances> clasInst = instancias.getClassInstances();
         
         if(propInst.size()==0){
-            prop = "Este test no tiene instancias de propiedad<br>";
+            bufProp.append("Este test no tiene instancias de propiedad<br>");
         }else{
             for(int i=0;i<propInst.size();i++){
-                prop = prop + propInst.get(i).getPropertyInstance()+"<br>";
+                bufProp.append(propInst.get(i).getPropertyInstance()).append("<br>");
             }
         }
         
         if(clasInst.size()==0){
-            clas = "Este test no tiene instancias de clase<br>";
+            bufClas.append("Este test no tiene instancias de clase<br>");
         }else{
             for(int i=0;i<clasInst.size();i++){
-                clas = clas + clasInst.get(i).getClassInstance()+"<br>";
+                bufClas.append(clasInst.get(i).getClassInstance()).append("<br>");
             }
         }
         
         if(propInst.size()==0 && clasInst.size()==0){
             return "El test no tiene instancias asociadas";
         }else{
-            if(tipo==0){
-                String result = "Nombre: " + nom + "<br><br>";
-                result = result + "Descripcion: " + desc + "<br><br>";
-                result = result + "<u>De Clase</u><br><br>" + clas;
-                result = result + "<br><u>De Propiedad</u><br><br>" + prop +"<br>";
-                return result;
-            }else{
+            //if(tipo==0){
+                bufRes.append("Nombre: ").append(nom).append("<br><br>").append("Descripcion: ")
+                        .append(desc).append("<br><br>").append("<u>De Clase</u><br><br>")
+                        .append(bufClas).append("<br><u>De Propiedad</u><br><br>").append(bufProp)
+                        .append("<br>");
+                return bufRes.toString();
+            /*}else{
+                
                 String result = "<b>Nombre: </b>" + nom + "<br>";
                 result = result + "<b>Descripcion: </b>" + desc + "<br><br>";
                 result = result + "<u>De Clase</u><br><br>" + clas;
                 result = result + "<br><u>De Propiedad</u><br><br>" + prop +"<br>";
                 return result;
-            }
+            }*/
         }
         
     }
     
     public String generarConsultasSimples(List<QueryOntology> listaQ){
-        String result="";
+        StringBuffer bufRes = new StringBuffer();
         for(int i=0;i<listaQ.size();i++){
-            result = result + "Consulta: " +listaQ.get(i).getQuery() +"<br>Resultado: " + 
-            listaQ.get(i).getResultexpected()+"<br>";
+            bufRes.append("Consulta: ").append(listaQ.get(i).getQuery()).append("<br>Resultado: ")
+                    .append(listaQ.get(i).getResultexpected()).append("<br>");
         }
-        if(result.equals("")){
-            return result="El test no tiene consultas<br>";
+        if(bufRes.length()==0){
+            return "El test no tiene consultas<br>";
         }else{
-            return result;
+            return bufRes.toString();
         }  
     }
     
     public String generarConsultasSparql(List<SparqlQueryOntology> listaQ){
-        String result="";
+        StringBuffer bufRes = new StringBuffer();
         for(int i=0;i<listaQ.size();i++){
-            result = result + "Consulta: " +listaQ.get(i).getQuerySparql() +"<br>Resultado:" + 
-            listaQ.get(i).getResultexpected() +"<br>";
+            bufRes.append("Consulta: ").append(listaQ.get(i).getQuerySparql()).append("<br>Resultado: ")
+                    .append(listaQ.get(i).getResultexpected()).append("<br>");
         }
-        if(result.equals("")){
-            return result="El test no tiene consultas<br>";
+        if(bufRes.length()==0){
+            return "El test no tiene consultas<br>";
         }else{
-            return result;
+            return bufRes.toString();
         }  
     }
     

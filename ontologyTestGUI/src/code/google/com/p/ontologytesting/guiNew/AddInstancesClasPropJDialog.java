@@ -26,16 +26,13 @@ import java.util.ListIterator;
  */
 public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
-    static final int desktopWidth = 800;
-    static final int desktopHeight = 580;
-    static JFrame frame,parent;
+    private static JFrame frame;
     private AddComentJDialog commentPane;
     private List<ClassInstances> clasInst;
     private List<PropertyInstances> propInst;
     private int indexVect;
     private String nombreFichero;
     private Instancias instancias;
-    public static boolean seleccionado;
     private int tabActual=0;
     private boolean queryValida=true;
     private JenaInterface jenaInterface;   
@@ -57,7 +54,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private boolean editado;
     private SaveTest saveTest;
     private ScenarioTest scenario;
-    private ListarTestsJPanel listInst;
 
     //Constructor para añadir las instancias a un test
     public AddInstancesClasPropJDialog(JPanel parent, boolean modal, ScenarioTest scenario){
@@ -67,8 +63,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setTitle("Asociar Instancias");
         this.setModal(false);
         this.setLocationRelativeTo(ListAndResultsJPanel.getInstance());
-        setSeleccionado(true);
         int contI=0,contP=0;
+        frame = new JFrame();
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
@@ -135,7 +131,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
-        setSeleccionado(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
@@ -613,7 +608,6 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }
 
 public boolean prepararInstancias(boolean guardar,boolean asociar){
-    listInst = ListarTestsJPanel.getInstance();
     jenaInterface = new JenaInterface();
     jena = jenaInterface.getJena();
     saveTest = new SaveTest();
@@ -917,6 +911,8 @@ void decrementarPosicion(int j,int type){
 
 public void copiarAInstancesTextArea(){
     String textoClase="",textoProp="";
+    StringBuffer bufClase = new StringBuffer();
+    StringBuffer bufProp = new StringBuffer();
     conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
     clasInst = new ArrayList<ClassInstances>();
     propInst = new ArrayList<PropertyInstances>();
@@ -926,13 +922,8 @@ public void copiarAInstancesTextArea(){
     for(int i=0; i<totalClas; i++){
         CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
         String query = panelInst.getQuery();
-
         if(!query.equals("")){
-            if(textoClase.equals("")){
-                textoClase = query+"\n";
-            }else{
-                textoClase = textoClase+query+"\n";
-            }
+            bufClase.append(query).append("\n");
         }
     }
     int totalProp = getPropPanel().getComponentCount();
@@ -941,15 +932,11 @@ public void copiarAInstancesTextArea(){
         String query = panelInst.getQuery();
 
         if(!query.equals("")){
-            if(textoProp.equals("")){
-                textoProp = query+"\n";
-            }else{
-                textoProp = textoProp+query+"\n";
-            }
+            bufProp.append(query).append("\n");
         }
     }
-    conjunto.setClaseTextArea(textoClase);
-    conjunto.setPropiedadTextArea(textoProp);
+    conjunto.setClaseTextArea(bufClase.toString());
+    conjunto.setPropiedadTextArea(bufProp.toString());
     
     
     int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
@@ -970,7 +957,7 @@ public void copiarAInstancesTextArea(){
 public void copiarAInstancesAyuda(){
     patron="[\\n|\\t|\\s]";
     conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-    conjuntoClase = conjunto.getClaseTextArea().toString().trim();
+    conjuntoClase = conjunto.getClaseTextArea().trim();
     conjuntoProp = conjunto.getPropiedadTextArea().trim();
     clas = conjuntoClase.split(patron);
     prop = conjuntoProp.split(patron);
@@ -1097,13 +1084,6 @@ public int getIndexVect() {
 
     public static javax.swing.JPanel getPropPanel() {
         return propPanel;
-    }
-    
-    public static boolean isSeleccionado() {
-        return seleccionado;
-    }
-    public static void setSeleccionado(boolean aSeleccionado) {
-        seleccionado = aSeleccionado;
     }
 
     public boolean getInstanciasInstGuardadas() {

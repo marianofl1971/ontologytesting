@@ -26,7 +26,7 @@ import javax.swing.WindowConstants;
  */
 public class OpcionesMenu {
     
-    private static OntologyTestResult testResult;
+    private OntologyTestResult testResult;
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
     private SaveTest saveTest;
@@ -35,6 +35,7 @@ public class OpcionesMenu {
     public void ejecutarUnTest(ScenarioTest scenario){
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
+        frame = new JFrame();
         try{
             testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
             new TreeResults(testResult);

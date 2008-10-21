@@ -27,6 +27,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         int pos = TestInstancesTextAreaJPanel.getContadorRetClas();
         this.setPosicion(pos);
         int cont = pos+1;
+        frame = new Frame();
         TestInstancesTextAreaJPanel.setContadorRetClas(cont);
         frameComent = new AddComentJDialog(frame,true); 
         frameComent.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
