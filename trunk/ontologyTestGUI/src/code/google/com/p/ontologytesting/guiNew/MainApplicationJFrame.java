@@ -341,7 +341,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
     collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
     /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
@@ -485,17 +485,27 @@ private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent e
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(true);
+    this.importarTestsInstancias(true);
 }//GEN-LAST:event_importarTestsMenuItemActionPerformed
 
 private void editarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(true);
+    if(CollectionTest.getInstance().getScenariotest().size()==0){
+        JOptionPane.showMessageDialog(this,"No tiene ningun test guardado para editar",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE); 
+    }else{
+        this.editarVerTestsInstancias(true);
+    }
 }//GEN-LAST:event_editarTestsMenuItemActionPerformed
 
 private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(true);
+    if(CollectionTest.getInstance().getScenariotest().size()==0){
+        JOptionPane.showMessageDialog(this,"No tiene ningun test guardado para ver",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE); 
+    }else{
+        this.editarVerTestsInstancias(true);
+    }
 }//GEN-LAST:event_verTestsMenuItemActionPerformed
 
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
@@ -509,17 +519,27 @@ private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent e
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(false);
+    this.importarTestsInstancias(false);
 }//GEN-LAST:event_importarInstanciasMenuItemActionPerformed
 
 private void editarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(false);
+    if(CollectionTest.getInstance().getInstancias().size()==0){
+        JOptionPane.showMessageDialog(this,"No tiene ningun conjunto de instancias guardado para editar",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE); 
+    }else{
+        this.editarVerTestsInstancias(false);
+    }
 }//GEN-LAST:event_editarInstanciasMenuItemActionPerformed
 
 private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    this.importarEditarTestsInstancias(false);
+    if(CollectionTest.getInstance().getInstancias().size()==0){
+        JOptionPane.showMessageDialog(this,"No tiene ningun conjunto de instancias guardado para ver",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE); 
+    }else{
+        this.editarVerTestsInstancias(false);
+    }
 }//GEN-LAST:event_verInstanciasMenuItemActionPerformed
 
 private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarTodosMenuItemActionPerformed
@@ -543,11 +563,19 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
     }
 }
 
-public void importarEditarTestsInstancias(boolean impTest){
+public void importarTestsInstancias(boolean impTest){
     ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,CollectionTest.getInstance(),impTest);
     abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+}
+
+public void editarVerTestsInstancias(boolean verEditTest){
+    ListarTestsInstanciasJPanel listar = new ListarTestsInstanciasJPanel(CollectionTest.getInstance().getScenariotest(),CollectionTest.getInstance().getInstancias(),verEditTest);
+    EditarVerTestInstanciasJDialog editarVerTestInst = new EditarVerTestInstanciasJDialog(this,true,listar,verEditTest);
+    editarVerTestInst.setLocationRelativeTo(this);
+    editarVerTestInst.setVisible(true);
+    editarVerTestInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 }
 
 public void aniadirTestsInstSat(int tipo){ 
