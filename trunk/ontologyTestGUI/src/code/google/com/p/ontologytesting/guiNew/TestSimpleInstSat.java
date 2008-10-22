@@ -320,10 +320,10 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());//GEN-LAST:event_asociarInstanciasButtonActionPerformed
+    addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
-}
+}//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
@@ -336,7 +336,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
            realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
@@ -355,7 +355,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             menu.ejecutarUnTest(this.getScenario());
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
@@ -375,7 +375,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setLocationRelativeTo(this.getParent());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);

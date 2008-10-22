@@ -31,7 +31,6 @@ public class ScenarioTest {
             this.tipo=tipo;
         }
     }
-    private String testName="";
     private String nombre="";
     private String descripcion="";
     private Instancias instancias = new Instancias();
@@ -46,7 +45,6 @@ public class ScenarioTest {
         this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
         this.nombre = "";
         this.descripcion = "";
-        this.testName="";
         this.tipoTest=tipoTest;
     }
     
@@ -68,14 +66,6 @@ public class ScenarioTest {
 
     public void setTipoTest(TipoTest tipoTest) {
         this.tipoTest = tipoTest;
-    }
-    
-    public String getTestName() {
-        return testName;
-    }
-
-    public void setTestName(String test_name) {
-        this.testName = test_name;
     }
 
     public List<QueryOntology> getQueryTest() {
@@ -139,9 +129,7 @@ public class ScenarioTest {
             }
             if(this.getDescripcion().equals(s2.getDescripcion())){
                 if(this.getNombre().equals(s2.getNombre())){
-                    if(this.getTestName().equals(s2.getTestName())){
-                            return true;
-                    }
+                    return true;
                 }
             }
             return false;
@@ -151,7 +139,6 @@ public class ScenarioTest {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + (this.testName != null ? this.testName.hashCode() : 0);
         hash = 61 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
         hash = 61 * hash + (this.descripcion != null ? this.descripcion.hashCode() : 0);
         hash = 61 * hash + (this.instancias != null ? this.instancias.hashCode() : 0);
@@ -160,8 +147,14 @@ public class ScenarioTest {
         return hash;
     }
     
-    public void esVacio(){
-        
+    public boolean esVacio(){
+        if(this.getNombre().equals("") && this.getDescripcion().equals("")
+                && this.getInstancias().esVacio()==true && this.getQueryTest().size()==0
+                && this.getSparqlQuerys().size()==0){
+                return true;
+        }else{
+            return false;
+        }
     }
 
 }

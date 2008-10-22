@@ -347,7 +347,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -365,7 +365,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -374,7 +374,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+    addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
 }
@@ -390,7 +390,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(this,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }

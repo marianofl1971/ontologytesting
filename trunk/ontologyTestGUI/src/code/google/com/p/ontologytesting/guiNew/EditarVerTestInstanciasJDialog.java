@@ -7,7 +7,8 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import java.awt.FlowLayout;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -16,16 +17,17 @@ import javax.swing.WindowConstants;
  */
 public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
 
-    private ListarTestsInstanciasJPanel listarTestInst = new ListarTestsInstanciasJPanel();
+    private ListarTestsInstanciasJPanel listarTestInst;
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean isTest=false;
-    private JPanel panel = new JPanel();
+    private JFrame frame = new JFrame();
     
     /** Creates new form EditarVerTestInstanciasJDialog */
     public EditarVerTestInstanciasJDialog(java.awt.Frame parent, boolean modal, ListarTestsInstanciasJPanel listarTestInst,boolean isTest) {
         super(parent, modal);
         initComponents();
         this.setListarTestInst(listarTestInst);
+        this.setIsTest(isTest);
         this.setLocationRelativeTo(this.getParent());
         contentPanel.setLayout(new FlowLayout());
         contentPanel.add(listarTestInst);
@@ -81,7 +83,7 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
             }
         });
 
-        verButton.setText("Ver");
+        verButton.setText("Ver Completo");
         verButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verButtonActionPerformed(evt);
@@ -146,10 +148,15 @@ private void verButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
 // TODO add your handling code here:
     if(this.getIsTest()==true){//GEN-LAST:event_editarButtonActionPerformed
-        opMenu.editarTest(this.getListarTestInst().getScenarioSelect());                                            
+        opMenu.editarTest(this.getListarTestInst().getScenarioSelect());    
+        JOptionPane.showMessageDialog(this,"Test cargado para su edición",                                                  
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
     }else{
-        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(panel, false, this.getListarTestInst().getInstanciaSelect());
+        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(frame, true, this.getListarTestInst().getInstanciaSelect());
         editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setVisible(false);
+        editInst.setLocationRelativeTo(this);
         editInst.setVisible(true);
     }
 }
