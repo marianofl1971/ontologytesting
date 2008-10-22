@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.WindowConstants;
@@ -33,7 +34,7 @@ public class PopMenuInstances implements ActionListener{
         CollectionTest collection = CollectionTest.getInstance();
         Instancias inst = utils.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
-            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(panel, false, inst);
+            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(frame, false, inst);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else if(source.getText().equals("Asociar a un Test")){
@@ -42,12 +43,14 @@ public class PopMenuInstances implements ActionListener{
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
         }else if(source.getText().equals("Ver")){
-            frame = new JFrame();
-            SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, inst);
-            seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            SeeTestJDialog seeTestCompleted = menu.verInstancias(inst);
             seeTestCompleted.setVisible(true);
         }else if(source.getText().equals("Eliminar")){
-            menu.eliminarInstancias(inst);
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Realmente desea eliminar el conjunto de isntancias?", 
+                "Eliminar Instancia",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                menu.eliminarInstancias(inst);
+            }  
         }
     }
     

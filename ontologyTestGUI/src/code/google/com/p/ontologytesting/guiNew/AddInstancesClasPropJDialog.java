@@ -56,9 +56,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private ScenarioTest scenario;
 
     //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJDialog(JPanel parent, boolean modal, ScenarioTest scenario){
+    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, ScenarioTest scenario){
         
-        //super(parent, modal);
+        super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
@@ -125,9 +125,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     } 
     
     //Constructor para crear un conjunto nuevo de instancias
-    public AddInstancesClasPropJDialog(JPanel parent, boolean modal){
+    public AddInstancesClasPropJDialog(JFrame parent, boolean modal){
         
-        //super(parent, modal);
+        super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
@@ -147,9 +147,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     } 
     
    //Constructor para editar un conjunto de instancias
-    public AddInstancesClasPropJDialog(JPanel parent, boolean modal, Instancias inst){
+    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, Instancias inst){
         
-        //super(parent, modal);
+        super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
         this.setModal(false);
@@ -473,12 +473,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
+
     boolean result = prepararInstancias(true,true);
     if(result==true){
         JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }
+    
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
 private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstButtonActionPerformed
@@ -614,113 +616,114 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
     int aux=0;
     try{
         jena.addReasoner(CollectionTest.getInstance().getOntology());
-        validar = new ValidarTests();
-        ciClas = null;
-        ciInd = null;
-        failClas = new ArrayList();
-        failProp = new ArrayList();
-        failGroupClas = 0;
-        failGroupProp = 0;
-        setInstanciaValida(true);
-        clasInst = new ArrayList<ClassInstances>();
-        propInst = new ArrayList<PropertyInstances>();
-        instanciaSinNombre = false;
-        totalClas = getClasPanel().getComponentCount();
-        nombreInstancias = nomInstanciasTextField.getText();
+    }catch(ExceptionReadOntology ex){
+        JOptionPane.showMessageDialog(this, "La ontología introducida no es válida. Las instancias " +
+                "no han sido asociadas.", "Error Message", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+    validar = new ValidarTests();
+    ciClas = null;
+    ciInd = null;
+    failClas = new ArrayList();
+    failProp = new ArrayList();
+    failGroupClas = 0;
+    failGroupProp = 0;
+    setInstanciaValida(true);
+    clasInst = new ArrayList<ClassInstances>();
+    propInst = new ArrayList<PropertyInstances>();
+    instanciaSinNombre = false;
+    totalClas = getClasPanel().getComponentCount();
+    nombreInstancias = nomInstanciasTextField.getText();
 
-        queryValida=true;  
-        patron1="[\\(|,]";
-        patron2="[,|\\)]"; 
-        patron = "\\\n";
+    queryValida=true;  
+    patron1="[\\(|,]";
+    patron2="[,|\\)]"; 
+    patron = "\\\n";
 
-        if(getInstancesTabbedPane() != 2){
-            preparrarInstConAyuda();
-        }else{
-            prepararInstSinAyuda();
-        }
-        if (queryValida==true && instanciaValida==true && instanciaSinNombre==false){
-            getInstancias().setClassInstances(clasInst);
-            getInstancias().setPropertyInstances(propInst);
-            getInstancias().setDescripcion(getDescInstanciasTextArea());
-            getInstancias().setNombre(getNomInstanciasTextField());
-            getInstancias().setType("Instancias");
- 
-            if((guardar==true && asociar==true) || (guardar==true)){
-                if(aux==0){
-                    if(this.getInstanciasAEditar()!= null && 
-                            this.getInstancias().equals(this.getInstanciasAEditar())==false
-                            && this.getInstancias().getNombre().equals(this.getInstanciasAEditar().getNombre())){
-                        Object[] options = {"Sobreescribir", "Cancelar"};
-                        int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
-                                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                        if (n == JOptionPane.YES_OPTION) {
-                            if(guardar==true){
-                                saveTest.replaceInstanciasLocally(getInstancias());
-                                saveTest.actualizarListaDeInstancias();
-                            }
-                            if(asociar==true){
-                                this.getScenario().setInstancias(this.getInstancias());
-                            }
-                            aux=1;
-                            setInstanciasAEditar(new Instancias(getInstancias()));
-                            setInstancias(new Instancias(getInstancias()));
-                        }else{
-                            aux=1;
-                            return false;
-                        }
-                    }
-                }
-            }
+    if(getInstancesTabbedPane() != 2){
+        preparrarInstConAyuda();
+    }else{
+        prepararInstSinAyuda();
+    }
+    if (queryValida==true && instanciaValida==true && instanciaSinNombre==false){
+        getInstancias().setClassInstances(clasInst);
+        getInstancias().setPropertyInstances(propInst);
+        getInstancias().setDescripcion(getDescInstanciasTextArea());
+        getInstancias().setNombre(getNomInstanciasTextField());
+        getInstancias().setType("Instancias");
+
+        if((guardar==true && asociar==true) || (guardar==true)){
             if(aux==0){
-                if(guardar==true){
-                    saveTest.saveInstanciasInMemory(getInstancias());
-                    saveTest.actualizarListaDeInstancias();
-                }
-                if(asociar==true){
-                    this.getScenario().setInstancias(this.getInstancias());
-                }  
-            }
-            return true;
-        } else if (instanciaSinNombre == true) {
-            JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
-                    + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-        } else if (instanciaValida == false) {
-            JOptionPane.showMessageDialog(this, "Las instancias marcadas" + 
-                    "en rojo no se corresponden con la definicion de su ontologia. " 
-                    + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-        } else if (queryValida == false) {
-            JOptionPane.showMessageDialog(this, "El formato de las instancias marcadas" 
-                    + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
-                    + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
-            if (getInstancesTabbedPane() != 2) {
-                CreateInstancesJPanel panelInst = null;
-                for (int j = 0; j < failClas.size(); j++) {
-                    if (failClas.get(j).equals(1)) {
-                        panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
+                if(this.getInstanciasAEditar()!= null && 
+                        this.getInstancias().equals(this.getInstanciasAEditar())==false
+                        && this.getInstancias().getNombre().equals(this.getInstanciasAEditar().getNombre())){
+                    Object[] options = {"Sobreescribir", "Cancelar"};
+                    int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
+                            "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (n == JOptionPane.YES_OPTION) {
+                        if(guardar==true){
+                            saveTest.replaceInstanciasLocally(getInstancias());
+                            saveTest.actualizarListaDeInstancias();
+                        }
+                        if(asociar==true){
+                            this.getScenario().setInstancias(this.getInstancias());
+                        }
+                        aux=1;
+                        setInstanciasAEditar(new Instancias(getInstancias()));
+                        setInstancias(new Instancias(getInstancias()));
+                    }else{
+                        aux=1;
+                        return false;
                     }
-                }
-                for (int j = 0; j < failProp.size(); j++) {
-                    if (failProp.get(j).equals(1)) {
-                        panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(j);
-                        panelInst.getInstanciaTextField().setForeground(Color.RED);
-                    }
-                }
-            } else {
-                conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
-                if (failGroupClas == 1 && failGroupProp == 1) {
-                    conjunto.getPropiedadArea().setForeground(Color.RED);
-                    conjunto.getClaseArea().setForeground(Color.RED);
-                } else if (failGroupClas == 1) {
-                    conjunto.getClaseArea().setForeground(Color.RED);
-                } else {
-                    conjunto.getPropiedadArea().setForeground(Color.RED);
                 }
             }
         }
-    }catch(ExceptionReadOntology er){
-        throw new ExceptionReadOntology("La ontologia introducida no es valida." +
-            "\nSolo pueden realizarse tests sobre documentos owl consistentes");
+        if(aux==0){
+            if(guardar==true){
+                saveTest.saveInstanciasInMemory(getInstancias());
+                saveTest.actualizarListaDeInstancias();
+            }
+            if(asociar==true){
+                this.getScenario().setInstancias(this.getInstancias());
+            }  
+        }
+        return true;
+    } else if (instanciaSinNombre == true) {
+        JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
+                + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+    } else if (instanciaValida == false) {
+        JOptionPane.showMessageDialog(this, "Las instancias marcadas" + 
+                "en rojo no se corresponden con la definicion de su ontologia. " 
+                + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+    } else if (queryValida == false) {
+        JOptionPane.showMessageDialog(this, "El formato de las instancias marcadas" 
+                + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
+                + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+        if (getInstancesTabbedPane() != 2) {
+            CreateInstancesJPanel panelInst = null;
+            for (int j = 0; j < failClas.size(); j++) {
+                if (failClas.get(j).equals(1)) {
+                    panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(j);
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                }
+            }
+            for (int j = 0; j < failProp.size(); j++) {
+                if (failProp.get(j).equals(1)) {
+                    panelInst = (CreateInstancesJPanel) getPropPanel().getComponent(j);
+                    panelInst.getInstanciaTextField().setForeground(Color.RED);
+                }
+            }
+        } else {
+            conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
+            if (failGroupClas == 1 && failGroupProp == 1) {
+                conjunto.getPropiedadArea().setForeground(Color.RED);
+                conjunto.getClaseArea().setForeground(Color.RED);
+            } else if (failGroupClas == 1) {
+                conjunto.getClaseArea().setForeground(Color.RED);
+            } else {
+                conjunto.getPropiedadArea().setForeground(Color.RED);
+            }
+        }
     }
     return false;
 }

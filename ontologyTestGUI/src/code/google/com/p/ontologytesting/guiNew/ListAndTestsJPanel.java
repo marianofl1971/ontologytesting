@@ -62,6 +62,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsScrollPane = new javax.swing.JScrollPane();
         testsPanel = new javax.swing.JPanel();
 
+        splitPane.setDividerSize(6);
         splitPane.setOneTouchExpandable(true);
 
         javax.swing.GroupLayout listTestPanelLayout = new javax.swing.GroupLayout(listTestPanel);

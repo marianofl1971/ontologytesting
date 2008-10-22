@@ -74,23 +74,25 @@ public class SeeTestJDialog extends javax.swing.JDialog {
 
 
     public String verTest(ScenarioTest scenario){
-        String verTest="<html>";
+        StringBuffer verTest= new StringBuffer();
+        verTest.append("<html>");
         String testName = scenario.getNombre();
         String desc = scenario.getDescripcion();
         String consultas="";
         Instancias inst = scenario.getInstancias();
         List<QueryOntology> listQ = scenario.getQueryTest();
         List<SparqlQueryOntology> listQSparql = scenario.getSparqlQuerys();
-        verTest="<b>Nombre del Test:</b> "+testName + "<br><br><b>Descripcion:</b>"+desc+"<br><br>" +
-                "<b>Instancias Asociadas</b><br><br>";
+        verTest.append("<b>Nombre del Test:</b> ").append(testName).append("<br><br><b>Descripcion:</b>")
+                .append(desc).append("<br><br><b>Instancias Asociadas</b><br><br>");
         String instancias = generarInstancias(inst,0);
         if(scenario.getTipoTest().getTipo()!=5){
             consultas = generarConsultasSimples(listQ);
         }else{
             consultas = generarConsultasSparql(listQSparql);
         }
-        verTest = verTest+instancias+"<b>Consultas Realizadas:</b><br><br>"+consultas+"</html>";
-        return verTest;
+        verTest.append(instancias).append("<b>Consultas Realizadas:</b><br><br>")
+                .append(consultas).append("</html>");
+        return verTest.toString();
     } 
     
     public String verInstancias(Instancias instancias){
@@ -128,20 +130,11 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         if(propInst.size()==0 && clasInst.size()==0){
             return "El test no tiene instancias asociadas";
         }else{
-            //if(tipo==0){
                 bufRes.append("Nombre: ").append(nom).append("<br><br>").append("Descripcion: ")
                         .append(desc).append("<br><br>").append("<u>De Clase</u><br><br>")
                         .append(bufClas).append("<br><u>De Propiedad</u><br><br>").append(bufProp)
                         .append("<br>");
                 return bufRes.toString();
-            /*}else{
-                
-                String result = "<b>Nombre: </b>" + nom + "<br>";
-                result = result + "<b>Descripcion: </b>" + desc + "<br><br>";
-                result = result + "<u>De Clase</u><br><br>" + clas;
-                result = result + "<br><u>De Propiedad</u><br><br>" + prop +"<br>";
-                return result;
-            }*/
         }
         
     }

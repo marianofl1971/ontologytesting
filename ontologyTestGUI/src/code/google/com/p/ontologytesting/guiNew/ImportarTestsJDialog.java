@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -30,7 +30,7 @@ import javax.swing.JTextField;
  */
 public class ImportarTestsJDialog extends javax.swing.JDialog {
 
-    private ListarTestsInstanciasJPanel listaFicheros;
+    private ListarTestsInstanciasJPanel listaFicheros = new ListarTestsInstanciasJPanel();
     private JFileChooser filechooser;
     private String pathProyect;
     private XMLDecoder decoder;
@@ -43,7 +43,6 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean importarTest=false;
     private SeeTestJDialog verTest = null;
-    private JPanel panel = new JPanel();
     
     /** Creates new form AbrirTestsJDialog */
     public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection,boolean impTest) {
@@ -107,7 +106,7 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel2.setText("Ubicación de los Tests");
+        jLabel2.setText("Ubicación del Proyecto");
 
         jLabel3.setText("Seleccione el proyecto que contiene los tests/instancias con los que desea trabajar:");
 
@@ -185,13 +184,17 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
 
 private void abrirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirButtonActionPerformed
 // TODO add your handling code here:  
-    if(this.isImportarTest()==true){
-        verTest = opMenu.verTest(listaFicheros.getScenarioSelect());
-    }else{
-        verTest = opMenu.verInstancias(listaFicheros.getInstanciaSelect());
-    }
-    verTest.setLocationRelativeTo(this);
-    verTest.setVisible(true);
+    ScenarioTest scenSelect = listaFicheros.getScenarioSelect();
+    Instancias instSelect = listaFicheros.getInstanciaSelect();
+    if(this.isImportarTest()==true && scenSelect.esVacio()==false){
+        verTest = opMenu.verTest(scenSelect);
+        verTest.setLocationRelativeTo(this);
+        verTest.setVisible(true);
+    }else if(this.isImportarTest()==false && instSelect.esVacio()==false){
+        verTest = opMenu.verInstancias(instSelect);
+        verTest.setLocationRelativeTo(this);
+        verTest.setVisible(true);
+    } 
 }//GEN-LAST:event_abrirButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -216,10 +219,11 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
             contentPanel.add(listaFicheros);
             contentPanel.getParent().validate(); 
         }catch(FileNotFoundException e){
+            this.errorAction("No se encontró el archivo especificado");
         }catch(ClassCastException e){
-            System.out.println("Este no es un proyecto valido");
+            this.errorAction("Proyecto no válido");
         }catch(NoSuchElementException e){
-            System.out.println("Este no es un proyecto valido");
+            this.errorAction("Proyecto no válido");
         }  
     }
 }
@@ -228,30 +232,49 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
     if(this.isImportarTest()==true){
         List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
-        for(int i=0;i<scenImp.size();i++){
-            if(scenImp.get(i).getTipoTest().getTipo()==5){
-                scenarioSparql.add(scenImp.get(i));
-            }else{
-                scenarioSimple.add(scenImp.get(i));
+        if(scenImp.size()!=0){
+            for(int i=0;i<scenImp.size();i++){
+                if(scenImp.get(i).getTipoTest().getTipo()==5){
+                    scenarioSparql.add(scenImp.get(i));
+                }else{
+                    scenarioSimple.add(scenImp.get(i));
+                }
+                saveTest.saveTestInMemory(scenImp.get(i));
             }
-            saveTest.saveTestInMemory(scenImp.get(i));
         }
         if(scenarioSparql.size()>0){
             listT.aniadirTestSparql(scenarioSparql);
+            this.acceptAction("Tests importados");  
+            this.setVisible(false);
         }
-        if(scenarioSimple.size()>0)
-        {
+        if(scenarioSimple.size()>0){
             listT.aniadirTestSimple(scenarioSimple);
-        }    
+            this.acceptAction("Tests importados");  
+            this.setVisible(false);
+        } 
     }else{
         List<Instancias> instImp = listaFicheros.getListaInstancias();
-        for(int i=0;i<instImp.size();i++){
-            instancias.add(instImp.get(i));
-            saveTest.saveInstanciasInMemory(instImp.get(i));
+        if(instImp.size()>0){
+            for(int i=0;i<instImp.size();i++){
+                instancias.add(instImp.get(i));
+                saveTest.saveInstanciasInMemory(instImp.get(i));
+            }
+            listT.aniadirInstancias(instancias);
+            this.acceptAction("Instancias importadas"); 
+            this.setVisible(false);
         }
-        listT.aniadirInstancias(instancias);
     }
 }
+
+    public void acceptAction(String msg){
+        JOptionPane.showMessageDialog(this,msg,                                                  
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void errorAction(String msg){
+        JOptionPane.showMessageDialog(this,msg,                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE);
+    }
 
     private boolean openFile(JTextField textfield){
         String path="";
@@ -279,6 +302,14 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     public void setPathProyect(String pathProyect) {
         this.pathProyect = pathProyect;
     }
+    
+    public boolean isImportarTest() {
+        return importarTest;
+    }
+
+    public void setImportarTest(boolean importarTest) {
+        this.importarTest = importarTest;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirButton;
@@ -292,22 +323,5 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField pathProyectoTextField;
     // End of variables declaration//GEN-END:variables
-
-    public boolean isImportarTest() {
-        return importarTest;
-    }
-
-    public void setImportarTest(boolean importarTest) {
-        this.importarTest = importarTest;
-    }
-    
-    /*Boton Editar
-            if(this.isImportarTest()==true){
-        opMenu.editarTest(listaFicheros.getScenarioSelect());
-    }else{
-        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(panel, true, listaFicheros.getInstanciaSelect());
-        editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        editInst.setVisible(true);
-    }*/
 
 }

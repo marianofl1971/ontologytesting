@@ -18,13 +18,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 /**
  *
  * @author  sara.garcia
  */
-public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelectionListener{
+public class ListarTestsJPanel extends javax.swing.JPanel{
 
     private DefaultListModel modeloSimples,modeloSparql,modeloInstancias;
     private PopMenuTests popTest;
@@ -37,9 +35,6 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         popTest = new PopMenuTests();
         popInst = new PopMenuInstances();
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-        testSimplesList.addListSelectionListener(this);
-        testSparqlList.addListSelectionListener(this);
-        instanciasList.addListSelectionListener(this);
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -53,12 +48,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel implements ListSelecti
         return listTests;
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        
-    }
-    
-    public void aniadirTestSimple(List<ScenarioTest> scenario){ 
+    public void aniadirTestSimple(List<ScenarioTest> scenario) {
         modeloSimples = new DefaultListModel();
         for(int i=0;i<scenario.size();i++){
             if(scenario.get(i).getTipoTest().getTipo()!=5){

@@ -9,10 +9,9 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -22,7 +21,6 @@ public class PopMenuTests implements ActionListener{
 
     private Utils utils = new Utils();
     private OpcionesMenu menu = new OpcionesMenu();
-    private JFrame frame = new JFrame();
     private String testSelec="";
 
     @Override
@@ -35,12 +33,14 @@ public class PopMenuTests implements ActionListener{
         }else if(source.getText().equals("Ejecutar")){
             menu.ejecutarUnTest(scenario);
         }else if(source.getText().equals("Ver")){
-            frame = new JFrame();
-            SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, false, scenario);
-            seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            SeeTestJDialog seeTestCompleted = menu.verTest(scenario);
             seeTestCompleted.setVisible(true);
         }else if(source.getText().equals("Eliminar")){
-            menu.eliminarTest(scenario);
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Realmente desea eliminar el test?", 
+                "Eliminar Tests",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                menu.eliminarTest(scenario);
+            }
         }
     }
     

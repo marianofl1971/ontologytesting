@@ -132,4 +132,13 @@ public class Instancias {
         return false;
     }
     
+    public boolean esVacio(){
+        if(this.getNombre().equals("") && this.getDescripcion().equals("") && 
+                this.getClassInstances().size()==0 && this.getPropertyInstances().size()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
 }

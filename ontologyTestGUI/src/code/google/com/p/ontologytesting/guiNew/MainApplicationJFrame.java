@@ -345,12 +345,12 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
-    //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    //collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
-    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
+    collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){
+    if(newProject.getProyectoCreado()==true){*/
         this.inicializarContadores();
         guardarProyectoComoMenuItem.setEnabled(true);
         guardarProyectoMenuItem.setEnabled(true);
@@ -359,7 +359,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
-    }
+    //}
 
 }
 
@@ -498,7 +498,7 @@ private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt
 private void editarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestsMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getScenariotest().size()==0){
-        JOptionPane.showMessageDialog(this,"No tiene ningun test guardado para editar",                                                  
+        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
         this.editarVerTestsInstancias(true);
@@ -508,7 +508,7 @@ private void editarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) 
 private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestsMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getScenariotest().size()==0){
-        JOptionPane.showMessageDialog(this,"No tiene ningun test guardado para ver",                                                  
+        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
         this.editarVerTestsInstancias(true);
@@ -518,7 +518,7 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
     JPanel panel = new JPanel();
-    AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(panel, true);
+    AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(this, true);
     nuevoInst.setLocationRelativeTo(this);
     nuevoInst.setVisible(true);
     nuevoInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -532,7 +532,7 @@ private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEven
 private void editarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getInstancias().size()==0){
-        JOptionPane.showMessageDialog(this,"No tiene ningun conjunto de instancias guardado para editar",                                                  
+        JOptionPane.showMessageDialog(this,"Su lista de instancias está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
         this.editarVerTestsInstancias(false);
@@ -542,7 +542,7 @@ private void editarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent 
 private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getInstancias().size()==0){
-        JOptionPane.showMessageDialog(this,"No tiene ningun conjunto de instancias guardado para ver",                                                  
+        JOptionPane.showMessageDialog(this,"Su lista de instancias está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
         this.editarVerTestsInstancias(false);

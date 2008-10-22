@@ -90,7 +90,7 @@ public class JenaImplementation implements Jena{
         ontologia = "file:".concat(ontologia);
         try {
             model.read(ontologia);  
-            model.prepare(); //Aqui salta la inconsistencia
+            model.prepare(); 
             model.validate();
         }catch(InconsistentOntologyException e){
             throw new ExceptionReadOntology("La ontologia introducida no es valida." +
