@@ -23,11 +23,6 @@ public class PropertyInstances {
         this.propertyInstance=propertyInstance;
     }
     
-   public PropertyInstances(){
-        this.propertyInstance="";
-        this.comment="";
-    }
-    
     public String getPropertyInstance() {
         return propertyInstance;
     }

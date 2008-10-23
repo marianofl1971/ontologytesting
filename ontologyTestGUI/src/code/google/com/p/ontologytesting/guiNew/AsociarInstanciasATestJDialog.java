@@ -1,8 +1,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.*;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.util.List;
@@ -80,7 +78,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
             }
         });
 
-        aceptarButton.setText("Aceptar");
+        aceptarButton.setText("Asociar");
         aceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarButtonActionPerformed(evt);
@@ -141,20 +139,24 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
 private void verTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestButtonActionPerformed
 // TODO add your handling code here:
-    SeeTestJDialog seeTest = opMenu.verTest(listaFicheros.getScenarioSelect());
-    seeTest.setLocationRelativeTo(this);
-    seeTest.setVisible(true);
+    if(listaFicheros.getScenarioSelect().esVacio()==false){
+        SeeTestJDialog seeTest = opMenu.verTest(listaFicheros.getScenarioSelect());
+        seeTest.setLocationRelativeTo(this);
+        seeTest.setVisible(true);
+    }
 }//GEN-LAST:event_verTestButtonActionPerformed
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
     List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
-    for(int i=0;i<scenImp.size();i++){
-        scenImp.get(i).setInstancias(this.getInstancias());
+    if(scenImp.size()>0){
+        for(int i=0;i<scenImp.size();i++){
+            scenImp.get(i).setInstancias(this.getInstancias());
+        }
+        JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
+        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
     }
-    JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-    this.setVisible(false);
 }//GEN-LAST:event_aceptarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
@@ -162,7 +164,14 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
 }
 
+public Instancias getInstancias() {
+    return instancias;
+}
 
+public void setInstancias(Instancias instancias) {
+    this.instancias = instancias;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;
     private javax.swing.JButton cancelarButton;
@@ -172,13 +181,5 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verTestButton;
     // End of variables declaration//GEN-END:variables
-
-    public Instancias getInstancias() {
-        return instancias;
-    }
-
-    public void setInstancias(Instancias instancias) {
-        this.instancias = instancias;
-    }
 
 }

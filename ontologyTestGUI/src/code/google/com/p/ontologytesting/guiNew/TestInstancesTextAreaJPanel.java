@@ -196,7 +196,71 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     this.getParent().getParent().validate();
 }//GEN-LAST:event_resultTextAreaMouseClicked
 
+public boolean consultaCompletaEnAyuda(){
+    if((!this.getQuery().equals("") && this.getQueryResult().equals("")) ||
+        this.getQuery().equals("") && !this.getQueryResult().equals("")){
+        return false;
+    }else{
+        return true;
+    }
+}
 
+public boolean panelVacio(){
+    if(this.getQuery().equals("") && this.getQueryResult().equals("")){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public AddComentJDialog getComment() {
+    return frameComent;
+}
+
+public void setComment(AddComentJDialog comment) {
+    this.frameComent = comment;
+}
+
+public void setQuery(String query){
+    getQueryTextField().setText(query);
+}
+
+public String getQuery(){
+    return getQueryTextField().getText();
+}
+
+public void setQueryResult(String result){
+    getResultTextArea().setText(result);
+}
+
+public String getQueryResult(){
+    return getResultTextArea().getText();
+}
+
+public javax.swing.JTextField getQueryTextField() {
+    return queryTextField;
+}
+
+public javax.swing.JTextArea getResultTextArea() {
+    return resultTextArea;
+}
+
+public int getPosicion() {
+    return posicion;
+}
+
+public void setPosicion(int posicion) {
+    this.posicion = posicion;
+}
+
+public static int getContadorRetClas() {
+    return contadorRetClas;
+}
+
+public static void setContadorRetClas(int aContadorRetClas) {
+    contadorRetClas = aContadorRetClas;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton comentarioButton;
@@ -206,53 +270,5 @@ private void resultTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JTextArea resultTextArea;
     // End of variables declaration//GEN-END:variables
 
-    
-    public AddComentJDialog getComment() {
-        return frameComent;
-    }
-
-    public void setComment(AddComentJDialog comment) {
-        this.frameComent = comment;
-    }
-    
-    public void setQuery(String query){
-        getQueryTextField().setText(query);
-    }
-    
-    public String getQuery(){
-        return getQueryTextField().getText();
-    }
-
-    public void setQueryResult(String result){
-        getResultTextArea().setText(result);
-    }
-    
-    public String getQueryResult(){
-        return getResultTextArea().getText();
-    }
-
-    public javax.swing.JTextField getQueryTextField() {
-        return queryTextField;
-    }
-
-    public javax.swing.JTextArea getResultTextArea() {
-        return resultTextArea;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
-    }
-    
-    public static int getContadorRetClas() {
-        return contadorRetClas;
-    }
-
-    public static void setContadorRetClas(int aContadorRetClas) {
-        contadorRetClas = aContadorRetClas;
-    }
 }
 

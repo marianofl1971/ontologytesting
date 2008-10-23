@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import java.awt.FlowLayout;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -20,7 +19,6 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
     private ListarTestsInstanciasJPanel listarTestInst;
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean isTest=false;
-    private JFrame frame = new JFrame();
     
     /** Creates new form EditarVerTestInstanciasJDialog */
     public EditarVerTestInstanciasJDialog(java.awt.Frame parent, boolean modal, ListarTestsInstanciasJPanel listarTestInst,boolean isTest) {
@@ -153,10 +151,8 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         this.setVisible(false);
     }else{
-        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(frame, true, this.getListarTestInst().getInstanciaSelect());
+        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(null, true, this.getListarTestInst().getInstanciaSelect());
         editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        this.setVisible(false);
-        editInst.setLocationRelativeTo(this);
         editInst.setVisible(true);
     }
 }
@@ -166,6 +162,21 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
 }
 
+public ListarTestsInstanciasJPanel getListarTestInst() {
+    return listarTestInst;
+}
+
+public void setListarTestInst(ListarTestsInstanciasJPanel listarTestInst) {
+    this.listarTestInst = listarTestInst;
+}
+
+public boolean getIsTest() {
+    return isTest;
+}
+
+public void setIsTest(boolean isTest) {
+    this.isTest = isTest;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelarButton;
@@ -176,21 +187,5 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verButton;
     // End of variables declaration//GEN-END:variables
-
-    public ListarTestsInstanciasJPanel getListarTestInst() {
-        return listarTestInst;
-    }
-
-    public void setListarTestInst(ListarTestsInstanciasJPanel listarTestInst) {
-        this.listarTestInst = listarTestInst;
-    }
-
-    public boolean getIsTest() {
-        return isTest;
-    }
-
-    public void setIsTest(boolean isTest) {
-        this.isTest = isTest;
-    }
 
 }

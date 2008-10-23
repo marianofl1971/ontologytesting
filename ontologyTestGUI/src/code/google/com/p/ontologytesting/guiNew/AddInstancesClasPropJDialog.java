@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.util.List;
 import java.util.ListIterator;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -61,8 +62,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
-        this.setModal(false);
-        this.setLocationRelativeTo(ListAndResultsJPanel.getInstance());
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         int contI=0,contP=0;
         frame = new JFrame();
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
@@ -126,11 +127,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     
     //Constructor para crear un conjunto nuevo de instancias
     public AddInstancesClasPropJDialog(JFrame parent, boolean modal){
-        
         super(parent, modal);
         initComponents();
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Asociar Instancias");
-        this.setModal(false);
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
@@ -148,12 +149,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     
    //Constructor para editar un conjunto de instancias
     public AddInstancesClasPropJDialog(JFrame parent, boolean modal, Instancias inst){
-        
         super(parent, modal);
         initComponents();
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Asociar Instancias");
-        this.setModal(false);
-        this.setLocationRelativeTo(ListAndResultsJPanel.getInstance());
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         int contI=0,contP=0;
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));

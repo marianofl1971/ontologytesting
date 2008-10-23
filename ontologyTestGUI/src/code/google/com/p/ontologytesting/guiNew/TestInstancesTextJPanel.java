@@ -104,6 +104,45 @@ private void resultadoEsperadoTextAreaMouseClicked(java.awt.event.MouseEvent evt
     getResultadoEsperadoTextArea().setForeground(Color.BLACK);
 }//GEN-LAST:event_resultadoEsperadoTextAreaMouseClicked
 
+public boolean consultaCompletaEnSinAyuda(String consulta,String resultado){
+    if((!consulta.equals("") && resultado.equals("")) || (consulta.equals("") && !resultado.equals(""))){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+public String getConsultaQuery() {
+    return getConsultaTextArea().getText();
+}
+
+public void setConsultaQuery(String aconsultaTextArea) {
+    getConsultaTextArea().setText(aconsultaTextArea);
+}
+
+public String getResultadoEsperado() {
+    return getResultadoEsperadoTextArea().getText();
+}
+
+public void setResultadoEsperado(String aresultadoEsperadoTextArea) {
+    getResultadoEsperadoTextArea().setText(aresultadoEsperadoTextArea);
+}
+
+public String getComentTextArea() {
+    return comentTextArea.getText();
+}
+
+public void setComentTextArea(String acomentTextArea) {
+    comentTextArea.setText(acomentTextArea);
+}
+
+public javax.swing.JTextArea getConsultaTextArea() {
+    return consultaTextArea;
+}
+
+public javax.swing.JTextArea getResultadoEsperadoTextArea() {
+    return resultadoEsperadoTextArea;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea comentTextArea;
@@ -114,37 +153,5 @@ private void resultadoEsperadoTextAreaMouseClicked(java.awt.event.MouseEvent evt
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JTextArea resultadoEsperadoTextArea;
     // End of variables declaration//GEN-END:variables
-
-    public String getConsultaQuery() {
-        return getConsultaTextArea().getText();
-    }
-
-    public void setConsultaQuery(String aconsultaTextArea) {
-        getConsultaTextArea().setText(aconsultaTextArea);
-    }
-
-    public String getResultadoEsperado() {
-        return getResultadoEsperadoTextArea().getText();
-    }
-
-    public void setResultadoEsperado(String aresultadoEsperadoTextArea) {
-        getResultadoEsperadoTextArea().setText(aresultadoEsperadoTextArea);
-    }
-
-    public String getComentTextArea() {
-        return comentTextArea.getText();
-    }
-
-    public void setComentTextArea(String acomentTextArea) {
-        comentTextArea.setText(acomentTextArea);
-    }
-
-    public javax.swing.JTextArea getConsultaTextArea() {
-        return consultaTextArea;
-    }
-
-    public javax.swing.JTextArea getResultadoEsperadoTextArea() {
-        return resultadoEsperadoTextArea;
-    }
 
 }

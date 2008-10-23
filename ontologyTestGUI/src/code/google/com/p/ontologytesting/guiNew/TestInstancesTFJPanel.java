@@ -192,6 +192,91 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     this.getParent().validate();
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
+public boolean consultaCompletaEnAyuda(){
+    if((!this.getQuery().equals("") && this.ningunoSeleccionado()==true) ||
+        this.getQuery().equals("") && this.ningunoSeleccionado()==false){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+public boolean panelVacio(){
+    if(this.getQuery().equals("") && this.ningunoSeleccionado()==true){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public void setQuery(String query){
+    getQueryTextField().setText(query);
+}
+
+public String getQuery(){
+    return getQueryTextField().getText();
+}
+
+public String isTestTrue() {
+    if(trueRadioButton.isSelected()){
+        return "true";
+    }else{
+        return "false";
+    }
+}
+
+public String isTestFalse() {
+    if(falseRadioButton.isSelected()){
+        return "true";
+    }else{
+        return "false";
+    }
+}   
+
+public boolean ningunoSeleccionado(){
+    if(falseRadioButton.isSelected()==false && trueRadioButton.isSelected()==false){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public void setTrueTest(boolean testT) {
+    trueRadioButton.setSelected(testT);
+}
+
+public void setFalseTest(boolean testF) {
+    falseRadioButton.setSelected(testF);
+}
+
+public AddComentJDialog getComment() {
+    return frameComent;
+}
+
+public void setComment(AddComentJDialog comment) {
+    this.frameComent = comment;
+}
+
+public javax.swing.JTextField getQueryTextField() {
+    return queryTextField;
+}
+
+public int getPosicion() {
+    return posicion;
+}
+
+public void setPosicion(int aPosicion) {
+    posicion = aPosicion;
+}
+
+public static int getContadorInstSat() {
+    return contadorInstSat;
+}
+
+public static void setContadorInstSat(int aContadorInst) {
+    contadorInstSat = aContadorInst;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton comentarioButton;
@@ -201,71 +286,4 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     private javax.swing.JRadioButton trueRadioButton;
     // End of variables declaration//GEN-END:variables
     
-    public void setQuery(String query){
-        getQueryTextField().setText(query);
-    }
-    
-    public String getQuery(){
-        return getQueryTextField().getText();
-    }
-
-    public String isTestTrue() {
-        if(trueRadioButton.isSelected()){
-            return "true";
-        }else{
-            return "false";
-        }
-    }
-    
-    public String isTestFalse() {
-        if(falseRadioButton.isSelected()){
-            return "true";
-        }else{
-            return "false";
-        }
-    }   
-    
-    public boolean ningunoSeleccionado(){
-        if(falseRadioButton.isSelected()==false && trueRadioButton.isSelected()==false){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public void setTrueTest(boolean testT) {
-        trueRadioButton.setSelected(testT);
-    }
-
-    public void setFalseTest(boolean testF) {
-        falseRadioButton.setSelected(testF);
-    }
-    
-    public AddComentJDialog getComment() {
-        return frameComent;
-    }
-
-    public void setComment(AddComentJDialog comment) {
-        this.frameComent = comment;
-    }
-
-    public javax.swing.JTextField getQueryTextField() {
-        return queryTextField;
-    }
-    
-    public int getPosicion() {
-        return posicion;
-    }
-    
-    public void setPosicion(int aPosicion) {
-        posicion = aPosicion;
-    }
-    
-    public static int getContadorInstSat() {
-        return contadorInstSat;
-    }
-
-    public static void setContadorInstSat(int aContadorInst) {
-        contadorInstSat = aContadorInst;
-    }
 }

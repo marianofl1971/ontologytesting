@@ -9,15 +9,10 @@ package code.google.com.p.ontologytesting.guiNew;
  *
  * @author sara.garcia
  */
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.OntologyTestCase;
-import code.google.com.p.ontologytesting.model.OntologyTestResult;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
@@ -30,12 +25,10 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
     private SaveTest saveTest;
-    private JFrame frame;
     
     public void ejecutarUnTest(ScenarioTest scenario){
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
-        frame = new JFrame();
         try{
             testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
             new TreeResults(testResult);
@@ -96,14 +89,16 @@ public class OpcionesMenu {
     }
     
     public SeeTestJDialog verTest(ScenarioTest scenario){
-        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, scenario);
+        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(null, true, scenario);
         seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        seeTestCompleted.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         return seeTestCompleted;
     }
     
     public SeeTestJDialog verInstancias(Instancias instancias){
-        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(frame, true, instancias);
+        SeeTestJDialog seeTestCompleted = new SeeTestJDialog(null, true, instancias);
         seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        seeTestCompleted.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         return seeTestCompleted;
     }
   

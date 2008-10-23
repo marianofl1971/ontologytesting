@@ -94,6 +94,29 @@ private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     format.setVisible(true);*/
 }//GEN-LAST:event_formatosButtonActionPerformed
 
+public boolean testSinNombre(){
+    if(this.getNombreTextField().equals("")){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public String getDescTextArea() {
+    return descTextArea.getText();
+}
+
+public void setDescTextArea(String adescTextArea) {
+    descTextArea.setText(adescTextArea);
+}
+
+public String getNombreTextField() {
+    return nombreTextField.getText();
+}
+
+public void setNombreTextField(String anombreTextField) {
+    nombreTextField.setText(anombreTextField);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descTextArea;
@@ -103,21 +126,5 @@ private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreTextField;
     // End of variables declaration//GEN-END:variables
-
-    public String getDescTextArea() {
-        return descTextArea.getText();
-    }
-
-    public void setDescTextArea(String adescTextArea) {
-        descTextArea.setText(adescTextArea);
-    }
-
-    public String getNombreTextField() {
-        return nombreTextField.getText();
-    }
-
-    public void setNombreTextField(String anombreTextField) {
-        nombreTextField.setText(anombreTextField);
-    }
 
 }

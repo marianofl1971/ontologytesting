@@ -9,10 +9,8 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.WindowConstants;
 
@@ -25,8 +23,6 @@ public class PopMenuInstances implements ActionListener{
     private String instSelec="";
     private OpcionesMenu menu = new OpcionesMenu();
     private Utils utils = new Utils();
-    private JFrame frame = new JFrame();
-    private JPanel panel = new JPanel();
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -34,11 +30,11 @@ public class PopMenuInstances implements ActionListener{
         CollectionTest collection = CollectionTest.getInstance();
         Instancias inst = utils.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
-            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(frame, false, inst);
+            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(null, false, inst);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }else if(source.getText().equals("Asociar a un Test")){
-            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(frame, true, inst);
+            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, inst);
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);

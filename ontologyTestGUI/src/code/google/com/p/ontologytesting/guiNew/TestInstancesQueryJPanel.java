@@ -203,7 +203,71 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     this.getParent().getParent().validate();
 }//GEN-LAST:event_resultTextFieldMouseClicked
 
+public boolean consultaCompletaEnAyuda(){
+    if((!this.getQuery().equals("") && this.getQueryResult().equals("")) ||
+        this.getQuery().equals("") && !this.getQueryResult().equals("")){
+        return false;
+    }else{
+        return true;
+    }
+}
 
+public boolean panelVacio(){
+    if(this.getQuery().equals("") && this.getQueryResult().equals("")){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+public void setQuery(String query){
+    getQueryTextField().setText(query);
+}
+
+public String getQuery(){
+    return getQueryTextField().getText();
+}
+
+public void setQueryResult(String result){
+    getResultTextField().setText(result);
+}
+
+public String getQueryResult(){
+    return getResultTextField().getText();
+}
+
+public AddComentJDialog getComment() {
+    return frameComent;
+}
+
+public void setComment(AddComentJDialog comment) {
+    this.frameComent = comment;
+}
+
+public javax.swing.JTextField getQueryTextField() {
+    return queryTextField;
+}
+
+public javax.swing.JTextField getResultTextField() {
+    return resultTextField;
+}
+
+public int getPosicion() {
+    return posicion;
+}
+
+public void setPosicion(int posicion) {
+    this.posicion = posicion;
+}
+
+public static int getContadorReal() {
+    return contadorReal;
+}
+
+public static void setContadorReal(int aContadorReal) {
+    contadorReal = aContadorReal;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton comentarioButton;
@@ -211,53 +275,5 @@ private void resultTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     private javax.swing.JTextField queryTextField;
     private javax.swing.JTextField resultTextField;
     // End of variables declaration//GEN-END:variables
-
-    public void setQuery(String query){
-        getQueryTextField().setText(query);
-    }
-    
-    public String getQuery(){
-        return getQueryTextField().getText();
-    }
-
-    public void setQueryResult(String result){
-        getResultTextField().setText(result);
-    }
-    
-    public String getQueryResult(){
-        return getResultTextField().getText();
-    }
-
-    public AddComentJDialog getComment() {
-        return frameComent;
-    }
-
-    public void setComment(AddComentJDialog comment) {
-        this.frameComent = comment;
-    }
-
-    public javax.swing.JTextField getQueryTextField() {
-        return queryTextField;
-    }
-
-    public javax.swing.JTextField getResultTextField() {
-        return resultTextField;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
-    }
-    
-    public static int getContadorReal() {
-        return contadorReal;
-    }
-
-    public static void setContadorReal(int aContadorReal) {
-        contadorReal = aContadorReal;
-    }
 
 }
