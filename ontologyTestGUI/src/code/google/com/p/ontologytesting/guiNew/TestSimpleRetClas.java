@@ -43,6 +43,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private Utils utils;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
+    private QueryOntology testQuery;
     
     public TestSimpleRetClas(ScenarioTest s){
         initComponents();
@@ -451,7 +452,7 @@ public void copiarTestAScenarioDesdeAyuda(){
                         AddComentJDialog comentPane = test.getComment();
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
-                        QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+                        testQuery = new QueryOntology(query,resExpT,coment);
                         if(validarTests.validarQuery(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
@@ -534,7 +535,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         testSinNombre=true;
     }else{
         if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-            QueryOntology testQuery = new QueryOntology();
+            testQuery = new QueryOntology();
             int tamQ = cQuery.length;
             int tamR = cResult.length;
             if(tamQ==tamR){
@@ -614,9 +615,9 @@ public void copiarDeAyudaATexto(){
      
     test = null;
     TestInstancesTextJPanel t;
-    String conjuntoQuerysRet="";
-    String conjuntoResExpRet="";
-    String conjuntoComentRet="";
+    StringBuffer conjuntoQuerysRet=new StringBuffer();
+    StringBuffer conjuntoResExpRet=new StringBuffer();
+    StringBuffer conjuntoComentRet=new StringBuffer();
 
     panelAyudaRet = this.getRetAyudaPanel();
     totalRet = panelAyudaRet.getComponentCount();
@@ -631,39 +632,39 @@ public void copiarDeAyudaATexto(){
                 String[] conjFinal = queryExp.split("\n| |,");
 
                 if(!query.equals("") || !queryExp.equals("")){
-                    if(conjuntoQuerysRet.equals("")){
-                        conjuntoQuerysRet = query.concat("\n");
+                    if(conjuntoQuerysRet.toString().equals("")){
+                        conjuntoQuerysRet.append(query).append("\n");
                     }else{
-                        conjuntoQuerysRet = conjuntoQuerysRet.concat(query).concat("\n");
+                        conjuntoQuerysRet.append(query).append("\n");
                     }  
                     if(conjFinal.length==1){
-                        conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[0]);
+                        conjuntoResExpRet.append(conjFinal[0]);
                     }else{
                         for(int j=0;j<conjFinal.length;j++){
                             if(conjuntoResExpRet.equals("")){
-                                conjuntoResExpRet = conjFinal[j]+",";
+                                conjuntoResExpRet.append(conjFinal[j]).append(",");
                             }else{
                                 if(j==conjFinal.length-1){
-                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j]);
+                                    conjuntoResExpRet.append(conjFinal[j]);
                                 }else{
-                                    conjuntoResExpRet = conjuntoResExpRet.concat(conjFinal[j])+",";
+                                    conjuntoResExpRet.append(conjFinal[j]).append(",");
                                 }
                             }
                         } 
                     }
-                    conjuntoResExpRet = conjuntoResExpRet.concat("\n");
-                    if(conjuntoComentRet.equals("")){
-                        conjuntoComentRet = coment.concat("\n");
+                    conjuntoResExpRet.append("\n");
+                    if(conjuntoComentRet.toString().equals("")){
+                        conjuntoComentRet.append(coment).append("\n");
                     }else{
-                        conjuntoComentRet = conjuntoComentRet.concat(coment).concat("\n");
+                        conjuntoComentRet.append(coment).append("\n");
                     }
                 } 
             }
     }
     t = (TestInstancesTextJPanel) getOpcionTextRetPanel().getComponent(0);
-    t.setConsultaQuery(conjuntoQuerysRet);
-    t.setResultadoEsperado(conjuntoResExpRet);
-    t.setComentTextArea(conjuntoComentRet);
+    t.setConsultaQuery(conjuntoQuerysRet.toString());
+    t.setResultadoEsperado(conjuntoResExpRet.toString());
+    t.setComentTextArea(conjuntoComentRet.toString());
     int c = retAyudaPanel.getComponentCount();
     TestInstancesTextAreaJPanel.setContadorRetClas(0);
     for(int i=1;i<c;i++){

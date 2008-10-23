@@ -45,6 +45,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private Utils utils;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
+    private QueryOntology testQuery;
     
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
@@ -455,7 +456,7 @@ public void copiarTestAScenarioDesdeAyuda(){
                         AddComentJDialog comentPane = test.getComment();
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
-                        QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+                        testQuery = new QueryOntology(query,resExpT,coment);
                         if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
@@ -538,7 +539,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         testSinNombre=true;
     }else{
         if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-            QueryOntology testQuery = new QueryOntology();
+            testQuery = new QueryOntology();
             int tamQ = cQuery.length;
             int tamR = cResult.length;
             if(tamQ==tamR){
@@ -618,9 +619,9 @@ public void copiarDeAyudaATexto(){
      
     test = null;
     TestInstancesTextJPanel t;
-    String conjuntoQuerysInst="";
-    String conjuntoResExpInst="";
-    String conjuntoComentInst="";
+    StringBuffer conjuntoQuerysInst=new StringBuffer();
+    StringBuffer conjuntoResExpInst=new StringBuffer();
+    StringBuffer conjuntoComentInst=new StringBuffer();
 
     panelAyudaInst = this.getInstAyudaPanel();
     totalInst = panelAyudaInst.getComponentCount();
@@ -634,28 +635,28 @@ public void copiarDeAyudaATexto(){
                 AddComentJDialog comentPane = test.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") || !resExpT.equals(resExpF)){
-                    if(conjuntoQuerysInst.equals("")){
-                        conjuntoQuerysInst = query.concat("\n");
+                    if(conjuntoQuerysInst.toString().equals("")){
+                        conjuntoQuerysInst.append(query).append("\n");
                     }else{
-                        conjuntoQuerysInst = conjuntoQuerysInst.concat(query).concat("\n");
+                        conjuntoQuerysInst.append(query).append("\n");
                     }
-                    if(conjuntoResExpInst.equals("")){
-                        conjuntoResExpInst = resExpT.concat("\n");
+                    if(conjuntoResExpInst.toString().equals("")){
+                        conjuntoResExpInst.append(resExpT).append("\n");
                     }else{
-                        conjuntoResExpInst = conjuntoResExpInst.concat(resExpT).concat("\n");
+                        conjuntoResExpInst.append(resExpT).append("\n");
                     }
-                    if(conjuntoComentInst.equals("")){
-                        conjuntoComentInst = coment.concat("\n");
+                    if(conjuntoComentInst.toString().equals("")){
+                        conjuntoComentInst.append(coment).append("\n");
                     }else{
-                        conjuntoComentInst = conjuntoComentInst.concat(coment).concat("\n");
+                        conjuntoComentInst.append(coment).append("\n");
                     }
                 } 
             }
     }
     t = (TestInstancesTextJPanel) getOpcionTextInstPanel().getComponent(0);
-    t.setConsultaQuery(conjuntoQuerysInst);
-    t.setResultadoEsperado(conjuntoResExpInst);
-    t.setComentTextArea(conjuntoComentInst);
+    t.setConsultaQuery(conjuntoQuerysInst.toString());
+    t.setResultadoEsperado(conjuntoResExpInst.toString());
+    t.setComentTextArea(conjuntoComentInst.toString());
     int c = getInstAyudaPanel().getComponentCount();
     TestInstancesTFJPanel.setContadorInstSat(0);
     for(int i=1;i<c;i++){

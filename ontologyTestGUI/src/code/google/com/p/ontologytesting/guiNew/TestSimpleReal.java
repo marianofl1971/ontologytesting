@@ -41,6 +41,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
     private List<QueryOntology> queryTest;
+    private QueryOntology testQuery;
 
     public TestSimpleReal(ScenarioTest s){
         initComponents();
@@ -446,7 +447,7 @@ public void copiarTestAScenarioDesdeAyuda(){
                         AddComentJDialog comentPane = test.getComment();
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
-                        QueryOntology testQuery = new QueryOntology(query,resExpT,coment);
+                        testQuery = new QueryOntology(query,resExpT,coment);
                         if(validarTests.validarQuery(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
                             cont++;
@@ -529,7 +530,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         testSinNombre=true;
     }else{
         if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
-            QueryOntology testQuery = new QueryOntology();
+            testQuery = new QueryOntology();
             int tamQ = cQuery.length;
             int tamR = cResult.length;
             if(tamQ==tamR){
@@ -624,17 +625,17 @@ public void copiarDeAyudaATexto(){
                 AddComentJDialog comentPane = test.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") || !queryExp.equals("")){
-                    if(conjuntoQuerysReal.equals("")){
+                    if(conjuntoQuerysReal.toString().equals("")){
                         conjuntoQuerysReal.append(query).append("\n");
                     }else{
                         conjuntoQuerysReal.append(query).append("\n");
                     }
-                    if(conjuntoResExpReal.equals("")){
+                    if(conjuntoResExpReal.toString().equals("")){
                         conjuntoResExpReal.append(queryExp).append("\n");
                     }else{
                         conjuntoResExpReal.append(queryExp).append("\n");
                     }
-                    if(conjuntoComentReal.equals("")){
+                    if(conjuntoComentReal.toString().equals("")){
                         conjuntoComentReal.append(coment).append("\n");
                     }else{
                         conjuntoComentReal.append(coment).append("\n");
