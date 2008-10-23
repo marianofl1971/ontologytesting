@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -27,21 +25,13 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre;
-    private int actualSubTabReal=0;
-    private boolean validoReal;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,
+            testYaExiste,continuar;
     private JPanel panelAyudaReal;
-    private int totalReal;
-    private JFrame frame;
-    private boolean ambosNecesarios;
-    public boolean seleccionado;
+    private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
     private List real;
-    private boolean continuarSinInstancias;
-    private boolean testYaExiste;
-    private int hayUnaConsulta=0;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
-    private boolean continuar;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
@@ -50,29 +40,10 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private Utils utils;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
-    
-    /** Creates new form TestSimpleReal */
-    /*public TestSimpleReal() {
-        initComponents();
-        TestInstancesQueryJPanel.setContadorReal(0);
-        descripcionJPanel.setLayout(new FlowLayout());
-        descripcionJPanel.add(new DescripcionJPanel());
-        opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
-        realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
-        for (int i = 1; i <= 10; i++) {  
-            realAyudaPanel.add(new TestInstancesQueryJPanel());   
-        }
-        opcionTextRealPanel.add(new TestInstancesTextJPanel());
-        setScenarioAEditar(null);
-        setScenario(new ScenarioTest(TipoTest.REAL)); 
-        setImportado(false);
-        setSoloEjecutar(false);
-    }*/
-    
+
     public TestSimpleReal(ScenarioTest s){
         initComponents();
         TestInstancesQueryJPanel.setContadorReal(0);
-        frame = new JFrame();
         descripcionJPanel.setLayout(new FlowLayout());
         descripcionJPanel.add(new DescripcionJPanel());
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
@@ -338,8 +309,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
             addInst.setVisible(true);
         }
     }
@@ -356,8 +326,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
             addInst.setVisible(true);
         }
     } 
@@ -374,8 +343,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
             addInst.setVisible(true);
         }
     }
@@ -383,8 +351,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
-    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
     addInst.setVisible(true);
 }//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
@@ -395,20 +362,20 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
                         && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
                 Object[] options = {"Sobreescribir", "Cancelar"};
-                int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
+                int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
                     saveTest.replaceScenarioLocally(scenario);
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestRealGuardado(true);
-                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 }
             }else{
                 saveTest.saveTestInMemory(scenario);
                 controlador.setTestRealGuardado(true);
-                JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se han producido cambios en el test",
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -421,7 +388,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestRealGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
@@ -439,65 +406,6 @@ public void inicializarVariables(){
     validoReal=true;
     hayUnaConsulta=0;
     continuar=true;
-}
-
-public static ScenarioTest scenarioTestExistente(String nombre){
-    ListIterator li;
-    List<ScenarioTest> lista = CollectionTest.getInstance().getScenariotest();
-    li = lista.listIterator();
-    while(li.hasNext()){
-        ScenarioTest s = (ScenarioTest) li.next();
-        String n = s.getNombre();
-        if(n.equals(nombre)){
-            return s;
-        }
-    }
-    return null;
-}
-
-public boolean testVacio(String nombre){
-    if(nombre.equals("")){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-public boolean consultaCompletaEnSinAyuda(String consulta,String resultado){
-    if((!consulta.equals("") && resultado.equals("")) || (consulta.equals("") && !resultado.equals(""))){
-        return false;
-    }else{
-        return true;
-    }
-}
-
-public boolean consultaCompletaEnAyuda(TestInstancesQueryJPanel test){
-    if((!test.getQuery().equals("") && test.getQueryResult().equals("")) ||
-        test.getQuery().equals("") && !test.getQueryResult().equals("")){
-        return false;
-    }else{
-        return true;
-    }
-}
-
-public boolean panelVacio(TestInstancesQueryJPanel test){
-    if(test.getQuery().equals("") && test.getQueryResult().equals("")){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-public boolean tieneInstanciasAsociadas(ScenarioTest scenario){
-    Instancias instancias = scenario.getInstancias();
-    List<ClassInstances> clasI = instancias.getClassInstances();
-    List<PropertyInstances> propI = instancias.getPropertyInstances();
-    
-    if(clasI.size()==0 && propI.size()==0){
-        return false;
-    }else{
-        return true;
-    }
 }
 
 public void copiarTestAScenarioDesdeAyuda(){
@@ -522,14 +430,14 @@ public void copiarTestAScenarioDesdeAyuda(){
     if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
-    if(testVacio(nombreTest)==true){
+    if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{
         for(int i=1;i<totalReal;i++){
             test = (TestInstancesQueryJPanel) panelAyudaReal.getComponent(i);
-            if(panelVacio(test)==false){
+            if(test.panelVacio()==false){
                 if(ambosNecesarios==false){
-                    if(consultaCompletaEnAyuda(test)==false){
+                    if(test.consultaCompletaEnAyuda()==false){
                         ambosNecesarios=true;
                     }else{
                         String query = test.getQuery();
@@ -556,47 +464,32 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        boolean res = preguntarSiContinuarSinInstancias(scenario);
+        boolean res = scenario.preguntarSiContinuarSinInstancias();
         if(res==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
         }
     }else if(testSinNombre==true){
-            JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El nombre del test es obligatorio",
             "Warning Message",JOptionPane.WARNING_MESSAGE);
             continuar=false;
     }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(this.getParent(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
         "obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
         continuar=false;
     }else if(hayUnaConsulta==0 && testSinNombre==false){
-        JOptionPane.showMessageDialog(this.getParent(),"Al menos debe introducir una consulta " +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Al menos debe introducir una consulta " +
         "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
         continuar=false;
     }else if(validoReal==false){
-        JOptionPane.showMessageDialog(this.getParent(),"El formato de " +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato de " +
         "los datos marcados en rojo no es correcto." +
         "\nPor favor, consulte la ayuda acerca del formato " +
         "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        formatoIncorrecto();
+        validarConsultas.formatoIncorrecto(panelAyudaReal, this.getTabbedPaneReal());
         continuar=false;
     }
-}
-
-
-public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
-    if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
-                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
-        }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
-        }
-    }
-
-    return continuarSinInstancias;
 }
 
 public void copiarTestAScenarioDesdeSinAyuda(){
@@ -631,7 +524,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     if(utils.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
         testYaExiste=true;
     }
-    if(testVacio(nombreTest)==true){
+    if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{
         if(!conjuntoQuerys.equals("") && !conjuntoResult.equals("")){
@@ -640,7 +533,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
             int tamR = cResult.length;
             if(tamQ==tamR){
                 for(int i=0; i<tamQ;i++){
-                    if(consultaCompletaEnSinAyuda(cQuery[i], cResult[i])==true){
+                    if(texto.consultaCompletaEnSinAyuda(cQuery[i], cResult[i])==true){
                         if(continuar=true){
                             hayUnaConsulta=1;
                             if(validarTests.validarQuery(cQuery[i])==true &&
@@ -684,41 +577,30 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
         && hayUnaConsulta==1){
-        preguntarSiContinuarSinInstancias(scenario);
+        continuarSinInstancias = scenario.preguntarSiContinuarSinInstancias();
         if(continuarSinInstancias==true){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
         }
     }else if(testSinNombre==true){
-        JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El nombre del test es obligatorio",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
         continuar=false;
     }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(this.getParent(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
         "obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
         continuar=false;
     }else if(hayUnaConsulta==0 && testSinNombre==false){
-        JOptionPane.showMessageDialog(this.getParent(),"Al menos debe introducir una consulta " +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Al menos debe introducir una consulta " +
         "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
         continuar=false;
     }else if(validoReal==false){
-        JOptionPane.showMessageDialog(this.getParent(),"El formato de los datos marcados en rojo no es correcto." +
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato de los datos marcados en rojo no es correcto." +
         "\nPor favor, consulte la ayuda acerca del formato " +
         "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        formatoIncorrecto();
+        validarConsultas.formatoIncorrecto(texto, this.getTabbedPaneReal());
         continuar=false;
-    }
-}
-
-public void formatoIncorrecto(){
-    ValidarConsultas validar = new ValidarConsultas();
-    if(this.getActualSubTabReal()==0){
-        if(validar.comprovarErrorEnAyudaReal(panelAyudaReal)==false){
-        }
-    }else{
-        if(validar.comprovarErrorQuerysReal(opcionTextRealPanel)==false){
-        }
     }
 }
 

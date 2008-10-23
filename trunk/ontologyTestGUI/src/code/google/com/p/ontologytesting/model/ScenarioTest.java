@@ -9,8 +9,10 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Saruskas
@@ -58,6 +60,32 @@ public class ScenarioTest {
     }
     
     public ScenarioTest(){
+    }
+    
+    public boolean tieneInstanciasAsociadas(){
+        List<ClassInstances> clasI = this.getInstancias().getClassInstances();
+        List<PropertyInstances> propI = this.getInstancias().getPropertyInstances();
+
+        if(clasI.size()==0 && propI.size()==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public boolean preguntarSiContinuarSinInstancias(){
+        boolean continuarSinInstancias=true;
+        if(tieneInstanciasAsociadas()==false){
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION){
+                continuarSinInstancias=false;
+            }else if(n == JOptionPane.YES_OPTION){
+                continuarSinInstancias=true;
+            }
+        }
+
+        return continuarSinInstancias;
     }
 
     public TipoTest getTipoTest() {

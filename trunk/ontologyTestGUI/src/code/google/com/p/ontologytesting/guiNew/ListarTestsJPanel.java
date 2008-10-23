@@ -32,6 +32,8 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     private ListarTestsJPanel() {
         initComponents();
         testSimplesList.setSelectedIndex(0);
+        testSparqlList.setSelectedIndex(0);
+        instanciasList.setSelectedIndex(0);
         popTest = new PopMenuTests();
         popInst = new PopMenuInstances();
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
@@ -55,6 +57,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 modeloSimples.addElement(scenario.get(i).getNombre()); 
             }
         }
+        if(modeloSimples.size()>=0){
+            testSimplesList.setSelectedIndex(0);
+        }
         testSimplesList.setModel(modeloSimples);
         simplesPanel.validate();
     }
@@ -66,6 +71,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 modeloSparql.addElement(scenario.get(i).getNombre());  
             }
         }
+        if(modeloSparql.size()>=0){
+            testSparqlList.setSelectedIndex(0);
+        }
         testSparqlList.setModel(modeloSparql);
         sparqlPanel.validate();
     }
@@ -75,6 +83,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         for(int i=0;i<instancias.size();i++){
             modeloInstancias.addElement(instancias.get(i).getNombre());  
         } 
+        if(modeloInstancias.size()>=0){
+            instanciasList.setSelectedIndex(0);
+        }
         instanciasList.setModel(modeloInstancias);
         instanciasPanel.validate();
     }

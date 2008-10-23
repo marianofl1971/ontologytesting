@@ -21,11 +21,6 @@ public class ExecQuerySparql {
         nombreSelect="";
     }
     
-    public ExecQuerySparql(List<String> datos, String nombreSelect){
-        this.datos = datos;
-        this.nombreSelect=nombreSelect;
-    }
-
     public List<String> getDatos() {
         return datos;
     }

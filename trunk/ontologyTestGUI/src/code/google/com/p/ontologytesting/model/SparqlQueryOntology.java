@@ -19,11 +19,6 @@ public class SparqlQueryOntology {
         this.querySparql=querySparql;
         this.resultexpected = resultexpected;
     }
-    
-    public SparqlQueryOntology(){
-        this.querySparql="";
-        this.resultexpected = "";
-    }
 
     public String getResultexpected() {
         return resultexpected;

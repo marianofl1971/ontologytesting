@@ -230,6 +230,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
+    int aux=0;
     if(this.isImportarTest()==true){
         List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
         if(scenImp.size()!=0){
@@ -245,11 +246,14 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(scenarioSparql.size()>0){
             listT.aniadirTestSparql(scenarioSparql);
             this.acceptAction("Tests importados");  
+            aux=1;
             this.setVisible(false);
         }
         if(scenarioSimple.size()>0){
             listT.aniadirTestSimple(scenarioSimple);
-            this.acceptAction("Tests importados");  
+            if(aux==0){
+                this.acceptAction("Tests importados");  
+            }
             this.setVisible(false);
         } 
     }else{

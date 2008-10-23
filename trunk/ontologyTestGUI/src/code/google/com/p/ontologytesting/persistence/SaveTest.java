@@ -7,9 +7,7 @@ package code.google.com.p.ontologytesting.persistence;
 
 import code.google.com.p.ontologytesting.guiNew.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.Instancias;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.*;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
  *

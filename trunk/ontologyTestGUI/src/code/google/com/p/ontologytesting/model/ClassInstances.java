@@ -22,12 +22,7 @@ public class ClassInstances {
     public ClassInstances(String classInstance){
         this.classInstance=classInstance;
     }
-    
-    public ClassInstances(){
-        this.classInstance="";
-        this.comment="";
-    }
-    
+
     public String getClassInstance() {
         return classInstance;
     }

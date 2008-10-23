@@ -20,6 +20,17 @@ public class ValidarConsultas {
     private List listRet = new ArrayList();
     private List listReal = new ArrayList();
     
+    public void formatoIncorrecto(JPanel panel,int tab){
+        ValidarConsultas validar = new ValidarConsultas();
+        if(tab==0){
+            if(validar.comprovarErrorEnAyudaReal(panel)==false){
+            }
+        }else{
+            if(validar.comprovarErrorQuerysReal(panel)==false){
+            }
+        }
+    }
+    
     public boolean comprovarErrorEnAyudaInst(JPanel panelAyudaInst){
         int var=0;
         for(int j=1;j<getListInst().size();j++){

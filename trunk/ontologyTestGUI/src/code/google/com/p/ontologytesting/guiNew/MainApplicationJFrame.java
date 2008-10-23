@@ -6,8 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.ScenarioTest;
+import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
@@ -368,6 +367,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?", 
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
+            this.dispose();
             System.exit(0);
         } 
 
@@ -633,7 +633,9 @@ public void inicializarContadores(){
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainApplicationJFrame().setVisible(true);
+                MainApplicationJFrame main = MainApplicationJFrame.getInstance();
+                main.setLocationRelativeTo(null);
+                main.setVisible(true);
             }
         });
     }

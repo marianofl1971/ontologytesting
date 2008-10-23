@@ -28,15 +28,6 @@ public class Instancias {
         this.propertyInstances = new ArrayList<PropertyInstances>();
     }
     
-    public Instancias(String nombre, String descripcion, String type,
-            List<ClassInstances> clasInstances, List<PropertyInstances> propInstances){
-        this.nombre=nombre;
-        this.type=type;
-        this.descripcion=descripcion;
-        this.classInstances.addAll(clasInstances);
-        this.propertyInstances.addAll(propInstances);
-    }
-    
     public Instancias(Instancias instancias){
         this.nombre=instancias.getNombre();
         this.descripcion=instancias.getDescripcion();
