@@ -379,34 +379,40 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(0);
+    s = new ScenarioTest(TipoTest.INST);
+    aniadirNuevoTest(0,s);
 }//GEN-LAST:event_nuevoTestInstMenuItemActionPerformed
 
 private void nuevoTestRecMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(1);
+    s = new ScenarioTest(TipoTest.RET);
+    aniadirNuevoTest(1,s);
 }//GEN-LAST:event_nuevoTestRecMenuItemActionPerformed
 
 
 private void nuevoTestRealMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRealMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(2);
+    s = new ScenarioTest(TipoTest.REAL);
+    aniadirNuevoTest(2,s);
 }//GEN-LAST:event_nuevoTestRealMenuItemActionPerformed
 
 private void nuevoTestSatMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSatMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(3);
+    s = new ScenarioTest(TipoTest.SAT);
+    aniadirNuevoTest(3,s);
 }//GEN-LAST:event_nuevoTestSatMenuItemActionPerformed
 
 
 private void nuevoTestClasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestClasMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(4);
+    s = new ScenarioTest(TipoTest.CLAS);
+    aniadirNuevoTest(4,s);
 }//GEN-LAST:event_nuevoTestClasMenuItemActionPerformed
 
 private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlMenuItemActionPerformed
 // TODO add your handling code here:
-    aniadirNuevoTest(5);
+    s = new ScenarioTest(TipoTest.SPARQL);
+    aniadirNuevoTest(5,s);
 }//GEN-LAST:event_nuevoTestSparqlMenuItemActionPerformed
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
@@ -503,44 +509,32 @@ public void editarVerTestsInstancias(boolean verEditTest){
     editarVerTestInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 }
 
-public void aniadirNuevoTest(int tipo){
+public void aniadirNuevoTest(int tipo,ScenarioTest s){
     this.inicializarContadores();
     if(controlador.algunTestSinGuardar()==false){
         controlador.prepararTest(tipo);
-        aniadirTest(tipo);
+        aniadirTest(tipo,s);
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                     controlador.prepararTest(tipo);
-                    aniadirTest(tipo);
+                    aniadirTest(tipo,s);
             }else{
                 controlador.prepararTest(tipo);
-                aniadirTest(tipo);
+                aniadirTest(tipo,s);
             }
     }
 }
 
-public void aniadirTest(int tipo){
+public void aniadirTest(int tipo,ScenarioTest s){
     if(tipo==0 || tipo==3){
-        if(tipo==0){
-            s = new ScenarioTest(TipoTest.INST);
-        }else if(tipo==3){
-            s = new ScenarioTest(TipoTest.SAT);
-        }
         panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
     }else if(tipo==1 || tipo==4){
-        if(tipo==1){
-            s = new ScenarioTest(TipoTest.RET);
-        }else if(tipo==4){
-            s = new ScenarioTest(TipoTest.CLAS);
-        }
         panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
     }else if(tipo==2){
-        s = new ScenarioTest(TipoTest.REAL);
         panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
     }else if(tipo==5){
-        s = new ScenarioTest(TipoTest.SPARQL);
         panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
     }
     this.validate();
