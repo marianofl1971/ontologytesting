@@ -379,119 +379,34 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestInst();
-        this.aniadirTestsInstSat(0);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestInst();
-                    this.aniadirTestsInstSat(0);
-            }else{
-                controlador.prepararTestInst();
-                this.aniadirTestsInstSat(0);
-            }
-    }
+    aniadirNuevoTest(0);
 }//GEN-LAST:event_nuevoTestInstMenuItemActionPerformed
 
 private void nuevoTestRecMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestRet();
-        this.aniadirTestsRetClas(1);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestRet();
-                    this.aniadirTestsRetClas(1);
-            }else{
-                controlador.prepararTestRet();
-                this.aniadirTestsRetClas(1);
-            }
-    }
+    aniadirNuevoTest(1);
 }//GEN-LAST:event_nuevoTestRecMenuItemActionPerformed
 
 
 private void nuevoTestRealMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRealMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestReal();
-        this.aniadirTestsReal();
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestReal();
-                    this.aniadirTestsReal();
-            }else{
-                controlador.prepararTestReal();
-                this.aniadirTestsReal();
-            }
-    }
+    aniadirNuevoTest(2);
 }//GEN-LAST:event_nuevoTestRealMenuItemActionPerformed
 
 private void nuevoTestSatMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSatMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestSat();
-        this.aniadirTestsInstSat(3);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestSat();
-                    this.aniadirTestsInstSat(3);
-            }else{
-                controlador.prepararTestSat();
-                this.aniadirTestsInstSat(3);
-            }
-    }
+    aniadirNuevoTest(3);
 }//GEN-LAST:event_nuevoTestSatMenuItemActionPerformed
 
 
 private void nuevoTestClasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestClasMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestClas();
-        this.aniadirTestsRetClas(4);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestClas();
-                    this.aniadirTestsRetClas(4);
-            }else{
-                controlador.prepararTestClas();
-                this.aniadirTestsRetClas(4);
-            }
-    }
-
+    aniadirNuevoTest(4);
 }//GEN-LAST:event_nuevoTestClasMenuItemActionPerformed
 
 private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlMenuItemActionPerformed
 // TODO add your handling code here:
-    this.inicializarContadores();
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTestSparql();
-        this.aniadirTestsSparql();
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTestSparql();
-                    this.aniadirTestsSparql();
-            }else{
-                controlador.prepararTestSparql();
-                this.aniadirTestsSparql();
-            }
-    }
+    aniadirNuevoTest(5);
 }//GEN-LAST:event_nuevoTestSparqlMenuItemActionPerformed
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
@@ -588,38 +503,48 @@ public void editarVerTestsInstancias(boolean verEditTest){
     editarVerTestInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 }
 
-public void aniadirTestsInstSat(int tipo){ 
-    if(tipo==0){
-        s = new ScenarioTest(TipoTest.INST);
-    }else if(tipo==3){
-        s = new ScenarioTest(TipoTest.SAT);
+public void aniadirNuevoTest(int tipo){
+    this.inicializarContadores();
+    if(controlador.algunTestSinGuardar()==false){
+        controlador.prepararTest(tipo);
+        aniadirTest(tipo);
+    }else{
+        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
+                "Guardar Tests",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                    controlador.prepararTest(tipo);
+                    aniadirTest(tipo);
+            }else{
+                controlador.prepararTest(tipo);
+                aniadirTest(tipo);
+            }
     }
-    panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
-    this.validate();
 }
 
-public void aniadirTestsRetClas(int tipo){ 
-    if(tipo==1){
-        s = new ScenarioTest(TipoTest.RET);
-    }else if(tipo==4){
-        s = new ScenarioTest(TipoTest.CLAS);
+public void aniadirTest(int tipo){
+    if(tipo==0 || tipo==3){
+        if(tipo==0){
+            s = new ScenarioTest(TipoTest.INST);
+        }else if(tipo==3){
+            s = new ScenarioTest(TipoTest.SAT);
+        }
+        panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
+    }else if(tipo==1 || tipo==4){
+        if(tipo==1){
+            s = new ScenarioTest(TipoTest.RET);
+        }else if(tipo==4){
+            s = new ScenarioTest(TipoTest.CLAS);
+        }
+        panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
+    }else if(tipo==2){
+        s = new ScenarioTest(TipoTest.REAL);
+        panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
+    }else if(tipo==5){
+        s = new ScenarioTest(TipoTest.SPARQL);
+        panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
     }
-    panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
     this.validate();
 }
-
-public void aniadirTestsReal(){ 
-    s = new ScenarioTest(TipoTest.REAL);
-    panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
-    this.validate();
-}
-
-public void aniadirTestsSparql(){ 
-    s = new ScenarioTest(TipoTest.SPARQL);
-    panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
-    this.validate();
-}
-
 
 public void inicializarContadores(){
         CreateInstancesJPanel.setContadorClas(0);

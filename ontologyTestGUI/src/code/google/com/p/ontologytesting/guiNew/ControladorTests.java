@@ -106,45 +106,28 @@ public class ControladorTests {
         }
     }
     
-    public void prepararTestInst(){
+    public void prepararTest(int tipo){
         inicializarGuardados();
         inicializarSeleccionados();
-        setTestInstSatGuardado(false);
-        setTestInstSelect(true);
-    }
-    
-    public void prepararTestRet(){
-        inicializarGuardados();
-        inicializarSeleccionados();
-        this.setTestRetClasGuardado(false);
-        setTestRetSelect(true);
-    }
-    public void prepararTestReal(){
-        inicializarGuardados();
-        inicializarSeleccionados();
-        setTestRealGuardado(false);
-        setTestRealSelect(true);
-    }
-    
-    public void prepararTestSat(){
-        inicializarGuardados();
-        inicializarSeleccionados();
-        setTestInstSatGuardado(false);
-        setTestSatSelect(true);
-    }
-    
-    public void prepararTestClas(){
-        inicializarGuardados();
-        inicializarSeleccionados();
-        setTestRetClasGuardado(false);
-        setTestClasSelect(true);
-    }
-    
-    public void prepararTestSparql(){
-        inicializarGuardados();
-        inicializarSeleccionados();
-        setTestSparqlGuardado(false);
-        setTestSparqlSelect(true);
+        if(tipo==0){
+            setTestInstSatGuardado(false);
+            setTestInstSelect(true);
+        }else if(tipo==1){
+            setTestRetClasGuardado(false);
+            setTestRetSelect(true);
+        }else if(tipo==2){
+            setTestRealGuardado(false);
+            setTestRealSelect(true);
+        }else if(tipo==3){
+            setTestInstSatGuardado(false);
+            setTestSatSelect(true);
+        }else if(tipo==4){
+            setTestRetClasGuardado(false);
+            setTestClasSelect(true);
+        }else if(tipo==5){
+            setTestSparqlGuardado(false);
+            setTestSparqlSelect(true);
+        }
     }
     
     public boolean getTestInstSatGuardado() {
