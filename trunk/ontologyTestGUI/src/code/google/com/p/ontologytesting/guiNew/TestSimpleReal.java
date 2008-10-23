@@ -40,6 +40,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private Utils utils;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
+    private List<QueryOntology> queryTest;
 
     public TestSimpleReal(ScenarioTest s){
         initComponents();
@@ -412,7 +413,7 @@ public void copiarTestAScenarioDesdeAyuda(){
 
     inicializarVariables();
 
-    List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
+    queryTest = new ArrayList<QueryOntology>();
     test = null; 
     
     panelAyudaReal= this.getRealAyudaPanel();
@@ -505,7 +506,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     texto = null;
     
     validarTests = new ValidarTests();
-    List<QueryOntology> queryTest = new ArrayList<QueryOntology>();
+    queryTest = new ArrayList<QueryOntology>();
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     texto = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
     conjuntoQuerys = texto.getConsultaQuery();
@@ -608,9 +609,9 @@ public void copiarDeAyudaATexto(){
      
     test = null;
     TestInstancesTextJPanel t;
-    String conjuntoQuerysReal="";
-    String conjuntoResExpReal="";
-    String conjuntoComentReal="";
+    StringBuffer conjuntoQuerysReal = new StringBuffer();
+    StringBuffer conjuntoResExpReal = new StringBuffer();
+    StringBuffer conjuntoComentReal = new StringBuffer();
 
     panelAyudaReal = this.getRealAyudaPanel();
     totalReal = panelAyudaReal.getComponentCount();
@@ -624,27 +625,27 @@ public void copiarDeAyudaATexto(){
                 String coment = comentPane.getComent();
                 if(!query.equals("") || !queryExp.equals("")){
                     if(conjuntoQuerysReal.equals("")){
-                        conjuntoQuerysReal = query.concat("\n");
+                        conjuntoQuerysReal.append(query).append("\n");
                     }else{
-                        conjuntoQuerysReal = conjuntoQuerysReal.concat(query).concat("\n");
+                        conjuntoQuerysReal.append(query).append("\n");
                     }
                     if(conjuntoResExpReal.equals("")){
-                        conjuntoResExpReal = queryExp.concat("\n");
+                        conjuntoResExpReal.append(queryExp).append("\n");
                     }else{
-                        conjuntoResExpReal = conjuntoResExpReal.concat(queryExp).concat("\n");
+                        conjuntoResExpReal.append(queryExp).append("\n");
                     }
                     if(conjuntoComentReal.equals("")){
-                        conjuntoComentReal = coment.concat("\n");
+                        conjuntoComentReal.append(coment).append("\n");
                     }else{
-                        conjuntoComentReal = conjuntoComentReal.concat(coment).concat("\n");
+                        conjuntoComentReal.append(coment).append("\n");
                     }
                 } 
             }
     }
     t = (TestInstancesTextJPanel) getOpcionTextRealPanel().getComponent(0);
-    t.setConsultaQuery(conjuntoQuerysReal);
-    t.setResultadoEsperado(conjuntoResExpReal);
-    t.setComentTextArea(conjuntoComentReal);
+    t.setConsultaQuery(conjuntoQuerysReal.toString());
+    t.setResultadoEsperado(conjuntoResExpReal.toString());
+    t.setComentTextArea(conjuntoComentReal.toString());
     int c = realAyudaPanel.getComponentCount();
     TestInstancesQueryJPanel.setContadorReal(0);
     for(int i=1;i<c;i++){

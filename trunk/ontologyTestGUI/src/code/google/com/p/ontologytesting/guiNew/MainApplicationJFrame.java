@@ -368,7 +368,11 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             this.dispose();
-            System.exit(0);
+            try{
+                System.exit(0);
+            }catch (SecurityException ex){
+                
+            }
         } 
 
 }//GEN-LAST:event_salirMenuItemActionPerformed
@@ -517,7 +521,6 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    JPanel panel = new JPanel();
     AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(this, true);
     nuevoInst.setLocationRelativeTo(this);
     nuevoInst.setVisible(true);
