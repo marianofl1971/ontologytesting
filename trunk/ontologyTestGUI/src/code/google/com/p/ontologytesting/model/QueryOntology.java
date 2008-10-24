@@ -9,11 +9,13 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Saruskas
  */
-public class QueryOntology {
+public class QueryOntology implements Serializable{
     
     private String query="";
     private String resultexpected="";

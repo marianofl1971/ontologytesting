@@ -5,7 +5,6 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
-import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.util.List;
@@ -61,5 +60,5 @@ public class Utils {
             }
         }
         return false;
-    }
+    }  
 }

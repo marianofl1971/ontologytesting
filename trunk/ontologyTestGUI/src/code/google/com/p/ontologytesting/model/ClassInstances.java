@@ -5,11 +5,13 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sara.garcia
  */
-public class ClassInstances {
+public class ClassInstances implements Serializable{
     
     private String classInstance="";
     private String comment="";
@@ -17,6 +19,11 @@ public class ClassInstances {
     public ClassInstances(String classInstance, String comment){
         this.classInstance=classInstance;
         this.comment=comment;
+    }
+    
+    public ClassInstances(){
+        this.classInstance="";
+        this.comment="";
     }
     
     public ClassInstances(String classInstance){

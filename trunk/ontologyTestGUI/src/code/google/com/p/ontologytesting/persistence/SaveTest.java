@@ -21,27 +21,31 @@ import javax.swing.JFileChooser;
  * @author saruskas
  */
 public class SaveTest {
-    private CollectionTest collection;
     private ListarTestsJPanel listInst;
     private XMLEncoder e;
     
     public boolean saveProject(boolean as) throws FileNotFoundException{
-        collection = CollectionTest.getInstance();
         if(as==true){
+            try{
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int seleccion = fileChooser.showSaveDialog(MainApplicationJFrame.getInstance());
             if(seleccion == JFileChooser.APPROVE_OPTION){
                 File fichero = fileChooser.getSelectedFile();
-                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
-                e.writeObject(collection);
+                
+                    e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
+                    e.writeObject(CollectionTest.getInstance());
+               
                 e.close();
                 return true;
+            }
+            }catch (Exception ex){
+                ex.printStackTrace();
             }
         }else{
             e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
             //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
-            e.writeObject(collection);
+            e.writeObject(CollectionTest.getInstance());
             e.close();
             return true;
         }
@@ -69,7 +73,7 @@ public class SaveTest {
         for(int i=0; i<instancias.size(); i++){
             if(inst.getNombre().equals(instancias.get(i).getNombre())){
                 instancias.remove(i);
-                instancias.add(inst);
+                instancias.add(i,inst);
                 return true;
             }
         }
@@ -102,7 +106,7 @@ public class SaveTest {
         for(int i=0; i<scenario.size(); i++){
             if(scen.getNombre().equals(scenario.get(i).getNombre())){
                 scenario.remove(i);
-                scenario.add(scen);
+                scenario.add(i,scen);
                 return true;
             }
         }

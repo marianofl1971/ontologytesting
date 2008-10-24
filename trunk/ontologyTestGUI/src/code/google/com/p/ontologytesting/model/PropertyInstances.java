@@ -5,11 +5,13 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sara.garcia
  */
-public class PropertyInstances {
+public class PropertyInstances implements Serializable{
     
     private String propertyInstance="";
     private String comment="";
@@ -18,6 +20,12 @@ public class PropertyInstances {
         this.propertyInstance=propertyInstance;
         this.comment=comment;
     }
+    
+    public PropertyInstances(){
+        this.propertyInstance="";
+        this.comment="";
+    }
+    
     
     public PropertyInstances(String propertyInstance){
         this.propertyInstance=propertyInstance;

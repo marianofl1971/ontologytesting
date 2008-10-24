@@ -5,11 +5,13 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sara_garcia
  */
-public class SparqlQueryOntology {
+public class SparqlQueryOntology implements Serializable{
 
     private String resultexpected="";
     private String querySparql="";
@@ -18,6 +20,11 @@ public class SparqlQueryOntology {
     public SparqlQueryOntology(String querySparql, String resultexpected){
         this.querySparql=querySparql;
         this.resultexpected = resultexpected;
+    }
+    
+    public SparqlQueryOntology(){
+        this.querySparql="";
+        this.resultexpected = "";
     }
 
     public String getResultexpected() {

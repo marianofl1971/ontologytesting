@@ -128,7 +128,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         }
         
         if(propInst.size()==0 && clasInst.size()==0){
-            return "El test no tiene instancias asociadas";
+            return "El test no tiene instancias asociadas<br><br>";
         }else{
                 bufRes.append("Nombre: ").append(nom).append("<br><br>").append("Descripcion: ")
                         .append(desc).append("<br><br>").append("<u>De Clase</u><br><br>")

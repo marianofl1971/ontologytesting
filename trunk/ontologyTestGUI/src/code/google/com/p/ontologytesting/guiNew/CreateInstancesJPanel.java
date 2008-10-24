@@ -19,7 +19,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
     private AddComentJDialog frameComent; 
     private Frame frame;
     private int posicion;
-    private static int contadorClas=0,contadorProp=0;
+    private static int contadorClas=0,contadorProp=0,tab;
     
     /** Creates new form CreateInstancesJPanel */
     public CreateInstancesJPanel(int type) {
@@ -132,8 +132,7 @@ private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
 // TODO add your handling code here:
    this.setVisible(false);
-   int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
-   if(tab == 0){
+   if(getTab() == 0){
        int finalPos=0;
        int p = this.getPosicion();
        int total = this.getParent().getComponentCount();
@@ -147,7 +146,7 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
        pa.setPosicion(finalPos+1);
        this.getParent().add(pa);
        this.getParent().remove(this);
-   }else if(tab == 1){
+   }else if(getTab() == 1){
        int finalPos=0;
        int p = this.getPosicion();
        int total = this.getParent().getComponentCount();
@@ -166,8 +165,7 @@ private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_duplicarButtonActionPerformed
 // TODO add your handling code here:
-    int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
-    if(tab==0){
+    if(getTab()==0){
          int tam = this.getParent().getComponentCount();
          String query = this.getQuery();
          CreateInstancesJPanel panel = new CreateInstancesJPanel(0);
@@ -186,7 +184,7 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 p.setPosicion(po+1);
            }  
          this.getParent().validate();
-    }else if(tab==1){
+    }else if(getTab()==1){
          int tam = this.getParent().getComponentCount();
          String query = this.getQuery();
          CreateInstancesJPanel panel = new CreateInstancesJPanel(1);
@@ -213,15 +211,14 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
     int pos = this.getPosicion();
     int tamClas = this.getParent().getComponentCount();
     int tamProp = this.getParent().getComponentCount();
-    int tab = AddInstancesClasPropJDialog.getInstancesTabbedPane();
-    if(tab == 0){
+    if(getTab() == 0){
         if(pos+1==tamClas){
              for(int i=0;i<9;i++){
                 this.getParent().add(new CreateInstancesJPanel(0));
              }
         }
         this.getParent().validate();
-    }else if(tab == 1){
+    }else if(getTab() == 1){
         if(pos+1==tamProp){
              for(int i=0;i<9;i++){
                 this.getParent().add(new CreateInstancesJPanel(1));
@@ -290,5 +287,13 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
 
     public static void setContadorProp(int aContadorProp) {
         contadorProp = aContadorProp;
+    }
+
+    public static int getTab() {
+        return tab;
+    }
+
+    public static void setTab(int atab) {
+        tab = atab;
     }
 }

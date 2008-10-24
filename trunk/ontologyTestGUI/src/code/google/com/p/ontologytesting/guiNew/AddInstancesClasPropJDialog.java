@@ -29,36 +29,29 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
     private JFrame frame;
     private AddComentJDialog commentPane;
-    private List<ClassInstances> clasInst;
-    private List<PropertyInstances> propInst;
-    private int indexVect;
+    private ArrayList<ClassInstances> clasInst;
+    private ArrayList<PropertyInstances> propInst;
+    private int indexVect,tabActual=0,failGroupClas,failGroupProp,totalClas;
     private String nombreFichero;
     private Instancias instancias;
-    private int tabActual=0;
-    private boolean queryValida=true;
     private JenaInterface jenaInterface;   
     private Jena jena;
-    private boolean instanciaValida=true;
     private String patron1,patron2;
     private ValidarTests validar;
     private String[] ciClas,ciInd;
     private ArrayList failClas,failProp;
-    private int failGroupClas,failGroupProp;
-    private boolean instanciaSinNombre;
-    private int totalClas;
     private String nombreInstancias;
     private CreateInstancesTextAreaJPanel conjunto;
     private String conjuntoClase,conjuntoProp,patron;
     private String[] clas,prop;
-    private boolean instanciasInstGuardadas;
+    private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
+            instanciaValida=true,queryValida=true,nuevoTest=false;
     private Instancias instanciasAEditar;
-    private boolean editado;
     private SaveTest saveTest;
     private ScenarioTest scenario;
 
     //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, ScenarioTest scenario){
-        
+    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, ScenarioTest scenario){       
         super(parent, modal);
         initComponents();
         this.setTitle("Asociar Instancias");
@@ -132,11 +125,11 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Asociar Instancias");
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setNuevoTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
-
         for (int i = 0; i <= 10; i++) {
             clasPanel.add(new CreateInstancesJPanel(0));  
             propPanel.add(new CreateInstancesJPanel(1));
@@ -154,6 +147,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Asociar Instancias");
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setNuevoTest(true);
         int contI=0,contP=0;
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
@@ -473,14 +467,23 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-
-    boolean result = prepararInstancias(true,true);
-    if(result==true){
-        JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
-        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+    if(this.getNuevoTest()==true){
+        boolean res = prepararInstancias(true,false);
+        if(res==true){
+            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, getInstancias());
+            asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            asociarInst.setVisible(true);
+            this.setVisible(false);
+        }
+    }else{
+        boolean result = prepararInstancias(true,true);
+        if(result==true){
+            JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
+            "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+        }   
     }
-    
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
 private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstButtonActionPerformed
@@ -535,6 +538,7 @@ private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//G
             copiarAInstancesAyuda();
         }
     }
+    CreateInstancesJPanel.setTab(getInstancesTabbedPane());
     setTabActual(getInstancesTabbedPane());
 }//GEN-LAST:event_instancesTabbedPaneMouseClicked
 
@@ -553,10 +557,10 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         for(int i=0; i<totalClas; i++){
             CreateInstancesJPanel panelInst = (CreateInstancesJPanel) getClasPanel().getComponent(i);
             if(panelInst.getSelectedCheckBox()==true){
-                AddInstancesClasPropJDialog.getClasPanel().remove(panelInst);
+                this.getClasPanel().remove(panelInst);
                 decrementarPosicion(i,0);
                 CreateInstancesJPanel nuevo = new CreateInstancesJPanel(0);
-                AddInstancesClasPropJDialog.getClasPanel().add(nuevo);
+                this.getClasPanel().add(nuevo);
                 i--;
                 auxClas=1;
             }
@@ -571,10 +575,10 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         for(int i=0; i<totalProp; i++){
             CreateInstancesJPanel panelProp = (CreateInstancesJPanel) getPropPanel().getComponent(i);
             if(panelProp.getSelectedCheckBox()==true){
-                AddInstancesClasPropJDialog.getPropPanel().remove(panelProp);
+                this.getPropPanel().remove(panelProp);
                 decrementarPosicion(i,1);
                 CreateInstancesJPanel nuevo = new CreateInstancesJPanel(1);
-                AddInstancesClasPropJDialog.getPropPanel().add(nuevo);
+                this.getPropPanel().add(nuevo);
                 i--;
                 auxProp=1;
             }
@@ -589,12 +593,24 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
-    boolean result = prepararInstancias(false,true);
-    if(result==true){
-        JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
-        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+    if(this.getNuevoTest()==true){
+        boolean res = this.prepararInstancias(false, true);
+        if(res==true){
+            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, getInstancias());
+            asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            asociarInst.setVisible(true);
+            this.setVisible(false);
+        }
+    }else{
+        boolean result = prepararInstancias(false,true);
+        if(result==true){
+            JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
+            "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+        }
     }
+    
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
 
 
@@ -650,9 +666,8 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
         getInstancias().setPropertyInstances(propInst);
         getInstancias().setDescripcion(getDescInstanciasTextArea());
         getInstancias().setNombre(getNomInstanciasTextField());
-        getInstancias().setType("Instancias");
 
-        if((guardar==true && asociar==true) || (guardar==true)){
+        if((guardar==true && asociar==true && this.getNuevoTest()==false) || (guardar==true)){
             if(aux==0){
                 if(this.getInstanciasAEditar()!= null && 
                         this.getInstancias().equals(this.getInstanciasAEditar())==false
@@ -665,7 +680,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                             saveTest.replaceInstanciasLocally(getInstancias());
                             saveTest.actualizarListaDeInstancias();
                         }
-                        if(asociar==true){
+                        if(asociar==true && this.getNuevoTest()==false){
                             this.getScenario().setInstancias(this.getInstancias());
                         }
                         aux=1;
@@ -683,7 +698,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                 saveTest.saveInstanciasInMemory(getInstancias());
                 saveTest.actualizarListaDeInstancias();
             }
-            if(asociar==true){
+            if(asociar==true && this.getNuevoTest()==false){
                 this.getScenario().setInstancias(this.getInstancias());
             }  
         }
@@ -725,17 +740,6 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             }
         }
     }
-    return false;
-}
-
-public boolean yaExisteInstancia(String nombre){
-    List<ScenarioTest> listaEsce = CollectionTest.getInstance().getScenariotest();
-        for(int i=0;i<listaEsce.size();i++){
-            String n = scenario.getInstancias().getNombre();
-            if(n.equals(nombre)){
-                return true;
-            }
-        }
     return false;
 }
 
@@ -942,15 +946,15 @@ public void copiarAInstancesTextArea(){
     conjunto.setPropiedadTextArea(bufProp.toString());
     
     
-    int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
-    int tamProp = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+    int tamClas = this.getClasPanel().getComponentCount();
+    int tamProp = this.getPropPanel().getComponentCount();
     for(int i=0;i<tamClas;i++){
-        CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(i);
+        CreateInstancesJPanel panelClas = (CreateInstancesJPanel) this.getClasPanel().getComponent(i);
         panelClas.setInstance("");
         panelClas.getComment().setComent("");
     }
     for(int i=0;i<tamProp;i++){
-        CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(i);
+        CreateInstancesJPanel panelProp = (CreateInstancesJPanel) this.getPropPanel().getComponent(i);
         panelProp.setInstance("");
         panelProp.getComment().setComent("");
     }
@@ -964,24 +968,24 @@ public void copiarAInstancesAyuda(){
     conjuntoProp = conjunto.getPropiedadTextArea().trim();
     clas = conjuntoClase.split(patron);
     prop = conjuntoProp.split(patron);
-    int tamClas = AddInstancesClasPropJDialog.getClasPanel().getComponentCount();
-    int tamProp = AddInstancesClasPropJDialog.getPropPanel().getComponentCount();
+    int tamClas = this.getClasPanel().getComponentCount();
+    int tamProp = this.getPropPanel().getComponentCount();
     int contClas=0,contProp=0;
     for(int i=0;i<clas.length;i++){
         if(!clas[i].equals("")){
             if(i<tamClas){
-                CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(contClas);
+                CreateInstancesJPanel panelClas = (CreateInstancesJPanel) this.getClasPanel().getComponent(contClas);
                 panelClas.setInstance(clas[i]);
                 contClas++;
             }else{
                 if(contClas<tamClas){
-                    CreateInstancesJPanel panelClas = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getClasPanel().getComponent(contClas);
+                    CreateInstancesJPanel panelClas = (CreateInstancesJPanel) this.getClasPanel().getComponent(contClas);
                     panelClas.setInstance(clas[i]);
                     contClas++;
                 }else{
                     CreateInstancesJPanel panelClas = new CreateInstancesJPanel(0);
                     panelClas.setInstance(clas[i]);
-                    AddInstancesClasPropJDialog.getClasPanel().add(panelClas);
+                    this.getClasPanel().add(panelClas);
                 }
             }
         }
@@ -990,18 +994,18 @@ public void copiarAInstancesAyuda(){
     for(int i=0;i<prop.length;i++){
         if(!prop[i].equals("")){
             if(i<tamProp){
-                CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(contProp);
+                CreateInstancesJPanel panelProp = (CreateInstancesJPanel) this.getPropPanel().getComponent(contProp);
                 panelProp.setInstance(prop[i]);
                 contProp++;
             }else{
                 if(contProp<tamProp){
-                    CreateInstancesJPanel panelProp = (CreateInstancesJPanel) AddInstancesClasPropJDialog.getPropPanel().getComponent(contProp);
+                    CreateInstancesJPanel panelProp = (CreateInstancesJPanel) this.getPropPanel().getComponent(contProp);
                     panelProp.setInstance(prop[i]);
                     contProp++;
                 }else{
                     CreateInstancesJPanel panelProp = new CreateInstancesJPanel(1);
                     panelProp.setInstance(prop[i]);
-                    AddInstancesClasPropJDialog.getPropPanel().add(panelProp);
+                    this.getPropPanel().add(panelProp);
                 }
             }
         }
@@ -1029,7 +1033,7 @@ public int getIndexVect() {
         this.nombreFichero = nombreFichero;
     }
 
-    public static int getInstancesTabbedPane() {
+    public int getInstancesTabbedPane() {
         return instancesTabbedPane.getSelectedIndex();
     }
 
@@ -1081,11 +1085,11 @@ public int getIndexVect() {
         this.instanciaValida = instanciaValida;
     }
 
-    public static javax.swing.JPanel getClasPanel() {
+    public javax.swing.JPanel getClasPanel() {
         return clasPanel;
     }
 
-    public static javax.swing.JPanel getPropPanel() {
+    public javax.swing.JPanel getPropPanel() {
         return propPanel;
     }
 
@@ -1128,11 +1132,19 @@ public int getIndexVect() {
     public void setScenario(ScenarioTest scenario) {
         this.scenario = scenario;
     }
+    
+    public boolean getNuevoTest() {
+        return nuevoTest;
+    }
+
+    public void setNuevoTest(boolean nuevo) {
+        this.nuevoTest = nuevo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarSelecButton;
     private javax.swing.JButton cancelarInstButton;
-    private static javax.swing.JPanel clasPanel;
+    private javax.swing.JPanel clasPanel;
     private javax.swing.JPanel clasPropPanel;
     private javax.swing.JScrollPane classScrollPane;
     private javax.swing.JPanel contentDescPanel;
@@ -1141,7 +1153,7 @@ public int getIndexVect() {
     private javax.swing.JButton formatosButton;
     private javax.swing.JButton guardarAsociarInstButton;
     private javax.swing.JButton guardarButton;
-    private static javax.swing.JTabbedPane instancesTabbedPane;
+    private javax.swing.JTabbedPane instancesTabbedPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1149,7 +1161,7 @@ public int getIndexVect() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiarInstButton;
     private javax.swing.JTextField nomInstanciasTextField;
-    private static javax.swing.JPanel propPanel;
+    private javax.swing.JPanel propPanel;
     private javax.swing.JScrollPane propScrollPane;
     private javax.swing.JButton soloAsociarButton;
     private javax.swing.JScrollPane textAreaScrollPane;

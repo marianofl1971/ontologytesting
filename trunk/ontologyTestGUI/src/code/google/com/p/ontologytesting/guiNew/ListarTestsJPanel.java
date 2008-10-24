@@ -7,11 +7,13 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 
+import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -57,6 +59,16 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 modeloSimples.addElement(scenario.get(i).getNombre()); 
             }
         }
+        ArrayList<ScenarioTest> scenSimple = CollectionTest.getInstance().getScenariotest();
+        if(scenSimple.size()>0){
+            for(int i=0;i<scenSimple.size();i++){
+                if(scenSimple.get(i).getTipoTest().getTipo()!=5){
+                    if(!modeloSimples.contains(scenSimple.get(i).getNombre())){
+                        modeloSimples.addElement(scenSimple.get(i).getNombre()); 
+                    }
+                }
+            }
+        }
         if(modeloSimples.size()>=0){
             testSimplesList.setSelectedIndex(0);
         }
@@ -71,11 +83,33 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 modeloSparql.addElement(scenario.get(i).getNombre());  
             }
         }
+        ArrayList<ScenarioTest> scenSparql = CollectionTest.getInstance().getScenariotest();
+        if(scenSparql.size()>0){
+            for(int i=0;i<scenSparql.size();i++){ 
+                if(scenSparql.get(i).getTipoTest().getTipo()==5){
+                    if(!modeloSparql.contains(scenSparql.get(i).getNombre())){
+                        modeloSparql.addElement(scenSparql.get(i).getNombre()); 
+                    }
+                }
+            }
+        }
         if(modeloSparql.size()>=0){
             testSparqlList.setSelectedIndex(0);
         }
         testSparqlList.setModel(modeloSparql);
         sparqlPanel.validate();
+    }
+  
+    public DefaultListModel actualizarModeloInstancias(DefaultListModel modelo){
+        ArrayList<Instancias> inst = CollectionTest.getInstance().getInstancias();
+        if(inst.size()>0){
+            for(int i=0;i<inst.size();i++){
+                if(!modelo.contains(inst.get(i).getNombre())){
+                    modelo.addElement(inst.get(i).getNombre()); 
+                }
+            }
+        }
+        return modelo;
     }
     
     public void aniadirInstancias(List<Instancias> instancias){ 
@@ -83,6 +117,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         for(int i=0;i<instancias.size();i++){
             modeloInstancias.addElement(instancias.get(i).getNombre());  
         } 
+        modeloInstancias = this.actualizarModeloInstancias(modeloInstancias);
         if(modeloInstancias.size()>=0){
             instanciasList.setSelectedIndex(0);
         }

@@ -10,6 +10,7 @@
 package code.google.com.p.ontologytesting.model;
 
 import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Saruskas
  */
 
-public class ScenarioTest {
+public class ScenarioTest implements Serializable{
 
     public enum TipoTest{
         INST(0),RET(1),REAL(2),SAT(3),CLAS(4),SPARQL(5);
@@ -50,6 +51,15 @@ public class ScenarioTest {
         this.tipoTest=tipoTest;
     }
     
+    public ScenarioTest(){  
+        this.instancias = new Instancias();
+        this.queryTest = new ArrayList<QueryOntology>();
+        this.sparqlQuerys = new ArrayList<SparqlQueryOntology>();
+        this.nombre = "";
+        this.descripcion = "";
+        this.tipoTest=null;
+    }
+    
     public ScenarioTest(ScenarioTest nuevo){
         this.setDescripcion(nuevo.getDescripcion());
         this.setNombre(nuevo.getNombre());
@@ -57,9 +67,6 @@ public class ScenarioTest {
         this.setQueryTest(nuevo.getQueryTest());
         this.setSparqlQuerys(nuevo.getSparqlQuerys());
         this.setTipoTest(nuevo.getTipoTest());
-    }
-    
-    public ScenarioTest(){
     }
     
     public boolean tieneInstanciasAsociadas(){

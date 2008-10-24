@@ -3,6 +3,7 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.*;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     private ListarTestsInstanciasJPanel listaFicheros;
     private Instancias instancias = new Instancias();
     private OpcionesMenu opMenu = new OpcionesMenu();
+    private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
     
     /** Creates new form AsociarInstanciasATestJDialog */
     public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
@@ -149,6 +151,7 @@ private void verTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
     List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
+    this.setScenariosSeleccionados(scenImp);
     if(scenImp.size()>0){
         for(int i=0;i<scenImp.size();i++){
             scenImp.get(i).setInstancias(this.getInstancias());
@@ -181,5 +184,13 @@ public void setInstancias(Instancias instancias) {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verTestButton;
     // End of variables declaration//GEN-END:variables
+
+    public List<ScenarioTest> getScenariosSeleccionados() {
+        return scenariosSeleccionados;
+    }
+
+    public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados) {
+        this.scenariosSeleccionados = scenariosSeleccionados;
+    }
 
 }
