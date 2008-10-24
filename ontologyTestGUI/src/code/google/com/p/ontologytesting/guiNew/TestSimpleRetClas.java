@@ -641,7 +641,7 @@ public void copiarDeAyudaATexto(){
                         conjuntoResExpRet.append(conjFinal[0]);
                     }else{
                         for(int j=0;j<conjFinal.length;j++){
-                            if(conjuntoResExpRet.equals("")){
+                            if(conjuntoResExpRet.toString().equals("")){
                                 conjuntoResExpRet.append(conjFinal[j]).append(",");
                             }else{
                                 if(j==conjFinal.length-1){
