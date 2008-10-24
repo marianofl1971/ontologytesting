@@ -179,9 +179,7 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_queryTextFieldMouseClicked
 // TODO add your handling code here:
-    //ts = Auxiliar.getTestSimpleInstSat();
-    getQueryTextField().setForeground(Color.BLACK);
-    
+    getQueryTextField().setForeground(Color.BLACK);   
     int pos = this.getPosicion();
     int tamInst = this.getParent().getComponentCount();
     if(pos+2==tamInst){

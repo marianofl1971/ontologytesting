@@ -11,9 +11,13 @@ import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -30,6 +34,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private SaveTest saveTest = new SaveTest();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
+    private JFileChooser filechooser;
+    private XMLDecoder decoder;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -127,6 +133,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         fileMenu.add(nuevoProyectoMenuItem);
 
         abrirProyectoMenuItem.setText("Abrir");
+        abrirProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirProyectoMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(abrirProyectoMenuItem);
 
         guardarProyectoMenuItem.setText("Guardar");
@@ -345,7 +356,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
     collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    collection.setOntology("C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
     /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
@@ -490,7 +501,46 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
             "Error Message",JOptionPane.ERROR_MESSAGE); 
         }
     } catch (FileNotFoundException ex) {
+    }
+}
 
+private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
+// TODO add your handling code here:
+    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(this, true);//GEN-LAST:event_abrirProyectoMenuItemActionPerformed
+    String path="";
+    filechooser = new JFileChooser("");
+    filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    int option = filechooser.showOpenDialog(this);
+    if (option == JFileChooser.APPROVE_OPTION) {
+      File selectedFile = filechooser.getSelectedFile();
+      path = selectedFile.getAbsolutePath();
+      try {
+          decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
+          collection = (CollectionTest) decoder.readObject();
+          CollectionTest.getInstance().setInstancias(collection.getInstancias());
+          CollectionTest.getInstance().setNamespace(collection.getNamespace());
+          CollectionTest.getInstance().setOntology(collection.getOntology());
+          CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
+          abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
+          abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
+          abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+          abrirP.setLocationRelativeTo(this);
+          abrirP.setVisible(true);
+      } catch (FileNotFoundException ex) {
+      }catch (ClassCastException ex){
+          JOptionPane.showMessageDialog(this,"Error. Proyecto no válido.",                                                  
+          "Error Message",JOptionPane.ERROR_MESSAGE); 
+      }
+    }   
+    if(abrirP.isProyectoCargado()==true){
+        this.inicializarContadores();
+        guardarProyectoComoMenuItem.setEnabled(true);
+        guardarProyectoMenuItem.setEnabled(true);
+        instanciasMenu.setEnabled(true);
+        testsMenu.setEnabled(true);
+        ejecutarMenu.setEnabled(true);
+        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+        this.validate();
     }
 }
 

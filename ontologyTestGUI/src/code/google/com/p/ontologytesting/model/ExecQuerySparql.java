@@ -17,8 +17,8 @@ public class ExecQuerySparql {
     private String nombreSelect="";
 
     public ExecQuerySparql(){
-        datos = new ArrayList<String>();
-        nombreSelect="";
+        this.datos = new ArrayList<String>();
+        this.nombreSelect = "";
     }
     
     public List<String> getDatos() {

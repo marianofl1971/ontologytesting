@@ -9,13 +9,14 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Saruskas
  */
-public class CollectionTest {
+public class CollectionTest implements Serializable{
 
     private ArrayList<ScenarioTest> scenariotest = new ArrayList<ScenarioTest>();
     private ArrayList<Instancias> instancias = new ArrayList<Instancias>();
