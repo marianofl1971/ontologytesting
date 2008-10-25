@@ -112,7 +112,7 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         String path="";
         filechooser = new JFileChooser("");
         filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        int option = filechooser.showOpenDialog(this);
+        int option = filechooser.showOpenDialog(MainApplicationJFrame.getInstance());
         if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           path = selectedFile.getAbsolutePath();

@@ -144,7 +144,7 @@ private void examinarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//
         String path="";
         filechooser = new JFileChooser("");
         filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int option = filechooser.showOpenDialog(this);
+        int option = filechooser.showOpenDialog(MainApplicationJFrame.getInstance());
         if (option == JFileChooser.APPROVE_OPTION) {
           File selectedFile = filechooser.getSelectedFile();
           path = selectedFile.getAbsolutePath();
