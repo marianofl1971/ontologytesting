@@ -32,10 +32,8 @@ public class SaveTest {
             int seleccion = fileChooser.showSaveDialog(MainApplicationJFrame.getInstance());
             if(seleccion == JFileChooser.APPROVE_OPTION){
                 File fichero = fileChooser.getSelectedFile();
-                
-                    e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
-                    e.writeObject(CollectionTest.getInstance());
-               
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
+                e.writeObject(CollectionTest.getInstance());
                 e.close();
                 return true;
             }
@@ -43,8 +41,8 @@ public class SaveTest {
                 ex.printStackTrace();
             }
         }else{
-            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
-            //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
+            //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
+            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
             e.writeObject(CollectionTest.getInstance());
             e.close();
             return true;
