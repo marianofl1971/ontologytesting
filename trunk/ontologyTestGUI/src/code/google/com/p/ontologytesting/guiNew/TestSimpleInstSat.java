@@ -340,7 +340,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
     if(continuar==true){
         if(continuarSinInstancias==true){
-            menu.ejecutarUnTest(this.getScenario());
+            this.realizarAccion(false, true);
         }else{
             addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
             addInst.setVisible(true);
@@ -391,7 +391,14 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
         if(ejecutar==true){
-            menu.ejecutarUnTest(this.getScenario());
+            boolean res = menu.ejecutarUnTest(this.getScenario());
+            if(res==true){
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }else{ 
         if(guardar==true){
@@ -403,7 +410,14 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
-            menu.ejecutarUnTest(this.getScenario());
+            boolean res = menu.ejecutarUnTest(this.getScenario());
+            if(res==true){
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     saveTest.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());

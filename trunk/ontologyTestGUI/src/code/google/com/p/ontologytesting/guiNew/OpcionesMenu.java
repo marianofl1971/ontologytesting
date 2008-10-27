@@ -26,36 +26,39 @@ public class OpcionesMenu {
     private ListAndResultsJPanel panelTest;
     private SaveTest saveTest;
     
-    public void ejecutarUnTest(ScenarioTest scenario){
+    public boolean ejecutarUnTest(ScenarioTest scenario){
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         try{
             testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
             new TreeResults(testResult);
+            return true;
         } catch (ExceptionReadOntology ex) {
             throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }
 
-    public void ejecutarBateriaTests(List<ScenarioTest> listScenario){
+    public boolean ejecutarBateriaTests(List<ScenarioTest> listScenario){
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         try{
             testCase.runListaScenario(testResult, CollectionTest.getInstance(), listScenario);
             new TreeResults(testResult);
+            return true;
         } catch (ExceptionReadOntology ex) {
             throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");
         }
     }
 
-    public void ejecutarTodosLosTests(){
+    public boolean ejecutarTodosLosTests(){
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         try{
             testCase.run(testResult, CollectionTest.getInstance());
             new TreeResults(testResult);
+            return true;
         } catch (ExceptionReadOntology ex) {
             throw new ExceptionReadOntology("La ontologia introducida no es valida." +
             "\nSolo pueden realizarse tests sobre documentos owl consistentes");

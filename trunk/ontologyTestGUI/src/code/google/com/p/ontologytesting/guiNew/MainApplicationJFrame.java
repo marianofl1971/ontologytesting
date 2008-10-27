@@ -104,6 +104,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         editarInstanciasMenuItem = new javax.swing.JMenuItem();
         verInstanciasMenuItem = new javax.swing.JMenuItem();
         ejecutarMenu = new javax.swing.JMenu();
+        selecTestMenuItem = new javax.swing.JMenuItem();
         ejecutarTodosMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
@@ -292,6 +293,14 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
         ejecutarMenu.setText("Ejecutar");
         ejecutarMenu.setEnabled(false);
+
+        selecTestMenuItem.setText("Seleccionar test");
+        selecTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecTestMenuItemActionPerformed(evt);
+            }
+        });
+        ejecutarMenu.add(selecTestMenuItem);
 
         ejecutarTodosMenuItem.setText("Todos los Tests");
         ejecutarTodosMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -486,7 +495,19 @@ private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarTodosMenuItemActionPerformed
 // TODO add your handling code here:
-    opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
+    if(CollectionTest.getInstance().getScenariotest().size()>0){
+        boolean res = opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
+        if(res==false){
+            JOptionPane.showMessageDialog(this,"Error ejecutando los tests",                                                  
+            "Error Message",JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"Test ejecutados",                                                  
+            "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+        }
+    }else{
+        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE);
+    }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
@@ -544,6 +565,20 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     }
 }
 
+private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTestMenuItemActionPerformed
+// TODO add your handling code here:
+    if(CollectionTest.getInstance().getScenariotest().size()==0){//GEN-LAST:event_selecTestMenuItemActionPerformed
+        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
+        "Error Message",JOptionPane.ERROR_MESSAGE); 
+    }else{
+        ListarTestsInstanciasJPanel listar = new ListarTestsInstanciasJPanel(CollectionTest.getInstance().getScenariotest(),CollectionTest.getInstance().getInstancias(),true);
+        EjecutarTestJDialog ejecutarTest = new EjecutarTestJDialog(this,true,listar);
+        ejecutarTest.setLocationRelativeTo(this);
+        ejecutarTest.setVisible(true);
+        ejecutarTest.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    }
+}
+    
 public void importarTestsInstancias(boolean impTest){
     ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,CollectionTest.getInstance(),impTest);
     abrirTests.setLocationRelativeTo(this);
@@ -657,6 +692,7 @@ public void inicializarContadores(){
     private javax.swing.JMenuItem nuevoTestSatMenuItem;
     private javax.swing.JMenuItem nuevoTestSparqlMenuItem;
     private javax.swing.JMenuItem salirMenuItem;
+    private javax.swing.JMenuItem selecTestMenuItem;
     private javax.swing.JMenu testsMenu;
     private javax.swing.JMenuItem verInstanciasMenuItem;
     private javax.swing.JMenuItem verTestsMenuItem;
