@@ -10,7 +10,6 @@ import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
-import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import java.util.List;
@@ -25,7 +24,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,testYaExiste,sinConsultas,
             ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
-    private JFrame frame;
     private ScenarioTest scenario,scenarioAEditar;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
@@ -48,7 +46,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         testDescTextArea.setWrapStyleWord(true);
         resultTextArea.setLineWrap(true);
         resultTextArea.setWrapStyleWord(true);
-        frame = new JFrame();
         List<SparqlQueryOntology> lista = s.getSparqlQuerys();
         if(lista.size()>0){
             for(int i=0; i<lista.size();i++){
@@ -426,7 +423,7 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     inicializarVariables();
     if(listaDeConsultas.size()==0 || (this.getSPARQLQuery().equals("") && this.getResultTextArea().equals(""))){
-        JOptionPane.showMessageDialog(this.getParent(),"No hay ninguna consulta que borrar",
+        JOptionPane.showMessageDialog(this,"No hay ninguna consulta que borrar",
         "Warning Message",JOptionPane.WARNING_MESSAGE);
     }else if(listaDeConsultas.size()==1){
         this.prepararNuevaConsultaVacia();
@@ -459,7 +456,7 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN FIRST:event_formatosPermitidosActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(frame,true,5);
+    FormatTestsJDialog format = new FormatTestsJDialog(null,true,5);
     format.setLocationRelativeTo(this);
     format.setModal(false);
     format.setVisible(true);
@@ -467,7 +464,8 @@ private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());                                                       
+    addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
+    addInst.setLocationRelativeTo(this);
     addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     addInst.setVisible(true);
 }//GEN-LAST:event_asociarInstanciasButtonActionPerformed
@@ -479,7 +477,8 @@ private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
+            addInst.setLocationRelativeTo(this);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -493,7 +492,8 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
+            addInst.setLocationRelativeTo(this);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -507,7 +507,8 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(frame,true,this.getScenario());
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
+            addInst.setLocationRelativeTo(this);
             addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             addInst.setVisible(true);
         }
@@ -521,20 +522,20 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             if((this.getScenarioAEditar() != null) && (scenario.equals(this.getScenarioAEditar())==false)
                         && (this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre()))){
                 Object[] options = {"Sobreescribir", "Cancelar"};
-                int n = JOptionPane.showOptionDialog(frame, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
+                int n = JOptionPane.showOptionDialog(this, "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
                     saveTest.replaceScenarioLocally(scenario);
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestSparqlGuardado(true);
-                    JOptionPane.showMessageDialog(this.getParent(),"El test ha sido sobreescrito",
+                    JOptionPane.showMessageDialog(this,"El test ha sido sobreescrito",
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
                 }
             }else{
                 saveTest.saveTestInMemory(this.getScenario());
                 controlador.setTestSparqlGuardado(true);
-                JOptionPane.showMessageDialog(this.getParent(),"No se han producido cambios en el test",
+                JOptionPane.showMessageDialog(this,"No se han producido cambios en el test",
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }
         }
@@ -547,7 +548,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(this.getParent(),"El test ha sido guardado",
+            JOptionPane.showMessageDialog(this,"El test ha sido guardado",
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
         if(ejecutar==true){
@@ -677,11 +678,11 @@ public void prepararGuardar(){
                 scenario.setSparqlQuerys(querys); 
             }
         }else if(testSinNombre==true){
-                JOptionPane.showMessageDialog(this.getParent(),"El nombre del test es obligatorio",
+                JOptionPane.showMessageDialog(this,"El nombre del test es obligatorio",
                 "Warning Message",JOptionPane.WARNING_MESSAGE);
                 continuar=false;
         }else if(listaDeConsultas.size()==0 && testSinNombre==false){
-            JOptionPane.showMessageDialog(this.getParent(),"Al menos debe introducir una consulta " +
+            JOptionPane.showMessageDialog(this,"Al menos debe introducir una consulta " +
             "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
             continuar=false;
         }
@@ -698,7 +699,7 @@ public boolean testVacio(String nombre){
 
 public boolean preguntarSiContinuarSinInstancias(ScenarioTest scen){
     if(tieneInstanciasAsociadas(scen)==false){
-        int n = JOptionPane.showConfirmDialog(frame, "El test no tiene instancias asociadas. " +
+        int n = JOptionPane.showConfirmDialog(this, "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
             continuarSinInstancias = false;
