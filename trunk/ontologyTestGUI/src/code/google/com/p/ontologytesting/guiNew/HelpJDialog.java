@@ -16,6 +16,7 @@ public class HelpJDialog extends javax.swing.JDialog {
     public HelpJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setModal(true);
         String help = generarTextoAyuda();
         helpEditorPane.setContentType("text/html");
         helpEditorPane.setText(help);

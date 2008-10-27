@@ -18,6 +18,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     public FormatTestsJDialog(java.awt.Frame parent, boolean modal, int tab) {
         super(parent, modal);
         initComponents();
+        this.setModal(true);
         String formato="";
         descripcionEditorPane.setContentType("text/html");
         if(tab==0){
@@ -35,7 +36,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
         }
         descripcionEditorPane.setText(formato);
         descripcionEditorPane.setEditable(false);
-        this.setTitle("Formatos Permitidos");
+        this.setTitle("Formatos de Tests Permitidos");
     }
 
     private String generarFormatoPermitidoInstanciacion(){
