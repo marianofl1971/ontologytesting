@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
