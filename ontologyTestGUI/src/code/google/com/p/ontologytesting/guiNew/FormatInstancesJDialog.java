@@ -16,6 +16,7 @@ public class FormatInstancesJDialog extends javax.swing.JDialog {
     public FormatInstancesJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setModal(true);
         String formato="";
         instancesFormatEditorPane.setContentType("text/html");
         formato = generarFormatoPermitidoInstancias();

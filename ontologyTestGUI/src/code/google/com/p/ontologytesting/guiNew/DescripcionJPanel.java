@@ -89,9 +89,9 @@ public class DescripcionJPanel extends javax.swing.JPanel {
 
 private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
 // TODO add your handling code here:
-    /*FormatTestsJDialog format = new FormatTestsJDialog(frame,true);
-    format.setModal(false);
-    format.setVisible(true);*/
+    FormatTestsJDialog format = new FormatTestsJDialog(MainApplicationJFrame.getInstance(),true,ControladorTests.getInstance().testSeleccionado());
+    format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+    format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
 
 public boolean testSinNombre(){

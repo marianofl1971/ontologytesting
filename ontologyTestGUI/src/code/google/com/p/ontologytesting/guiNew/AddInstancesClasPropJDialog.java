@@ -17,7 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.util.List;
 import java.util.ListIterator;
 import javax.swing.WindowConstants;
 
@@ -27,7 +26,6 @@ import javax.swing.WindowConstants;
  */
 public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
 
-    private JFrame frame;
     private AddComentJDialog commentPane;
     private ArrayList<ClassInstances> clasInst;
     private ArrayList<PropertyInstances> propInst;
@@ -58,7 +56,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         int contI=0,contP=0;
-        frame = new JFrame();
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
@@ -544,8 +541,8 @@ private void instancesTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//G
 
 private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
 // TODO add your handling code here:
-    FormatInstancesJDialog format = new FormatInstancesJDialog(frame,true);
-    format.setModal(false);
+    FormatInstancesJDialog format = new FormatInstancesJDialog(MainApplicationJFrame.getInstance(),true);
+    format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
 

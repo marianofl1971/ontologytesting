@@ -312,12 +312,17 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
         menuBar.add(ejecutarMenu);
 
-        helpMenu.setText("Help");
+        helpMenu.setText("Ayuda");
 
-        contentsMenuItem.setText("Contents");
+        contentsMenuItem.setText("Contenidos");
+        contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contentsMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(contentsMenuItem);
 
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("Acerca de");
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -568,7 +573,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTestMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getScenariotest().size()==0){//GEN-LAST:event_selecTestMenuItemActionPerformed
-        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
+            JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
         ListarTestsInstanciasJPanel listar = new ListarTestsInstanciasJPanel(CollectionTest.getInstance().getScenariotest(),CollectionTest.getInstance().getInstancias(),true);
@@ -577,6 +582,13 @@ private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
         ejecutarTest.setVisible(true);
         ejecutarTest.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
+}
+
+private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
+// TODO add your handling code here:
+    HelpJDialog help = new HelpJDialog(this,true);//GEN-LAST:event_contentsMenuItemActionPerformed
+    help.setLocationRelativeTo(this);
+    help.setVisible(true);
 }
     
 public void importarTestsInstancias(boolean impTest){
