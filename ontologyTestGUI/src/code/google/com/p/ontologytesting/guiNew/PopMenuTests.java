@@ -31,7 +31,14 @@ public class PopMenuTests implements ActionListener{
         if(source.getText().equals("Editar")){   
             menu.editarTest(scenario);
         }else if(source.getText().equals("Ejecutar")){
-            menu.ejecutarUnTest(scenario);
+            boolean res = menu.ejecutarUnTest(scenario);
+            if(res==true){
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
         }else if(source.getText().equals("Ver")){
             SeeTestJDialog seeTestCompleted = menu.verTest(scenario);
             seeTestCompleted.setVisible(true);

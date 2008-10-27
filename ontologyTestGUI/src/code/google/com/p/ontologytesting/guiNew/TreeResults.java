@@ -29,14 +29,14 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 
 public class TreeResults extends JPanel {
     
-    private JEditorPane htmlPane;
+    private JEditorPane editor = new JEditorPane();
     private static boolean DEBUG = false;
     private DefaultMutableTreeNode inst,ret,clas,sat,real,sparql;
     private DefaultMutableTreeNode inst_hijo,ret_hijo,clas_hijo, sat_hijo,real_hijo,sparql_hijo;
     private static String testSeleccionado;
     private JScrollPane resultsView,treeView;
     private ListarTestsJPanel listT;
-    private String resultado="";
+    //private StringBuffer resultado = new StringBuffer();
 
     public TreeResults(final OntologyTestResult testresult) {
 
@@ -56,7 +56,7 @@ public class TreeResults extends JPanel {
                     String test = (String) nodeInfo;
                     int size = test.length();
                     test = test.substring(0,size-9);
-                    displaySimpleTest(test,testresult);
+                    editor = displaySimpleTest(test,testresult);
                     setTestSeleccionado(test);
                 } else {
                 }
@@ -88,18 +88,18 @@ public class TreeResults extends JPanel {
         });
 
         treeView = new JScrollPane(tree);
-        htmlPane = new JEditorPane();
-        htmlPane.setEditable(false);
-        resultsView = new JScrollPane(htmlPane);
+        editor.setEditable(false);
+        resultsView = new JScrollPane(editor);
 
         ListAndResultsJPanel listAndRes = ListAndResultsJPanel.getInstance();
         listAndRes.mostrarResultado(resultsView);
         listT.aniadirTreeResult(treeView);
     }
 
-    private void displaySimpleTest(String test, OntologyTestResult testresult) {
+    private JEditorPane displaySimpleTest(String test, OntologyTestResult testresult) {
         
-        htmlPane.setContentType("text/html");
+        StringBuffer resultado = new StringBuffer();
+        editor.setContentType("text/html");
         ListIterator liFailures,liSparql,liFailuresPassed,liSparqlPassed;
         int var=0;
         List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
@@ -119,10 +119,10 @@ public class TreeResults extends JPanel {
                 OntologyTestFailure ontoFailure = (OntologyTestFailure) liFailures.next();
                 if(ontoFailure.getTestNameUsuario().equals(test)){
                     if(var==0){
-                        resultado = "<html>Las pruebas que han <b>fallado</b> en este test son: <br><br>";
+                        resultado.append("<html>Las pruebas que han <b>fallado</b> en este test son: <br><br>");
                     }
                     var=1;
-                    resultado = resultado + ontoFailure.showSimpleTest() + "<br><br>";
+                    resultado.append(ontoFailure.showSimpleTest()).append("<br><br>");
                 }
         
             }
@@ -134,10 +134,10 @@ public class TreeResults extends JPanel {
                 OntologyTestPassed ontoPassed = (OntologyTestPassed) liFailuresPassed.next();
                 if(ontoPassed.getTestNameUsuario().equals(test)){
                     if(var==0){
-                        resultado = resultado + "<html>Las pruebas que han <b>pasado</b> en este test son: <br><br>";
+                        resultado.append("<html>Las pruebas que han <b>pasado</b> en este test son: <br><br>");
                     }
                     var=1;
-                    resultado = resultado + ontoPassed.showSimpleTest() + "<br><br>";
+                    resultado.append(ontoPassed.showSimpleTest()).append("<br><br>");
                 }
         
             }
@@ -149,10 +149,10 @@ public class TreeResults extends JPanel {
                 OntologyTestFailure ontoFailure = (OntologyTestFailure) liSparql.next();
                 if(ontoFailure.getTestNameUsuario().equals(test)){
                     if(var==0){
-                        resultado = "<html>Las pruebas que han <b>fallado</b> en este test son: <br><br>";
+                        resultado.append("<html>Las pruebas que han <b>fallado</b> en este test son: <br><br>");
                     } 
                     var=1;
-                    resultado = resultado + ontoFailure.showSparqlTest() + "<br><br>";
+                    resultado.append(ontoFailure.showSparqlTest()).append("<br><br>");
                  }
             }
           }
@@ -163,15 +163,16 @@ public class TreeResults extends JPanel {
                 OntologyTestPassed ontoPassed = (OntologyTestPassed) liSparqlPassed.next();
                 if(ontoPassed.getTestNameUsuario().equals(test)){
                     if(var==0){
-                        resultado = resultado + "<html>Las pruebas que han <b>pasado</b> en este test son: <br><br>";
+                        resultado.append("<html>Las pruebas que han <b>pasado</b> en este test son: <br><br>");
                     }
                     var=1;
-                    resultado = resultado + ontoPassed.showSparqlTest() + "<br><br>";
+                    resultado.append(ontoPassed.showSparqlTest()).append("<br><br>");
                  }
             }
           }
         
-        htmlPane.setText(resultado+"</html>");  
+        editor.setText(resultado.toString()+"</html>");  
+        return editor;
     }
     
     private void createNodes(DefaultMutableTreeNode top, OntologyTestResult testresult) {

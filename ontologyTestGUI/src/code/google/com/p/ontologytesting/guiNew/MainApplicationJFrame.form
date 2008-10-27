@@ -193,6 +193,14 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="selecTestMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seleccionar test"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selecTestMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ejecutarTodosMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Todos los Tests"/>
