@@ -32,7 +32,6 @@ public class PopMenuTests implements ActionListener{
         ControladorTests controlador = ControladorTests.getInstance();
         ScenarioTest scenario = utils.buscarScenario(collection.getScenariotest(), this.getTestSelec());
         if(source.getText().equals("Editar")){   
-            controlador.prepararTest(scenario.getTipoTest().getTipo());
             if(controlador.algunTestSinGuardar()==false){
                 menu.editarTest(scenario);
                 controlador.prepararTest(scenario.getTipoTest().getTipo());
@@ -42,8 +41,8 @@ public class PopMenuTests implements ActionListener{
                 if (n == JOptionPane.YES_OPTION){
                     saveTest.replaceScenarioLocally(scenario);
                 }
-                menu.editarTest(scenario);
                 controlador.prepararTest(scenario.getTipoTest().getTipo());
+                menu.editarTest(scenario);
             }
         }else if(source.getText().equals("Ejecutar")){
             boolean res = menu.ejecutarUnTest(scenario);
