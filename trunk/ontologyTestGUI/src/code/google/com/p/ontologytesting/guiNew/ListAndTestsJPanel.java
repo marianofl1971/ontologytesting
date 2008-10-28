@@ -20,7 +20,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private ListAndTestsJPanel() {
         initComponents();
         this.listTestPanel.setLayout(new BorderLayout());
-        this.testsPanel.setLayout(new BorderLayout());
+        this.testsPanel.setLayout(new FlowLayout());
         this.splitPane.setDividerLocation(235);
     }
  
@@ -39,7 +39,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         if(this.testsPanel.getComponentCount()>0){
             this.testsPanel.remove(0);
         }
-        this.testsPanel.add(panel,BorderLayout.CENTER); 
+        this.testsPanel.add(panel); 
         this.validate();
     }
     
