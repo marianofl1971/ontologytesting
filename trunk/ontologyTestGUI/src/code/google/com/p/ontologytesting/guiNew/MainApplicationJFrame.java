@@ -16,6 +16,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -36,6 +37,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private static MainApplicationJFrame mainApp = null;
     private JFileChooser filechooser;
     private XMLDecoder decoder;
+    private boolean proyectoGuardado=false;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -355,6 +357,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
             if(guardado==true){
                 JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+                this.setProyectoGuardado(true);
             }else{
                 JOptionPane.showMessageDialog(this,"Error. Proyecto no guardado.",                                                  
                 "Error Message",JOptionPane.ERROR_MESSAGE); 
@@ -369,12 +372,12 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
-    collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
-    /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
+    //collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){*/
+    if(newProject.getProyectoCreado()==true){
         this.inicializarContadores();
         guardarProyectoComoMenuItem.setEnabled(true);
         guardarProyectoMenuItem.setEnabled(true);
@@ -383,7 +386,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
-    //}
+    }
 
 }
 
@@ -517,7 +520,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
-    try {//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
+    try {
         boolean guardado = saveTest.saveProject(false);
         if(guardado==true){
             JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
@@ -528,11 +531,11 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
         }
     } catch (FileNotFoundException ex) {
     }
-}
+}//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
 // TODO add your handling code here:
-    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(this, true);//GEN-LAST:event_abrirProyectoMenuItemActionPerformed
+    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(this, true);
     String path="";
     filechooser = new JFileChooser("");
     filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -553,8 +556,13 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
           abrirP.setLocationRelativeTo(this);
           abrirP.setVisible(true);
       } catch (FileNotFoundException ex) {
+          JOptionPane.showMessageDialog(this,"Error. No se encontró el archivo especificado.",                                                  
+          "Error Message",JOptionPane.ERROR_MESSAGE); 
       }catch (ClassCastException ex){
           JOptionPane.showMessageDialog(this,"Error. Proyecto no válido.",                                                  
+          "Error Message",JOptionPane.ERROR_MESSAGE); 
+      }catch(NoSuchElementException ex){
+            JOptionPane.showMessageDialog(this,"Error. Proyecto no válido.",                                                  
           "Error Message",JOptionPane.ERROR_MESSAGE); 
       }
     }   
@@ -566,13 +574,15 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         testsMenu.setEnabled(true);
         ejecutarMenu.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+        ControladorTests.getInstance().inicializarGuardados();
+        ControladorTests.getInstance().inicializarSeleccionados();
         this.validate();
     }
-}
+}//GEN-LAST:event_abrirProyectoMenuItemActionPerformed
 
 private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTestMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getScenariotest().size()==0){//GEN-LAST:event_selecTestMenuItemActionPerformed
+    if(CollectionTest.getInstance().getScenariotest().size()==0){
             JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE); 
     }else{
@@ -582,14 +592,14 @@ private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {/
         ejecutarTest.setVisible(true);
         ejecutarTest.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
     }
-}
+}//GEN-LAST:event_selecTestMenuItemActionPerformed
 
 private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contentsMenuItemActionPerformed
 // TODO add your handling code here:
-    HelpJDialog help = new HelpJDialog(this,true);//GEN-LAST:event_contentsMenuItemActionPerformed
+    HelpJDialog help = new HelpJDialog(this,true);
     help.setLocationRelativeTo(this);
     help.setVisible(true);
-}
+}//GEN-LAST:event_contentsMenuItemActionPerformed
     
 public void importarTestsInstancias(boolean impTest){
     ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,CollectionTest.getInstance(),impTest);
@@ -675,6 +685,13 @@ public void inicializarContadores(){
         this.nombreProyecto = nombreProyecto;
     }
 
+    public boolean isProyectoGuardado() {
+        return proyectoGuardado;
+    }
+
+    public void setProyectoGuardado(boolean proyectoGuardado) {
+        this.proyectoGuardado = proyectoGuardado;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
