@@ -369,12 +369,12 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
     collection = CollectionTest.getInstance();
-    //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    //collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
-    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+    collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
+    collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
+    /*NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){
+    if(newProject.getProyectoCreado()==true){*/
         this.inicializarContadores();
         guardarProyectoComoMenuItem.setEnabled(true);
         guardarProyectoMenuItem.setEnabled(true);
@@ -383,7 +383,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
-    }
+    //}
 
 }
 
