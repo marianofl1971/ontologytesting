@@ -19,28 +19,59 @@ public class ValidarConsultas {
     private List listInst = new ArrayList();
     private List listRet = new ArrayList();
     private List listReal = new ArrayList();
+    private AniadirPanelDeAviso panelAviso;
     
-    public void formatoIncorrecto(JPanel panel,int tab){
-        ValidarConsultas validar = new ValidarConsultas();
-        if(tab==0){
-            if(validar.comprovarErrorEnAyudaReal(panel)==false){
+    public void formatoIncorrecto(JPanel panel,int tab,int tipoTest){
+        if(tipoTest==0){
+            if(tab==0){
+                if(this.comprovarErrorEnAyudaInst(panel)==false){
+                    mostrarError();
+                }
+            }else{
+                if(this.comprovarErrorQuerysInst(panel)==false){
+                    mostrarError();
+                }
             }
-        }else{
-            if(validar.comprovarErrorQuerysReal(panel)==false){
+        }else if(tipoTest==1){
+            if(tab==0){
+                if(this.comprovarErrorEnAyudaRet(panel)==false){
+                    mostrarError();
+                }
+            }else{
+                if(this.comprovarErrorQuerysRet(panel)==false){
+                    mostrarError();
+                }
+            }
+        }else if(tipoTest==2){
+            if(tab==0){
+                if(this.comprovarErrorEnAyudaReal(panel)==false){
+                    mostrarError();
+                }
+            }else{
+                if(this.comprovarErrorQuerysReal(panel)==false){
+                    mostrarError();
+                }
             }
         }
     }
     
+    public void mostrarError(){
+        panelAviso = new AniadirPanelDeAviso();
+        panelAviso.warningAction("El formato de los datos marcados en rojo no es correcto." +
+        "\nPor favor, consulte la ayuda acerca del formato " +
+        "de las consultas y el resultado", MainApplicationJFrame.getInstance());
+    }
+    
     public boolean comprovarErrorEnAyudaInst(JPanel panelAyudaInst){
-        int var=0;
+        int error=0;
         for(int j=1;j<getListInst().size();j++){
             if(getListInst().get(j).equals(1)){
                 TestInstancesTFJPanel test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
                 test.getQueryTextField().setForeground(Color.RED);
-                var=1;
+                error=1;
             }
         }
-        if(var==0){
+        if(error==0){
             return true;
         }else{
             return false;

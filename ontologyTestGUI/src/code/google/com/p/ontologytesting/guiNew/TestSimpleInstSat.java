@@ -46,10 +46,12 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
     private QueryOntology testQuery;
+    private AniadirPanelDeAviso panelAviso;
     
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
         TestInstancesTFJPanel.setContadorInstSat(0);
+        panelAviso = new AniadirPanelDeAviso();
         controlador = ControladorTests.getInstance();
         descripcionJPanel.setLayout(new BorderLayout());
         descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.CENTER);
@@ -380,24 +382,20 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestInstSatGuardado(true);
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido sobreescrito",
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                    panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
             }else{
                 saveTest.saveTestInMemory(scenario);
                 controlador.setTestInstSatGuardado(true);
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se han producido cambios en el test",
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
         }
         if(ejecutar==true){
             boolean res = menu.ejecutarUnTest(this.getScenario());
             if(res==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.errorAction("No se pudo ejecutar el test", MainApplicationJFrame.getInstance());
             }
         }
     }else{ 
@@ -406,17 +404,14 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestInstSatGuardado(true);
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            panelAviso.confirmAction("Test guardado", MainApplicationJFrame.getInstance());
         }
         if(ejecutar==true){
             boolean res = menu.ejecutarUnTest(this.getScenario());
             if(res==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.errorAction("No se pudo ejecutar el test", MainApplicationJFrame.getInstance());
             }
         }
     }
@@ -443,8 +438,6 @@ public void copiarTestAScenarioDesdeAyuda(){
     panelAyudaInst = this.getInstAyudaPanel();
     totalInst = panelAyudaInst.getComponentCount();
     validarTests = new ValidarTests();
-    
-    int cont=0;
     
     inst = new ArrayList();
     this.inst.add(0,0);
@@ -473,7 +466,6 @@ public void copiarTestAScenarioDesdeAyuda(){
                         testQuery = new QueryOntology(query,resExpT,coment);
                         if(validarTests.validarQueryInstSatis(testQuery.getQuery())==true){
                             queryTest.add(testQuery);
-                            cont++;
                             this.inst.add(i, 0);
                             validarConsultas.setListInst(this.inst);
                         }else{
@@ -495,25 +487,8 @@ public void copiarTestAScenarioDesdeAyuda(){
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
         }
-    }else if(testSinNombre==true){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El nombre del test es obligatorio",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);
-            continuar=false;
-    }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
-        "obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(hayUnaConsulta==0 && testSinNombre==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Al menos debe introducir una consulta " +
-        "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
-    }else if(validoInst==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato de " +
-        "los datos marcados en rojo no es correcto." +
-        "\nPor favor, consulte la ayuda acerca del formato " +
-        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        validarConsultas.formatoIncorrecto(panelAyudaInst, this.getTabbedPaneInst());
-        continuar=false;
+    }else {
+        comprobarDatosErroneos(true);
     }
 }
 
@@ -608,23 +583,27 @@ public void copiarTestAScenarioDesdeSinAyuda(){
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
         }
-    }else if(testSinNombre==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El nombre del test es obligatorio",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
-        continuar=false;
+    }else {
+        comprobarDatosErroneos(false);
+    }
+}
+
+public void comprobarDatosErroneos(boolean ayuda){
+    if(testSinNombre==true){
+            panelAviso.warningAction("El nombre del test es obligatorio", MainApplicationJFrame.getInstance());
+            continuar=false;
     }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Ambos campos CONSULTA y RESULTADO ESPERADO son" +
-        "obligatorios","Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(hayUnaConsulta==0 && testSinNombre==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Al menos debe introducir una consulta " +
-        "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("Al menos debe introducir una consulta para guardar el test", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(validoInst==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato de los datos marcados en rojo no es correcto." +
-        "\nPor favor, consulte la ayuda acerca del formato " +
-        "de las consultas y el resultado.","Warning Message",JOptionPane.WARNING_MESSAGE);
-        validarConsultas.formatoIncorrecto(texto, this.getTabbedPaneInst());
+        if(ayuda==true){
+            validarConsultas.formatoIncorrecto(panelAyudaInst, this.getTabbedPaneInst(),0);
+        }else{
+            validarConsultas.formatoIncorrecto(texto, this.getTabbedPaneInst(),0);
+        }
         continuar=false;
     }
 }

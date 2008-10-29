@@ -38,10 +38,12 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private JFileChooser filechooser;
     private XMLDecoder decoder;
     private boolean proyectoGuardado=false;
+    private AniadirPanelDeAviso panelAviso;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
         initComponents();
+        panelAviso = new AniadirPanelDeAviso();
         this.setTitle("EVALUADOR DE ONTOLOGIAS");
         this.setSize(new Dimension(895,720));
         controlador = ControladorTests.getInstance();
@@ -355,15 +357,13 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         try {
             boolean guardado = saveTest.saveProject(true);
             if(guardado==true){
-                JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+                panelAviso.confirmAction("Proyecto guardado", this); 
                 this.setProyectoGuardado(true);
             }else{
-                JOptionPane.showMessageDialog(this,"Error. Proyecto no guardado.",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE); 
+                panelAviso.errorAction("Error. Proyecto no guardado.",this);                                                
             }
-        } catch (FileNotFoundException ex) {
-            
+        }catch (FileNotFoundException ex) {
+            panelAviso.errorAction("Error. No se encontró el archivo especificado.",this);              
         }
         
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
@@ -399,7 +399,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             try{
                 System.exit(0);
             }catch (SecurityException ex){
-                
+                panelAviso.errorAction("Security exception", this);
             }
         } 
 
@@ -450,20 +450,16 @@ private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void editarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getScenariotest().size()==0){
-        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE); 
-    }else{
+    boolean res = listaTestsInstanciasVacia(true); 
+    if(res==true){
         this.editarVerTestsInstancias(true);
     }
 }//GEN-LAST:event_editarTestsMenuItemActionPerformed
 
 private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTestsMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getScenariotest().size()==0){
-        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE); 
-    }else{
+    boolean res = listaTestsInstanciasVacia(true); 
+    if(res==true){
         this.editarVerTestsInstancias(true);
     }
 }//GEN-LAST:event_verTestsMenuItemActionPerformed
@@ -483,20 +479,16 @@ private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEven
 
 private void editarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getInstancias().size()==0){
-        JOptionPane.showMessageDialog(this,"Su lista de instancias está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE); 
-    }else{
+    boolean res = listaTestsInstanciasVacia(false); 
+    if(res==true){
         this.editarVerTestsInstancias(false);
     }
 }//GEN-LAST:event_editarInstanciasMenuItemActionPerformed
 
 private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getInstancias().size()==0){
-        JOptionPane.showMessageDialog(this,"Su lista de instancias está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE); 
-    }else{
+    boolean res = listaTestsInstanciasVacia(false); 
+    if(res==true){
         this.editarVerTestsInstancias(false);
     }
 }//GEN-LAST:event_verInstanciasMenuItemActionPerformed
@@ -506,15 +498,12 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         boolean res = opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
         if(res==false){
-            JOptionPane.showMessageDialog(this,"Error ejecutando los tests",                                                  
-            "Error Message",JOptionPane.ERROR_MESSAGE);
+            panelAviso.errorAction("Error ejecutando los tests.",this);  
         }else{
-            JOptionPane.showMessageDialog(this,"Test ejecutados",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+            panelAviso.confirmAction("Tests ejecutados.", this);
         }
     }else{
-        JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE);
+        panelAviso.errorAction("Su lista de tests está vacía.",this);  
     }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
@@ -523,13 +512,12 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
     try {
         boolean guardado = saveTest.saveProject(false);
         if(guardado==true){
-            JOptionPane.showMessageDialog(this,"Proyecto guardado",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+            panelAviso.confirmAction("Proyecto guardado.", this);
         }else{
-            JOptionPane.showMessageDialog(this,"Error. Proyecto no guardado.",                                                  
-            "Error Message",JOptionPane.ERROR_MESSAGE); 
+            panelAviso.errorAction("Proyecto no guardado.",this);  
         }
     } catch (FileNotFoundException ex) {
+        panelAviso.errorAction("No se encontró el archivo especificado.", this);
     }
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
@@ -556,14 +544,11 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
           abrirP.setLocationRelativeTo(this);
           abrirP.setVisible(true);
       } catch (FileNotFoundException ex) {
-          JOptionPane.showMessageDialog(this,"Error. No se encontró el archivo especificado.",                                                  
-          "Error Message",JOptionPane.ERROR_MESSAGE); 
+          panelAviso.errorAction("No se encontró el archivo especificado.", this);
       }catch (ClassCastException ex){
-          JOptionPane.showMessageDialog(this,"Error. Proyecto no válido.",                                                  
-          "Error Message",JOptionPane.ERROR_MESSAGE); 
+          panelAviso.errorAction("Proyecto no válido.", this);
       }catch(NoSuchElementException ex){
-            JOptionPane.showMessageDialog(this,"Error. Proyecto no válido.",                                                  
-          "Error Message",JOptionPane.ERROR_MESSAGE); 
+          panelAviso.errorAction("Proyecto no válido.", this);
       }
     }   
     if(abrirP.isProyectoCargado()==true){
@@ -582,10 +567,8 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void selecTestMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecTestMenuItemActionPerformed
 // TODO add your handling code here:
-    if(CollectionTest.getInstance().getScenariotest().size()==0){
-            JOptionPane.showMessageDialog(this,"Su lista de tests está vacía",                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE); 
-    }else{
+    boolean res = listaTestsInstanciasVacia(true); 
+    if(res==true){
         ListarTestsInstanciasJPanel listar = new ListarTestsInstanciasJPanel(CollectionTest.getInstance().getScenariotest(),CollectionTest.getInstance().getInstancias(),true);
         EjecutarTestJDialog ejecutarTest = new EjecutarTestJDialog(this,true,listar);
         ejecutarTest.setLocationRelativeTo(this);
@@ -602,7 +585,7 @@ private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_contentsMenuItemActionPerformed
     
 public void importarTestsInstancias(boolean impTest){
-    ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,CollectionTest.getInstance(),impTest);
+    ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,impTest);
     abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -614,6 +597,19 @@ public void editarVerTestsInstancias(boolean verEditTest){
     editarVerTestInst.setLocationRelativeTo(this);
     editarVerTestInst.setVisible(true);
     editarVerTestInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+}
+
+public boolean listaTestsInstanciasVacia(boolean test){
+    if(test==true){
+        if(CollectionTest.getInstance().getScenariotest().size()==0){
+            panelAviso.errorAction("Su lista de tests está vacía.",this);  
+        }else return true;
+    }else{
+        if(CollectionTest.getInstance().getInstancias().size()==0){
+            panelAviso.errorAction("Su lista de instancias está vacía.",this);  
+        }else return true;
+    }
+    return false;
 }
 
 public void aniadirNuevoTest(int tipo,ScenarioTest s){

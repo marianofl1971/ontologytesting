@@ -26,7 +26,6 @@ public class SaveTest {
     
     public boolean saveProject(boolean as) throws FileNotFoundException{
         if(as==true){
-            try{
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int seleccion = fileChooser.showSaveDialog(MainApplicationJFrame.getInstance());
@@ -36,10 +35,7 @@ public class SaveTest {
                 e.writeObject(CollectionTest.getInstance());
                 e.close();
                 return true;
-            }
-            }catch (Exception ex){
-                ex.printStackTrace();
-            }
+            } 
         }else{
             //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
             e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
