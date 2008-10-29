@@ -360,10 +360,10 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
                 panelAviso.confirmAction("Proyecto guardado", this); 
                 this.setProyectoGuardado(true);
             }else{
-                panelAviso.errorAction("Error. Proyecto no guardado.",this);                                                
+                panelAviso.errorAction("Error. Proyecto no guardado",this);                                                
             }
         }catch (FileNotFoundException ex) {
-            panelAviso.errorAction("Error. No se encontró el archivo especificado.",this);              
+            panelAviso.errorAction("Error. No se encontró el archivo especificado",this);              
         }
         
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
@@ -498,12 +498,12 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         boolean res = opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
         if(res==false){
-            panelAviso.errorAction("Error ejecutando los tests.",this);  
+            panelAviso.errorAction("Error ejecutando los tests",this);  
         }else{
-            panelAviso.confirmAction("Tests ejecutados.", this);
+            panelAviso.confirmAction("Tests ejecutados", this);
         }
     }else{
-        panelAviso.errorAction("Su lista de tests está vacía.",this);  
+        panelAviso.errorAction("Su lista de tests está vacía",this);  
     }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
@@ -512,12 +512,12 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
     try {
         boolean guardado = saveTest.saveProject(false);
         if(guardado==true){
-            panelAviso.confirmAction("Proyecto guardado.", this);
+            panelAviso.confirmAction("Proyecto guardado", this);
         }else{
-            panelAviso.errorAction("Proyecto no guardado.",this);  
+            panelAviso.errorAction("Proyecto no guardado",this);  
         }
     } catch (FileNotFoundException ex) {
-        panelAviso.errorAction("No se encontró el archivo especificado.", this);
+        panelAviso.errorAction("No se encontró el archivo especificado", this);
     }
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
@@ -543,12 +543,12 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
           abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
           abrirP.setLocationRelativeTo(this);
           abrirP.setVisible(true);
-      } catch (FileNotFoundException ex) {
-          panelAviso.errorAction("No se encontró el archivo especificado.", this);
-      }catch (ClassCastException ex){
-          panelAviso.errorAction("Proyecto no válido.", this);
+      } catch(FileNotFoundException ex) {
+          panelAviso.errorAction("No se encontró el archivo especificado", this);
+      }catch(ClassCastException ex){
+          panelAviso.errorAction("Proyecto no válido", this);
       }catch(NoSuchElementException ex){
-          panelAviso.errorAction("Proyecto no válido.", this);
+          panelAviso.errorAction("Proyecto no válido", this);
       }
     }   
     if(abrirP.isProyectoCargado()==true){
@@ -602,11 +602,11 @@ public void editarVerTestsInstancias(boolean verEditTest){
 public boolean listaTestsInstanciasVacia(boolean test){
     if(test==true){
         if(CollectionTest.getInstance().getScenariotest().size()==0){
-            panelAviso.errorAction("Su lista de tests está vacía.",this);  
+            panelAviso.errorAction("Su lista de tests está vacía",this);  
         }else return true;
     }else{
         if(CollectionTest.getInstance().getInstancias().size()==0){
-            panelAviso.errorAction("Su lista de instancias está vacía.",this);  
+            panelAviso.errorAction("Su lista de instancias está vacía",this);  
         }else return true;
     }
     return false;
@@ -644,12 +644,12 @@ public void aniadirTest(int tipo,ScenarioTest s){
 }
 
 public void inicializarContadores(){
-        CreateInstancesJPanel.setContadorClas(0);
-        CreateInstancesJPanel.setContadorProp(0);
-        TestInstancesQueryJPanel.setContadorReal(0);
-        TestInstancesTFJPanel.setContadorInstSat(0);
-        TestInstancesTextAreaJPanel.setContadorRetClas(0);
-    }
+    CreateInstancesJPanel.setContadorClas(0);
+    CreateInstancesJPanel.setContadorProp(0);
+    TestInstancesQueryJPanel.setContadorReal(0);
+    TestInstancesTFJPanel.setContadorInstSat(0);
+    TestInstancesTextAreaJPanel.setContadorRetClas(0);
+}
 
     /**
     * @param args the command line arguments
