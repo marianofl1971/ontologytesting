@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -43,11 +42,13 @@ public class ImportarTestsJDialog extends javax.swing.JDialog {
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean importarTest=false;
     private SeeTestJDialog verTest = null;
+    private AniadirPanelDeAviso panelAviso;
     
     /** Creates new form AbrirTestsJDialog */
-    public ImportarTestsJDialog(Frame parent, boolean modal,final CollectionTest collection,boolean impTest) {
+    public ImportarTestsJDialog(Frame parent, boolean modal,boolean impTest) {
         super(parent, modal);
         initComponents();
+        panelAviso = new AniadirPanelDeAviso();
         contentPanel.setLayout(new FlowLayout());  
         contentPanel.add(new ListarTestsInstanciasJPanel());
         contentPanel.getParent().validate(); 
@@ -219,11 +220,11 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {
             contentPanel.add(listaFicheros);
             contentPanel.getParent().validate(); 
         }catch(FileNotFoundException e){
-            this.errorAction("No se encontró el archivo especificado");
+            panelAviso.errorAction("No se encontró el archivo especificado",this);
         }catch(ClassCastException e){
-            this.errorAction("Proyecto no válido");
+            panelAviso.errorAction("Proyecto no válido",this);
         }catch(NoSuchElementException e){
-            this.errorAction("Proyecto no válido");
+            panelAviso.errorAction("Proyecto no válido",this);
         }  
     }
 }
@@ -245,14 +246,14 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         }
         if(scenarioSparql.size()>0){
             listT.aniadirTestSparql(scenarioSparql);
-            this.acceptAction("Tests importados");  
+            panelAviso.confirmAction("Tests importados",this);  
             aux=1;
             this.setVisible(false);
         }
         if(scenarioSimple.size()>0){
             listT.aniadirTestSimple(scenarioSimple);
             if(aux==0){
-                this.acceptAction("Tests importados");  
+                panelAviso.confirmAction("Tests importados",this);  
             }
             this.setVisible(false);
         } 
@@ -264,21 +265,11 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 saveTest.saveInstanciasInMemory(instImp.get(i));
             }
             listT.aniadirInstancias(instancias);
-            this.acceptAction("Instancias importadas"); 
+            panelAviso.confirmAction("Instancias importadas",this); 
             this.setVisible(false);
         }
     }
 }
-
-    public void acceptAction(String msg){
-        JOptionPane.showMessageDialog(this,msg,                                                  
-        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    public void errorAction(String msg){
-        JOptionPane.showMessageDialog(this,msg,                                                  
-        "Error Message",JOptionPane.ERROR_MESSAGE);
-    }
 
     private boolean openFile(JTextField textfield){
         String path="";

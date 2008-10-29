@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.guiNew;
 
 import java.awt.FlowLayout;
-import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -19,11 +18,13 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
     private ListarTestsInstanciasJPanel listarTestInst;
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean isTest=false;
+    private AniadirPanelDeAviso panelAviso;
     
     /** Creates new form EditarVerTestInstanciasJDialog */
     public EditarVerTestInstanciasJDialog(java.awt.Frame parent, boolean modal, ListarTestsInstanciasJPanel listarTestInst,boolean isTest) {
         super(parent, modal);
         initComponents();
+        panelAviso = new AniadirPanelDeAviso();
         this.setListarTestInst(listarTestInst);
         this.setIsTest(isTest);
         this.setLocationRelativeTo(this.getParent());
@@ -147,8 +148,7 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     if(this.getIsTest()==true){//GEN-LAST:event_editarButtonActionPerformed
         opMenu.editarTest(this.getListarTestInst().getScenarioSelect());    
-        JOptionPane.showMessageDialog(this,"Test cargado para su edición",                                                  
-        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        panelAviso.confirmAction("Test cargado para su edición", this);
         this.setVisible(false);
     }else{
         AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(null, true, this.getListarTestInst().getInstanciaSelect());

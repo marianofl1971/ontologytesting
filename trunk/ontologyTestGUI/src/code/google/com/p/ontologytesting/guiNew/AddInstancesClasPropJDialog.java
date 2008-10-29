@@ -9,7 +9,6 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.guiNew.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.ValidarTests;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
@@ -914,7 +913,6 @@ void decrementarPosicion(int j,int type){
 }
 
 public void copiarAInstancesTextArea(){
-    String textoClase="",textoProp="";
     StringBuffer bufClase = new StringBuffer();
     StringBuffer bufProp = new StringBuffer();
     conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);

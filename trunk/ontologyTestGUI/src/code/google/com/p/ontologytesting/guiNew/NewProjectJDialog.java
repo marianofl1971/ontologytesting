@@ -10,7 +10,6 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.awt.BorderLayout;
 import java.io.File;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,11 +23,13 @@ public class NewProjectJDialog extends javax.swing.JDialog {
     private JenaInterface jenaInterface;
     private Jena jena;
     private boolean proyectoCreado=false;
+    private AniadirPanelDeAviso panelAviso;
     
     /** Creates new form NewProjectJDialog */
     public NewProjectJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        panelAviso = new AniadirPanelDeAviso();
         this.setTitle("Nuevo Proyecto");
         project = new ProjectNameSituJPanel();
         ontology = new OntologyNameSituJPanel();
@@ -154,8 +155,7 @@ private void sigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     ubicProy = project.getUbicacionProyecto();
     nombreProy = project.getNombreProyectoTextField();
     if(nombreProy.equals("") || (ubicProy.equals(""))){
-           JOptionPane.showMessageDialog(this,"Todos los campos son obligatorios",                                                  
-            "Warning Message",JOptionPane.WARNING_MESSAGE);  
+        panelAviso.warningAction("Todos los campos son obligatorios", this);
     }else{
         project.setNombreP(nombreProy);
         project.setUbicP(ubicProy);
@@ -172,8 +172,7 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     ubicOnto = ontology.getUbicacionOnto();
     namespaceOnto = ontology.getNamespaceOntoTextField();
     if(ubicOnto.equals("") || namespaceOnto.equals("")){
-        JOptionPane.showMessageDialog(this,"Todos los campos son obligatorios",                                                  
-        "Warning Message",JOptionPane.WARNING_MESSAGE);  
+        panelAviso.warningAction("Todos los campos son obligatorios", this);
     }else{
         if(!namespaceOnto.endsWith("#")){
             namespaceOnto = namespaceOnto.concat("#");
@@ -190,12 +189,10 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
                 MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
                 setProyectoCreado(true);
-                JOptionPane.showMessageDialog(this,"Proyecto Creado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+                panelAviso.confirmAction("Proyecto Creado", this);
                 this.setVisible(false);
             }else{
-                JOptionPane.showMessageDialog(this,"No se pudo crear el directorio para el proyecto",                                                  
-                "Warning Message",JOptionPane.WARNING_MESSAGE); 
+                panelAviso.errorAction("No se puedo crear un directorio para el proyecto", this);
             }
         }catch(ExceptionReadOntology ex){
             throw new ExceptionReadOntology("No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +

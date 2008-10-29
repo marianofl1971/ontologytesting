@@ -11,8 +11,6 @@ import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntolog
 import code.google.com.p.ontologytesting.model.jenainterfaz.Jena;
 import code.google.com.p.ontologytesting.model.jenainterfaz.JenaInterface;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -225,6 +223,15 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         this.ubicacionFisicaTextField.setText(ubicacionFisicaTextField);
     }
     
+    public boolean isProyectoCargado() {
+        return proyectoCargado;
+    }
+
+    public void setProyectoCargado(boolean proyectoCargado) {
+        this.proyectoCargado = proyectoCargado;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;
     private javax.swing.JButton cancelButton;
@@ -237,13 +244,5 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JTextField namespaceTextField;
     private javax.swing.JTextField ubicacionFisicaTextField;
     // End of variables declaration//GEN-END:variables
-
-    public boolean isProyectoCargado() {
-        return proyectoCargado;
-    }
-
-    public void setProyectoCargado(boolean proyectoCargado) {
-        this.proyectoCargado = proyectoCargado;
-    }
 
 }

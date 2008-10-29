@@ -9,7 +9,6 @@ package code.google.com.p.ontologytesting.guiNew;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import code.google.com.p.ontologytesting.model.ValidarTests;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -34,9 +33,11 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ControladorTests controlador;
     private Utils utils;
     private OpcionesMenu menu;
+    private AniadirPanelDeAviso panelAviso;
     
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
+        panelAviso = new AniadirPanelDeAviso();
         controlador = ControladorTests.getInstance();
         listaDeConsultas = new ArrayList<SparqlQueryOntology>();
         sparqlTextArea.setLineWrap(true);
@@ -329,8 +330,7 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
                 antQueryButton.setEnabled(true);
             }
        }else if(resultValido==false){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato del resultado no es valido",
-            "Warning Message",JOptionPane.WARNING_MESSAGE);
+            panelAviso.warningAction("El formato del resultado no es válido", MainApplicationJFrame.getInstance());
             continuar=false;
        }
     }else{
@@ -528,24 +528,20 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                     setScenarioAEditar(new ScenarioTest(scenario));
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestSparqlGuardado(true);
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido sobreescrito",
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+                    panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
             }else{
                 saveTest.saveTestInMemory(this.getScenario());
                 controlador.setTestSparqlGuardado(true);
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se han producido cambios en el test",
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
         }
         if(ejecutar==true){
             boolean res = menu.ejecutarUnTest(this.getScenario());
             if(res==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.errorAction("No se pudo ejecutar el test", MainApplicationJFrame.getInstance());
             }
         }
      }else{
@@ -554,17 +550,14 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             setScenarioAEditar(new ScenarioTest(scenario));
             setScenario(new ScenarioTest(scenario));
             controlador.setTestSparqlGuardado(true);
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El test ha sido guardado",
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            panelAviso.confirmAction("El test ha sido guardado", MainApplicationJFrame.getInstance());
         }
         if(ejecutar==true){
             boolean res = menu.ejecutarUnTest(this.getScenario());
             if(res==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.errorAction("No se pudo ejecutar el test", MainApplicationJFrame.getInstance());
             }
         }
     }  
@@ -606,24 +599,19 @@ public boolean consultaOK(String query, String result){
     if(resultValido==true && ambosNecesarios==false && sinConsultas==false){
         continuar=true;
     }else if(sinConsultas==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Debe introducir alguna consulta",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("Debe introducir alguna consulta", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(ambosNecesarios==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("Ambos campos CONSULTA y RESULTADO ESPERADO son obligatorios", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(queryValida==false && resultValido==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La consulta introducida y el resultado no son validos",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("La consulta introducida y el resultado no son válidos", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(queryValida==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La consulta introducida no es valida",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("La consulta introducida no es válida", MainApplicationJFrame.getInstance());
         continuar=false;
     }else if(resultValido==false){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato del resultado no es valido",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("El formato del resultado no es válido", MainApplicationJFrame.getInstance());
         continuar=false;
     }
     return continuar;
@@ -635,8 +623,7 @@ public void validarConsulta(String query){
     try{
         jena.validarSparqlQuery(query); 
     }catch(Exception ex){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La consulta SPARQL no es valida",
-        "Warning Message",JOptionPane.WARNING_MESSAGE);
+        panelAviso.warningAction("La consulta SPARQL no es válida", MainApplicationJFrame.getInstance());
         queryValida=false;
         continuar=false;
     }
@@ -674,8 +661,7 @@ public void prepararGuardar(){
                 if(continuar==true){
                     this.reemplazarConsulta(q, posListQuerysSel);
                 }else{
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El formato del resultado no es valido",
-                    "Warning Message",JOptionPane.WARNING_MESSAGE);
+                    panelAviso.warningAction("El formato del resultado no es válido", MainApplicationJFrame.getInstance());
                     continuar=false;
                 }
             }
@@ -691,12 +677,10 @@ public void prepararGuardar(){
                 scenario.setSparqlQuerys(querys); 
             }
         }else if(testSinNombre==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"El nombre del test es obligatorio",
-                "Warning Message",JOptionPane.WARNING_MESSAGE);
+                panelAviso.warningAction("El nombre del test es obligatorio", MainApplicationJFrame.getInstance());
                 continuar=false;
         }else if(listaDeConsultas.size()==0 && testSinNombre==false){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Al menos debe introducir una consulta " +
-            "para guardar el test.","Warning Message",JOptionPane.WARNING_MESSAGE);
+            panelAviso.warningAction("Al menos debe introducir una consulta para ejecutar el test", MainApplicationJFrame.getInstance());
             continuar=false;
         }
     }

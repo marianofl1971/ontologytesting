@@ -246,7 +246,6 @@ public class JenaImplementation implements Jena{
     public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
 
         String expReg = "([\\?]{1}[a-zA-Z]+)";
-        int cont=0;
         ArrayList<String> sel = new ArrayList<String>();
         Query query = QueryFactory.create(queryStr);
         Element patern = query.getQueryPattern();
@@ -255,7 +254,6 @@ public class JenaImplementation implements Jena{
         for(int i=0; i<consulta.length;i++){
             if(consulta[i].matches(expReg)){
                 sel.add(consulta[i].substring(1));
-                cont++;
             }
         }
 
