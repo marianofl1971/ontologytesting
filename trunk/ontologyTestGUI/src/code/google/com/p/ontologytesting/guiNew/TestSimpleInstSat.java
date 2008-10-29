@@ -372,20 +372,20 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
+            if(this.getScenarioAEditar() != null && this.getScenario().equals(this.getScenarioAEditar())==false
                     && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
-                    saveTest.replaceScenarioLocally(scenario);
-                    setScenarioAEditar(new ScenarioTest(scenario));
-                    setScenario(new ScenarioTest(scenario));
+                    saveTest.replaceScenarioLocally(this.getScenario());
+                    setScenarioAEditar(new ScenarioTest(this.getScenario()));
+                    setScenario(new ScenarioTest(this.getScenario()));
                     controlador.setTestInstSatGuardado(true);
                     panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
             }else{
-                saveTest.saveTestInMemory(scenario);
+                saveTest.saveTestInMemory(this.getScenario());
                 controlador.setTestInstSatGuardado(true);
                 panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
@@ -400,9 +400,9 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }else{ 
         if(guardar==true){
-            saveTest.saveTestInMemory(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
-            setScenario(new ScenarioTest(scenario));
+            saveTest.saveTestInMemory(this.getScenario());
+            setScenarioAEditar(new ScenarioTest(this.getScenario()));
+            setScenario(new ScenarioTest(this.getScenario()));
             controlador.setTestInstSatGuardado(true);
             panelAviso.confirmAction("Test guardado", MainApplicationJFrame.getInstance());
         }
@@ -481,11 +481,11 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        continuarSinInstancias = scenario.preguntarSiContinuarSinInstancias();
+        continuarSinInstancias = this.getScenario().preguntarSiContinuarSinInstancias();
         if(continuarSinInstancias==true){
-            scenario.setDescripcion(descTest);
-            scenario.setNombre(nombreTest);
-            scenario.setQueryTest(queryTest); 
+            this.getScenario().setDescripcion(descTest);
+            this.getScenario().setNombre(nombreTest);
+            this.getScenario().setQueryTest(queryTest); 
         }
     }else {
         comprobarDatosErroneos(true);
@@ -577,11 +577,11 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
         && hayUnaConsulta==1){
-        continuarSinInstancias = scenario.preguntarSiContinuarSinInstancias();
+        continuarSinInstancias = this.getScenario().preguntarSiContinuarSinInstancias();
         if(continuarSinInstancias==true){
-            scenario.setDescripcion(descTest);
-            scenario.setNombre(nombreTest);
-            scenario.setQueryTest(queryTest);
+            this.getScenario().setDescripcion(descTest);
+            this.getScenario().setNombre(nombreTest);
+            this.getScenario().setQueryTest(queryTest);
         }
     }else {
         comprobarDatosErroneos(false);
