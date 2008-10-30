@@ -22,8 +22,7 @@ public class ClassInstances implements Serializable{
     }
     
     public ClassInstances(){
-        this.classInstance="";
-        this.comment="";
+        this("","");
     }
     
     public ClassInstances(String classInstance){

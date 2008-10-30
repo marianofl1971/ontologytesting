@@ -10,7 +10,6 @@ import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.ontology.*;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.shared.JenaException;
 import com.hp.hpl.jena.sparql.syntax.Element;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,10 +82,7 @@ public class JenaImplementation implements Jena{
             model.read(ontologia);  
             model.prepare(); 
             model.validate();
-        }catch(InconsistentOntologyException e){
-            throw new ExceptionReadOntology("La ontologia introducida no es valida." +
-            "\nSolo pueden realizarse tests sobre documentos owl consistentes");
-        }catch(JenaException je){
+        }catch(Exception e){
             throw new ExceptionReadOntology();
         }
     }
@@ -293,11 +289,12 @@ public class JenaImplementation implements Jena{
     }
     
     @Override
-    public void validarSparqlQuery(String query) throws Exception{   
+    public boolean validarSparqlQuery(String query){   
         Query queryStr = QueryFactory.create(query);
         if(!queryStr.isSelectType()){
-            throw new Exception();
+            return false;
         }
+        return true;   
     }
     
     public boolean perteneceALista(String nombre, ArrayList<ExecQuerySparql> lista){

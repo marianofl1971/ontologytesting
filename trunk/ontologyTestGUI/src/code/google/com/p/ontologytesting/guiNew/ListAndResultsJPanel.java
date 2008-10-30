@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.guiNew.menupanels.ListarTestsJPanel;
 import java.awt.*;
 import javax.swing.*;
 

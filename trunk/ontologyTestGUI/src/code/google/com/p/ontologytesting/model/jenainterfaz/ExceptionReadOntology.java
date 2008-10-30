@@ -5,10 +5,6 @@
 
 package code.google.com.p.ontologytesting.model.jenainterfaz;
 
-import java.awt.Component;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -16,7 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class ExceptionReadOntology extends RuntimeException {
 
-    private Component frame = new JFrame();
     /**
      * Creates a new instance of <code>ExceptionReadOntology</code> without detail message.
      */
@@ -29,7 +24,7 @@ public class ExceptionReadOntology extends RuntimeException {
      */
     public ExceptionReadOntology(String msg) {
         super(msg);
-        JOptionPane.showMessageDialog(frame,msg,"Error Message",JOptionPane.ERROR_MESSAGE);
-    }
+        
+    }   
     
 }

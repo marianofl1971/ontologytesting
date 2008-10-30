@@ -7,6 +7,8 @@ package code.google.com.p.ontologytesting.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  *
@@ -63,6 +65,29 @@ public class Instancias implements Serializable{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+    
+    public Instancias buscarInstancias(List<Instancias> inst, String name){
+        for(int i=0;i<inst.size();i++){
+            String n = inst.get(i).getNombre();
+            if(n.equals(name)){
+                return inst.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public boolean instanciaYaExiste(List<Instancias> lista,String nombre){
+        ListIterator li;
+        li = lista.listIterator();
+        while(li.hasNext()){
+            Instancias s = (Instancias) li.next();
+            String n = s.getNombre();
+            if(n.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
     
     @Override
