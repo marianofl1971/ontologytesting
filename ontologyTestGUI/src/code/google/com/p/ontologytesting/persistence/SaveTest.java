@@ -5,37 +5,49 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
-import code.google.com.p.ontologytesting.guiNew.ListarTestsJPanel;
+import code.google.com.p.ontologytesting.guiNew.auxiliarpanels.AbrirProyectoJDialog;
+import code.google.com.p.ontologytesting.guiNew.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.guiNew.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.model.*;
+import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.jenainterfaz.Jena;
+import code.google.com.p.ontologytesting.model.jenainterfaz.JenaInterface;
+import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
-import javax.swing.JFileChooser;
+import java.util.NoSuchElementException;
+import javax.swing.WindowConstants;
 
+    
 /**
  *
  * @author saruskas
  */
 public class SaveTest {
+    private CollectionTest collection;
+    private XMLDecoder decoder;
     private ListarTestsJPanel listInst;
     private XMLEncoder e;
+    private FileChooserSelector utils;
+    private JenaInterface jenaInterface;
+    private Jena jena;
     
     public boolean saveProject(boolean as) throws FileNotFoundException{
+        utils = new FileChooserSelector();
         if(as==true){
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int seleccion = fileChooser.showSaveDialog(MainApplicationJFrame.getInstance());
-            if(seleccion == JFileChooser.APPROVE_OPTION){
-                File fichero = fileChooser.getSelectedFile();
-                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
-                e.writeObject(CollectionTest.getInstance());
-                e.close();
-                return true;
-            } 
+            utils.fileChooser(false, true);
+            File fichero = utils.getFileSelected();
+            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
+            e.writeObject(CollectionTest.getInstance());
+            e.close();
+            return true;
         }else{
             //e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("C:\\Documents and Settings\\sara_garcia\\Escritorio\\Mi Proyecto\\ProyectoPrueba")));
             e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(MainApplicationJFrame.getInstance().getCarpetaProyecto()+"/"+MainApplicationJFrame.getInstance().getNombreProyecto())));
@@ -43,9 +55,54 @@ public class SaveTest {
             e.close();
             return true;
         }
-        return false;
     }
     
+    public void prepareLoadProject(AbrirProyectoJDialog abrirP) throws FileNotFoundException,
+        ClassCastException,NoSuchElementException{
+        utils = new FileChooserSelector();
+        utils.fileChooser(true, true);
+        //try {
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(utils.getPathSelected())));
+            collection = (CollectionTest) decoder.readObject();
+            CollectionTest.getInstance().setInstancias(collection.getInstancias());
+            CollectionTest.getInstance().setNamespace(collection.getNamespace());
+            CollectionTest.getInstance().setOntology(collection.getOntology());
+            CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
+            abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
+            abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
+            abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            abrirP.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+            abrirP.setVisible(true);
+        /*} catch(FileNotFoundException ex) {
+            panelAviso.errorAction("No se encontró el archivo especificado", MainApplicationJFrame.getInstance());
+        }catch(ClassCastException ex){
+            panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
+        }catch(NoSuchElementException ex){
+            panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
+        }*/
+    }  
+    
+    public void finishLoadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology{
+        jenaInterface = new JenaInterface();                                              
+        jena = jenaInterface.getJena();
+        if(!namespaceOnto.endsWith("#")){
+            namespaceOnto = namespaceOnto.concat("#");
+        }
+        CollectionTest.getInstance().setOntology(ubicOnto);
+        CollectionTest.getInstance().setNamespace(namespaceOnto);
+        //try{
+            jena.addReasoner(ubicOnto);
+            CollectionTest.getInstance().setNamespace(namespaceOnto);
+            CollectionTest.getInstance().setOntology(ubicOnto);
+            this.actualizarListaDeInstancias();
+            this.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+            this.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+        /*}catch(ExceptionReadOntology ex){
+            throw new ExceptionReadOntology("No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
+                    "Introduzca una ontologia valida.");
+        }*/
+    }
+
     public void saveInstanciasInMemory(Instancias instancias){
         if(instanciasYaGuardadas(instancias)==false){
             CollectionTest.getInstance().getInstancias().add(instancias);

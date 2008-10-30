@@ -9,7 +9,6 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.guiNew.Utils;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.jenainterfaz.*;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class OntologyTestCase implements OntologyTest{
     private static String muestra="";
     private List<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
     private List<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
-    private Utils util = new Utils();
+    private ScenarioTest s = new ScenarioTest();
     
     public OntologyTestCase(){
     }
@@ -90,7 +89,6 @@ public class OntologyTestCase implements OntologyTest{
         ArrayList<String> obtenido = new ArrayList<String>();
         ListIterator liQuery,liSparql;
         String res[],clasF="",indF="",concepto="",loincluye="";
-        int tipo = scenariotest.getTipoTest().getTipo();
         TipoTest tip = scenariotest.getTipoTest();
         String nombreTestUsuario = scenariotest.getNombre();
         List<QueryOntology> queryTest = scenariotest.getQueryTest();
@@ -111,7 +109,7 @@ public class OntologyTestCase implements OntologyTest{
                 qo = (QueryOntology) liQuery.next();
                 String query = qo.getQuery();
                 resQueryExpected = qo.getResultexpected();
-                if(tipo==0){
+                if(tip.name().equals("INST")){
                     res = query.split(patron3);
                     clasF = res[0];
                     indF = res[1];
@@ -121,7 +119,7 @@ public class OntologyTestCase implements OntologyTest{
                     }else{
                         testresult.addOntologyPassedQuery(nombreTestUsuario, qo, resObtenidoInst, tip);
                     }
-                }else if(tipo==1){
+                }else if(tip.name().equals("RET")){
                     resObtenidoRet = jena.retieval(ns, query);
                     String[] queryMod = resQueryExpected.split(patron4);
                     ArrayList<String> queryRet = new ArrayList<String>();
@@ -142,14 +140,14 @@ public class OntologyTestCase implements OntologyTest{
                             testresult.addOntologyPassedQuery(nombreTestUsuario, qo,resObtenidoRet.toString(), tip);
                         }
                     }
-                }else if(tipo==2){
+                }else if(tip.name().equals("REAL")){
                     resObtenidoRealiz = jena.realization(ns, query);
                     if(!resObtenidoRealiz.equals(resQueryExpected)){
                         testresult.addOntologyFailureQuery(nombreTestUsuario, qo, resObtenidoRealiz,tip);
                     }else{
                         testresult.addOntologyPassedQuery(nombreTestUsuario, qo,resObtenidoRealiz, tip);
                     }
-                }else if(tipo==3){
+                }else if(tip.name().equals("SAT")){
                     res = query.split(patron3);
                     concepto = res[0];
                     loincluye = res[1];
@@ -159,7 +157,7 @@ public class OntologyTestCase implements OntologyTest{
                     }else{
                         testresult.addOntologyPassedQuery(nombreTestUsuario, qo,resObtenidoSatisf, tip);
                     }
-                }else if(tipo==4){
+                }else if(tip.name().equals("CLAS")){
                     String[] queryMod = resQueryExpected.split(patron4);
                     ArrayList<String> querySat = new ArrayList<String>();
                     for(int k=0;k<queryMod.length;k++){
@@ -194,8 +192,8 @@ public class OntologyTestCase implements OntologyTest{
                     String[] select = res[k].trim().split("\\(");
                     execQuery.setNombreSelect(select[0]); 
                     String[] subRes = select[1].split(patron6);
-                    for(int s=0; s<subRes.length;s++){
-                        execQuery.getDatos().add(subRes[s]);
+                    for(int m=0; m<subRes.length;m++){
+                        execQuery.getDatos().add(subRes[m]);
                     }
                     listaResultEsperada.add(execQuery);
                 }
@@ -209,10 +207,10 @@ public class OntologyTestCase implements OntologyTest{
                 int tamBis = listaResultEsperada.get(0).getDatos().size();
                 fallo=0;
                 if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
-                    for(int s=0;s<tam;s++){
+                    for(int n=0;n<tam;n++){
                         for(int t=0; t<listaResultObtenida.size(); t++){
-                            contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(s);
-                            contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(s);
+                            contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(n);
+                            contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(n);
                         } 
                         esperado.add(contenidoEsperado);
                         obtenido.add(contenidoObtenido);
@@ -345,12 +343,12 @@ public class OntologyTestCase implements OntologyTest{
         if(liFailures.hasNext()){
         while(liFailures.hasNext()){
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();
-            if(otf.getTipoTest().getTipo()==0){
+            if(otf.getTipoTest().name().equals("INST")){
                 if(varInst==0){
                     testInstIntro="TESTS DE INSTANCIACION\r\n\r\n";
                     varInst=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxInst==0){
                     actualInst = otf.getTestNameUsuario();
                     testInstIntro = testInstIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -372,12 +370,12 @@ public class OntologyTestCase implements OntologyTest{
                 testInstFailed = testInstFailed + "Prueba realizada: " +otf.getfQuery() +
                         "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
                         otf.getResultQueryObtenido()+"\r\n\r\n";
-            }else if(otf.getTipoTest().getTipo()==1){
+            }else if(otf.getTipoTest().name().equals("RET")){
                 if(varRet==0){
                     testRetIntro="TESTS DE RECUPERACION\r\n\r\n";
                     varRet=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxRet==0){
                     actualRet = otf.getTestNameUsuario();
                     testRetIntro= testRetIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -399,12 +397,12 @@ public class OntologyTestCase implements OntologyTest{
                 testRetFailed = testRetFailed + "Prueba realizada: " +otf.getfQuery() +
                         "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
                         otf.getResultQueryObtenido()+"\r\n";
-            }else if(otf.getTipoTest().getTipo()==2){
+            }else if(otf.getTipoTest().name().equals("REAL")){
                 if(varReal==0){
                     testRealIntro="TESTS DE REALIZACION\r\n\r\n";
                     varReal=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxReal==0){
                     actualReal = otf.getTestNameUsuario();
                     testRealIntro= testRealIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -426,12 +424,12 @@ public class OntologyTestCase implements OntologyTest{
                 testRealFailed = testRealFailed + "Prueba realizada: " +otf.getfQuery() +
                         "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
                         otf.getResultQueryObtenido()+"\r\n";
-            }else if(otf.getTipoTest().getTipo()==3){
+            }else if(otf.getTipoTest().name().equals("SAT")){
                 if(varSat==0){
                     testSatIntro="TESTS DE SATISFACTIBILIDAD\r\n\r\n";
                     varSat=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxSat==0){
                     actualSat = otf.getTestNameUsuario();
                     testSatIntro= testSatIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -453,12 +451,12 @@ public class OntologyTestCase implements OntologyTest{
                 testSatFailed = testSatFailed + "Prueba realizada: " +otf.getfQuery() +
                         "\r\nResultado esperado: "+otf.getfResultExpected()+"\r\nResultado Obtenido: "+
                         otf.getResultQueryObtenido()+"\r\n";
-            }else if(otf.getTipoTest().getTipo()==4){
+            }else if(otf.getTipoTest().name().equals("CLAS")){
                 if(varClas==0){
                     testClasIntro="TESTS DE CLASIFICACION\r\n\r\n";
                     varClas=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxClas==0){
                     actualClas = otf.getTestNameUsuario();
                     testClasIntro= testClasIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+
@@ -523,12 +521,12 @@ public class OntologyTestCase implements OntologyTest{
       if(liSparql.hasNext()){
         while(liSparql.hasNext()){
             OntologyTestFailure otf = (OntologyTestFailure) liSparql.next();
-            if(otf.getTipoTest().getTipo()==5){
+            if(otf.getTipoTest().name().equals("SPARQL")){
                 if(varSparql==0){
                     testSparqlIntro="TESTS SPARQL\r\n\r\n";
                     varSparql=1;
                 }
-                ScenarioTest scenario = util.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
+                ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(),otf.getTestNameUsuario());
                 if(auxSparql==0){
                     actualSparql = otf.getTestNameUsuario();
                     testSparqlIntro= testSparqlIntro + "Nombre del Test: "+otf.getTestNameUsuario()+"\r\n"+"Descripcion: "+

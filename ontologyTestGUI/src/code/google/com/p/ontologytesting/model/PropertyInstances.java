@@ -22,8 +22,7 @@ public class PropertyInstances implements Serializable{
     }
     
     public PropertyInstances(){
-        this.propertyInstance="";
-        this.comment="";
+        this("","");
     }
     
     

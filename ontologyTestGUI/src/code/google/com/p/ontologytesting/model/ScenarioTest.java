@@ -9,11 +9,11 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+import java.util.ListIterator;
+
 /**
  *
  * @author Saruskas
@@ -22,17 +22,7 @@ import javax.swing.JOptionPane;
 public class ScenarioTest implements Serializable{
 
     public enum TipoTest{
-        INST(0),RET(1),REAL(2),SAT(3),CLAS(4),SPARQL(5);
-        private int tipo;
-        TipoTest(int tipo){
-            this.tipo=tipo;
-        }
-        public int getTipo(){
-            return this.tipo;
-        }
-        public void setTipo(int tipo){
-            this.tipo=tipo;
-        }
+        INST,RET,REAL,SAT,CLAS,SPARQL;
     }
     private String nombre="";
     private String descripcion="";
@@ -80,19 +70,27 @@ public class ScenarioTest implements Serializable{
         }
     }
     
-    public boolean preguntarSiContinuarSinInstancias(){
-        boolean continuarSinInstancias=true;
-        if(tieneInstanciasAsociadas()==false){
-            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION){
-                continuarSinInstancias=false;
-            }else if(n == JOptionPane.YES_OPTION){
-                continuarSinInstancias=true;
+    public ScenarioTest buscarScenario(List<ScenarioTest> scenario, String name){
+        for(int i=0;i<scenario.size();i++){
+            String n = scenario.get(i).getNombre();
+            if(n.equals(name)){
+                return scenario.get(i);
             }
         }
-
-        return continuarSinInstancias;
+        return null;
+    }
+    
+    public boolean testYaExiste(List<ScenarioTest> lista,String nombre){
+        ListIterator li;
+        li = lista.listIterator();
+        while(li.hasNext()){
+            ScenarioTest s = (ScenarioTest) li.next();
+            String n = s.getNombre();
+            if(n.equals(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public TipoTest getTipoTest() {

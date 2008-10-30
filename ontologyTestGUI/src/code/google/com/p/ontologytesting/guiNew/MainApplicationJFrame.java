@@ -6,18 +6,33 @@
 
 package code.google.com.p.ontologytesting.guiNew;
 
+import code.google.com.p.ontologytesting.guiNew.tests.TestInstancesQueryJPanel;
+import code.google.com.p.ontologytesting.guiNew.tests.TestInstancesTFJPanel;
+import code.google.com.p.ontologytesting.guiNew.tests.TestInstancesTextAreaJPanel;
+import code.google.com.p.ontologytesting.guiNew.auxiliarpanels.NewProjectJDialog;
+import code.google.com.p.ontologytesting.guiNew.auxiliarpanels.AbrirProyectoJDialog;
+import code.google.com.p.ontologytesting.guiNew.auxiliarpanels.HelpJDialog;
+import code.google.com.p.ontologytesting.guiNew.menupanels.EditarVerTestInstanciasJDialog;
+import code.google.com.p.ontologytesting.guiNew.menupanels.EjecutarTestJDialog;
+import code.google.com.p.ontologytesting.guiNew.menupanels.ListarTestsInstanciasJPanel;
+import code.google.com.p.ontologytesting.guiNew.menupanels.ImportarTestsInstJDialog;
+import code.google.com.p.ontologytesting.guiNew.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.guiNew.instances.CreateInstancesJPanel;
+import code.google.com.p.ontologytesting.guiNew.auxiliarclasess.AniadirPanelDeAviso;
+import code.google.com.p.ontologytesting.guiNew.auxiliarclasess.ControladorTests;
+import code.google.com.p.ontologytesting.guiNew.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.guiNew.tests.TestSimpleInstSat;
+import code.google.com.p.ontologytesting.guiNew.tests.TestSimpleRetClas;
+import code.google.com.p.ontologytesting.guiNew.tests.AddSPARQLJPanel;
+import code.google.com.p.ontologytesting.guiNew.tests.TestSimpleReal;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
+import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -27,7 +42,6 @@ import javax.swing.WindowConstants;
  */
 public class MainApplicationJFrame extends javax.swing.JFrame {
     
-    private CollectionTest collection;
     private ListAndResultsJPanel panelTest;
     private ControladorTests controlador;
     private ScenarioTest s = new ScenarioTest();
@@ -35,8 +49,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private SaveTest saveTest = new SaveTest();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
-    private JFileChooser filechooser;
-    private XMLDecoder decoder;
     private boolean proyectoGuardado=false;
     private AniadirPanelDeAviso panelAviso;
     
@@ -371,7 +383,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
     //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
-    collection = CollectionTest.getInstance();
     //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
     //collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
     NewProjectJDialog newProject = new NewProjectJDialog(this,true);
@@ -408,39 +419,39 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.INST);
-    aniadirNuevoTest(0,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestInstMenuItemActionPerformed
 
 private void nuevoTestRecMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRecMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.RET);
-    aniadirNuevoTest(1,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestRecMenuItemActionPerformed
 
 
 private void nuevoTestRealMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestRealMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.REAL);
-    aniadirNuevoTest(2,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestRealMenuItemActionPerformed
 
 private void nuevoTestSatMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSatMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.SAT);
-    aniadirNuevoTest(3,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestSatMenuItemActionPerformed
 
 
 private void nuevoTestClasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestClasMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.CLAS);
-    aniadirNuevoTest(4,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestClasMenuItemActionPerformed
 
 private void nuevoTestSparqlMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestSparqlMenuItemActionPerformed
 // TODO add your handling code here:
     s = new ScenarioTest(TipoTest.SPARQL);
-    aniadirNuevoTest(5,s);
+    aniadirNuevoTest(s);
 }//GEN-LAST:event_nuevoTestSparqlMenuItemActionPerformed
 
 private void importarTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarTestsMenuItemActionPerformed
@@ -496,11 +507,11 @@ private void verInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt
 private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarTodosMenuItemActionPerformed
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getScenariotest().size()>0){
-        boolean res = opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
-        if(res==false){
-            panelAviso.errorAction("Error ejecutando los tests",this);  
-        }else{
+        try{
+            opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
             panelAviso.confirmAction("Tests ejecutados", this);
+        }catch(ExceptionReadOntology ex){
+            panelAviso.errorAction("Error ejecutando los tests",this);  
         }
     }else{
         panelAviso.errorAction("Su lista de tests está vacía",this);  
@@ -522,46 +533,28 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
-// TODO add your handling code here:
-    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(this, true);
-    String path="";
-    filechooser = new JFileChooser("");
-    filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-    int option = filechooser.showOpenDialog(this);
-    if (option == JFileChooser.APPROVE_OPTION) {
-      File selectedFile = filechooser.getSelectedFile();
-      path = selectedFile.getAbsolutePath();
-      try {
-          decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
-          collection = (CollectionTest) decoder.readObject();
-          CollectionTest.getInstance().setInstancias(collection.getInstancias());
-          CollectionTest.getInstance().setNamespace(collection.getNamespace());
-          CollectionTest.getInstance().setOntology(collection.getOntology());
-          CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
-          abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
-          abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
-          abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-          abrirP.setLocationRelativeTo(this);
-          abrirP.setVisible(true);
-      } catch(FileNotFoundException ex) {
-          panelAviso.errorAction("No se encontró el archivo especificado", this);
-      }catch(ClassCastException ex){
-          panelAviso.errorAction("Proyecto no válido", this);
-      }catch(NoSuchElementException ex){
-          panelAviso.errorAction("Proyecto no válido", this);
-      }
-    }   
-    if(abrirP.isProyectoCargado()==true){
-        this.inicializarContadores();
-        guardarProyectoComoMenuItem.setEnabled(true);
-        guardarProyectoMenuItem.setEnabled(true);
-        instanciasMenu.setEnabled(true);
-        testsMenu.setEnabled(true);
-        ejecutarMenu.setEnabled(true);
-        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-        ControladorTests.getInstance().inicializarGuardados();
-        ControladorTests.getInstance().inicializarSeleccionados();
-        this.validate();
+// TODO add your handling code here: 
+    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
+    try {
+        saveTest.prepareLoadProject(abrirP);
+        if(abrirP.isProyectoCargado()==true){
+            this.inicializarContadores();
+            guardarProyectoComoMenuItem.setEnabled(true);
+            guardarProyectoMenuItem.setEnabled(true);
+            instanciasMenu.setEnabled(true);
+            testsMenu.setEnabled(true);
+            ejecutarMenu.setEnabled(true);
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            ControladorTests.getInstance().inicializarGuardados();
+            ControladorTests.getInstance().inicializarSeleccionados();
+            this.validate();
+        }
+    } catch (FileNotFoundException ex) {
+        panelAviso.errorAction("No se encontró el archivo especificado", MainApplicationJFrame.getInstance());
+    } catch (ClassCastException ex) {
+        panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
+    } catch (NoSuchElementException ex) {
+        panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
     }
 }//GEN-LAST:event_abrirProyectoMenuItemActionPerformed
 
@@ -585,7 +578,7 @@ private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_contentsMenuItemActionPerformed
     
 public void importarTestsInstancias(boolean impTest){
-    ImportarTestsJDialog abrirTests = new ImportarTestsJDialog(this,true,impTest);
+    ImportarTestsInstJDialog abrirTests = new ImportarTestsInstJDialog(this,true,impTest);
     abrirTests.setLocationRelativeTo(this);
     abrirTests.setVisible(true);
     abrirTests.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -612,32 +605,32 @@ public boolean listaTestsInstanciasVacia(boolean test){
     return false;
 }
 
-public void aniadirNuevoTest(int tipo,ScenarioTest s){
+public void aniadirNuevoTest(ScenarioTest s){
     this.inicializarContadores();
     if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTest(tipo);
-        aniadirTest(tipo,s);
+        controlador.prepararTest(s.getTipoTest().name());
+        aniadirTest(s);
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTest(tipo);
-                    aniadirTest(tipo,s);
+                    controlador.prepararTest(s.getTipoTest().name());
+                    aniadirTest(s);
             }else{
-                controlador.prepararTest(tipo);
-                aniadirTest(tipo,s);
+                controlador.prepararTest(s.getTipoTest().name());
+                aniadirTest(s);
             }
     }
 }
 
-public void aniadirTest(int tipo,ScenarioTest s){
-    if(tipo==0 || tipo==3){
+public void aniadirTest(ScenarioTest s){
+    if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
         panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
-    }else if(tipo==1 || tipo==4){
+    }else if(s.getTipoTest().name().equals("RET") || s.getTipoTest().name().equals("CLAS")){
         panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
-    }else if(tipo==2){
+    }else if(s.getTipoTest().name().equals("REAL")){
         panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
-    }else if(tipo==5){
+    }else if(s.getTipoTest().name().equals("SPARQL")){
         panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
     }
     this.validate();
