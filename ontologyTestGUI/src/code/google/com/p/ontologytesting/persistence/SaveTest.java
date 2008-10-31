@@ -5,10 +5,10 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
-import code.google.com.p.ontologytesting.guiNew.auxiliarpanels.AbrirProyectoJDialog;
-import code.google.com.p.ontologytesting.guiNew.menupanels.ListarTestsJPanel;
-import code.google.com.p.ontologytesting.guiNew.MainApplicationJFrame;
-import code.google.com.p.ontologytesting.guiNew.auxiliarclasess.FileChooserSelector;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.AbrirProyectoJDialog;
+import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.jenainterfaz.Jena;
