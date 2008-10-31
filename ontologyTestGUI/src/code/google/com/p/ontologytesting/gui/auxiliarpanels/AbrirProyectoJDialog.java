@@ -157,14 +157,18 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             "Warning Message",JOptionPane.WARNING_MESSAGE); 
     }else{
         try{
-            saveTest.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
-            opMenu.actualizarListaDeInstancias();
-            opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
-            opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Proyecto cargado",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
-            this.setProyectoCargado(true);
-            this.setVisible(false);
+            boolean res = saveTest.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
+            if(res==true){
+                opMenu.actualizarListaDeInstancias();
+                opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+                opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Proyecto cargado",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
+                this.setProyectoCargado(true);
+                this.setVisible(false);
+            }else{
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+                }
         }catch (ExceptionReadOntology ex){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
             "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);

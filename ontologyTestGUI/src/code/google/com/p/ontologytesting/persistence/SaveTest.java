@@ -38,16 +38,21 @@ public class SaveTest {
         }
     }
     
-    public void loadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology{                                             
+    public boolean loadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology{                                             
         InterfaceReasoner j = jena.getReasoner();
-        if(!namespaceOnto.endsWith("#")){
-            namespaceOnto = namespaceOnto.concat("#");
+        if(jena.isCargado()==false){
+            return false;
+        }else{
+            if(!namespaceOnto.endsWith("#")){
+                namespaceOnto = namespaceOnto.concat("#");
+            }
+            CollectionTest.getInstance().setOntology(ubicOnto);
+            CollectionTest.getInstance().setNamespace(namespaceOnto);
+            j.addReasoner(ubicOnto);
+            CollectionTest.getInstance().setNamespace(namespaceOnto);
+            CollectionTest.getInstance().setOntology(ubicOnto);
+            return true;
         }
-        CollectionTest.getInstance().setOntology(ubicOnto);
-        CollectionTest.getInstance().setNamespace(namespaceOnto);
-        j.addReasoner(ubicOnto);
-        CollectionTest.getInstance().setNamespace(namespaceOnto);
-        CollectionTest.getInstance().setOntology(ubicOnto);
     }
 
     public void saveInstanciasInMemory(Instancias instancias){

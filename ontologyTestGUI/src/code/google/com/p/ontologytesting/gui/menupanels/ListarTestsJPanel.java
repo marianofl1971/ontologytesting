@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 /**
@@ -32,6 +33,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     private PopMenuTests popTest;
     private PopMenuInstances popInst;
     private static ListarTestsJPanel listTests = null;
+    private JPanel panelResultAux;
     
     private ListarTestsJPanel() {
         initComponents();
@@ -41,6 +43,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         popTest = new PopMenuTests();
         popInst = new PopMenuInstances();
         resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+        
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -128,11 +131,17 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     }
     
     public void aniadirTreeResult(JScrollPane treeView){
+        panelResultAux = new JPanel();
+        panelResultAux.setLayout(new BoxLayout(panelResultAux, BoxLayout.Y_AXIS));
         if(resultsPanel.getComponentCount()>0){
-            resultsPanel.remove(0);
+            tabbedTestsPanel.add(panelResultAux);
+            tabbedTestsPanel.setTitleAt(tabbedTestsPanel.getComponentCount()-1, "Resultados Ejecución");
+            panelResultAux.add(treeView);
+            panelResultAux.validate();
+        }else{
+            resultsPanel.add(treeView);
+            resultsPanel.validate();
         }
-        resultsPanel.add(treeView);
-        resultsPanel.validate();
     }
     
     /** This method is called from within the constructor to
