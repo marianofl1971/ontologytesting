@@ -13,10 +13,12 @@ package code.google.com.p.ontologytesting.model.reasonerinterfaz;
 public class Reasoner {
 
     private InterfaceReasoner reasoner;
+    private boolean cargado = false;
     
     public InterfaceReasoner getReasoner(){
         try {
-            reasoner = (InterfaceReasoner) Class.forName("code.google.com.p.ontologytesting.model.jenainterfaz.driverjena.JenaImplementation").newInstance();
+            reasoner = (InterfaceReasoner) Class.forName("code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation").newInstance();
+            this.setCargado(true);
         } catch (InstantiationException ex) {  
             System.out.println("Instantiation Exception");
         } catch (IllegalAccessException ex) {       
@@ -28,6 +30,14 @@ public class Reasoner {
     }
     
     public Reasoner(){
+    }
+
+    public boolean isCargado() {
+        return cargado;
+    }
+
+    public void setCargado(boolean cargado) {
+        this.cargado = cargado;
     }
 
 }

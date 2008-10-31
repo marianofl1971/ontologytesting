@@ -36,24 +36,22 @@ public class OntologyTestCase implements OntologyTest{
 
     protected void setUpOntology(ScenarioTest st, String ont, String ns) throws ExceptionReadOntology{  
 
-            ListIterator liClass;
-            ListIterator liProperties;
-            String[] ciClas;
-            String[] ciInd;
-            String[] piClas;
-            String[] piInd;
+        ListIterator liClass;
+        ListIterator liProperties;
+        String[] ciClas;
+        String[] ciInd;
+        String[] piClas;
+        String[] piInd;
 
-            patron1 = "[\\(|,|\n| ]";
-            patron2 = "[\n| |\\)]";
-            jenaInterface = new Reasoner();
-            jena = jenaInterface.getReasoner();
+        patron1 = "[\\(|,|\n| ]";
+        patron2 = "[\n| |\\)]";
+        jenaInterface = new Reasoner();
+        jena = jenaInterface.getReasoner();
+        if(jenaInterface.isCargado()==true){
             jena.addReasoner(ont);
-
             Instancias instancias = st.getInstancias();
-
             List<ClassInstances> classInstances = instancias.getClassInstances();
             List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
-
             liClass = classInstances.listIterator();
             liProperties = propertyInstances.listIterator();
 
@@ -72,6 +70,7 @@ public class OntologyTestCase implements OntologyTest{
                 piInd = piClas[1].split(patron2);
                 jena.addInstanceProperty(ns, piClas[0], piInd[0]);
             }       
+        }
     }
     
     protected void tearDownOntology(){

@@ -172,36 +172,40 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
     jenaInterface = new Reasoner();
     jena = jenaInterface.getReasoner();
-    ubicOnto = ontology.getUbicacionOnto();
-    namespaceOnto = ontology.getNamespaceOntoTextField();
-    if(ubicOnto.equals("") || namespaceOnto.equals("")){
-        panelAviso.warningAction("Todos los campos son obligatorios", this);
-    }else{
-        if(!namespaceOnto.endsWith("#")){
-            namespaceOnto = namespaceOnto.concat("#");
-        }
-        ontology.setUbicOnto(ubicOnto);
-        ontology.setNsOnto(namespaceOnto);
-         try{
-            jena.addReasoner(ubicOnto);
-            CollectionTest.getInstance().setNamespace(namespaceOnto);
-            CollectionTest.getInstance().setOntology(ubicOnto);
-            File directorio = new File(project.getCarpetaProyectoTextField());
-            boolean res = directorio.mkdir(); 
-            if(res==true){
-                MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
-                MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
-                setProyectoCreado(true);
-                panelAviso.confirmAction("Proyecto Creado", this);
-                this.setVisible(false);
-            }else{
-                panelAviso.errorAction("No se puedo crear un directorio para el proyecto", this);
+    if(jenaInterface.isCargado()==true){ 
+        ubicOnto = ontology.getUbicacionOnto();
+        namespaceOnto = ontology.getNamespaceOntoTextField();
+        if(ubicOnto.equals("") || namespaceOnto.equals("")){
+            panelAviso.warningAction("Todos los campos son obligatorios", this);
+        }else{
+            if(!namespaceOnto.endsWith("#")){
+                namespaceOnto = namespaceOnto.concat("#");
             }
-        }catch(ExceptionReadOntology ex){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
-            "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }  
+            ontology.setUbicOnto(ubicOnto);
+            ontology.setNsOnto(namespaceOnto);
+             try{
+                jena.addReasoner(ubicOnto);
+                CollectionTest.getInstance().setNamespace(namespaceOnto);
+                CollectionTest.getInstance().setOntology(ubicOnto);
+                File directorio = new File(project.getCarpetaProyectoTextField());
+                boolean res = directorio.mkdir(); 
+                if(res==true){
+                    MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
+                    MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
+                    setProyectoCreado(true);
+                    panelAviso.confirmAction("Proyecto Creado", this);
+                    this.setVisible(false);
+                }else{
+                    panelAviso.errorAction("No se puedo crear un directorio para el proyecto", this);
+                }
+            }catch(ExceptionReadOntology ex){
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
+                "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);
+            }
+        } 
+    }else{
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+    }
 }//GEN-LAST:event_terminarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

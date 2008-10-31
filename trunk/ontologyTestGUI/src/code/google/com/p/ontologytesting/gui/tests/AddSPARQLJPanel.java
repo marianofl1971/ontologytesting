@@ -624,15 +624,21 @@ public boolean consultaOK(String query, String result){
 public void validarConsulta(String query){
     jenaInterface = new Reasoner();   
     jena = jenaInterface.getReasoner();
-    try{
-        boolean res = jena.validarSparqlQuery(query); 
-        if(res==false){
-            panelAviso.warningAction("Sólo está permitidas las consultas SELECT", MainApplicationJFrame.getInstance());
+    if(jenaInterface.isCargado()==true){ 
+        try{
+            boolean res = jena.validarSparqlQuery(query); 
+            if(res==false){
+                panelAviso.warningAction("Sólo está permitidas las consultas SELECT", MainApplicationJFrame.getInstance());
+                queryValida=false;
+                continuar=false;
+            }
+        }catch(Exception ex){
+            panelAviso.warningAction("La consulta SPARQL no es válida", MainApplicationJFrame.getInstance());
             queryValida=false;
             continuar=false;
         }
-    }catch(Exception ex){
-        panelAviso.warningAction("La consulta SPARQL no es válida", MainApplicationJFrame.getInstance());
+    }else{
+        panelAviso.warningAction("Error en la aplicación", MainApplicationJFrame.getInstance());
         queryValida=false;
         continuar=false;
     }
