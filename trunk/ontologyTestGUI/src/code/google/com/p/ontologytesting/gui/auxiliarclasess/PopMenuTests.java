@@ -49,6 +49,7 @@ public class PopMenuTests implements ActionListener{
             }
         }else if(source.getText().equals("Ejecutar")){
             try{
+                TreeResults.setTestSeleccionado(scenario.getNombre());
                 menu.ejecutarUnTest(scenario);
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
