@@ -22,6 +22,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
 import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
@@ -519,6 +520,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here:
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
+            TreeResults.setTestSeleccionado("Todos los Tests");
             opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
             panelAviso.confirmAction("Tests ejecutados", this);
         }catch(ExceptionReadOntology ex){
