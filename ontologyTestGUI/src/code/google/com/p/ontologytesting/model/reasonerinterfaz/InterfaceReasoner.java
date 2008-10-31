@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model.jenainterfaz;
+package code.google.com.p.ontologytesting.model.reasonerinterfaz;
 
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author sara.garcia
  */
-public interface Jena {
+public interface InterfaceReasoner {
     
     boolean addInstanceClass(String ns,String nameClass, String value);
     

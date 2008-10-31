@@ -13,7 +13,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -416,7 +416,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
     }  
-    saveTest.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+    menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
 
 public void inicializarVariables(){

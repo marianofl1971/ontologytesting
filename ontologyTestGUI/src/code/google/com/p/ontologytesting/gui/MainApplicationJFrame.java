@@ -20,6 +20,7 @@ import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDial
 import code.google.com.p.ontologytesting.gui.instances.CreateInstancesJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
@@ -27,10 +28,14 @@ import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import javax.swing.JOptionPane;
@@ -51,6 +56,9 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false;
     private AniadirPanelDeAviso panelAviso;
+    private FileChooserSelector utils;
+    private XMLDecoder decoder;
+    private CollectionTest collection;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -366,8 +374,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
+        utils = new FileChooserSelector();
         try {
-            boolean guardado = saveTest.saveProject(true);
+            utils.fileChooser(false, true);
+            File fichero = utils.getFileSelected();
+            boolean guardado = saveTest.saveProject(true,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
             if(guardado==true){
                 panelAviso.confirmAction("Proyecto guardado", this); 
                 this.setProyectoGuardado(true);
@@ -521,7 +532,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
     try {
-        boolean guardado = saveTest.saveProject(false);
+        boolean guardado = saveTest.saveProject(false,this.getCarpetaProyecto(),this.getNombreProyecto(),null);
         if(guardado==true){
             panelAviso.confirmAction("Proyecto guardado", this);
         }else{
@@ -536,7 +547,19 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 // TODO add your handling code here: 
     AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
     try {
-        saveTest.prepareLoadProject(abrirP);
+        utils = new FileChooserSelector();
+        utils.fileChooser(true, true);
+        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
+        collection = (CollectionTest) decoder.readObject();
+        CollectionTest.getInstance().setInstancias(collection.getInstancias());
+        CollectionTest.getInstance().setNamespace(collection.getNamespace());
+        CollectionTest.getInstance().setOntology(collection.getOntology());
+        CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
+        abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
+        abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
+        abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        abrirP.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        abrirP.setVisible(true);
         if(abrirP.isProyectoCargado()==true){
             this.inicializarContadores();
             guardarProyectoComoMenuItem.setEnabled(true);

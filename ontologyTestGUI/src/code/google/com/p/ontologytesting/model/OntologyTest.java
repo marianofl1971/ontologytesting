@@ -9,7 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.util.List;
 
 /**

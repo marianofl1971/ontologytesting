@@ -11,12 +11,13 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
  */
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
 import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.List;
 import javax.swing.WindowConstants;
@@ -31,6 +32,7 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
     private SaveTest saveTest;
+    private ListarTestsJPanel listInst;
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
@@ -72,14 +74,14 @@ public class OpcionesMenu {
     public void eliminarTest(ScenarioTest scenario){
         saveTest = new SaveTest();
         CollectionTest.getInstance().getScenariotest().remove(scenario);
-        saveTest.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
-        saveTest.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+        this.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+        this.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
     }
     
     public void eliminarInstancias(Instancias inst){
         saveTest = new SaveTest();
         CollectionTest.getInstance().getInstancias().remove(inst);
-        saveTest.actualizarListaDeInstancias();
+        this.actualizarListaDeInstancias();
     }
     
     public SeeTestJDialog verTest(ScenarioTest scenario){
@@ -94,6 +96,21 @@ public class OpcionesMenu {
         seeTestCompleted.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         seeTestCompleted.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         return seeTestCompleted;
+    }
+    
+    public void actualizarListaDeTestsSimples(List<ScenarioTest> scenario){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirTestSimple(scenario);
+    }
+    
+    public void actualizarListaDeTestsSparql(List<ScenarioTest> scenario){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirTestSparql(scenario);
+    }
+    
+    public void actualizarListaDeInstancias(){
+        listInst = ListarTestsJPanel.getInstance();
+        listInst.aniadirInstancias(CollectionTest.getInstance().getInstancias());
     }
   
 }

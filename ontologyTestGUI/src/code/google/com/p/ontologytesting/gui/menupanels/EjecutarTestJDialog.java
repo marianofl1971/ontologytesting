@@ -7,7 +7,7 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
-import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import java.awt.FlowLayout;
 import javax.swing.JOptionPane;
 
