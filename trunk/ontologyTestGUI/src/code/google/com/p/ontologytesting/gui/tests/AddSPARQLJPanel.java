@@ -11,9 +11,8 @@ import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDial
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.gui.*;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.ArrayList;
@@ -32,13 +31,12 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ScenarioTest scenario,scenarioAEditar;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
-    private JenaInterface jenaInterface;
-    private Jena jena;
+    private Reasoner jenaInterface;
+    private InterfaceReasoner jena;
     private ValidarTests validarTest;
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private ControladorTests controlador;
-    private FileChooserSelector utils;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
     
@@ -70,7 +68,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             this.setTestDescTextArea(s.getDescripcion());
         }
         this.inicializarVariables();
-        utils = new FileChooserSelector();
         menu = new OpcionesMenu();
         scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
@@ -568,7 +565,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
     }  
-    saveTest.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
+    menu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
 }
 
 public void reemplazarConsulta(SparqlQueryOntology query,int pos){
@@ -625,8 +622,8 @@ public boolean consultaOK(String query, String result){
 }
 
 public void validarConsulta(String query){
-    jenaInterface = new JenaInterface();   
-    jena = jenaInterface.getJena();
+    jenaInterface = new Reasoner();   
+    jena = jenaInterface.getReasoner();
     try{
         boolean res = jena.validarSparqlQuery(query); 
         if(res==false){

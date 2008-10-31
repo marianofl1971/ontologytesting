@@ -3,32 +3,33 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model.jenainterfaz.driverjena;
+package code.google.com.p.ontologytesting.model.reasonerinterfaz.driver;
 
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.model.ExecQuerySparql;
 import com.hp.hpl.jena.ontology.*;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.syntax.Element;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import org.mindswap.pellet.jena.PelletQueryExecution;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 import org.mindswap.pellet.exceptions.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  *
  * @author sara.garcia
  */
-public class JenaImplementation implements Jena{
+public class ReasonerImplementation implements InterfaceReasoner{
 
     public final OntModel model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
     private OntClass nameclass;
     private Property nameprop;
     
-    public JenaImplementation(){}
+    public ReasonerImplementation(){}
     
     @Override
     public boolean addInstanceClass(String ns, String nameClass, String value) {

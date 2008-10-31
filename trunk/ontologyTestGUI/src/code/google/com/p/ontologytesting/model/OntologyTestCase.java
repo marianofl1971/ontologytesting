@@ -10,7 +10,7 @@
 package code.google.com.p.ontologytesting.model;
 
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,8 +22,8 @@ import java.util.ListIterator;
  */
 public class OntologyTestCase implements OntologyTest{
     
-    private JenaInterface jenaInterface;   
-    private Jena jena;
+    private Reasoner jenaInterface;   
+    private InterfaceReasoner jena;
     private String patron1="",patron2="",patron3="",patron4="",patron5="",patron6="";
     private int fallo=0;
     private static String muestra="";
@@ -45,8 +45,8 @@ public class OntologyTestCase implements OntologyTest{
 
             patron1 = "[\\(|,|\n| ]";
             patron2 = "[\n| |\\)]";
-            jenaInterface = new JenaInterface();
-            jena = jenaInterface.getJena();
+            jenaInterface = new Reasoner();
+            jena = jenaInterface.getReasoner();
             jena.addReasoner(ont);
 
             Instancias instancias = st.getInstancias();

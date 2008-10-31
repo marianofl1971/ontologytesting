@@ -9,7 +9,7 @@ import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

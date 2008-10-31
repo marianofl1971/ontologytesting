@@ -9,7 +9,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.model.CollectionTest;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.awt.BorderLayout;
 import java.io.File;
 import javax.swing.JOptionPane;
@@ -23,8 +23,8 @@ public class NewProjectJDialog extends javax.swing.JDialog {
     private ProjectNameSituJPanel project = new ProjectNameSituJPanel();;
     private OntologyNameSituJPanel ontology = new OntologyNameSituJPanel();;
     private String nombreProy="", ubicProy="", ubicOnto="", namespaceOnto="";
-    private JenaInterface jenaInterface;
-    private Jena jena;
+    private Reasoner jenaInterface;
+    private InterfaceReasoner jena;
     private boolean proyectoCreado=false;
     private AniadirPanelDeAviso panelAviso;
     
@@ -170,8 +170,8 @@ private void sigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarButtonActionPerformed
 // TODO add your handling code here:
-    jenaInterface = new JenaInterface();
-    jena = jenaInterface.getJena();
+    jenaInterface = new Reasoner();
+    jena = jenaInterface.getReasoner();
     ubicOnto = ontology.getUbicacionOnto();
     namespaceOnto = ontology.getNamespaceOntoTextField();
     if(ubicOnto.equals("") || namespaceOnto.equals("")){

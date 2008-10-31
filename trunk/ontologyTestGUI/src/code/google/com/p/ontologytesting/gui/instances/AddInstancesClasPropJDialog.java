@@ -8,7 +8,8 @@ package code.google.com.p.ontologytesting.gui.instances;
 
 import code.google.com.p.ontologytesting.gui.menupanels.AsociarInstanciasATestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
-import code.google.com.p.ontologytesting.model.jenainterfaz.*;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
@@ -33,8 +34,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private int indexVect,tabActual=0,failGroupClas,failGroupProp,totalClas;
     private String nombreFichero;
     private Instancias instancias;
-    private JenaInterface jenaInterface;   
-    private Jena jena;
+    private Reasoner jenaInterface;   
+    private InterfaceReasoner jena;
     private String patron1,patron2;
     private ValidarTests validar;
     private String[] ciClas,ciInd;
@@ -48,7 +49,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private Instancias instanciasAEditar;
     private SaveTest saveTest;
     private ScenarioTest scenario;
-
+    private OpcionesMenu menu;
+    
     //Constructor para añadir las instancias a un test
     public AddInstancesClasPropJDialog(JFrame parent, boolean modal, ScenarioTest scenario){       
         super(parent, modal);
@@ -624,8 +626,9 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }
 
 public boolean prepararInstancias(boolean guardar,boolean asociar){
-    jenaInterface = new JenaInterface();
-    jena = jenaInterface.getJena();
+    menu = new OpcionesMenu();
+    jenaInterface = new Reasoner();
+    jena = jenaInterface.getReasoner();
     saveTest = new SaveTest();
     int aux=0;
     try{
@@ -676,7 +679,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                     if (n == JOptionPane.YES_OPTION) {
                         if(guardar==true){
                             saveTest.replaceInstanciasLocally(getInstancias());
-                            saveTest.actualizarListaDeInstancias();
+                            menu.actualizarListaDeInstancias();
                         }
                         if(asociar==true && this.getNuevoTest()==false){
                             this.getScenario().setInstancias(this.getInstancias());
@@ -694,7 +697,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
         if(aux==0){
             if(guardar==true){
                 saveTest.saveInstanciasInMemory(getInstancias());
-                saveTest.actualizarListaDeInstancias();
+                menu.actualizarListaDeInstancias();
             }
             if(asociar==true && this.getNuevoTest()==false){
                 this.getScenario().setInstancias(this.getInstancias());

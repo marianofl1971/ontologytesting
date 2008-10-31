@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model.jenainterfaz;
+package code.google.com.p.ontologytesting.model.reasonerinterfaz;
 
 
 /**
