@@ -7,8 +7,10 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuInstances;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuTests;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -23,6 +25,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 /**
  *
  * @author  sara.garcia
@@ -41,9 +44,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         testSparqlList.setSelectedIndex(0);
         instanciasList.setSelectedIndex(0);
         popTest = new PopMenuTests();
-        popInst = new PopMenuInstances();
-        resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-        
+        popInst = new PopMenuInstances();    
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -133,15 +134,16 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     public void aniadirTreeResult(JScrollPane treeView){
         panelResultAux = new JPanel();
         panelResultAux.setLayout(new BoxLayout(panelResultAux, BoxLayout.Y_AXIS));
-        if(resultsPanel.getComponentCount()>0){
-            tabbedTestsPanel.add(panelResultAux);
-            tabbedTestsPanel.setTitleAt(tabbedTestsPanel.getComponentCount()-1, "Resultados Ejecución");
-            panelResultAux.add(treeView);
-            panelResultAux.validate();
-        }else{
-            resultsPanel.add(treeView);
-            resultsPanel.validate();
-        }
+        tabbedTestsPanel.add("Ejecución: "+TreeResults.getTestSeleccionado(),panelResultAux);
+        initTabComponent(tabbedTestsPanel.getTabCount()-1);
+        panelResultAux.add(treeView);
+        tabbedTestsPanel.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        panelResultAux.validate();
+    }
+    
+    private void initTabComponent(int i) {
+        tabbedTestsPanel.setTabComponentAt(i,
+                 new ButtonTabComponent(tabbedTestsPanel));
     }
     
     /** This method is called from within the constructor to
@@ -162,7 +164,6 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         testSparqlPanel = new javax.swing.JPanel();
         listSparqlScrollPane = new javax.swing.JScrollPane();
         testSparqlList = new javax.swing.JList();
-        resultsPanel = new javax.swing.JPanel();
         instanciasPanel = new javax.swing.JPanel();
         instanciasContentPanel = new javax.swing.JPanel();
         instanciasScrollPane = new javax.swing.JScrollPane();
@@ -235,19 +236,6 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         );
 
         tabbedTestsPanel.addTab("Tests Sparql", sparqlPanel);
-
-        javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
-        resultsPanel.setLayout(resultsPanelLayout);
-        resultsPanelLayout.setHorizontalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 171, Short.MAX_VALUE)
-        );
-        resultsPanelLayout.setVerticalGroup(
-            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
-        );
-
-        tabbedTestsPanel.addTab("Resultados Ejecución", resultsPanel);
 
         instanciasList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         instanciasList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -331,7 +319,6 @@ private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt
     private javax.swing.JScrollPane instanciasScrollPane;
     private javax.swing.JScrollPane listSparqlScrollPane;
     private javax.swing.JScrollPane listTestSimpleScrollPane;
-    private javax.swing.JPanel resultsPanel;
     private javax.swing.JPanel simplesPanel;
     private javax.swing.JPanel sparqlPanel;
     private javax.swing.JTabbedPane tabbedTestsPanel;

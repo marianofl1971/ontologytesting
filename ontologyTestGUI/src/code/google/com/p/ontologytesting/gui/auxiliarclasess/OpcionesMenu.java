@@ -18,7 +18,6 @@ import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
 import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.List;
 import javax.swing.WindowConstants;
 
@@ -31,7 +30,6 @@ public class OpcionesMenu {
     private OntologyTestResult testResult;
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
-    private SaveTest saveTest;
     private ListarTestsJPanel listInst;
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
@@ -72,14 +70,12 @@ public class OpcionesMenu {
             "\nSolo pueden realizarse tests sobre documentos owl consistentes","Error Message",JOptionPane.ERROR_MESSAGE);*/
     
     public void eliminarTest(ScenarioTest scenario){
-        saveTest = new SaveTest();
         CollectionTest.getInstance().getScenariotest().remove(scenario);
         this.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
         this.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
     }
     
     public void eliminarInstancias(Instancias inst){
-        saveTest = new SaveTest();
         CollectionTest.getInstance().getInstancias().remove(inst);
         this.actualizarListaDeInstancias();
     }
