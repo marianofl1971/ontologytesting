@@ -6,8 +6,12 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
 import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 
 /**
@@ -17,10 +21,10 @@ import javax.swing.JScrollPane;
 public class ResultTestJPanel extends javax.swing.JPanel {
 
     private static ResultTestJPanel result = null;
+    private JPanel panelResult;
  
     private ResultTestJPanel() {
        initComponents();
-       contentResultPanel.setLayout(new BoxLayout(contentResultPanel, BoxLayout.Y_AXIS));
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -36,12 +40,20 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     
     
     public void aniadirResultado(JScrollPane result){
-        if(contentResultPanel.getComponentCount()>0){
-            contentResultPanel.remove(0);
-        }
-        contentResultPanel.add(result);
-        contentResultPanel.validate();
+        panelResult = new JPanel();
+        panelResult.setLayout(new BoxLayout(panelResult, BoxLayout.Y_AXIS));
+        resultsTabbedPane.add(TreeResults.getTestSeleccionado(),panelResult);
+        initTabComponent(resultsTabbedPane.getTabCount()-1);
+        panelResult.add(result);
+        resultsTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        panelResult.validate();    
     }
+    
+    private void initTabComponent(int i) {
+        resultsTabbedPane.setTabComponentAt(i,
+                 new ButtonTabComponent(resultsTabbedPane));
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -51,34 +63,27 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentResultPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout contentResultPanelLayout = new javax.swing.GroupLayout(contentResultPanel);
-        contentResultPanel.setLayout(contentResultPanelLayout);
-        contentResultPanelLayout.setHorizontalGroup(
-            contentResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
-        );
-        contentResultPanelLayout.setVerticalGroup(
-            contentResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
-        );
+        resultsTabbedPane = new javax.swing.JTabbedPane();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentResultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(resultsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentResultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(resultsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel contentResultPanel;
+    private javax.swing.JTabbedPane resultsTabbedPane;
     // End of variables declaration//GEN-END:variables
 
 }

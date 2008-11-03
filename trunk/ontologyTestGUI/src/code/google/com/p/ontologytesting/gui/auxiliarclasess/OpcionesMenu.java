@@ -36,21 +36,21 @@ public class OpcionesMenu {
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
-        new TreeResults(testResult);
+        new TreeResults(testResult,scenario.getNombre()); 
     }
 
     public void ejecutarBateriaTests(List<ScenarioTest> listScenario) throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         testCase.runListaScenario(testResult, CollectionTest.getInstance(), listScenario);
-        new TreeResults(testResult);
+        new TreeResults(testResult,listScenario.get(0).getNombre());
     }
 
     public void ejecutarTodosLosTests() throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         testCase.run(testResult, CollectionTest.getInstance());
-        new TreeResults(testResult);
+        new TreeResults(testResult, CollectionTest.getInstance().getScenariotest().get(0).getNombre());
     }
     
     public void editarTest(ScenarioTest scenario){
@@ -65,9 +65,6 @@ public class OpcionesMenu {
             panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(scenario));
         }   
     }
-    
-    /*JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La ontologia introducida no es valida." +
-            "\nSolo pueden realizarse tests sobre documentos owl consistentes","Error Message",JOptionPane.ERROR_MESSAGE);*/
     
     public void eliminarTest(ScenarioTest scenario){
         CollectionTest.getInstance().getScenariotest().remove(scenario);

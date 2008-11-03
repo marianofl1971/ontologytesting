@@ -39,10 +39,14 @@ public class TreeResults extends JPanel {
     private JScrollPane resultsView,treeView;
     private ListarTestsJPanel listT;
 
-    public TreeResults(final OntologyTestResult testresult) {
+    public TreeResults(){
+    }
+    
+    public TreeResults(final OntologyTestResult testResult, String testName) {
 
+        int aux=0;
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Resultado de sus Tests");
-        createNodes(top,testresult);
+        createNodes(top,testResult);
         listT = ListarTestsJPanel.getInstance();
         JTree tree = new JTree(top);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -57,7 +61,7 @@ public class TreeResults extends JPanel {
                     String test = (String) nodeInfo;
                     int size = test.length();
                     test = test.substring(0,size-9);
-                    editor = displaySimpleTest(test,testresult);
+                    editor = displaySimpleTest(test,testResult);
                     setTestSeleccionado(test);
                 } else {
                 }
@@ -87,6 +91,9 @@ public class TreeResults extends JPanel {
 	}
         });
 
+        if(aux==0){
+            editor = displaySimpleTest(testName, testResult);
+        }
         treeView = new JScrollPane(tree);
         editor.setEditable(false);
         resultsView = new JScrollPane(editor);
@@ -96,7 +103,7 @@ public class TreeResults extends JPanel {
         listT.aniadirTreeResult(treeView);
     }
 
-    private JEditorPane displaySimpleTest(String test, OntologyTestResult testresult) {
+    public JEditorPane displaySimpleTest(String test, OntologyTestResult testresult) {
         
         StringBuffer resultado = new StringBuffer();
         editor.setContentType("text/html");
