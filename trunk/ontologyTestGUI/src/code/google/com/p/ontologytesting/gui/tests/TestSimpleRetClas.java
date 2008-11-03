@@ -45,7 +45,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
-    private ScenarioTest scenarioAEditar;
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
@@ -87,7 +86,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             }
         }
         menu = new OpcionesMenu();
-        scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
     }
 
@@ -314,19 +312,7 @@ private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    if(getTabbedPaneRet()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneRet()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            this.realizarAccion(true, false);
-        }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setVisible(true);
-        }
-    }
+    guardarTest();
 }//GEN-LAST:event_guardarButtonActionPerformed
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
@@ -345,6 +331,23 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         }
     }
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
+
+public boolean guardarTest(){
+    if(getTabbedPaneRet()==0){
+        copiarTestAScenarioDesdeAyuda();
+    }else if(getTabbedPaneRet()==1){
+        copiarTestAScenarioDesdeSinAyuda();
+    }
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            this.realizarAccion(true, false);
+        }else{
+            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
+            addInst.setVisible(true);
+        }
+    }
+    return continuar;
+}
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
 // TODO add your handling code here:
@@ -373,15 +376,13 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if(this.getScenarioAEditar() != null && scenario.equals(this.getScenarioAEditar())==false
-                        && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+            if(OpcionesMenu.getScenarioActual() != null && scenario.equals(OpcionesMenu.getScenarioActual())==false
+                        && this.getScenario().getNombre().equals(OpcionesMenu.getScenarioActual().getNombre())){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {       
                     saveTest.replaceScenarioLocally(scenario);
-                    setScenarioAEditar(new ScenarioTest(scenario));
-                    setScenario(new ScenarioTest(scenario));
                     controlador.setTestRetClasGuardado(true);
                     panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
@@ -390,6 +391,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                 controlador.setTestRetClasGuardado(true);
                 panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
+            OpcionesMenu.setScenarioActual(scenario);
+            this.setScenario(new ScenarioTest(scenario));
         }
         if(ejecutar==true){
             try{
@@ -402,7 +405,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
      }else{
         if(guardar==true){
             saveTest.saveTestInMemory(scenario);
-            setScenarioAEditar(new ScenarioTest(scenario));
+            OpcionesMenu.setScenarioActual(scenario);
             setScenario(new ScenarioTest(scenario));
             controlador.setTestRetClasGuardado(true);
             panelAviso.confirmAction("El test ha sido guardado", MainApplicationJFrame.getInstance());
@@ -824,14 +827,6 @@ public ScenarioTest getScenario() {
 
 public void setScenario(ScenarioTest scenario) {
     this.scenario = scenario;
-}
-
-public ScenarioTest getScenarioAEditar() {
-    return scenarioAEditar;
-}
-
-public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
-    this.scenarioAEditar = scenarioAEditar;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
