@@ -8,9 +8,11 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuInstances;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -26,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 /**
  *
  * @author  sara.garcia
@@ -37,6 +40,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     private PopMenuInstances popInst;
     private static ListarTestsJPanel listTests = null;
     private JPanel panelResultAux;
+    private OpcionesMenu opMenu = new OpcionesMenu();
+    private ScenarioTest s = new ScenarioTest();
+    private Instancias instancias = new Instancias();
     
     private ListarTestsJPanel() {
         initComponents();
@@ -169,7 +175,18 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         instanciasScrollPane = new javax.swing.JScrollPane();
         instanciasList = new javax.swing.JList();
 
+        tabbedTestsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabbedTestsPanelMouseClicked(evt);
+            }
+        });
+
         testSimplesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        testSimplesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testSimplesListMouseClicked(evt);
+            }
+        });
         testSimplesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 testSimplesListValueChanged(evt);
@@ -206,6 +223,11 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         tabbedTestsPanel.addTab("Tests Simples", simplesPanel);
 
         testSparqlList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        testSparqlList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testSparqlListMouseClicked(evt);
+            }
+        });
         testSparqlList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 testSparqlListValueChanged(evt);
@@ -238,6 +260,11 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         tabbedTestsPanel.addTab("Tests Sparql", sparqlPanel);
 
         instanciasList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        instanciasList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instanciasListMouseClicked(evt);
+            }
+        });
         instanciasList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 instanciasListValueChanged(evt);
@@ -283,35 +310,70 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
 
 private void testSimplesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSimplesListValueChanged
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSimplesListValueChanged
+    JList lista = (JList) evt.getSource();
     if(modeloSimples.getSize()>0){
         popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
         MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
         lista.addMouseListener(popupListener);
     }
-}
+}//GEN-LAST:event_testSimplesListValueChanged
 
 private void testSparqlListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSparqlListValueChanged
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSparqlListValueChanged
+    JList lista = (JList) evt.getSource();
     if(modeloSparql.getSize()>0){
         popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
         MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
         lista.addMouseListener(popupListener);
     }
-}
+}//GEN-LAST:event_testSparqlListValueChanged
 
 private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_instanciasListValueChanged
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_instanciasListValueChanged
+    JList lista = (JList) evt.getSource();
     if(modeloInstancias.getSize()>0){
         popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
         MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
         lista.addMouseListener(popupListener);
     }
+}//GEN-LAST:event_instanciasListValueChanged
+
+private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedTestsPanelMouseClicked
+// TODO add your handling code here:
+    testSparqlList.clearSelection();
+    instanciasList.clearSelection();
+    testSimplesList.clearSelection();
+}//GEN-LAST:event_tabbedTestsPanelMouseClicked
+
+private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
+// TODO add your handling code here:
+    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSimplesListMouseClicked
+    ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+    if(evt.getClickCount()==2){
+        opMenu.editarTest(scenario);
+    }
 }
 
+private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSparqlListMouseClicked
+// TODO add your handling code here:
+    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSparqlListMouseClicked
+    ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+    if(evt.getClickCount()==2){
+        opMenu.editarTest(scenario);
+    }
+}
 
+private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
+// TODO add your handling code here:
+    JList lista = (JList) evt.getSource();//GEN-LAST:event_instanciasListMouseClicked
+    Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
+    if(evt.getClickCount()==2){
+        AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(null, false, inst);
+        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        addInst.setVisible(true);
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel instanciasContentPanel;
     private javax.swing.JList instanciasList;
