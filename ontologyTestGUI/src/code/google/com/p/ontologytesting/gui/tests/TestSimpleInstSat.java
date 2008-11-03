@@ -45,7 +45,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private SaveTest saveTest;
     private AddInstancesClasPropJDialog addInst;
     private String nombreTest = "",descTest = "";
-    private ScenarioTest scenarioAEditar;
+    //private ScenarioTest scenarioAEditar;
     //private ProgressMonitor progressMonitor;
     //private Task task;
     private ControladorTests controlador;
@@ -94,7 +94,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             }
         }
         menu = new OpcionesMenu();
-        scenarioAEditar = new ScenarioTest(s);
         setScenario(s);
     }
 
@@ -323,6 +322,10 @@ private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent e
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
+    guardarTest();
+}
+
+public boolean guardarTest(){
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -336,6 +339,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {
             addInst.setVisible(true);
         }
     }
+    return continuar;
 }
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -377,15 +381,13 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if(this.getScenarioAEditar() != null && this.getScenario().equals(this.getScenarioAEditar())==false
-                    && this.getScenario().getNombre().equals(this.getScenarioAEditar().getNombre())){
+            if(OpcionesMenu.getScenarioActual() != null && this.getScenario().equals(OpcionesMenu.getScenarioActual())==false
+                    && this.getScenario().getNombre().equals(OpcionesMenu.getScenarioActual().getNombre())){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
                     saveTest.replaceScenarioLocally(this.getScenario());
-                    setScenarioAEditar(new ScenarioTest(this.getScenario()));
-                    setScenario(new ScenarioTest(this.getScenario()));
                     controlador.setTestInstSatGuardado(true);
                     panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
@@ -394,6 +396,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                 controlador.setTestInstSatGuardado(true);
                 panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
+            OpcionesMenu.setScenarioActual(scenario);
+            this.setScenario(new ScenarioTest(scenario));
         }
         if(ejecutar==true){
             try{
@@ -406,8 +410,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     }else{ 
         if(guardar==true){
             saveTest.saveTestInMemory(this.getScenario());
-            setScenarioAEditar(new ScenarioTest(this.getScenario()));
-            setScenario(new ScenarioTest(this.getScenario()));
+            OpcionesMenu.setScenarioActual(scenario);
+            setScenario(new ScenarioTest(scenario));
             controlador.setTestInstSatGuardado(true);
             panelAviso.confirmAction("Test guardado", MainApplicationJFrame.getInstance());
         }
@@ -823,13 +827,13 @@ public  int getTabbedPaneInst() {
     return tabbedPaneInst.getSelectedIndex();
 }
 
-public ScenarioTest getScenarioAEditar() {
+/*public ScenarioTest getScenarioAEditar() {
     return scenarioAEditar;
 }
 
 public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
     this.scenarioAEditar = scenarioAEditar;
-}
+}*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton asociarInstanciasButton;

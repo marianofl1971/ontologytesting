@@ -6,27 +6,11 @@
 
 package code.google.com.p.ontologytesting.gui;
 
-import code.google.com.p.ontologytesting.gui.tests.TestInstancesQueryJPanel;
-import code.google.com.p.ontologytesting.gui.tests.TestInstancesTFJPanel;
-import code.google.com.p.ontologytesting.gui.tests.TestInstancesTextAreaJPanel;
-import code.google.com.p.ontologytesting.gui.auxiliarpanels.NewProjectJDialog;
-import code.google.com.p.ontologytesting.gui.auxiliarpanels.AbrirProyectoJDialog;
-import code.google.com.p.ontologytesting.gui.auxiliarpanels.HelpJDialog;
-import code.google.com.p.ontologytesting.gui.menupanels.EditarVerTestInstanciasJDialog;
-import code.google.com.p.ontologytesting.gui.menupanels.EjecutarTestJDialog;
-import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsInstanciasJPanel;
-import code.google.com.p.ontologytesting.gui.menupanels.ImportarTestsInstJDialog;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
-import code.google.com.p.ontologytesting.gui.instances.CreateInstancesJPanel;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
-import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.*;
+import code.google.com.p.ontologytesting.gui.menupanels.*;
+import code.google.com.p.ontologytesting.gui.instances.*;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
+import code.google.com.p.ontologytesting.gui.tests.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
@@ -60,6 +44,10 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private FileChooserSelector utils;
     private XMLDecoder decoder;
     private CollectionTest collection;
+    private TestSimpleInstSat testInstSat;
+    private TestSimpleReal testReal;
+    private TestSimpleRetClas testRetClas;
+    private AddSPARQLJPanel testSparql;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -632,33 +620,72 @@ public boolean listaTestsInstanciasVacia(boolean test){
 
 public void aniadirNuevoTest(ScenarioTest s){
     this.inicializarContadores();
+    testInstSat = new TestSimpleInstSat(s);
+    testRetClas = new TestSimpleRetClas(s);
+    testReal = new TestSimpleReal(s);
+    testSparql = new AddSPARQLJPanel(s);
+    boolean res = false;
+    int type = 0;
+    if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
+        type = 0;
+    }else if(s.getTipoTest().name().equals("RET") || s.getTipoTest().name().equals("CLAS")){
+        type = 1;
+    }else if(s.getTipoTest().name().equals("REAL")){
+        type = 2;
+    }else if(s.getTipoTest().name().equals("SPARQL")){
+        type = 3;
+    }
+    
     if(controlador.algunTestSinGuardar()==false){
         controlador.prepararTest(s.getTipoTest().name());
-        aniadirTest(s);
+        if(type==0){
+            panelTest.getTestsPanel().aniadirTest(testInstSat);
+        }else if(type==1){
+            panelTest.getTestsPanel().aniadirTest(testRetClas);
+        }else if(type==2){
+            panelTest.getTestsPanel().aniadirTest(testReal);
+        }else if(type==3){
+            panelTest.getTestsPanel().aniadirTest(testSparql);
+        }
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                     controlador.prepararTest(s.getTipoTest().name());
-                    aniadirTest(s);
+                    if(type==0){
+                        res = testInstSat.guardarTest();
+                        if(res==true){
+                            panelTest.getTestsPanel().aniadirTest(testInstSat);
+                        }
+                    }else if(type==1){
+                        res = testRetClas.guardarTest();
+                        if(res==true){
+                            panelTest.getTestsPanel().aniadirTest(testRetClas);
+                        }
+                    }else if(type==2){
+                        res = testReal.guardarTest();
+                        if(res==true){
+                             panelTest.getTestsPanel().aniadirTest(testReal);
+                        }
+                    }else if(type==3){
+                        res = testSparql.guardarTest();
+                        if(res==true){
+                            panelTest.getTestsPanel().aniadirTest(testSparql);
+                        }
+                    }
             }else{
                 controlador.prepararTest(s.getTipoTest().name());
-                aniadirTest(s);
+                if(type==0){
+                    panelTest.getTestsPanel().aniadirTest(testInstSat);
+                }else if(type==1){
+                    panelTest.getTestsPanel().aniadirTest(testRetClas);
+                }else if(type==2){
+                    panelTest.getTestsPanel().aniadirTest(testReal);
+                }else if(type==3){
+                    panelTest.getTestsPanel().aniadirTest(testSparql);
+                }
             }
     }
-}
-
-public void aniadirTest(ScenarioTest s){
-    if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
-        panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(s));
-    }else if(s.getTipoTest().name().equals("RET") || s.getTipoTest().name().equals("CLAS")){
-        panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(s));
-    }else if(s.getTipoTest().name().equals("REAL")){
-        panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(s));
-    }else if(s.getTipoTest().name().equals("SPARQL")){
-        panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(s));
-    }
-    this.validate();
 }
 
 public void inicializarContadores(){

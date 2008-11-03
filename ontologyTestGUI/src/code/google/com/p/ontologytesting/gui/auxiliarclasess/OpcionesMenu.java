@@ -31,6 +31,8 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListAndResultsJPanel panelTest;
     private ListarTestsJPanel listInst;
+    private static ScenarioTest scenarioActual = new ScenarioTest();
+    private static ScenarioTest scenarioAEditar = new ScenarioTest();
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
@@ -54,15 +56,17 @@ public class OpcionesMenu {
     }
     
     public void editarTest(ScenarioTest scenario){
+        setScenarioActual(scenario);
+        scenarioAEditar = new ScenarioTest(scenario);
         panelTest = ListAndResultsJPanel.getInstance();
-        if(scenario.getTipoTest().name().equals("INST") || scenario.getTipoTest().name().equals("SAT")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(scenario));
-        }else if(scenario.getTipoTest().name().equals("RET") || scenario.getTipoTest().name().equals("CLAS")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(scenario));
-        }else if(scenario.getTipoTest().name().equals("REAL")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(scenario));
-        }else if(scenario.getTipoTest().name().equals("SPARQL")){
-            panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(scenario));
+        if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
+            panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(scenarioAEditar));
+        }else if(scenarioAEditar.getTipoTest().name().equals("RET") || scenarioAEditar.getTipoTest().name().equals("CLAS")){
+            panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(scenarioAEditar));
+        }else if(scenarioAEditar.getTipoTest().name().equals("REAL")){
+            panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(scenarioAEditar));
+        }else if(scenarioAEditar.getTipoTest().name().equals("SPARQL")){
+            panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(scenarioAEditar));
         }   
     }
     
@@ -104,6 +108,14 @@ public class OpcionesMenu {
     public void actualizarListaDeInstancias(){
         listInst = ListarTestsJPanel.getInstance();
         listInst.aniadirInstancias(CollectionTest.getInstance().getInstancias());
+    }
+
+    public static ScenarioTest getScenarioActual() {
+        return scenarioActual;
+    }
+
+    public static void setScenarioActual(ScenarioTest ascenarioActual) {
+        scenarioActual = ascenarioActual;
     }
   
 }
