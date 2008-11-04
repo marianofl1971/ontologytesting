@@ -139,17 +139,17 @@ private void verButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 // TODO add your handling code here:
     SeeTestJDialog seeTest;
     if(this.getIsTest()==true){
-        seeTest = opMenu.verTest(this.getListarTestInst().getScenarioSelect());//GEN-LAST:event_verButtonActionPerformed
+        seeTest = opMenu.verTest(this.getListarTestInst().getScenarioSelect());
     }else{
         seeTest = opMenu.verInstancias(this.getListarTestInst().getInstanciaSelect());
     }
     seeTest.setLocationRelativeTo(this);
     seeTest.setVisible(true);
-}
+}//GEN-LAST:event_verButtonActionPerformed
 
 private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarButtonActionPerformed
 // TODO add your handling code here:
-    if(this.getIsTest()==true){//GEN-LAST:event_editarButtonActionPerformed
+    if(this.getIsTest()==true){
         opMenu.editarTest(this.getListarTestInst().getScenarioSelect());    
         panelAviso.confirmAction("Test cargado para su edición", this);
         this.setVisible(false);
@@ -158,12 +158,12 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         editInst.setVisible(true);
     }
-}
+}//GEN-LAST:event_editarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
-    this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
-}
+    this.setVisible(false);
+}//GEN-LAST:event_cancelarButtonActionPerformed
 
 public ListarTestsInstanciasJPanel getListarTestInst() {
     return listarTestInst;

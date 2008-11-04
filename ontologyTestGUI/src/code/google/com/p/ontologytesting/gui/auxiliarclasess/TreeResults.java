@@ -91,6 +91,7 @@ public class TreeResults extends JPanel {
 	}
         });
 
+        setTestSeleccionado(testName);
         if(aux==0){
             editor = displaySimpleTest(testName, testResult);
         }

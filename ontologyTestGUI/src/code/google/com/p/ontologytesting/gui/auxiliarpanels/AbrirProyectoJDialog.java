@@ -11,7 +11,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.LoadTest;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  */
 public class AbrirProyectoJDialog extends javax.swing.JDialog {
 
-    private SaveTest saveTest = new SaveTest();
+    private LoadTest loadTest = new LoadTest();
     private boolean proyectoCargado = false;
     private FileChooserSelector utils;
     private OpcionesMenu opMenu;
@@ -150,14 +150,13 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog {
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
-    saveTest = new SaveTest();
     opMenu = new OpcionesMenu();
     if(this.getUbicacionFisica().equals("") || this.getNamespaceText().equals("")){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Todos los campos son obligatorios",                                                  
             "Warning Message",JOptionPane.WARNING_MESSAGE); 
     }else{
         try{
-            boolean res = saveTest.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
+            boolean res = loadTest.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
             if(res==true){
                 opMenu.actualizarListaDeInstancias();
                 opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
@@ -167,8 +166,8 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 this.setProyectoCargado(true);
                 this.setVisible(false);
             }else{
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+            }
         }catch (ExceptionReadOntology ex){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
             "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);

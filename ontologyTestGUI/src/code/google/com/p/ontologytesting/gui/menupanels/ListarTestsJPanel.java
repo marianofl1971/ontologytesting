@@ -7,7 +7,9 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuInstances;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuTests;
@@ -24,6 +26,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -43,6 +46,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     private OpcionesMenu opMenu = new OpcionesMenu();
     private ScenarioTest s = new ScenarioTest();
     private Instancias instancias = new Instancias();
+    private ControladorTests controlador = ControladorTests.getInstance();
     
     private ListarTestsJPanel() {
         initComponents();
@@ -347,32 +351,60 @@ private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 
 private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSimplesListMouseClicked
+    JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+    boolean res = true;
     if(evt.getClickCount()==2){
-        opMenu.editarTest(scenario);
+        if(controlador.algunTestSinGuardar()==false){
+                opMenu.editarTest(scenario);
+                controlador.prepararTest(scenario.getTipoTest().name());
+        }else{
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
+            "Guardar Tests",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
+            }
+            if(res==true){
+                controlador.prepararTest(scenario.getTipoTest().name());
+                opMenu.editarTest(scenario);
+            }
+        }  
     }
-}
+}//GEN-LAST:event_testSimplesListMouseClicked
 
 private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSparqlListMouseClicked
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_testSparqlListMouseClicked
+    JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+    boolean res = true;
     if(evt.getClickCount()==2){
-        opMenu.editarTest(scenario);
+        if(controlador.algunTestSinGuardar()==false){
+            opMenu.editarTest(scenario);
+            controlador.prepararTest(scenario.getTipoTest().name());
+        }else{
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
+            "Guardar Tests",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
+            }
+            if(res==true){
+                controlador.prepararTest(scenario.getTipoTest().name());
+                opMenu.editarTest(scenario);
+            }
+        } 
     }
-}
+}//GEN-LAST:event_testSparqlListMouseClicked
 
 private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
 // TODO add your handling code here:
-    JList lista = (JList) evt.getSource();//GEN-LAST:event_instanciasListMouseClicked
+    JList lista = (JList) evt.getSource();
     Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
         AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(null, false, inst);
         addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         addInst.setVisible(true);
     }
-}
+}//GEN-LAST:event_instanciasListMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel instanciasContentPanel;

@@ -30,7 +30,6 @@ import java.util.NoSuchElementException;
 public class ImportarTestsInstJDialog extends javax.swing.JDialog {
 
     private ListarTestsInstanciasJPanel listaFicheros = new ListarTestsInstanciasJPanel();
-    private String pathProyect;
     private XMLDecoder decoder;
     private CollectionTest collection;
     private List<ScenarioTest> scenarioSparql = new ArrayList<ScenarioTest>();
@@ -276,11 +275,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     public String getPathProyect() {
-        return pathProyect;
-    }
-
-    public void setPathProyect(String pathProyect) {
-        this.pathProyect = pathProyect;
+        return pathProyectoTextField.getText();
     }
     
     public boolean isImportarTest() {

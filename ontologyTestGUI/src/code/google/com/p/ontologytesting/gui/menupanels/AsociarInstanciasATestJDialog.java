@@ -175,6 +175,14 @@ public Instancias getInstancias() {
 public void setInstancias(Instancias instancias) {
     this.instancias = instancias;
 }
+
+public List<ScenarioTest> getScenariosSeleccionados() {
+    return scenariosSeleccionados;
+}
+
+public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados) {
+    this.scenariosSeleccionados = scenariosSeleccionados;
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;
@@ -185,13 +193,5 @@ public void setInstancias(Instancias instancias) {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verTestButton;
     // End of variables declaration//GEN-END:variables
-
-    public List<ScenarioTest> getScenariosSeleccionados() {
-        return scenariosSeleccionados;
-    }
-
-    public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados) {
-        this.scenariosSeleccionados = scenariosSeleccionados;
-    }
 
 }

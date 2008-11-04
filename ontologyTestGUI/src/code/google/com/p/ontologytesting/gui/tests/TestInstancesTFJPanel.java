@@ -66,7 +66,6 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         falseRadioButton.setText("False");
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
-        comentarioButton.setText("Comentario");
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +74,6 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         });
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        borrarButton.setText("Borrar");
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +101,9 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
                 .add(falseRadioButton)
                 .add(40, 40, 40)
                 .add(comentarioButton)
-                .add(30, 30, 30)
+                .add(18, 18, 18)
                 .add(borrarButton)
-                .add(32, 32, 32)
+                .add(18, 18, 18)
                 .add(duplicarButton)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -113,13 +111,14 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(trueRadioButton)
-                    .add(falseRadioButton)
-                    .add(comentarioButton)
-                    .add(borrarButton)
-                    .add(duplicarButton))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(duplicarButton)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(trueRadioButton)
+                        .add(falseRadioButton)
+                        .add(comentarioButton))
+                    .add(borrarButton))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

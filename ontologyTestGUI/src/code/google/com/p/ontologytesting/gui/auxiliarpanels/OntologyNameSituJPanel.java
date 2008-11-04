@@ -105,16 +105,44 @@ public class OntologyNameSituJPanel extends javax.swing.JPanel {
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
     utils.fileChooser(true, true);
-    this.getUbicacionOntoTextField().setText(utils.getPathSelected());
+    this.getUbicacionOntoTextField().setText(FileChooserSelector.getPathSelected());
 }//GEN-LAST:event_examinarButtonActionPerformed
 
-    public boolean isState() {
-        return state;
-    }
+public boolean isState() {
+    return state;
+}
 
-    public void setState(boolean state) {
-        this.state = state;
-    }
+public void setState(boolean state) {
+    this.state = state;
+}
+
+public String getUbicOnto() {
+    return ubicOnto;
+}
+
+public void setUbicOnto(String ubicOnto) {
+    this.ubicOnto = ubicOnto;
+}
+
+public String getNsOnto() {
+    return nsOnto;
+}
+
+public void setNsOnto(String nsOnto) {
+    this.nsOnto = nsOnto;
+}
+
+public String getNamespaceOntoTextField() {
+    return namespaceOntoTextField.getText();
+}
+
+public javax.swing.JTextField getUbicacionOntoTextField() {
+    return ubicacionOntoTextField;
+}
+
+public String getUbicacionOnto() {
+    return ubicacionOntoTextField.getText();
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton examinarButton;
@@ -125,33 +153,5 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JTextField namespaceOntoTextField;
     private javax.swing.JTextField ubicacionOntoTextField;
     // End of variables declaration//GEN-END:variables
-
-    public String getUbicOnto() {
-        return ubicOnto;
-    }
-
-    public void setUbicOnto(String ubicOnto) {
-        this.ubicOnto = ubicOnto;
-    }
-
-    public String getNsOnto() {
-        return nsOnto;
-    }
-
-    public void setNsOnto(String nsOnto) {
-        this.nsOnto = nsOnto;
-    }
-
-    public String getNamespaceOntoTextField() {
-        return namespaceOntoTextField.getText();
-    }
-
-    public javax.swing.JTextField getUbicacionOntoTextField() {
-        return ubicacionOntoTextField;
-    }
-    
-    public String getUbicacionOnto() {
-        return ubicacionOntoTextField.getText();
-    }
 
 }

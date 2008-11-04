@@ -12,10 +12,6 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
-import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
-import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import java.util.List;
@@ -29,7 +25,6 @@ public class OpcionesMenu {
     
     private OntologyTestResult testResult;
     private OntologyTestCase testCase;
-    private ListAndResultsJPanel panelTest;
     private ListarTestsJPanel listInst;
     private static ScenarioTest scenarioActual = new ScenarioTest();
     private static ScenarioTest scenarioAEditar = new ScenarioTest();
@@ -45,28 +40,27 @@ public class OpcionesMenu {
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         testCase.runListaScenario(testResult, CollectionTest.getInstance(), listScenario);
-        new TreeResults(testResult,listScenario.get(0).getNombre());
+        new TreeResults(testResult,"Batería de Tests");
     }
 
     public void ejecutarTodosLosTests() throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         testCase.run(testResult, CollectionTest.getInstance());
-        new TreeResults(testResult, CollectionTest.getInstance().getScenariotest().get(0).getNombre());
+        new TreeResults(testResult, "Todos los Test");
     }
     
     public void editarTest(ScenarioTest scenario){
         setScenarioActual(scenario);
         scenarioAEditar = new ScenarioTest(scenario);
-        panelTest = ListAndResultsJPanel.getInstance();
         if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleInstSat(scenarioAEditar));
+            MainApplicationJFrame.getInstance().cargarTest(0, true, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("RET") || scenarioAEditar.getTipoTest().name().equals("CLAS")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleRetClas(scenarioAEditar));
+            MainApplicationJFrame.getInstance().cargarTest(1, true, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("REAL")){
-            panelTest.getTestsPanel().aniadirTest(new TestSimpleReal(scenarioAEditar));
+            MainApplicationJFrame.getInstance().cargarTest(2, true, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("SPARQL")){
-            panelTest.getTestsPanel().aniadirTest(new AddSPARQLJPanel(scenarioAEditar));
+            MainApplicationJFrame.getInstance().cargarTest(3, true, scenarioAEditar);
         }   
     }
     

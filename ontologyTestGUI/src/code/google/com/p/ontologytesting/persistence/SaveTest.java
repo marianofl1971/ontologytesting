@@ -6,7 +6,6 @@
 package code.google.com.p.ontologytesting.persistence;
 
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -22,7 +21,6 @@ import java.util.List;
 public class SaveTest {
 
     private XMLEncoder e;
-    private Reasoner jena = new Reasoner();
     
     public boolean saveProject(boolean as,String carpetaProy, String nombreProy,File fichero) throws FileNotFoundException{
         if(as==true){
@@ -34,23 +32,6 @@ public class SaveTest {
             e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy)));
             e.writeObject(CollectionTest.getInstance());
             e.close();
-            return true;
-        }
-    }
-    
-    public boolean loadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology{                                             
-        InterfaceReasoner j = jena.getReasoner();
-        if(jena.isCargado()==false){
-            return false;
-        }else{
-            if(!namespaceOnto.endsWith("#")){
-                namespaceOnto = namespaceOnto.concat("#");
-            }
-            CollectionTest.getInstance().setOntology(ubicOnto);
-            CollectionTest.getInstance().setNamespace(namespaceOnto);
-            j.addReasoner(ubicOnto);
-            CollectionTest.getInstance().setNamespace(namespaceOnto);
-            CollectionTest.getInstance().setOntology(ubicOnto);
             return true;
         }
     }

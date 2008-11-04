@@ -14,6 +14,7 @@ import code.google.com.p.ontologytesting.gui.tests.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.persistence.LoadTest;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
@@ -37,6 +39,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
     private SaveTest saveTest = new SaveTest();
+    private LoadTest loadTest = new LoadTest();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false;
@@ -48,6 +51,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private TestSimpleReal testReal;
     private TestSimpleRetClas testRetClas;
     private AddSPARQLJPanel testSparql;
+    private JPanel panelActual;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -183,7 +187,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         testsMenu.setText("Tests");
-        testsMenu.setEnabled(false);
 
         jMenu3.setText("Nuevo");
 
@@ -407,11 +410,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             this.dispose();
-            try{
-                System.exit(0);
-            }catch (SecurityException ex){
-                panelAviso.errorAction("Security exception", this);
-            }
+            System.exit(0);
         } 
 
 }//GEN-LAST:event_salirMenuItemActionPerformed
@@ -509,7 +508,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
             TreeResults.setTestSeleccionado("Todos los Tests");
-            opMenu.ejecutarBateriaTests(CollectionTest.getInstance().getScenariotest());
+            opMenu.ejecutarTodosLosTests();
             panelAviso.confirmAction("Tests ejecutados", this);
         }catch(ExceptionReadOntology ex){
             panelAviso.errorAction("Error ejecutando los tests",this);  
@@ -541,10 +540,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         utils.fileChooser(true, true);
         decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
         collection = (CollectionTest) decoder.readObject();
-        CollectionTest.getInstance().setInstancias(collection.getInstancias());
-        CollectionTest.getInstance().setNamespace(collection.getNamespace());
-        CollectionTest.getInstance().setOntology(collection.getOntology());
-        CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
+        loadTest.prepareProject(collection);
         abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
         abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
         abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -620,10 +616,6 @@ public boolean listaTestsInstanciasVacia(boolean test){
 
 public void aniadirNuevoTest(ScenarioTest s){
     this.inicializarContadores();
-    testInstSat = new TestSimpleInstSat(s);
-    testRetClas = new TestSimpleRetClas(s);
-    testReal = new TestSimpleReal(s);
-    testSparql = new AddSPARQLJPanel(s);
     boolean res = false;
     int type = 0;
     if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
@@ -635,56 +627,67 @@ public void aniadirNuevoTest(ScenarioTest s){
     }else if(s.getTipoTest().name().equals("SPARQL")){
         type = 3;
     }
-    
     if(controlador.algunTestSinGuardar()==false){
         controlador.prepararTest(s.getTipoTest().name());
-        if(type==0){
-            panelTest.getTestsPanel().aniadirTest(testInstSat);
-        }else if(type==1){
-            panelTest.getTestsPanel().aniadirTest(testRetClas);
-        }else if(type==2){
-            panelTest.getTestsPanel().aniadirTest(testReal);
-        }else if(type==3){
-            panelTest.getTestsPanel().aniadirTest(testSparql);
-        }
+        cargarTest(type,true,s);
     }else{
         int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                     controlador.prepararTest(s.getTipoTest().name());
-                    if(type==0){
-                        res = testInstSat.guardarTest();
-                        if(res==true){
-                            panelTest.getTestsPanel().aniadirTest(testInstSat);
-                        }
-                    }else if(type==1){
-                        res = testRetClas.guardarTest();
-                        if(res==true){
-                            panelTest.getTestsPanel().aniadirTest(testRetClas);
-                        }
-                    }else if(type==2){
-                        res = testReal.guardarTest();
-                        if(res==true){
-                             panelTest.getTestsPanel().aniadirTest(testReal);
-                        }
-                    }else if(type==3){
-                        res = testSparql.guardarTest();
-                        if(res==true){
-                            panelTest.getTestsPanel().aniadirTest(testSparql);
-                        }
-                    }
+                    res = obtenerPanelAGuardar();
+                    cargarTest(type,res,s);
             }else{
                 controlador.prepararTest(s.getTipoTest().name());
-                if(type==0){
-                    panelTest.getTestsPanel().aniadirTest(testInstSat);
-                }else if(type==1){
-                    panelTest.getTestsPanel().aniadirTest(testRetClas);
-                }else if(type==2){
-                    panelTest.getTestsPanel().aniadirTest(testReal);
-                }else if(type==3){
-                    panelTest.getTestsPanel().aniadirTest(testSparql);
-                }
+                cargarTest(type,true,s);
             }
+    }
+}
+
+public boolean obtenerPanelAGuardar(){
+    JPanel panel = getPanelActual();
+    boolean res = false;
+    if(panel instanceof TestSimpleInstSat){
+        testInstSat = (TestSimpleInstSat) panel;
+        res = testInstSat.guardarTest();
+    }else if(panel instanceof TestSimpleRetClas){
+        testRetClas = (TestSimpleRetClas) panel;
+        res = testRetClas.guardarTest();
+    }else if(panel instanceof TestSimpleReal){
+        testReal = (TestSimpleReal) panel;
+        res = testReal.guardarTest();
+    }else if(panel instanceof AddSPARQLJPanel){
+        testSparql = (AddSPARQLJPanel) panel;
+        res = testSparql.guardarTest();
+    }
+    return res;
+}
+
+public void cargarTest(int type,boolean res,ScenarioTest s){
+    if(type==0){
+        if(res==true){
+            testInstSat = new TestSimpleInstSat(s);
+            panelTest.getTestsPanel().aniadirTest(testInstSat);
+            setPanelActual(testInstSat);
+        }
+    }else if(type==1){
+        if(res==true){
+            testRetClas = new TestSimpleRetClas(s);
+            panelTest.getTestsPanel().aniadirTest(testRetClas);
+            setPanelActual(testRetClas);
+        }
+    }else if(type==2){
+        if(res==true){
+             testReal = new TestSimpleReal(s);
+             panelTest.getTestsPanel().aniadirTest(testReal);
+             setPanelActual(testReal);
+        }
+    }else if(type==3){
+        if(res==true){
+            testSparql = new AddSPARQLJPanel(s);
+            panelTest.getTestsPanel().aniadirTest(testSparql);
+            setPanelActual(testSparql);
+        }
     }
 }
 
@@ -767,5 +770,13 @@ public void inicializarContadores(){
     private javax.swing.JMenuItem verInstanciasMenuItem;
     private javax.swing.JMenuItem verTestsMenuItem;
     // End of variables declaration//GEN-END:variables
+
+    public JPanel getPanelActual() {
+        return panelActual;
+    }
+
+    public void setPanelActual(JPanel panelActual) {
+        this.panelActual = panelActual;
+    }
 
 }
