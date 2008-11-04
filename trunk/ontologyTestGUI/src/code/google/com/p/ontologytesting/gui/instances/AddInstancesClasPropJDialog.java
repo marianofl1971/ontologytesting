@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.ListIterator;
 import javax.swing.WindowConstants;
 
@@ -61,7 +62,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         int contI=0,contP=0;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.setLayout(new FlowLayout());
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
         if(scenario.getInstancias().hayInstancias()==true){
@@ -128,7 +130,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setNuevoTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.setLayout(new FlowLayout());
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
         for (int i = 0; i <= 10; i++) {
             clasPanel.add(new CreateInstancesJPanel(0));  
@@ -152,7 +155,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
+        clasPropPanel.setLayout(new FlowLayout());
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
 
         setNomInstanciasTextField(inst.getNombre());
@@ -668,7 +672,6 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             getInstancias().setPropertyInstances(propInst);
             getInstancias().setDescripcion(getDescInstanciasTextArea());
             getInstancias().setNombre(getNomInstanciasTextField());
-
             if((guardar==true && asociar==true && this.getNuevoTest()==false) || (guardar==true)){
                 if(aux==0){
                     if(this.getInstanciasAEditar()!= null && 

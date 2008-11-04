@@ -106,17 +106,19 @@ public class TestSimpleReal extends javax.swing.JPanel {
         labelRealLabel = new javax.swing.JLabel();
         opcionTextRealPanel = new javax.swing.JPanel();
         asociarInstanciasButton = new javax.swing.JButton();
-        descripcionJPanel = new javax.swing.JPanel();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
         guardarEjecutarButton = new javax.swing.JButton();
         ejecutarButton = new javax.swing.JButton();
+        descripcionJPanel = new javax.swing.JPanel();
 
         tabbedPaneReal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabbedPaneRealMouseClicked(evt);
             }
         });
+
+        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         labelRealLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO");
 
@@ -127,7 +129,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             .addGroup(labelRealPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRealLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         labelRealPanelLayout.setVerticalGroup(
             labelRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,14 +146,14 @@ public class TestSimpleReal extends javax.swing.JPanel {
             .addGroup(realAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
         realAyudaPanelLayout.setVerticalGroup(
             realAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(realAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRealPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(realAyudaPanel);
@@ -161,14 +163,16 @@ public class TestSimpleReal extends javax.swing.JPanel {
         opcionAyudaRealPanelLayout.setHorizontalGroup(
             opcionAyudaRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaRealPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+                .addContainerGap())
         );
         opcionAyudaRealPanelLayout.setVerticalGroup(
             opcionAyudaRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionAyudaRealPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tabbedPaneReal.addTab("Formato ayuda", opcionAyudaRealPanel);
@@ -177,11 +181,11 @@ public class TestSimpleReal extends javax.swing.JPanel {
         opcionTextRealPanel.setLayout(opcionTextRealPanelLayout);
         opcionTextRealPanelLayout.setHorizontalGroup(
             opcionTextRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 804, Short.MAX_VALUE)
+            .addGap(0, 672, Short.MAX_VALUE)
         );
         opcionTextRealPanelLayout.setVerticalGroup(
             opcionTextRealPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 362, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
         tabbedPaneReal.addTab("Formato Texto", opcionTextRealPanel);
@@ -193,39 +197,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout contentRealTabedPanelLayout = new javax.swing.GroupLayout(contentRealTabedPanel);
-        contentRealTabedPanel.setLayout(contentRealTabedPanelLayout);
-        contentRealTabedPanelLayout.setHorizontalGroup(
-            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentRealTabedPanelLayout.createSequentialGroup()
-                .addContainerGap(621, Short.MAX_VALUE)
-                .addComponent(asociarInstanciasButton)
-                .addGap(79, 79, 79))
-            .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
-                .addComponent(tabbedPaneReal, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        contentRealTabedPanelLayout.setVerticalGroup(
-            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
-                .addComponent(asociarInstanciasButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabbedPaneReal, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
-        descripcionJPanel.setLayout(descripcionJPanelLayout);
-        descripcionJPanelLayout.setHorizontalGroup(
-            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 621, Short.MAX_VALUE)
-        );
-        descripcionJPanelLayout.setVerticalGroup(
-            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
-        );
-
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
-        guardarButton.setText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarButtonActionPerformed(evt);
@@ -240,7 +212,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
         });
 
         ejecutarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cog.png"))); // NOI18N
-        ejecutarButton.setText("Ejecutar");
         ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ejecutarButtonActionPerformed(evt);
@@ -258,7 +229,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
                 .addComponent(ejecutarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarEjecutarButton)
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,27 +239,61 @@ public class TestSimpleReal extends javax.swing.JPanel {
                 .addComponent(guardarEjecutarButton))
         );
 
+        javax.swing.GroupLayout contentRealTabedPanelLayout = new javax.swing.GroupLayout(contentRealTabedPanel);
+        contentRealTabedPanel.setLayout(contentRealTabedPanelLayout);
+        contentRealTabedPanelLayout.setHorizontalGroup(
+            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(asociarInstanciasButton)
+                .addContainerGap(193, Short.MAX_VALUE))
+            .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
+                .addComponent(tabbedPaneReal, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        contentRealTabedPanelLayout.setVerticalGroup(
+            contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(asociarInstanciasButton))
+                .addGap(20, 20, 20)
+                .addComponent(tabbedPaneReal, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
+        descripcionJPanel.setLayout(descripcionJPanelLayout);
+        descripcionJPanelLayout.setHorizontalGroup(
+            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 612, Short.MAX_VALUE)
+        );
+        descripcionJPanelLayout.setVerticalGroup(
+            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 145, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contentRealTabedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

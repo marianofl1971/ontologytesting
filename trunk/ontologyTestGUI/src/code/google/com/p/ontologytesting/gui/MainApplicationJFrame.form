@@ -56,7 +56,6 @@
         <Menu class="javax.swing.JMenu" name="testsMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tests"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu3">

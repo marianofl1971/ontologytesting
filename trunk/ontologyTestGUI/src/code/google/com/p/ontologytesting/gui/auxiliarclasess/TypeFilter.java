@@ -14,7 +14,6 @@ import javax.swing.filechooser.*;
 
 public class TypeFilter extends FileFilter{
 
-    //Accept all directories and all gif, jpg, tiff, or png files.
     @Override
     public boolean accept(File f) {
         if (f.isDirectory()) {
@@ -32,7 +31,6 @@ public class TypeFilter extends FileFilter{
         return false;
     }
 
-    //The description of this filter
     @Override
     public String getDescription() {
         return ".xml .owl";

@@ -58,7 +58,6 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         });
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
-        comentarioButton.setText("Comentario");
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,8 +65,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             }
         });
 
-        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        borrarButton.setText("Borrar");
+        borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

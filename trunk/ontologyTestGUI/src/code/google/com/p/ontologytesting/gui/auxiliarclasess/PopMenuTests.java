@@ -10,7 +10,6 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
@@ -23,13 +22,13 @@ import javax.swing.JPopupMenu;
  */
 public class PopMenuTests implements ActionListener{
 
-    private SaveTest saveTest =  new SaveTest();
     private OpcionesMenu menu = new OpcionesMenu();
     private String testSelec="";
     private ScenarioTest s = new ScenarioTest();
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean res = true;
         JMenuItem source = (JMenuItem)(e.getSource());
         CollectionTest collection = CollectionTest.getInstance();
         ControladorTests controlador = ControladorTests.getInstance();
@@ -42,10 +41,12 @@ public class PopMenuTests implements ActionListener{
                 int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
                 "Guardar Tests",JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION){
-                    saveTest.replaceScenarioLocally(scenario);
+                    res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
                 }
-                controlador.prepararTest(scenario.getTipoTest().name());
-                menu.editarTest(scenario);
+                if(res==true){
+                    controlador.prepararTest(scenario.getTipoTest().name());
+                    menu.editarTest(scenario);
+                }
             }
         }else if(source.getText().equals("Ejecutar")){
             try{
