@@ -94,16 +94,16 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 202, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(34, 34, 34)
+                .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 177, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
                 .add(trueRadioButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(falseRadioButton)
-                .add(40, 40, 40)
+                .add(18, 18, 18)
                 .add(comentarioButton)
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(borrarButton)
-                .add(18, 18, 18)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(duplicarButton)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -113,12 +113,12 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(duplicarButton)
+                    .add(borrarButton)
+                    .add(comentarioButton)
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(queryTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(trueRadioButton)
-                        .add(falseRadioButton)
-                        .add(comentarioButton))
-                    .add(borrarButton))
+                        .add(falseRadioButton)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -186,7 +186,7 @@ private void queryTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
             this.getParent().add(new TestInstancesTFJPanel());
          }
     }
-    this.getParent().validate();
+    this.getParent().getParent().validate();
 }//GEN-LAST:event_queryTextFieldMouseClicked
 
 public boolean consultaCompletaEnAyuda(){

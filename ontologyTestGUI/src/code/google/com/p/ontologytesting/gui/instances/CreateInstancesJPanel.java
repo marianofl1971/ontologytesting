@@ -218,18 +218,76 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
                 this.getParent().add(new CreateInstancesJPanel(0));
              }
         }
-        this.getParent().validate();
     }else if(getTab() == 1){
         if(pos+1==tamProp){
              for(int i=0;i<9;i++){
                 this.getParent().add(new CreateInstancesJPanel(1));
              }
         }
-        this.getParent().validate();
     }
+    this.getParent().getParent().validate();
 }//GEN-LAST:event_instanciaTextFieldMouseClicked
 
+public void setInstance(String instance){
+    getInstanciaTextField().setText(instance);
+}
 
+public String getQuery(){
+    return getInstanciaTextField().getText();
+}
+
+public AddComentJDialog getComment() {
+    return frameComent;
+}
+
+public void setComment(AddComentJDialog comment) {
+    this.frameComent = comment;
+}
+
+public void setInstanciaTextField(javax.swing.JTextField instanciaTextField) {
+    this.instanciaTextField = instanciaTextField;
+}
+
+public javax.swing.JTextField getInstanciaTextField() {
+    return instanciaTextField;
+}
+
+public int getPosicion() {
+    return posicion;
+}
+
+public void setPosicion(int posicion) {
+    this.posicion = posicion;
+}
+
+public boolean getSelectedCheckBox() {
+    return selectedCheckBox.isSelected();
+}
+
+public static int getContadorClas() {
+    return contadorClas;
+}
+
+public static void setContadorClas(int aContador) {
+    contadorClas = aContador;
+}
+
+public static int getContadorProp() {
+    return contadorProp;
+}
+
+public static void setContadorProp(int aContadorProp) {
+    contadorProp = aContadorProp;
+}
+
+public static int getTab() {
+    return tab;
+}
+
+public static void setTab(int atab) {
+    tab = atab;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarButton;
     private javax.swing.JButton comentarioButton;
@@ -237,64 +295,5 @@ private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GE
     private javax.swing.JTextField instanciaTextField;
     private javax.swing.JCheckBox selectedCheckBox;
     // End of variables declaration//GEN-END:variables
-
-    public void setInstance(String instance){
-        getInstanciaTextField().setText(instance);
-    }
     
-    public String getQuery(){
-        return getInstanciaTextField().getText();
-    }
-
-    public AddComentJDialog getComment() {
-        return frameComent;
-    }
-
-    public void setComment(AddComentJDialog comment) {
-        this.frameComent = comment;
-    }
-
-    public void setInstanciaTextField(javax.swing.JTextField instanciaTextField) {
-        this.instanciaTextField = instanciaTextField;
-    }
-
-    public javax.swing.JTextField getInstanciaTextField() {
-        return instanciaTextField;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
-    }
-
-    public boolean getSelectedCheckBox() {
-        return selectedCheckBox.isSelected();
-    }
-    
-    public static int getContadorClas() {
-        return contadorClas;
-    }
-    
-    public static void setContadorClas(int aContador) {
-        contadorClas = aContador;
-    }
-
-    public static int getContadorProp() {
-        return contadorProp;
-    }
-
-    public static void setContadorProp(int aContadorProp) {
-        contadorProp = aContadorProp;
-    }
-
-    public static int getTab() {
-        return tab;
-    }
-
-    public static void setTab(int atab) {
-        tab = atab;
-    }
 }

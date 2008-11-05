@@ -69,7 +69,7 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
         resultTestsPanel = new javax.swing.JPanel();
 
         splitPane.setDividerLocation(500);
-        splitPane.setDividerSize(6);
+        splitPane.setDividerSize(7);
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         splitPane.setOneTouchExpandable(true);
 
@@ -83,7 +83,7 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
         );
         listAndTestsPanelLayout.setVerticalGroup(
             listAndTestsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGap(0, 473, Short.MAX_VALUE)
         );
 
         splitPane.setLeftComponent(listAndTestsPanel);
