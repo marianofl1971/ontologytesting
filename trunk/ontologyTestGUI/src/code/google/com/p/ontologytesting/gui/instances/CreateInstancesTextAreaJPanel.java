@@ -32,7 +32,7 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
         jScrollPane17 = new javax.swing.JScrollPane();
         propiedadTextArea = new javax.swing.JTextArea();
 
-        jLabel1.setText("                      INSTANCIAS DE CLASE                                                                    INSTANCIAS DE PROPIEDAD  ");
+        jLabel1.setText("                      INSTANCIAS DE CLASE                                                                            INSTANCIAS DE PROPIEDAD  ");
 
         claseTextArea.setColumns(20);
         claseTextArea.setRows(5);
@@ -49,14 +49,12 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(85, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane16, jScrollPane17});
@@ -67,17 +65,45 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane17)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane16, jScrollPane17});
-
     }// </editor-fold>//GEN-END:initComponents
 
+public String getClaseTextArea() {
+    return getClaseArea().getText();
+}
 
+public void setClaseTextArea(String aclaseTextArea) {
+    getClaseArea().setText(aclaseTextArea);
+}
+
+public String getPropiedadTextArea() {
+    return getPropiedadArea().getText();
+}
+
+public void setPropiedadTextArea(String apropiedadTextArea) {
+    getPropiedadArea().setText(apropiedadTextArea);
+}
+
+public javax.swing.JTextArea getClaseArea() {
+    return claseTextArea;
+}
+
+public void setClaseArea(javax.swing.JTextArea claseTextArea) {
+    this.claseTextArea = claseTextArea;
+}
+
+public javax.swing.JTextArea getPropiedadArea() {
+    return propiedadTextArea;
+}
+
+public void setPropiedadTextArea(javax.swing.JTextArea propiedadTextArea) {
+    this.propiedadTextArea = propiedadTextArea;
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea claseTextArea;
     private javax.swing.JLabel jLabel1;
@@ -85,37 +111,5 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JTextArea propiedadTextArea;
     // End of variables declaration//GEN-END:variables
-
-    public String getClaseTextArea() {
-        return getClaseArea().getText();
-    }
-
-    public void setClaseTextArea(String aclaseTextArea) {
-        getClaseArea().setText(aclaseTextArea);
-    }
-
-    public String getPropiedadTextArea() {
-        return getPropiedadArea().getText();
-    }
-
-    public void setPropiedadTextArea(String apropiedadTextArea) {
-        getPropiedadArea().setText(apropiedadTextArea);
-    }
-
-    public javax.swing.JTextArea getClaseArea() {
-        return claseTextArea;
-    }
-
-    public void setClaseArea(javax.swing.JTextArea claseTextArea) {
-        this.claseTextArea = claseTextArea;
-    }
-
-    public javax.swing.JTextArea getPropiedadArea() {
-        return propiedadTextArea;
-    }
-
-    public void setPropiedadTextArea(javax.swing.JTextArea propiedadTextArea) {
-        this.propiedadTextArea = propiedadTextArea;
-    }
 
 }

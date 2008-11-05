@@ -13,13 +13,13 @@ import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.util.ListIterator;
 import javax.swing.WindowConstants;
 
@@ -62,9 +62,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         int contI=0,contP=0;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new FlowLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
+        clasPropPanel.setLayout(new BorderLayout());
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
 
         if(scenario.getInstancias().hayInstancias()==true){
             Instancias inst = scenario.getInstancias();
@@ -97,18 +96,22 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 contP++;
             }
 
-            for (int j = 0; j <= (10-contI); j++) {
-                clasPanel.add(new CreateInstancesJPanel(0));
+            if(4-contI>0){
+                for (int j = 0; j <= (4-contI); j++) {
+                    clasPanel.add(new CreateInstancesJPanel(0));
+                }
             }
-            for (int k = 0; k <= (10-contP); k++) {
-                propPanel.add(new CreateInstancesJPanel(1));
+            if(4-contP>0){
+                for (int k = 0; k <= (4-contP); k++) {
+                    propPanel.add(new CreateInstancesJPanel(1));
+                }
             }
             instanciasAEditar = new Instancias(scenario.getInstancias());
             setInstancias(new Instancias(scenario.getInstancias()));
             this.setScenario(scenario);
             setEditado(false);
         }else{
-            for (int i = 0; i <= 10; i++) {
+            for (int i = 0; i <= 4; i++) {
                 clasPanel.add(new CreateInstancesJPanel(0));  
                 propPanel.add(new CreateInstancesJPanel(1));
             }
@@ -130,10 +133,9 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         this.setNuevoTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new FlowLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
-        for (int i = 0; i <= 10; i++) {
+        clasPropPanel.setLayout(new BorderLayout());
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
+        for (int i = 0; i <= 4; i++) {
             clasPanel.add(new CreateInstancesJPanel(0));  
             propPanel.add(new CreateInstancesJPanel(1));
         }
@@ -155,9 +157,8 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         setInstanciasInstGuardadas(false);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        //clasPropPanel.setLayout(new BoxLayout(clasPropPanel, BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new FlowLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),0);
+        clasPropPanel.setLayout(new BorderLayout());
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
 
         setNomInstanciasTextField(inst.getNombre());
         setDescInstanciasTextArea(inst.getDescripcion());
@@ -187,14 +188,17 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             propPanel.add(instProp);
             contP++;
         }
-          
-        for (int j = 0; j <= (10-contI); j++) {
-            clasPanel.add(new CreateInstancesJPanel(0));
+         
+        if(4-contI>0){
+            for (int j = 0; j <= (4-contI); j++) {
+                clasPanel.add(new CreateInstancesJPanel(0));
+            }
         }
-        for (int k = 0; k <= (10-contP); k++) {
-            propPanel.add(new CreateInstancesJPanel(1));
+        if(4-contP>0){
+            for (int k = 0; k <= (4-contP); k++) {
+                propPanel.add(new CreateInstancesJPanel(1));
+            }
         }
-        
         instanciasAEditar = new Instancias(inst);
         setInstancias(inst);
         setEditado(true);
@@ -245,7 +249,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             }
         });
 
-        cancelarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
+        cancelarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
         cancelarInstButton.setText("Cancelar");
         cancelarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,14 +331,14 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         instancesTabbedPane.addTab("Introducir ambas en forma de texto", textAreaScrollPane);
 
         formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/information.png"))); // NOI18N
-        formatosButton.setText("Formatos Permitidos");
+        formatosButton.setToolTipText("Formatos Permitidos");
         formatosButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 formatosButtonActionPerformed(evt);
             }
         });
 
-        borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
+        borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
         borrarSelecButton.setText("Borrar Seleccion");
         borrarSelecButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,7 +372,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                     .addComponent(instancesTabbedPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
                         .addComponent(formatosButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
                         .addComponent(cancelarInstButton)

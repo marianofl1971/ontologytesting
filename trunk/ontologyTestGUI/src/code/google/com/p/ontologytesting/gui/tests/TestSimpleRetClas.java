@@ -15,7 +15,7 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -55,8 +55,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
-        descripcionJPanel.setLayout(new FlowLayout());
-        descripcionJPanel.add(new DescripcionJPanel());
+        descripcionJPanel.setLayout(new BorderLayout());
+        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.CENTER);
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
         retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
         controlador = ControladorTests.getInstance();
@@ -80,8 +80,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             retAyudaPanel.add(panelInstances,cont);
             cont++;
         }
-        if(cont<10){
-            for (int i = cont; i <= 10; i++) {  
+        if(cont<2){
+            for (int i = cont; i <= 2; i++) {  
                 retAyudaPanel.add(new TestInstancesTextAreaJPanel());   
             }
         }
@@ -131,7 +131,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             .addGroup(labelRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         labelRetPanelLayout.setVerticalGroup(
             labelRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +148,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             .addGroup(retAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addContainerGap(465, Short.MAX_VALUE))
         );
         retAyudaPanelLayout.setVerticalGroup(
             retAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,8 +166,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionAyudaRetPanelLayout.setVerticalGroup(
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +183,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         opcionTextRetPanel.setLayout(opcionTextRetPanelLayout);
         opcionTextRetPanelLayout.setHorizontalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 738, Short.MAX_VALUE)
+            .addGap(0, 572, Short.MAX_VALUE)
         );
         opcionTextRetPanelLayout.setVerticalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,6 +200,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         });
 
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
+        guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarButtonActionPerformed(evt);
@@ -207,6 +208,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         });
 
         guardarEjecutarButton.setText("Guardar y Ejecutar");
+        guardarEjecutarButton.setToolTipText("Guardar y Ejecutar");
         guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarEjecutarButtonActionPerformed(evt);
@@ -214,6 +216,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         });
 
         ejecutarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cog.png"))); // NOI18N
+        ejecutarButton.setToolTipText("Ejecutar");
         ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ejecutarButtonActionPerformed(evt);
@@ -252,8 +255,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
                 .addComponent(asociarInstanciasButton)
                 .addGap(303, 303, 303))
             .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
-                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         contentRetTabedPanelLayout.setVerticalGroup(
             contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,30 +273,30 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         descripcionJPanel.setLayout(descripcionJPanelLayout);
         descripcionJPanelLayout.setHorizontalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
         descripcionJPanelLayout.setVerticalGroup(
             descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
+            .addGap(0, 134, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descripcionJPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );

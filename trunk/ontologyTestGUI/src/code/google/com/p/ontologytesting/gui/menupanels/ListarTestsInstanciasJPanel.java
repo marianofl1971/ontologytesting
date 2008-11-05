@@ -258,7 +258,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
         list = new javax.swing.JList();
 
         jSplitPane1.setDividerLocation(170);
-        jSplitPane1.setDividerSize(6);
+        jSplitPane1.setDividerSize(7);
         jSplitPane1.setOneTouchExpandable(true);
         jSplitPane1.setPreferredSize(new java.awt.Dimension(500, 200));
 
@@ -270,9 +270,9 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 264, Short.MAX_VALUE)
+            .addGap(0, 263, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(descScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                .addComponent(descScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

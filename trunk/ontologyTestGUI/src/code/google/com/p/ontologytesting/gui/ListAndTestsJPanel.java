@@ -63,7 +63,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsScrollPane = new javax.swing.JScrollPane();
         testsPanel = new javax.swing.JPanel();
 
-        splitPane.setDividerSize(6);
+        splitPane.setDividerSize(7);
         splitPane.setOneTouchExpandable(true);
 
         javax.swing.GroupLayout listTestPanelLayout = new javax.swing.GroupLayout(listTestPanel);
@@ -78,6 +78,8 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         );
 
         splitPane.setLeftComponent(listTestPanel);
+
+        testsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         javax.swing.GroupLayout testsPanelLayout = new javax.swing.GroupLayout(testsPanel);
         testsPanel.setLayout(testsPanelLayout);

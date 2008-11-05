@@ -187,6 +187,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         testsMenu.setText("Tests");
+        testsMenu.setEnabled(false);
 
         jMenu3.setText("Nuevo");
 
