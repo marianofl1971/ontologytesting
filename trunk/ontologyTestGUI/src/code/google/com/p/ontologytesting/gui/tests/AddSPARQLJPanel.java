@@ -7,7 +7,7 @@
 package code.google.com.p.ontologytesting.gui.tests;
 
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.FormatTestsJDialog;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
@@ -17,6 +17,7 @@ import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
@@ -35,7 +36,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private InterfaceReasoner jena;
     private ValidarTests validarTest;
     private SaveTest saveTest;
-    private AddInstancesClasPropJDialog addInst;
+    private AddInstancesClasPropJPanel addInst;
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
@@ -108,6 +109,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
         nuevaConsultaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
+        nuevaConsultaButton.setToolTipText("Nueva consulta");
         nuevaConsultaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevaConsultaButtonActionPerformed(evt);
@@ -211,6 +213,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         asociarInstanciasButton.setText("Asociar Instancias");
+        asociarInstanciasButton.setToolTipText("Asociar Instancias");
         asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asociarInstanciasButtonActionPerformed(evt);
@@ -227,21 +230,19 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                                        .add(limpiarButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(borrarConsultaJButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(antQueryButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(sigQueryButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(nuevaConsultaButton)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 335, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
+                                    .add(limpiarButton)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(borrarConsultaJButton)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(antQueryButton)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(sigQueryButton)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                    .add(nuevaConsultaButton)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                                .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 335, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                         .add(10, 10, 10)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(limpiarResultButton)
@@ -307,13 +308,12 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(sigQueryButton)
                                     .add(antQueryButton)
-                                    .add(nuevaConsultaButton))
-                                .addContainerGap())))
+                                    .add(nuevaConsultaButton)))))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(limpiarResultButton)
-                        .addContainerGap())))
+                        .add(limpiarResultButton)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -485,10 +485,9 @@ private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-    addInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-    addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    addInst.setVisible(true);
+    addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+    //Prueba
+    addInst.asociarDialogoInstancias(addInst);
 }//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void testNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testNameTextFieldActionPerformed
@@ -506,10 +505,9 @@ public boolean guardarTest(){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
     return continuar;
@@ -522,10 +520,9 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
 }                                                      
@@ -537,10 +534,9 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
 }                                               

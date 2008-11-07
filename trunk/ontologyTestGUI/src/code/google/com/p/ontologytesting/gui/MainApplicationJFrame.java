@@ -14,8 +14,7 @@ import code.google.com.p.ontologytesting.gui.tests.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.LoadTest;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.beans.XMLDecoder;
@@ -62,17 +61,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         controlador = ControladorTests.getInstance();
         panelTest = ListAndResultsJPanel.getInstance();
         contentTestsJPanel.setLayout(new BorderLayout());
-        //panelTest = ListAndResultsJPanel.getInstance();
-        //"http://www.owl-ontologies.com/family.owl#"
-        //http://nlp.shef.ac.uk/abraxas/ontologies/animals.owl
-        //http://www.semanticweb.org/ontologies/2008/1/Ontology1202481514781.owl
-        //C:\\Users\\saruskas\\Desktop\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
-        //C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl
-        
-          /*PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-          SELECT ?subject ?object 
-          WHERE {?subject rdfs:subClassOf ?object }*/
-         
     }
  
     private synchronized static void createListAndTestPanel() {
@@ -367,9 +355,10 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
-        utils = new FileChooserSelector();
-        try {
-            utils.fileChooser(false, true);
+    utils = new FileChooserSelector();
+    try {
+        boolean res = utils.fileChooser(false, true);
+        if(res == true){
             File fichero = utils.getFileSelected();
             boolean guardado = saveTest.saveProject(true,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
             if(guardado==true){
@@ -378,17 +367,14 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
             }else{
                 panelAviso.errorAction("Error. Proyecto no guardado",this);                                                
             }
-        }catch (FileNotFoundException ex) {
-            panelAviso.errorAction("Error. No se encontró el archivo especificado",this);              
         }
-        
+    }catch (FileNotFoundException ex) {
+        panelAviso.errorAction("Error. No se encontró el archivo especificado",this);              
+    }       
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-    //Realmente me crea la collection al crar el proyecto, aqui lo quitaria
-    //collection.setNamespace("http://www.owl-ontologies.com/family.owl#");
-    //collection.setOntology("C:\\Documents and Settings\\sara_garcia\\Escritorio\\PFC\\Imple OntologyTestGui\\ontologyTestGUI\\data\\family.owl");
     NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
@@ -402,7 +388,6 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
     }
-
 }
 
 private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
@@ -413,7 +398,6 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             this.dispose();
             System.exit(0);
         } 
-
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
@@ -477,10 +461,8 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    AddInstancesClasPropJDialog nuevoInst = new AddInstancesClasPropJDialog(this, true);
-    nuevoInst.setLocationRelativeTo(this);
-    nuevoInst.setVisible(true);
-    nuevoInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel();
+    cargarInstancia(nuevoInst);
 }//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
@@ -538,26 +520,28 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
     try {
         utils = new FileChooserSelector();
-        utils.fileChooser(true, true);
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
-        collection = (CollectionTest) decoder.readObject();
-        loadTest.prepareProject(collection);
-        abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
-        abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
-        abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        abrirP.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-        abrirP.setVisible(true);
-        if(abrirP.isProyectoCargado()==true){
-            this.inicializarContadores();
-            guardarProyectoComoMenuItem.setEnabled(true);
-            guardarProyectoMenuItem.setEnabled(true);
-            instanciasMenu.setEnabled(true);
-            testsMenu.setEnabled(true);
-            ejecutarMenu.setEnabled(true);
-            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            ControladorTests.getInstance().inicializarGuardados();
-            ControladorTests.getInstance().inicializarSeleccionados();
-            this.validate();
+        boolean res = utils.fileChooser(true, true);
+        if(res == true){
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
+            collection = (CollectionTest) decoder.readObject();
+            loadTest.prepareProject(collection);
+            abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
+            abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
+            abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            abrirP.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+            abrirP.setVisible(true);
+            if(abrirP.isProyectoCargado()==true){
+                this.inicializarContadores();
+                guardarProyectoComoMenuItem.setEnabled(true);
+                guardarProyectoMenuItem.setEnabled(true);
+                instanciasMenu.setEnabled(true);
+                testsMenu.setEnabled(true);
+                ejecutarMenu.setEnabled(true);
+                contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+                ControladorTests.getInstance().inicializarGuardados();
+                ControladorTests.getInstance().inicializarSeleccionados();
+                this.validate();
+            }
         }
     } catch (FileNotFoundException ex) {
         panelAviso.errorAction("No se encontró el archivo especificado", MainApplicationJFrame.getInstance());
@@ -664,6 +648,11 @@ public boolean obtenerPanelAGuardar(){
     return res;
 }
 
+public void cargarInstancia(AddInstancesClasPropJPanel nuevoInst){
+    panelTest.getTestsPanel().aniadirTest(nuevoInst);
+    setPanelActual(nuevoInst);
+}
+
 public void cargarTest(int type,boolean res,ScenarioTest s){
     if(type==0){
         if(res==true){
@@ -737,6 +726,14 @@ public void inicializarContadores(){
     public void setProyectoGuardado(boolean proyectoGuardado) {
         this.proyectoGuardado = proyectoGuardado;
     }
+    
+    public JPanel getPanelActual() {
+        return panelActual;
+    }
+
+    public void setPanelActual(JPanel panelActual) {
+        this.panelActual = panelActual;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -771,13 +768,5 @@ public void inicializarContadores(){
     private javax.swing.JMenuItem verInstanciasMenuItem;
     private javax.swing.JMenuItem verTestsMenuItem;
     // End of variables declaration//GEN-END:variables
-
-    public JPanel getPanelActual() {
-        return panelActual;
-    }
-
-    public void setPanelActual(JPanel panelActual) {
-        this.panelActual = panelActual;
-    }
 
 }

@@ -14,7 +14,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuInstances;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -400,9 +400,8 @@ private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     JList lista = (JList) evt.getSource();
     Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
-        AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(null, false, inst);
-        addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        addInst.setVisible(true);
+        AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
+        MainApplicationJFrame.getInstance().cargarInstancia(addInst);
     }
 }//GEN-LAST:event_instanciasListMouseClicked
     

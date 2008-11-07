@@ -20,7 +20,7 @@ public class FileChooserSelector {
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
 
-    public void fileChooser(boolean open,boolean onlyFiles){
+    public boolean fileChooser(boolean open,boolean onlyFiles){
         int option;
         filechooser = new JFileChooser(FileChooserSelector.getPathSelected());
         if(onlyFiles==false){
@@ -39,7 +39,8 @@ public class FileChooserSelector {
           File selectedFile = filechooser.getSelectedFile();
           this.setFileSelected(fileSelected);
           FileChooserSelector.setPathSelected(selectedFile.getAbsolutePath());
-        }
+          return true;
+        }else return false;
     }
 
     public static String getExtension(File f) {
