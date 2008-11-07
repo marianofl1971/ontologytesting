@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui;
 
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import java.awt.*;
 import javax.swing.*;
@@ -37,11 +38,15 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     public void aniadirTest(JPanel panel){
-        if(this.testsPanel.getComponentCount()>0){
-            this.testsPanel.remove(0);
-        }
-        this.testsPanel.add(panel); 
-        this.validate();
+        contentTabbedPane.add(panel);
+        initTabComponent(contentTabbedPane.getTabCount()-1);
+        contentTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        contentTabbedPane.validate();    
+    }
+    
+    private void initTabComponent(int i) {
+        contentTabbedPane.setTabComponentAt(i,
+                 new ButtonTabComponent(contentTabbedPane));
     }
     
     public void aniadirLista(ListarTestsJPanel lista){
@@ -62,6 +67,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         listTestPanel = new javax.swing.JPanel();
         testsScrollPane = new javax.swing.JScrollPane();
         testsPanel = new javax.swing.JPanel();
+        contentTabbedPane = new javax.swing.JTabbedPane();
 
         splitPane.setDividerSize(7);
         splitPane.setOneTouchExpandable(true);
@@ -86,10 +92,14 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsPanelLayout.setHorizontalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 633, Short.MAX_VALUE)
+            .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
         );
         testsPanelLayout.setVerticalGroup(
             testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 296, Short.MAX_VALUE)
+            .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
         );
 
         testsScrollPane.setViewportView(testsPanel);
@@ -109,6 +119,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane contentTabbedPane;
     private javax.swing.JPanel listTestPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel testsPanel;

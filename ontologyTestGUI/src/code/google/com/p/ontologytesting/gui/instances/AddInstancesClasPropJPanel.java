@@ -20,14 +20,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ListIterator;
+import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
 /**
  *
  * @author  Saruskas
  */
-public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
+public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
 
     private AddComentJDialog commentPane;
     private ArrayList<ClassInstances> clasInst;
@@ -53,12 +55,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     private OpcionesMenu menu;
     
     //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, ScenarioTest scenario){       
-        super(parent, modal);
+    public AddInstancesClasPropJPanel(JFrame parent, boolean modal, ScenarioTest scenario){       
+        //super(parent, modal);
         initComponents();
-        this.setTitle("Asociar Instancias");
-        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        //this.setTitle("Asociar Instancias");
+        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         int contI=0,contP=0;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -96,13 +98,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 contP++;
             }
 
-            if(4-contI>0){
-                for (int j = 0; j <= (4-contI); j++) {
+            if(3-contI>0){
+                for (int j = 0; j <= (3-contI); j++) {
                     clasPanel.add(new CreateInstancesJPanel(0));
                 }
             }
-            if(4-contP>0){
-                for (int k = 0; k <= (4-contP); k++) {
+            if(3-contP>0){
+                for (int k = 0; k <= (3-contP); k++) {
                     propPanel.add(new CreateInstancesJPanel(1));
                 }
             }
@@ -111,7 +113,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             this.setScenario(scenario);
             setEditado(false);
         }else{
-            for (int i = 0; i <= 4; i++) {
+            for (int i = 0; i <= 3; i++) {
                 clasPanel.add(new CreateInstancesJPanel(0));  
                 propPanel.add(new CreateInstancesJPanel(1));
             }
@@ -124,18 +126,18 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     } 
     
     //Constructor para crear un conjunto nuevo de instancias
-    public AddInstancesClasPropJDialog(JFrame parent, boolean modal){
-        super(parent, modal);
+    public AddInstancesClasPropJPanel(){
+        //super(parent, modal);
         initComponents();
-        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        this.setTitle("Asociar Instancias");
-        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        //this.setTitle("Asociar Instancias");
+        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setNuevoTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BorderLayout());
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 3; i++) {
             clasPanel.add(new CreateInstancesJPanel(0));  
             propPanel.add(new CreateInstancesJPanel(1));
         }
@@ -146,12 +148,12 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
     } 
     
    //Constructor para editar un conjunto de instancias
-    public AddInstancesClasPropJDialog(JFrame parent, boolean modal, Instancias inst){
-        super(parent, modal);
+    public AddInstancesClasPropJPanel(JFrame parent, boolean modal, Instancias inst){
+        //super(parent, modal);
         initComponents();
-        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        this.setTitle("Asociar Instancias");
-        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        //this.setTitle("Asociar Instancias");
+        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setNuevoTest(true);
         int contI=0,contP=0;
         setInstanciasInstGuardadas(false);
@@ -189,20 +191,19 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             contP++;
         }
          
-        if(4-contI>0){
-            for (int j = 0; j <= (4-contI); j++) {
+        if(3-contI>0){
+            for (int j = 0; j <= (3-contI); j++) {
                 clasPanel.add(new CreateInstancesJPanel(0));
             }
         }
-        if(4-contP>0){
-            for (int k = 0; k <= (4-contP); k++) {
+        if(3-contP>0){
+            for (int k = 0; k <= (3-contP); k++) {
                 propPanel.add(new CreateInstancesJPanel(1));
             }
         }
         instanciasAEditar = new Instancias(inst);
         setInstancias(inst);
-        setEditado(true);
-        
+        setEditado(true);  
     }
 
     /** This method is called from within the constructor to
@@ -217,7 +218,6 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         contentPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         guardarAsociarInstButton = new javax.swing.JButton();
-        cancelarInstButton = new javax.swing.JButton();
         limpiarInstButton = new javax.swing.JButton();
         instancesTabbedPane = new javax.swing.JTabbedPane();
         classScrollPane = new javax.swing.JScrollPane();
@@ -236,29 +236,19 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         nomInstanciasTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Añada las instancias que quiera a su ontología:");
 
         guardarAsociarInstButton.setText("Guardar y Asociar");
+        guardarAsociarInstButton.setToolTipText("Guardar y Asociar");
         guardarAsociarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarAsociarInstButtonActionPerformed(evt);
             }
         });
 
-        cancelarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        cancelarInstButton.setText("Cancelar");
-        cancelarInstButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarInstButtonActionPerformed(evt);
-            }
-        });
-
         limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
-        limpiarInstButton.setText(" Limpiar Seleccion");
+        limpiarInstButton.setToolTipText("Limpiar Selección");
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarInstButtonActionPerformed(evt);
@@ -339,7 +329,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         });
 
         borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
-        borrarSelecButton.setText("Borrar Seleccion");
+        borrarSelecButton.setToolTipText("Borrar Selección");
         borrarSelecButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarSelecButtonActionPerformed(evt);
@@ -347,7 +337,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         });
 
         soloAsociarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/accept.png"))); // NOI18N
-        soloAsociarButton.setText("Asociar");
+        soloAsociarButton.setToolTipText("Asociar");
         soloAsociarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 soloAsociarButtonActionPerformed(evt);
@@ -355,7 +345,7 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
         });
 
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
-        guardarButton.setText("Guardar");
+        guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarButtonActionPerformed(evt);
@@ -368,45 +358,40 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                         .addComponent(formatosButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanelLayout.createSequentialGroup()
-                        .addComponent(cancelarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
-                        .addComponent(soloAsociarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guardarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guardarAsociarInstButton))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(limpiarInstButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
-                        .addComponent(borrarSelecButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(borrarSelecButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                        .addComponent(soloAsociarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guardarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(guardarAsociarInstButton)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(formatosButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(limpiarInstButton)
                     .addComponent(borrarSelecButton)
-                    .addComponent(limpiarInstButton))
-                .addGap(18, 18, 18)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelarInstButton)
-                    .addComponent(guardarAsociarInstButton)
-                    .addComponent(guardarButton)
-                    .addComponent(soloAsociarButton)))
+                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(soloAsociarButton)
+                        .addComponent(guardarAsociarInstButton)
+                        .addComponent(guardarButton))))
         );
 
         descInstanciasTextArea.setColumns(20);
@@ -424,13 +409,13 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
             .addGroup(contentDescPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addGroup(contentDescPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         contentDescPanelLayout.setVerticalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,36 +427,28 @@ public class AddInstancesClasPropJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("Complete los siguientes campos:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
-            .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194))
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        setSize(new java.awt.Dimension(751, 691));
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
@@ -482,22 +459,15 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
-            this.setVisible(false);
         }
     }else{
         boolean result = prepararInstancias(true,true);
         if(result==true){
             JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
             "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-            this.setVisible(false);
         }   
     }
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
-
-private void cancelarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarInstButtonActionPerformed
-// TODO add your handling code here:
-    this.setVisible(false);
-}//GEN-LAST:event_cancelarInstButtonActionPerformed
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
 // TODO add your handling code here:
@@ -608,14 +578,12 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
-            this.setVisible(false);
         }
     }else{
         boolean result = prepararInstancias(false,true);
         if(result==true){
             JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
             "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-            this.setVisible(false);
         }
     }
     
@@ -629,7 +597,6 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     if(result==true){
         JOptionPane.showMessageDialog(this, "Instancias guardadas", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
     }
 }
 
@@ -926,6 +893,17 @@ void decrementarPosicion(int j,int type){
     }
 }
 
+public void asociarDialogoInstancias(AddInstancesClasPropJPanel addInst){
+    JDialog dialog = new JDialog(MainApplicationJFrame.getInstance(),false);
+    dialog.setSize(new Dimension(620,540));
+    dialog.getContentPane().add(addInst);
+    dialog.setTitle("Asociar Instancias");
+    dialog.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+    dialog.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+    dialog.setVisible(true);
+    dialog.validate();
+}
+
 public void copiarAInstancesTextArea(){
     StringBuffer bufClase = new StringBuffer();
     StringBuffer bufProp = new StringBuffer();
@@ -1152,7 +1130,6 @@ public int getIndexVect() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarSelecButton;
-    private javax.swing.JButton cancelarInstButton;
     private javax.swing.JPanel clasPanel;
     private javax.swing.JPanel clasPropPanel;
     private javax.swing.JScrollPane classScrollPane;
@@ -1166,7 +1143,6 @@ public int getIndexVect() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiarInstButton;
     private javax.swing.JTextField nomInstanciasTextField;

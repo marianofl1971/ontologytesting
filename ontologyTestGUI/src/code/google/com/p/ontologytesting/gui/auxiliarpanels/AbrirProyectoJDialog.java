@@ -183,8 +183,9 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    utils.fileChooser(true, true);
-    this.getUbicacionFisicaTextField().setText(FileChooserSelector.getPathSelected());
+    if(utils.fileChooser(true, true)==true){
+        this.getUbicacionFisicaTextField().setText(FileChooserSelector.getPathSelected());
+    }
 }//GEN-LAST:event_examinarButtonActionPerformed
     
     public String getNamespaceText() {

@@ -105,8 +105,9 @@ public class OntologyNameSituJPanel extends javax.swing.JPanel {
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    utils.fileChooser(true, true);
-    this.getUbicacionOntoTextField().setText(FileChooserSelector.getPathSelected());
+    if(utils.fileChooser(true, true)==true){
+        this.getUbicacionOntoTextField().setText(FileChooserSelector.getPathSelected());
+    }
 }//GEN-LAST:event_examinarButtonActionPerformed
 
 public boolean isState() {

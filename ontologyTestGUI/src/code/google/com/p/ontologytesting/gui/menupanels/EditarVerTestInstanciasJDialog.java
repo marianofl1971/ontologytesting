@@ -6,7 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui.menupanels;
 
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import java.awt.FlowLayout;
@@ -154,9 +155,8 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         panelAviso.confirmAction("Test cargado para su edición", this);
         this.setVisible(false);
     }else{
-        AddInstancesClasPropJDialog editInst = new AddInstancesClasPropJDialog(null, true, this.getListarTestInst().getInstanciaSelect());
-        editInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        editInst.setVisible(true);
+        AddInstancesClasPropJPanel editInst = new AddInstancesClasPropJPanel(null, true, this.getListarTestInst().getInstanciaSelect());
+        MainApplicationJFrame.getInstance().cargarInstancia(editInst);
     }
 }//GEN-LAST:event_editarButtonActionPerformed
 

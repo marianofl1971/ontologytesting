@@ -206,27 +206,28 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    utils.fileChooser(true, true);
-    this.getPathProyectoTextField().setText(FileChooserSelector.getPathSelected());
-    try{
-        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
-        collection = (CollectionTest) decoder.readObject();
-        if(this.isImportarTest()==true){
-            listaFicheros = new ListarTestsInstanciasJPanel(collection.getScenariotest(),null,true);
-        }else{
-            listaFicheros = new ListarTestsInstanciasJPanel(null,collection.getInstancias(),false);
-        }
-        decoder.close(); 
-        contentPanel.remove(0);
-        contentPanel.add(listaFicheros);
-        contentPanel.getParent().validate(); 
-    }catch(FileNotFoundException e){
-        panelAviso.errorAction("No se encontró el archivo especificado",this);
-    }catch(ClassCastException e){
-        panelAviso.errorAction("Proyecto no válido",this);
-    }catch(NoSuchElementException e){
-        panelAviso.errorAction("Proyecto no válido",this);
-    }  
+    if(utils.fileChooser(true, true)==true){
+        this.getPathProyectoTextField().setText(FileChooserSelector.getPathSelected());
+        try{
+            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
+            collection = (CollectionTest) decoder.readObject();
+            if(this.isImportarTest()==true){
+                listaFicheros = new ListarTestsInstanciasJPanel(collection.getScenariotest(),null,true);
+            }else{
+                listaFicheros = new ListarTestsInstanciasJPanel(null,collection.getInstancias(),false);
+            }
+            decoder.close(); 
+            contentPanel.remove(0);
+            contentPanel.add(listaFicheros);
+            contentPanel.getParent().validate(); 
+        }catch(FileNotFoundException e){
+            panelAviso.errorAction("No se encontró el archivo especificado",this);
+        }catch(ClassCastException e){
+            panelAviso.errorAction("Proyecto no válido",this);
+        }catch(NoSuchElementException e){
+            panelAviso.errorAction("Proyecto no válido",this);
+        }  
+    }
 }
 
 private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               

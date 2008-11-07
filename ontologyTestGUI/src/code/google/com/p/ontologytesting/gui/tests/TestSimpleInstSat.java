@@ -6,7 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui.tests;
 
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ValidarConsultas;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -43,7 +44,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private SaveTest saveTest;
-    private AddInstancesClasPropJDialog addInst;
+    private AddInstancesClasPropJPanel addInst;
     private String nombreTest = "",descTest = "";
     //private ScenarioTest scenarioAEditar;
     //private ProgressMonitor progressMonitor;
@@ -326,8 +327,9 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst = new AddInstancesClasPropJDialog(null,false,this.getScenario());
-    addInst.setVisible(true);
+    addInst = new AddInstancesClasPropJPanel(null,false,this.getScenario());
+    //Prueba
+    addInst.asociarDialogoInstancias(addInst);
 }//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
@@ -346,8 +348,9 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
 }
@@ -364,8 +367,9 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
 }
@@ -380,8 +384,9 @@ public boolean guardarTest(){
         if(continuarSinInstancias==true){
            realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJDialog(null,true,this.getScenario());
-            addInst.setVisible(true);
+            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }
     }
     return continuar;

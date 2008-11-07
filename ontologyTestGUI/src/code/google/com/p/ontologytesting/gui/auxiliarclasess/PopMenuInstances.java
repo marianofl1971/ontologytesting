@@ -7,12 +7,13 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
 import code.google.com.p.ontologytesting.gui.menupanels.AsociarInstanciasATestJDialog;
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJDialog;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -34,9 +35,9 @@ public class PopMenuInstances implements ActionListener{
         CollectionTest collection = CollectionTest.getInstance();
         Instancias inst = instancias.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
-            AddInstancesClasPropJDialog addInst = new AddInstancesClasPropJDialog(null, false, inst);
-            addInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            addInst.setVisible(true);
+            AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
+            //Prueba
+            addInst.asociarDialogoInstancias(addInst);
         }else if(source.getText().equals("Asociar a un Test")){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, inst);
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
