@@ -51,16 +51,16 @@ public class OpcionesMenu {
     }
     
     public void editarTest(ScenarioTest scenario){
-        setScenarioActual(scenario);
         scenarioAEditar = new ScenarioTest(scenario);
+        OpcionesMenu.setScenarioActual(scenario);
         if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
-            MainApplicationJFrame.getInstance().cargarTest(0, true, scenarioAEditar);
+            MainApplicationJFrame.getInstance().cargarTest(0, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("RET") || scenarioAEditar.getTipoTest().name().equals("CLAS")){
-            MainApplicationJFrame.getInstance().cargarTest(1, true, scenarioAEditar);
+            MainApplicationJFrame.getInstance().cargarTest(1, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("REAL")){
-            MainApplicationJFrame.getInstance().cargarTest(2, true, scenarioAEditar);
+            MainApplicationJFrame.getInstance().cargarTest(2, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("SPARQL")){
-            MainApplicationJFrame.getInstance().cargarTest(3, true, scenarioAEditar);
+            MainApplicationJFrame.getInstance().cargarTest(3, scenarioAEditar);
         }   
     }
     

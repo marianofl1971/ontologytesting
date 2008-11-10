@@ -601,7 +601,6 @@ public boolean listaTestsInstanciasVacia(boolean test){
 
 public void aniadirNuevoTest(ScenarioTest s){
     this.inicializarContadores();
-    boolean res = false;
     int type = 0;
     if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
         type = 0;
@@ -612,24 +611,11 @@ public void aniadirNuevoTest(ScenarioTest s){
     }else if(s.getTipoTest().name().equals("SPARQL")){
         type = 3;
     }
-    if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTest(s.getTipoTest().name());
-        cargarTest(type,true,s);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                    controlador.prepararTest(s.getTipoTest().name());
-                    res = obtenerPanelAGuardar();
-                    cargarTest(type,res,s);
-            }else{
-                controlador.prepararTest(s.getTipoTest().name());
-                cargarTest(type,true,s);
-            }
-    }
+    controlador.prepararTest(s.getTipoTest().name());
+    cargarTest(type,s);
 }
 
-public boolean obtenerPanelAGuardar(){
+/*public boolean obtenerPanelAGuardar(){
     JPanel panel = getPanelActual();
     boolean res = false;
     if(panel instanceof TestSimpleInstSat){
@@ -646,38 +632,43 @@ public boolean obtenerPanelAGuardar(){
         res = testSparql.guardarTest();
     }
     return res;
-}
+}*/
 
 public void cargarInstancia(AddInstancesClasPropJPanel nuevoInst){
-    panelTest.getTestsPanel().aniadirTest(nuevoInst);
+    panelTest.getTestsPanel().aniadirTest(nuevoInst,"Nueva Instancia");
     setPanelActual(nuevoInst);
 }
 
-public void cargarTest(int type,boolean res,ScenarioTest s){
+public void cargarTest(int type,ScenarioTest s){
+    String testName="";
     if(type==0){
-        if(res==true){
-            testInstSat = new TestSimpleInstSat(s);
-            panelTest.getTestsPanel().aniadirTest(testInstSat);
-            setPanelActual(testInstSat);
-        }
+        testInstSat = new TestSimpleInstSat(s);
+        if(s.getNombre().equals("")){
+            testName="Nuevo Test Simple";
+        }else testName=s.getNombre();
+        panelTest.getTestsPanel().aniadirTest(testInstSat,testName);
+        setPanelActual(testInstSat);
     }else if(type==1){
-        if(res==true){
-            testRetClas = new TestSimpleRetClas(s);
-            panelTest.getTestsPanel().aniadirTest(testRetClas);
-            setPanelActual(testRetClas);
-        }
+        if(s.getNombre().equals("")){
+            testName="Nuevo Test Simple";
+        }else testName=s.getNombre();
+        testRetClas = new TestSimpleRetClas(s);
+        panelTest.getTestsPanel().aniadirTest(testRetClas,testName);
+        setPanelActual(testRetClas);
     }else if(type==2){
-        if(res==true){
-             testReal = new TestSimpleReal(s);
-             panelTest.getTestsPanel().aniadirTest(testReal);
-             setPanelActual(testReal);
-        }
+        if(s.getNombre().equals("")){
+            testName="Nuevo Test Simple";
+        }else testName=s.getNombre();
+         testReal = new TestSimpleReal(s);
+         panelTest.getTestsPanel().aniadirTest(testReal,testName);
+         setPanelActual(testReal);
     }else if(type==3){
-        if(res==true){
-            testSparql = new AddSPARQLJPanel(s);
-            panelTest.getTestsPanel().aniadirTest(testSparql);
-            setPanelActual(testSparql);
-        }
+        if(s.getNombre().equals("")){
+            testName="Nuevo Test SPARQL";
+        }else testName=s.getNombre();
+        testSparql = new AddSPARQLJPanel(s);
+        panelTest.getTestsPanel().aniadirTest(testSparql,testName);
+        setPanelActual(testSparql);
     }
 }
 

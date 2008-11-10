@@ -130,6 +130,10 @@ public class ControladorTests {
         }
     }
     
+    public void estaTestSinGuardar(String nombre){
+        
+    }
+    
     public boolean getTestInstSatGuardado() {
         return testInstSatGuardado;
     }

@@ -7,10 +7,7 @@
 package code.google.com.p.ontologytesting.gui.tests;
 
 import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.ValidarConsultas;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
@@ -20,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.BoxLayout;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -393,12 +389,10 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                     saveTest.replaceScenarioLocally(scenario);
                     setScenario(new ScenarioTest(scenario));
                     controlador.setTestRealGuardado(true);
-                    panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
             }else{
                 saveTest.saveTestInMemory(scenario);
                 controlador.setTestRealGuardado(true);
-                panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
             OpcionesMenu.setScenarioActual(scenario);
             this.setScenario(new ScenarioTest(scenario));
@@ -406,7 +400,6 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         if(ejecutar==true){
            try{
                 menu.ejecutarUnTest(this.getScenario());
-                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
@@ -417,12 +410,10 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             OpcionesMenu.setScenarioActual(scenario);
             setScenario(new ScenarioTest(scenario));
             controlador.setTestRealGuardado(true);
-            panelAviso.confirmAction("El test ha sido guardado", MainApplicationJFrame.getInstance());
         }
         if(ejecutar==true){
             try{
                 menu.ejecutarUnTest(this.getScenario());
-                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
