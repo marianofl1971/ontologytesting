@@ -644,21 +644,9 @@ public void copiarDeAyudaATexto(){
                 AddComentJDialog comentPane = test.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") || !queryExp.equals("")){
-                    if(conjuntoQuerysReal.toString().equals("")){
-                        conjuntoQuerysReal.append(query).append("\n");
-                    }else{
-                        conjuntoQuerysReal.append(query).append("\n");
-                    }
-                    if(conjuntoResExpReal.toString().equals("")){
-                        conjuntoResExpReal.append(queryExp).append("\n");
-                    }else{
-                        conjuntoResExpReal.append(queryExp).append("\n");
-                    }
-                    if(conjuntoComentReal.toString().equals("")){
-                        conjuntoComentReal.append(coment).append("\n");
-                    }else{
-                        conjuntoComentReal.append(coment).append("\n");
-                    }
+                    conjuntoQuerysReal.append(query).append("\n");
+                    conjuntoResExpReal.append(queryExp).append("\n");
+                    conjuntoComentReal.append(coment).append("\n");
                 } 
             }
     }

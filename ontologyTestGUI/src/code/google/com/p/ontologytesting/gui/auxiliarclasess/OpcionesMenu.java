@@ -27,7 +27,7 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListarTestsJPanel listInst;
     private static ScenarioTest scenarioActual = new ScenarioTest();
-    private static ScenarioTest scenarioAEditar = new ScenarioTest();
+    private ScenarioTest scenarioAEditar = new ScenarioTest();
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
         testCase = new OntologyTestCase();
@@ -52,7 +52,7 @@ public class OpcionesMenu {
     
     public void editarTest(ScenarioTest scenario){
         scenarioAEditar = new ScenarioTest(scenario);
-        OpcionesMenu.setScenarioActual(scenario);
+        OpcionesMenu.setScenarioActual(scenarioAEditar);
         if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
             MainApplicationJFrame.getInstance().cargarTest(0, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("RET") || scenarioAEditar.getTipoTest().name().equals("CLAS")){

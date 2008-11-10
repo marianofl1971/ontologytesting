@@ -654,11 +654,7 @@ public void copiarDeAyudaATexto(){
                 String[] conjFinal = queryExp.split("\n| |,");
 
                 if(!query.equals("") || !queryExp.equals("")){
-                    if(conjuntoQuerysRet.toString().equals("")){
                         conjuntoQuerysRet.append(query).append("\n");
-                    }else{
-                        conjuntoQuerysRet.append(query).append("\n");
-                    }  
                     if(conjFinal.length==1){
                         conjuntoResExpRet.append(conjFinal[0]);
                     }else{
@@ -675,11 +671,7 @@ public void copiarDeAyudaATexto(){
                         } 
                     }
                     conjuntoResExpRet.append("\n");
-                    if(conjuntoComentRet.toString().equals("")){
-                        conjuntoComentRet.append(coment).append("\n");
-                    }else{
-                        conjuntoComentRet.append(coment).append("\n");
-                    }
+                    conjuntoComentRet.append(coment).append("\n");
                 } 
             }
     }
