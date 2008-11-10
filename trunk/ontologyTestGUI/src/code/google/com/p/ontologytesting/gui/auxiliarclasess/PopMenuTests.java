@@ -28,26 +28,13 @@ public class PopMenuTests implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean res = true;
         JMenuItem source = (JMenuItem)(e.getSource());
         CollectionTest collection = CollectionTest.getInstance();
         ControladorTests controlador = ControladorTests.getInstance();
         ScenarioTest scenario = s.buscarScenario(collection.getScenariotest(), this.getTestSelec());
         if(source.getText().equals("Editar")){   
-            if(controlador.algunTestSinGuardar()==false){
-                menu.editarTest(scenario);
-                controlador.prepararTest(scenario.getTipoTest().name());
-            }else{
-                int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
-                "Guardar Tests",JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.YES_OPTION){
-                    res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
-                }
-                if(res==true){
-                    controlador.prepararTest(scenario.getTipoTest().name());
-                    menu.editarTest(scenario);
-                }
-            }
+            menu.editarTest(scenario);
+            controlador.prepararTest(scenario.getTipoTest().name());
         }else if(source.getText().equals("Ejecutar")){
             try{
                 TreeResults.setTestSeleccionado(scenario.getNombre());

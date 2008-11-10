@@ -37,8 +37,9 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         return listAndTest;
     }
     
-    public void aniadirTest(JPanel panel){
+    public void aniadirTest(JPanel panel, String name){
         contentTabbedPane.add(panel);
+        contentTabbedPane.setTitleAt(contentTabbedPane.getTabCount()-1, name);
         initTabComponent(contentTabbedPane.getTabCount()-1);
         contentTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         contentTabbedPane.validate();    
@@ -84,8 +85,6 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         );
 
         splitPane.setLeftComponent(listTestPanel);
-
-        testsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         javax.swing.GroupLayout testsPanelLayout = new javax.swing.GroupLayout(testsPanel);
         testsPanel.setLayout(testsPanelLayout);

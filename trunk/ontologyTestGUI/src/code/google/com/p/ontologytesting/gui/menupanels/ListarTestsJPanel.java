@@ -26,12 +26,10 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.WindowConstants;
 /**
  *
  * @author  sara.garcia
@@ -353,22 +351,10 @@ private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
-    boolean res = true;
     if(evt.getClickCount()==2){
-        if(controlador.algunTestSinGuardar()==false){
-                opMenu.editarTest(scenario);
-                controlador.prepararTest(scenario.getTipoTest().name());
-        }else{
-            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
-            "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
-            }
-            if(res==true){
-                controlador.prepararTest(scenario.getTipoTest().name());
-                opMenu.editarTest(scenario);
-            }
-        }  
+        opMenu.editarTest(scenario);
+        controlador.prepararTest(scenario.getTipoTest().name());
+
     }
 }//GEN-LAST:event_testSimplesListMouseClicked
 
@@ -376,22 +362,9 @@ private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
-    boolean res = true;
     if(evt.getClickCount()==2){
-        if(controlador.algunTestSinGuardar()==false){
-            opMenu.editarTest(scenario);
-            controlador.prepararTest(scenario.getTipoTest().name());
-        }else{
-            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Guardar los cambios realizados al test?", 
-            "Guardar Tests",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.YES_OPTION){
-                res = MainApplicationJFrame.getInstance().obtenerPanelAGuardar();
-            }
-            if(res==true){
-                controlador.prepararTest(scenario.getTipoTest().name());
-                opMenu.editarTest(scenario);
-            }
-        } 
+        opMenu.editarTest(scenario);
+        controlador.prepararTest(scenario.getTipoTest().name()); 
     }
 }//GEN-LAST:event_testSparqlListMouseClicked
 

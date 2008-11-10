@@ -129,5 +129,21 @@ public class ButtonTabComponent extends JPanel {
     };
 }
 
+/*  if(controlador.algunTestSinGuardar()==false){
+        controlador.prepararTest(s.getTipoTest().name());
+        cargarTest(type,true,s);
+    }else{
+        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
+            "Guardar Tests",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+                controlador.prepararTest(s.getTipoTest().name());
+                res = obtenerPanelAGuardar();
+                cargarTest(type,res,s);
+        }else{
+            controlador.prepararTest(s.getTipoTest().name());
+            cargarTest(type,true,s);
+    }
+}*/
+
 
 

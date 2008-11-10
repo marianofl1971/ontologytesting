@@ -58,9 +58,6 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
     public AddInstancesClasPropJPanel(JFrame parent, boolean modal, ScenarioTest scenario){       
         //super(parent, modal);
         initComponents();
-        //this.setTitle("Asociar Instancias");
-        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         int contI=0,contP=0;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -127,11 +124,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
     
     //Constructor para crear un conjunto nuevo de instancias
     public AddInstancesClasPropJPanel(){
-        //super(parent, modal);
         initComponents();
-        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        //this.setTitle("Asociar Instancias");
-        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setNuevoTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -149,11 +142,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
     
    //Constructor para editar un conjunto de instancias
     public AddInstancesClasPropJPanel(JFrame parent, boolean modal, Instancias inst){
-        //super(parent, modal);
         initComponents();
-        //this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        //this.setTitle("Asociar Instancias");
-        //this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setNuevoTest(true);
         int contI=0,contP=0;
         setInstanciasInstGuardadas(false);
@@ -215,6 +204,12 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        contentDescPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        descInstanciasTextArea = new javax.swing.JTextArea();
+        nomInstanciasTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         guardarAsociarInstButton = new javax.swing.JButton();
@@ -230,12 +225,14 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
         borrarSelecButton = new javax.swing.JButton();
         soloAsociarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
-        contentDescPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        descInstanciasTextArea = new javax.swing.JTextArea();
-        nomInstanciasTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+
+        descInstanciasTextArea.setColumns(20);
+        descInstanciasTextArea.setRows(5);
+        jScrollPane1.setViewportView(descInstanciasTextArea);
+
+        jLabel2.setText("Nombre para el conjunto de instancias:");
+
+        jLabel3.setText("Descripción:");
 
         jLabel1.setText("Añada las instancias que quiera a su ontología:");
 
@@ -359,16 +356,16 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(formatosButton))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(limpiarInstButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(borrarSelecButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                         .addComponent(soloAsociarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(guardarButton)
@@ -394,14 +391,6 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                         .addComponent(guardarButton))))
         );
 
-        descInstanciasTextArea.setColumns(20);
-        descInstanciasTextArea.setRows(5);
-        jScrollPane1.setViewportView(descInstanciasTextArea);
-
-        jLabel2.setText("Nombre para el conjunto de instancias:");
-
-        jLabel3.setText("Descripción:");
-
         javax.swing.GroupLayout contentDescPanelLayout = new javax.swing.GroupLayout(contentDescPanel);
         contentDescPanel.setLayout(contentDescPanelLayout);
         contentDescPanelLayout.setHorizontalGroup(
@@ -409,18 +398,21 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
             .addGroup(contentDescPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(contentDescPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                            .addGroup(contentDescPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         contentDescPanelLayout.setVerticalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentDescPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -428,26 +420,25 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentDescPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentDescPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
