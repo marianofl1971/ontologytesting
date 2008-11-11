@@ -8,12 +8,7 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuInstances;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.PopMenuTests;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.TreeResults;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
@@ -374,7 +369,7 @@ private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
         AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
-        MainApplicationJFrame.getInstance().cargarInstancia(addInst);
+        MainApplicationJFrame.getInstance().cargarInstancia(addInst,addInst.getNomInstanciasTextField());
     }
 }//GEN-LAST:event_instanciasListMouseClicked
     

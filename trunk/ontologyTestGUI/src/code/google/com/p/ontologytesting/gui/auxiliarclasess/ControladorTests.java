@@ -129,11 +129,7 @@ public class ControladorTests {
             setTestSparqlSelect(true);
         }
     }
-    
-    public void estaTestSinGuardar(String nombre){
-        
-    }
-    
+
     public boolean getTestInstSatGuardado() {
         return testInstSatGuardado;
     }

@@ -13,7 +13,6 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -36,8 +35,7 @@ public class PopMenuInstances implements ActionListener{
         Instancias inst = instancias.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
             AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            menu.editarInstancias(addInst);
         }else if(source.getText().equals("Asociar a un Test")){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, inst);
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());

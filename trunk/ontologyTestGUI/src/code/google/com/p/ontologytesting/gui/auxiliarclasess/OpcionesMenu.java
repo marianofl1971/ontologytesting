@@ -11,6 +11,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
  */
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
@@ -22,11 +23,12 @@ import javax.swing.WindowConstants;
  * @author sara.garcia
  */
 public class OpcionesMenu {
-    
+
     private OntologyTestResult testResult;
     private OntologyTestCase testCase;
     private ListarTestsJPanel listInst;
     private static ScenarioTest scenarioActual = new ScenarioTest();
+    private static Instancias instanciasActual = new Instancias();
     private ScenarioTest scenarioAEditar = new ScenarioTest();
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
@@ -51,8 +53,8 @@ public class OpcionesMenu {
     }
     
     public void editarTest(ScenarioTest scenario){
+        OpcionesMenu.setScenarioActual(scenario);
         scenarioAEditar = new ScenarioTest(scenario);
-        OpcionesMenu.setScenarioActual(scenarioAEditar);
         if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
             MainApplicationJFrame.getInstance().cargarTest(0, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("RET") || scenarioAEditar.getTipoTest().name().equals("CLAS")){
@@ -62,6 +64,10 @@ public class OpcionesMenu {
         }else if(scenarioAEditar.getTipoTest().name().equals("SPARQL")){
             MainApplicationJFrame.getInstance().cargarTest(3, scenarioAEditar);
         }   
+    }
+    
+    public void editarInstancias(AddInstancesClasPropJPanel inst){
+        MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNomInstanciasTextField());
     }
     
     public void eliminarTest(ScenarioTest scenario){
@@ -111,5 +117,14 @@ public class OpcionesMenu {
     public static void setScenarioActual(ScenarioTest ascenarioActual) {
         scenarioActual = ascenarioActual;
     }
+    
+    public static Instancias getInstanciasActual() {
+        return instanciasActual;
+    }
+
+    public static void setInstanciasActual(Instancias aInstanciasActual) {
+        instanciasActual = aInstanciasActual;
+    }
+    
   
 }

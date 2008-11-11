@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPane
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import java.awt.FlowLayout;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -156,7 +155,7 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         this.setVisible(false);
     }else{
         AddInstancesClasPropJPanel editInst = new AddInstancesClasPropJPanel(null, true, this.getListarTestInst().getInstanciaSelect());
-        MainApplicationJFrame.getInstance().cargarInstancia(editInst);
+        MainApplicationJFrame.getInstance().cargarInstancia(editInst,editInst.getNomInstanciasTextField());
     }
 }//GEN-LAST:event_editarButtonActionPerformed
 

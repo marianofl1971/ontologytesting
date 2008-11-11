@@ -46,9 +46,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="contentGuardarEjecutarPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="104" max="32767" attributes="0"/>
-                  <Component id="asociarInstanciasButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace pref="313" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <Component id="tabbedPaneReal" min="-2" pref="574" max="-2" attributes="0"/>
@@ -60,10 +58,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="contentGuardarEjecutarPanel" min="-2" max="-2" attributes="0"/>
-                      <Component id="asociarInstanciasButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="contentGuardarEjecutarPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="tabbedPaneReal" pref="395" max="32767" attributes="0"/>
               </Group>
@@ -198,14 +193,6 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="asociarInstanciasButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Asociar Instancias"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="asociarInstanciasButtonActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JPanel" name="contentGuardarEjecutarPanel">
 
           <Layout>

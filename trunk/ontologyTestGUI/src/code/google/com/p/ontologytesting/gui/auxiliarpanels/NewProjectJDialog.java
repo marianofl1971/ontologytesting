@@ -190,8 +190,7 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 if(res==true){
                     MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
                     MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
-                    setProyectoCreado(true);
-                    panelAviso.confirmAction("Proyecto Creado", this);
+                    setProyectoCreado(true); 
                     this.setVisible(false);
                 }else{
                     panelAviso.errorAction("No se puedo crear un directorio para el proyecto", this);

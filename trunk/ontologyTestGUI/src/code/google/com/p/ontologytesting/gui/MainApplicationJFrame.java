@@ -462,7 +462,7 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
     AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel();
-    cargarInstancia(nuevoInst);
+    cargarInstancia(nuevoInst,"Nueva Instancia");
 }//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
@@ -634,8 +634,8 @@ public void aniadirNuevoTest(ScenarioTest s){
     return res;
 }*/
 
-public void cargarInstancia(AddInstancesClasPropJPanel nuevoInst){
-    panelTest.getTestsPanel().aniadirTest(nuevoInst,"Nueva Instancia");
+public void cargarInstancia(AddInstancesClasPropJPanel nuevoInst, String msg){
+    panelTest.getTestsPanel().aniadirTest(nuevoInst,msg);
     setPanelActual(nuevoInst);
 }
 

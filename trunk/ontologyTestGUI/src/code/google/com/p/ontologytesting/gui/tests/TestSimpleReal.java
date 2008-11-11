@@ -102,7 +102,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
         labelRealPanel = new javax.swing.JPanel();
         labelRealLabel = new javax.swing.JLabel();
         opcionTextRealPanel = new javax.swing.JPanel();
-        asociarInstanciasButton = new javax.swing.JButton();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
         guardarEjecutarButton = new javax.swing.JButton();
@@ -187,13 +186,6 @@ public class TestSimpleReal extends javax.swing.JPanel {
 
         tabbedPaneReal.addTab("Formato Texto", opcionTextRealPanel);
 
-        asociarInstanciasButton.setText("Asociar Instancias");
-        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asociarInstanciasButtonActionPerformed(evt);
-            }
-        });
-
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -246,9 +238,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(asociarInstanciasButton)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
             .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
                 .addComponent(tabbedPaneReal, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -257,9 +247,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentRealTabedPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentRealTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(asociarInstanciasButton))
+                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tabbedPaneReal, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
         );
@@ -350,13 +338,6 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         }
     }
 }//GEN-LAST:event_ejecutarButtonActionPerformed
-
-private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
-// TODO add your handling code here:
-    addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-    //Prueba
-    addInst.asociarDialogoInstancias(addInst);
-}//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 public boolean guardarTest(){
     if(getTabbedPaneReal()==0){
@@ -796,7 +777,6 @@ public JPanel panelActualReal(){
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentRealTabedPanel;
     private javax.swing.JPanel descripcionJPanel;
