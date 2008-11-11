@@ -28,7 +28,6 @@ public class OpcionesMenu {
     private OntologyTestCase testCase;
     private ListarTestsJPanel listInst;
     private static ScenarioTest scenarioActual = new ScenarioTest();
-    private static Instancias instanciasActual = new Instancias();
     private ScenarioTest scenarioAEditar = new ScenarioTest();
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
@@ -117,14 +116,4 @@ public class OpcionesMenu {
     public static void setScenarioActual(ScenarioTest ascenarioActual) {
         scenarioActual = ascenarioActual;
     }
-    
-    public static Instancias getInstanciasActual() {
-        return instanciasActual;
-    }
-
-    public static void setInstanciasActual(Instancias aInstanciasActual) {
-        instanciasActual = aInstanciasActual;
-    }
-    
-  
 }
