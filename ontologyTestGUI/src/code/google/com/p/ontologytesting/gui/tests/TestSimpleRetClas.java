@@ -104,7 +104,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         labelRetPanel = new javax.swing.JPanel();
         labelRetLabel = new javax.swing.JLabel();
         opcionTextRetPanel = new javax.swing.JPanel();
-        asociarInstanciasButton = new javax.swing.JButton();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
         guardarEjecutarButton = new javax.swing.JButton();
@@ -189,13 +188,6 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
 
         tabbedPaneRet.addTab("Formato Texto", opcionTextRetPanel);
 
-        asociarInstanciasButton.setText("Asociar Instancias");
-        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asociarInstanciasButtonActionPerformed(evt);
-            }
-        });
-
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -248,9 +240,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentRetTabedPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(120, 120, 120)
-                .addComponent(asociarInstanciasButton)
-                .addGap(303, 303, 303))
+                .addGap(542, 542, 542))
             .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
                 .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -259,9 +249,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(asociarInstanciasButton))
+                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -351,13 +339,6 @@ public boolean guardarTest(){
         }
     }
     return continuar;
-}
-
-private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-// TODO add your handling code here:
-    addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-    //Prueba
-    addInst.asociarDialogoInstancias(addInst);
 }
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
@@ -823,7 +804,6 @@ public void setScenario(ScenarioTest scenario) {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentRetTabedPanel;
     private javax.swing.JPanel descripcionJPanel;

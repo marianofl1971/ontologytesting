@@ -125,7 +125,6 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
 
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
-    System.out.println("pos"+this.getPosicion());
     frameComent.setVisible(true);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 

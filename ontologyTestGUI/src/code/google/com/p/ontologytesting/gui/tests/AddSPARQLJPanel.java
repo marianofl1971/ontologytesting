@@ -104,7 +104,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         guardarEjecutarJButton = new javax.swing.JButton();
         ejecutarJButton = new javax.swing.JButton();
         guardarJButton = new javax.swing.JButton();
-        asociarInstanciasButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -212,14 +211,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        asociarInstanciasButton.setText("Asociar Instancias");
-        asociarInstanciasButton.setToolTipText("Asociar Instancias");
-        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asociarInstanciasButtonActionPerformed(evt);
-            }
-        });
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,10 +252,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                 .add(ejecutarJButton)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(guardarEjecutarJButton)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 182, Short.MAX_VALUE)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(formatosPermitidos)
-                            .add(asociarInstanciasButton)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 252, Short.MAX_VALUE)
+                        .add(formatosPermitidos))
                     .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 458, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -286,8 +275,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(guardarJButton)
                             .add(ejecutarJButton)
-                            .add(guardarEjecutarJButton)
-                            .add(asociarInstanciasButton))
+                            .add(guardarEjecutarJButton))
                         .add(18, 18, 18)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel1)
@@ -482,13 +470,6 @@ private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {
     format.setModal(false);
     format.setVisible(true);
 }                                                  
-
-private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
-// TODO add your handling code here:
-    addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-    //Prueba
-    addInst.asociarDialogoInstancias(addInst);
-}//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void testNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testNameTextFieldActionPerformed
 // TODO add your handling code here:
@@ -826,7 +807,6 @@ public void inicializarVariables(){
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton antQueryButton;
-    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JButton borrarConsultaJButton;
     private javax.swing.JButton ejecutarJButton;
     private javax.swing.JButton formatosPermitidos;

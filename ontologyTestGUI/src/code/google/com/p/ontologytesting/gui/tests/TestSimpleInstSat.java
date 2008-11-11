@@ -111,7 +111,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         labelInstPanel = new javax.swing.JPanel();
         labelInstLabel = new javax.swing.JLabel();
         opcionTextInstPanel = new javax.swing.JPanel();
-        asociarInstanciasButton = new javax.swing.JButton();
         contentGuardarEjecutarPanel = new javax.swing.JPanel();
         guardarButton = new javax.swing.JButton();
         ejecutarButton = new javax.swing.JButton();
@@ -196,13 +195,6 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         tabbedPaneInst.addTab("Formato Texto", opcionTextInstPanel);
 
-        asociarInstanciasButton.setText("Asociar Instancias");
-        asociarInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asociarInstanciasButtonActionPerformed(evt);
-            }
-        });
-
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -255,9 +247,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
                 .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
-                        .addComponent(asociarInstanciasButton))
+                        .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -265,9 +255,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentInstTabedPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentInstTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(asociarInstanciasButton)
-                    .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(tabbedPaneInst, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -320,13 +308,6 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
         setActualSubTabInst(subTab);
     }
 }//GEN-LAST:event_tabbedPaneInstMouseClicked
-
-private void asociarInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asociarInstanciasButtonActionPerformed
-// TODO add your handling code here:
-    addInst = new AddInstancesClasPropJPanel(null,false,this.getScenario());
-    //Prueba
-    addInst.asociarDialogoInstancias(addInst);
-}//GEN-LAST:event_asociarInstanciasButtonActionPerformed
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
@@ -821,16 +802,7 @@ public  int getTabbedPaneInst() {
     return tabbedPaneInst.getSelectedIndex();
 }
 
-/*public ScenarioTest getScenarioAEditar() {
-    return scenarioAEditar;
-}
-
-public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
-    this.scenarioAEditar = scenarioAEditar;
-}*/
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton asociarInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentInstTabedPanel;
     private javax.swing.JPanel descripcionJPanel;
@@ -846,50 +818,5 @@ public void setScenarioAEditar(ScenarioTest scenarioAEditar) {
     private javax.swing.JTabbedPane tabbedPaneInst;
     // End of variables declaration//GEN-END:variables
 
-    /*class Task extends SwingWorker<Void, Void> {
-        @Override
-        public Void doInBackground() {
-            Random random = new Random();
-            int progress = 0;
-            setProgress(0);
-            try {
-                Thread.sleep(1000);
-                while (progress < 100 && !isCancelled()) {
-                    //Sleep for up to one second.
-                    Thread.sleep(random.nextInt(1000));
-                    //Make random progress.
-                    progress += random.nextInt(10);
-                    setProgress(Math.min(progress, 100));
-                }
-            } catch (InterruptedException ignore) {}
-            return null;
-        }
-
-        @Override
-        public void done() {
-            Toolkit.getDefaultToolkit().beep();
-            progressMonitor.setProgress(0);
-        }
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if ("progress".equals(evt.getPropertyName()) ) {
-            int progress = (Integer) evt.getNewValue();
-            progressMonitor.setProgress(progress);
-            String message =
-                String.format("Completed %d%%.\n", progress);
-            progressMonitor.setNote(message);
-            //taskOutput.append(message);
-            if (progressMonitor.isCanceled() || task.isDone()) {
-                Toolkit.getDefaultToolkit().beep();
-                if (progressMonitor.isCanceled()) {
-                    task.cancel(true);
-                    //taskOutput.append("Ejecución cancelada.\n");
-                } else {
-                    //taskOutput.append("Ejecución completada.\n");
-                }
-            }
-        }
-    }*/
+    
 }

@@ -19,13 +19,13 @@ import javax.swing.JTextField;
  *
  * @author  sara.garcia
  */
-public class AbrirProyectoJDialog extends javax.swing.JDialog {
+public class AbrirProyectoJDialog extends javax.swing.JDialog{
 
     private LoadTest loadTest = new LoadTest();
     private boolean proyectoCargado = false;
     private FileChooserSelector utils;
     private OpcionesMenu opMenu;
-
+    
     /** Creates new form AbrirProyectoJDialog */
     public AbrirProyectoJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -152,6 +152,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog {
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
     opMenu = new OpcionesMenu();
+    
     if(this.getUbicacionFisica().equals("") || this.getNamespaceText().equals("")){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Todos los campos son obligatorios",                                                  
             "Warning Message",JOptionPane.WARNING_MESSAGE); 
@@ -162,8 +163,6 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 opMenu.actualizarListaDeInstancias();
                 opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
                 opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Proyecto cargado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE); 
                 this.setProyectoCargado(true);
                 this.setVisible(false);
             }else{
