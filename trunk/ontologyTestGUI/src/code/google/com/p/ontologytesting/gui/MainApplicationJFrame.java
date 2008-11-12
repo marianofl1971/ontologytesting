@@ -57,7 +57,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         this.setTitle("EVALUADOR DE ONTOLOGIAS");
-        this.setSize(new Dimension(895,720));
+        this.setSize(new Dimension(910,750));
         controlador = ControladorTests.getInstance();
         panelTest = ListAndResultsJPanel.getInstance();
         contentTestsJPanel.setLayout(new BorderLayout());
@@ -115,7 +115,12 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentTestsJPanelLayout = new javax.swing.GroupLayout(contentTestsJPanel);
         contentTestsJPanel.setLayout(contentTestsJPanelLayout);
@@ -165,6 +170,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         fileMenu.add(guardarProyectoComoMenuItem);
 
         salirMenuItem.setText("Salir");
+        salirMenuItem.setEnabled(false);
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirMenuItemActionPerformed(evt);
@@ -356,21 +362,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
     utils = new FileChooserSelector();
-    try {
-        boolean res = utils.fileChooser(false, true);
-        if(res == true){
-            File fichero = utils.getFileSelected();
-            boolean guardado = saveTest.saveProject(true,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
-            if(guardado==true){
-                panelAviso.confirmAction("Proyecto guardado", this); 
-                this.setProyectoGuardado(true);
-            }else{
-                panelAviso.errorAction("Error. Proyecto no guardado",this);                                                
-            }
-        }
-    }catch (FileNotFoundException ex) {
-        panelAviso.errorAction("Error. No se encontró el archivo especificado",this);              
-    }       
+    boolean res = utils.fileChooser(false, true);
+    if(res == true){
+        File fichero = utils.getFileSelected();
+        this.guardarProyecto(true, fichero);
+    }         
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
@@ -385,6 +381,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         instanciasMenu.setEnabled(true);
         testsMenu.setEnabled(true);
         ejecutarMenu.setEnabled(true);
+        salirMenuItem.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         this.validate();
     }
@@ -392,12 +389,17 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
 // TODO add your handling code here:
-    int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?", 
+    int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto?", 
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
+            this.guardarProyecto(false, null);
+            panelAviso.confirmAction("Proyecto Guardado", this);
             this.dispose();
             System.exit(0);
-        } 
+        }else{
+            this.dispose();
+            System.exit(0);
+        }
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
@@ -461,8 +463,8 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
-    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel();
-    cargarInstancia(nuevoInst,"Nueva Instancia");
+    Instancias inst = new Instancias();
+    cargarInstancia(inst,"Nueva Instancia");
 }//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
@@ -503,16 +505,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
-    try {
-        boolean guardado = saveTest.saveProject(false,this.getCarpetaProyecto(),this.getNombreProyecto(),null);
-        if(guardado==true){
-            panelAviso.confirmAction("Proyecto guardado", this);
-        }else{
-            panelAviso.errorAction("Proyecto no guardado",this);  
-        }
-    } catch (FileNotFoundException ex) {
-        panelAviso.errorAction("No se encontró el archivo especificado", this);
-    }
+    this.guardarProyecto(true, null);
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
@@ -537,6 +530,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 instanciasMenu.setEnabled(true);
                 testsMenu.setEnabled(true);
                 ejecutarMenu.setEnabled(true);
+                salirMenuItem.setEnabled(true);
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 ControladorTests.getInstance().inicializarGuardados();
                 ControladorTests.getInstance().inicializarSeleccionados();
@@ -570,7 +564,31 @@ private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
     help.setLocationRelativeTo(this);
     help.setVisible(true);
 }//GEN-LAST:event_contentsMenuItemActionPerformed
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+// TODO add your handling code here:
+    int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?",//GEN-LAST:event_formWindowClosing
+            "Salir",JOptionPane.YES_NO_OPTION);
+    if (n == JOptionPane.YES_OPTION){
+        this.dispose();
+        System.exit(0);
+    } 
+}
     
+private void guardarProyecto(boolean como, File fichero){
+    try {
+        boolean guardado = saveTest.saveProject(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
+        if(guardado==true){
+            panelAviso.confirmAction("Proyecto guardado", this);
+            this.setProyectoGuardado(true);
+        }else{
+            panelAviso.errorAction("Proyecto no guardado",this);  
+        }
+    } catch (FileNotFoundException ex) {
+        panelAviso.errorAction("No se encontró el archivo especificado", this);
+    }
+}
+
 public void importarTestsInstancias(boolean impTest){
     ImportarTestsInstJDialog abrirTests = new ImportarTestsInstJDialog(this,true,impTest);
     abrirTests.setLocationRelativeTo(this);
@@ -634,7 +652,9 @@ public void aniadirNuevoTest(ScenarioTest s){
     return res;
 }*/
 
-public void cargarInstancia(AddInstancesClasPropJPanel nuevoInst, String msg){
+public void cargarInstancia(Instancias inst, String msg){
+    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel(inst);
+    nuevoInst.setInstanciasActuales(new Instancias(inst));
     panelTest.getTestsPanel().aniadirTest(nuevoInst,msg);
     setPanelActual(nuevoInst);
 }
@@ -646,6 +666,7 @@ public void cargarTest(int type,ScenarioTest s){
         if(s.getNombre().equals("")){
             testName="Nuevo Test Simple";
         }else testName=s.getNombre();
+        testInstSat.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testInstSat,testName);
         setPanelActual(testInstSat);
     }else if(type==1){
@@ -653,6 +674,7 @@ public void cargarTest(int type,ScenarioTest s){
             testName="Nuevo Test Simple";
         }else testName=s.getNombre();
         testRetClas = new TestSimpleRetClas(s);
+        testRetClas.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testRetClas,testName);
         setPanelActual(testRetClas);
     }else if(type==2){
@@ -660,6 +682,7 @@ public void cargarTest(int type,ScenarioTest s){
             testName="Nuevo Test Simple";
         }else testName=s.getNombre();
          testReal = new TestSimpleReal(s);
+         testReal.setScenarioActual(new ScenarioTest(s));
          panelTest.getTestsPanel().aniadirTest(testReal,testName);
          setPanelActual(testReal);
     }else if(type==3){
@@ -667,6 +690,7 @@ public void cargarTest(int type,ScenarioTest s){
             testName="Nuevo Test SPARQL";
         }else testName=s.getNombre();
         testSparql = new AddSPARQLJPanel(s);
+        testSparql.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testSparql,testName);
         setPanelActual(testSparql);
     }

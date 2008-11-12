@@ -11,7 +11,6 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
  */
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
@@ -27,7 +26,7 @@ public class OpcionesMenu {
     private OntologyTestResult testResult;
     private OntologyTestCase testCase;
     private ListarTestsJPanel listInst;
-    private static ScenarioTest scenarioActual = new ScenarioTest();
+    private ScenarioTest scenarioActual = new ScenarioTest();
     private ScenarioTest scenarioAEditar = new ScenarioTest();
     
     public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
@@ -52,7 +51,7 @@ public class OpcionesMenu {
     }
     
     public void editarTest(ScenarioTest scenario){
-        OpcionesMenu.setScenarioActual(scenario);
+        setScenarioActual(scenario);
         scenarioAEditar = new ScenarioTest(scenario);
         if(scenarioAEditar.getTipoTest().name().equals("INST") || scenarioAEditar.getTipoTest().name().equals("SAT")){
             MainApplicationJFrame.getInstance().cargarTest(0, scenarioAEditar);
@@ -65,8 +64,14 @@ public class OpcionesMenu {
         }   
     }
     
-    public void editarInstancias(AddInstancesClasPropJPanel inst){
-        MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNomInstanciasTextField());
+    public void editarInstancias(Instancias inst){
+        String nombre = "";
+        if(!inst.getNombre().equals("")){
+            nombre = inst.getNombre();
+        }else{
+            nombre = "Editar instancias";
+        }
+        MainApplicationJFrame.getInstance().cargarInstancia(inst,nombre);
     }
     
     public void eliminarTest(ScenarioTest scenario){
@@ -109,11 +114,11 @@ public class OpcionesMenu {
         listInst.aniadirInstancias(CollectionTest.getInstance().getInstancias());
     }
 
-    public static ScenarioTest getScenarioActual() {
+    public ScenarioTest getScenarioActual() {
         return scenarioActual;
     }
 
-    public static void setScenarioActual(ScenarioTest ascenarioActual) {
+    public void setScenarioActual(ScenarioTest ascenarioActual) {
         scenarioActual = ascenarioActual;
     }
 }

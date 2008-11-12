@@ -34,8 +34,7 @@ public class PopMenuInstances implements ActionListener{
         CollectionTest collection = CollectionTest.getInstance();
         Instancias inst = instancias.buscarInstancias(collection.getInstancias(), this.getInstSelec());
         if(source.getText().equals("Editar")){   
-            AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
-            menu.editarInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(inst, inst.getNombre());
         }else if(source.getText().equals("Asociar a un Test")){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, inst);
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());

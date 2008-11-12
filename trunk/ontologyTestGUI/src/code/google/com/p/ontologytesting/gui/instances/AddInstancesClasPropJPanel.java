@@ -16,11 +16,11 @@ import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 import java.util.ListIterator;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
@@ -29,7 +29,7 @@ import javax.swing.WindowConstants;
  *
  * @author  Saruskas
  */
-public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
+public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
     private AddComentJDialog commentPane;
     private ArrayList<ClassInstances> clasInst;
@@ -49,13 +49,13 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
     private String[] clas,prop;
     private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
             instanciaValida=true,queryValida=true,nuevoTest=false;
-    private Instancias instanciasAEditar;
     private SaveTest saveTest;
     private ScenarioTest scenario;
     private OpcionesMenu menu;
+    private Instancias instanciasActuales = new Instancias();
     
     //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJPanel(JFrame parent, boolean modal, ScenarioTest scenario){       
+    public AddInstancesClasPropJPanel(ScenarioTest scenario){       
         //super(parent, modal);
         initComponents();
         int contI=0,contP=0;
@@ -105,8 +105,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                     propPanel.add(new CreateInstancesJPanel(1));
                 }
             }
-            instanciasAEditar = new Instancias(scenario.getInstancias());
-            setInstancias(new Instancias(scenario.getInstancias()));
+            setInstancias(scenario.getInstancias());
             this.setScenario(scenario);
             setEditado(false);
         }else{
@@ -114,10 +113,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                 clasPanel.add(new CreateInstancesJPanel(0));  
                 propPanel.add(new CreateInstancesJPanel(1));
             }
-            instanciasAEditar = new Instancias();
             setInstancias(new Instancias());
             this.setScenario(scenario);
-            setInstanciasAEditar(null);
             setEditado(false);
         }
     } 
@@ -134,14 +131,12 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
             clasPanel.add(new CreateInstancesJPanel(0));  
             propPanel.add(new CreateInstancesJPanel(1));
         }
-        instanciasAEditar = new Instancias();
         setInstancias(new Instancias());
-        setInstanciasAEditar(null);
         setEditado(false);
     } 
     
    //Constructor para editar un conjunto de instancias
-    public AddInstancesClasPropJPanel(JFrame parent, boolean modal, Instancias inst){
+    public AddInstancesClasPropJPanel(Instancias inst){
         initComponents();
         this.setNuevoTest(true);
         int contI=0,contP=0;
@@ -190,7 +185,6 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                 propPanel.add(new CreateInstancesJPanel(1));
             }
         }
-        instanciasAEditar = new Instancias(inst);
         setInstancias(inst);
         setEditado(true);  
     }
@@ -225,6 +219,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
         borrarSelecButton = new javax.swing.JButton();
         soloAsociarButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
+
+        setLayout(new java.awt.BorderLayout());
 
         descInstanciasTextArea.setColumns(20);
         descInstanciasTextArea.setRows(5);
@@ -356,21 +352,21 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addComponent(formatosButton))
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addComponent(limpiarInstButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(borrarSelecButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
                         .addComponent(soloAsociarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(guardarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guardarAsociarInstButton)))
+                        .addComponent(guardarAsociarInstButton))
+                    .addComponent(instancesTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -379,40 +375,38 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(formatosButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(1, 1, 1)
                 .addComponent(instancesTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(limpiarInstButton)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(borrarSelecButton)
-                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(soloAsociarButton)
-                        .addComponent(guardarAsociarInstButton)
-                        .addComponent(guardarButton))))
+                    .addComponent(limpiarInstButton)
+                    .addComponent(soloAsociarButton)
+                    .addComponent(guardarAsociarInstButton)
+                    .addComponent(guardarButton))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout contentDescPanelLayout = new javax.swing.GroupLayout(contentDescPanel);
         contentDescPanel.setLayout(contentDescPanelLayout);
         contentDescPanelLayout.setHorizontalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentDescPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentDescPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(contentDescPanelLayout.createSequentialGroup()
-                        .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-                            .addGroup(contentDescPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentDescPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         contentDescPanelLayout.setVerticalGroup(
             contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentDescPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(contentDescPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nomInstanciasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -420,26 +414,12 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentDescPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentDescPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+
+        add(contentDescPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
@@ -454,7 +434,7 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
     }else{
         boolean result = prepararInstancias(true,true);
         if(result==true){
-            JOptionPane.showMessageDialog(this, "Instancias guardadas y asociadas al test", 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas y asociadas al test", 
             "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
         }   
     }
@@ -476,7 +456,7 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
         getClasPanel().validate();
         if(auxClas==0){
-            JOptionPane.showMessageDialog(this,"No ha seleccionado ninguna clase para limpiar",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No ha seleccionado ninguna clase para limpiar",
                     "Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }else if(getInstancesTabbedPane()==1){
@@ -492,7 +472,7 @@ private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
         getPropPanel().validate();
         if(auxProp==0){
-            JOptionPane.showMessageDialog(this,"No ha seleccionado ninguna propiedad para limpiar",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No ha seleccionado ninguna propiedad para limpiar",
                     "Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -536,7 +516,7 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
         getClasPanel().validate();
         if(auxClas==0){
-            JOptionPane.showMessageDialog(this,"No ha seleccionado ninguna clase para borrar",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No ha seleccionado ninguna clase para borrar",
                     "Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }else if(getInstancesTabbedPane()==1){
@@ -554,7 +534,7 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         }
         getPropPanel().validate();
         if(auxProp==0){
-            JOptionPane.showMessageDialog(this,"No ha seleccionado ninguna propiedad para borrar",
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No ha seleccionado ninguna propiedad para borrar",
                     "Warning Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -573,7 +553,7 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
     }else{
         boolean result = prepararInstancias(false,true);
         if(result==true){
-            JOptionPane.showMessageDialog(this, "Instancias asociadas al test", 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias asociadas al test", 
             "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -586,7 +566,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 //GEN-LAST:event_guardarButtonActionPerformed
     boolean result = prepararInstancias(true,false);
     if(result==true){
-        JOptionPane.showMessageDialog(this, "Instancias guardadas", 
+        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
     }
 }
@@ -601,7 +581,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
         try{
             jena.addReasoner(CollectionTest.getInstance().getOntology());
         }catch(ExceptionReadOntology ex){
-            JOptionPane.showMessageDialog(this, "La ontología introducida no es válida. Las instancias " +
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "La ontología introducida no es válida. Las instancias " +
                     "no han sido asociadas.", "Error Message", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -636,9 +616,8 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             getInstancias().setNombre(getNomInstanciasTextField());
             if((guardar==true && asociar==true && this.getNuevoTest()==false) || (guardar==true)){
                 if(aux==0){
-                    if(this.getInstanciasAEditar()!= null && 
-                            this.getInstancias().equals(this.getInstanciasAEditar())==false
-                            && this.getInstancias().getNombre().equals(this.getInstanciasAEditar().getNombre())){
+                    if(this.getInstanciasActuales() != null && instancias.equals(this.getInstanciasActuales())==false
+                        && this.getInstancias().getNombre().equals(this.getInstanciasActuales().getNombre())){
                         Object[] options = {"Sobreescribir", "Cancelar"};
                         int n = JOptionPane.showOptionDialog(this, "El conjunto de instancias ha sido modificado. ¿Que desea hacer?", 
                                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -651,8 +630,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                                 this.getScenario().setInstancias(this.getInstancias());
                             }
                             aux=1;
-                            setInstanciasAEditar(new Instancias(getInstancias()));
-                            setInstancias(new Instancias(getInstancias()));
+                            setInstanciasActuales(new Instancias(instancias));
                         }else{
                             aux=1;
                             return false;
@@ -663,6 +641,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             if(aux==0){
                 if(guardar==true){
                     saveTest.saveInstanciasInMemory(getInstancias());
+                    this.setInstanciasActuales(new Instancias(instancias));
                     menu.actualizarListaDeInstancias();
                 }
                 if(asociar==true && this.getNuevoTest()==false){
@@ -671,14 +650,14 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             }
             return true;
         } else if (instanciaSinNombre == true) {
-            JOptionPane.showMessageDialog(this, "El nombre para el conjunto de instancias" 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "El nombre para el conjunto de instancias" 
                     + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
         } else if (instanciaValida == false) {
-            JOptionPane.showMessageDialog(this, "Las instancias marcadas" + 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Las instancias marcadas" + 
                     "en rojo no se corresponden con la definicion de su ontologia. " 
                     + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
         } else if (queryValida == false) {
-            JOptionPane.showMessageDialog(this, "El formato de las instancias marcadas" 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "El formato de las instancias marcadas" 
                     + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
                     + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             if (getInstancesTabbedPane() != 2) {
@@ -991,7 +970,7 @@ public void copiarAInstancesAyuda(){
     this.validate();
 }
 
-public int getIndexVect() {
+    public int getIndexVect() {
         return indexVect;
     }
 
@@ -1079,14 +1058,6 @@ public int getIndexVect() {
         this.instanciasInstGuardadas = instanciasGuardadas;
     }
 
-    public Instancias getInstanciasAEditar() {
-        return instanciasAEditar;
-    }
-
-    public void setInstanciasAEditar(Instancias instanciasAEditar) {
-        this.instanciasAEditar = instanciasAEditar;
-    }
-
     public Instancias getInstancias() {
         return instancias;
     }
@@ -1118,6 +1089,14 @@ public int getIndexVect() {
     public void setNuevoTest(boolean nuevo) {
         this.nuevoTest = nuevo;
     }
+    
+    public Instancias getInstanciasActuales() {
+        return instanciasActuales;
+    }
+
+    public void setInstanciasActuales(Instancias instanciasActuales) {
+        this.instanciasActuales = instanciasActuales;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton borrarSelecButton;
@@ -1142,5 +1121,6 @@ public int getIndexVect() {
     private javax.swing.JButton soloAsociarButton;
     private javax.swing.JScrollPane textAreaScrollPane;
     // End of variables declaration//GEN-END:variables
+
 
 }
