@@ -154,8 +154,7 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         panelAviso.confirmAction("Test cargado para su edición", this);
         this.setVisible(false);
     }else{
-        AddInstancesClasPropJPanel editInst = new AddInstancesClasPropJPanel(null, true, this.getListarTestInst().getInstanciaSelect());
-        MainApplicationJFrame.getInstance().cargarInstancia(editInst,editInst.getNomInstanciasTextField());
+        MainApplicationJFrame.getInstance().cargarInstancia(this.getListarTestInst().getInstanciaSelect(),this.getListarTestInst().getInstanciaSelect().getNombre());
     }
 }//GEN-LAST:event_editarButtonActionPerformed
 

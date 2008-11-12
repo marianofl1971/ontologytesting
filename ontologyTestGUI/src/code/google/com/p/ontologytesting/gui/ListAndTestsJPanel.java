@@ -22,7 +22,6 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private ListAndTestsJPanel() {
         initComponents();
         this.listTestPanel.setLayout(new BorderLayout());
-        this.testsPanel.setLayout(new FlowLayout());
         this.splitPane.setDividerLocation(235);
     }
  
@@ -70,6 +69,8 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         testsPanel = new javax.swing.JPanel();
         contentTabbedPane = new javax.swing.JTabbedPane();
 
+        setLayout(new java.awt.BorderLayout());
+
         splitPane.setDividerSize(7);
         splitPane.setOneTouchExpandable(true);
 
@@ -86,35 +87,14 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
 
         splitPane.setLeftComponent(listTestPanel);
 
-        javax.swing.GroupLayout testsPanelLayout = new javax.swing.GroupLayout(testsPanel);
-        testsPanel.setLayout(testsPanelLayout);
-        testsPanelLayout.setHorizontalGroup(
-            testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
-            .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
-        );
-        testsPanelLayout.setVerticalGroup(
-            testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
-            .addGroup(testsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(contentTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
-        );
+        testsPanel.setLayout(new java.awt.BorderLayout());
+        testsPanel.add(contentTabbedPane, java.awt.BorderLayout.CENTER);
 
         testsScrollPane.setViewportView(testsPanel);
 
         splitPane.setRightComponent(testsScrollPane);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-        );
+        add(splitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

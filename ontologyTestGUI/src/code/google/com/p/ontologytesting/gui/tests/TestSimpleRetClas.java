@@ -6,7 +6,6 @@
 
 package code.google.com.p.ontologytesting.gui.tests;
 
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
@@ -40,20 +39,19 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private SaveTest saveTest;
-    private AddInstancesClasPropJPanel addInst;
     private String nombreTest = "",descTest = "";
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
     private QueryOntology testQuery;
     private AniadirPanelDeAviso panelAviso;
+    private ScenarioTest scenarioActual = new ScenarioTest();
     
     public TestSimpleRetClas(ScenarioTest s){
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
-        descripcionJPanel.setLayout(new BorderLayout());
-        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.CENTER);
+        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.WEST);
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
         retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
         controlador = ControladorTests.getInstance();
@@ -108,7 +106,12 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         guardarButton = new javax.swing.JButton();
         guardarEjecutarButton = new javax.swing.JButton();
         ejecutarButton = new javax.swing.JButton();
+        addInstanciasButton = new javax.swing.JButton();
         descripcionJPanel = new javax.swing.JPanel();
+
+        setLayout(new java.awt.BorderLayout());
+
+        contentRetTabedPanel.setLayout(new java.awt.BorderLayout());
 
         tabbedPaneRet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -127,7 +130,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             .addGroup(labelRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         labelRetPanelLayout.setVerticalGroup(
             labelRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,14 +147,14 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             .addGroup(retAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         retAyudaPanelLayout.setVerticalGroup(
             retAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelRetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(495, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(retAyudaPanel);
@@ -162,14 +165,14 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                .addContainerGap())
         );
         opcionAyudaRetPanelLayout.setVerticalGroup(
             opcionAyudaRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaRetPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -179,14 +182,16 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         opcionTextRetPanel.setLayout(opcionTextRetPanelLayout);
         opcionTextRetPanelLayout.setHorizontalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGap(0, 571, Short.MAX_VALUE)
         );
         opcionTextRetPanelLayout.setVerticalGroup(
             opcionTextRetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 325, Short.MAX_VALUE)
         );
 
         tabbedPaneRet.addTab("Formato Texto", opcionTextRetPanel);
+
+        contentRetTabedPanel.add(tabbedPaneRet, java.awt.BorderLayout.CENTER);
 
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setToolTipText("Guardar");
@@ -212,79 +217,46 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
             }
         });
 
+        addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
+        addInstanciasButton.setText("Instancias");
+        addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addInstanciasButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentGuardarEjecutarPanelLayout = new javax.swing.GroupLayout(contentGuardarEjecutarPanel);
         contentGuardarEjecutarPanel.setLayout(contentGuardarEjecutarPanelLayout);
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(guardarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ejecutarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardarEjecutarButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(addInstanciasButton)
+                .addContainerGap())
         );
         contentGuardarEjecutarPanelLayout.setVerticalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(guardarButton)
-                .addComponent(ejecutarButton)
-                .addComponent(guardarEjecutarButton))
-        );
-
-        javax.swing.GroupLayout contentRetTabedPanelLayout = new javax.swing.GroupLayout(contentRetTabedPanel);
-        contentRetTabedPanel.setLayout(contentRetTabedPanelLayout);
-        contentRetTabedPanelLayout.setHorizontalGroup(
-            contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentRetTabedPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(542, 542, 542))
-            .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
-                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(contentGuardarEjecutarPanelLayout.createSequentialGroup()
+                .addGroup(contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addInstanciasButton)
+                    .addComponent(guardarEjecutarButton)
+                    .addComponent(ejecutarButton)
+                    .addComponent(guardarButton))
                 .addContainerGap())
         );
-        contentRetTabedPanelLayout.setVerticalGroup(
-            contentRetTabedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentRetTabedPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentGuardarEjecutarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(tabbedPaneRet, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
-        javax.swing.GroupLayout descripcionJPanelLayout = new javax.swing.GroupLayout(descripcionJPanel);
-        descripcionJPanel.setLayout(descripcionJPanelLayout);
-        descripcionJPanelLayout.setHorizontalGroup(
-            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
-        );
-        descripcionJPanelLayout.setVerticalGroup(
-            descripcionJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 134, Short.MAX_VALUE)
-        );
+        contentRetTabedPanel.add(contentGuardarEjecutarPanel, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(descripcionJPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(descripcionJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(contentRetTabedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(contentRetTabedPanel, java.awt.BorderLayout.CENTER);
+
+        descripcionJPanel.setLayout(new java.awt.BorderLayout());
+        add(descripcionJPanel, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 private void tabbedPaneRetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabbedPaneRetMouseClicked
@@ -316,12 +288,15 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
+
+private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
+// TODO add your handling code here:
+    menu.editarInstancias(this.getScenario().getInstancias());//GEN-LAST:event_addInstanciasButtonActionPerformed
+}
 
 public boolean guardarTest(){
     if(getTabbedPaneRet()==0){
@@ -333,9 +308,7 @@ public boolean guardarTest(){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
     return continuar;
@@ -352,9 +325,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
 }
@@ -363,8 +334,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if(OpcionesMenu.getScenarioActual() != null && scenario.equals(OpcionesMenu.getScenarioActual())==false
-                        && this.getScenario().getNombre().equals(OpcionesMenu.getScenarioActual().getNombre())){
+            if(this.getScenarioActual() != null && scenario.equals(this.getScenarioActual())==false
+                        && this.getScenario().getNombre().equals(this.getScenarioActual().getNombre())){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
@@ -376,8 +347,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                 saveTest.saveTestInMemory(scenario);
                 controlador.setTestRetClasGuardado(true);
             }
-            OpcionesMenu.setScenarioActual(scenario);
-            this.setScenario(new ScenarioTest(scenario));
+            this.setScenarioActual(new ScenarioTest(scenario));
         }
         if(ejecutar==true){
             try{
@@ -389,8 +359,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
      }else{
         if(guardar==true){
             saveTest.saveTestInMemory(scenario);
-            OpcionesMenu.setScenarioActual(scenario);
-            setScenario(new ScenarioTest(scenario));
+            setScenarioActual(new ScenarioTest(scenario));
             controlador.setTestRetClasGuardado(true);
         }
         if(ejecutar==true){
@@ -401,6 +370,13 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
         }
     }  
+    if(guardar==true && ejecutar==true){
+        panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
+    }else if(guardar==true){
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
+    }else{
+        panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
+    }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
 
@@ -804,6 +780,7 @@ public void setScenario(ScenarioTest scenario) {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addInstanciasButton;
     private javax.swing.JPanel contentGuardarEjecutarPanel;
     private javax.swing.JPanel contentRetTabedPanel;
     private javax.swing.JPanel descripcionJPanel;
@@ -818,5 +795,13 @@ public void setScenario(ScenarioTest scenario) {
     private javax.swing.JPanel retAyudaPanel;
     private javax.swing.JTabbedPane tabbedPaneRet;
     // End of variables declaration//GEN-END:variables
+
+    public ScenarioTest getScenarioActual() {
+        return scenarioActual;
+    }
+
+    public void setScenarioActual(ScenarioTest scenarioActual) {
+        this.scenarioActual = scenarioActual;
+    }
 
 }

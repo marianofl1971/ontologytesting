@@ -368,8 +368,7 @@ private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     JList lista = (JList) evt.getSource();
     Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
-        AddInstancesClasPropJPanel addInst = new AddInstancesClasPropJPanel(null, false, inst);
-        MainApplicationJFrame.getInstance().cargarInstancia(addInst,addInst.getNomInstanciasTextField());
+        MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
     }
 }//GEN-LAST:event_instanciasListMouseClicked
     

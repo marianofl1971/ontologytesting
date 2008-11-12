@@ -7,7 +7,6 @@
 package code.google.com.p.ontologytesting.gui.tests;
 
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.FormatTestsJDialog;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
@@ -17,9 +16,7 @@ import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.SaveTest;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -29,14 +26,13 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,testYaExiste,sinConsultas,
             ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
-    private ScenarioTest scenario,scenarioAEditar;
+    private ScenarioTest scenario,scenarioActual;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
     private Reasoner jenaInterface;
     private InterfaceReasoner jena;
     private ValidarTests validarTest;
     private SaveTest saveTest;
-    private AddInstancesClasPropJPanel addInst;
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
@@ -104,6 +100,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         guardarEjecutarJButton = new javax.swing.JButton();
         ejecutarJButton = new javax.swing.JButton();
         guardarJButton = new javax.swing.JButton();
+        addInstanciasButton = new javax.swing.JButton();
 
         jLabel1.setText("Introduzca la consulta en SPARQL:");
 
@@ -211,6 +208,14 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
+        addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
+        addInstanciasButton.setText("Instancias");
+        addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addInstanciasButtonActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,21 +246,23 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                                 .add(10, 10, 10)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(jLabel4)
-                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))))
+                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 209, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .add(guardarJButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(ejecutarJButton)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(guardarEjecutarJButton)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 252, Short.MAX_VALUE)
+                            .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 240, Short.MAX_VALUE)
                         .add(formatosPermitidos))
                     .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 458, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 458, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(guardarJButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(ejecutarJButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(guardarEjecutarJButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(addInstanciasButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -270,17 +277,18 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(jLabel3)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(guardarJButton)
-                            .add(ejecutarJButton)
-                            .add(guardarEjecutarJButton))
-                        .add(18, 18, 18)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel1)
-                            .add(jLabel4)))
+                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(formatosPermitidos))
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(guardarJButton)
+                    .add(ejecutarJButton)
+                    .add(guardarEjecutarJButton)
+                    .add(addInstanciasButton))
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(jLabel4))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
@@ -475,6 +483,11 @@ private void testNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {/
 // TODO add your handling code here:
 }//GEN-LAST:event_testNameTextFieldActionPerformed
 
+private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
+// TODO add your handling code here:
+    menu.editarInstancias(this.getScenario().getInstancias());
+}//GEN-LAST:event_addInstanciasButtonActionPerformed
+
 private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
     guardarTest();
@@ -486,9 +499,7 @@ public boolean guardarTest(){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
     return continuar;
@@ -501,9 +512,7 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
 }                                                      
@@ -515,9 +524,7 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            addInst = new AddInstancesClasPropJPanel(null,true,this.getScenario());
-            //Prueba
-            addInst.asociarDialogoInstancias(addInst);
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
 }                                               
@@ -526,28 +533,24 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     saveTest = new SaveTest();
     if(testYaExiste==true){
         if(guardar==true){
-            if((OpcionesMenu.getScenarioActual() != null) && (scenario.equals(OpcionesMenu.getScenarioActual())==false)
-                        && (this.getScenario().getNombre().equals(OpcionesMenu.getScenarioActual().getNombre()))){
+            if((this.getScenarioActual() != null) && (scenario.equals(this.getScenarioActual())==false)
+                        && (this.getScenario().getNombre().equals(this.getScenarioActual().getNombre()))){
                 Object[] options = {"Sobreescribir", "Cancelar"};
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
                     saveTest.replaceScenarioLocally(scenario);
                     controlador.setTestSparqlGuardado(true);
-                    panelAviso.confirmAction("El test ha sido sobreescrito", MainApplicationJFrame.getInstance());
                 }
             }else{
                 saveTest.saveTestInMemory(this.getScenario());
                 controlador.setTestSparqlGuardado(true);
-                panelAviso.confirmAction("No se han producido cambios en el test", MainApplicationJFrame.getInstance());
             }
-            OpcionesMenu.setScenarioActual(scenario);
-            this.setScenario(new ScenarioTest(scenario));
+            this.setScenarioActual(new ScenarioTest(scenario));
         }
         if(ejecutar==true){
             try{
                 menu.ejecutarUnTest(this.getScenario());
-                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
@@ -555,20 +558,24 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
      }else{
         if(guardar==true){
             saveTest.saveTestInMemory(scenario);
-            OpcionesMenu.setScenarioActual(scenario);
-            this.setScenario(new ScenarioTest(scenario));
+            this.setScenarioActual(new ScenarioTest(scenario));
             controlador.setTestSparqlGuardado(true);
-            panelAviso.confirmAction("El test ha sido guardado", MainApplicationJFrame.getInstance());
         }
         if(ejecutar==true){
             try{
                 menu.ejecutarUnTest(this.getScenario());
-                panelAviso.confirmAction("Test ejecutado", MainApplicationJFrame.getInstance());
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
         }
     }  
+    if(guardar==true && ejecutar==true){
+        panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
+    }else if(guardar==true){
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
+    }else{
+        panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
+    }
     menu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
 }
 
@@ -806,6 +813,7 @@ public void inicializarVariables(){
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addInstanciasButton;
     private javax.swing.JButton antQueryButton;
     private javax.swing.JButton borrarConsultaJButton;
     private javax.swing.JButton ejecutarJButton;
@@ -828,6 +836,14 @@ public void inicializarVariables(){
     private javax.swing.JTextArea testDescTextArea;
     private javax.swing.JTextField testNameTextField;
     // End of variables declaration//GEN-END:variables
+
+    public ScenarioTest getScenarioActual() {
+        return scenarioActual;
+    }
+
+    public void setScenarioActual(ScenarioTest scenarioActual) {
+        this.scenarioActual = scenarioActual;
+    }
 
 
 }

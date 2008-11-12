@@ -87,6 +87,8 @@ public class ListAndResultsJPanel extends javax.swing.JPanel {
 
         splitPane.setLeftComponent(listAndTestsPanel);
 
+        resultTestsPanel.setPreferredSize(new java.awt.Dimension(354, 170));
+
         javax.swing.GroupLayout resultTestsPanelLayout = new javax.swing.GroupLayout(resultTestsPanel);
         resultTestsPanel.setLayout(resultTestsPanelLayout);
         resultTestsPanelLayout.setHorizontalGroup(
