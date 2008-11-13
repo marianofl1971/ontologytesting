@@ -620,37 +620,22 @@ public boolean listaTestsInstanciasVacia(boolean test){
 public void aniadirNuevoTest(ScenarioTest s){
     this.inicializarContadores();
     int type = 0;
-    if(s.getTipoTest().name().equals("INST") || s.getTipoTest().name().equals("SAT")){
+    if(s.getTipoTest().name().equals("INST")){
         type = 0;
-    }else if(s.getTipoTest().name().equals("RET") || s.getTipoTest().name().equals("CLAS")){
+    }else if(s.getTipoTest().name().equals("SAT")){
+        type = 3;
+    }else if(s.getTipoTest().name().equals("RET") ){
         type = 1;
+    }else if(s.getTipoTest().name().equals("CLAS")){
+        type = 4;
     }else if(s.getTipoTest().name().equals("REAL")){
         type = 2;
     }else if(s.getTipoTest().name().equals("SPARQL")){
-        type = 3;
+        type = 5;
     }
     controlador.prepararTest(s.getTipoTest().name());
     cargarTest(type,s);
 }
-
-/*public boolean obtenerPanelAGuardar(){
-    JPanel panel = getPanelActual();
-    boolean res = false;
-    if(panel instanceof TestSimpleInstSat){
-        testInstSat = (TestSimpleInstSat) panel;
-        res = testInstSat.guardarTest();
-    }else if(panel instanceof TestSimpleRetClas){
-        testRetClas = (TestSimpleRetClas) panel;
-        res = testRetClas.guardarTest();
-    }else if(panel instanceof TestSimpleReal){
-        testReal = (TestSimpleReal) panel;
-        res = testReal.guardarTest();
-    }else if(panel instanceof AddSPARQLJPanel){
-        testSparql = (AddSPARQLJPanel) panel;
-        res = testSparql.guardarTest();
-    }
-    return res;
-}*/
 
 public void cargarInstancia(Instancias inst, String msg){
     AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel(inst);
@@ -661,17 +646,21 @@ public void cargarInstancia(Instancias inst, String msg){
 
 public void cargarTest(int type,ScenarioTest s){
     String testName="";
-    if(type==0){
+    if(type==0 || type==3){
         testInstSat = new TestSimpleInstSat(s);
-        if(s.getNombre().equals("")){
-            testName="Nuevo Test Simple";
+        if(s.getNombre().equals("") && type==0){
+            testName="Nuevo Instanciación";
+        }else if(s.getNombre().equals("") && type==3){
+            testName="Nuevo Satisfactibilidad";
         }else testName=s.getNombre();
         testInstSat.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testInstSat,testName);
         setPanelActual(testInstSat);
-    }else if(type==1){
-        if(s.getNombre().equals("")){
-            testName="Nuevo Test Simple";
+    }else if(type==1 || type==4){
+        if(s.getNombre().equals("") && type==1){
+            testName="Nuevo Recuperación";
+        }else if(s.getNombre().equals("") && type==4){
+            testName="Nuevo Clasificación";
         }else testName=s.getNombre();
         testRetClas = new TestSimpleRetClas(s);
         testRetClas.setScenarioActual(new ScenarioTest(s));
@@ -679,7 +668,7 @@ public void cargarTest(int type,ScenarioTest s){
         setPanelActual(testRetClas);
     }else if(type==2){
         if(s.getNombre().equals("")){
-            testName="Nuevo Test Simple";
+            testName="Nuevo Realización";
         }else testName=s.getNombre();
          testReal = new TestSimpleReal(s);
          testReal.setScenarioActual(new ScenarioTest(s));
@@ -687,7 +676,7 @@ public void cargarTest(int type,ScenarioTest s){
          setPanelActual(testReal);
     }else if(type==3){
         if(s.getNombre().equals("")){
-            testName="Nuevo Test SPARQL";
+            testName="Nuevo SPARQL";
         }else testName=s.getNombre();
         testSparql = new AddSPARQLJPanel(s);
         testSparql.setScenarioActual(new ScenarioTest(s));

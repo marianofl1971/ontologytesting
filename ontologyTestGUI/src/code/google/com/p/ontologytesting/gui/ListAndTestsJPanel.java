@@ -41,6 +41,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         contentTabbedPane.setTitleAt(contentTabbedPane.getTabCount()-1, name);
         initTabComponent(contentTabbedPane.getTabCount()-1);
         contentTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        contentTabbedPane.setSelectedIndex(contentTabbedPane.getTabCount()-1);
         contentTabbedPane.validate();    
     }
     
