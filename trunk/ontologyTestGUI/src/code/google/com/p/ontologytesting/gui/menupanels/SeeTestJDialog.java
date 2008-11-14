@@ -155,7 +155,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
     public String generarConsultasSparql(List<SparqlQueryOntology> listaQ){
         StringBuffer bufRes = new StringBuffer();
         for(int i=0;i<listaQ.size();i++){
-            bufRes.append("Consulta: ").append(listaQ.get(i).getQuerySparql()).append("<br>Resultado: ")
+            bufRes.append("Consulta: ").append(listaQ.get(i).getQuery()).append("<br>Resultado: ")
                     .append(listaQ.get(i).getResultexpected()).append("<br>");
         }
         if(bufRes.length()==0){

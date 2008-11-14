@@ -12,7 +12,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
@@ -49,7 +49,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private String[] clas,prop;
     private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
             instanciaValida=true,queryValida=true,nuevoTest=false;
-    private SaveTest saveTest;
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private ScenarioTest scenario;
     private OpcionesMenu menu;
     private Instancias instanciasActuales = new Instancias();
@@ -240,7 +240,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             }
         });
 
-        limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
+        limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/edit-clear.png"))); // NOI18N
         limpiarInstButton.setToolTipText("Limpiar Selección");
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -321,7 +321,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             }
         });
 
-        borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
+        borrarSelecButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/user-trash.png"))); // NOI18N
         borrarSelecButton.setToolTipText("Borrar Selección");
         borrarSelecButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -576,7 +576,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
     jenaInterface = new Reasoner();
     jena = jenaInterface.getReasoner();
     if(jenaInterface.isCargado()==true){
-        saveTest = new SaveTest();
+        persist = new IOManagerImplementation();
         int aux=0;
         try{
             jena.addReasoner(CollectionTest.getInstance().getOntology());
@@ -623,7 +623,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (n == JOptionPane.YES_OPTION) {
                             if(guardar==true){
-                                saveTest.replaceInstanciasLocally(getInstancias());
+                                persist.replaceInstanciasLocally(getInstancias());
                                 menu.actualizarListaDeInstancias();
                             }
                             if(asociar==true && this.getNuevoTest()==false){
@@ -640,7 +640,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             }
             if(aux==0){
                 if(guardar==true){
-                    saveTest.saveInstanciasInMemory(getInstancias());
+                    persist.saveInstanciasInMemory(getInstancias());
                     this.setInstanciasActuales(new Instancias(instancias));
                     menu.actualizarListaDeInstancias();
                 }

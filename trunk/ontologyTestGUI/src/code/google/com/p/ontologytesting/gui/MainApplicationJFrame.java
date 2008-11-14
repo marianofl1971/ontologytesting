@@ -37,8 +37,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private ControladorTests controlador;
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
-    private SaveTest saveTest = new SaveTest();
-    private LoadTest loadTest = new LoadTest();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false;
@@ -135,6 +134,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
         fileMenu.setText("Proyecto");
 
+        nuevoProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoProyectoMenuItem.setText("Nuevo");
         nuevoProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +143,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         fileMenu.add(nuevoProyectoMenuItem);
 
+        abrirProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-open.png"))); // NOI18N
         abrirProyectoMenuItem.setText("Abrir");
         abrirProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +152,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         fileMenu.add(abrirProyectoMenuItem);
 
+        guardarProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-save.png"))); // NOI18N
         guardarProyectoMenuItem.setText("Guardar");
         guardarProyectoMenuItem.setEnabled(false);
         guardarProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +162,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         fileMenu.add(guardarProyectoMenuItem);
 
+        guardarProyectoComoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-save-as.png"))); // NOI18N
         guardarProyectoComoMenuItem.setText("Guardar Como");
         guardarProyectoComoMenuItem.setEnabled(false);
         guardarProyectoComoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +186,12 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         testsMenu.setText("Tests");
         testsMenu.setEnabled(false);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         jMenu3.setText("Nuevo");
 
         jMenu4.setText("Test Simple");
 
+        nuevoTestInstMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_blue.gif"))); // NOI18N
         nuevoTestInstMenuItem.setText("Test de Instanciación");
         nuevoTestInstMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +200,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         jMenu4.add(nuevoTestInstMenuItem);
 
+        nuevoTestRecMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_green.gif"))); // NOI18N
         nuevoTestRecMenuItem.setText("Test de Recuperación");
         nuevoTestRecMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +209,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         jMenu4.add(nuevoTestRecMenuItem);
 
+        nuevoTestRealMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_orange.gif"))); // NOI18N
         nuevoTestRealMenuItem.setText("Test de Realización");
         nuevoTestRealMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +218,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         jMenu4.add(nuevoTestRealMenuItem);
 
+        nuevoTestSatMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_red.gif"))); // NOI18N
         nuevoTestSatMenuItem.setText("Test de Satisfactibilidad");
         nuevoTestSatMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +227,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         jMenu4.add(nuevoTestSatMenuItem);
 
+        nuevoTestClasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_white.gif"))); // NOI18N
         nuevoTestClasMenuItem.setText("Test de Clasificación");
         nuevoTestClasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +248,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
         testsMenu.add(jMenu3);
 
+        importarTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/go-jump.png"))); // NOI18N
         importarTestsMenuItem.setText("Importar");
         importarTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,6 +257,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         testsMenu.add(importarTestsMenuItem);
 
+        editarTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_edit.png"))); // NOI18N
         editarTestsMenuItem.setText("Editar");
         editarTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,6 +266,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         testsMenu.add(editarTestsMenuItem);
 
+        verTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         verTestsMenuItem.setText("Ver");
         verTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,6 +280,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         instanciasMenu.setText("Instancias");
         instanciasMenu.setEnabled(false);
 
+        nuevoInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoInstanciasMenuItem.setText("Nuevo");
         nuevoInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +289,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         instanciasMenu.add(nuevoInstanciasMenuItem);
 
+        importarInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/go-jump.png"))); // NOI18N
         importarInstanciasMenuItem.setText("Importar");
         importarInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +298,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         instanciasMenu.add(importarInstanciasMenuItem);
 
+        editarInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_edit.png"))); // NOI18N
         editarInstanciasMenuItem.setText("Editar");
         editarInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +307,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         instanciasMenu.add(editarInstanciasMenuItem);
 
+        verInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         verInstanciasMenuItem.setText("Ver");
         verInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +321,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         ejecutarMenu.setText("Ejecutar");
         ejecutarMenu.setEnabled(false);
 
+        selecTestMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         selecTestMenuItem.setText("Seleccionar test");
         selecTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +330,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
         });
         ejecutarMenu.add(selecTestMenuItem);
 
+        ejecutarTodosMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/applications-system.png"))); // NOI18N
         ejecutarTodosMenuItem.setText("Todos los Tests");
         ejecutarTodosMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,7 +380,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
     utils = new FileChooserSelector();
-    boolean res = utils.fileChooser(false, true);
+    boolean res = utils.fileChooser(false, true, false);
     if(res == true){
         File fichero = utils.getFileSelected();
         this.guardarProyecto(true, fichero);
@@ -513,11 +531,11 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
     try {
         utils = new FileChooserSelector();
-        boolean res = utils.fileChooser(true, true);
+        boolean res = utils.fileChooser(true, true, false);
         if(res == true){
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
             collection = (CollectionTest) decoder.readObject();
-            loadTest.prepareProject(collection);
+            persist.prepareProject(collection);
             abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
             abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
             abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -577,7 +595,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     
 private void guardarProyecto(boolean como, File fichero){
     try {
-        boolean guardado = saveTest.saveProject(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
+        boolean guardado = persist.saveProject(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
         if(guardado==true){
             panelAviso.confirmAction("Proyecto guardado", this);
             this.setProyectoGuardado(true);

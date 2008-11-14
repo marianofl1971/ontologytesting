@@ -105,8 +105,9 @@ public class OntologyNameSituJPanel extends javax.swing.JPanel {
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    if(utils.fileChooser(true, true)==true){
+    if(utils.fileChooser(true, true, true)==true){
         this.getUbicacionOntoTextField().setText(FileChooserSelector.getPathSelected());
+        this.setNamespaceOntoTextField(utils.getNsDefecto());
     }
 }//GEN-LAST:event_examinarButtonActionPerformed
 
@@ -144,6 +145,10 @@ public javax.swing.JTextField getUbicacionOntoTextField() {
 
 public String getUbicacionOnto() {
     return ubicacionOntoTextField.getText();
+}
+
+public void setNamespaceOntoTextField(String anamespaceOntoTextField) {
+    namespaceOntoTextField.setText(anamespaceOntoTextField);
 }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

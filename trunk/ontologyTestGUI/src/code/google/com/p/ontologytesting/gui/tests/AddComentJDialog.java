@@ -71,7 +71,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
             }
         });
 
-        limpiarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
+        limpiarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/edit-clear.png"))); // NOI18N
         limpiarButton.setText("Limpiar");
         limpiarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

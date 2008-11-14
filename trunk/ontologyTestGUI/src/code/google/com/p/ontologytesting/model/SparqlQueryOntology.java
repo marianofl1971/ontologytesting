@@ -13,12 +13,12 @@ import java.io.Serializable;
  */
 public class SparqlQueryOntology implements Serializable{
 
-    private String resultexpected="";
-    private String querySparql="";
+    protected String resultexpected="";
+    protected String query="";
 
     
     public SparqlQueryOntology(String querySparql, String resultexpected){
-        this.querySparql=querySparql;
+        this.query=querySparql;
         this.resultexpected = resultexpected;
     }
     
@@ -34,19 +34,19 @@ public class SparqlQueryOntology implements Serializable{
         this.resultexpected = resultexpected;
     }
 
-    public String getQuerySparql() {
-        return querySparql;
+    public String getQuery() {
+        return query;
     }
 
-    public void setQuerySparql(String querySparql) {
-        this.querySparql = querySparql;
+    public void setQuery(String querySparql) {
+        this.query = querySparql;
     }
     
     @Override
     public boolean equals(Object object){
         if((object!=null) && (object instanceof SparqlQueryOntology) ) {
             SparqlQueryOntology comp = (SparqlQueryOntology)object;
-            if(this.getQuerySparql().equals(comp.getQuerySparql())){
+            if(this.getQuery().equals(comp.getQuery())){
                if(this.getResultexpected().equals(comp.getResultexpected())){
                     return true;
                }
@@ -60,7 +60,7 @@ public class SparqlQueryOntology implements Serializable{
     public int hashCode() {
         int hash = 3;
         hash = 11 * hash + (this.resultexpected != null ? this.resultexpected.hashCode() : 0);
-        hash = 11 * hash + (this.querySparql != null ? this.querySparql.hashCode() : 0);
+        hash = 11 * hash + (this.query != null ? this.query.hashCode() : 0);
         return hash;
     }
 

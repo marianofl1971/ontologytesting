@@ -233,12 +233,6 @@ public class ReasonerImplementation implements InterfaceReasoner{
         return clases;
     }
     
-    //Validar las consultas de tipo select x,y,z from ...
-    //incluir mostrar el resultado de x de y de z por separado.
-    //El formato del resultado seria algo de tipo:
-    //x(a,b)
-    //y(c,d,e)
-    //z(f)
     @Override
     public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
 
@@ -272,12 +266,12 @@ public class ReasonerImplementation implements InterfaceReasoner{
                     String aux = result.toString();
                     String dato = aux.substring(aux.indexOf("#")+1);
 
-                    if(perteneceALista(var,lista)==false){
+                    if(this.perteneceALista(var,lista)==false){
                         e.setNombreSelect(var);
                         lista.add(e);
                         lista.get(i).getDatos().add(dato);
                     }else{
-                        ExecQuerySparql eq = seleccionarLista(var, lista);
+                        ExecQuerySparql eq = this.seleccionarLista(var, lista);
                         eq.getDatos().add(dato);
                     }  
                 }

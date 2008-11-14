@@ -11,7 +11,9 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.LoadTest;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
+import code.google.com.p.ontologytesting.persistence.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -21,10 +23,11 @@ import javax.swing.JTextField;
  */
 public class AbrirProyectoJDialog extends javax.swing.JDialog{
 
-    private LoadTest loadTest = new LoadTest();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private boolean proyectoCargado = false;
     private FileChooserSelector utils;
     private OpcionesMenu opMenu;
+    private Reasoner jena = new Reasoner();
     
     /** Creates new form AbrirProyectoJDialog */
     public AbrirProyectoJDialog(java.awt.Frame parent, boolean modal) {
@@ -152,21 +155,26 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
     opMenu = new OpcionesMenu();
-    
+    InterfaceReasoner j = jena.getReasoner();
     if(this.getUbicacionFisica().equals("") || this.getNamespaceText().equals("")){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Todos los campos son obligatorios",                                                  
             "Warning Message",JOptionPane.WARNING_MESSAGE); 
     }else{
         try{
-            boolean res = loadTest.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
-            if(res==true){
-                opMenu.actualizarListaDeInstancias();
-                opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
-                opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
-                this.setProyectoCargado(true);
-                this.setVisible(false);
-            }else{
+            if(jena.isCargado()==false){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+            }else{
+                boolean res = persist.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
+                j.addReasoner(this.getUbicacionFisica());
+                if(res==true){
+                    opMenu.actualizarListaDeInstancias();
+                    opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+                    opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+                    this.setProyectoCargado(true);
+                    this.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+                }
             }
         }catch (ExceptionReadOntology ex){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
@@ -182,7 +190,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    if(utils.fileChooser(true, true)==true){
+    if(utils.fileChooser(true, true, false)==true){
         this.getUbicacionFisicaTextField().setText(FileChooserSelector.getPathSelected());
     }
 }//GEN-LAST:event_examinarButtonActionPerformed
