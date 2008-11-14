@@ -6,7 +6,11 @@
 package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
 import code.google.com.p.ontologytesting.gui.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
@@ -14,14 +18,15 @@ import javax.swing.JFileChooser;
  * @author sara.garcia
  */
 public class FileChooserSelector {
-    
+
     private JFileChooser filechooser;
     private File fileSelected;
+    private String linea,nsDefecto;
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
 
-    public boolean fileChooser(boolean open,boolean onlyFiles){
-        int option;
+    public boolean fileChooser(boolean open,boolean onlyFiles, boolean newProject){
+        int option,var=0;
         filechooser = new JFileChooser(FileChooserSelector.getPathSelected());
         if(onlyFiles==false){
             filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -36,10 +41,28 @@ public class FileChooserSelector {
             option = filechooser.showSaveDialog(MainApplicationJFrame.getInstance());
         }
         if (option == JFileChooser.APPROVE_OPTION) {
-          File selectedFile = filechooser.getSelectedFile();
-          this.setFileSelected(fileSelected);
-          FileChooserSelector.setPathSelected(selectedFile.getAbsolutePath());
-          return true;
+            File selectedFile = filechooser.getSelectedFile();
+            if(newProject==true){
+                BufferedReader bf = null;
+                try {
+                    bf = new BufferedReader(new FileReader(selectedFile.getAbsolutePath()));
+                } catch (FileNotFoundException ex) {
+                }
+                try {
+                    while ((linea = bf.readLine()) != null && var==0) {
+                            if(linea.contains("xmlns=")) {
+                                int indexBegin = linea.indexOf("xmlns=\"");
+                                int indexEnd = linea.indexOf("#", indexBegin);
+                                setNsDefecto(linea.substring(indexBegin+7, indexEnd).concat("#"));
+                                var = 1;
+                            }
+                    }
+                } catch (IOException ex) {   
+                }
+            }
+            this.setFileSelected(fileSelected);
+            FileChooserSelector.setPathSelected(selectedFile.getAbsolutePath());
+            return true;
         }else return false;
     }
 
@@ -68,6 +91,14 @@ public class FileChooserSelector {
 
     public static void setPathSelected(String apathSelected) {
         pathSelected = apathSelected;
+    }
+    
+    public String getNsDefecto() {
+        return nsDefecto;
+    }
+
+    public void setNsDefecto(String aNsDefecto) {
+        nsDefecto = aNsDefecto;
     }
 
 }

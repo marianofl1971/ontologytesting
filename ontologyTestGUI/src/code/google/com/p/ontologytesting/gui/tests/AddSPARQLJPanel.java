@@ -13,7 +13,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -32,7 +32,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private Reasoner jenaInterface;
     private InterfaceReasoner jena;
     private ValidarTests validarTest;
-    private SaveTest saveTest;
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
@@ -530,7 +530,7 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
 }                                               
 
 public void realizarAccion(boolean guardar, boolean ejecutar){
-    saveTest = new SaveTest();
+    persist = new IOManagerImplementation();
     if(testYaExiste==true){
         if(guardar==true){
             if((this.getScenarioActual() != null) && (scenario.equals(this.getScenarioActual())==false)
@@ -539,11 +539,11 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
-                    saveTest.replaceScenarioLocally(scenario);
+                    persist.replaceScenarioLocally(scenario);
                     controlador.setTestSparqlGuardado(true);
                 }
             }else{
-                saveTest.saveTestInMemory(this.getScenario());
+                persist.saveTestInMemory(this.getScenario());
                 controlador.setTestSparqlGuardado(true);
             }
             this.setScenarioActual(new ScenarioTest(scenario));
@@ -557,7 +557,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
      }else{
         if(guardar==true){
-            saveTest.saveTestInMemory(scenario);
+            persist.saveTestInMemory(scenario);
             this.setScenarioActual(new ScenarioTest(scenario));
             controlador.setTestSparqlGuardado(true);
         }
@@ -594,7 +594,7 @@ public void prepararNuevaConsultaVacia(){
 }
 
 public void prepararNuevaConsultaCompleta(SparqlQueryOntology query){
-    this.setSPARQLQuery(query.getQuerySparql());
+    this.setSPARQLQuery(query.getQuery());
     this.setResultTextArea(query.getResultexpected());
 }
 

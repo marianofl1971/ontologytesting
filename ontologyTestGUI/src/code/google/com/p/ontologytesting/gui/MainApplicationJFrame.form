@@ -11,6 +11,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoProyectoMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-new.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <Events>
@@ -19,6 +22,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="abrirProyectoMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-open.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Abrir"/>
               </Properties>
               <Events>
@@ -27,6 +33,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="guardarProyectoMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-save.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -36,6 +45,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="guardarProyectoComoMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-save-as.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Guardar Como"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -62,6 +74,9 @@
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-new.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <SubComponents>
@@ -72,6 +87,9 @@
                   <SubComponents>
                     <MenuItem class="javax.swing.JMenuItem" name="nuevoTestInstMenuItem">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/flag_blue.gif"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Test de Instanciaci&#xf3;n"/>
                       </Properties>
                       <Events>
@@ -80,6 +98,9 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="nuevoTestRecMenuItem">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/flag_green.gif"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Test de Recuperaci&#xf3;n"/>
                       </Properties>
                       <Events>
@@ -88,6 +109,9 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="nuevoTestRealMenuItem">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/flag_orange.gif"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Test de Realizaci&#xf3;n"/>
                       </Properties>
                       <Events>
@@ -96,6 +120,9 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="nuevoTestSatMenuItem">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/flag_red.gif"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Test de Satisfactibilidad"/>
                       </Properties>
                       <Events>
@@ -104,6 +131,9 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="nuevoTestClasMenuItem">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/code/google/com/p/ontologytesting/images/flag_white.gif"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" value="Test de Clasificaci&#xf3;n"/>
                       </Properties>
                       <Events>
@@ -124,6 +154,9 @@
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="importarTestsMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/go-jump.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Importar"/>
               </Properties>
               <Events>
@@ -132,6 +165,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editarTestsMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/page_edit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <Events>
@@ -140,6 +176,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="verTestsMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-print-preview.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ver"/>
               </Properties>
               <Events>
@@ -156,6 +195,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevoInstanciasMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-new.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
               <Events>
@@ -164,6 +206,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="importarInstanciasMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/go-jump.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Importar"/>
               </Properties>
               <Events>
@@ -172,6 +217,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="editarInstanciasMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/page_edit.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <Events>
@@ -180,6 +228,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="verInstanciasMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-print-preview.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ver"/>
               </Properties>
               <Events>
@@ -196,6 +247,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="selecTestMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/document-print-preview.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Seleccionar test"/>
               </Properties>
               <Events>
@@ -204,6 +258,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ejecutarTodosMenuItem">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/code/google/com/p/ontologytesting/images/applications-system.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Todos los Tests"/>
               </Properties>
               <Events>

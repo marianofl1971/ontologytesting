@@ -10,7 +10,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private List<QueryOntology> queryTest;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
-    private SaveTest saveTest;
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private String nombreTest = "",descTest = "";
     private ControladorTests controlador;
     private OpcionesMenu menu;
@@ -285,7 +285,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-    saveTest = new SaveTest();
+    persist = new IOManagerImplementation();
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -302,7 +302,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-    saveTest = new SaveTest();
+    persist = new IOManagerImplementation();
     if(getTabbedPaneInst()==0){
         copiarTestAScenarioDesdeAyuda();
     }else if(getTabbedPaneInst()==1){
@@ -334,7 +334,7 @@ public boolean guardarTest(){
 }
 
 public void realizarAccion(boolean guardar, boolean ejecutar){
-    saveTest = new SaveTest();
+    persist = new IOManagerImplementation();
     if(testYaExiste==true){
         if(guardar==true){
             if(this.getScenarioActual() != null && this.getScenario().equals(this.getScenarioActual())==false
@@ -343,11 +343,11 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
                 int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
                         "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                 if (n == JOptionPane.YES_OPTION) {
-                    saveTest.replaceScenarioLocally(this.getScenario());
+                    persist.replaceScenarioLocally(this.getScenario());
                     controlador.setTestInstSatGuardado(true);
                 }
             }else{
-                saveTest.saveTestInMemory(this.getScenario());
+                persist.saveTestInMemory(this.getScenario());
                 controlador.setTestInstSatGuardado(true);
             }
             this.setScenarioActual(new ScenarioTest(scenario));
@@ -361,7 +361,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }else{ 
         if(guardar==true){
-            saveTest.saveTestInMemory(this.getScenario());
+            persist.saveTestInMemory(this.getScenario());
             this.setScenarioActual(new ScenarioTest(scenario));
             controlador.setTestInstSatGuardado(true);
         }

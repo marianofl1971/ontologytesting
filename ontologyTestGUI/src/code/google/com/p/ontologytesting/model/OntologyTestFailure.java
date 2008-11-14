@@ -47,7 +47,7 @@ public class OntologyTestFailure extends Object{
     void addOntologyTestFailureSparql(String testNameUsuario, SparqlQueryOntology querysparql, 
             List<ExecQuerySparql> resQueryEspe,List<ExecQuerySparql> resQueryObte,TipoTest tipoTest){
         this.ftestNameUsuario=testNameUsuario;
-        this.fquerysparql = querysparql.getQuerySparql();
+        this.fquerysparql = querysparql.getQuery();
         this.fresultsparqlexpected = querysparql.getResultexpected();
         this.fressparqlobtenido = resQueryObte;
         this.fressparqlesperado = resQueryEspe;

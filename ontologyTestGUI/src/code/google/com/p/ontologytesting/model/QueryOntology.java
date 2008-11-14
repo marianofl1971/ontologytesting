@@ -15,12 +15,9 @@ import java.io.Serializable;
  *
  * @author Saruskas
  */
-public class QueryOntology implements Serializable{
+public class QueryOntology extends SparqlQueryOntology implements Serializable {
     
-    private String query="";
-    private String resultexpected="";
     private String comment="";
-
     
     public QueryOntology(String query, String resultexpected,String comment){
         this.query=query;
@@ -29,30 +26,12 @@ public class QueryOntology implements Serializable{
     }
 
     public QueryOntology(){
-        this.query="";
-        this.resultexpected="";
-        this.comment="";
+        this("","","");
     }
     
     public QueryOntology(String query, String resultexpected){
         this.query=query;
         this.resultexpected=resultexpected;
-    }
-
-    public String getQuery() {
-        return query;
-    }
-
-    public void setQuery(String query) {
-        this.query = query;
-    }
-
-    public String getResultexpected() {
-        return resultexpected;
-    }
-
-    public void setResultexpected(String resultexpected) {
-        this.resultexpected = resultexpected;
     }
 
     public String getComment() {

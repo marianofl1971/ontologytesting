@@ -12,7 +12,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import code.google.com.p.ontologytesting.persistence.SaveTest;
+import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.beans.XMLDecoder;
@@ -36,7 +36,7 @@ public class ImportarTestsInstJDialog extends javax.swing.JDialog {
     private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
     private List<Instancias> instancias = new ArrayList<Instancias>();
     private ListarTestsJPanel listT;
-    private SaveTest saveTest = new SaveTest();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean importarTest=false;
     private SeeTestJDialog verTest = null;
@@ -206,7 +206,7 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    if(utils.fileChooser(true, true)==true){
+    if(utils.fileChooser(true, true, false)==true){
         this.getPathProyectoTextField().setText(FileChooserSelector.getPathSelected());
         try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));
@@ -242,7 +242,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
                 }else{
                     scenarioSimple.add(scenImp.get(i));
                 }
-                saveTest.saveTestInMemory(scenImp.get(i));
+                persist.saveTestInMemory(scenImp.get(i));
             }
         }
         if(scenarioSparql.size()>0){
@@ -263,7 +263,7 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(instImp.size()>0){
             for(int i=0;i<instImp.size();i++){
                 instancias.add(instImp.get(i));
-                saveTest.saveInstanciasInMemory(instImp.get(i));
+                persist.saveInstanciasInMemory(instImp.get(i));
             }
             listT.aniadirInstancias(instancias);
             panelAviso.confirmAction("Instancias importadas",this); 

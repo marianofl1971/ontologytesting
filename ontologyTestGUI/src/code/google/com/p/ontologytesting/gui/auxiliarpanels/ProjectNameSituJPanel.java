@@ -124,7 +124,7 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
 
 private void examinarProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
-     boolean res = utils.fileChooser(true, false);
+     boolean res = utils.fileChooser(true, false, false);
      if(res == true){
         this.getUbicacionProyectoTextField().setText(FileChooserSelector.getPathSelected());    
         carpetaProyectoTextField.setText(FileChooserSelector.getPathSelected()+"\\"+getNombreProyectoTextField());
