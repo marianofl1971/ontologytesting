@@ -13,7 +13,6 @@ import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import java.util.List;
 import javax.swing.WindowConstants;
 
@@ -23,32 +22,9 @@ import javax.swing.WindowConstants;
  */
 public class OpcionesMenu {
 
-    private OntologyTestResult testResult;
-    private OntologyTestCase testCase;
     private ListarTestsJPanel listInst;
     private ScenarioTest scenarioActual = new ScenarioTest();
     private ScenarioTest scenarioAEditar = new ScenarioTest();
-    
-    public void ejecutarUnTest(ScenarioTest scenario) throws ExceptionReadOntology{
-        testCase = new OntologyTestCase();
-        testResult = new OntologyTestResult();
-        testCase.runScenario(testResult, CollectionTest.getInstance(), scenario);   
-        new TreeResults(testResult,scenario.getNombre()); 
-    }
-
-    public void ejecutarBateriaTests(List<ScenarioTest> listScenario) throws ExceptionReadOntology{
-        testCase = new OntologyTestCase();
-        testResult = new OntologyTestResult();
-        testCase.runListaScenario(testResult, CollectionTest.getInstance(), listScenario);
-        new TreeResults(testResult,"Batería de Tests");
-    }
-
-    public void ejecutarTodosLosTests() throws ExceptionReadOntology{
-        testCase = new OntologyTestCase();
-        testResult = new OntologyTestResult();
-        testCase.run(testResult, CollectionTest.getInstance());
-        new TreeResults(testResult, "Todos los Test");
-    }
     
     public void editarTest(ScenarioTest scenario){
         setScenarioActual(scenario);
@@ -60,7 +36,7 @@ public class OpcionesMenu {
         }else if(scenarioAEditar.getTipoTest().name().equals("REAL")){
             MainApplicationJFrame.getInstance().cargarTest(2, scenarioAEditar);
         }else if(scenarioAEditar.getTipoTest().name().equals("SPARQL")){
-            MainApplicationJFrame.getInstance().cargarTest(3, scenarioAEditar);
+            MainApplicationJFrame.getInstance().cargarTest(5, scenarioAEditar);
         }   
     }
     

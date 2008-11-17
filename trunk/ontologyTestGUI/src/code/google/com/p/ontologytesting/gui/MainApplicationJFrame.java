@@ -17,28 +17,35 @@ import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOnt
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ProgressMonitor;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
  *
  * @author  saruskas
  */
-public class MainApplicationJFrame extends javax.swing.JFrame {
+public class MainApplicationJFrame extends javax.swing.JFrame implements PropertyChangeListener{
     
     private ListAndResultsJPanel panelTest;
     private ControladorTests controlador;
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
     private IOManagerImplementation persist = new IOManagerImplementation();
-    private OpcionesMenu opMenu = new OpcionesMenu();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false;
     private AniadirPanelDeAviso panelAviso;
@@ -50,6 +57,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame {
     private TestSimpleRetClas testRetClas;
     private AddSPARQLJPanel testSparql;
     private JPanel panelActual;
+    private ProgressMonitor progressMonitor;
+    private Task task;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -511,8 +520,16 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
             TreeResults.setTestSeleccionado("Todos los Tests");
-            opMenu.ejecutarTodosLosTests();
-            panelAviso.confirmAction("Tests ejecutados", this);
+            ExecuteTest execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());
+            execTest.execute();
+            progressMonitor = new ProgressMonitor(this,"Ejecutando los Tests","", 0, 100);
+            progressMonitor.setProgress(0);
+            task = new Task();
+            task.addPropertyChangeListener(this);
+            task.execute();
+            if(task.isCancelled()==true){
+                execTest.cancel(true);
+            }
         }catch(ExceptionReadOntology ex){
             panelAviso.errorAction("Error ejecutando los tests",this);  
         }
@@ -520,6 +537,48 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
         panelAviso.errorAction("Su lista de tests está vacía",this);  
     }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
+
+class Task extends SwingWorker<Void, Void> {
+    @Override
+    public Void doInBackground() {
+        Random random = new Random();
+        int progress = 0;
+        setProgress(0);
+        try {
+            Thread.sleep(1000);
+            while (progress < 100 && !isCancelled()) {
+                Thread.sleep(random.nextInt(1000));
+                //Make random progress.
+                progress += random.nextInt(10);
+                setProgress(Math.min(progress, 100));
+            }
+        } catch (InterruptedException ignore) {}
+        return null;
+    }
+
+    @Override
+    public void done() {
+        Toolkit.getDefaultToolkit().beep();
+        progressMonitor.close();
+    }
+}
+
+@Override
+public void propertyChange(PropertyChangeEvent evt) {
+    if ("progress".equals(evt.getPropertyName())) {
+        int progress = (Integer) evt.getNewValue();
+        progressMonitor.setProgress(progress);
+        String message = String.format("Completed %d%%.\n", progress);
+        progressMonitor.setNote(message);
+        if (progressMonitor.isCanceled() || task.isDone()) {
+            Toolkit.getDefaultToolkit().beep();
+            if (progressMonitor.isCanceled()) {
+                task.cancel(true);
+            }
+        }
+    }
+
+}
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
@@ -692,7 +751,7 @@ public void cargarTest(int type,ScenarioTest s){
          testReal.setScenarioActual(new ScenarioTest(s));
          panelTest.getTestsPanel().aniadirTest(testReal,testName);
          setPanelActual(testReal);
-    }else if(type==3){
+    }else if(type==5){
         if(s.getNombre().equals("")){
             testName="Nuevo SPARQL";
         }else testName=s.getNombre();
@@ -715,9 +774,14 @@ public void inicializarContadores(){
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(
+                            UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ignore) {
+                }
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);

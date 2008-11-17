@@ -104,7 +104,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Compruebe que los siguientes datos son correctos. En caso contrario, realize las modificaciones oportunas:"/>
+        <Property name="text" type="java.lang.String" value="Compruebe que los siguientes datos son correctos. En caso contrario, realice las modificaciones oportunas:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

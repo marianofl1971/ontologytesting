@@ -38,7 +38,8 @@ public class PopMenuTests implements ActionListener{
         }else if(source.getText().equals("Ejecutar")){
             try{
                 TreeResults.setTestSeleccionado(scenario.getNombre());
-                menu.ejecutarUnTest(scenario);
+                ExecuteTest execTest = new ExecuteTest(scenario);
+                execTest.execute();
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }catch (ExceptionReadOntology ex){

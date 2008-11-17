@@ -97,64 +97,68 @@ public class OntologyTestFailure extends Object{
         StringBuffer datosEspe = new StringBuffer();
         result= new StringBuffer();
         
-        if(execQObte.size()>0 && execQEspe.size()>0){
-        
-            for(int i=0;i<execQObte.size();i++){
-                nombreObte.append(execQObte.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
-            }
-            nombreObte.append("<br>--------------------<br>");
+        if(execQObte!=null && execQEspe!=null){
+            if(execQObte.size()>0 && execQEspe.size()>0){
 
-            int tam = execQObte.get(0).getDatos().size();
-            for(int i=0; i<tam;i++){
-                for(int j=0;j<execQObte.size();j++){
-                    if(i<execQObte.get(j).getDatos().size()){
-                        datosObte.append(execQObte.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
-                    }
+                for(int i=0;i<execQObte.size();i++){
+                    nombreObte.append(execQObte.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
                 }
-                datosObte.append("<br>");
-            }
-            resultadoTotalObte.append(nombreObte).append(datosObte);
+                nombreObte.append("<br>--------------------<br>");
 
-            for(int i=0;i<execQEspe.size();i++){
-                nombreEspe.append(execQEspe.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
-            }
-            nombreEspe.append("<br>------------------------------------------<br>");
-
-            int tamEsp = execQEspe.get(0).getDatos().size();
-            for(int i=0; i<tamEsp;i++){
-                for(int j=0;j<execQEspe.size();j++){
-                    if(i<execQEspe.get(j).getDatos().size()){
-                        datosEspe.append(execQEspe.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
+                int tam = execQObte.get(0).getDatos().size();
+                for(int i=0; i<tam;i++){
+                    for(int j=0;j<execQObte.size();j++){
+                        if(i<execQObte.get(j).getDatos().size()){
+                            datosObte.append(execQObte.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
+                        }
                     }
+                    datosObte.append("<br>");
                 }
-                datosEspe.append("<br>");
-            }
-            resultadoTotalEspe.append(nombreEspe).append(datosEspe);
-            
-            result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>") 
-                        .append(resultadoTotalEspe).append("<br><b>Resultado obtenido: </b><br>").append(resultadoTotalObte);
-        }else if(execQObte.size()==0 && execQEspe.size()>0){
-            for(int i=0;i<execQEspe.size();i++){
-                nombreEspe.append(execQEspe.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
-            }
-            nombreEspe.append("<br>------------------------------------------<br>");
+                resultadoTotalObte.append(nombreObte).append(datosObte);
 
-            int tamEsp = execQEspe.get(0).getDatos().size();
-            for(int i=0; i<tamEsp;i++){
-                for(int j=0;j<execQEspe.size();j++){
-                    if(i<execQEspe.get(j).getDatos().size()){
-                        datosEspe.append(execQEspe.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
-                    }
+                for(int i=0;i<execQEspe.size();i++){
+                    nombreEspe.append(execQEspe.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
                 }
-                datosEspe.append("<br>");
+                nombreEspe.append("<br>------------------------------------------<br>");
+
+                int tamEsp = execQEspe.get(0).getDatos().size();
+                for(int i=0; i<tamEsp;i++){
+                    for(int j=0;j<execQEspe.size();j++){
+                        if(i<execQEspe.get(j).getDatos().size()){
+                            datosEspe.append(execQEspe.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
+                        }
+                    }
+                    datosEspe.append("<br>");
+                }
+                resultadoTotalEspe.append(nombreEspe).append(datosEspe);
+
+                result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>") 
+                            .append(resultadoTotalEspe).append("<br><b>Resultado obtenido: </b><br>").append(resultadoTotalObte);
+            }else if(execQObte.size()==0 && execQEspe.size()>0){
+                for(int i=0;i<execQEspe.size();i++){
+                    nombreEspe.append(execQEspe.get(i).getNombreSelect()).append("&nbsp;&nbsp;&nbsp;");
+                }
+                nombreEspe.append("<br>------------------------------------------<br>");
+
+                int tamEsp = execQEspe.get(0).getDatos().size();
+                for(int i=0; i<tamEsp;i++){
+                    for(int j=0;j<execQEspe.size();j++){
+                        if(i<execQEspe.get(j).getDatos().size()){
+                            datosEspe.append(execQEspe.get(j).getDatos().get(i)).append("&nbsp;&nbsp;&nbsp;");
+                        }
+                    }
+                    datosEspe.append("<br>");
+                }
+                resultadoTotalEspe.append(nombreEspe).append(datosEspe);
+
+                result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>") 
+                            .append(resultadoTotalEspe).append("<br><b>Resultado obtenido: </b><br>").append("No se han obtenido resultados pare esta consulta.");
+            }else{
+                result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>No se han producido resultados")
+                        .append("<br><b>Resultado obtenido: </b><br>No se han producido resultados");   
             }
-            resultadoTotalEspe.append(nombreEspe).append(datosEspe);
-            
-            result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>") 
-                        .append(resultadoTotalEspe).append("<br><b>Resultado obtenido: </b><br>").append("No se han obtenido resultados pare esta consulta.");
         }else{
-            result.append("<b>Consulta: </b>").append(this.fquerysparql).append("<br><br><b>Resultado esperado: </b><br>No se han producido resultados")
-                    .append("<br><b>Resultado obtenido: </b><br>No se han producido resultados");   
+            result.append("No hay datos para este test");
         }
         return result.toString(); 
     }

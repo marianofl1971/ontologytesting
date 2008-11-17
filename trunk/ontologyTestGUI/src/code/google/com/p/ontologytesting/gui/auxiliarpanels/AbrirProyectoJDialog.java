@@ -62,7 +62,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText("Datos del Proyecto");
 
-        jLabel2.setText("Compruebe que los siguientes datos son correctos. En caso contrario, realize las modificaciones oportunas:");
+        jLabel2.setText("Compruebe que los siguientes datos son correctos. En caso contrario, realice las modificaciones oportunas:");
 
         jLabel3.setText("Ubicación de la ontología con la que va a trabajar:");
 
