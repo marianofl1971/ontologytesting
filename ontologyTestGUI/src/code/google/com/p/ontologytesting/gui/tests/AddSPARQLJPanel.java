@@ -11,6 +11,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
@@ -550,7 +551,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
         if(ejecutar==true){
             try{
-                menu.ejecutarUnTest(this.getScenario());
+                ExecuteTest execTest = new ExecuteTest(this.getScenario());
+                execTest.execute();
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
@@ -563,7 +565,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
         if(ejecutar==true){
             try{
-                menu.ejecutarUnTest(this.getScenario());
+                ExecuteTest execTest = new ExecuteTest(this.getScenario());
+                execTest.execute();
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }

@@ -190,7 +190,7 @@ public class OntologyTestCase implements OntologyTest{
                 }
             }
             listaResultObtenida = jena.testSPARQL(sparqlQuery, true);
-            if(listaResultObtenida.size()>0){
+            if(listaResultObtenida!=null && listaResultObtenida.size() > 0){
                 esperado = new ArrayList<String>();
                 obtenido = new ArrayList<String>();
                 String contenidoObtenido = "",contenidoEsperado="";
@@ -213,8 +213,10 @@ public class OntologyTestCase implements OntologyTest{
                 }
             }
             if(utils.contieneTodosIguales(esperado, obtenido)==false || fallo==1){
-                testresult.addOntologyFailureSparql(nombreTestUsuario, 
-                sparqlquery,listaResultEsperada,listaResultObtenida, tip);
+                if(listaResultObtenida!=null){
+                    testresult.addOntologyFailureSparql(nombreTestUsuario, 
+                    sparqlquery,listaResultEsperada,listaResultObtenida, tip);
+                }
             }else{
                 testresult.addOntologyPassedSparql(nombreTestUsuario, sparqlquery,listaResultEsperada,listaResultObtenida, tip);
             }

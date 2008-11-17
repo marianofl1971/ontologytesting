@@ -351,7 +351,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
         if(ejecutar==true){
             try{
-                menu.ejecutarUnTest(this.getScenario());
+                ExecuteTest execTest = new ExecuteTest(this.getScenario());
+                execTest.execute();
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }
@@ -364,7 +365,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
         if(ejecutar==true){
             try{
-                menu.ejecutarUnTest(this.getScenario());
+                ExecuteTest execTest = new ExecuteTest(this.getScenario());
+                execTest.execute();
             }catch (ExceptionReadOntology ex){
                 panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
             }

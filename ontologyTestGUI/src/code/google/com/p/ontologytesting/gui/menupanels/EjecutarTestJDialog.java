@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui.menupanels;
 
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import java.awt.FlowLayout;
@@ -145,7 +146,8 @@ private void verCompletoButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
 // TODO add your handling code here:
     try{
-        opMenu.ejecutarBateriaTests(this.getListarTestInst().getListaDeScenarios());
+        ExecuteTest execTest = new ExecuteTest(this.getListarTestInst().getListaDeScenarios());
+        execTest.execute();
         this.setVisible(false);
     }catch (ExceptionReadOntology ex){
         JOptionPane.showMessageDialog(this,"No se pudo ejecutar el test. Ontología no válida.",                                                  

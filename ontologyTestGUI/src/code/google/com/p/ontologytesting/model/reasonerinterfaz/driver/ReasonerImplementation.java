@@ -235,11 +235,12 @@ public class ReasonerImplementation implements InterfaceReasoner{
     
     @Override
     public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
-
+        Query query=null;
         String expReg = "([\\?]{1}[a-zA-Z]+)";
         ArrayList<String> sel = new ArrayList<String>();
-        Query query = QueryFactory.create(queryStr);
-        Element patern = query.getQueryPattern();
+        try{
+            query = QueryFactory.create(queryStr);
+            Element patern = query.getQueryPattern();
         String p = patern.toString();
         String[] consulta = p.split("(\\s)");
         for(int i=0; i<consulta.length;i++){
@@ -281,6 +282,10 @@ public class ReasonerImplementation implements InterfaceReasoner{
         }catch(InconsistentOntologyException in){
             throw new ExceptionReadOntology();
         }
+        }catch (QueryParseException ex){
+            System.out.println("ERROR EN LA SPARQL");
+        }
+        return null;
     }
     
     @Override
