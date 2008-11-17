@@ -141,7 +141,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame implements Propert
             .addGap(0, 452, Short.MAX_VALUE)
         );
 
-        fileMenu.setText("Proyecto");
+        fileMenu.setText("Archivo");
 
         nuevoProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoProyectoMenuItem.setText("Nuevo");

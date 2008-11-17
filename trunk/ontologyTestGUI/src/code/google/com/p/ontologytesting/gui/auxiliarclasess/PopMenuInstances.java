@@ -7,7 +7,6 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
 import code.google.com.p.ontologytesting.gui.menupanels.AsociarInstanciasATestJDialog;
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
-import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
