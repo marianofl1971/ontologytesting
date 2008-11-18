@@ -27,8 +27,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.ProgressMonitor;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -39,7 +41,7 @@ import javax.swing.WindowConstants;
  *
  * @author  saruskas
  */
-public class MainApplicationJFrame extends javax.swing.JFrame implements PropertyChangeListener{
+public class MainApplicationJFrame extends javax.swing.JFrame{
     
     private ListAndResultsJPanel panelTest;
     private ControladorTests controlador;
@@ -57,8 +59,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame implements Propert
     private TestSimpleRetClas testRetClas;
     private AddSPARQLJPanel testSparql;
     private JPanel panelActual;
-    private ProgressMonitor progressMonitor;
-    private Task task;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -520,16 +520,14 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
             TreeResults.setTestSeleccionado("Todos los Tests");
-            ExecuteTest execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());
+            ExecuteTest execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());  
+            ProgressControlJDialog progres = new ProgressControlJDialog();
+            JProgressBar progresBar = progres.getProgressBar();
+            progresBar.setValue(0);
+            execTest.addPropertyChangeListener(new ProgressListener(progresBar));
+            progresBar.setIndeterminate(true);
             execTest.execute();
-            progressMonitor = new ProgressMonitor(this,"Ejecutando los Tests","", 0, 100);
-            progressMonitor.setProgress(0);
-            task = new Task();
-            task.addPropertyChangeListener(this);
-            task.execute();
-            if(task.isCancelled()==true){
-                execTest.cancel(true);
-            }
+            progres.setVisible(true);
         }catch(ExceptionReadOntology ex){
             panelAviso.errorAction("Error ejecutando los tests",this);  
         }
@@ -538,35 +536,51 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
 
-class Task extends SwingWorker<Void, Void> {
-    @Override
-    public Void doInBackground() {
-        Random random = new Random();
-        int progress = 0;
-        setProgress(0);
-        try {
-            Thread.sleep(1000);
-            while (progress < 100 && !isCancelled()) {
-                Thread.sleep(random.nextInt(1000));
-                //Make random progress.
-                progress += random.nextInt(10);
-                setProgress(Math.min(progress, 100));
+class ProgressListener implements PropertyChangeListener {
+        
+        private JProgressBar progressBar;
+        
+        private ProgressListener() {}
+        
+        ProgressListener(JProgressBar progressBar) {
+            this.progressBar = progressBar;
+            this.progressBar.setValue(0);
+        }
+        
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            String strPropertyName = evt.getPropertyName();
+            if ("progress".equals(strPropertyName)) {
+                progressBar.setIndeterminate(false);
+                int progress = (Integer)evt.getNewValue();
+                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBB"+progress);
+                progressBar.setValue(progress);
             }
-        } catch (InterruptedException ignore) {}
-        return null;
+        }
     }
 
-    @Override
-    public void done() {
-        Toolkit.getDefaultToolkit().beep();
-        progressMonitor.close();
-    }
-}
+/*class ProgressListener implements PropertyChangeListener {
+     private JDialog dialog;
+ 
+     public ProgressListener(JDialog dialog) {
+         this.dialog = dialog;
+     }
+ 
+        @Override
+     public void propertyChange(PropertyChangeEvent event) {
+         if ("state".equals(event.getPropertyName())
+                 && SwingWorker.StateValue.DONE == event.getNewValue()) {
+             dialog.setVisible(false);
+             dialog.dispose();
+         }
+     }
+}*/
 
-@Override
+/*@Override
 public void propertyChange(PropertyChangeEvent evt) {
     if ("progress".equals(evt.getPropertyName())) {
         int progress = (Integer) evt.getNewValue();
+        System.out.println("PPPPPPPPPPPPPPPPPPPPPPP"+progress);
         progressMonitor.setProgress(progress);
         String message = String.format("Completed %d%%.\n", progress);
         progressMonitor.setNote(message);
@@ -577,8 +591,7 @@ public void propertyChange(PropertyChangeEvent evt) {
             }
         }
     }
-
-}
+}*/
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
