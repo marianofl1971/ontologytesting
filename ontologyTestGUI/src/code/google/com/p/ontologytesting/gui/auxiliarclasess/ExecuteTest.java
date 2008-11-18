@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author sara.garcia
  */
-public class ExecuteTest extends SwingWorker<OntologyTestResult, Void> {
+public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
     
     private OntologyTestResult testResult;
     private List<ScenarioTest> listScenario = null;
