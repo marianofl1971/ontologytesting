@@ -59,6 +59,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
         //super(parent, modal);
         initComponents();
         int contI=0,contP=0;
+        CreateInstancesJPanel.setContadorClas(0);
+        CreateInstancesJPanel.setContadorProp(0);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BorderLayout());
@@ -123,6 +125,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     public AddInstancesClasPropJPanel(){
         initComponents();
         this.setNuevoTest(true);
+        CreateInstancesJPanel.setContadorClas(0);
+        CreateInstancesJPanel.setContadorProp(0);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BorderLayout());
@@ -146,6 +150,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
         clasPropPanel.setLayout(new BorderLayout());
         clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
 
+        CreateInstancesJPanel.setContadorClas(0);
+        CreateInstancesJPanel.setContadorProp(0);
         setNomInstanciasTextField(inst.getNombre());
         setDescInstanciasTextArea(inst.getDescripcion());
         ListIterator ci,pi;

@@ -130,6 +130,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
 private void comentarioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comentarioButtonActionPerformed
 // TODO add your handling code here:
     frameComent.setVisible(true);
+    System.out.println(posicion);
 }//GEN-LAST:event_comentarioButtonActionPerformed
 
 private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed

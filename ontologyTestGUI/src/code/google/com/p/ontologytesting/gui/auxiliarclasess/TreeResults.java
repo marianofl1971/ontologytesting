@@ -43,7 +43,6 @@ public class TreeResults extends JPanel {
     }
     
     public TreeResults(final OntologyTestResult testResult, String testName) {
-
         int aux=0;
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Resultado de sus Tests");
         createNodes(top,testResult);
@@ -78,18 +77,17 @@ public class TreeResults extends JPanel {
                  Object pValue, boolean pIsSelected, boolean pIsExpanded,
                  boolean pIsLeaf, int pRow, boolean pHasFocus)
              {
-	    DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
-            String texto = ((String)node.getUserObject());
-	    super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,
-                     pIsExpanded, pIsLeaf, pRow, pHasFocus);
-                 if (texto.contains("passed")){
-                     setForeground(Color.green);
-                 }else if (texto.contains("failed")){
-                     setForeground(Color.red);
-                 }
-                 return (this);
-	}
-        });
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
+                String texto = ((String)node.getUserObject());
+                super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,pIsExpanded, pIsLeaf, pRow, pHasFocus);
+                    if (texto.contains("passed")){
+                        setForeground(Color.green);
+                    }else if (texto.contains("failed")){
+                        setForeground(Color.red);
+                    }
+                return (this);
+             }
+         });
 
         setTestSeleccionado(testName);
         if(aux==0){
@@ -101,6 +99,7 @@ public class TreeResults extends JPanel {
 
         ListAndResultsJPanel listAndRes = ListAndResultsJPanel.getInstance();
         listAndRes.mostrarResultado(resultsView);
+        
         listT.aniadirTreeResult(treeView);
     }
 
