@@ -228,23 +228,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     @Override
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology{ 
-        String ont = baterytest.getOntology();
-        String ns = baterytest.getNamespace(); 
-        ListIterator liScenario;
-        ScenarioTest scenariotest;
-        List<ScenarioTest> listscenario = baterytest.getScenariotest();
-        liScenario = listscenario.listIterator();
-        while(liScenario.hasNext()){
-                scenariotest = (ScenarioTest) liScenario.next();
-                setUpOntology(scenariotest, ont, ns);
-                runOntologyTest(testresult,ns,scenariotest);
-                tearDownOntology(); 
-        }
-    }
-    
-    @Override
-    public void runScenario(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenariotest) throws ExceptionReadOntology{ 
+    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenariotest) throws ExceptionReadOntology{ 
 
         String ont = baterytest.getOntology();
         String ns = baterytest.getNamespace();
@@ -252,19 +236,6 @@ public class OntologyTestCase implements OntologyTest{
         setUpOntology(scenariotest, ont, ns);
         runOntologyTest(testresult,ns,scenariotest);
         tearDownOntology(); 
-    }
-    
-    @Override
-    public void runListaScenario(OntologyTestResult testresult, CollectionTest baterytest, List<ScenarioTest> liScenario) throws ExceptionReadOntology{ 
-
-        String ont = baterytest.getOntology();
-        String ns = baterytest.getNamespace();
- 
-        for(int i=0;i<liScenario.size();i++){
-                setUpOntology(liScenario.get(i), ont, ns);
-                runOntologyTest(testresult,ns,liScenario.get(i));
-                tearDownOntology(); 
-        }
     }
 }    
 

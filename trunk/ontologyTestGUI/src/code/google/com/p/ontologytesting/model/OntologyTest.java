@@ -10,18 +10,13 @@
 package code.google.com.p.ontologytesting.model;
 
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
-import java.util.List;
 
 /**
  *
  * @author Saruskas
  */
 public interface OntologyTest {
-    
-    public void run(OntologyTestResult testresult, CollectionTest baterytest) throws ExceptionReadOntology;
-    
-    public void runScenario(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenario) throws ExceptionReadOntology;
-    
-    public void runListaScenario(OntologyTestResult testresult, CollectionTest baterytest, List<ScenarioTest> scenario) throws ExceptionReadOntology;
+
+    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenario) throws ExceptionReadOntology;
 
 }

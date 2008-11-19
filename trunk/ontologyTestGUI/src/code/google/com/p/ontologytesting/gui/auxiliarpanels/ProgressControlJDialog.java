@@ -7,6 +7,8 @@
 package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -14,11 +16,15 @@ import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
  */
 public class ProgressControlJDialog extends javax.swing.JDialog {
 
+    private ExecuteTest execTest;
+    
     /** Creates new form ProgressControlJDialog */
-    public ProgressControlJDialog() {
+    public ProgressControlJDialog(ExecuteTest execTest) {
         this.setModal(true);
-        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.execTest=execTest;
         initComponents();
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
 
     /** This method is called from within the constructor to
@@ -36,10 +42,20 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ejecutando");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Ejecutando los tests...");
 
         cancelButton.setText("Cancelar");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,19 +88,32 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+// TODO add your handling code here:
+    this.dispose();//GEN-LAST:event_cancelButtonActionPerformed
+    this.setVisible(false);
+    this.execTest.cancel(true); 
+}
+
+private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+// TODO add your handling code here:
+    this.dispose();//GEN-LAST:event_formWindowClosing
+    this.setVisible(false);
+    this.execTest.cancel(true); 
+}
+
+public javax.swing.JProgressBar getProgressBar() {
+    return progressBar;
+}
+
+public void setProgressBar(javax.swing.JProgressBar progressBar) {
+    this.progressBar = progressBar;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JProgressBar progressBar;
     // End of variables declaration//GEN-END:variables
-
-    public javax.swing.JProgressBar getProgressBar() {
-        return progressBar;
-    }
-
-    public void setProgressBar(javax.swing.JProgressBar progressBar) {
-        this.progressBar = progressBar;
-    }
 
 }

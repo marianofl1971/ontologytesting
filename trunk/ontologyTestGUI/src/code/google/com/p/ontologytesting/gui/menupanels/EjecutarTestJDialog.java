@@ -8,9 +8,13 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -146,8 +150,14 @@ private void verCompletoButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejecutarButtonActionPerformed
 // TODO add your handling code here:
     try{
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ExecuteTest execTest = new ExecuteTest(this.getListarTestInst().getListaDeScenarios());
+        ProgressControlJDialog progres = new ProgressControlJDialog(execTest);
+        JProgressBar progresBar = progres.getProgressBar();
+        progresBar.setValue(0);
+        execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres));
         execTest.execute();
+        progres.setVisible(true);    
         this.setVisible(false);
     }catch (ExceptionReadOntology ex){
         JOptionPane.showMessageDialog(this,"No se pudo ejecutar el test. Ontología no válida.",                                                  

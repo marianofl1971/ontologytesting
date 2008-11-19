@@ -7,14 +7,17 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -39,7 +42,12 @@ public class PopMenuTests implements ActionListener{
             try{
                 TreeResults.setTestSeleccionado(scenario.getNombre());
                 ExecuteTest execTest = new ExecuteTest(scenario);
+                ProgressControlJDialog progres = new ProgressControlJDialog(execTest);
+                JProgressBar progresBar = progres.getProgressBar();
+                progresBar.setValue(0);
+                execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres));
                 execTest.execute();
+                progres.setVisible(true); 
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }catch (ExceptionReadOntology ex){
