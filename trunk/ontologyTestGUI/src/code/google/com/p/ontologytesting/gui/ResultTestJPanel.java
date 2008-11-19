@@ -22,6 +22,7 @@ public class ResultTestJPanel extends javax.swing.JPanel {
 
     private static ResultTestJPanel result = null;
     private JPanel panelResult;
+    int numCom=0;
  
     private ResultTestJPanel() {
        initComponents();
