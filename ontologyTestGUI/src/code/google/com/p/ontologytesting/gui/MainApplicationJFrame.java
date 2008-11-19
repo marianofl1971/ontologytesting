@@ -16,24 +16,18 @@ import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
-import java.util.Random;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.ProgressMonitor;
 import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
@@ -59,6 +53,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private TestSimpleRetClas testRetClas;
     private AddSPARQLJPanel testSparql;
     private JPanel panelActual;
+    private ProgressControlJDialog progres;
+    private ExecuteTest execTest;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -520,14 +516,14 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
             TreeResults.setTestSeleccionado("Todos los Tests");
-            ExecuteTest execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());  
-            ProgressControlJDialog progres = new ProgressControlJDialog();
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());  
+            progres = new ProgressControlJDialog(execTest);
             JProgressBar progresBar = progres.getProgressBar();
             progresBar.setValue(0);
-            execTest.addPropertyChangeListener(new ProgressListener(progresBar));
-            progresBar.setIndeterminate(true);
+            execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres));
             execTest.execute();
-            progres.setVisible(true);
+            progres.setVisible(true);         
         }catch(ExceptionReadOntology ex){
             panelAviso.errorAction("Error ejecutando los tests",this);  
         }
@@ -535,63 +531,6 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
         panelAviso.errorAction("Su lista de tests está vacía",this);  
     }
 }//GEN-LAST:event_ejecutarTodosMenuItemActionPerformed
-
-class ProgressListener implements PropertyChangeListener {
-        
-        private JProgressBar progressBar;
-        
-        private ProgressListener() {}
-        
-        ProgressListener(JProgressBar progressBar) {
-            this.progressBar = progressBar;
-            this.progressBar.setValue(0);
-        }
-        
-        @Override
-        public void propertyChange(PropertyChangeEvent evt) {
-            String strPropertyName = evt.getPropertyName();
-            if ("progress".equals(strPropertyName)) {
-                progressBar.setIndeterminate(false);
-                int progress = (Integer)evt.getNewValue();
-                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBB"+progress);
-                progressBar.setValue(progress);
-            }
-        }
-    }
-
-/*class ProgressListener implements PropertyChangeListener {
-     private JDialog dialog;
- 
-     public ProgressListener(JDialog dialog) {
-         this.dialog = dialog;
-     }
- 
-        @Override
-     public void propertyChange(PropertyChangeEvent event) {
-         if ("state".equals(event.getPropertyName())
-                 && SwingWorker.StateValue.DONE == event.getNewValue()) {
-             dialog.setVisible(false);
-             dialog.dispose();
-         }
-     }
-}*/
-
-/*@Override
-public void propertyChange(PropertyChangeEvent evt) {
-    if ("progress".equals(evt.getPropertyName())) {
-        int progress = (Integer) evt.getNewValue();
-        System.out.println("PPPPPPPPPPPPPPPPPPPPPPP"+progress);
-        progressMonitor.setProgress(progress);
-        String message = String.format("Completed %d%%.\n", progress);
-        progressMonitor.setNote(message);
-        if (progressMonitor.isCanceled() || task.isDone()) {
-            Toolkit.getDefaultToolkit().beep();
-            if (progressMonitor.isCanceled()) {
-                task.cancel(true);
-            }
-        }
-    }
-}*/
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
@@ -791,8 +730,7 @@ public void inicializarContadores(){
             @Override
             public void run() {
                 try {
-                    UIManager.setLookAndFeel(
-                            UIManager.getSystemLookAndFeelClassName());
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ignore) {
                 }
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
