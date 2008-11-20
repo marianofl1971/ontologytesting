@@ -5,12 +5,12 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -42,14 +42,21 @@ public class IOManagerImplementation implements IOManager{
     }
 
     @Override
-    public boolean saveProject(boolean as,String carpetaProy, String nombreProy,File fichero) throws FileNotFoundException{
+    public boolean saveProject(boolean as,String carpetaProy, String nombreProy,String fichero) throws FileNotFoundException{
         if(as==true){
+            if(!fichero.endsWith(".xml")){
+                fichero.concat(".xml");
+            }
             e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
             e.writeObject(CollectionTest.getInstance());
             e.close();
             return true;
         }else{
-            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy)));
+            if(MainApplicationJFrame.getInstance().getEsNuevo()==true){
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy)));
+            }else{
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
+            }
             e.writeObject(CollectionTest.getInstance());
             e.close();
             return true;

@@ -22,7 +22,7 @@ public class ResultTestJPanel extends javax.swing.JPanel {
 
     private static ResultTestJPanel result = null;
     private JPanel panelResult;
-    int numCom=0;
+    int numCom = 0;
  
     private ResultTestJPanel() {
        initComponents();
@@ -43,16 +43,15 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     public void aniadirResultado(JScrollPane result){
         panelResult = new JPanel();
         panelResult.setLayout(new BoxLayout(panelResult, BoxLayout.Y_AXIS));
-        resultsTabbedPane.add(TreeResults.getTestSeleccionado(),panelResult);
-        initTabComponent(resultsTabbedPane.getTabCount()-1);
+        getResultsTabbedPane().add(TreeResults.getTestSeleccionado(),panelResult);
+        initTabComponent(getResultsTabbedPane().getTabCount()-1);
         panelResult.add(result);
-        resultsTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        getResultsTabbedPane().setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         panelResult.validate();    
     }
     
     private void initTabComponent(int i) {
-        resultsTabbedPane.setTabComponentAt(i,
-                 new ButtonTabComponent(resultsTabbedPane));
+        getResultsTabbedPane().setTabComponentAt(i,new ButtonTabComponent(getResultsTabbedPane(),true,false));
     }
     
     /** This method is called from within the constructor to
@@ -86,5 +85,11 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane resultsTabbedPane;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTabbedPane getResultsTabbedPane() {
+        return resultsTabbedPane;
+    }
+
+
 
 }

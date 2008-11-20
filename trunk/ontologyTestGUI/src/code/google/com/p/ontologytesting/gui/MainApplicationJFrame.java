@@ -20,7 +20,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
@@ -43,7 +42,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private String carpetaProyecto,nombreProyecto;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
-    private boolean proyectoGuardado=false;
+    private boolean proyectoGuardado=false,esNuevo=false;
     private AniadirPanelDeAviso panelAviso;
     private FileChooserSelector utils;
     private XMLDecoder decoder;
@@ -387,8 +386,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     utils = new FileChooserSelector();
     boolean res = utils.fileChooser(false, true, false);
     if(res == true){
-        File fichero = utils.getFileSelected();
-        this.guardarProyecto(true, fichero);
+        this.guardarProyecto(true, FileChooserSelector.getPathSelected());
     }         
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
@@ -406,6 +404,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         salirMenuItem.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+        this.setEsNuevo(true);
         this.validate();
     }
 }
@@ -534,7 +533,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
-    this.guardarProyecto(true, null);
+    this.guardarProyecto(false, null);
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
@@ -544,6 +543,8 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         utils = new FileChooserSelector();
         boolean res = utils.fileChooser(true, true, false);
         if(res == true){
+            this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
+            this.setNombreProyecto(nombreProyecto);
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
             collection = (CollectionTest) decoder.readObject();
             persist.prepareProject(collection);
@@ -563,6 +564,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 ControladorTests.getInstance().inicializarGuardados();
                 ControladorTests.getInstance().inicializarSeleccionados();
+                this.setEsNuevo(false);
                 this.validate();
             }
         }
@@ -604,7 +606,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     } 
 }
     
-private void guardarProyecto(boolean como, File fichero){
+private void guardarProyecto(boolean como, String fichero){
     try {
         boolean guardado = persist.saveProject(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
         if(guardado==true){
@@ -746,6 +748,14 @@ public void inicializarContadores(){
 
     public void setCarpetaProyecto(String carpetaProyecto) {
         this.carpetaProyecto = carpetaProyecto;
+    }
+    
+    public boolean getEsNuevo() {
+        return esNuevo;
+    }
+
+    public void setEsNuevo(boolean esNuevo) {
+        this.esNuevo = esNuevo;
     }
 
     public String getNombreProyecto() {

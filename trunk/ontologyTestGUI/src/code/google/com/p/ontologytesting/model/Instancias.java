@@ -90,6 +90,11 @@ public class Instancias implements Serializable{
         return false;
     }
     
+    public void eliminarInstancias(List<ClassInstances> clasInst, List<PropertyInstances> propInst){
+        this.classInstances.removeAll(clasInst);
+        this.propertyInstances.removeAll(propInst);
+    }
+    
     @Override
     public boolean equals(Object object){
         if((object!=null) && (object instanceof Instancias) ) {

@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
  */
 public class NewProjectJDialog extends javax.swing.JDialog {
 
-    private ProjectNameSituJPanel project = new ProjectNameSituJPanel();;
-    private OntologyNameSituJPanel ontology = new OntologyNameSituJPanel();;
+    private ProjectNameSituJPanel project = new ProjectNameSituJPanel();
+    private OntologyNameSituJPanel ontology = new OntologyNameSituJPanel();
     private String nombreProy="", ubicProy="", ubicOnto="", namespaceOnto="";
     private Reasoner jenaInterface;
     private InterfaceReasoner jena;

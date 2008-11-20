@@ -46,8 +46,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     private void initTabComponent(int i) {
-        contentTabbedPane.setTabComponentAt(i,
-                 new ButtonTabComponent(contentTabbedPane));
+        contentTabbedPane.setTabComponentAt(i,new ButtonTabComponent(contentTabbedPane,false,false));
     }
     
     public void aniadirLista(ListarTestsJPanel lista){
