@@ -144,8 +144,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     }
     
     private void initTabComponent(int i) {
-        tabbedTestsPanel.setTabComponentAt(i,
-                 new ButtonTabComponent(tabbedTestsPanel));
+        tabbedTestsPanel.setTabComponentAt(i,new ButtonTabComponent(tabbedTestsPanel,false,true));
     }
     
     /** This method is called from within the constructor to
@@ -371,6 +370,10 @@ private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     }
 }//GEN-LAST:event_instanciasListMouseClicked
     
+    public JTabbedPane getTabbedTestPane() {
+        return tabbedTestsPanel;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel instanciasContentPanel;
     private javax.swing.JList instanciasList;

@@ -60,7 +60,6 @@ public class FileChooserSelector {
                 } catch (IOException ex) {   
                 }
             }
-            this.setFileSelected(fileSelected);
             FileChooserSelector.setPathSelected(selectedFile.getAbsolutePath());
             return true;
         }else return false;
@@ -74,15 +73,6 @@ public class FileChooserSelector {
             ext = s.substring(i+1).toLowerCase();
         }
         return ext;
-    }
-
-
-    public File getFileSelected() {
-        return fileSelected;
-    }
-
-    public void setFileSelected(File fileSelected) {
-        this.fileSelected = fileSelected;
     }
 
     public static String getPathSelected() {

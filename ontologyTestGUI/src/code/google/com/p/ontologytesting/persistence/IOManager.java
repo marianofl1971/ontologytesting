@@ -9,7 +9,6 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -22,7 +21,7 @@ public interface IOManager {
     
     public void prepareProject(CollectionTest collection);
     
-    public boolean saveProject(boolean as,String carpetaProy, String nombreProy,File fichero) throws FileNotFoundException;
+    public boolean saveProject(boolean as,String carpetaProy, String nombreProy,String fichero) throws FileNotFoundException;
     
     public void saveInstanciasInMemory(Instancias instancias);
     

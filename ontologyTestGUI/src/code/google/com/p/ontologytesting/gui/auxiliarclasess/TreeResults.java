@@ -26,6 +26,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
@@ -38,7 +39,10 @@ public class TreeResults extends JPanel {
     private static String testSeleccionado;
     private JScrollPane resultsView,treeView;
     private ListarTestsJPanel listT;
-
+    private boolean instFail=false,recFail=false,realFail=false,satFail=false,clasFail=false,sparqlFail=false;
+    private ImageIcon iconFail = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_delete.png");
+    private ImageIcon iconOk = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_check.png");
+    
     public TreeResults(){
     }
     
@@ -53,8 +57,7 @@ public class TreeResults extends JPanel {
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
-                                   (e.getPath().getLastPathComponent());
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) (e.getPath().getLastPathComponent());
                 Object nodeInfo = node.getUserObject();
                 if (node.isLeaf()) {
                     String test = (String) nodeInfo;
@@ -62,29 +65,77 @@ public class TreeResults extends JPanel {
                     test = test.substring(0,size-9);
                     editor = displaySimpleTest(test,testResult);
                     setTestSeleccionado(test);
-                } else {
-                }
-                if (DEBUG) {
-                    System.out.println(nodeInfo.toString());
-                }
+                } 
             }
         });
-        
+
         tree.setCellRenderer(new DefaultTreeCellRenderer()
         {
             @Override
-             public Component getTreeCellRendererComponent(JTree pTree,
-                 Object pValue, boolean pIsSelected, boolean pIsExpanded,
-                 boolean pIsLeaf, int pRow, boolean pHasFocus)
+             public Component getTreeCellRendererComponent(JTree pTree,Object pValue, boolean pIsSelected, boolean pIsExpanded,boolean pIsLeaf, int pRow, boolean pHasFocus)
              {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
                 String texto = ((String)node.getUserObject());
                 super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,pIsExpanded, pIsLeaf, pRow, pHasFocus);
-                    if (texto.contains("passed")){
-                        setForeground(Color.green);
-                    }else if (texto.contains("failed")){
-                        setForeground(Color.red);
+                if(texto.equals("Tests de Instanciación")){
+                    if(iconOk!=null){
+                        if(instFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
                     }
+                }else if(texto.equals("Tests de Recuperación")){
+                    if(iconOk!=null){
+                        if(recFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
+                    }
+                }else if(texto.equals("Tests de Realización")){
+                    if(iconOk!=null){
+                        if(realFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
+                    }
+                }else if(texto.equals("Tests de Satisfactibilidad")){
+                    if(iconOk!=null){
+                        if(satFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
+                    }
+                }else if(texto.equals("Tests de Clasificación")){
+                    if(iconOk!=null){
+                        if(clasFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
+                    }
+                }else if(texto.equals("Tests SPARQL")){
+                    if(iconOk!=null){
+                        if(sparqlFail==true){
+                            setIcon(iconFail);
+                        }else{
+                            setIcon(iconOk);
+                        }
+                    }
+                }else if (texto.contains("passed")){
+                    setForeground(Color.green);
+                    if(iconFail!=null){
+                        setIcon(iconOk);
+                    }
+                }else if (texto.contains("failed")){
+                    setForeground(Color.red);
+                    if(iconFail!=null){
+                        setIcon(iconFail);
+                    }
+                }
                 return (this);
              }
          });
@@ -98,9 +149,19 @@ public class TreeResults extends JPanel {
         resultsView = new JScrollPane(editor);
 
         ListAndResultsJPanel listAndRes = ListAndResultsJPanel.getInstance();
-        listAndRes.mostrarResultado(resultsView);
-        
         listT.aniadirTreeResult(treeView);
+        listAndRes.mostrarResultado(resultsView);
+    }
+    
+    /** Returns an ImageIcon, or null if the path was invalid. */
+    protected static ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = TreeResults.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
     }
 
     public JEditorPane displaySimpleTest(String test, OntologyTestResult testresult) {
@@ -213,7 +274,7 @@ public class TreeResults extends JPanel {
         int var_inst=0, var_sat=0, var_ret=0, var_real=0, var_clas=0, var_sparql=0;
         String inst_hijo_var = "", ret_hijo_var="", real_hijo_var="",sat_hijo_var="", 
                 clas_hijo_var="", sparql_hijo_var="";
-        
+
         while(liFailures.hasNext()){ 
             OntologyTestFailure otf = (OntologyTestFailure) liFailures.next();   
             if(otf.getTipoTest().name().equals("INST")){
@@ -225,6 +286,7 @@ public class TreeResults extends JPanel {
                     inst.add(inst_hijo);
                     inst_hijo_var = otf.getTestNameUsuario();
                     list_inst.add(inst_hijo_var);
+                    instFail=true;
                 }else{
                     if(!inst_hijo.equals(otf.getTestNameUsuario())){
                         inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -245,6 +307,7 @@ public class TreeResults extends JPanel {
                     ret.add(ret_hijo);
                     ret_hijo_var = otf.getTestNameUsuario();
                     list_ret.add(ret_hijo_var);
+                    recFail=true;
                 }else{
                     ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     ret_hijo_var = otf.getTestNameUsuario();
@@ -263,6 +326,7 @@ public class TreeResults extends JPanel {
                     real.add(real_hijo);
                     real_hijo_var = otf.getTestNameUsuario();
                     list_real.add(real_hijo_var);
+                    realFail=true;
                 }else{
                     real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     real_hijo_var = otf.getTestNameUsuario();
@@ -281,6 +345,7 @@ public class TreeResults extends JPanel {
                     clas.add(clas_hijo);
                     clas_hijo_var = otf.getTestNameUsuario();
                     list_clas.add(clas_hijo_var);
+                    clasFail=true;
                 }else{
                     clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     clas_hijo_var = otf.getTestNameUsuario();
@@ -299,6 +364,7 @@ public class TreeResults extends JPanel {
                     sat.add(sat_hijo);
                     sat_hijo_var = otf.getTestNameUsuario();
                     list_sat.add(sat_hijo_var);
+                    satFail=true;
                 }else{
                         sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                         sat_hijo_var = otf.getTestNameUsuario();
@@ -421,6 +487,7 @@ public class TreeResults extends JPanel {
                 sparql.add(sparql_hijo);
                 sparql_hijo_var = otf.getTestNameUsuario();
                 list_sparql.add(sparql_hijo_var);
+                sparqlFail=true;
             }else{
                 if(!sparql_hijo.equals(otf.getTestNameUsuario())){
                     sparql_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));

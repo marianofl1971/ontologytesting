@@ -12,6 +12,8 @@ import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -26,7 +28,7 @@ public class PopMenuInstances implements ActionListener{
     private String instSelec="";
     private OpcionesMenu menu = new OpcionesMenu();
     private Instancias instancias = new Instancias();
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem)(e.getSource());
@@ -55,15 +57,19 @@ public class PopMenuInstances implements ActionListener{
         JMenuItem menuItem;  
         JPopupMenu popup = new JPopupMenu();
         menuItem = new JMenuItem("Editar");
+        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/page_edit.png"));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Asociar a un Test");
+        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/add.png"));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Ver");
+        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/document-print-preview.png"));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Eliminar");
+        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/eliminar.png"));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         

@@ -80,6 +80,23 @@ public class ScenarioTest implements Serializable{
         return null;
     }
     
+    public boolean eliminarInstancias(){
+        Instancias inst = this.getInstancias();
+        inst.eliminarInstancias(inst.getClassInstances(), inst.getPropertyInstances());
+        return true;
+    }
+    
+    public void eliminarInstancias(Instancias inst){
+        ArrayList<ClassInstances> clasI = inst.getClassInstances();
+        ArrayList<PropertyInstances> propI = inst.getPropertyInstances();
+        for(int i=0; i<clasI.size();++i){
+            clasI.remove(i);
+        }
+        for(int i=0; i<propI.size();i++){
+            propI.remove(i);
+        }
+    }
+    
     public boolean testYaExiste(List<ScenarioTest> lista,String nombre){
         ListIterator li;
         li = lista.listIterator();

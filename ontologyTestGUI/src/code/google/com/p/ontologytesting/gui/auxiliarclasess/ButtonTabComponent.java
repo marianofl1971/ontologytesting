@@ -9,6 +9,8 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
  *
  * @author sara.garcia
  */
+import code.google.com.p.ontologytesting.gui.ResultTestJPanel;
+import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
@@ -21,10 +23,13 @@ import java.awt.event.*;
  */ 
 public class ButtonTabComponent extends JPanel {
     private final JTabbedPane pane;
+    private boolean listaTest=false,listaResult;
 
-    public ButtonTabComponent(final JTabbedPane pane) {
+    public ButtonTabComponent(final JTabbedPane pane, boolean listaTest, boolean listaResult) {
         //unset default FlowLayout' gaps
         super(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.listaTest=listaTest;
+        this.listaResult=listaResult;
         if (pane == null) {
             throw new NullPointerException("TabbedPane is null");
         }
@@ -57,7 +62,7 @@ public class ButtonTabComponent extends JPanel {
         public TabButton() {
             int size = 17;
             setPreferredSize(new Dimension(size, size));
-            setToolTipText("close this tab");
+            setToolTipText("Cerrar");
             //Make the button looks the same for all Laf's
             setUI(new BasicButtonUI());
             //Make it transparent
@@ -77,8 +82,20 @@ public class ButtonTabComponent extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             int i = pane.indexOfTabComponent(ButtonTabComponent.this);
-            if (i != -1) {
+            if(listaTest==true){
+                if (i != -1) {
+                    JTabbedPane panelBis = ListarTestsJPanel.getInstance().getTabbedTestPane();
+                    panelBis.remove(i+3);
+                    pane.remove(i);
+                }
+            }else if(listaResult==true){
+                JTabbedPane panelAux = ResultTestJPanel.getInstance().getResultsTabbedPane();
+                panelAux.remove(i-3);
                 pane.remove(i);
+            }else{
+                if (i != -1) {
+                    pane.remove(i);
+                }
             }
         }
 
@@ -92,7 +109,7 @@ public class ButtonTabComponent extends JPanel {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g.create();
-            //shift the image for pressed buttons
+
             if (getModel().isPressed()) {
                 g2.translate(1, 1);
             }
@@ -129,21 +146,6 @@ public class ButtonTabComponent extends JPanel {
     };
 }
 
-/*  if(controlador.algunTestSinGuardar()==false){
-        controlador.prepararTest(s.getTipoTest().name());
-        cargarTest(type,true,s);
-    }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar los cambios realizados al test?", 
-            "Guardar Tests",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.YES_OPTION){
-                controlador.prepararTest(s.getTipoTest().name());
-                res = obtenerPanelAGuardar();
-                cargarTest(type,res,s);
-        }else{
-            controlador.prepararTest(s.getTipoTest().name());
-            cargarTest(type,true,s);
-    }
-}*/
 
 
 
