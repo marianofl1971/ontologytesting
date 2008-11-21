@@ -54,91 +54,6 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private OpcionesMenu menu;
     private Instancias instanciasActuales = new Instancias();
     
-    //Constructor para añadir las instancias a un test
-    public AddInstancesClasPropJPanel(ScenarioTest scenario){       
-        //super(parent, modal);
-        initComponents();
-        int contI=0,contP=0;
-        CreateInstancesJPanel.setContadorClas(0);
-        CreateInstancesJPanel.setContadorProp(0);
-        clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
-        propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BorderLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
-
-        if(scenario.getInstancias().hayInstancias()==true){
-            Instancias inst = scenario.getInstancias();
-            setNomInstanciasTextField(inst.getNombre());
-            setDescInstanciasTextArea(inst.getDescripcion());
-            ListIterator ci,pi;
-            clasInst = inst.getClassInstances();
-            ci = clasInst.listIterator();
-            while(ci.hasNext()){ 
-                ClassInstances cI = (ClassInstances) ci.next();
-                CreateInstancesJPanel instClas = new CreateInstancesJPanel(0);
-                instClas.setInstance(cI.getClassInstance());
-                commentPane = instClas.getComment();
-                commentPane.setComent(cI.getComment());
-                instClas.setComment(commentPane);
-                clasPanel.add(instClas);
-                contI++;
-            }
-
-            propInst = inst.getPropertyInstances();
-            pi = propInst.listIterator();
-            while(pi.hasNext()){
-                PropertyInstances pI = (PropertyInstances) pi.next();
-                CreateInstancesJPanel instProp = new CreateInstancesJPanel(1);
-                instProp.setInstance(pI.getPropertyInstance());
-                commentPane = instProp.getComment();
-                commentPane.setComent(pI.getComment());
-                instProp.setComment(commentPane);
-                propPanel.add(instProp);
-                contP++;
-            }
-
-            if(3-contI>0){
-                for (int j = 0; j <= (3-contI); j++) {
-                    clasPanel.add(new CreateInstancesJPanel(0));
-                }
-            }
-            if(3-contP>0){
-                for (int k = 0; k <= (3-contP); k++) {
-                    propPanel.add(new CreateInstancesJPanel(1));
-                }
-            }
-            setInstancias(scenario.getInstancias());
-            this.setScenario(scenario);
-            setEditado(false);
-        }else{
-            for (int i = 0; i <= 3; i++) {
-                clasPanel.add(new CreateInstancesJPanel(0));  
-                propPanel.add(new CreateInstancesJPanel(1));
-            }
-            setInstancias(new Instancias());
-            this.setScenario(scenario);
-            setEditado(false);
-        }
-    } 
-    
-    //Constructor para crear un conjunto nuevo de instancias
-    public AddInstancesClasPropJPanel(){
-        initComponents();
-        this.setNuevoTest(true);
-        CreateInstancesJPanel.setContadorClas(0);
-        CreateInstancesJPanel.setContadorProp(0);
-        clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
-        propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
-        clasPropPanel.setLayout(new BorderLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
-        for (int i = 0; i <= 3; i++) {
-            clasPanel.add(new CreateInstancesJPanel(0));  
-            propPanel.add(new CreateInstancesJPanel(1));
-        }
-        setInstancias(new Instancias());
-        setEditado(false);
-    } 
-    
    //Constructor para editar un conjunto de instancias
     public AddInstancesClasPropJPanel(Instancias inst){
         initComponents();
@@ -429,20 +344,12 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-    if(this.getNuevoTest()==true){
-        boolean res = prepararInstancias(true,false);
-        if(res==true){
-            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, getInstancias());
-            asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            asociarInst.setVisible(true);
-        }
-    }else{
-        boolean result = prepararInstancias(true,true);
-        if(result==true){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas y asociadas al test", 
-            "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-        }   
+    boolean res = prepararInstancias(true);
+    if(res==true){
+        AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, new Instancias(this.getInstancias()));
+        asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        asociarInst.setVisible(true);
     }
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
@@ -548,36 +455,27 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
-    if(this.getNuevoTest()==true){
-        boolean res = this.prepararInstancias(false, true);
-        if(res==true){
-            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, getInstancias());
-            asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            asociarInst.setVisible(true);
-        }
-    }else{
-        boolean result = prepararInstancias(false,true);
-        if(result==true){
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias asociadas al test", 
-            "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+    boolean res = this.prepararInstancias(false);
+    if(res==true){
+        AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, new Instancias(this.getInstancias()));
+        asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        asociarInst.setVisible(true);
     }
-    
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
 
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_guardarButtonActionPerformed
-    boolean result = prepararInstancias(true,false);
+    boolean result = prepararInstancias(true);
     if(result==true){
         JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
     }
 }
 
-public boolean prepararInstancias(boolean guardar,boolean asociar){
+public boolean prepararInstancias(boolean guardar){
     menu = new OpcionesMenu();
     jenaInterface = new Reasoner();
     jena = jenaInterface.getReasoner();
@@ -620,7 +518,7 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
             getInstancias().setPropertyInstances(propInst);
             getInstancias().setDescripcion(getDescInstanciasTextArea());
             getInstancias().setNombre(getNomInstanciasTextField());
-            if((guardar==true && asociar==true && this.getNuevoTest()==false) || (guardar==true)){
+            if(guardar==true){
                 if(aux==0){
                     if(this.getInstanciasActuales() != null && instancias.equals(this.getInstanciasActuales())==false
                         && this.getInstancias().getNombre().equals(this.getInstanciasActuales().getNombre())){
@@ -631,9 +529,6 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                             if(guardar==true){
                                 persist.replaceInstanciasLocally(getInstancias());
                                 menu.actualizarListaDeInstancias();
-                            }
-                            if(asociar==true && this.getNuevoTest()==false){
-                                this.getScenario().setInstancias(this.getInstancias());
                             }
                             aux=1;
                             setInstanciasActuales(new Instancias(instancias));
@@ -650,9 +545,6 @@ public boolean prepararInstancias(boolean guardar,boolean asociar){
                     this.setInstanciasActuales(new Instancias(instancias));
                     menu.actualizarListaDeInstancias();
                 }
-                if(asociar==true && this.getNuevoTest()==false){
-                    this.getScenario().setInstancias(this.getInstancias());
-                }  
             }
             return true;
         } else if (instanciaSinNombre == true) {
