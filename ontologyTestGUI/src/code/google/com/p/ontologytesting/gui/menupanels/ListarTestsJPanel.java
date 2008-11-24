@@ -364,9 +364,11 @@ private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
-    if(evt.getClickCount()==2){
-        MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
+    if(lista.getSize()!=null){
+        Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
+        if(evt.getClickCount()==2){
+            MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
+        }
     }
 }//GEN-LAST:event_instanciasListMouseClicked
     

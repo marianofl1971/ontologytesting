@@ -29,7 +29,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private TestInstancesTFJPanel test;
     private DescripcionJPanel descPanel = null;
     private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,
-            testYaExiste,continuar;
+            testYaExiste,continuar,addInst;
     private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0;
     private JPanel panelAyudaInst;
     private List inst;
@@ -276,8 +276,13 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    menu.editarInstancias(this.getScenario().getInstancias());//GEN-LAST:event_addInstanciasButtonActionPerformed
-}
+    addInst=true;
+    System.out.println(addInst);
+    if(persist.testYaGuardado(getScenario())==false){
+        guardarTest();
+    }
+    menu.editarInstancias(this.getScenario());
+}//GEN-LAST:event_addInstanciasButtonActionPerformed
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
 // TODO add your handling code here:
@@ -393,6 +398,7 @@ public void inicializarVariables(){
     validoInst=true;
     hayUnaConsulta=0;
     continuar=true;
+    addInst=false;
 }
 
 public void copiarTestAScenarioDesdeAyuda(){
@@ -460,15 +466,17 @@ public void copiarTestAScenarioDesdeAyuda(){
 }
 
 public boolean preguntarSiContinuarSinInstancias(){
-    if(scenario.tieneInstanciasAsociadas()==false){
-        int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
-        }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+    if(addInst==false){
+        if(scenario.tieneInstanciasAsociadas()==false){
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION){
+                continuarSinInstancias=false;
+            }else if(n == JOptionPane.YES_OPTION){
+                continuarSinInstancias=true;
+            }
         }
-    }
+    }else continuarSinInstancias=true;
     return continuarSinInstancias;
 }
 
