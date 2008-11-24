@@ -669,8 +669,14 @@ public void aniadirNuevoTest(ScenarioTest s){
 }
 
 public void cargarInstancia(Instancias inst, String msg){
-    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel(inst);
-    nuevoInst.setInstanciasActuales(new Instancias(inst));
+    Instancias instancias = new Instancias(inst);
+    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel(instancias);
+    panelTest.getTestsPanel().aniadirTest(nuevoInst,msg);
+    setPanelActual(nuevoInst);
+}
+
+public void cargarInstancia(ScenarioTest scenario, String msg){
+    AddInstancesClasPropJPanel nuevoInst = new AddInstancesClasPropJPanel(scenario);
     panelTest.getTestsPanel().aniadirTest(nuevoInst,msg);
     setPanelActual(nuevoInst);
 }

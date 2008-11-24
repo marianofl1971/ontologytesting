@@ -2,6 +2,8 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.*;
+import code.google.com.p.ontologytesting.persistence.IOManager;
+import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     private Instancias instancias = new Instancias();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
+    private IOManager persist = new IOManagerImplementation();
     
     /** Creates new form AsociarInstanciasATestJDialog */
     public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
@@ -156,6 +159,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     if(scenImp.size()>0){
         for(int i=0;i<scenImp.size();i++){
             scenImp.get(i).setInstancias(this.getInstancias());
+            persist.replaceScenarioLocally(scenImp.get(i));
         }
         JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
         "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
@@ -166,6 +170,9 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
+    JOptionPane.showMessageDialog(this,"Instancias Guardadas pero no asociadas",                                                  
+    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+    this.setVisible(false);
 }
 
 public Instancias getInstancias() {

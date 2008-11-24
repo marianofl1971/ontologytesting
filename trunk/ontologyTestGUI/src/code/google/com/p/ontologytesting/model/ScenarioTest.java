@@ -81,11 +81,10 @@ public class ScenarioTest implements Serializable{
     }
     
     public boolean eliminarInstancias(){
-        Instancias inst = this.getInstancias();
-        inst.getClassInstances().clear();
-        inst.getPropertyInstances().clear();
-        inst.setDescripcion("");
-        inst.setNombre("");
+        this.getInstancias().getClassInstances().clear();
+        this.getInstancias().getPropertyInstances().clear();
+        this.getInstancias().setDescripcion("");
+        this.getInstancias().setNombre("");
         return true;
     }
     

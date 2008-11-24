@@ -50,6 +50,16 @@ public class OpcionesMenu {
         MainApplicationJFrame.getInstance().cargarInstancia(inst,nombre);
     }
     
+    public void editarInstancias(ScenarioTest scenario){
+        String nombre = "";
+        if(!scenario.getInstancias().getNombre().equals("")){
+            nombre = scenario.getInstancias().getNombre();
+        }else{
+            nombre = "Editar instancias";
+        }
+        MainApplicationJFrame.getInstance().cargarInstancia(scenario,nombre);
+    }
+    
     public void eliminarTest(ScenarioTest scenario){
         CollectionTest.getInstance().getScenariotest().remove(scenario);
         this.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
