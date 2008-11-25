@@ -158,7 +158,8 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     this.setScenariosSeleccionados(scenImp);
     if(scenImp.size()>0){
         for(int i=0;i<scenImp.size();i++){
-            scenImp.get(i).setInstancias(this.getInstancias());
+            Instancias inst = new Instancias(this.getInstancias());
+            scenImp.get(i).setInstancias(inst);
             persist.replaceScenarioLocally(scenImp.get(i));
         }
         JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  

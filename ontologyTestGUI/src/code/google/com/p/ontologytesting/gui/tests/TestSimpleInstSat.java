@@ -28,8 +28,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private ValidarTests validarTests;
     private TestInstancesTFJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,
-            testYaExiste,continuar,addInst;
+    private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,continuar,addInst;
     private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0;
     private JPanel panelAyudaInst;
     private List inst;
@@ -340,51 +339,30 @@ public boolean guardarTest(){
 
 public void realizarAccion(boolean guardar, boolean ejecutar){
     persist = new IOManagerImplementation();
-    if(testYaExiste==true){
-        if(guardar==true){
-            if(this.getScenarioActual() != null && this.getScenario().equals(this.getScenarioActual())==false
-                    && this.getScenario().getNombre().equals(this.getScenarioActual().getNombre())){
-                Object[] options = {"Sobreescribir", "Cancelar"};
-                int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                if (n == JOptionPane.YES_OPTION) {
-                    persist.replaceScenarioLocally(this.getScenario());
-                    controlador.setTestInstSatGuardado(true);
-                }
-            }else{
-                persist.saveTestInMemory(this.getScenario());
-                controlador.setTestInstSatGuardado(true);
-            }
-            this.setScenarioActual(new ScenarioTest(scenario));
-        }
-        if(ejecutar==true){
-            try{
-                ExecuteTest execTest = new ExecuteTest(this.getScenario());
-                execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
-        }
-    }else{ 
-        if(guardar==true){
-            persist.saveTestInMemory(this.getScenario());
-            this.setScenarioActual(new ScenarioTest(scenario));
+    if(guardar==true){
+        if(persist.testYaGuardado(getScenario())==true){
+            persist.replaceScenarioLocally(getScenario());
+        }else{
+            persist.saveTestInMemory(getScenario());
             controlador.setTestInstSatGuardado(true);
         }
-        if(ejecutar==true){
-            try{
-               ExecuteTest execTest = new ExecuteTest(this.getScenario());
-               execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
+        this.setScenarioActual(new ScenarioTest(scenario));
+    }
+    if(ejecutar==true){
+        try{
+            ExecuteTest execTest = new ExecuteTest(getScenario());
+            execTest.execute();
+        }catch (ExceptionReadOntology ex){
+            panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }
     if(guardar==true && ejecutar==true){
         panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
     }else if(guardar==true){
-        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
-    }else{
+        if(addInst==false){
+            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
+        }
+    }else{ 
         panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
@@ -393,12 +371,10 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 public void inicializarVariables(){
     ambosNecesarios=false;
     continuarSinInstancias=true;
-    testYaExiste=false;
     testSinNombre=false;
     validoInst=true;
     hayUnaConsulta=0;
     continuar=true;
-    addInst=false;
 }
 
 public void copiarTestAScenarioDesdeAyuda(){
@@ -418,9 +394,6 @@ public void copiarTestAScenarioDesdeAyuda(){
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
-    if(scenario.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
-        testYaExiste=true;
-    }
     if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{
@@ -509,9 +482,6 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     inst = new ArrayList();
     this.inst.add(0,0);
     validarConsultas.setListInst(this.inst);
-    if(scenario.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
-        testYaExiste=true;
-    }
     if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{

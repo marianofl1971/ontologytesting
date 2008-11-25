@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
-    private boolean testSinNombre,testYaExiste,sinConsultas,
+    private boolean testSinNombre,sinConsultas,
             ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
     private ScenarioTest scenario,scenarioActual;
     private List<SparqlQueryOntology> listaDeConsultas;
@@ -319,20 +319,16 @@ private void nuevaConsultaButtonActionPerformed(java.awt.event.ActionEvent evt) 
     String q = this.getSPARQLQuery();
     String r = this.getResultTextArea();
     this.inicializarVariables();
-    
     this.consultaVacia(q, r);
     if(sinConsultas==false){
         this.consultaCompleta(q, r);
-
         continuar = consultaOK(q, r);
-
         if(continuar==true){
             this.validarConsulta(q);
             if(continuar==true){
                 this.validarResultado(r);
             }
         }
-
         if(continuar==true){
             SparqlQueryOntology query = new SparqlQueryOntology(q,r);
             if((this.getListaDeConsultas().size()==0) || (posListQuerysSel==listaDeConsultas.size())){
@@ -369,7 +365,6 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     inicializarVariables();
     String q = this.getSPARQLQuery();
     String r = this.getResultTextArea();
-
     this.consultaVacia(q, r);
     if(sinConsultas==false){
         this.consultaCompleta(q, r);
@@ -380,8 +375,7 @@ private void antQueryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 this.validarResultado(r);
             }
         } 
-    }
-    
+    }   
     if(continuar==true){
         SparqlQueryOntology query = new SparqlQueryOntology(q,r);
         SparqlQueryOntology querySig = listaDeConsultas.get(posListQuerysSel-1);
@@ -532,46 +526,23 @@ private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 public void realizarAccion(boolean guardar, boolean ejecutar){
     persist = new IOManagerImplementation();
-    if(testYaExiste==true){
-        if(guardar==true){
-            if((this.getScenarioActual() != null) && (scenario.equals(this.getScenarioActual())==false)
-                        && (this.getScenario().getNombre().equals(this.getScenarioActual().getNombre()))){
-                Object[] options = {"Sobreescribir", "Cancelar"};
-                int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                if (n == JOptionPane.YES_OPTION) {
-                    persist.replaceScenarioLocally(scenario);
-                    controlador.setTestSparqlGuardado(true);
-                }
-            }else{
-                persist.saveTestInMemory(this.getScenario());
-                controlador.setTestSparqlGuardado(true);
-            }
-            this.setScenarioActual(new ScenarioTest(scenario));
+    if(guardar==true){
+        if(persist.testYaGuardado(getScenario())==true){
+            persist.replaceScenarioLocally(getScenario());
+        }else{
+            persist.saveTestInMemory(getScenario());
+            controlador.setTestInstSatGuardado(true);
         }
-        if(ejecutar==true){
-            try{
-                ExecuteTest execTest = new ExecuteTest(this.getScenario());
-                execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
+        this.setScenarioActual(new ScenarioTest(scenario));
+    }
+    if(ejecutar==true){
+        try{
+            ExecuteTest execTest = new ExecuteTest(this.getScenario());
+            execTest.execute();
+        }catch (ExceptionReadOntology ex){
+            panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
-     }else{
-        if(guardar==true){
-            persist.saveTestInMemory(scenario);
-            this.setScenarioActual(new ScenarioTest(scenario));
-            controlador.setTestSparqlGuardado(true);
-        }
-        if(ejecutar==true){
-            try{
-                ExecuteTest execTest = new ExecuteTest(this.getScenario());
-                execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
-        }
-    }  
+    }
     if(guardar==true && ejecutar==true){
         panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
     }else if(guardar==true){
@@ -673,9 +644,6 @@ public void prepararGuardar(){
     String query = this.getSPARQLQuery();
     String result = this.getResultTextArea();
     SparqlQueryOntology q = new SparqlQueryOntology(query,result);
-    if(scenario.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
-        testYaExiste=true;
-    }
     if(testVacio(nombreTest)==true){
         testSinNombre=true;
     }
@@ -741,7 +709,6 @@ public void inicializarVariables(){
     resultValido=true;
     queryValida=true;
     testSinNombre=false;
-    testYaExiste=false;
     sinConsultas=false;
     continuar=true;
     ambosNecesarios=false;
