@@ -47,7 +47,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private String conjuntoClase,conjuntoProp,patron;
     private String[] clas,prop;
     private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
-            instanciaValida=true,queryValida=true,fromTest=false;
+            instanciaValida=true,queryValida=true,fromTest=false,guardarAsociar=false;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private ScenarioTest scenario = new ScenarioTest();
     private OpcionesMenu menu;
@@ -401,20 +401,9 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-    boolean res = this.prepararInstancias(true);    
-    if(res==true){
-        if(isFromTest()==false){
-            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
-            asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
-            asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            asociarInst.setVisible(true);
-        }else{
-            getScenario().setInstancias(getInstancias());
-            persist.replaceScenarioLocally(getScenario());
-            JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        }
-     } 
+    guardarAsociar=true;
+    soloAsociar();
+    soloGuardar();
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
@@ -519,6 +508,11 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
+    soloAsociar();
+}//GEN-LAST:event_soloAsociarButtonActionPerformed
+
+
+public void soloAsociar(){
     boolean res = this.prepararInstancias(false);
     if(res==true){
         if(isFromTest()==false){
@@ -533,12 +527,15 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
             "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
-}//GEN-LAST:event_soloAsociarButtonActionPerformed
-
+}
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_guardarButtonActionPerformed
+    soloGuardar();
+}
+
+public void soloGuardar(){
     boolean result = prepararInstancias(true);
     if(result==true){
         JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas", 
@@ -591,7 +588,7 @@ public boolean prepararInstancias(boolean guardar){
             if(guardar==true){
                 if(persist.instanciasYaGuardadas(getInstancias())==true){
                     if(this.isFromTest()==false){
-                        persist.replaceInstanciasLocally(new Instancias(getInstancias()));
+                        persist.replaceInstanciasLocally(getInstancias());
                     }else{
                         Object[] options = {"Sobreescribir", "Cancelar"};
                         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un conjunto de instancias guardado con ese nombre. ¿Qué desea hacer?", 

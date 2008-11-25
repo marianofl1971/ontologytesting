@@ -28,8 +28,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,
-            testYaExiste,continuar;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar;
     private JPanel panelAyudaReal;
     private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
     private List real;
@@ -334,44 +333,21 @@ public boolean guardarTest(){
 
 public void realizarAccion(boolean guardar, boolean ejecutar){  
     persist = new IOManagerImplementation();
-    if(testYaExiste==true){
-        if(guardar==true){
-            if(this.getScenarioActual() != null && scenario.equals(this.getScenarioActual())==false
-                        && this.getScenario().getNombre().equals(this.getScenarioActual().getNombre())){
-                Object[] options = {"Sobreescribir", "Cancelar"};
-                int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test ya existe o ha sido modificado. ¿Que desea hacer?", 
-                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                if (n == JOptionPane.YES_OPTION) {
-                    persist.replaceScenarioLocally(scenario);
-                    controlador.setTestRealGuardado(true);
-                }
-            }else{
-                persist.saveTestInMemory(scenario);
-                controlador.setTestRealGuardado(true);
-            }
-            this.setScenarioActual(new ScenarioTest(scenario));
+    if(guardar==true){
+        if(persist.testYaGuardado(getScenario())==true){
+            persist.replaceScenarioLocally(getScenario());
+        }else{
+            persist.saveTestInMemory(getScenario());
+            controlador.setTestInstSatGuardado(true);
         }
-        if(ejecutar==true){
-           try{
-                ExecuteTest execTest = new ExecuteTest(this.getScenario());
-                execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
-        }
-     }else{
-        if(guardar==true){
-            persist.saveTestInMemory(scenario);
-            this.setScenarioActual(new ScenarioTest(scenario));
-            controlador.setTestRealGuardado(true);
-        }
-        if(ejecutar==true){
-            try{
-                ExecuteTest execTest = new ExecuteTest(this.getScenario());
-                execTest.execute();
-            }catch (ExceptionReadOntology ex){
-                panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
-            }
+        this.setScenarioActual(new ScenarioTest(scenario));
+    }
+    if(ejecutar==true){
+        try{
+            ExecuteTest execTest = new ExecuteTest(getScenario());
+            execTest.execute();
+        }catch (ExceptionReadOntology ex){
+            panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }
     if(guardar==true && ejecutar==true){
@@ -387,7 +363,6 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 public void inicializarVariables(){
     ambosNecesarios=false;
     continuarSinInstancias=true;
-    testYaExiste=false;
     testSinNombre=false;
     validoReal=true;
     hayUnaConsulta=0;
@@ -411,9 +386,6 @@ public void copiarTestAScenarioDesdeAyuda(){
     descPanel = (DescripcionJPanel) descripcionJPanel.getComponent(0);
     nombreTest = descPanel.getNombreTextField();
     descTest = descPanel.getDescTextArea();
-    if(scenario.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
-        testYaExiste=true;
-    }
     if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{
@@ -500,9 +472,6 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     real = new ArrayList();
     this.real.add(0,0);
     validarConsultas.setListReal(this.real);
-    if(scenario.testYaExiste(CollectionTest.getInstance().getScenariotest(),nombreTest)==true){
-        testYaExiste=true;
-    }
     if(descPanel.testSinNombre()==true){
         testSinNombre=true;
     }else{
