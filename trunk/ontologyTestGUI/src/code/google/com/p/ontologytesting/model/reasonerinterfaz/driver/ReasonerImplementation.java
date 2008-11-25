@@ -6,7 +6,7 @@
 package code.google.com.p.ontologytesting.model.reasonerinterfaz.driver;
 
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
-import code.google.com.p.ontologytesting.model.ExecQuerySparql;
+import code.google.com.p.ontologytesting.model.exectests.*;
 import com.hp.hpl.jena.ontology.*;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.*;
