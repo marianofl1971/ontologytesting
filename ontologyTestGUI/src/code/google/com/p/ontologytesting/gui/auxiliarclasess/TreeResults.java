@@ -12,9 +12,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
  */
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.gui.*;
-import code.google.com.p.ontologytesting.model.OntologyTestFailure;
-import code.google.com.p.ontologytesting.model.OntologyTestPassed;
-import code.google.com.p.ontologytesting.model.OntologyTestResult;
+import code.google.com.p.ontologytesting.model.exectests.*;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.event.TreeSelectionListener;
@@ -33,7 +31,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 public class TreeResults extends JPanel {
     
     private JEditorPane editor = new JEditorPane();
-    private static boolean DEBUG = false;
     private DefaultMutableTreeNode inst,ret,clas,sat,real,sparql;
     private DefaultMutableTreeNode inst_hijo,ret_hijo,clas_hijo, sat_hijo,real_hijo,sparql_hijo;
     private static String testSeleccionado;

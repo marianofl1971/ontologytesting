@@ -7,8 +7,9 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model;
+package code.google.com.p.ontologytesting.model.exectests;
 
+import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.util.ArrayList;
@@ -88,8 +89,8 @@ public class OntologyTestCase implements OntologyTest{
         
         String resObtenidoInst="",resQueryExpected="", resObtenidoRealiz="",
                 resObtenidoSatisf="";
-        ArrayList<String> resObtenidoRet = new ArrayList<String>();
-        ArrayList<String> resObtenidoClas = new ArrayList<String>();
+        List<String> resObtenidoRet = new ArrayList<String>();
+        List<String> resObtenidoClas = new ArrayList<String>();
         QueryOntology qo = null;
         SparqlQueryOntology sparqlquery = null;
                 

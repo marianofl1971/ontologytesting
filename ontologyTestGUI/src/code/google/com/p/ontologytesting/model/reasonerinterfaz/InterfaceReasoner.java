@@ -5,8 +5,8 @@
 
 package code.google.com.p.ontologytesting.model.reasonerinterfaz;
 
-import code.google.com.p.ontologytesting.model.ExecQuerySparql;
-import java.util.ArrayList;
+import code.google.com.p.ontologytesting.model.exectests.ExecQuerySparql;
+import java.util.List;
 
 /**
  *
@@ -24,15 +24,15 @@ public interface InterfaceReasoner {
     
     String instantiation(String ns, String className, String individualName) throws ExceptionReadOntology;
     
-    ArrayList<String> retieval(String ns, String className);
+    List<String> retieval(String ns, String className);
 
     String realization(String ns, String individualName); 
     
     String satisfactibility(String ns, String concepto, String clase) throws ExceptionReadOntology;
 
-    ArrayList<String> classification(String ns, String individuo) throws ExceptionReadOntology;
+    List<String> classification(String ns, String individuo) throws ExceptionReadOntology;
     
-    ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);
+    List<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);
     
     boolean validarSparqlQuery(String query);
 

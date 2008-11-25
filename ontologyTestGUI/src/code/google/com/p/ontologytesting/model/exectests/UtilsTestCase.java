@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model;
+package code.google.com.p.ontologytesting.model.exectests;
 
+import code.google.com.p.ontologytesting.model.exectests.OntologyTestResult;
+import code.google.com.p.ontologytesting.model.exectests.ExecQuerySparql;
+import code.google.com.p.ontologytesting.model.exectests.OntologyTestFailure;
 import code.google.com.p.ontologytesting.model.*;
 import java.util.ArrayList;
 import java.util.Collections;

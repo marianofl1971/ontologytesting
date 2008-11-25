@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package code.google.com.p.ontologytesting.model;
+package code.google.com.p.ontologytesting.model.exectests;
 
+import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import java.util.List;
 

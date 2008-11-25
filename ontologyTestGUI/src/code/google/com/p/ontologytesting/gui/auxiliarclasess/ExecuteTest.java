@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
+import code.google.com.p.ontologytesting.model.exectests.*;
 import code.google.com.p.ontologytesting.model.*;
 import java.awt.Toolkit;
 import javax.swing.SwingWorker;
