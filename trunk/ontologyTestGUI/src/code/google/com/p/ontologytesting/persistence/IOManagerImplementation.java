@@ -5,7 +5,6 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
-import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
@@ -22,6 +21,7 @@ import java.util.List;
 public class IOManagerImplementation implements IOManager{
 
     private XMLEncoder e;
+    private boolean esNuevo=false;
     
     @Override
     public boolean loadProject(String ubicOnto,String namespaceOnto){                                             
@@ -52,7 +52,7 @@ public class IOManagerImplementation implements IOManager{
             e.close();
             return true;
         }else{
-            if(MainApplicationJFrame.getInstance().getEsNuevo()==true){
+            if(this.isEsNuevo()==true){
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy)));
             }else{
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
@@ -123,5 +123,13 @@ public class IOManagerImplementation implements IOManager{
             }
         }
         return false;
+    }
+
+    public boolean isEsNuevo() {
+        return esNuevo;
+    }
+
+    public void setEsNuevo(boolean esNuevo) {
+        this.esNuevo = esNuevo;
     }
 }
