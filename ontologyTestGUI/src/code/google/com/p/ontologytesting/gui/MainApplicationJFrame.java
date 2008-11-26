@@ -16,7 +16,6 @@ import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
@@ -404,7 +403,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         salirMenuItem.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-        this.setEsNuevo(true);
+        persist.setEsNuevo(true);
         this.validate();
     }
 }
@@ -515,7 +514,6 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(CollectionTest.getInstance().getScenariotest().size()>0){
         try{
             TreeResults.setTestSeleccionado("Todos los Tests");
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             execTest = new ExecuteTest(CollectionTest.getInstance().getScenariotest());  
             progres = new ProgressControlJDialog(execTest);
             JProgressBar progresBar = progres.getProgressBar();
@@ -564,7 +562,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 ControladorTests.getInstance().inicializarGuardados();
                 ControladorTests.getInstance().inicializarSeleccionados();
-                this.setEsNuevo(false);
+                persist.setEsNuevo(false);
                 this.validate();
             }
         }
@@ -754,14 +752,6 @@ public void inicializarContadores(){
 
     public void setCarpetaProyecto(String carpetaProyecto) {
         this.carpetaProyecto = carpetaProyecto;
-    }
-    
-    public boolean getEsNuevo() {
-        return esNuevo;
-    }
-
-    public void setEsNuevo(boolean esNuevo) {
-        this.esNuevo = esNuevo;
     }
 
     public String getNombreProyecto() {

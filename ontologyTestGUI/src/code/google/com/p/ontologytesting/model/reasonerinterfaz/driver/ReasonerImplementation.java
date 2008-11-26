@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class ReasonerImplementation implements InterfaceReasoner{
 
-    public final OntModel model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
+    private final OntModel model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
     private OntClass nameclass;
     private Property nameprop;
     
