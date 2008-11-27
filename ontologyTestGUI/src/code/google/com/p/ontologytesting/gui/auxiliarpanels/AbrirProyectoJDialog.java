@@ -8,8 +8,8 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
-import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
@@ -165,15 +165,9 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
             }else{
                 boolean res = persist.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
-                j.addReasoner(this.getUbicacionFisica());
                 if(res==true){
-                    opMenu.actualizarListaDeInstancias();
-                    opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
-                    opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
-                    this.setProyectoCargado(true);
-                    this.setVisible(false);
-                }else{
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+                    LoadOntology loadOnto = new LoadOntology(this.getUbicacionFisica(),this);
+                    loadOnto.execute();
                 }
             }
         }catch (ExceptionReadOntology ex){

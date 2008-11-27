@@ -28,7 +28,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar,addInst;
     private JPanel panelAyudaReal;
     private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
     private List real;
@@ -312,8 +312,12 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    menu.editarInstancias(this.getScenario().getInstancias());//GEN-LAST:event_addInstanciasButtonActionPerformed
-}
+    addInst=true;
+    if(persist.testYaGuardado(getScenario())==false){
+        guardarTest();
+    }
+    menu.editarInstancias(this.getScenario());
+}//GEN-LAST:event_addInstanciasButtonActionPerformed
 
 public boolean guardarTest(){
     if(getTabbedPaneReal()==0){
@@ -353,7 +357,9 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     if(guardar==true && ejecutar==true){
         panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
     }else if(guardar==true){
-        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
+        if(addInst==false){
+            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
+        }
     }else{
         panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
     }
@@ -431,15 +437,17 @@ public void copiarTestAScenarioDesdeAyuda(){
 }
 
 public boolean preguntarSiContinuarSinInstancias(){
-    if(scenario.tieneInstanciasAsociadas()==false){
-        int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
-        }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+    if(addInst==false){
+        if(scenario.tieneInstanciasAsociadas()==false){
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION){
+                continuarSinInstancias=false;
+            }else if(n == JOptionPane.YES_OPTION){
+                continuarSinInstancias=true;
+            }
         }
-    }
+    }else continuarSinInstancias=true;
     return continuarSinInstancias;
 }
 

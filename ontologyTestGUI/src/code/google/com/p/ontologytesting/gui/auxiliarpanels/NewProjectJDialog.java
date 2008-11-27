@@ -8,10 +8,9 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
-import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.awt.BorderLayout;
-import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -182,19 +181,8 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             ontology.setUbicOnto(ubicOnto);
             ontology.setNsOnto(namespaceOnto);
              try{
-                jena.addReasoner(ubicOnto);
-                CollectionTest.getInstance().setNamespace(namespaceOnto);
-                CollectionTest.getInstance().setOntology(ubicOnto);
-                File directorio = new File(project.getCarpetaProyectoTextField());
-                boolean res = directorio.mkdir(); 
-                if(res==true){
-                    MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
-                    MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
-                    setProyectoCreado(true); 
-                    this.setVisible(false);
-                }else{
-                    panelAviso.errorAction("No se puedo crear un directorio para el proyecto", this);
-                }
+                LoadOntology loadOnto = new LoadOntology(ubicOnto,namespaceOnto,this,nombreProy,project);
+                loadOnto.execute();
             }catch(ExceptionReadOntology ex){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
                 "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);

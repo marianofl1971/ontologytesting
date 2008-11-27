@@ -21,7 +21,18 @@ import java.util.List;
 public class IOManagerImplementation implements IOManager{
 
     private XMLEncoder e;
-    private boolean esNuevo=false;
+    private static boolean esNuevo=false;
+    private boolean como=false;
+    private String carpetaProy,nombreProy,fichero;
+    
+    public IOManagerImplementation(){}
+    
+    public IOManagerImplementation(boolean as,String carpetaProy, String nombreProy,String fichero){
+        this.como=as;
+        this.carpetaProy=carpetaProy;
+        this.nombreProy=nombreProy;
+        this.fichero=fichero;
+    }
     
     @Override
     public boolean loadProject(String ubicOnto,String namespaceOnto){                                             
@@ -45,15 +56,18 @@ public class IOManagerImplementation implements IOManager{
     public boolean saveProject(boolean as,String carpetaProy, String nombreProy,String fichero) throws FileNotFoundException{
         if(as==true){
             if(!fichero.endsWith(".xml")){
-                fichero.concat(".xml");
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero+".xml")));
+            }else{
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
             }
-            e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(fichero)));
             e.writeObject(CollectionTest.getInstance());
             e.close();
             return true;
         }else{
-            if(this.isEsNuevo()==true){
-                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy)));
+            System.out.println(carpetaProy +"    "+nombreProy+"   "+fichero);
+            if(IOManagerImplementation.esNuevo==true){
+                System.out.println("ENtro");
+                e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy+".xml")));
             }else{
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
             }
@@ -125,11 +139,43 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    public boolean isEsNuevo() {
+    public static boolean isEsNuevo() {
         return esNuevo;
     }
 
-    public void setEsNuevo(boolean esNuevo) {
-        this.esNuevo = esNuevo;
+    public static void setEsNuevo(boolean aesNuevo) {
+        esNuevo= aesNuevo;
+    }
+
+    public boolean getComo() {
+        return como;
+    }
+
+    public void setComo(boolean como) {
+        this.como = como;
+    }
+
+    public String getCarpetaProy() {
+        return carpetaProy;
+    }
+
+    public void setCarpetaProy(String carpetaProy) {
+        this.carpetaProy = carpetaProy;
+    }
+
+    public String getNombreProy() {
+        return nombreProy;
+    }
+
+    public void setNombreProy(String nombreProy) {
+        this.nombreProy = nombreProy;
+    }
+
+    public String getFichero() {
+        return fichero;
+    }
+
+    public void setFichero(String fichero) {
+        this.fichero = fichero;
     }
 }

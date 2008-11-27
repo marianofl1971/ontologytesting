@@ -17,6 +17,7 @@ import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOnt
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
@@ -41,7 +43,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private String carpetaProyecto,nombreProyecto;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
-    private boolean proyectoGuardado=false,esNuevo=false;
+    private boolean proyectoGuardado=false;
     private AniadirPanelDeAviso panelAviso;
     private FileChooserSelector utils;
     private XMLDecoder decoder;
@@ -403,7 +405,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         ejecutarMenu.setEnabled(true);
         salirMenuItem.setEnabled(true);
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-        persist.setEsNuevo(true);
+        IOManagerImplementation.setEsNuevo(true);
         this.validate();
     }
 }
@@ -414,7 +416,6 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             this.guardarProyecto(false, null);
-            panelAviso.confirmAction("Proyecto Guardado", this);
             this.dispose();
             System.exit(0);
         }else{
@@ -605,16 +606,53 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 }
     
 private void guardarProyecto(boolean como, String fichero){
-    try {
-        boolean guardado = persist.saveProject(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
-        if(guardado==true){
-            panelAviso.confirmAction("Proyecto guardado", this);
-            this.setProyectoGuardado(true);
-        }else{
-            panelAviso.errorAction("Proyecto no guardado",this);  
+    IOManagerImplementation manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
+    IOSwingWorker sw = new IOSwingWorker(manager);
+    sw.execute();
+}
+
+class IOSwingWorker extends SwingWorker<Boolean, Void>{
+        
+    private IOManagerImplementation iomanager;
+
+    private IOSwingWorker(IOManagerImplementation iomanager) {
+        this.iomanager=iomanager;
+    }
+
+    @Override
+    protected Boolean doInBackground() throws Exception {
+        boolean res=false;
+        res = saveTest(iomanager);
+        return res;
+    }
+
+    private boolean saveTest(IOManagerImplementation iomanager){ 
+        boolean res=false;
+        try {
+            res = iomanager.saveProject(iomanager.getComo(), iomanager.getCarpetaProy(), iomanager.getNombreProy(), iomanager.getFichero());
+        } catch (FileNotFoundException ex) {
         }
-    } catch (FileNotFoundException ex) {
-        panelAviso.errorAction("No se encontró el archivo especificado", this);
+        return res;
+    }
+
+    @Override
+    protected void done() {
+        boolean res = false;
+        AniadirPanelDeAviso panelAviso = new AniadirPanelDeAviso();
+        if(this.isCancelled()==false){
+            Toolkit.getDefaultToolkit().beep();
+            try {
+                res = get();
+            } catch (Exception ignore) {
+                ignore.printStackTrace();
+            }
+            if(res==true){
+                panelAviso.confirmAction("Proyecto guardado", MainApplicationJFrame.getInstance());
+                MainApplicationJFrame.getInstance().setProyectoGuardado(true);
+            }else{
+                panelAviso.errorAction("Proyecto no guardado",MainApplicationJFrame.getInstance());  
+            }
+        }
     }
 }
 
