@@ -402,8 +402,9 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
     guardarAsociar=true;
-    soloAsociar();
-    soloGuardar();
+    boolean result = prepararInstancias(true);
+    soloAsociar(result);
+    soloGuardar(result);
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
@@ -508,12 +509,12 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
-    soloAsociar();
+    boolean res = this.prepararInstancias(false);
+    soloAsociar(res);
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
 
 
-public void soloAsociar(){
-    boolean res = this.prepararInstancias(false);
+public void soloAsociar(boolean res){ 
     if(res==true){
         if(isFromTest()==false){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
@@ -532,11 +533,11 @@ public void soloAsociar(){
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_guardarButtonActionPerformed
-    soloGuardar();
+    boolean result = prepararInstancias(true);
+    soloGuardar(result);
 }
 
-public void soloGuardar(){
-    boolean result = prepararInstancias(true);
+public void soloGuardar(boolean result){
     if(result==true){
         JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas", 
         "Confirm Message", JOptionPane.INFORMATION_MESSAGE);

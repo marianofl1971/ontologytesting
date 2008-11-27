@@ -276,7 +276,6 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
     addInst=true;
-    System.out.println(addInst);
     if(persist.testYaGuardado(getScenario())==false){
         guardarTest();
     }
