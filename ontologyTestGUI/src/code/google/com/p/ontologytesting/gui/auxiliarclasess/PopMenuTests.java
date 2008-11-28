@@ -50,7 +50,7 @@ public class PopMenuTests implements ActionListener{
                 ProgressControlJDialog progres = new ProgressControlJDialog(execTest);
                 JProgressBar progresBar = progres.getProgressBar();
                 progresBar.setValue(0);
-                execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres));
+                execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
                 execTest.execute();
                 progres.setVisible(true); 
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  

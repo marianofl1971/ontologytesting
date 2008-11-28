@@ -519,7 +519,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
             progres = new ProgressControlJDialog(execTest);
             JProgressBar progresBar = progres.getProgressBar();
             progresBar.setValue(0);
-            execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres));
+            execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
             execTest.execute();
             progres.setVisible(true);         
         }catch(ExceptionReadOntology ex){
@@ -563,7 +563,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 ControladorTests.getInstance().inicializarGuardados();
                 ControladorTests.getInstance().inicializarSeleccionados();
-                persist.setEsNuevo(false);
+                IOManagerImplementation.setEsNuevo(false);
                 this.validate();
             }
         }
@@ -608,10 +608,15 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 private void guardarProyecto(boolean como, String fichero){
     IOManagerImplementation manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
     IOSwingWorker sw = new IOSwingWorker(manager);
+    progres = new ProgressControlJDialog(sw);
+    JProgressBar progresBar = progres.getProgressBar();
+    sw.addPropertyChangeListener(new ProgressListener(progresBar,progres,false));
+    progresBar.setIndeterminate(true);
     sw.execute();
+    progres.setVisible(true); 
 }
 
-class IOSwingWorker extends SwingWorker<Boolean, Void>{
+public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         
     private IOManagerImplementation iomanager;
 
@@ -649,8 +654,10 @@ class IOSwingWorker extends SwingWorker<Boolean, Void>{
             if(res==true){
                 panelAviso.confirmAction("Proyecto guardado", MainApplicationJFrame.getInstance());
                 MainApplicationJFrame.getInstance().setProyectoGuardado(true);
+                progres.setVisible(false);
             }else{
-                panelAviso.errorAction("Proyecto no guardado",MainApplicationJFrame.getInstance());  
+                panelAviso.errorAction("Proyecto no guardado",MainApplicationJFrame.getInstance()); 
+                progres.setVisible(false);
             }
         }
     }

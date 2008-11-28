@@ -52,10 +52,13 @@ public class LoadOntology extends SwingWorker<Boolean, Void>{
 
     @Override
     protected Boolean doInBackground() throws Exception {
-        setProgress(0);
+        try{
         j.addReasoner(this.ubicFisica);
         setProgress(100);
         return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 
     
@@ -77,20 +80,27 @@ public class LoadOntology extends SwingWorker<Boolean, Void>{
                     abrirProy.setProyectoCargado(true);
                     abrirProy.setVisible(false);
                 }else{
-                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Error en la Aplicación","Error Message",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La ontología introducida no se pudo cargar","Error Message",JOptionPane.ERROR_MESSAGE);
+                    abrirProy.getProgres().setVisible(false);
                 }
             }else{
-                CollectionTest.getInstance().setNamespace(this.namespace);
-                CollectionTest.getInstance().setOntology(this.ubicFisica);
-                File directorio = new File(project.getCarpetaProyectoTextField());
-                boolean result = directorio.mkdir(); 
-                if(result==true){
-                    MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
-                    MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
-                    newProy.setProyectoCreado(true); 
-                    newProy.setVisible(false);
+                if(res==true){
+                    CollectionTest.getInstance().setNamespace(this.namespace);
+                    CollectionTest.getInstance().setOntology(this.ubicFisica);
+                    File directorio = new File(project.getCarpetaProyectoTextField());
+                    boolean result = directorio.mkdir(); 
+                    if(result==true){
+                        MainApplicationJFrame.getInstance().setCarpetaProyecto(project.getCarpetaProyectoTextField());
+                        MainApplicationJFrame.getInstance().setNombreProyecto(nombreProy);
+                        newProy.setProyectoCreado(true); 
+                        newProy.setVisible(false);
+                    }else{
+                        panelAviso.errorAction("No se puedo crear un directorio para el proyecto", newProy);
+                        newProy.getProgres().setVisible(false);
+                    }
                 }else{
-                    panelAviso.errorAction("No se puedo crear un directorio para el proyecto", newProy);
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"La ontología introducida no se pudo cargar","Error Message",JOptionPane.ERROR_MESSAGE);
+                    newProy.getProgres().setVisible(false);
                 }
             }
         }

@@ -9,9 +9,11 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -23,9 +25,9 @@ public class NewProjectJDialog extends javax.swing.JDialog {
     private OntologyNameSituJPanel ontology = new OntologyNameSituJPanel();
     private String nombreProy="", ubicProy="", ubicOnto="", namespaceOnto="";
     private Reasoner jenaInterface;
-    private InterfaceReasoner jena;
     private boolean proyectoCreado=false;
     private AniadirPanelDeAviso panelAviso;
+    private ProgressControlJDialog progres;
     
     /** Creates new form NewProjectJDialog */
     public NewProjectJDialog(java.awt.Frame parent, boolean modal) {
@@ -168,7 +170,7 @@ private void sigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarButtonActionPerformed
 // TODO add your handling code here:
     jenaInterface = new Reasoner();
-    jena = jenaInterface.getReasoner();
+    jenaInterface.getReasoner();
     if(jenaInterface.isCargado()==true){ 
         ubicOnto = ontology.getUbicacionOnto();
         namespaceOnto = ontology.getNamespaceOntoTextField();
@@ -180,9 +182,14 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
             ontology.setUbicOnto(ubicOnto);
             ontology.setNsOnto(namespaceOnto);
-             try{
+             try{ 
                 LoadOntology loadOnto = new LoadOntology(ubicOnto,namespaceOnto,this,nombreProy,project);
+                setProgres(new ProgressControlJDialog(loadOnto));
+                JProgressBar progresBar = getProgres().getProgressBar();
+                loadOnto.addPropertyChangeListener(new ProgressListener(progresBar,getProgres(),false));
+                progresBar.setIndeterminate(true);
                 loadOnto.execute();
+                getProgres().setVisible(true); 
             }catch(ExceptionReadOntology ex){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
                 "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);
@@ -205,8 +212,15 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     public void setProyectoCreado(boolean proyectoCreado) {
         this.proyectoCreado = proyectoCreado;
     }
+    
+    public ProgressControlJDialog getProgres() {
+        return progres;
+    }
 
-
+    public void setProgres(ProgressControlJDialog progres) {
+        this.progres = progres;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton antButton;
     private javax.swing.JButton cancelarButton;

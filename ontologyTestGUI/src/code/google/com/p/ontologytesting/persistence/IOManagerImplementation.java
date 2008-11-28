@@ -64,9 +64,7 @@ public class IOManagerImplementation implements IOManager{
             e.close();
             return true;
         }else{
-            System.out.println(carpetaProy +"    "+nombreProy+"   "+fichero);
             if(IOManagerImplementation.esNuevo==true){
-                System.out.println("ENtro");
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy+".xml")));
             }else{
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));

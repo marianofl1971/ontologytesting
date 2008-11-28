@@ -7,7 +7,9 @@
 package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame.IOSwingWorker;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
 import javax.swing.WindowConstants;
 
 /**
@@ -17,12 +19,40 @@ import javax.swing.WindowConstants;
 public class ProgressControlJDialog extends javax.swing.JDialog {
 
     private ExecuteTest execTest;
+    private LoadOntology loadOnto;
+    private IOSwingWorker sw;
+    private boolean execSelec=false,load=false,save=false;
     
     /** Creates new form ProgressControlJDialog */
     public ProgressControlJDialog(ExecuteTest execTest) {
+        initComponents();
         this.setModal(true);
         this.execTest=execTest;
+        this.execSelec=true;
+        texto.setText("Ejecutando los tests...");
+        this.setTitle("Ejecutando");
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
+    
+    public ProgressControlJDialog(LoadOntology loadOnto) {
         initComponents();
+        this.setModal(true);
+        this.loadOnto=loadOnto;
+        this.load=true;
+        this.setTitle("Cargando");
+        texto.setText("Cargando proyecto...");
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
+    
+    public ProgressControlJDialog(IOSwingWorker sw) {
+        initComponents();
+        this.setModal(true);
+        this.sw=sw;
+        this.save=true;
+        this.setTitle("Guardando");
+        texto.setText("Guardando el proyecto...");
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -37,18 +67,16 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         progressBar = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
+        texto = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ejecutando");
+        setTitle("");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-
-        jLabel1.setText("Ejecutando los tests...");
 
         cancelButton.setText("Cancelar");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +94,7 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
@@ -77,12 +105,12 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(texto)
                 .addGap(18, 18, 18)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cancelButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,14 +120,26 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     this.dispose();//GEN-LAST:event_cancelButtonActionPerformed
     this.setVisible(false);
-    this.execTest.cancel(true); 
+    if(this.execSelec==true){
+        this.execTest.cancel(true); 
+    }else if(this.load==true){
+        this.loadOnto.cancel(true);
+    }else if(this.save==true){
+        this.sw.cancel(true);
+    }
 }
 
 private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 // TODO add your handling code here:
     this.dispose();//GEN-LAST:event_formWindowClosing
     this.setVisible(false);
-    this.execTest.cancel(true); 
+    if(this.execSelec==true){
+        this.execTest.cancel(true); 
+    }else if(this.load==true){
+        this.loadOnto.cancel(true);
+    }else if(this.save==true){
+        this.sw.cancel(true);
+    } 
 }
 
 public javax.swing.JProgressBar getProgressBar() {
@@ -112,8 +152,8 @@ public void setProgressBar(javax.swing.JProgressBar progressBar) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JLabel texto;
     // End of variables declaration//GEN-END:variables
 
 }
