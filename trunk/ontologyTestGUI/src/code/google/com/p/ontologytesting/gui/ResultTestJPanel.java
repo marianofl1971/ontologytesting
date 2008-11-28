@@ -46,6 +46,7 @@ public class ResultTestJPanel extends javax.swing.JPanel {
         getResultsTabbedPane().add(TreeResults.getTestSeleccionado(),panelResult);
         initTabComponent(getResultsTabbedPane().getTabCount()-1);
         panelResult.add(result);
+        getResultsTabbedPane().setSelectedIndex(getResultsTabbedPane().getTabCount()-1);
         getResultsTabbedPane().setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         panelResult.validate();    
     }

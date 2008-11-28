@@ -139,6 +139,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         tabbedTestsPanel.add("Ejecución: "+TreeResults.getTestSeleccionado(),panelResultAux);
         initTabComponent(tabbedTestsPanel.getTabCount()-1);
         panelResultAux.add(treeView);
+        tabbedTestsPanel.setSelectedIndex(tabbedTestsPanel.getTabCount()-1);
         tabbedTestsPanel.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         panelResultAux.validate();
     }
