@@ -16,24 +16,30 @@ import javax.swing.JProgressBar;
  */
 public class ProgressListener implements PropertyChangeListener {
         
-        public JProgressBar progressBar;
-        public ProgressControlJDialog execDialog;
+        private JProgressBar progressBar;
+        private ProgressControlJDialog execDialog;
+        private boolean mostrarProgreso;
         
         public ProgressListener() {}
         
-        public ProgressListener(JProgressBar progressBar, ProgressControlJDialog execDialog) {
+        public ProgressListener(JProgressBar progressBar, ProgressControlJDialog execDialog, boolean mostrarProgreso) {
             this.progressBar = progressBar;
             this.execDialog=execDialog;
-            this.progressBar.setValue(0);
+            this.mostrarProgreso=mostrarProgreso;
+            if(this.mostrarProgreso==true){
+                this.progressBar.setValue(0);
+            }
         }
         
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String strPropertyName = evt.getPropertyName();
-            this.progressBar.setStringPainted(true);
             if ("progress".equals(strPropertyName)) {
                 int progress = (Integer) evt.getNewValue();
-                progressBar.setValue(progress);
+                if(this.mostrarProgreso==true){
+                    this.progressBar.setStringPainted(true);
+                    progressBar.setValue(progress);
+                }
                 if(progress==100){
                     this.execDialog.setVisible(false);
                 }

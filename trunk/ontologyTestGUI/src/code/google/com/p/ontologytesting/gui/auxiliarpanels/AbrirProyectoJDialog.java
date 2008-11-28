@@ -9,12 +9,12 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import code.google.com.p.ontologytesting.persistence.*;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
 /**
@@ -26,7 +26,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
     private IOManagerImplementation persist = new IOManagerImplementation();
     private boolean proyectoCargado = false;
     private FileChooserSelector utils;
-    private OpcionesMenu opMenu;
+    private ProgressControlJDialog progres;
     private Reasoner jena = new Reasoner();
     
     /** Creates new form AbrirProyectoJDialog */
@@ -154,8 +154,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
 
 private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
 // TODO add your handling code here:
-    opMenu = new OpcionesMenu();
-    InterfaceReasoner j = jena.getReasoner();
+    jena.getReasoner();
     if(this.getUbicacionFisica().equals("") || this.getNamespaceText().equals("")){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Todos los campos son obligatorios",                                                  
             "Warning Message",JOptionPane.WARNING_MESSAGE); 
@@ -167,7 +166,12 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                 boolean res = persist.loadProject(this.getUbicacionFisica(), this.getNamespaceText());
                 if(res==true){
                     LoadOntology loadOnto = new LoadOntology(this.getUbicacionFisica(),this);
+                    setProgres(new ProgressControlJDialog(loadOnto));
+                    JProgressBar progresBar = getProgres().getProgressBar();
+                    loadOnto.addPropertyChangeListener(new ProgressListener(progresBar,getProgres(),false));
+                    progresBar.setIndeterminate(true);
                     loadOnto.execute();
+                    getProgres().setVisible(true); 
                 }
             }
         }catch (ExceptionReadOntology ex){
@@ -215,6 +219,14 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public void setProyectoCargado(boolean proyectoCargado) {
         this.proyectoCargado = proyectoCargado;
+    }
+    
+    public ProgressControlJDialog getProgres() {
+        return progres;
+    }
+
+    public void setProgres(ProgressControlJDialog progres) {
+        this.progres = progres;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
