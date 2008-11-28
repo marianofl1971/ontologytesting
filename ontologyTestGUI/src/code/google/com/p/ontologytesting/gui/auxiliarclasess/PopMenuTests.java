@@ -39,9 +39,13 @@ public class PopMenuTests implements ActionListener{
             menu.editarTest(scenario);
             controlador.prepararTest(scenario.getTipoTest().name());
         }else if(source.getText().equals("Eliminar Instancias")){
-            if(scenario.eliminarInstancias()==true){
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Instancias Eliminadas",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "¿Realmente desea eliminar las instancias del test?", 
+                "Eliminar Instancias Asociadas",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.YES_OPTION){
+                if(scenario.eliminarInstancias()==true){
+                    JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Instancias Eliminadas",                                                  
+                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }else if(source.getText().equals("Ejecutar")){
             try{

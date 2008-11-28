@@ -22,11 +22,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 public class TreeResults extends JPanel {
     
@@ -41,6 +44,7 @@ public class TreeResults extends JPanel {
     private ImageIcon iconOk = new ImageIcon("./src/code/google/com/p/ontologytesting/images/flag_green.gif");
     private ImageIcon iconFailTree = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_delete.png");
     private ImageIcon iconOkTree = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_check.png");
+    int contador=0;
     
     public TreeResults(){
     }
@@ -139,6 +143,7 @@ public class TreeResults extends JPanel {
              }
          });
 
+        this.expandAll(tree, true);
         setTestSeleccionado(testName);
         if(aux==0){
             editor = displaySimpleTest(testName, testResult);
@@ -151,6 +156,28 @@ public class TreeResults extends JPanel {
         listT.aniadirTreeResult(treeView);
         listAndRes.mostrarResultado(resultsView);
     }
+    
+    public void expandAll(JTree tree, boolean expand) {
+        TreeNode root = (TreeNode)tree.getModel().getRoot();
+        expandAll(tree, new TreePath(root), expand);
+    }
+    
+    private void expandAll(JTree tree, TreePath parent, boolean expand) {
+        TreeNode node = (TreeNode)parent.getLastPathComponent();
+        if (node.getChildCount() >= 0) {
+            for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode)e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAll(tree, path, expand);
+            }
+        }
+        if (expand) {
+            tree.expandPath(parent);
+        } else {
+            tree.collapsePath(parent);
+        }
+    }
+
     
     /** Returns an ImageIcon, or null if the path was invalid. */
     protected static ImageIcon createImageIcon(String path) {
@@ -280,6 +307,7 @@ public class TreeResults extends JPanel {
                 if(var_inst==0){
                     var_inst=1;
                     inst = new DefaultMutableTreeNode("Tests de Instanciación");
+                    contador++;
                     top.add(inst);
                     inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     inst.add(inst_hijo);
@@ -301,6 +329,7 @@ public class TreeResults extends JPanel {
                 if(var_ret==0){
                     var_ret=1;
                     ret = new DefaultMutableTreeNode("Tests de Recuperación");
+                    contador++;
                     top.add(ret);
                     ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     ret.add(ret_hijo);
@@ -320,6 +349,7 @@ public class TreeResults extends JPanel {
                 if(var_real==0){
                     var_real=1;
                     real = new DefaultMutableTreeNode("Tests de Realización");
+                    contador++;
                     top.add(real);
                     real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     real.add(real_hijo);
@@ -339,6 +369,7 @@ public class TreeResults extends JPanel {
                 if(var_clas==0){
                     var_clas=1;
                     clas = new DefaultMutableTreeNode("Tests de Clasificación");
+                    contador++;
                     top.add(clas);
                     clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     clas.add(clas_hijo);
@@ -358,6 +389,7 @@ public class TreeResults extends JPanel {
                 if(var_sat==0){
                     var_sat=1;
                     sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
+                    contador++;
                     top.add(sat);
                     sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                     sat.add(sat_hijo);
@@ -382,6 +414,7 @@ public class TreeResults extends JPanel {
                 if(var_inst==0){
                     var_inst=1;
                     inst = new DefaultMutableTreeNode("Tests de Instanciación");
+                    contador++;
                     top.add(inst);
                     inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                     inst.add(inst_hijo);
@@ -402,6 +435,7 @@ public class TreeResults extends JPanel {
                 if(var_ret==0){
                     var_ret=1;
                     ret = new DefaultMutableTreeNode("Tests de Recuperación");
+                    contador++;
                     top.add(ret);
                     ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                     ret.add(ret_hijo);
@@ -420,6 +454,7 @@ public class TreeResults extends JPanel {
                 if(var_real==0){
                     var_real=1;
                     real = new DefaultMutableTreeNode("Tests de Realización");
+                    contador++;
                     top.add(real);
                     real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                     real.add(real_hijo);
@@ -438,6 +473,7 @@ public class TreeResults extends JPanel {
                 if(var_clas==0){
                     var_clas=1;
                     clas = new DefaultMutableTreeNode("Tests de Clasificación");
+                    contador++;
                     top.add(clas);
                     clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                     clas.add(clas_hijo);
@@ -456,6 +492,7 @@ public class TreeResults extends JPanel {
                 if(var_sat==0){
                     var_sat=1;
                     sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
+                    contador++;
                     top.add(sat);
                     sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                     sat.add(sat_hijo);
@@ -481,6 +518,7 @@ public class TreeResults extends JPanel {
             if(var_sparql==0){
                 var_sparql=1;
                 sparql = new DefaultMutableTreeNode("Tests SPARQL");
+                contador++;
                 top.add(sparql);
                 sparql_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
                 sparql.add(sparql_hijo);
@@ -506,6 +544,7 @@ public class TreeResults extends JPanel {
             if(var_sparql==0){
                 var_sparql=1;
                 sparql = new DefaultMutableTreeNode("Tests SPARQL");
+                contador++;
                 top.add(sparql);
                 sparql_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
                 sparql.add(sparql_hijo);
