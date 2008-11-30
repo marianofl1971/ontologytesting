@@ -23,7 +23,10 @@ import java.beans.XMLDecoder;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -787,7 +790,8 @@ public void inicializarContadores(){
                 } catch (Exception ignore) {
                 }
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
-                main.setIconImage (new ImageIcon("./src/code/google/com/p/ontologytesting/images/ontologyBB.jpg").getImage());
+                URL image = this.getClass().getResource("ontologyBB.jpg"); 
+                main.setIconImage (new ImageIcon(image).getImage());
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);
             }
