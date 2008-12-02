@@ -42,11 +42,11 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     
     private ListarTestsJPanel() {
         initComponents();
+        popTest = new PopMenuTests();
+        popInst = new PopMenuInstances();    
         testSimplesList.setSelectedIndex(0);
         testSparqlList.setSelectedIndex(0);
         instanciasList.setSelectedIndex(0);
-        popTest = new PopMenuTests();
-        popInst = new PopMenuInstances();    
     }
  
     private synchronized static void createListAndResultPanel() {
@@ -343,6 +343,9 @@ private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 
 private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
 // TODO add your handling code here:
+    if(modeloSimples.size()>=0){
+        testSimplesList.setSelectedIndex(0);
+    }
     JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
@@ -354,6 +357,9 @@ private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 
 private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSparqlListMouseClicked
 // TODO add your handling code here:
+    if(modeloSparql.size()>=0){
+        testSparqlList.setSelectedIndex(0);
+    }
     JList lista = (JList) evt.getSource();
     ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
     if(evt.getClickCount()==2){
@@ -364,6 +370,9 @@ private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
 // TODO add your handling code here:
+    if(modeloInstancias.size()>=0){
+        instanciasList.setSelectedIndex(0);
+    }
     JList lista = (JList) evt.getSource();
     if(lista.getSize()!=null){
         Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());

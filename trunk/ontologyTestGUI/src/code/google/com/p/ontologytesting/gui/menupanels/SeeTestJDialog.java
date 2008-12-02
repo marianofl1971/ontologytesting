@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.model.*;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         String print = verTest(scenario);
         testDescriptionPane.setText(print);
         testDescriptionPane.setEditable(false);
+        scrollPane.getVerticalScrollBar().setValue(0);
     }
     
     public SeeTestJDialog(JFrame parent, boolean modal, Instancias instancias) {
@@ -56,9 +58,13 @@ public class SeeTestJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        scrollPane.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane.setAlignmentX(0.0F);
         scrollPane.setAlignmentY(0.0F);
+        scrollPane.setAutoscrolls(true);
         scrollPane.setHorizontalScrollBar(null);
+
+        testDescriptionPane.setContentType("text/html");
         scrollPane.setViewportView(testDescriptionPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
