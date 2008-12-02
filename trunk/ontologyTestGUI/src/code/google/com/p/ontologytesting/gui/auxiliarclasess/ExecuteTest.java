@@ -5,11 +5,13 @@
 
 package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.exectests.*;
 import code.google.com.p.ontologytesting.model.*;
 import java.awt.Toolkit;
 import javax.swing.SwingWorker;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,6 +83,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
                 ignore.printStackTrace();
             }
             new TreeResults(treeResult,getName()); 
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Acción Realizada","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

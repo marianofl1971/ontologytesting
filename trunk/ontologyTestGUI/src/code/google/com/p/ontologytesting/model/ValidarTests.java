@@ -13,7 +13,7 @@ package code.google.com.p.ontologytesting.model;
 public class ValidarTests {
     
     public boolean validarQuery(String query){
-        String regexp1 = "([\\w]+){1}";
+        String regexp1 = "([\\w|-|_]+){1}";
         
         if(!query.trim().matches(regexp1)){
             return false;
@@ -23,7 +23,7 @@ public class ValidarTests {
     }
     
     public boolean validarResultado(String res){
-        String regexp1 = "[\\w|,|.|\\s]+";
+        String regexp1 = "[\\w|,|.|\\s|-|_]+";
         
         if(!res.matches(regexp1)){
             return false;
@@ -42,8 +42,8 @@ public class ValidarTests {
     }
     
     public boolean validarQueryInstSatis(String query){
-        String regexp1 = "([\\w]+[\\s|,|.]{1}[\\w]+){1}";
-        String regexp2 = "([\\w]+[(]{1}[\\w]+[)]{1}){1}";
+        String regexp1 = "([\\w|-|_]+[\\s|,|.]{1}[\\w|_|-]+){1}";
+        String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
         
         if(!query.matches(regexp2) && !query.matches(regexp1)){
             return false;
@@ -53,8 +53,8 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaClase(String query){
-        String regexp1 = "[\\w]+[,|.]{1}[\\w]+";
-        String regexp2 = "([\\w]+[(]{1}[\\w]+[)]{1}){1}";
+        String regexp1 = "[\\w|_|-]+[,|.]{1}[\\w|_|-]+";
+        String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
         
             if(!query.trim().matches(regexp2) && !query.trim().matches(regexp1)){
                 return false;
@@ -64,7 +64,7 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaPropiedad(String query){
-        String regexp1 = "([\\w]+[(]{1}[\\w]+[,|.]{1}[\\w]+[)]{1}){1}";
+        String regexp1 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[,|.]{1}[\\w|_|-]+[)]{1}){1}";
         
         if(!query.trim().matches(regexp1)){
             return false;
@@ -74,7 +74,7 @@ public class ValidarTests {
     }
     
     public boolean validarSparqlResult(String query){
-        String patron = ("[\\;|\\n|\\t|\\v|\\s]");
+        String patron = ("[\\;|\\n|\\t|\\v|\\s|_|-]");
         String[] res = query.split(patron);
         for(int i=0;i<res.length;i++){
             if(validarQuerySparql(res[i])==false){
@@ -85,7 +85,7 @@ public class ValidarTests {
     }
     
     public boolean validarQuerySparql(String query){
-        String regexp1 = "[\\w]+[(]{1}([[\\w]+[,.]])+[)]{1}[;]?";
+        String regexp1 = "[\\w|_|-]+[(]{1}([[\\w|_|-]+[,.]])+[)]{1}[;]?";
         
         if(!query.matches(regexp1)){
             return false;

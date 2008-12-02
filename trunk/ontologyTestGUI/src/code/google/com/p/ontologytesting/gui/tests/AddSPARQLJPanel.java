@@ -12,12 +12,15 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 
 /**
  *
@@ -37,6 +40,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
+    private ProgressControlJDialog progres;
     
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
@@ -541,20 +545,21 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     }
     if(ejecutar==true){
         try{
-            ExecuteTest execTest = new ExecuteTest(this.getScenario());
+            ExecuteTest execTest = new ExecuteTest(getScenario());
+            progres = new ProgressControlJDialog(execTest);
+            JProgressBar progresBar = progres.getProgressBar();
+            execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
+            progresBar.setIndeterminate(true);
             execTest.execute();
+            progres.setVisible(true);
         }catch (ExceptionReadOntology ex){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }
-    if(guardar==true && ejecutar==true){
-        panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
-    }else if(guardar==true){
+    if(guardar==true && ejecutar==false){
         if(addInst==false){
             panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
         }
-    }else{
-        panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
 }

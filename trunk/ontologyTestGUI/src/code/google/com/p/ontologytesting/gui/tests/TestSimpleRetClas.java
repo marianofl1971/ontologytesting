@@ -18,6 +18,8 @@ import java.util.ListIterator;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 
 /**
  *
@@ -45,6 +47,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private QueryOntology testQuery;
     private AniadirPanelDeAviso panelAviso;
     private ScenarioTest scenarioActual = new ScenarioTest();
+    private ProgressControlJDialog progres;
     
     public TestSimpleRetClas(ScenarioTest s){
         initComponents();
@@ -346,20 +349,21 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     }
     if(ejecutar==true){
         try{
-            ExecuteTest execTest = new ExecuteTest(this.getScenario());
+            ExecuteTest execTest = new ExecuteTest(getScenario());
+            progres = new ProgressControlJDialog(execTest);
+            JProgressBar progresBar = progres.getProgressBar();
+            execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
+            progresBar.setIndeterminate(true);
             execTest.execute();
+            progres.setVisible(true);
         }catch (ExceptionReadOntology ex){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }
-    if(guardar==true && ejecutar==true){
-        panelAviso.confirmAction("Test Guardado y Ejecutado", MainApplicationJFrame.getInstance());
-    }else if(guardar==true){
+    if(guardar==true && ejecutar==false){
         if(addInst==false){
             panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
         }
-    }else{
-        panelAviso.confirmAction("Test Ejecutado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
