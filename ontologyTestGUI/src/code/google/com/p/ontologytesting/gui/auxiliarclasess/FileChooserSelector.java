@@ -20,7 +20,6 @@ import javax.swing.JFileChooser;
 public class FileChooserSelector {
 
     private JFileChooser filechooser;
-    private File fileSelected;
     private String linea,nsDefecto;
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
@@ -50,11 +49,13 @@ public class FileChooserSelector {
                 }
                 try {
                     while ((linea = bf.readLine()) != null && var==0) {
-                            if(linea.contains("xmlns=")) {
+                            if(linea.contains("xmlns=\"")) {
                                 int indexBegin = linea.indexOf("xmlns=\"");
                                 int indexEnd = linea.indexOf("#", indexBegin);
                                 setNsDefecto(linea.substring(indexBegin+7, indexEnd).concat("#"));
                                 var = 1;
+                            }else{
+                                setNsDefecto("http://nombreDeSuOntologia.org/nombreOntologia.owl");
                             }
                     }
                 } catch (IOException ex) {   
