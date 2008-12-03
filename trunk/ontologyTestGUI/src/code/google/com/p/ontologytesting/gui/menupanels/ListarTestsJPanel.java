@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.ResultTestJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
@@ -147,6 +148,23 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     
     private void initTabComponent(int i) {
         tabbedTestsPanel.setTabComponentAt(i,new ButtonTabComponent(tabbedTestsPanel,false,true));
+    }
+    
+    public void eliminarDatosGuardados(){
+        modeloSimples = new DefaultListModel();
+        testSimplesList.setModel(modeloSimples);
+        simplesPanel.validate();
+        modeloSparql = new DefaultListModel();
+        testSparqlList.setModel(modeloSparql);
+        sparqlPanel.validate();
+        modeloInstancias = new DefaultListModel();
+        instanciasList.setModel(modeloInstancias);
+        instanciasPanel.validate();
+        int tabCount = tabbedTestsPanel.getTabCount();
+        for(int i=tabCount-1; i>2; i--){
+            tabbedTestsPanel.remove(i);
+            ResultTestJPanel.getInstance().eliminarResultados(i-3);  
+        }
     }
     
     /** This method is called from within the constructor to

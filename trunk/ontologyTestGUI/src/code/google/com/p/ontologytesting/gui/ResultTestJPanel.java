@@ -55,6 +55,11 @@ public class ResultTestJPanel extends javax.swing.JPanel {
         getResultsTabbedPane().setTabComponentAt(i,new ButtonTabComponent(getResultsTabbedPane(),true,false));
     }
     
+    public void eliminarResultados(int i){
+        getResultsTabbedPane().remove(i);
+        getResultsTabbedPane().validate();
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

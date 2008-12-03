@@ -45,6 +45,11 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         contentTabbedPane.validate();    
     }
     
+    public void eliminarTests(){
+        contentTabbedPane.removeAll();
+        contentTabbedPane.validate();
+    }
+    
     private void initTabComponent(int i) {
         contentTabbedPane.setTabComponentAt(i,new ButtonTabComponent(contentTabbedPane,false,false));
     }
