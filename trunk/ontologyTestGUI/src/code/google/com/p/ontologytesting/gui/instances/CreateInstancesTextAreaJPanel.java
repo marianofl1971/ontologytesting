@@ -6,6 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui.instances;
 
+import java.awt.Color;
+
 /**
  *
  * @author  sara.garcia
@@ -32,14 +34,24 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
         jScrollPane17 = new javax.swing.JScrollPane();
         propiedadTextArea = new javax.swing.JTextArea();
 
-        jLabel1.setText("                      INSTANCIAS DE CLASE                                                                            INSTANCIAS DE PROPIEDAD  ");
+        jLabel1.setText("              INSTANCIAS DE CLASE                                              INSTANCIAS DE PROPIEDAD  ");
 
         claseTextArea.setColumns(20);
         claseTextArea.setRows(5);
+        claseTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                claseTextAreaMouseClicked(evt);
+            }
+        });
         jScrollPane16.setViewportView(claseTextArea);
 
         propiedadTextArea.setColumns(20);
         propiedadTextArea.setRows(5);
+        propiedadTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                propiedadTextAreaMouseClicked(evt);
+            }
+        });
         jScrollPane17.setViewportView(propiedadTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -49,11 +61,11 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -64,13 +76,26 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane17)
-                    .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane16, jScrollPane17});
+
     }// </editor-fold>//GEN-END:initComponents
+
+private void claseTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_claseTextAreaMouseClicked
+// TODO add your handling code here:
+    getClaseArea().setForeground(Color.BLACK);
+}//GEN-LAST:event_claseTextAreaMouseClicked
+
+private void propiedadTextAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propiedadTextAreaMouseClicked
+// TODO add your handling code here:
+    getPropiedadArea().setForeground(Color.BLACK);
+}//GEN-LAST:event_propiedadTextAreaMouseClicked
 
 public String getClaseTextArea() {
     return getClaseArea().getText();

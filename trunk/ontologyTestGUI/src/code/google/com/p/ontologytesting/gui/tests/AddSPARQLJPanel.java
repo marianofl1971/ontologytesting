@@ -73,6 +73,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         menu = new OpcionesMenu();
         setScenario(s);
         setPosListQuerysSel(0);
+        addInst=false;
     }
 
     /** This method is called from within the constructor to
@@ -151,6 +152,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
         sigQueryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/resultset_next.png"))); // NOI18N
         sigQueryButton.setToolTipText("Siguiente");
+        sigQueryButton.setEnabled(false);
         sigQueryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sigQueryButtonActionPerformed(evt);
@@ -159,6 +161,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
         antQueryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/resultset_previous.png"))); // NOI18N
         antQueryButton.setToolTipText("Anterior");
+        antQueryButton.setEnabled(false);
         antQueryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 antQueryButtonActionPerformed(evt);
@@ -173,7 +176,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        borrarConsultaJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
+        borrarConsultaJButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/user-trash.png"))); // NOI18N
         borrarConsultaJButton.setToolTipText("Borrar");
         borrarConsultaJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

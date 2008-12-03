@@ -21,6 +21,11 @@ public class ClassInstances implements Serializable{
         this.comment=comment;
     }
     
+    public ClassInstances(ClassInstances clasInstan){
+        this.classInstance=clasInstan.getClassInstance();
+        this.comment=clasInstan.getComment();
+    }
+    
     public ClassInstances(){
         this("","");
     }

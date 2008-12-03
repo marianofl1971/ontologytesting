@@ -18,11 +18,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" pref="668" max="32767" attributes="1"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane16" linkSize="8" min="-2" pref="291" max="-2" attributes="0"/>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
-                      <Component id="jScrollPane17" linkSize="8" min="-2" pref="318" max="-2" attributes="0"/>
+                      <Component id="jScrollPane16" linkSize="12" min="-2" pref="229" max="-2" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <Component id="jScrollPane17" linkSize="12" min="-2" pref="255" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -34,12 +34,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="14" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane17" max="32767" attributes="1"/>
-                  <Component id="jScrollPane16" alignment="0" pref="223" max="32767" attributes="1"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane16" linkSize="10" pref="264" max="32767" attributes="1"/>
+                  <Component id="jScrollPane17" linkSize="10" min="-2" pref="264" max="-2" attributes="1"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,7 +47,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="                      INSTANCIAS DE CLASE                                                                            INSTANCIAS DE PROPIEDAD  "/>
+        <Property name="text" type="java.lang.String" value="              INSTANCIAS DE CLASE                                              INSTANCIAS DE PROPIEDAD  "/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane16">
@@ -62,6 +62,9 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="claseTextAreaMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -77,6 +80,9 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="propiedadTextAreaMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

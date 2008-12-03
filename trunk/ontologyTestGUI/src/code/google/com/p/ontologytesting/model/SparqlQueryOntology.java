@@ -22,6 +22,11 @@ public class SparqlQueryOntology implements Serializable{
         this.resultexpected = resultexpected;
     }
     
+    public SparqlQueryOntology(SparqlQueryOntology queryOnto){
+        this.query=queryOnto.getQuery();
+        this.resultexpected=queryOnto.getResultexpected();
+    }
+    
     public SparqlQueryOntology(){
         this("","");
     }

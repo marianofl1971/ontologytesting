@@ -47,7 +47,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private String conjuntoClase,conjuntoProp,patron;
     private String[] clas,prop;
     private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
-            instanciaValida=true,queryValida=true,fromTest=false,guardarAsociar=false;
+            instanciaValida=true,queryValida=true,fromTest=false,continuar=true;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private ScenarioTest scenario = new ScenarioTest();
     private OpcionesMenu menu;
@@ -57,10 +57,11 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     public AddInstancesClasPropJPanel(Instancias inst){
         initComponents();
         int contI=0,contP=0;
+        continuar=true;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BorderLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.WEST);
 
         CreateInstancesJPanel.setContadorClas(0);
         CreateInstancesJPanel.setContadorProp(0);
@@ -111,14 +112,14 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     public AddInstancesClasPropJPanel(ScenarioTest scenario){
         initComponents();
         int contI=0,contP=0;
-
+        continuar=true;
         guardarButton.setEnabled(false);
         guardarButton.setVisible(false);
         setFromTest(true);
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
         clasPropPanel.setLayout(new BorderLayout());
-        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.CENTER);
+        clasPropPanel.add(new CreateInstancesTextAreaJPanel(),BorderLayout.WEST);
 
         Instancias inst = scenario.getInstancias();
         CreateInstancesJPanel.setContadorClas(0);
@@ -163,7 +164,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             }
         }
         setScenario(scenario);
-        setInstancias(new Instancias(scenario.getInstancias()));
+        setInstancias(scenario.getInstancias());
         setEditado(true);  
     }
 
@@ -401,10 +402,17 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-    guardarAsociar=true;
     boolean result = prepararInstancias(true);
-    soloAsociar(result);
-    soloGuardar(result);
+    if(continuar==true){
+        boolean asoc = soloAsociar(result);
+        if(asoc == true){
+            JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"Acción no realizada",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
 
 private void limpiarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarInstButtonActionPerformed
@@ -510,23 +518,36 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
     boolean res = this.prepararInstancias(false);
-    soloAsociar(res);
+    if(continuar==true){
+        boolean resAsoc = soloAsociar(res);
+        if(isFromTest()==true){
+            if(resAsoc==true){
+                JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
+                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Instancias No Asociadas",                                                  
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
 
 
-public void soloAsociar(boolean res){ 
+public boolean soloAsociar(boolean res){ 
     if(res==true){
         if(isFromTest()==false){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
+            return true;
         }else{
             getScenario().setInstancias(getInstancias());
             persist.replaceScenarioLocally(getScenario());
-            JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            return true;
         }
+    }else{
+        return false;
     }
 }
 
@@ -534,13 +555,14 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 // TODO add your handling code here:
 //GEN-LAST:event_guardarButtonActionPerformed
     boolean result = prepararInstancias(true);
-    soloGuardar(result);
-}
-
-public void soloGuardar(boolean result){
-    if(result==true){
-        JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Instancias guardadas", 
-        "Confirm Message", JOptionPane.INFORMATION_MESSAGE);
+    if(continuar==true){
+        if(result==true){
+            JOptionPane.showMessageDialog(this,"Instancias Guardadas",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"Instancias No Guardadas",                                                  
+                "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
 
@@ -596,26 +618,33 @@ public boolean prepararInstancias(boolean guardar){
                                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (n == JOptionPane.YES_OPTION){
                             persist.replaceInstanciasLocally(new Instancias(getInstancias()));
-                        }
+                        }else continuar=false;
                     }
                 }else{
-                    persist.saveInstanciasInMemory(getInstancias());
+                    if(isFromTest()==true){
+                        persist.saveInstanciasInMemory(new Instancias(getInstancias()));
+                    }else{
+                        persist.saveInstanciasInMemory(getInstancias());
+                    }
                 }
                 menu.actualizarListaDeInstancias();
-                setInstanciasActuales(new Instancias(instancias));
+                setInstanciasActuales(new Instancias(getInstancias()));
             }
             return true;
         } else if (instanciaSinNombre == true) {
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "El nombre para el conjunto de instancias" 
                     + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            continuar=false;
         } else if (instanciaValida == false) {
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Las instancias marcadas" + 
                     "en rojo no se corresponden con la definicion de su ontologia. " 
                     + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            continuar=false;
         } else if (queryValida == false) {
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "El formato de las instancias marcadas" 
                     + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
                     + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            continuar=false;
             if (getInstancesTabbedPane() != 2) {
                 CreateInstancesJPanel panelInst = null;
                 for (int j = 0; j < failClas.size(); j++) {
