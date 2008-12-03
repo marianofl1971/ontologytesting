@@ -42,6 +42,13 @@ public class CollectionTest implements Serializable{
         return collection;
     }
     
+    public void destroy(){
+        this.scenariotest = new ArrayList<ScenarioTest>();
+        this.ontology = "";
+        this.namespace = "";
+        this.instancias= new ArrayList<Instancias>();
+    }
+    
     public ArrayList<ScenarioTest> getScenariotest() {
         return scenariotest;
     }

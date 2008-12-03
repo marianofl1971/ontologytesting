@@ -45,7 +45,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private String carpetaProyecto,nombreProyecto;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
-    private boolean proyectoGuardado=false;
+    private boolean proyectoGuardado=false,existeProyecto=false;
     private AniadirPanelDeAviso panelAviso;
     private FileChooserSelector utils;
     private XMLDecoder decoder;
@@ -67,6 +67,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         controlador = ControladorTests.getInstance();
         panelTest = ListAndResultsJPanel.getInstance();
         contentTestsJPanel.setLayout(new BorderLayout());
+        existeProyecto=false;
     }
  
     private synchronized static void createListAndTestPanel() {
@@ -406,9 +407,19 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         testsMenu.setEnabled(true);
         ejecutarMenu.setEnabled(true);
         salirMenuItem.setEnabled(true);
-        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-        IOManagerImplementation.setEsNuevo(true);
-        this.validate();
+        if(existeProyecto==false){
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            IOManagerImplementation.setEsNuevo(true);
+            existeProyecto=true;
+            this.validate();
+        }else{
+            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+            ListAndTestsJPanel.getInstance().eliminarTests();
+            CollectionTest.getInstance().destroy();
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            IOManagerImplementation.setEsNuevo(true);
+            this.validate();
+        }
     }
 }
 
@@ -546,6 +557,14 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         if(res == true){
             this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
             this.setNombreProyecto(nombreProyecto);
+            if(existeProyecto==true){
+                ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+                ListAndTestsJPanel.getInstance().eliminarTests();
+                CollectionTest.getInstance().destroy();
+                contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+                IOManagerImplementation.setEsNuevo(true);
+                this.validate();   
+            }
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
             collection = (CollectionTest) decoder.readObject();
             persist.prepareProject(collection);
@@ -562,11 +581,14 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 testsMenu.setEnabled(true);
                 ejecutarMenu.setEnabled(true);
                 salirMenuItem.setEnabled(true);
-                contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-                ControladorTests.getInstance().inicializarGuardados();
-                ControladorTests.getInstance().inicializarSeleccionados();
-                IOManagerImplementation.setEsNuevo(false);
-                this.validate();
+                if(existeProyecto==false){
+                    contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+                    ControladorTests.getInstance().inicializarGuardados();
+                    ControladorTests.getInstance().inicializarSeleccionados();
+                    IOManagerImplementation.setEsNuevo(false);
+                    existeProyecto=true;
+                    this.validate();
+                }
             }
         }
     } catch (FileNotFoundException ex) {
