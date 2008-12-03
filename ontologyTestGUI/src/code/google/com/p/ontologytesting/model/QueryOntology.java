@@ -24,6 +24,12 @@ public class QueryOntology extends SparqlQueryOntology implements Serializable {
         this.resultexpected=resultexpected;
         this.comment=comment;
     }
+    
+    public QueryOntology(QueryOntology queryOnto){
+        this.query=queryOnto.getQuery();
+        this.resultexpected=queryOnto.getResultexpected();
+        this.comment=queryOnto.getComment();
+    }
 
     public QueryOntology(){
         this("","","");

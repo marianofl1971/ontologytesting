@@ -125,7 +125,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        labelInstLabel.setText("                      CONSULTAS                               RESULTADO ESPERADO");
+        labelInstLabel.setText("                            CONSULTAS                                        RESULTADO ESPERADO");
 
         javax.swing.GroupLayout labelInstPanelLayout = new javax.swing.GroupLayout(labelInstPanel);
         labelInstPanel.setLayout(labelInstPanelLayout);
@@ -151,7 +151,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         instAyudaPanelLayout.setVerticalGroup(
             instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +169,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             opcionAyudaInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionAyudaInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionAyudaInstPanelLayout.setVerticalGroup(
@@ -186,7 +186,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
         opcionTextInstPanelLayout.setHorizontalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 613, Short.MAX_VALUE)
         );
         opcionTextInstPanelLayout.setVerticalGroup(
             opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +234,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         contentGuardarEjecutarPanelLayout.setHorizontalGroup(
             contentGuardarEjecutarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentGuardarEjecutarPanelLayout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addComponent(guardarButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ejecutarButton)
@@ -459,7 +459,6 @@ public boolean preguntarSiContinuarSinInstancias(){
 public void copiarTestAScenarioDesdeSinAyuda(){
       
     inicializarVariables();
-    
     String conjuntoQuerys;
     String conjuntoResult;
     String conjuntoComent;
@@ -613,7 +612,6 @@ public void copiarDeAyudaATexto(){
 public void copiarDeTextoAAyuda(){
 
     test = null;
-
     panelAyudaInst = this.getInstAyudaPanel();
     totalInst = panelAyudaInst.getComponentCount();
 

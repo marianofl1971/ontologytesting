@@ -21,6 +21,11 @@ public class PropertyInstances implements Serializable{
         this.comment=comment;
     }
     
+    public PropertyInstances(PropertyInstances propInstan){
+        this.propertyInstance=propInstan.getPropertyInstance();
+        this.comment=propInstan.getComment();
+    }
+    
     public PropertyInstances(){
         this("","");
     }

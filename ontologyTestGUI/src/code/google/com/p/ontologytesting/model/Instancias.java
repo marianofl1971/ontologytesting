@@ -31,8 +31,16 @@ public class Instancias implements Serializable{
     public Instancias(Instancias instancias){
         this.nombre=instancias.getNombre();
         this.descripcion=instancias.getDescripcion();
-        this.classInstances = instancias.getClassInstances();
-        this.propertyInstances = instancias.getPropertyInstances();
+        if(instancias.getClassInstances().size()>0){
+            for(int i=0; i<instancias.getClassInstances().size();i++){
+                this.classInstances.add(new ClassInstances(instancias.getClassInstances().get(i)));
+            }
+        }
+        if(instancias.getPropertyInstances().size()>0){
+            for(int i=0; i<instancias.getPropertyInstances().size();i++){
+                this.propertyInstances.add(new PropertyInstances(instancias.getPropertyInstances().get(i)));
+            }
+        }
     }
     
     public ArrayList<ClassInstances> getClassInstances() {

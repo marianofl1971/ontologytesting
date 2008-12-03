@@ -51,11 +51,19 @@ public class ScenarioTest implements Serializable{
     }
     
     public ScenarioTest(ScenarioTest nuevo){
-        this.setDescripcion(nuevo.getDescripcion());
-        this.setNombre(nuevo.getNombre());
-        this.setInstancias(nuevo.getInstancias());
-        this.setQueryTest(nuevo.getQueryTest());
-        this.setSparqlQuerys(nuevo.getSparqlQuerys());
+        this.descripcion=nuevo.getDescripcion();
+        this.nombre =nuevo.getNombre();
+        this.instancias=nuevo.getInstancias();
+        if(nuevo.getQueryTest().size()>0){
+            for(int i=0; i<nuevo.getQueryTest().size();i++){
+                this.queryTest.add(new QueryOntology(nuevo.getQueryTest().get(i)));
+            }
+        }
+        if(nuevo.getSparqlQuerys().size()>0){
+            for(int i=0; i<nuevo.getSparqlQuerys().size();i++){
+                this.sparqlQuerys.add(new SparqlQueryOntology(nuevo.getSparqlQuerys().get(i)));
+            }
+        }
         this.setTipoTest(nuevo.getTipoTest());
     }
     
