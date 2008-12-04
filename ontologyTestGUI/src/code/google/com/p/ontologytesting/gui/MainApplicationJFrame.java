@@ -396,6 +396,26 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
+    int aux=0;
+    if(existeProyecto==true){
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            this.guardarProyecto(false, null);
+            aux=1;
+        }else if(n == JOptionPane.NO_OPTION){
+            aux=1;
+        }
+        if(aux==1){
+            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+            ListAndTestsJPanel.getInstance().eliminarTests();
+            CollectionTest.getInstance().destroy();
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            IOManagerImplementation.setEsNuevo(true);
+            this.validate();
+        }
+    }
     NewProjectJDialog newProject = new NewProjectJDialog(this,true);
     newProject.setLocationRelativeTo(this);
     newProject.setVisible(true);
@@ -411,13 +431,6 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
             IOManagerImplementation.setEsNuevo(true);
             existeProyecto=true;
-            this.validate();
-        }else{
-            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
-            ListAndTestsJPanel.getInstance().eliminarTests();
-            CollectionTest.getInstance().destroy();
-            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            IOManagerImplementation.setEsNuevo(true);
             this.validate();
         }
     }
@@ -550,6 +563,26 @@ private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent e
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
 // TODO add your handling code here: 
+    int aux=0;
+    if(existeProyecto==true){
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            this.guardarProyecto(false, null);
+            aux=1;
+        }else if(n == JOptionPane.NO_OPTION){
+            aux=1;
+        }
+        if(aux==1){
+            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+            ListAndTestsJPanel.getInstance().eliminarTests();
+            CollectionTest.getInstance().destroy();
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            IOManagerImplementation.setEsNuevo(true);
+            this.validate();
+        }
+    }
     AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
     try {
         utils = new FileChooserSelector();
@@ -557,14 +590,6 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         if(res == true){
             this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
             this.setNombreProyecto(nombreProyecto);
-            if(existeProyecto==true){
-                ListarTestsJPanel.getInstance().eliminarDatosGuardados();
-                ListAndTestsJPanel.getInstance().eliminarTests();
-                CollectionTest.getInstance().destroy();
-                contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-                IOManagerImplementation.setEsNuevo(true);
-                this.validate();   
-            }
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
             collection = (CollectionTest) decoder.readObject();
             persist.prepareProject(collection);
