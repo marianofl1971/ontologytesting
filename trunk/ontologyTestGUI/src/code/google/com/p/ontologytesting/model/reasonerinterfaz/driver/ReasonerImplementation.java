@@ -90,25 +90,21 @@ public class ReasonerImplementation implements InterfaceReasoner{
 
     //Saber si un individuo pertenece a una clase
     @Override
-    public String instantiation(String ns, String className, String individualName) throws ExceptionReadOntology{
+    public String instantiation(String ns, String className, 
+            String individualName) throws ExceptionReadOntology{    
         
         OntClass ontClass = model.getOntClass(ns + className);
-
-        if(ontClass==null) 
-        {
-            return "La clase introducida no es una instancia para el modelo";
-        }
-      
+        if(ontClass==null) return "La clase introducida no es una instancia " +
+                "para el modelo";
         try{
-        Iterator it = ontClass.listInstances();       
-              
-        while(it.hasNext()){
-            String instanceName = it.next().toString();
-            instanceName = instanceName.substring(instanceName.indexOf("#")+1);
-            if(individualName.equals(instanceName)) {
-                return "true";
+            Iterator it = ontClass.listInstances();             
+            while(it.hasNext()){
+                String instanceName = it.next().toString();
+                instanceName = instanceName.substring(instanceName.indexOf("#")+1);
+                if(individualName.equals(instanceName)) {
+                    return "true";
+                }
             }
-        }
         }catch(InconsistentOntologyException in){
             throw new ExceptionReadOntology();
         }
@@ -122,11 +118,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
         
         ArrayList<String> rval = new ArrayList<String>();
         OntClass ontClass = model.getOntClass(ns + className);    
-        if(ontClass==null) 
-        {
-            rval = null;
-            return rval;
-        }
+        if(ontClass==null) return rval=null;
         try{
             Iterator it = ontClass.listInstances();
             while(it.hasNext())
@@ -147,11 +139,12 @@ public class ReasonerImplementation implements InterfaceReasoner{
     public String realization(String ns, String individualName){
          
         Individual individual = model.getIndividual(ns + individualName);
-        
-        if(individual==null) return "El individuo introducido no es una instancia para el modelo";
+        if(individual==null) return "El individuo introducido no es una instancia " +
+                "para el modelo";
         try{
             Resource resource = individual.getRDFType(true); 
-            String className = resource.toString().substring(resource.toString().indexOf("#")+1);
+            String className = resource.toString().substring
+                    (resource.toString().indexOf("#")+1);
             return className;
         }catch(InconsistentOntologyException in){
             throw new ExceptionReadOntology();
@@ -160,24 +153,21 @@ public class ReasonerImplementation implements InterfaceReasoner{
     
     //Saber si se puede añadir un concepto
     @Override
-    public String satisfactibility(String ns, String concepto, String clase) throws ExceptionReadOntology{
+    public String satisfactibility(String ns, String concepto, String clase) 
+            throws ExceptionReadOntology{
       
        OntClass ontClass = model.getOntClass(ns+clase);
-       if(ontClass==null){
-            return "La clase introducida no es una instancia para el modelo";
-       }
+       if(ontClass==null) return "La clase introducida no es una " +
+               "instancia para el modelo";
        try{
            Iterator it = ontClass.listDisjointWith();
            ArrayList<String> conjuntoDisj = new ArrayList<String>();
-
            while(it.hasNext()){
                 String disjunta = it.next().toString();
                 disjunta = disjunta.substring(disjunta.indexOf("#")+1);
                 conjuntoDisj.add(disjunta);
             }
-
            ArrayList<String> clasesConcepto = classification(ns,concepto);
-
            if(clasesConcepto==null){
                 return "true";
            }else{
@@ -196,17 +186,13 @@ public class ReasonerImplementation implements InterfaceReasoner{
     
     //Dado un individuo, deducir todas las clases a las que pertenece
     @Override
-    public ArrayList<String> classification(String ns, String individuo) throws ExceptionReadOntology{
+    public ArrayList<String> classification(String ns, String individuo) 
+            throws ExceptionReadOntology{
         
         Individual individual = model.getIndividual(ns + individuo);
         String pertenece;
         ArrayList<String> clases = new ArrayList<String>();
-        
-        if(individual==null){
-            clases = null;
-            return clases;
-        }
-
+        if(individual==null) return clases = null;
         Iterator it = model.listNamedClasses();
         Iterator itaux = model.listObjectProperties();
         ArrayList<String[]> arrayProp = new ArrayList<String[]>();
@@ -223,7 +209,6 @@ public class ReasonerImplementation implements InterfaceReasoner{
                 }
             }
             if(aux==0){
-                //instanceName[1].toString()
                 pertenece = instantiation(ns, instanceName[1], individuo);
                 if (pertenece.equals("true")) {
                     clases.add(instanceName[1]);
@@ -248,7 +233,6 @@ public class ReasonerImplementation implements InterfaceReasoner{
                 sel.add(consulta[i].substring(1));
             }
         }
-
         try{
         QueryExecution qexec = new PelletQueryExecution(query, model);
         ResultSet results = qexec.execSelect();
@@ -283,9 +267,8 @@ public class ReasonerImplementation implements InterfaceReasoner{
             throw new ExceptionReadOntology();
         }
         }catch (QueryParseException ex){
-            System.out.println("ERROR EN LA SPARQL");
+            throw new ExceptionReadOntology();
         }
-        return null;
     }
     
     @Override
