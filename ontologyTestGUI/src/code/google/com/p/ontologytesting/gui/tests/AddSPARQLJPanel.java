@@ -55,6 +55,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         resultTextArea.setWrapStyleWord(true);
         List<SparqlQueryOntology> lista = s.getSparqlQuerys();
         if(lista.size()>0){
+            this.sigQueryButton.setEnabled(true);
             for(int i=0; i<lista.size();i++){
                 listaDeConsultas.add(lista.get(i));
             }
@@ -469,8 +470,6 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
             antQueryButton.setEnabled(false);
         } 
     }
-    
-    
 }//GEN-LAST:event_borrarConsultaJButtonActionPerformed
 
 private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN FIRST:event_formatosPermitidosActionPerformed
@@ -488,9 +487,6 @@ private void testNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {/
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
     addInst=true;
-    if(persist.testYaGuardado(getScenario())==false){
-        guardarTest();
-    }
     menu.editarInstancias(this.getScenario());
 }//GEN-LAST:event_addInstanciasButtonActionPerformed
 
@@ -501,38 +497,52 @@ private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 public boolean guardarTest(){
     prepararGuardar();
-    if(continuar==true){
+    asociarInstancias(true,false);
+    /*if(continuar==true){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
             MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
-    }
+    }*/
     return continuar;
+}
+
+public void asociarInstancias(boolean a, boolean b){
+    if(continuar==true){
+        if(continuarSinInstancias==true){
+            this.realizarAccion(a, b);
+        }else{
+            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
+        }
+    }
 }
 
 private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
 // TODO add your handling code here:
     prepararGuardar();
+    asociarInstancias(true,true);
+    /*
     if(continuar==true){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
             MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
-    }
+    }*/
 }                                                      
 
 private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
     prepararGuardar();
-    if(continuar==true){
+    asociarInstancias(false,true);
+    /*if(continuar==true){
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
             MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
-    }
+    }*/
 }                                               
 
 public void realizarAccion(boolean guardar, boolean ejecutar){

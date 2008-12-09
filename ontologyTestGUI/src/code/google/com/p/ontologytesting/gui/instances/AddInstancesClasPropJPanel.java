@@ -52,6 +52,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private ScenarioTest scenario = new ScenarioTest();
     private OpcionesMenu menu;
     private Instancias instanciasActuales = new Instancias();
+    private AsociarInstanciasATestJDialog asociarInst;
     
     //Constructor para editar un conjunto de instancias
     public AddInstancesClasPropJPanel(Instancias inst){
@@ -405,12 +406,14 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
     boolean result = prepararInstancias(true);
     if(continuar==true){
         boolean asoc = soloAsociar(result);
-        if(asoc == true){
-            JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(this,"Acción no realizada",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+        if(asociarInst.isIsCancel()==false){
+            if(asoc == true){
+                JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
+                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"Acción no realizada",                                                  
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }//GEN-LAST:event_guardarAsociarInstButtonActionPerformed
@@ -536,7 +539,7 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 public boolean soloAsociar(boolean res){ 
     if(res==true){
         if(isFromTest()==false){
-            AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
+            asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
