@@ -10,6 +10,7 @@ import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
 import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -18,6 +19,8 @@ import java.io.FileNotFoundException;
 public interface IOManager {
     
     public boolean loadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology;
+    
+    public CollectionTest loadProject() throws FileNotFoundException,ClassCastException,NoSuchElementException;
     
     public void prepareProject(CollectionTest collection);
     

@@ -5,14 +5,21 @@
 
 package code.google.com.p.ontologytesting.persistence;
 
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
+import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +28,7 @@ import java.util.List;
 public class IOManagerImplementation implements IOManager{
 
     private XMLEncoder e;
+    private XMLDecoder decoder;
     private static boolean esNuevo=false;
     private boolean como=false;
     private String carpetaProy,nombreProy,fichero;
@@ -44,6 +52,12 @@ public class IOManagerImplementation implements IOManager{
         return true;
     }
 
+    @Override
+    public CollectionTest loadProject() throws FileNotFoundException,ClassCastException,NoSuchElementException{
+       decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
+       return (CollectionTest) decoder.readObject();
+    }
+    
     @Override
     public void prepareProject(CollectionTest collection){
         CollectionTest.getInstance().setInstancias(collection.getInstancias());

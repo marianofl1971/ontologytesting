@@ -35,11 +35,7 @@ public class OntologyTestCase implements OntologyTest{
 
         ListIterator liClass;
         ListIterator liProperties;
-        String[] ciClas;
-        String[] ciInd;
-        String[] piClas;
-        String[] piInd;
-
+        String[] ciClas,ciInd,piClas,piInd;
         patron1 = "[\\(|,|\n| ]";
         patron2 = "[\n| |\\)]";
         jenaInterface = new Reasoner();
@@ -51,7 +47,6 @@ public class OntologyTestCase implements OntologyTest{
             List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
             liClass = classInstances.listIterator();
             liProperties = propertyInstances.listIterator();
-
             while (liClass.hasNext()) {
                 ClassInstances cla = (ClassInstances) liClass.next();
                 String ci = cla.getClassInstance();
@@ -59,7 +54,6 @@ public class OntologyTestCase implements OntologyTest{
                 ciInd = ciClas[1].split(patron2);
                 jena.addInstanceClass(ns, ciClas[0], ciInd[0]);
             }
-
             while (liProperties.hasNext()) {
                 PropertyInstances p = (PropertyInstances) liProperties.next();
                 String pi = p.getPropertyInstance();
