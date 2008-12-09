@@ -48,7 +48,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private boolean proyectoGuardado=false,existeProyecto=false;
     private AniadirPanelDeAviso panelAviso;
     private FileChooserSelector utils;
-    private XMLDecoder decoder;
     private CollectionTest collection;
     private TestSimpleInstSat testInstSat;
     private TestSimpleReal testReal;
@@ -590,8 +589,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         if(res == true){
             this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
             this.setNombreProyecto(nombreProyecto);
-            decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
-            collection = (CollectionTest) decoder.readObject();
+            collection = persist.loadProject();
             persist.prepareProject(collection);
             abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
             abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
