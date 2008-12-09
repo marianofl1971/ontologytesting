@@ -21,6 +21,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
     private IOManager persist = new IOManagerImplementation();
+    private boolean isCancel=false;
     
     /** Creates new form AsociarInstanciasATestJDialog */
     public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
@@ -174,6 +175,7 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
     JOptionPane.showMessageDialog(this,"Instancias Guardadas pero no asociadas",                                                  
     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
     this.setVisible(false);
+    this.setIsCancel(true);
 }
 
 public Instancias getInstancias() {
@@ -201,5 +203,13 @@ public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados)
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verTestButton;
     // End of variables declaration//GEN-END:variables
+
+    public boolean isIsCancel() {
+        return isCancel;
+    }
+
+    public void setIsCancel(boolean isCancel) {
+        this.isCancel = isCancel;
+    }
 
 }
