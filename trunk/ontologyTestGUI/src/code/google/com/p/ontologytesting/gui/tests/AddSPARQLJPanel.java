@@ -565,7 +565,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             progresBar.setIndeterminate(true);
             execTest.execute();
             progres.setVisible(true);
-        }catch (ExceptionReadOntology ex){
+        }catch (InvalidOntologyException ex){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }

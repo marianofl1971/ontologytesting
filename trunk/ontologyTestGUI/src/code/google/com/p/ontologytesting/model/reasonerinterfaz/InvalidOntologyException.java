@@ -10,19 +10,19 @@ package code.google.com.p.ontologytesting.model.reasonerinterfaz;
  *
  * @author saruskas
  */
-public class ExceptionReadOntology extends RuntimeException {
+public class InvalidOntologyException extends RuntimeException {
 
     /**
      * Creates a new instance of <code>ExceptionReadOntology</code> without detail message.
      */
-    public ExceptionReadOntology() {
+    public InvalidOntologyException() {
     }
 
     /**
      * Constructs an instance of <code>ExceptionReadOntology</code> with the specified detail message.
      * @param msg the detail message.
      */
-    public ExceptionReadOntology(String msg) {
+    public InvalidOntologyException(String msg) {
         super(msg);
         
     }   

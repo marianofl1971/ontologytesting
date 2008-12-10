@@ -13,7 +13,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.tests.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.ScenarioTest.TipoTest;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -547,7 +547,7 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
             execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
             execTest.execute();
             progres.setVisible(true);         
-        }catch(ExceptionReadOntology ex){
+        }catch(InvalidOntologyException ex){
             panelAviso.errorAction("Error ejecutando los tests",this);  
         }
     }else{

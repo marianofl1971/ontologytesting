@@ -10,7 +10,7 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -59,7 +59,7 @@ public class PopMenuTests implements ActionListener{
                 progres.setVisible(true); 
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
                 "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-            }catch (ExceptionReadOntology ex){
+            }catch (InvalidOntologyException ex){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test. Ontología no válida.",                                                  
                 "Error Message",JOptionPane.ERROR_MESSAGE);
             }

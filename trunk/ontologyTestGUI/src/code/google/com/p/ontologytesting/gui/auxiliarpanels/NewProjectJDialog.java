@@ -190,7 +190,7 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 progresBar.setIndeterminate(true);
                 loadOnto.execute();
                 getProgres().setVisible(true); 
-            }catch(ExceptionReadOntology ex){
+            }catch(InvalidOntologyException ex){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
                 "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);
             }
