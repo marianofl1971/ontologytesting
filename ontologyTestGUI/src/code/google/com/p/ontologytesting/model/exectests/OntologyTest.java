@@ -18,6 +18,6 @@ import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
  */
 public interface OntologyTest {
 
-    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenario) throws ExceptionReadOntology;
+    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenario) throws InvalidOntologyException;
 
 }

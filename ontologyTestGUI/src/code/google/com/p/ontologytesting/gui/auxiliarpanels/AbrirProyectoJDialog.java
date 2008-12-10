@@ -10,7 +10,7 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import code.google.com.p.ontologytesting.persistence.*;
 import javax.swing.JOptionPane;
@@ -174,7 +174,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     getProgres().setVisible(true); 
                 }
             }
-        }catch (ExceptionReadOntology ex){
+        }catch (InvalidOntologyException ex){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo crear el proyecto. La ontologia introducida no es valida.\n" +
             "Introduzca una ontologia valida.","Error Message",JOptionPane.ERROR_MESSAGE);
         }

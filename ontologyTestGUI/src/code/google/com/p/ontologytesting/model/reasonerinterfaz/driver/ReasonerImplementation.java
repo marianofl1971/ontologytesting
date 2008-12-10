@@ -77,21 +77,21 @@ public class ReasonerImplementation implements InterfaceReasoner{
     }
 
     @Override
-    public void addReasoner(String ontologia) throws ExceptionReadOntology{
+    public void addReasoner(String ontologia) throws InvalidOntologyException{
         ontologia = "file:".concat(ontologia);
         try {
             model.read(ontologia);  
             model.prepare(); 
             model.validate();
         }catch(Exception e){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
     }
 
     //Saber si un individuo pertenece a una clase
     @Override
     public String instantiation(String ns, String className, 
-            String individualName) throws ExceptionReadOntology{    
+            String individualName) throws InvalidOntologyException{    
         
         OntClass ontClass = model.getOntClass(ns + className);
         if(ontClass==null) return "La clase introducida no es una instancia " +
@@ -106,7 +106,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
                 }
             }
         }catch(InconsistentOntologyException in){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
         return "false";
     } 
@@ -129,7 +129,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
             }
             return rval;
         }catch(InconsistentOntologyException in){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
     }    
 
@@ -147,14 +147,14 @@ public class ReasonerImplementation implements InterfaceReasoner{
                     (resource.toString().indexOf("#")+1);
             return className;
         }catch(InconsistentOntologyException in){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
     }  
     
     //Saber si se puede añadir un concepto
     @Override
     public String satisfactibility(String ns, String concepto, String clase) 
-            throws ExceptionReadOntology{
+            throws InvalidOntologyException{
       
        OntClass ontClass = model.getOntClass(ns+clase);
        if(ontClass==null) return "La clase introducida no es una " +
@@ -180,14 +180,14 @@ public class ReasonerImplementation implements InterfaceReasoner{
                }
            return "true";
        }catch(InconsistentOntologyException in){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
     }
     
     //Dado un individuo, deducir todas las clases a las que pertenece
     @Override
     public ArrayList<String> classification(String ns, String individuo) 
-            throws ExceptionReadOntology{
+            throws InvalidOntologyException{
         
         Individual individual = model.getIndividual(ns + individuo);
         String pertenece;
@@ -264,10 +264,10 @@ public class ReasonerImplementation implements InterfaceReasoner{
         }
         return lista;
         }catch(InconsistentOntologyException in){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
         }catch (QueryParseException ex){
-            throw new ExceptionReadOntology();
+            throw new InvalidOntologyException();
         }
     }
     

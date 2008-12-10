@@ -8,7 +8,7 @@ package code.google.com.p.ontologytesting.persistence;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 
@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
  */
 public interface IOManager {
     
-    public boolean loadProject(String ubicOnto,String namespaceOnto) throws ExceptionReadOntology;
+    public boolean loadProject(String ubicOnto,String namespaceOnto) throws InvalidOntologyException;
     
     public CollectionTest loadProject() throws FileNotFoundException,ClassCastException,NoSuchElementException;
     

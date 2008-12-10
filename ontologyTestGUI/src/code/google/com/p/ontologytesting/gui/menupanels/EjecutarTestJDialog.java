@@ -10,7 +10,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.JOptionPane;
@@ -159,7 +159,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         execTest.execute();
         progres.setVisible(true);    
         this.setVisible(false);
-    }catch (ExceptionReadOntology ex){
+    }catch (InvalidOntologyException ex){
         JOptionPane.showMessageDialog(this,"No se pudo ejecutar el test. Ontología no válida.",                                                  
         "Error Message",JOptionPane.ERROR_MESSAGE);
         this.setVisible(false);

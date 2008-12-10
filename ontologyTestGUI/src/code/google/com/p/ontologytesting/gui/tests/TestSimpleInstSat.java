@@ -9,7 +9,7 @@ package code.google.com.p.ontologytesting.gui.tests;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.ExceptionReadOntology;
+import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -359,7 +359,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             progresBar.setIndeterminate(true);
             execTest.execute();
             progres.setVisible(true);    
-        }catch (ExceptionReadOntology ex){
+        }catch (InvalidOntologyException ex){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }

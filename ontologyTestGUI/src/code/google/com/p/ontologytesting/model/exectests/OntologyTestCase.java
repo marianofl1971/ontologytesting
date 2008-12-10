@@ -31,7 +31,7 @@ public class OntologyTestCase implements OntologyTest{
     private List<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
     private List<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
 
-    protected void setUpOntology(ScenarioTest st, String ont, String ns) throws ExceptionReadOntology{  
+    protected void setUpOntology(ScenarioTest st, String ont, String ns) throws InvalidOntologyException{  
 
         ListIterator liClass;
         ListIterator liProperties;
@@ -65,7 +65,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     private void runOntologyTest(OntologyTestResult testresult, String ns, 
-            ScenarioTest scenariotest) throws ExceptionReadOntology{
+            ScenarioTest scenariotest) throws InvalidOntologyException{
           
         patron3="[\\(|\\)|,| |.]";
         patron4="[,|\n| ]";
@@ -223,7 +223,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     @Override
-    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenariotest) throws ExceptionReadOntology{ 
+    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenariotest) throws InvalidOntologyException{ 
 
         String ont = baterytest.getOntology();
         String ns = baterytest.getNamespace();
