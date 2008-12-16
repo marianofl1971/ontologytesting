@@ -5,6 +5,8 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import java.util.StringTokenizer;
+
 
 /**
  *
@@ -14,8 +16,12 @@ public class ValidarTests {
     
     public boolean validarQuery(String query){
         String regexp1 = "([\\w|-|_]+){1}";
-        
-        if(!query.trim().matches(regexp1)){
+        StringTokenizer stTexto = new StringTokenizer(query.trim());
+        StringBuffer buf = new StringBuffer();
+        while (stTexto.hasMoreElements()){
+            buf.append(stTexto.nextElement());
+        }
+        if(!buf.toString().matches(regexp1)){
             return false;
         }else{
             return true;
@@ -24,8 +30,12 @@ public class ValidarTests {
     
     public boolean validarResultado(String res){
         String regexp1 = "[\\w|,|.|\\s|-|_]+";
-        
-        if(!res.matches(regexp1)){
+        StringTokenizer stTexto = new StringTokenizer(res.trim());
+        StringBuffer buf = new StringBuffer();
+        while (stTexto.hasMoreElements()){
+            buf.append(stTexto.nextElement());
+        }
+        if(!buf.toString().matches(regexp1)){
             return false;
         }else{
             return true;
@@ -33,8 +43,7 @@ public class ValidarTests {
     }
     
     public boolean validarResultadoInstSatis(String res){
-        
-        if(!res.equals("true") && !res.equals("false")){
+        if(!res.trim().equals("true") && !res.trim().equals("false")){
             return false;
         }else{
             return true;
@@ -45,9 +54,14 @@ public class ValidarTests {
         String regexp1 = "([\\w|-|_]+[\\s|,|.]{1}[\\w|_|-]+){1}";
         String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
         
-        if(!query.matches(regexp2) && !query.matches(regexp1)){
+        StringTokenizer stTexto = new StringTokenizer(query.trim());
+        StringBuffer buf = new StringBuffer();
+        while (stTexto.hasMoreElements()){
+            buf.append(stTexto.nextElement());
+        }
+        if(!buf.toString().matches(regexp2) && !buf.toString().matches(regexp1)){
             return false;
-        }else{
+        }else{ 
             return true;
         }
     }
@@ -56,17 +70,27 @@ public class ValidarTests {
         String regexp1 = "[\\w|_|-]+[,|.]{1}[\\w|_|-]+";
         String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
         
-            if(!query.trim().matches(regexp2) && !query.trim().matches(regexp1)){
-                return false;
-            }else{
-                return true;
-            }
+        StringTokenizer stTexto = new StringTokenizer(query.trim());
+        StringBuffer buf = new StringBuffer();
+        while (stTexto.hasMoreElements()){
+            buf.append(stTexto.nextElement());
+        }
+        if(!buf.toString().matches(regexp2) && !buf.toString().matches(regexp1)){
+            return false;
+        }else{
+            return true;
+        }
     }
     
     public boolean validarInstanciaPropiedad(String query){
         String regexp1 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[,|.]{1}[\\w|_|-]+[)]{1}){1}";
         
-        if(!query.trim().matches(regexp1)){
+        StringTokenizer stTexto = new StringTokenizer(query.trim());
+        StringBuffer buf = new StringBuffer();
+        while (stTexto.hasMoreElements()){
+            buf.append(stTexto.nextElement());
+        }
+        if(!buf.toString().matches(regexp1)){
             return false;
         }else{
             return true;

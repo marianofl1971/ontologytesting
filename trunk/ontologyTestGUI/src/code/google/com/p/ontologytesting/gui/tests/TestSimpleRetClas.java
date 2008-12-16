@@ -404,8 +404,8 @@ public void copiarTestAScenarioDesdeAyuda(){
                     if(test.consultaCompletaEnAyuda()==false){
                         ambosNecesarios=true;
                     }else{
-                        String query = test.getQuery();
-                        String resExpT = test.getQueryResult();
+                        String query = test.getQuery().trim();
+                        String resExpT = test.getQueryResult().trim();
                         AddComentJDialog comentPane = test.getComment();
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
@@ -587,8 +587,8 @@ public void copiarDeAyudaATexto(){
     for(int i=1;i<totalRet;i++){
         test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(i);
             if(!test.getQuery().equals("") || !test.getQueryResult().equals("")){
-                String query = test.getQuery();
-                String queryExp = test.getQueryResult();
+                String query = test.getQuery().trim();
+                String queryExp = test.getQueryResult().trim();
                 AddComentJDialog comentPane = test.getComment();
                 String coment = comentPane.getComent();
                 String[] conjFinal = queryExp.split("\n| |,");
@@ -650,16 +650,16 @@ public void copiarDeTextoAAyuda(){
             if(!cQuery[i].equals("")){
                 if(i<tamInst){
                     test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                    test.setQuery(cQuery[i]);
+                    test.setQuery(cQuery[i].trim());
                     j++;
                 }else{
                     if(j<tamInst){
                         test = (TestInstancesTextAreaJPanel) panelAyudaRet.getComponent(j);
-                        test.setQuery(cQuery[i]);
+                        test.setQuery(cQuery[i].trim());
                         j++;
                     }else{
                         TestInstancesTextAreaJPanel instP = new TestInstancesTextAreaJPanel();
-                        instP.setQuery(cQuery[i]);
+                        instP.setQuery(cQuery[i].trim());
                         getRetAyudaPanel().add(instP);
                     }
                 }
@@ -677,7 +677,7 @@ public void copiarDeTextoAAyuda(){
                 if(res.equals(",") || res.endsWith(" ")){
                     test.setQueryResult("\n");
                 }else{
-                    test.setQueryResult(res);
+                    test.setQueryResult(res.trim());
                 }
                 j++;
             }else{
@@ -686,7 +686,7 @@ public void copiarDeTextoAAyuda(){
                     if(res.equals(",") || res.endsWith(" ")){
                         test.setQueryResult("\n");
                     }else{
-                        test.setQueryResult(res);
+                        test.setQueryResult(res.trim());
                     }
                     j++;
                 }else{
@@ -694,7 +694,7 @@ public void copiarDeTextoAAyuda(){
                     if(res.equals(",") || res.endsWith(" ")){
                         instP.setQueryResult("\n");
                     }else{
-                        instP.setQueryResult(res);
+                        instP.setQueryResult(res.trim());
                     }
                     getRetAyudaPanel().add(instP);
                 }

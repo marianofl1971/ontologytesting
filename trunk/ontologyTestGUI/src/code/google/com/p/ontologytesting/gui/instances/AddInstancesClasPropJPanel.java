@@ -406,7 +406,12 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
     boolean result = prepararInstancias(true);
     if(continuar==true){
         boolean asoc = soloAsociar(result);
-        if(asociarInst.isIsCancel()==false){
+        if(this.isFromTest()==false){
+            if(asociarInst.isIsCancel()==true){
+                continuar=false;
+            }
+        }
+        if(continuar==true){
             if(asoc == true){
                 JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
@@ -693,7 +698,7 @@ public void prepararInstSinAyuda(){
                 if (validar.validarInstanciaClase(clas[i]) == true) {
                     ciClas = clas[i].split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0].trim(), ciInd[0].trim());
                     if (v == false) {
                         conjunto.getClaseArea().setForeground(Color.RED);
                         instanciaValida=false;
@@ -752,7 +757,7 @@ public void preparrarInstConAyuda(){
                 if (validar.validarInstanciaClase(query) == true) {
                     ciClas = query.split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceClass(CollectionTest.getInstance().getNamespace(), ciClas[0].trim(), ciInd[0].trim());
                     if (v == false) {
                         panelInst.getInstanciaTextField().setForeground(Color.RED);
                         instanciaValida=false;
