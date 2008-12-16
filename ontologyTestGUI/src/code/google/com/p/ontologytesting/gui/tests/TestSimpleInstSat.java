@@ -407,8 +407,8 @@ public void copiarTestAScenarioDesdeAyuda(){
                     if(test.consultaCompletaEnAyuda()==false){
                         ambosNecesarios=true;
                     }else{
-                        String query = test.getQuery();
-                        String resExpT = test.isTestTrue();
+                        String query = test.getQuery().trim();
+                        String resExpT = test.isTestTrue().trim();
                         AddComentJDialog comentPane = test.getComment();
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
@@ -582,9 +582,9 @@ public void copiarDeAyudaATexto(){
     for(int i=1;i<totalInst;i++){
         test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(i);
             if(!test.getQuery().equals("") || !test.isTestFalse().equals(test.isTestTrue())){
-                String query = test.getQuery();
-                String resExpT = test.isTestTrue();
-                String resExpF = test.isTestFalse();
+                String query = test.getQuery().trim();
+                String resExpT = test.isTestTrue().trim();
+                String resExpF = test.isTestFalse().trim();
                 AddComentJDialog comentPane = test.getComment();
                 String coment = comentPane.getComent();
                 if(!query.equals("") || !resExpT.equals(resExpF)){
@@ -636,16 +636,16 @@ public void copiarDeTextoAAyuda(){
             if(!cQuery[i].equals("")){
                 if(i<tamInst){
                     test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                    test.setQuery(cQuery[i]);
+                    test.setQuery(cQuery[i].trim());
                     j++;
                 }else{
                     if(j<tamInst){
                         test = (TestInstancesTFJPanel) panelAyudaInst.getComponent(j);
-                        test.setQuery(cQuery[i]);
+                        test.setQuery(cQuery[i].trim());
                         j++;
                     }else{
                         TestInstancesTFJPanel instP = new TestInstancesTFJPanel();
-                        instP.setQuery(cQuery[i]);
+                        instP.setQuery(cQuery[i].trim());
                         this.getInstAyudaPanel().add(instP);
                     }
                 }

@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.gui.tests;
 
 import java.awt.Color;
+import java.util.StringTokenizer;
 
 
 /**
