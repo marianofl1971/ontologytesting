@@ -82,8 +82,13 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
             } catch (Exception ignore) {
                 ignore.printStackTrace();
             }
-            new TreeResults(treeResult,getName()); 
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Acción Realizada","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            if(treeResult!=null){
+                new TreeResults(treeResult,getName()); 
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Acción Realizada","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                this.cancel(true);
+                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Error de Ejecución","Erro Message",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

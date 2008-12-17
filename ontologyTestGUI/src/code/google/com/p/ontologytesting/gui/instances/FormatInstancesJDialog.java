@@ -30,11 +30,9 @@ public class FormatInstancesJDialog extends javax.swing.JDialog {
                 "<h><b>FORMATOS PARA LAS INSTANCIAS</h></b><br><br>" +
                 "<b>INSTANCIAS DE CLASE</b><br><br>" +
                 "Clase,individuo<br>" +
-                "Clase.individuo<br>" +
                 "Clase(individuo)<br><br>" +
                 "<b>INSTANCIAS DE PROPIEDAD</b><br><br>" +
-                "Propiedad(individuo,individuo)<br>" +
-                "Propiedad(individuo.individuo)<br>";
+                "Propiedad(individuo,individuo)<br>";
         return formato;
     }
 

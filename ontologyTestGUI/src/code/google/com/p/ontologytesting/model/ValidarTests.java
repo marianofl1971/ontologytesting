@@ -67,8 +67,8 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaClase(String query){
-        String regexp1 = "[\\w|_|-]+[,|.]{1}[\\w|_|-]+";
-        String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
+        String regexp1 = "[\\w|_|-|/|.]+[,]{1}[\\w|_|-|/|.]+";
+        String regexp2 = "([\\w|_|-|/|.]+[(]{1}[\\w|_|-|/|.]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
@@ -83,7 +83,7 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaPropiedad(String query){
-        String regexp1 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[,|.]{1}[\\w|_|-]+[)]{1}){1}";
+        String regexp1 = "([\\w|_|-]+[(]{1}[\\w|_|-|.|/]+[,]{1}[\\w|_|-|.|/]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
@@ -98,7 +98,7 @@ public class ValidarTests {
     }
     
     public boolean validarSparqlResult(String query){
-        String patron = ("[\\;|\\n|\\t|\\v|\\s|_|-]");
+        String patron = ("[\\;|\\n|\\v]");
         String[] res = query.split(patron);
         for(int i=0;i<res.length;i++){
             if(validarQuerySparql(res[i])==false){
@@ -109,7 +109,7 @@ public class ValidarTests {
     }
     
     public boolean validarQuerySparql(String query){
-        String regexp1 = "[\\w|_|-]+[(]{1}([[\\w|_|-]+[,.]])+[)]{1}[;]?";
+        String regexp1 = "[\\w|_|-|.|/]+[(]{1}([[\\w|_|-|.|/|\\s]+[,.]])+[)]{1}[;]?";
         
         if(!query.matches(regexp1)){
             return false;
