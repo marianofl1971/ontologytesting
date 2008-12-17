@@ -57,8 +57,6 @@ public class PopMenuTests implements ActionListener{
                 execTest.addPropertyChangeListener(new ProgressListener(progresBar,progres,true));
                 execTest.execute();
                 progres.setVisible(true); 
-                JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Test ejecutado",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }catch (InvalidOntologyException ex){
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"No se pudo ejecutar el test. Ontología no válida.",                                                  
                 "Error Message",JOptionPane.ERROR_MESSAGE);

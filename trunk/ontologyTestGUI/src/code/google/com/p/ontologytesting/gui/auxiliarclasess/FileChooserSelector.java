@@ -55,7 +55,7 @@ public class FileChooserSelector {
                                 setNsDefecto(linea.substring(indexBegin+7, indexEnd).concat("#"));
                                 var = 1;
                             }else{
-                                setNsDefecto("http://nombreDeSuOntologia.org/nombreOntologia.owl");
+                                setNsDefecto("http://www.owl-ontologies.com/unnamed.owl");
                             }
                     }
                 } catch (IOException ex) {   

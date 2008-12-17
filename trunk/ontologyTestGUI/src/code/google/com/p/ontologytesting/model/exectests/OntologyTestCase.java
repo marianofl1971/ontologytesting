@@ -68,9 +68,9 @@ public class OntologyTestCase implements OntologyTest{
             ScenarioTest scenariotest) throws InvalidOntologyException{
           
         patron3="[\\(|\\)|,| |.]";
-        patron4="[,|\n| ]";
-        patron5="[\n|\\t|\\v|\\s]";
-        patron6="[.,\\s\\)]";
+        patron4="[,|\\n| ]";
+        patron5="[\\n|\\v]";
+        patron6="[,\\)]";
         ArrayList<String> esperado = new ArrayList<String>();
         ArrayList<String> obtenido = new ArrayList<String>();
         ListIterator liQuery,liSparql;
@@ -177,9 +177,9 @@ public class OntologyTestCase implements OntologyTest{
                     ExecQuerySparql execQuery = new ExecQuerySparql();
                     String[] select = res[k].trim().split("\\(");
                     execQuery.setNombreSelect(select[0]); 
-                    String[] subRes = select[1].split(patron6);
+                    String[] subRes = select[1].trim().split(patron6);
                     for(int m=0; m<subRes.length;m++){
-                        execQuery.getDatos().add(subRes[m]);
+                        execQuery.getDatos().add(subRes[m].trim());
                     }
                     listaResultEsperada.add(execQuery);
                 }
@@ -189,9 +189,9 @@ public class OntologyTestCase implements OntologyTest{
                 esperado = new ArrayList<String>();
                 obtenido = new ArrayList<String>();
                 String contenidoObtenido = "",contenidoEsperado="";
+                fallo=0;
                 int tam = listaResultObtenida.get(0).getDatos().size();
                 int tamBis = listaResultEsperada.get(0).getDatos().size();
-                fallo=0;
                 if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
                     for(int n=0;n<tam;n++){
                         for(int t=0; t<listaResultObtenida.size(); t++){
@@ -204,6 +204,10 @@ public class OntologyTestCase implements OntologyTest{
                         contenidoEsperado = "";
                 }
                 }else{
+                    fallo=1;
+                }
+            }else if(listaResultObtenida.size()==0){
+                if((listaResultEsperada.size()!=listaResultObtenida.size())){
                     fallo=1;
                 }
             }

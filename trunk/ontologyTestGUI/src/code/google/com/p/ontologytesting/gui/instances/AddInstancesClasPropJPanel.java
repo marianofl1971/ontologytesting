@@ -707,7 +707,7 @@ public void prepararInstSinAyuda(){
                     }
                 }
                 if (validar.validarInstanciaClase(clas[i]) == true && isInstanciaValida() == true) {
-                    ClassInstances cI = new ClassInstances(clas[i]);
+                    ClassInstances cI = new ClassInstances(clas[i].trim());
                     clasInst.add(cI);
                     failClas.add(i, 0);
                 } else {
@@ -769,14 +769,14 @@ public void preparrarInstConAyuda(){
             if(!query.equals("")){
                 if (validar.validarInstanciaClase(query) == true && isInstanciaValida() == true) {
                     if (!query.equals("") && !coment.equals("")) {
-                        ClassInstances cI = new ClassInstances(query, coment);
+                        ClassInstances cI = new ClassInstances(query.trim(), coment);
                         clasInst.add(cI);
                     } else if (!query.equals("") && coment.equals("")) {
-                        ClassInstances cI = new ClassInstances(query);
+                        ClassInstances cI = new ClassInstances(query.trim());
                         clasInst.add(cI);
                     }
                     failClas.add(i, 0);
-                }else if (validar.validarInstanciaClase(query) == false) {
+                }else if (validar.validarInstanciaClase(query.trim()) == false) {
                 if (!query.equals("")) {
                     failClas.add(i, 1);
                     queryValida=false;
@@ -798,7 +798,7 @@ public void preparrarInstConAyuda(){
                 if (validar.validarInstanciaPropiedad(query) == true) {
                     ciClas = query.split(patron1);
                     ciInd = ciClas[1].split(patron2);
-                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0], ciInd[0]);
+                    boolean v = jena.addInstanceProperty(CollectionTest.getInstance().getNamespace(), ciClas[0].trim(), ciInd[0].trim());
                     if (v == false) {
                         panelInst.getInstanciaTextField().setForeground(Color.RED);
                         instanciaValida=false;
@@ -810,10 +810,10 @@ public void preparrarInstConAyuda(){
             if(!query.equals("")){
                 if (validar.validarInstanciaPropiedad(query) == true && isInstanciaValida() == true && instanciaSinNombre == false) {
                     if (!query.equals("") && !coment.equals("")) {
-                        PropertyInstances pI = new PropertyInstances(query, coment);
+                        PropertyInstances pI = new PropertyInstances(query.trim(), coment);
                         propInst.add(pI);
                     } else if (!query.equals("") && coment.equals("")) {
-                        PropertyInstances pI = new PropertyInstances(query);
+                        PropertyInstances pI = new PropertyInstances(query.trim());
                         propInst.add(pI);
                     } 
                     failProp.add(i, 0);
@@ -912,7 +912,7 @@ public void copiarAInstancesTextArea(){
 }
 
 public void copiarAInstancesAyuda(){
-    patron="[\\n|\\t|\\s]";
+    patron="[\\n]";
     conjunto = (CreateInstancesTextAreaJPanel) clasPropPanel.getComponent(0);
     conjuntoClase = conjunto.getClaseTextArea().trim();
     conjuntoProp = conjunto.getPropiedadTextArea().trim();
@@ -925,16 +925,16 @@ public void copiarAInstancesAyuda(){
         if(!clas[i].equals("")){
             if(i<tamClas){
                 CreateInstancesJPanel panelClas = (CreateInstancesJPanel) this.getClasPanel().getComponent(contClas);
-                panelClas.setInstance(clas[i]);
+                panelClas.setInstance(clas[i].trim());
                 contClas++;
             }else{
                 if(contClas<tamClas){
                     CreateInstancesJPanel panelClas = (CreateInstancesJPanel) this.getClasPanel().getComponent(contClas);
-                    panelClas.setInstance(clas[i]);
+                    panelClas.setInstance(clas[i].trim());
                     contClas++;
                 }else{
                     CreateInstancesJPanel panelClas = new CreateInstancesJPanel(0);
-                    panelClas.setInstance(clas[i]);
+                    panelClas.setInstance(clas[i].trim());
                     this.getClasPanel().add(panelClas);
                 }
             }
@@ -945,16 +945,16 @@ public void copiarAInstancesAyuda(){
         if(!prop[i].equals("")){
             if(i<tamProp){
                 CreateInstancesJPanel panelProp = (CreateInstancesJPanel) this.getPropPanel().getComponent(contProp);
-                panelProp.setInstance(prop[i]);
+                panelProp.setInstance(prop[i].trim());
                 contProp++;
             }else{
                 if(contProp<tamProp){
                     CreateInstancesJPanel panelProp = (CreateInstancesJPanel) this.getPropPanel().getComponent(contProp);
-                    panelProp.setInstance(prop[i]);
+                    panelProp.setInstance(prop[i].trim());
                     contProp++;
                 }else{
                     CreateInstancesJPanel panelProp = new CreateInstancesJPanel(1);
-                    panelProp.setInstance(prop[i]);
+                    panelProp.setInstance(prop[i].trim());
                     this.getPropPanel().add(panelProp);
                 }
             }
