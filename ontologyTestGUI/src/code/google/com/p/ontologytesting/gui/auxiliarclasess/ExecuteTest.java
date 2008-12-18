@@ -87,6 +87,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Acción Realizada","Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }else{
                 this.cancel(true);
+                this.setProgress(100);
                 JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Error de Ejecución","Erro Message",JOptionPane.ERROR_MESSAGE);
             }
         }
