@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.persistence.*;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -30,7 +29,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private ValidarTests validarTests;
     private TestInstancesTFJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,continuar,addInst;
+    private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,continuar;
     private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0;
     private JPanel panelAyudaInst;
     private List inst;
@@ -53,8 +52,10 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         TestInstancesTFJPanel.setContadorInstSat(0);
         panelAviso = new AniadirPanelDeAviso();
         controlador = ControladorTests.getInstance();
-        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.WEST);
-        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
+        descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
+        descripcionJPanel.add(new DescripcionJPanel());
+        opcionAyudaInstPanel.setLayout(new BoxLayout(opcionAyudaInstPanel, BoxLayout.Y_AXIS));
+        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.X_AXIS));
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());
         int cont=1;
@@ -125,7 +126,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        labelInstLabel.setText("                            CONSULTAS                                        RESULTADO ESPERADO");
+        labelInstLabel.setText("                            CONSULTAS                                                          RESULTADO ESPERADO");
 
         javax.swing.GroupLayout labelInstPanelLayout = new javax.swing.GroupLayout(labelInstPanel);
         labelInstPanel.setLayout(labelInstPanelLayout);
@@ -133,15 +134,15 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             labelInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(labelInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(labelInstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addComponent(labelInstLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                .addContainerGap())
         );
         labelInstPanelLayout.setVerticalGroup(
             labelInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(labelInstPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstLabel)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout instAyudaPanelLayout = new javax.swing.GroupLayout(instAyudaPanel);
@@ -151,14 +152,14 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         instAyudaPanelLayout.setVerticalGroup(
             instAyudaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(instAyudaPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelInstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(instAyudaPanel);
@@ -182,17 +183,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         tabbedPaneInst.addTab("Formato ayuda", opcionAyudaInstPanel);
 
-        javax.swing.GroupLayout opcionTextInstPanelLayout = new javax.swing.GroupLayout(opcionTextInstPanel);
-        opcionTextInstPanel.setLayout(opcionTextInstPanelLayout);
-        opcionTextInstPanelLayout.setHorizontalGroup(
-            opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
-        );
-        opcionTextInstPanelLayout.setVerticalGroup(
-            opcionTextInstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
-        );
-
+        opcionTextInstPanel.setLayout(new javax.swing.BoxLayout(opcionTextInstPanel, javax.swing.BoxLayout.X_AXIS));
         tabbedPaneInst.addTab("Formato Texto", opcionTextInstPanel);
 
         contentInstTabedPanel.add(tabbedPaneInst, java.awt.BorderLayout.CENTER);
@@ -259,7 +250,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         add(contentInstTabedPanel, java.awt.BorderLayout.CENTER);
 
-        descripcionJPanel.setLayout(new java.awt.BorderLayout());
+        descripcionJPanel.setLayout(new javax.swing.BoxLayout(descripcionJPanel, javax.swing.BoxLayout.X_AXIS));
         add(descripcionJPanel, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -278,10 +269,6 @@ private void tabbedPaneInstMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst=true;
-    if(persist.testYaGuardado(getScenario())==false){
-        guardarTest();
-    }
     menu.editarInstancias(this.getScenario());
 }//GEN-LAST:event_addInstanciasButtonActionPerformed
 
@@ -364,9 +351,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }
     if(guardar==true && ejecutar==false){
-        if(addInst==false){
-            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
-        }
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
@@ -442,17 +427,15 @@ public void copiarTestAScenarioDesdeAyuda(){
 }
 
 public boolean preguntarSiContinuarSinInstancias(){
-    if(addInst==false){
-        if(scenario.tieneInstanciasAsociadas()==false){
-            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION){
-                continuarSinInstancias=false;
-            }else if(n == JOptionPane.YES_OPTION){
-                continuarSinInstancias=true;
-            }
+    if(scenario.tieneInstanciasAsociadas()==false){
+        int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.NO_OPTION){
+            continuarSinInstancias=false;
+        }else if(n == JOptionPane.YES_OPTION){
+            continuarSinInstancias=true;
         }
-    }else continuarSinInstancias=true;
+    }
     return continuarSinInstancias;
 }
 

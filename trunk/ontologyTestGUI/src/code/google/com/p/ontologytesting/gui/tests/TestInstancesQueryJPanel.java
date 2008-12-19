@@ -50,6 +50,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
         duplicarButton = new javax.swing.JButton();
         resultTextField = new javax.swing.JTextField();
 
+        queryTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         queryTextField.setToolTipText("Consulta");
         queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -80,6 +81,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             }
         });
 
+        resultTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         resultTextField.setToolTipText("Resultado esperado");
         resultTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

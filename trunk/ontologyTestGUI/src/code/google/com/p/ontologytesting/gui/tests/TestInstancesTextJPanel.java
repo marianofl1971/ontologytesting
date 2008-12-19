@@ -39,6 +39,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         comentTextArea = new javax.swing.JTextArea();
 
         consultaTextArea.setColumns(20);
+        consultaTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         consultaTextArea.setRows(5);
         consultaTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -48,6 +49,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         jScrollPane16.setViewportView(consultaTextArea);
 
         resultadoEsperadoTextArea.setColumns(20);
+        resultadoEsperadoTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         resultadoEsperadoTextArea.setRows(5);
         resultadoEsperadoTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -59,6 +61,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         jLabel1.setText("                 CONSULTA                                           RESULTADO ESPERADO                                 COMENTARIO");
 
         comentTextArea.setColumns(20);
+        comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         comentTextArea.setRows(5);
         jScrollPane18.setViewportView(comentTextArea);
 
@@ -76,7 +79,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane16, jScrollPane17, jScrollPane18});

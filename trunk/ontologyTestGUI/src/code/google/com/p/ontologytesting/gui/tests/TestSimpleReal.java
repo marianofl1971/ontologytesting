@@ -12,7 +12,6 @@ import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDial
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.persistence.*;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -30,7 +29,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar,addInst;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar;
     private JPanel panelAyudaReal;
     private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
     private List real;
@@ -51,7 +50,9 @@ public class TestSimpleReal extends javax.swing.JPanel {
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         TestInstancesQueryJPanel.setContadorReal(0);
-        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.WEST);
+        descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
+        descripcionJPanel.add(new DescripcionJPanel());
+        opcionAyudaRealPanel.setLayout(new BoxLayout(opcionAyudaRealPanel, BoxLayout.Y_AXIS));
         opcionTextRealPanel.setLayout(new BoxLayout(getOpcionTextRealPanel(), BoxLayout.Y_AXIS));
         realAyudaPanel.setLayout(new BoxLayout(getRealAyudaPanel(), BoxLayout.Y_AXIS));
         controlador = ControladorTests.getInstance();
@@ -315,10 +316,6 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst=true;
-    if(persist.testYaGuardado(getScenario())==false){
-        guardarTest();
-    }
     menu.editarInstancias(this.getScenario());
 }//GEN-LAST:event_addInstanciasButtonActionPerformed
 
@@ -363,9 +360,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }
     if(guardar==true && ejecutar==false){
-        if(addInst==false){
-            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
-        }
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
@@ -441,7 +436,6 @@ public void copiarTestAScenarioDesdeAyuda(){
 }
 
 public boolean preguntarSiContinuarSinInstancias(){
-    if(addInst==false){
         if(scenario.tieneInstanciasAsociadas()==false){
             int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                     "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
@@ -451,7 +445,6 @@ public boolean preguntarSiContinuarSinInstancias(){
                 continuarSinInstancias=true;
             }
         }
-    }else continuarSinInstancias=true;
     return continuarSinInstancias;
 }
 

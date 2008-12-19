@@ -54,6 +54,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
 
+        queryTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         queryTextField.setToolTipText("Consulta");
         queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

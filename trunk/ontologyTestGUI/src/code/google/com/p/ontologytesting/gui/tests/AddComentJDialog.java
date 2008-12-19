@@ -52,6 +52,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         jLabel3.setText("Añada su comentario:");
 
         comentTextArea.setColumns(20);
+        comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         comentTextArea.setRows(5);
         jScrollPane.setViewportView(comentTextArea);
 

@@ -58,6 +58,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
 
         setName("instances"); // NOI18N
 
+        instanciaTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         instanciaTextField.setToolTipText("Instancia");
         instanciaTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

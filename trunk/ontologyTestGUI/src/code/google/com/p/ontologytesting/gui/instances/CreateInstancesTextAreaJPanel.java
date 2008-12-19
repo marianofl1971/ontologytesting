@@ -37,6 +37,7 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
         jLabel1.setText("              INSTANCIAS DE CLASE                                              INSTANCIAS DE PROPIEDAD  ");
 
         claseTextArea.setColumns(20);
+        claseTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         claseTextArea.setRows(5);
         claseTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -46,6 +47,7 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
         jScrollPane16.setViewportView(claseTextArea);
 
         propiedadTextArea.setColumns(20);
+        propiedadTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         propiedadTextArea.setRows(5);
         propiedadTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

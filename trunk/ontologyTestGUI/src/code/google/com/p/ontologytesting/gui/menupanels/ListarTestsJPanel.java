@@ -383,11 +383,12 @@ private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
-    if(evt.getClickCount()==2){
-        opMenu.editarTest(scenario);
-        controlador.prepararTest(scenario.getTipoTest().name());
-
+    if(modeloSimples.size()>0){
+        ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+        if(evt.getClickCount()==2){
+            opMenu.editarTest(scenario);
+            controlador.prepararTest(scenario.getTipoTest().name());
+        }
     }
 }//GEN-LAST:event_testSimplesListMouseClicked
 
