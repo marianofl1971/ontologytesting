@@ -29,7 +29,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDial
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,sinConsultas,
-            ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar,addInst;
+            ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
     private ScenarioTest scenario,scenarioActual;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
@@ -74,7 +74,6 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         menu = new OpcionesMenu();
         setScenario(s);
         setPosListQuerysSel(0);
-        addInst=false;
     }
 
     /** This method is called from within the constructor to
@@ -129,6 +128,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Introduzca el nombre del test:");
 
+        testNameTextField.setFont(new java.awt.Font("Arial", 1, 11));
         testNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 testNameTextFieldActionPerformed(evt);
@@ -138,17 +138,18 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         jLabel3.setText("Añada una descripción para el test:");
 
         testDescTextArea.setColumns(20);
+        testDescTextArea.setFont(new java.awt.Font("Arial", 0, 13));
         testDescTextArea.setRows(5);
         jScrollPane2.setViewportView(testDescTextArea);
 
         jLabel4.setText("Resultado esperado:");
 
-        resultTextArea.setColumns(20);
-        resultTextArea.setRows(5);
+        resultTextArea.setFont(new java.awt.Font("Arial", 0, 13));
+        resultTextArea.setToolTipText("Resultado Esperado");
         jScrollPane3.setViewportView(resultTextArea);
 
-        sparqlTextArea.setColumns(20);
-        sparqlTextArea.setRows(5);
+        sparqlTextArea.setFont(new java.awt.Font("Arial", 0, 13));
+        sparqlTextArea.setToolTipText("Consulta Sparql");
         jScrollPane1.setViewportView(sparqlTextArea);
 
         sigQueryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/resultset_next.png"))); // NOI18N
@@ -232,38 +233,31 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                                    .add(limpiarButton)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                    .add(borrarConsultaJButton)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(antQueryButton)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                    .add(sigQueryButton)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                    .add(nuevaConsultaButton)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 335, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(10, 10, 10)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                            .add(layout.createSequentialGroup()
+                                .add(limpiarButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(borrarConsultaJButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 79, Short.MAX_VALUE)
+                                .add(antQueryButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(sigQueryButton)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(nuevaConsultaButton)))
+                        .add(6, 6, 6)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                             .add(limpiarResultButton)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createSequentialGroup()
-                                .add(10, 10, 10)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel4)
-                                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))))
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)))
+                    .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 209, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 267, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 240, Short.MAX_VALUE)
                         .add(formatosPermitidos))
-                    .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 458, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(guardarJButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -271,7 +265,11 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(guardarEjecutarJButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(addInstanciasButton)))
+                        .add(addInstanciasButton))
+                    .add(layout.createSequentialGroup()
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 311, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(55, 55, 55)
+                        .add(jLabel4)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -284,41 +282,38 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(testNameTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jLabel3)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(jLabel3))
                     .add(formatosPermitidos))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(guardarJButton)
                     .add(ejecutarJButton)
                     .add(guardarEjecutarJButton)
                     .add(addInstanciasButton))
-                .add(18, 18, 18)
+                .add(13, 13, 13)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
                     .add(jLabel4))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 182, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(layout.createSequentialGroup()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(borrarConsultaJButton)
-                                    .add(limpiarButton)))
-                            .add(layout.createSequentialGroup()
-                                .add(6, 6, 6)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(sigQueryButton)
-                                    .add(antQueryButton)
-                                    .add(nuevaConsultaButton)))))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(limpiarResultButton)))
-                .addContainerGap())
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(borrarConsultaJButton)
+                            .add(limpiarButton)))
+                    .add(layout.createSequentialGroup()
+                        .add(6, 6, 6)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(sigQueryButton)
+                            .add(antQueryButton)
+                            .add(nuevaConsultaButton)
+                            .add(limpiarResultButton))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -486,7 +481,6 @@ private void testNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst=true;
     menu.editarInstancias(this.getScenario());
 }//GEN-LAST:event_addInstanciasButtonActionPerformed
 
@@ -570,9 +564,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }
     if(guardar==true && ejecutar==false){
-        if(addInst==false){
-            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
-        }
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
 }
@@ -708,17 +700,15 @@ public void prepararGuardar(){
 }
 
 public boolean preguntarSiContinuarSinInstancias(){
-    if(addInst==false){
-        if(scenario.tieneInstanciasAsociadas()==false){
-            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-            if (n == JOptionPane.NO_OPTION){
-                continuarSinInstancias=false;
-            }else if(n == JOptionPane.YES_OPTION){
-                continuarSinInstancias=true;
-            }
+    if(scenario.tieneInstanciasAsociadas()==false){
+        int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.NO_OPTION){
+            continuarSinInstancias=false;
+        }else if(n == JOptionPane.YES_OPTION){
+            continuarSinInstancias=true;
         }
-    }else continuarSinInstancias=true;
+    }
     return continuarSinInstancias;
 }
 

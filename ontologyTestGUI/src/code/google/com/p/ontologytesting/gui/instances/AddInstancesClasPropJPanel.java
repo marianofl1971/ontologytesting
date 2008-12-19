@@ -203,8 +203,11 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
         setLayout(new java.awt.BorderLayout());
 
         descInstanciasTextArea.setColumns(20);
+        descInstanciasTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         descInstanciasTextArea.setRows(5);
         jScrollPane1.setViewportView(descInstanciasTextArea);
+
+        nomInstanciasTextField.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
 
         jLabel2.setText("Nombre para el conjunto de instancias:");
 

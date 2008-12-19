@@ -30,7 +30,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesTextAreaJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoRet,ambosNecesarios,continuarSinInstancias,continuar,addInst;
+    private boolean testSinNombre,validoRet,ambosNecesarios,continuarSinInstancias,continuar;
     private int actualSubTabRet=0;
     private JPanel panelAyudaRet;
     private int totalRet,hayUnaConsulta=0;
@@ -53,7 +53,9 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
-        descripcionJPanel.add(new DescripcionJPanel(),BorderLayout.WEST);
+        descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
+        descripcionJPanel.add(new DescripcionJPanel());
+        opcionAyudaRetPanel.setLayout(new BoxLayout(opcionAyudaRetPanel, BoxLayout.Y_AXIS));
         opcionTextRetPanel.setLayout(new BoxLayout(getOpcionTextRetPanel(), BoxLayout.Y_AXIS));
         retAyudaPanel.setLayout(new BoxLayout(getRetAyudaPanel(), BoxLayout.Y_AXIS));
         controlador = ControladorTests.getInstance();
@@ -297,10 +299,6 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void addInstanciasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addInstanciasButtonActionPerformed
 // TODO add your handling code here:
-    addInst=true;
-    if(persist.testYaGuardado(getScenario())==false){
-        guardarTest();
-    }
     menu.editarInstancias(this.getScenario());
 }//GEN-LAST:event_addInstanciasButtonActionPerformed
 
@@ -361,9 +359,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
     }
     if(guardar==true && ejecutar==false){
-        if(addInst==false){
-            panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
-        }
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
 }
@@ -440,17 +436,15 @@ public void copiarTestAScenarioDesdeAyuda(){
 }
 
     public boolean preguntarSiContinuarSinInstancias(){
-        if(addInst==false){
-            if(scenario.tieneInstanciasAsociadas()==false){
-                int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                        "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-                if (n == JOptionPane.NO_OPTION){
-                    continuarSinInstancias=false;
-                }else if(n == JOptionPane.YES_OPTION){
-                    continuarSinInstancias=true;
-                }
+        if(scenario.tieneInstanciasAsociadas()==false){
+            int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
+                    "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
+            if (n == JOptionPane.NO_OPTION){
+                continuarSinInstancias=false;
+            }else if(n == JOptionPane.YES_OPTION){
+                continuarSinInstancias=true;
             }
-        }else continuarSinInstancias=true;
+        }
         return continuarSinInstancias;
     }
 

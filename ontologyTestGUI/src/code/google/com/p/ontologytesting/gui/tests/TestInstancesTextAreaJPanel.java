@@ -48,6 +48,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
 
+        queryTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         queryTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 queryTextFieldMouseClicked(evt);
@@ -55,6 +56,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
         });
 
         resultTextArea.setColumns(20);
+        resultTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         resultTextArea.setRows(5);
         resultTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -92,7 +94,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(queryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(queryTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -113,7 +115,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
                     .addComponent(borrarButton)
                     .addComponent(comentarioButton)
                     .addComponent(duplicarButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
