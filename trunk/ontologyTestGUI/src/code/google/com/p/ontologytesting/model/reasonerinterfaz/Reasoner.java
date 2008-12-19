@@ -5,6 +5,12 @@
 
 package code.google.com.p.ontologytesting.model.reasonerinterfaz;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 
 /**
  *
@@ -16,8 +22,30 @@ public class Reasoner {
     private boolean cargado = false;
     
     public InterfaceReasoner getReasoner(){
+       String home = System.getProperty("user.home");
+       String arch = "configuracion.properties";
+       String directorio = "/.ontologyTestGUI/"+arch;
+       String rutaDelArchivo = home + directorio;
+       Properties propiedades = new Properties();
+       File archivo = new File(rutaDelArchivo);
+       try {
+         if (!archivo.exists()) {
+           Properties tmp = new Properties();
+           tmp.setProperty("HOME",home);
+           tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
+           File directorio_file = new File(home+"/.ontologyTestGUI/");
+           directorio_file.mkdir();
+           FileOutputStream out = new FileOutputStream(home+"/.ontologyTestGUI/"+arch);
+           tmp.store(out, "Configuración de OntologyTestGUI");
+           out.close();
+         }
+         FileInputStream in =new FileInputStream(archivo);
+         propiedades.load(in);
+       }catch (IOException ex) {
+         System.out.println("Cagamos en la configuración");
+       }
         try {
-            reasoner = (InterfaceReasoner) Class.forName("code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation").newInstance();
+            reasoner = (InterfaceReasoner) Class.forName(propiedades.getProperty("DRIVER")).newInstance();
             this.setCargado(true);
         } catch (InstantiationException ex) {  
             System.out.println("Instantiation Exception");
