@@ -832,7 +832,7 @@ public void inicializarContadores(){
                 } catch (Exception ignore) {
                 }
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
-                URL image = this.getClass().getResource("ontologyBB.jpg"); 
+                URL image = this.getClass().getResource("images/ontology.jpg"); 
                 main.setIconImage (new ImageIcon(image).getImage());
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);

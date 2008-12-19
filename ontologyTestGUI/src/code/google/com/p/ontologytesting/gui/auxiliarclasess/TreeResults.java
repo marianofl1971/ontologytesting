@@ -21,6 +21,7 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -40,10 +41,7 @@ public class TreeResults extends JPanel {
     private JScrollPane resultsView,treeView;
     private ListarTestsJPanel listT;
     private boolean instFail=false,recFail=false,realFail=false,satFail=false,clasFail=false,sparqlFail=false;
-    private ImageIcon iconFail = new ImageIcon("./src/code/google/com/p/ontologytesting/images/flag_red.gif");
-    private ImageIcon iconOk = new ImageIcon("./src/code/google/com/p/ontologytesting/images/flag_green.gif");
-    private ImageIcon iconFailTree = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_delete.png");
-    private ImageIcon iconOkTree = new ImageIcon("./src/code/google/com/p/ontologytesting/images/action_check.png");
+    private URL iconFail,iconOk,iconFailTree,iconOkTree;
     int contador=0;
     
     public TreeResults(){
@@ -77,66 +75,70 @@ public class TreeResults extends JPanel {
             @Override
              public Component getTreeCellRendererComponent(JTree pTree,Object pValue, boolean pIsSelected, boolean pIsExpanded,boolean pIsLeaf, int pRow, boolean pHasFocus)
              {
+                iconFail = this.getClass().getResource("images/flag_red.gif"); 
+                iconOk = this.getClass().getResource("images/flag_green.gif"); 
+                iconFailTree = this.getClass().getResource("images/action_delete.gif"); 
+                iconOkTree = this.getClass().getResource("images/action_check.gif");
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
                 String texto = ((String)node.getUserObject());
                 super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,pIsExpanded, pIsLeaf, pRow, pHasFocus);
                 if(texto.equals("Tests de Instanciación")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(instFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if(texto.equals("Tests de Recuperación")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(recFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if(texto.equals("Tests de Realización")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(realFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if(texto.equals("Tests de Satisfactibilidad")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(satFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if(texto.equals("Tests de Clasificación")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(clasFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if(texto.equals("Tests SPARQL")){
                     if(iconOkTree!=null && iconFailTree!=null){
                         if(sparqlFail==true){
-                            setIcon(iconFailTree);
+                            setIcon(new ImageIcon(iconFailTree));
                         }else{
-                            setIcon(iconOkTree);
+                            setIcon(new ImageIcon(iconOkTree));
                         }
                     }
                 }else if (texto.contains("passed")){
                     setForeground(Color.green);
                     if(iconOk!=null){
-                        setIcon(iconOk);
+                        setIcon(new ImageIcon(iconOk));
                     }
                 }else if (texto.contains("failed")){
                     setForeground(Color.red);
                     if(iconFail!=null){
-                        setIcon(iconFail);
+                        setIcon(new ImageIcon(iconFail));
                     }
                 }
                 return (this);
