@@ -18,9 +18,6 @@ import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.NoSuchElementException;
@@ -578,7 +575,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            IOManagerImplementation.setEsNuevo(true);
+            IOManagerImplementation.setEsNuevo(false);
             this.validate();
         }
     }
@@ -588,13 +585,11 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         boolean res = utils.fileChooser(true, true, false);
         if(res == true){
             this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
-            this.setNombreProyecto(nombreProyecto);
+            this.setNombreProyecto(utils.getNombreProyecto());
             collection = persist.loadProject();
             persist.prepareProject(collection);
             abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
             abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
-            abrirP.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            abrirP.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             abrirP.setVisible(true);
             if(abrirP.isProyectoCargado()==true){
                 this.inicializarContadores();

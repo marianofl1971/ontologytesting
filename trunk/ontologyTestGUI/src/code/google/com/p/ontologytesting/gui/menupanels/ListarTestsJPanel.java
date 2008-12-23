@@ -326,30 +326,36 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
 private void testSimplesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSimplesListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(modeloSimples.getSize()>0){
-        popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
-        MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
-        lista.addMouseListener(popupListener);
+    if(lista.getSize()!=null && modeloSimples.getSize()>0){
+        if(lista.getLeadSelectionIndex()<modeloSimples.getSize()){
+            popTest.setTestSelec(modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+            MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
+            lista.addMouseListener(popupListener);
+        }
     }
 }//GEN-LAST:event_testSimplesListValueChanged
 
 private void testSparqlListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_testSparqlListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(modeloSparql.getSize()>0){
-        popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
-        MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
-        lista.addMouseListener(popupListener);
+    if(lista.getSize()!=null && modeloSparql.getSize()>0){
+        if(lista.getLeadSelectionIndex()<modeloSparql.getSize()){
+            popTest.setTestSelec(modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+            MouseListener popupListener = new PopupListener(popTest.createPopupMenuForTests());
+            lista.addMouseListener(popupListener);
+        }
     }
 }//GEN-LAST:event_testSparqlListValueChanged
 
 private void instanciasListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_instanciasListValueChanged
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(modeloInstancias.getSize()>0){
-        popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
-        MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
-        lista.addMouseListener(popupListener);
+    if(lista.getSize()!=null && modeloInstancias.getSize()>0){
+        if(lista.getLeadSelectionIndex()<modeloInstancias.getSize()){
+            popInst.setInstSelec(modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
+            MouseListener popupListener = new PopupListener(popInst.createPopupMenuForInstances());
+            lista.addMouseListener(popupListener);
+        }
     }
 }//GEN-LAST:event_instanciasListValueChanged
 
@@ -383,7 +389,7 @@ private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(modeloSimples.size()>0){
+    if(lista.getSize()!=null && modeloSimples.size()>0){
         ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
         if(evt.getClickCount()==2){
             opMenu.editarTest(scenario);
@@ -395,17 +401,19 @@ private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSparqlListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
-    if(evt.getClickCount()==2){
-        opMenu.editarTest(scenario);
-        controlador.prepararTest(scenario.getTipoTest().name()); 
+    if(lista.getSize()!=null && modeloSparql.size()>0){
+        ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+        if(evt.getClickCount()==2){
+            opMenu.editarTest(scenario);
+            controlador.prepararTest(scenario.getTipoTest().name());  
+        }
     }
 }//GEN-LAST:event_testSparqlListMouseClicked
 
 private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(lista.getSize()!=null){
+    if(lista.getSize()!=null && modeloInstancias.size()>0){
         Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
         if(evt.getClickCount()==2){
             MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
