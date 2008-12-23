@@ -36,13 +36,13 @@ public class Reasoner {
            File directorio_file = new File(home+"/.ontologyTestGUI/");
            directorio_file.mkdir();
            FileOutputStream out = new FileOutputStream(home+"/.ontologyTestGUI/"+arch);
-           tmp.store(out, "Configuración de OntologyTestGUI");
+           tmp.store(out, "Configuracion de OntologyTestGUI");
            out.close();
          }
          FileInputStream in =new FileInputStream(archivo);
          propiedades.load(in);
        }catch (IOException ex) {
-         System.out.println("Cagamos en la configuración");
+         System.out.println("Error durante la configuracion");
        }
         try {
             reasoner = (InterfaceReasoner) Class.forName(propiedades.getProperty("DRIVER")).newInstance();
