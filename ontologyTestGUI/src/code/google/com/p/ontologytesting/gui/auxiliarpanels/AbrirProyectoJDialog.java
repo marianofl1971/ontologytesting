@@ -16,6 +16,7 @@ import code.google.com.p.ontologytesting.persistence.*;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -35,6 +36,8 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         initComponents();
         utils = new FileChooserSelector();
         this.setTitle("Ubicación de la Ontología y el Namespace");
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     }
 
     /** This method is called from within the constructor to

@@ -20,7 +20,7 @@ import javax.swing.JFileChooser;
 public class FileChooserSelector {
 
     private JFileChooser filechooser;
-    private String linea,nsDefecto;
+    private String linea,nsDefecto,nombreProyecto;
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
 
@@ -41,6 +41,7 @@ public class FileChooserSelector {
         }
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
+            setNombreProyecto(selectedFile.getName());
             if(newProject==true){
                 BufferedReader bf = null;
                 try {
@@ -90,6 +91,14 @@ public class FileChooserSelector {
 
     public void setNsDefecto(String aNsDefecto) {
         nsDefecto = aNsDefecto;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
     }
 
 }
