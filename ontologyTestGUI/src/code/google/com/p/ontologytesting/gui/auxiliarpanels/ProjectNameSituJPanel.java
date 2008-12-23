@@ -48,6 +48,12 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Nombre del Proyecto:");
 
+        nombreProyectoTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nombreProyectoTextFieldKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Ubicacion del Proyecto:");
 
         examinarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
@@ -121,6 +127,13 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {nombreProyectoTextField, ubicacionProyectoTextField});
 
     }// </editor-fold>//GEN-END:initComponents
+
+private void nombreProyectoTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreProyectoTextFieldKeyPressed
+// TODO add your handling code here:
+    if(!carpetaProyectoTextField.getText().equals("")){//GEN-LAST:event_nombreProyectoTextFieldKeyPressed
+        carpetaProyectoTextField.setText(FileChooserSelector.getPathSelected()+"\\"+getNombreProyectoTextField());
+    }
+}
 
 private void examinarProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
