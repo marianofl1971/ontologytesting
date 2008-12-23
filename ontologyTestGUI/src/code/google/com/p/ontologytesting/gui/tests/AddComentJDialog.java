@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui.tests;
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import java.awt.Frame;
 
 /**
@@ -26,7 +27,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         comentTextArea.setWrapStyleWord(true);
         
         this.setTitle("Añadir Comentario");
-        this.setLocationRelativeTo(this.getParent());
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setSize(desktopWidth,desktopHeight);
     }
 
