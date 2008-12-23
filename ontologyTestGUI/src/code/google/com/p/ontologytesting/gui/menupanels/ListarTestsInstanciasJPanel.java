@@ -263,6 +263,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
         jSplitPane1.setPreferredSize(new java.awt.Dimension(500, 200));
 
         descripcion.setColumns(20);
+        descripcion.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         descripcion.setRows(5);
         descScrollPane.setViewportView(descripcion);
 
@@ -283,6 +284,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
 
         jSplitPane1.setRightComponent(jPanel2);
 
+        list.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         listScrollPane.setViewportView(list);
 
         jSplitPane1.setLeftComponent(listScrollPane);
