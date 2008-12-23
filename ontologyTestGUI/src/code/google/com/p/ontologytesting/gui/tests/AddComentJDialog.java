@@ -22,10 +22,9 @@ public class AddComentJDialog extends javax.swing.JDialog {
     public AddComentJDialog(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+        añadirButton.requestFocus();
         comentTextArea.setLineWrap(true);
         comentTextArea.setWrapStyleWord(true);
-        
         this.setTitle("Añadir Comentario");
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setSize(desktopWidth,desktopHeight);
@@ -88,14 +87,17 @@ public class AddComentJDialog extends javax.swing.JDialog {
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                        .addComponent(limpiarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                        .addComponent(cancelarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(añadirButton)))
+                        .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                            .addGroup(contentPanelLayout.createSequentialGroup()
+                                .addComponent(limpiarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                                .addComponent(añadirButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelarButton)))
+                        .addGap(16, 16, 16)))
                 .addContainerGap())
         );
         contentPanelLayout.setVerticalGroup(
@@ -107,9 +109,9 @@ public class AddComentJDialog extends javax.swing.JDialog {
                 .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limpiarButton)
                     .addComponent(añadirButton)
-                    .addComponent(cancelarButton)
-                    .addComponent(limpiarButton))
+                    .addComponent(cancelarButton))
                 .addContainerGap())
         );
 
@@ -117,7 +119,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 396, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

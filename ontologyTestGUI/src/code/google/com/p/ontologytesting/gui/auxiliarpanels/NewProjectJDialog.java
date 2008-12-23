@@ -33,6 +33,7 @@ public class NewProjectJDialog extends javax.swing.JDialog {
     public NewProjectJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        sigButton.requestFocus();
         panelAviso = new AniadirPanelDeAviso();
         this.setTitle("Nuevo Proyecto");
         project = new ProjectNameSituJPanel();
@@ -151,14 +152,14 @@ private void antButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void sigButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sigButtonActionPerformed
 // TODO add your handling code here:
-    antButton.setEnabled(true);
-    terminarButton.setEnabled(true);
-    sigButton.setEnabled(false);
     ubicProy = project.getUbicacionProyecto();
     nombreProy = project.getNombreProyectoTextField();
     if(nombreProy.equals("") || (ubicProy.equals(""))){
         panelAviso.warningAction("Todos los campos son obligatorios", this);
     }else{
+        terminarButton.setEnabled(true);
+        sigButton.setEnabled(false);
+        antButton.setEnabled(true);
         project.setNombreP(nombreProy);
         project.setUbicP(ubicProy);
         contentPanel.remove(0);

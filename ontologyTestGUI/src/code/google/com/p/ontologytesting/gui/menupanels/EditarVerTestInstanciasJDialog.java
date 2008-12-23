@@ -26,6 +26,7 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
     public EditarVerTestInstanciasJDialog(java.awt.Frame parent, boolean modal, ListarTestsInstanciasJPanel listarTestInst,boolean isTest) {
         super(parent, modal);
         initComponents();
+        editarButton.requestFocus();
         panelAviso = new AniadirPanelDeAviso();
         this.setListarTestInst(listarTestInst);
         this.setIsTest(isTest);

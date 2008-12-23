@@ -63,6 +63,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         scrollPane.setHorizontalScrollBar(null);
 
         testDescriptionPane.setContentType("text/html");
+        testDescriptionPane.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         testDescriptionPane.setAutoscrolls(false);
         scrollPane.setViewportView(testDescriptionPane);
 

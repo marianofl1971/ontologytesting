@@ -47,6 +47,7 @@ public class ImportarTestsInstJDialog extends javax.swing.JDialog {
     public ImportarTestsInstJDialog(Frame parent, boolean modal,boolean impTest) {
         super(parent, modal);
         initComponents();
+        importarButton.requestFocus();
         utils = new FileChooserSelector();
         panelAviso = new AniadirPanelDeAviso();
         contentPanel.setLayout(new FlowLayout());  
