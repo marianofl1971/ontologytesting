@@ -34,6 +34,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
     public AbrirProyectoJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        aceptarButton.requestFocus();
         utils = new FileChooserSelector();
         this.setTitle("Ubicación de la Ontología y el Namespace");
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

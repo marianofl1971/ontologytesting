@@ -27,6 +27,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
         super(parent, modal);
         initComponents();
+        aceptarButton.requestFocus();
         contentPanel.setLayout(new FlowLayout());  
         contentPanel.add(new ListarTestsInstanciasJPanel());
         contentPanel.getParent().validate();
@@ -75,9 +76,10 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
+            .addGap(0, 243, Short.MAX_VALUE)
         );
 
+        verTestButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         verTestButton.setText("Ver Test Completo");
         verTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +87,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
             }
         });
 
+        aceptarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
         aceptarButton.setText("Asociar");
         aceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +95,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
             }
         });
 
+        cancelarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
         cancelarButton.setText("Cancelar");
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
