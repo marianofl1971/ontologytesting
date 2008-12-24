@@ -21,6 +21,7 @@ public class HelpJDialog extends javax.swing.JDialog {
         helpEditorPane.setContentType("text/html");
         helpEditorPane.setText(help);
         helpEditorPane.setEditable(false);
+        helpEditorPane.setCaretPosition(0);
         this.setTitle("Documentación de Ayuda");
     }
 
