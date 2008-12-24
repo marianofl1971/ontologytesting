@@ -28,7 +28,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         String print = verTest(scenario);
         testDescriptionPane.setText(print);
         testDescriptionPane.setEditable(false);
-        scrollPane.getVerticalScrollBar().setValue(0);
+        testDescriptionPane.setCaretPosition(0);
     }
     
     public SeeTestJDialog(JFrame parent, boolean modal, Instancias instancias) {
@@ -40,6 +40,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         String print = verInstancias(instancias);
         testDescriptionPane.setText(print);
         testDescriptionPane.setEditable(false);
+        testDescriptionPane.setCaretPosition(0);
     }
 
 

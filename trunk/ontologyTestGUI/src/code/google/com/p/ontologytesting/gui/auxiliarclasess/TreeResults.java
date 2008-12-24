@@ -65,6 +65,7 @@ public class TreeResults extends JPanel {
                     int size = test.length();
                     test = test.substring(0,size-9);
                     editor = displaySimpleTest(test,testResult);
+                    editor.setCaretPosition(0);
                     setTestSeleccionado(test);
                 } 
             }
@@ -153,6 +154,7 @@ public class TreeResults extends JPanel {
         treeView = new JScrollPane(tree);
         editor.setEditable(false);
         resultsView = new JScrollPane(editor);
+        editor.setCaretPosition(0);
 
         ListAndResultsJPanel listAndRes = ListAndResultsJPanel.getInstance();
         listT.aniadirTreeResult(treeView);
@@ -196,6 +198,7 @@ public class TreeResults extends JPanel {
         
         StringBuffer resultado = new StringBuffer();
         editor.setContentType("text/html");
+        editor.setCaretPosition(0);
         ListIterator liFailures,liSparql,liFailuresPassed,liSparqlPassed;
         int var=0;
         List<OntologyTestFailure> failures = testresult.getOntologyTestFailureQuery();
