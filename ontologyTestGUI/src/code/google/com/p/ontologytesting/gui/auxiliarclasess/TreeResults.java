@@ -77,8 +77,8 @@ public class TreeResults extends JPanel {
              {
                 iconFail = this.getClass().getResource("images/flag_red.gif"); 
                 iconOk = this.getClass().getResource("images/flag_green.gif"); 
-                iconFailTree = this.getClass().getResource("images/action_delete.gif"); 
-                iconOkTree = this.getClass().getResource("images/action_check.gif");
+                iconFailTree = this.getClass().getResource("images/action_delete.png"); 
+                iconOkTree = this.getClass().getResource("images/action_check.png");
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)pValue;
                 String texto = ((String)node.getUserObject());
                 super.getTreeCellRendererComponent(pTree, pValue, pIsSelected,pIsExpanded, pIsLeaf, pRow, pHasFocus);

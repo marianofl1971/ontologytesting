@@ -1,5 +1,6 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.IOManager;
@@ -21,18 +22,19 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
     private IOManager persist = new IOManagerImplementation();
-    private boolean isCancel=false;
+    private boolean isCancel=false,asociadas=false,guardar;
     
     /** Creates new form AsociarInstanciasATestJDialog */
-    public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst) {
+    public AsociarInstanciasATestJDialog(Frame parent, boolean modal,Instancias inst,boolean guardar) {
         super(parent, modal);
         initComponents();
         aceptarButton.requestFocus();
         contentPanel.setLayout(new FlowLayout());  
         contentPanel.add(new ListarTestsInstanciasJPanel());
         contentPanel.getParent().validate();
+        this.setGuardar(guardar);
         this.setInstancias(inst);
-        this.setLocationRelativeTo(this.getParent());
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.prepararImport(CollectionTest.getInstance().getScenariotest());
         this.setTitle("Asociar Instancias a Test");
     }
@@ -165,21 +167,24 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         for(int i=0;i<scenImp.size();i++){
             Instancias inst = new Instancias(this.getInstancias());
             scenImp.get(i).setInstancias(inst);
-            persist.replaceScenarioLocally(scenImp.get(i));
+            asociadas = persist.replaceScenarioLocally(scenImp.get(i));
         }
-        JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-        "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-        this.setVisible(false);
+        if(asociadas==true){
+            if(isGuardar()==false){
+                JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.setVisible(false);
+            this.setAsociadas(asociadas);
+        }
     }
 }//GEN-LAST:event_aceptarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
     this.setVisible(false);//GEN-LAST:event_cancelarButtonActionPerformed
-    JOptionPane.showMessageDialog(this,"Instancias Guardadas pero no asociadas",                                                  
-    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
-    this.setVisible(false);
     this.setIsCancel(true);
+    this.setAsociadas(false);
 }
 
 public Instancias getInstancias() {
@@ -214,6 +219,22 @@ public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados)
 
     public void setIsCancel(boolean isCancel) {
         this.isCancel = isCancel;
+    }
+
+    public boolean isAsociadas() {
+        return asociadas;
+    }
+
+    public void setAsociadas(boolean asociadas) {
+        this.asociadas = asociadas;
+    }
+
+    public boolean isGuardar() {
+        return guardar;
+    }
+
+    public void setGuardar(boolean guardar) {
+        this.guardar = guardar;
     }
 
 }

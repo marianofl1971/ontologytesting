@@ -406,20 +406,24 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     }// </editor-fold>//GEN-END:initComponents
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-    boolean result = prepararInstancias(true);
+    boolean asoc = soloAsociar(true);
+    boolean res = false;
+    continuar=true;
+    if(asoc==true){
+        res = prepararInstancias(true);
+    }
     if(continuar==true){
-        boolean asoc = soloAsociar(result);
         if(this.isFromTest()==false){
             if(asociarInst.isIsCancel()==true){
                 continuar=false;
             }
         }
         if(continuar==true){
-            if(asoc == true){
+            if(res == true){
                 JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }else{
-                JOptionPane.showMessageDialog(this,"Acción no realizada",                                                  
+                JOptionPane.showMessageDialog(this,"Instancias Asociadas pero No Guardadas",                                                  
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -528,17 +532,21 @@ private void borrarSelecButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soloAsociarButtonActionPerformed
 // TODO add your handling code here:
-    boolean res = this.prepararInstancias(false);
+    continuar=true;
+    boolean res = prepararInstancias(false);
     if(continuar==true){
         boolean resAsoc = soloAsociar(res);
         if(isFromTest()==true){
             if(resAsoc==true){
                 JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(this,"Instancias No Asociadas",                                                  
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                "Error Message",JOptionPane.ERROR_MESSAGE);
             }
+        }else if(resAsoc==true){
+            JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
+            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
@@ -547,11 +555,11 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
 public boolean soloAsociar(boolean res){ 
     if(res==true){
         if(isFromTest()==false){
-            asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias());
+            asociarInst = new AsociarInstanciasATestJDialog(null, true, this.getInstancias(),true);
             asociarInst.setLocationRelativeTo(MainApplicationJFrame.getInstance());
             asociarInst.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             asociarInst.setVisible(true);
-            return true;
+            return asociarInst.isAsociadas();
         }else{
             getScenario().setInstancias(getInstancias());
             persist.replaceScenarioLocally(getScenario());
@@ -565,6 +573,7 @@ public boolean soloAsociar(boolean res){
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
 //GEN-LAST:event_guardarButtonActionPerformed
+    continuar=true;
     boolean result = prepararInstancias(true);
     if(continuar==true){
         if(result==true){
