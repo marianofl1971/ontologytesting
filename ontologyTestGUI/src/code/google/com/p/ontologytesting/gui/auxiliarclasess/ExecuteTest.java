@@ -53,7 +53,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
         OntologyTestCase testCase = new OntologyTestCase();
         testResult = new OntologyTestResult();
         if(this.isCancelled()==false){
-            testCase.run(testResult, CollectionTest.getInstance(), scenario);   
+            testCase.run(testResult, CollectionTest.getInstance().getOntology(),CollectionTest.getInstance().getNamespace(), scenario);   
         }
         return testResult;
     }
@@ -65,7 +65,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
         int div = 100/size;
         for(int i=0;i<size;i++){
             if(this.isCancelled()==false){
-                testCase.run(testResult, CollectionTest.getInstance(), listScenario.get(i));
+                testCase.run(testResult, CollectionTest.getInstance().getOntology(),CollectionTest.getInstance().getNamespace(), listScenario.get(i));
                 setProgress(getProgress()+div);
             }
         }

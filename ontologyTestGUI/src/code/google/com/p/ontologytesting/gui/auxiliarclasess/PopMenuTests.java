@@ -13,6 +13,7 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -28,6 +29,7 @@ public class PopMenuTests implements ActionListener{
     private OpcionesMenu menu = new OpcionesMenu();
     private String testSelec="";
     private ScenarioTest s = new ScenarioTest();
+    private URL editar,ejecutar,eliminarInst,eliminar,ver;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -75,25 +77,30 @@ public class PopMenuTests implements ActionListener{
     
     public JPopupMenu createPopupMenuForTests() {
         JMenuItem menuItem;  
+        ver = this.getClass().getResource("images/document-print-preview.png");
+        eliminar = this.getClass().getResource("images/eliminar.png");
+        ejecutar = this.getClass().getResource("images/applications-system.png");
+        editar = this.getClass().getResource("images/page_edit.png");
+        eliminarInst = this.getClass().getResource("images/edit-clear.png");
         JPopupMenu popup = new JPopupMenu();
         menuItem = new JMenuItem("Editar");
-        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/page_edit.png"));
+        menuItem.setIcon(new ImageIcon(editar));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Ejecutar");
-        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/applications-system.png"));
+        menuItem.setIcon(new ImageIcon(ejecutar));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Eliminar Instancias");
-        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/edit-clear.png"));
+        menuItem.setIcon(new ImageIcon(eliminarInst));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Ver");
-        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/document-print-preview.png"));
+        menuItem.setIcon(new ImageIcon(ver));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Eliminar");
-        menuItem.setIcon(new ImageIcon("./src/code/google/com/p/ontologytesting/images/eliminar.png"));
+        menuItem.setIcon(new ImageIcon(eliminar));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         

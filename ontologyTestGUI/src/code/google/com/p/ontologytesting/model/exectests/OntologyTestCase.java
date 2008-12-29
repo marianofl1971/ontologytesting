@@ -227,10 +227,7 @@ public class OntologyTestCase implements OntologyTest{
     }
     
     @Override
-    public void run(OntologyTestResult testresult, CollectionTest baterytest, ScenarioTest scenariotest) throws InvalidOntologyException{ 
-
-        String ont = baterytest.getOntology();
-        String ns = baterytest.getNamespace();
+    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenariotest) throws InvalidOntologyException{ 
 
         setUpOntology(scenariotest, ont, ns);
         runOntologyTest(testresult,ns,scenariotest);
