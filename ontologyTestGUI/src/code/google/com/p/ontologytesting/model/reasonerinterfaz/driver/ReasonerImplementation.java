@@ -25,14 +25,20 @@ import java.util.List;
  */
 public class ReasonerImplementation implements InterfaceReasoner{
 
-    private final OntModel model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
+    private OntModel model;
     private OntClass nameclass;
     private Property nameprop;
     
     public ReasonerImplementation(){}
     
     @Override
+    public void selectReasoner() {
+        model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
+    }
+    
+    @Override
     public boolean addInstanceClass(String ns, String nameClass, String value) {
+        selectReasoner();
         Iterator it = model.listNamedClasses();
         String[] clas = null;
         ArrayList<String> clases = new ArrayList<String>();
@@ -53,6 +59,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
 
     @Override
     public boolean addInstanceProperty(String ns, String nameProperty, String value) {
+        selectReasoner();
         Iterator it = model.listObjectProperties();
         String[] prop = null;
         ArrayList<String> propiedades = new ArrayList<String>();
@@ -73,11 +80,13 @@ public class ReasonerImplementation implements InterfaceReasoner{
 
     @Override
     public void deleteEntries() {
+        selectReasoner();
         model.removeAll();
     }
 
     @Override
     public void addReasoner(String ontologia) throws InvalidOntologyException{
+        selectReasoner();
         ontologia = "file:".concat(ontologia);
         try {
             model.read(ontologia);  
@@ -92,7 +101,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     @Override
     public String instantiation(String ns, String className, 
             String individualName) throws InvalidOntologyException{    
-        
+        selectReasoner();
         OntClass ontClass = model.getOntClass(ns + className);
         if(ontClass==null) return "La clase introducida no es una instancia " +
                 "para el modelo";
@@ -115,7 +124,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     //TODOS los individuos que son instancias de un concepto    
     @Override
     public ArrayList<String> retieval(String ns, String className){
-        
+        selectReasoner();
         ArrayList<String> rval = new ArrayList<String>();
         OntClass ontClass = model.getOntClass(ns + className);    
         if(ontClass==null) return rval=null;
@@ -137,7 +146,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     //Dado un individuo, encontrar el concepto más específico que lo contiene
     @Override
     public String realization(String ns, String individualName){
-         
+        selectReasoner();
         Individual individual = model.getIndividual(ns + individualName);
         if(individual==null) return "El individuo introducido no es una instancia " +
                 "para el modelo";
@@ -155,7 +164,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     @Override
     public String satisfactibility(String ns, String concepto, String clase) 
             throws InvalidOntologyException{
-      
+       selectReasoner();
        OntClass ontClass = model.getOntClass(ns+clase);
        if(ontClass==null) return "La clase introducida no es una " +
                "instancia para el modelo";
@@ -188,7 +197,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     @Override
     public ArrayList<String> classification(String ns, String individuo) 
             throws InvalidOntologyException{
-        
+        selectReasoner();
         Individual individual = model.getIndividual(ns + individuo);
         String pertenece;
         ArrayList<String> clases = new ArrayList<String>();
@@ -220,6 +229,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     
     @Override
     public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
+        selectReasoner();
         Query query=null;
         String expReg = "([\\?]{1}[a-zA-Z]+)";
         ArrayList<String> sel = new ArrayList<String>();
