@@ -37,7 +37,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private List<QueryOntology> queryTest;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
-    private IOManagerImplementation persist = new IOManagerImplementation();
+    private IOManager persist = new IOManagerImplementation();
     private String nombreTest = "",descTest = "";
     private ControladorTests controlador;
     private OpcionesMenu menu;

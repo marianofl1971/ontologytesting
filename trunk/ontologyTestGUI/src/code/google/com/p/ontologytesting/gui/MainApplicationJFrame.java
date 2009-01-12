@@ -40,7 +40,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private ControladorTests controlador;
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
-    private IOManagerImplementation persist = new IOManagerImplementation();
+    private IOManager persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false,existeProyecto=false;
     private AniadirPanelDeAviso panelAviso;
@@ -408,7 +408,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            IOManagerImplementation.setEsNuevo(true);
+            persist.setEsNuevo(true);
             this.validate();
         }
     }
@@ -425,7 +425,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         salirMenuItem.setEnabled(true);
         if(existeProyecto==false){
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            IOManagerImplementation.setEsNuevo(true);
+            persist.setEsNuevo(true);
             existeProyecto=true;
             this.validate();
         }
@@ -575,7 +575,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            IOManagerImplementation.setEsNuevo(false);
+            persist.setEsNuevo(false);
             this.validate();
         }
     }
@@ -603,7 +603,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                     contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                     ControladorTests.getInstance().inicializarGuardados();
                     ControladorTests.getInstance().inicializarSeleccionados();
-                    IOManagerImplementation.setEsNuevo(false);
+                    persist.setEsNuevo(false);
                     existeProyecto=true;
                     this.validate();
                 }
@@ -648,7 +648,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 }
     
 private void guardarProyecto(boolean como, String fichero){
-    IOManagerImplementation manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
+    IOManager manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
     IOSwingWorker sw = new IOSwingWorker(manager);
     progres = new ProgressControlJDialog(sw);
     JProgressBar progresBar = progres.getProgressBar();
@@ -660,9 +660,9 @@ private void guardarProyecto(boolean como, String fichero){
 
 public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         
-    private IOManagerImplementation iomanager;
+    private IOManager iomanager = new IOManagerImplementation();
 
-    private IOSwingWorker(IOManagerImplementation iomanager) {
+    private IOSwingWorker(IOManager iomanager) {
         this.iomanager=iomanager;
     }
 
@@ -673,7 +673,7 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         return res;
     }
 
-    private boolean saveTest(IOManagerImplementation iomanager){ 
+    private boolean saveTest(IOManager iomanager){ 
         boolean res=false;
         try {
             res = iomanager.saveProject(iomanager.getComo(), iomanager.getCarpetaProy(), iomanager.getNombreProy(), iomanager.getFichero());

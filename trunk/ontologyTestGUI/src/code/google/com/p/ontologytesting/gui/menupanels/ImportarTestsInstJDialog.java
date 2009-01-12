@@ -36,7 +36,7 @@ public class ImportarTestsInstJDialog extends javax.swing.JDialog {
     private List<ScenarioTest> scenarioSimple = new ArrayList<ScenarioTest>();
     private List<Instancias> instancias = new ArrayList<Instancias>();
     private ListarTestsJPanel listT;
-    private IOManagerImplementation persist = new IOManagerImplementation();
+    private IOManager persist = new IOManagerImplementation();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private boolean importarTest=false;
     private SeeTestJDialog verTest = null;
