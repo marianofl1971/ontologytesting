@@ -37,5 +37,25 @@ public interface IOManager {
     public boolean testYaGuardado(ScenarioTest scen);
     
     public boolean replaceScenarioLocally(ScenarioTest scen);
+    
+    public boolean isEsNuevo();
+
+    public void setEsNuevo(boolean aesNuevo);
+
+    public boolean getComo();
+
+    public void setComo(boolean como);
+
+    public String getCarpetaProy();
+
+    public void setCarpetaProy(String carpetaProy);
+
+    public String getNombreProy();
+
+    public void setNombreProy(String nombreProy);
+
+    public String getFichero();
+
+    public void setFichero(String fichero);
 
 }

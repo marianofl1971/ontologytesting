@@ -21,6 +21,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
+import code.google.com.p.ontologytesting.persistence.IOManager;
 
 /**
  *
@@ -36,7 +37,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private Reasoner jenaInterface;
     private InterfaceReasoner jena;
     private ValidarTests validarTest;
-    private IOManagerImplementation persist = new IOManagerImplementation();
+    private IOManager persist = new IOManagerImplementation();
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;

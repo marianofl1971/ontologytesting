@@ -35,7 +35,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private List real;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
-    private IOManagerImplementation persist = new IOManagerImplementation();
+    private IOManager persist = new IOManagerImplementation();
     private ScenarioTest scenarioActual;
     private String nombreTest = "",descTest = "";
     private ControladorTests controlador;

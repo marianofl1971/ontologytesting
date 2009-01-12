@@ -27,7 +27,7 @@ public class IOManagerImplementation implements IOManager{
 
     private XMLEncoder e;
     private XMLDecoder decoder;
-    private static boolean esNuevo=false;
+    private boolean esNuevo=false;
     private boolean como=false;
     private String carpetaProy,nombreProy,fichero;
     
@@ -76,7 +76,7 @@ public class IOManagerImplementation implements IOManager{
             e.close();
             return true;
         }else{
-            if(IOManagerImplementation.esNuevo==true){
+            if(this.esNuevo==true){
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy+".xml")));
             }else{
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
@@ -149,42 +149,52 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    public static boolean isEsNuevo() {
+    @Override
+    public boolean isEsNuevo() {
         return esNuevo;
     }
 
-    public static void setEsNuevo(boolean aesNuevo) {
+    @Override
+    public void setEsNuevo(boolean aesNuevo) {
         esNuevo= aesNuevo;
     }
 
+    @Override
     public boolean getComo() {
         return como;
     }
 
+    @Override
     public void setComo(boolean como) {
         this.como = como;
     }
 
+    @Override
     public String getCarpetaProy() {
         return carpetaProy;
     }
 
+    @Override
     public void setCarpetaProy(String carpetaProy) {
         this.carpetaProy = carpetaProy;
     }
 
+    @Override
     public String getNombreProy() {
         return nombreProy;
     }
 
+    @Override
     public void setNombreProy(String nombreProy) {
         this.nombreProy = nombreProy;
     }
 
+    @Override
     public String getFichero() {
         return fichero;
     }
 
+    @Override
     public void setFichero(String fichero) {
         this.fichero = fichero;
     }
