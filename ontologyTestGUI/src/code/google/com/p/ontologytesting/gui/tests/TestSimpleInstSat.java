@@ -55,7 +55,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
         descripcionJPanel.add(new DescripcionJPanel());
         opcionAyudaInstPanel.setLayout(new BoxLayout(opcionAyudaInstPanel, BoxLayout.Y_AXIS));
-        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.X_AXIS));
+        opcionTextInstPanel.setLayout(new BoxLayout(getOpcionTextInstPanel(), BoxLayout.Y_AXIS));
         instAyudaPanel.setLayout(new BoxLayout(getInstAyudaPanel(), BoxLayout.Y_AXIS));
         opcionTextInstPanel.add(new TestInstancesTextJPanel());
         int cont=1;
