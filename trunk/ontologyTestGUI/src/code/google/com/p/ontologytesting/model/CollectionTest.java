@@ -49,6 +49,13 @@ public class CollectionTest implements Serializable{
         this.instancias= new ArrayList<Instancias>();
     }
     
+    public boolean esVacio(){
+        if(this.scenariotest.size()==0 && this.ontology.equals("") && this.namespace.equals("") 
+                && this.instancias.size()==0) {
+            return true;
+        }else{return false;}
+    }
+       
     public ArrayList<ScenarioTest> getScenariotest() {
         return scenariotest;
     }

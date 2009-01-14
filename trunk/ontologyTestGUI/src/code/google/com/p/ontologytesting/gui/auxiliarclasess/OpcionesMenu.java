@@ -40,7 +40,7 @@ public class OpcionesMenu {
         }   
     }
     
-    public void editarInstancias(Instancias inst){
+    /*public void editarInstancias(Instancias inst){
         String nombre = "";
         if(!inst.getNombre().equals("")){
             nombre = inst.getNombre();
@@ -48,14 +48,14 @@ public class OpcionesMenu {
             nombre = "Editar instancias";
         }
         MainApplicationJFrame.getInstance().cargarInstancia(inst,nombre);
-    }
+    }*/
     
     public void editarInstancias(ScenarioTest scenario){
         String nombre = "";
         if(!scenario.getInstancias().getNombre().equals("")){
             nombre = scenario.getInstancias().getNombre();
         }else{
-            nombre = "Editar instancias";
+            nombre = "Asociar instancias";
         }
         MainApplicationJFrame.getInstance().cargarInstancia(scenario,nombre);
     }

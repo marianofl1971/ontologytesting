@@ -508,7 +508,8 @@ public void asociarInstancias(boolean a, boolean b){
         if(continuarSinInstancias==true){
             this.realizarAccion(a, b);
         }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
+            menu.editarInstancias(this.getScenario());
+            //MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
     }
 }
