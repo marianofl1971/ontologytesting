@@ -37,10 +37,6 @@ public interface IOManager {
     public boolean testYaGuardado(ScenarioTest scen);
     
     public boolean replaceScenarioLocally(ScenarioTest scen);
-    
-    public boolean isEsNuevo();
-
-    public void setEsNuevo(boolean aesNuevo);
 
     public boolean getComo();
 

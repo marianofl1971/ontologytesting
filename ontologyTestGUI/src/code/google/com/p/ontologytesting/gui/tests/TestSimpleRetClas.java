@@ -292,7 +292,7 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         if(continuarSinInstancias==true){
             this.realizarAccion(true, true);
         }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
+            menu.editarInstancias(this.getScenario());
         }
     }
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
@@ -312,7 +312,7 @@ public boolean guardarTest(){
         if(continuarSinInstancias==true){
             this.realizarAccion(true, false);
         }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
+            menu.editarInstancias(this.getScenario());
         }
     }
     return continuar;
@@ -329,7 +329,7 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(continuarSinInstancias==true){
             this.realizarAccion(false, true);
         }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
+            menu.editarInstancias(this.getScenario());
         }
     }
 }

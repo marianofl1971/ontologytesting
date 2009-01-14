@@ -35,7 +35,7 @@ public class Reasoner {
            tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
            File directorio_file = new File(home+"/.ontologyTestGUI/");
            try{
-           directorio_file.mkdir();
+               directorio_file.mkdir();
            }catch(SecurityException ex){
             System.out.println("No se pudo crear el directorio");
            }

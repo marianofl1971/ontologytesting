@@ -33,11 +33,12 @@ public class IOManagerImplementation implements IOManager{
     
     public IOManagerImplementation(){}
     
-    public IOManagerImplementation(boolean as,String carpetaProy, String nombreProy,String fichero){
+    public IOManagerImplementation(boolean as,String carpetaProy, String nombreProy,String fichero,boolean esNuevo){
         this.como=as;
         this.carpetaProy=carpetaProy;
         this.nombreProy=nombreProy;
         this.fichero=fichero;
+        this.esNuevo=esNuevo;
     }
     
     @Override
@@ -77,8 +78,10 @@ public class IOManagerImplementation implements IOManager{
             return true;
         }else{
             if(this.esNuevo==true){
+                System.out.println("1"+nombreProy);
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy+".xml")));
             }else{
+                System.out.println("2"+carpetaProy);
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
             }
             e.writeObject(CollectionTest.getInstance());
@@ -147,16 +150,6 @@ public class IOManagerImplementation implements IOManager{
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean isEsNuevo() {
-        return esNuevo;
-    }
-
-    @Override
-    public void setEsNuevo(boolean aesNuevo) {
-        esNuevo= aesNuevo;
     }
 
     @Override

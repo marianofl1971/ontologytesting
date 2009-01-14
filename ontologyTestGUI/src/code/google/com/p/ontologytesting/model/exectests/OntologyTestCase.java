@@ -228,7 +228,6 @@ public class OntologyTestCase implements OntologyTest{
     
     @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenariotest) throws InvalidOntologyException{ 
-
         setUpOntology(scenariotest, ont, ns);
         runOntologyTest(testresult,ns,scenariotest);
         tearDownOntology(); 

@@ -592,13 +592,14 @@ public boolean prepararInstancias(boolean guardar){
     jena = jenaInterface.getReasoner();
     if(jenaInterface.isCargado()==true){
         persist = new IOManagerImplementation();
-        try{
+        /*try{
             jena.addReasoner(CollectionTest.getInstance().getOntology());
         }catch(InvalidOntologyException ex){
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "La ontología introducida no es válida. Las instancias " +
                     "no han sido asociadas.", "Error Message", JOptionPane.ERROR_MESSAGE);
+            continuar=false;
             return false;
-        }
+        }*/
         validar = new ValidarTests();
         ciClas = null;
         ciInd = null;

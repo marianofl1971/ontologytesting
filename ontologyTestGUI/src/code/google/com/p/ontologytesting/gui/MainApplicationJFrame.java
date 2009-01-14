@@ -43,6 +43,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private IOManager persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false,existeProyecto=false;
+    private static boolean esNuevo=false;
     private AniadirPanelDeAviso panelAviso;
     private FileChooserSelector utils;
     private CollectionTest collection;
@@ -383,51 +384,58 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
-    utils = new FileChooserSelector();
-    boolean res = utils.fileChooser(false, true, false);
-    if(res == true){
-        this.guardarProyecto(true, FileChooserSelector.getPathSelected());
-    }         
+    if(CollectionTest.getInstance().esVacio()==false){
+        utils = new FileChooserSelector();
+        boolean res = utils.fileChooser(false, true, false);
+        if(res == true){
+            this.guardarProyecto(true, FileChooserSelector.getPathSelected(),esNuevo);
+        }   
+    }else{
+        panelAviso.warningAction("No tiene ningún proyecto para guardar", MainApplicationJFrame.getInstance());
+    }
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
     int aux=0;
-    if(existeProyecto==true){
+    if(existeProyecto==true && CollectionTest.getInstance().esVacio()==false){
         Object[] options = {"Si", "No", "Cancelar"};
         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION) {
-            this.guardarProyecto(false, null);
+            this.guardarProyecto(false, null,esNuevo);
             aux=1;
         }else if(n == JOptionPane.NO_OPTION){
             aux=1;
+        }else {
+            aux=2;
         }
         if(aux==1){
             ListarTestsJPanel.getInstance().eliminarDatosGuardados();
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            persist.setEsNuevo(true);
             this.validate();
         }
     }
-    NewProjectJDialog newProject = new NewProjectJDialog(this,true);
-    newProject.setLocationRelativeTo(this);
-    newProject.setVisible(true);
-    if(newProject.getProyectoCreado()==true){
-        this.inicializarContadores();
-        guardarProyectoComoMenuItem.setEnabled(true);
-        guardarProyectoMenuItem.setEnabled(true);
-        instanciasMenu.setEnabled(true);
-        testsMenu.setEnabled(true);
-        ejecutarMenu.setEnabled(true);
-        salirMenuItem.setEnabled(true);
-        if(existeProyecto==false){
-            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            persist.setEsNuevo(true);
-            existeProyecto=true;
-            this.validate();
+    if(aux!=2){
+        esNuevo=true;
+        NewProjectJDialog newProject = new NewProjectJDialog(this,true);
+        newProject.setLocationRelativeTo(this);
+        newProject.setVisible(true);
+        if(newProject.getProyectoCreado()==true){
+            this.inicializarContadores();
+            guardarProyectoComoMenuItem.setEnabled(true);
+            guardarProyectoMenuItem.setEnabled(true);
+            instanciasMenu.setEnabled(true);
+            testsMenu.setEnabled(true);
+            ejecutarMenu.setEnabled(true);
+            salirMenuItem.setEnabled(true);
+            if(existeProyecto==false){
+                contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+                existeProyecto=true;
+                this.validate();
+            }
         }
     }
 }
@@ -437,7 +445,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto?", 
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
-            this.guardarProyecto(false, null);
+            this.guardarProyecto(false, null,esNuevo);
             this.dispose();
             System.exit(0);
         }else{
@@ -554,67 +562,74 @@ private void ejecutarTodosMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void guardarProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoMenuItemActionPerformed
 // TODO add your handling code here:
-    this.guardarProyecto(false, null);
+    if(CollectionTest.getInstance().esVacio()==false){
+        this.guardarProyecto(false, null,esNuevo);
+    }else{
+        panelAviso.warningAction("No tiene ningún proyecto para guardar", MainApplicationJFrame.getInstance());
+    }
 }//GEN-LAST:event_guardarProyectoMenuItemActionPerformed
 
 private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirProyectoMenuItemActionPerformed
 // TODO add your handling code here: 
     int aux=0;
-    if(existeProyecto==true){
+    if(existeProyecto==true && CollectionTest.getInstance().esVacio()==false){
         Object[] options = {"Si", "No", "Cancelar"};
         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION) {
-            this.guardarProyecto(false, null);
+            this.guardarProyecto(false, null,esNuevo);
             aux=1;
         }else if(n == JOptionPane.NO_OPTION){
             aux=1;
+        }else{
+            aux=2;
         }
         if(aux==1){
             ListarTestsJPanel.getInstance().eliminarDatosGuardados();
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            persist.setEsNuevo(false);
             this.validate();
         }
     }
-    AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
-    try {
-        utils = new FileChooserSelector();
-        boolean res = utils.fileChooser(true, true, false);
-        if(res == true){
-            this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
-            this.setNombreProyecto(utils.getNombreProyecto());
-            collection = persist.loadProject();
-            persist.prepareProject(collection);
-            abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
-            abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
-            abrirP.setVisible(true);
-            if(abrirP.isProyectoCargado()==true){
-                this.inicializarContadores();
-                guardarProyectoComoMenuItem.setEnabled(true);
-                guardarProyectoMenuItem.setEnabled(true);
-                instanciasMenu.setEnabled(true);
-                testsMenu.setEnabled(true);
-                ejecutarMenu.setEnabled(true);
-                salirMenuItem.setEnabled(true);
-                if(existeProyecto==false){
-                    contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-                    ControladorTests.getInstance().inicializarGuardados();
-                    ControladorTests.getInstance().inicializarSeleccionados();
-                    persist.setEsNuevo(false);
-                    existeProyecto=true;
-                    this.validate();
+    if(aux!=2){
+        AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
+        try {
+            utils = new FileChooserSelector();
+            boolean res = utils.fileChooser(true, true, false);
+            if(res == true){
+                esNuevo=false;
+                this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
+                this.setNombreProyecto(utils.getNombreProyecto());
+                collection = persist.loadProject();
+                persist.prepareProject(collection);
+                abrirP.setNamespaceText(CollectionTest.getInstance().getNamespace());
+                abrirP.getUbicacionFisicaTextField().setText(CollectionTest.getInstance().getOntology());
+                abrirP.setVisible(true);
+                if(abrirP.isProyectoCargado()==true){
+                    this.inicializarContadores();
+                    guardarProyectoComoMenuItem.setEnabled(true);
+                    guardarProyectoMenuItem.setEnabled(true);
+                    instanciasMenu.setEnabled(true);
+                    testsMenu.setEnabled(true);
+                    ejecutarMenu.setEnabled(true);
+                    salirMenuItem.setEnabled(true);
+                    if(existeProyecto==false){
+                        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+                        ControladorTests.getInstance().inicializarGuardados();
+                        ControladorTests.getInstance().inicializarSeleccionados();
+                        existeProyecto=true;
+                        this.validate();
+                    }
                 }
             }
+        } catch (FileNotFoundException ex) {
+            panelAviso.errorAction("No se encontró el archivo especificado", MainApplicationJFrame.getInstance());
+        } catch (ClassCastException ex) {
+            panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
+        } catch (NoSuchElementException ex) {
+            panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
         }
-    } catch (FileNotFoundException ex) {
-        panelAviso.errorAction("No se encontró el archivo especificado", MainApplicationJFrame.getInstance());
-    } catch (ClassCastException ex) {
-        panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
-    } catch (NoSuchElementException ex) {
-        panelAviso.errorAction("Proyecto no válido", MainApplicationJFrame.getInstance());
     }
 }//GEN-LAST:event_abrirProyectoMenuItemActionPerformed
 
@@ -647,8 +662,8 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
     } 
 }
     
-private void guardarProyecto(boolean como, String fichero){
-    IOManager manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero);
+private void guardarProyecto(boolean como, String fichero,boolean esNuevo){
+    IOManager manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero,esNuevo);
     IOSwingWorker sw = new IOSwingWorker(manager);
     progres = new ProgressControlJDialog(sw);
     JProgressBar progresBar = progres.getProgressBar();
