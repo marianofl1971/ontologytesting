@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,10 +20,17 @@ import java.util.Properties;
 public class Configuration {
     
     private static Configuration config = null;
+    private String home = System.getProperty("user.home");
+    private String arch = "configuracion.properties";
+    private String directorio = "/.ontologyTestGUI/"+arch;
+    private String rutaDelArchivo = home + directorio;
+    private static Properties propiedades = null;
+    private File archivo;
     
     private synchronized static void createConfiguration() {
         if (config == null) { 
             config = new Configuration();
+            propiedades = new Properties();
         }
     }
  
@@ -31,17 +40,13 @@ public class Configuration {
     }
     
     public Properties cargarDriver(){
-        String home = System.getProperty("user.home");
-        String arch = "configuracion.properties";
-        String directorio = "/.ontologyTestGUI/"+arch;
-        String rutaDelArchivo = home + directorio;
-        Properties propiedades = new Properties();
-        File archivo = new File(rutaDelArchivo);
+        archivo = new File(rutaDelArchivo);
         try {
             if (!archivo.exists()) {
             Properties tmp = new Properties();
             tmp.setProperty("HOME",home);
             tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
+            tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
             File directorio_file = new File(home+"/.ontologyTestGUI/");
             try{
                 directorio_file.mkdir();
@@ -59,5 +64,19 @@ public class Configuration {
         }
         return propiedades;
     }
-
+    
+    public void cambiarIdioma(String idioma){
+        propiedades.remove("IDIOMA");
+        propiedades.setProperty("IDIOMA", idioma);
+        FileOutputStream out = null;
+        try{
+            out = new FileOutputStream(archivo);
+            propiedades.store(out, "Configuracion de OntologyTestGUI");
+            out.close();
+            FileInputStream in =new FileInputStream(archivo);
+            propiedades.load(in);
+        } catch (IOException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
