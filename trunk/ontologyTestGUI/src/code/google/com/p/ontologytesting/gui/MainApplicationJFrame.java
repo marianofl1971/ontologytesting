@@ -40,7 +40,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private ControladorTests controlador;
     private ScenarioTest s = new ScenarioTest();
     private String carpetaProyecto,nombreProyecto;
-    private IOManager persist = new IOManagerImplementation();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private static MainApplicationJFrame mainApp = null;
     private boolean proyectoGuardado=false,existeProyecto=false;
     private static boolean esNuevo=false;
@@ -94,6 +94,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         abrirProyectoMenuItem = new javax.swing.JMenuItem();
         guardarProyectoMenuItem = new javax.swing.JMenuItem();
         guardarProyectoComoMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         salirMenuItem = new javax.swing.JMenuItem();
         testsMenu = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -115,6 +117,10 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         ejecutarMenu = new javax.swing.JMenu();
         selecTestMenuItem = new javax.swing.JMenuItem();
         ejecutarTodosMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -137,7 +143,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
             .addGap(0, 452, Short.MAX_VALUE)
         );
 
-        fileMenu.setText("Archivo");
+        fileMenu.setText("Proyecto");
 
         nuevoProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoProyectoMenuItem.setText("Nuevo");
@@ -176,6 +182,12 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
             }
         });
         fileMenu.add(guardarProyectoComoMenuItem);
+
+        jMenuItem1.setText("Cerrar");
+        fileMenu.add(jMenuItem1);
+
+        jMenuItem2.setText("Eliminar");
+        fileMenu.add(jMenuItem2);
 
         salirMenuItem.setText("Salir");
         salirMenuItem.setEnabled(false);
@@ -345,6 +357,19 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         ejecutarMenu.add(ejecutarTodosMenuItem);
 
         menuBar.add(ejecutarMenu);
+
+        jMenu1.setText("Idiomas");
+
+        jMenuItem3.setText("Español");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Ingles (GB)");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem5.setText("Ingles (US)");
+        jMenu1.add(jMenuItem5);
+
+        menuBar.add(jMenu1);
 
         helpMenu.setText("Ayuda");
 
@@ -663,7 +688,7 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
 }
     
 private void guardarProyecto(boolean como, String fichero,boolean esNuevo){
-    IOManager manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero,esNuevo);
+    IOManagerImplementation manager = new IOManagerImplementation(como,this.getCarpetaProyecto(),this.getNombreProyecto(),fichero,esNuevo);
     IOSwingWorker sw = new IOSwingWorker(manager);
     progres = new ProgressControlJDialog(sw);
     JProgressBar progresBar = progres.getProgressBar();
@@ -675,9 +700,9 @@ private void guardarProyecto(boolean como, String fichero,boolean esNuevo){
 
 public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         
-    private IOManager iomanager = new IOManagerImplementation();
+    private IOManagerImplementation iomanager = new IOManagerImplementation();
 
-    private IOSwingWorker(IOManager iomanager) {
+    private IOSwingWorker(IOManagerImplementation iomanager) {
         this.iomanager=iomanager;
     }
 
@@ -688,7 +713,7 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         return res;
     }
 
-    private boolean saveTest(IOManager iomanager){ 
+    private boolean saveTest(IOManagerImplementation iomanager){ 
         boolean res=false;
         try {
             res = iomanager.saveProject(iomanager.getComo(), iomanager.getCarpetaProy(), iomanager.getNombreProy(), iomanager.getFichero());
@@ -898,8 +923,14 @@ public void inicializarContadores(){
     private javax.swing.JMenuItem importarInstanciasMenuItem;
     private javax.swing.JMenuItem importarTestsMenuItem;
     private javax.swing.JMenu instanciasMenu;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem nuevoInstanciasMenuItem;
     private javax.swing.JMenuItem nuevoProyectoMenuItem;

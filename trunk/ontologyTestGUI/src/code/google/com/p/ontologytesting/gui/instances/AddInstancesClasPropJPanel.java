@@ -48,7 +48,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private String[] clas,prop;
     private boolean instanciasInstGuardadas,editado,instanciaSinNombre,
             instanciaValida=true,queryValida=true,fromTest=false,continuar=true;
-    private IOManager persist = new IOManagerImplementation();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private ScenarioTest scenario = new ScenarioTest();
     private OpcionesMenu menu;
     private Instancias instanciasActuales = new Instancias();

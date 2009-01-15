@@ -24,7 +24,7 @@ import javax.swing.WindowConstants;
  */
 public class AbrirProyectoJDialog extends javax.swing.JDialog{
 
-    private IOManager persist = new IOManagerImplementation();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private boolean proyectoCargado = false;
     private FileChooserSelector utils;
     private ProgressControlJDialog progres;

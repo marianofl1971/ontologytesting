@@ -40,7 +40,9 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Formato ayuda">
-                    <Property name="tabTitle" type="java.lang.String" value="Formato ayuda"/>
+                    <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Formato_ayuda" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -121,7 +123,9 @@
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="labelInstLabel">
                               <Properties>
-                                <Property name="text" type="java.lang.String" value="                            CONSULTAS                                                          RESULTADO ESPERADO"/>
+                                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="____________________________CONSULTAS__________________________________________________________RESULTADO_ESPERADO" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                                </Property>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -136,7 +140,9 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Formato Texto">
-                    <Property name="tabTitle" type="java.lang.String" value="Formato Texto"/>
+                    <Property name="tabTitle" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                      <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Formato_Texto" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                    </Property>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -190,7 +196,9 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/code/google/com/p/ontologytesting/images/disk.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Guardar"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarButtonActionPerformed"/>
@@ -201,7 +209,9 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/code/google/com/p/ontologytesting/images/cog.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ejecutar"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ejecutarButtonActionPerformed"/>
@@ -209,8 +219,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="guardarEjecutarButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Guardar y Ejecutar"/>
-                <Property name="toolTipText" type="java.lang.String" value="Guardar y Ejecutar"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar_y_Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar_y_Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarEjecutarButtonActionPerformed"/>
@@ -221,7 +235,9 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/code/google/com/p/ontologytesting/images/add.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Instancias"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Instancias" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addInstanciasButtonActionPerformed"/>

@@ -127,7 +127,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca la consulta en SPARQL:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Introduzca_la_consulta_en_SPARQL:" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="nuevaConsultaButton">
@@ -135,7 +137,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/add.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Nueva consulta"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Nueva_consulta" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaConsultaButtonActionPerformed"/>
@@ -146,7 +150,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/paintbrush.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Limpiar"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Limpiar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarButtonActionPerformed"/>
@@ -154,7 +160,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduzca el nombre del test:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Introduzca_el_nombre_del_test:" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="testNameTextField">
@@ -192,7 +200,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Resultado esperado:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Resultado_esperado:" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -207,7 +217,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="13" style="0"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Resultado Esperado"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Resultado_Esperado" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -224,7 +236,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="13" style="0"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Consulta Sparql"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Consulta_Sparql" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -234,7 +248,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/resultset_next.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Siguiente"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Siguiente" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -246,7 +262,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/resultset_previous.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Anterior"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Anterior" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -258,7 +276,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/paintbrush.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Limpiar"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Limpiar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiarResultButtonActionPerformed"/>
@@ -269,7 +289,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/user-trash.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Borrar"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Borrar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarConsultaJButtonActionPerformed"/>
@@ -280,7 +302,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/information.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Formatos Permitidos"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Formatos_Permitidos" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="formatosPermitidosActionPerformed"/>
@@ -288,8 +312,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="guardarEjecutarJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Guardar y Ejecutar"/>
-        <Property name="toolTipText" type="java.lang.String" value="Guardar y Ejecutar"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar_y_Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar_y_Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarEjecutarJButtonActionPerformed"/>
@@ -300,7 +328,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/cog.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Ejecutar"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Ejecutar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ejecutarJButtonActionPerformed"/>
@@ -311,7 +341,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/disk.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Guardar"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Guardar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarJButtonActionPerformed"/>
@@ -322,7 +354,9 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/code/google/com/p/ontologytesting/images/add.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Instancias"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Instancias" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addInstanciasButtonActionPerformed"/>

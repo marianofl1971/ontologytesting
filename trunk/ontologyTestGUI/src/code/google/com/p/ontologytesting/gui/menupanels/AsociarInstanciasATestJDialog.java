@@ -3,7 +3,6 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.*;
-import code.google.com.p.ontologytesting.persistence.IOManager;
 import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -21,7 +20,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
     private Instancias instancias = new Instancias();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
-    private IOManager persist = new IOManagerImplementation();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private boolean isCancel=false,asociadas=false,guardar;
     
     /** Creates new form AsociarInstanciasATestJDialog */

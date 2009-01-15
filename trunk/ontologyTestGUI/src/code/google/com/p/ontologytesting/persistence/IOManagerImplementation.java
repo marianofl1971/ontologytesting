@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
  *
  * @author sara.garcia
  */
-public class IOManagerImplementation implements IOManager{
+public class IOManagerImplementation{
 
     private XMLEncoder e;
     private XMLDecoder decoder;
@@ -41,7 +41,6 @@ public class IOManagerImplementation implements IOManager{
         this.esNuevo=esNuevo;
     }
     
-    @Override
     public boolean loadProject(String ubicOnto,String namespaceOnto){                                             
         if(!namespaceOnto.endsWith("#")){
             namespaceOnto = namespaceOnto.concat("#");
@@ -51,13 +50,11 @@ public class IOManagerImplementation implements IOManager{
         return true;
     }
 
-    @Override
     public CollectionTest loadProject() throws FileNotFoundException,ClassCastException,NoSuchElementException{
        decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FileChooserSelector.getPathSelected())));
        return (CollectionTest) decoder.readObject();
     }
-    
-    @Override
+
     public void prepareProject(CollectionTest collection){
         CollectionTest.getInstance().setInstancias(collection.getInstancias());
         CollectionTest.getInstance().setNamespace(collection.getNamespace());
@@ -65,7 +62,6 @@ public class IOManagerImplementation implements IOManager{
         CollectionTest.getInstance().setScenariotest(collection.getScenariotest());
     }
 
-    @Override
     public boolean saveProject(boolean as,String carpetaProy, String nombreProy,String fichero) throws FileNotFoundException{
         if(as==true){
             if(!fichero.endsWith(".xml")){
@@ -90,14 +86,12 @@ public class IOManagerImplementation implements IOManager{
         }
     }
 
-    @Override
     public void saveInstanciasInMemory(Instancias instancias){
         if(instanciasYaGuardadas(instancias)==false){
             CollectionTest.getInstance().getInstancias().add(instancias);
         }
     }
 
-    @Override
     public boolean instanciasYaGuardadas(Instancias inst){
         List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
         for(int i=0; i<instancias.size(); i++){
@@ -108,7 +102,6 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    @Override
     public boolean replaceInstanciasLocally(Instancias inst){
         List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
         for(int i=0; i<instancias.size(); i++){
@@ -121,14 +114,12 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    @Override
     public void saveTestInMemory(ScenarioTest scenario){
         if(testYaGuardado(scenario)==false){
             CollectionTest.getInstance().getScenariotest().add(scenario);
         }
     }
 
-    @Override
     public boolean testYaGuardado(ScenarioTest scen){
         List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
         for(int i=0; i<scenario.size(); i++){
@@ -139,7 +130,6 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    @Override
     public boolean replaceScenarioLocally(ScenarioTest scen){
         List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
         for(int i=0; i<scenario.size(); i++){
@@ -152,42 +142,34 @@ public class IOManagerImplementation implements IOManager{
         return false;
     }
 
-    @Override
     public boolean getComo() {
         return como;
     }
 
-    @Override
     public void setComo(boolean como) {
         this.como = como;
     }
 
-    @Override
     public String getCarpetaProy() {
         return carpetaProy;
     }
 
-    @Override
     public void setCarpetaProy(String carpetaProy) {
         this.carpetaProy = carpetaProy;
     }
 
-    @Override
     public String getNombreProy() {
         return nombreProy;
     }
 
-    @Override
     public void setNombreProy(String nombreProy) {
         this.nombreProy = nombreProy;
     }
 
-    @Override
     public String getFichero() {
         return fichero;
     }
 
-    @Override
     public void setFichero(String fichero) {
         this.fichero = fichero;
     }
