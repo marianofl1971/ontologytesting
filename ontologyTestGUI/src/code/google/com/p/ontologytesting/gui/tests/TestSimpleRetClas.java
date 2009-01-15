@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.persistence.*;
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -39,7 +38,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private List<QueryOntology> queryTest;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
-    private IOManager persist = new IOManagerImplementation();
+    private IOManagerImplementation persist = new IOManagerImplementation();
     private String nombreTest = "",descTest = "";
     private ControladorTests controlador;
     private OpcionesMenu menu;
