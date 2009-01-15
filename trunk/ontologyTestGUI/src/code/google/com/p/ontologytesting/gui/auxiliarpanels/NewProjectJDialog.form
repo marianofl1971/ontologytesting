@@ -79,7 +79,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="antButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt; Anterior"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="&lt;_Anterior" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -88,7 +90,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="sigButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Siguiente &gt;"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Siguiente_&gt;" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sigButtonActionPerformed"/>
@@ -96,7 +100,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="terminarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Terminar"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Terminar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -105,7 +111,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="cancelarButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="code/google/com/p/ontologytesting/gui/internacionalization/Spanish.properties" key="Cancelar" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarButtonActionPerformed"/>
