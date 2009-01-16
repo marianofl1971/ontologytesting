@@ -65,7 +65,7 @@ public class Configuration {
         return propiedades;
     }
     
-    public void cambiarIdioma(String idioma){
+    public boolean cambiarIdioma(String idioma){
         propiedades.remove("IDIOMA");
         propiedades.setProperty("IDIOMA", idioma);
         FileOutputStream out = null;
@@ -75,8 +75,25 @@ public class Configuration {
             out.close();
             FileInputStream in =new FileInputStream(archivo);
             propiedades.load(in);
+            return true;
         } catch (IOException ex) {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+    
+    public String obtenerIdioma(){
+        return propiedades.getProperty("IDIOMA");
+        /*FileOutputStream out = null;
+        try{
+            out = new FileOutputStream(archivo);
+            propiedades.store(out, "Configuracion de OntologyTestGUI");
+            out.close();
+            FileInputStream in =new FileInputStream(archivo);
+            propiedades.load(in);
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
 }
