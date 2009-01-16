@@ -60,13 +60,21 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private JPanel panelActual;
     private ProgressControlJDialog progres;
     private ExecuteTest execTest;
-    private ActionListener l;
+    private JRadioButton esMenuItem,gbMenuItem,usMenuItem;
+    
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
         this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("EVALUADOR_DE_ONTOLOGIAS"));
+        if(Configuration.getInstance().obtenerIdioma().endsWith("Spanish")){
+            esMenuItem.setSelected(true);
+        }else if(Configuration.getInstance().obtenerIdioma().endsWith("EnglishGB")){
+            gbMenuItem.setSelected(true);
+        }else if(Configuration.getInstance().obtenerIdioma().endsWith("EnglishUS")){
+            usMenuItem.setSelected(true);
+        }
         this.setSize(new Dimension(910,750));
         controlador = ControladorTests.getInstance();
         panelTest = ListAndResultsJPanel.getInstance();
@@ -124,9 +132,9 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         selecTestMenuItem = new javax.swing.JMenuItem();
         ejecutarTodosMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        JRadioButton esMenuItem = new JRadioButton();
-        JRadioButton gbMenuItem = new JRadioButton();
-        JRadioButton usMenuItem = new JRadioButton();
+        esMenuItem = new JRadioButton();
+        gbMenuItem = new JRadioButton();
+        usMenuItem = new JRadioButton();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -134,6 +142,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         group.add(esMenuItem);
         group.add(gbMenuItem);
         group.add(usMenuItem);
+        esMenuItem.setSelected(true);
         esMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esMenuItemActionPerformed(evt);
@@ -506,17 +515,35 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void esMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
-    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+    boolean res = Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+    if(res==true){
+        panelAviso.confirmAction("Idioma cambiado con esto. Debe reiniciar la aplicación para que los " +
+                "cambios tengan efecto", this);
+    }else{
+        panelAviso.errorAction("No se pudo cambiar el idioma", this);
+    }
 }
 
 private void gbMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
-    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishGB");
+    boolean res = Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishGB");
+    if(res==true){
+        panelAviso.confirmAction("Idioma cambiado con esto. Debe reiniciar la aplicación para que los " +
+                "cambios tengan efecto", this);
+    }else{
+        panelAviso.errorAction("No se pudo cambiar el idioma", this);
+    }
 }
 
 private void usMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
-    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishUS");
+    boolean res = Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishUS");
+    if(res==true){
+        panelAviso.confirmAction("Idioma cambiado con esto. Debe reiniciar la aplicación para que los " +
+                "cambios tengan efecto", this);
+    }else{
+        panelAviso.errorAction("No se pudo cambiar el idioma", this);
+    }
 }
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
