@@ -18,13 +18,19 @@ import code.google.com.p.ontologytesting.persistence.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.NoSuchElementException;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
@@ -54,6 +60,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private JPanel panelActual;
     private ProgressControlJDialog progres;
     private ExecuteTest execTest;
+    private ActionListener l;
     
     /** Creates new form MainApplicationJFrame */
     private MainApplicationJFrame() {
@@ -117,13 +124,32 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         selecTestMenuItem = new javax.swing.JMenuItem();
         ejecutarTodosMenuItem = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        JRadioButton esMenuItem = new JRadioButton();
+        JRadioButton gbMenuItem = new JRadioButton();
+        JRadioButton usMenuItem = new JRadioButton();
         helpMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
-
+        ButtonGroup group = new ButtonGroup();
+        group.add(esMenuItem);
+        group.add(gbMenuItem);
+        group.add(usMenuItem);
+        esMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                esMenuItemActionPerformed(evt);
+            }
+        });
+        gbMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gbMenuItemActionPerformed(evt);
+            }
+        });
+        usMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usMenuItemActionPerformed(evt);
+            }
+        });
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -359,14 +385,14 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         jMenu1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Idiomas")); // NOI18N
 
-        jMenuItem3.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Español"));
-        jMenu1.add(jMenuItem3);
+        esMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Español"));
+        jMenu1.add(esMenuItem);
 
-        jMenuItem4.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ingles_(GB)")); // NOI18N
-        jMenu1.add(jMenuItem4);
+        gbMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ingles_(GB)")); // NOI18N
+        jMenu1.add(gbMenuItem);
 
-        jMenuItem5.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ingles_(US)")); // NOI18N
-        jMenu1.add(jMenuItem5);
+        usMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ingles_(US)")); // NOI18N
+        jMenu1.add(usMenuItem);
 
         menuBar.add(jMenu1);
 
@@ -477,6 +503,21 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             System.exit(0);
         }
 }//GEN-LAST:event_salirMenuItemActionPerformed
+
+private void esMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+}
+
+private void gbMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishGB");
+}
+
+private void usMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+    Configuration.getInstance().cambiarIdioma("code.google.com.p.ontologytesting.gui.internacionalization.EnglishUS");
+}
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
 // TODO add your handling code here:

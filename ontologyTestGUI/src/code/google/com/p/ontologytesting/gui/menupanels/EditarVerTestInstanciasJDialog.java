@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui.menupanels;
 
+import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
@@ -33,7 +34,7 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(this.getParent());
         contentPanel.setLayout(new FlowLayout());
         contentPanel.add(listarTestInst);
-        this.setTitle(java.util.ResourceBundle.getBundle("code/google/com/p/ontologytesting/gui/internacionalization/Spanish").getString("Editar/Ver_Test_o_Instancias"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Editar/Ver_Test_o_Instancias"));
     }
 
     /** This method is called from within the constructor to
@@ -55,7 +56,7 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText("Editar/Ver Tests o Instancias");
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Editar_/_Ver_Tests_o_Instancias"));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -68,7 +69,7 @@ public class EditarVerTestInstanciasJDialog extends javax.swing.JDialog {
             .addGap(0, 247, Short.MAX_VALUE)
         );
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("code/google/com/p/ontologytesting/gui/internacionalization/Spanish"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")); // NOI18N
         jLabel2.setText(bundle.getString("Seleccione_el_Test_que_desee_editar_o_ver:")); // NOI18N
 
         cancelarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N

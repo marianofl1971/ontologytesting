@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 
+import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.ResultTestJPanel;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.*;
@@ -138,7 +139,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     public void aniadirTreeResult(JScrollPane treeView){
         panelResultAux = new JPanel();
         panelResultAux.setLayout(new BoxLayout(panelResultAux, BoxLayout.Y_AXIS));
-        tabbedTestsPanel.add("Ejecución: "+TreeResults.getTestSeleccionado(),panelResultAux);
+        tabbedTestsPanel.add(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ejecución: ")+TreeResults.getTestSeleccionado(),panelResultAux);
         initTabComponent(tabbedTestsPanel.getTabCount()-1);
         panelResultAux.add(treeView);
         tabbedTestsPanel.setSelectedIndex(tabbedTestsPanel.getTabCount()-1);
@@ -234,7 +235,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 .addComponent(testSimpleListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("code/google/com/p/ontologytesting/gui/internacionalization/Spanish"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")); // NOI18N
         tabbedTestsPanel.addTab(bundle.getString("Tests_Simples"), simplesPanel); // NOI18N
 
         testSparqlList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
