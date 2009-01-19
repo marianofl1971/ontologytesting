@@ -139,7 +139,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     public void aniadirTreeResult(JScrollPane treeView){
         panelResultAux = new JPanel();
         panelResultAux.setLayout(new BoxLayout(panelResultAux, BoxLayout.Y_AXIS));
-        tabbedTestsPanel.add(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ejecución: ")+TreeResults.getTestSeleccionado(),panelResultAux);
+        tabbedTestsPanel.add(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ejecución:_")+TreeResults.getTestSeleccionado(),panelResultAux);
         initTabComponent(tabbedTestsPanel.getTabCount()-1);
         panelResultAux.add(treeView);
         tabbedTestsPanel.setSelectedIndex(tabbedTestsPanel.getTabCount()-1);
