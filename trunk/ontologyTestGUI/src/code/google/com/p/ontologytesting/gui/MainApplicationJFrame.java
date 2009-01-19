@@ -19,14 +19,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -61,6 +58,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private ProgressControlJDialog progres;
     private ExecuteTest execTest;
     private JRadioButton esMenuItem,gbMenuItem,usMenuItem;
+    private javax.swing.JMenu ontologyMenu;
     
     
     /** Creates new form MainApplicationJFrame */
@@ -110,6 +108,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoComoMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1.setEnabled(false);
+        jMenuItem2.setEnabled(false);
         salirMenuItem = new javax.swing.JMenuItem();
         testsMenu = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -136,7 +136,9 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         gbMenuItem = new JRadioButton();
         usMenuItem = new JRadioButton();
         helpMenu = new javax.swing.JMenu();
+        ontologyMenu = new javax.swing.JMenu();
         contentsMenuItem = new javax.swing.JMenuItem();
+        javax.swing.JMenuItem ontologyMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
         ButtonGroup group = new ButtonGroup();
         group.add(esMenuItem);
@@ -217,14 +219,14 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         });
         fileMenu.add(guardarProyectoComoMenuItem);
 
-        jMenuItem1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Cerrar")); // NOI18N
-        fileMenu.add(jMenuItem1);
-
         jMenuItem2.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Eliminar")); // NOI18N
         fileMenu.add(jMenuItem2);
-
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_delete.gif")));
+        jMenuItem1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Cerrar")); // NOI18N
+        fileMenu.add(jMenuItem1);
         salirMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Salir")); // NOI18N
-        salirMenuItem.setEnabled(false);
+        salirMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/system-log-out.png")));
+        salirMenuItem.setEnabled(true);
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirMenuItemActionPerformed(evt);
@@ -403,21 +405,32 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         usMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ingles_(US)")); // NOI18N
         jMenu1.add(usMenuItem);
 
+        ontologyMenu.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ontología")); // NOI18N
+        ontologyMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ver")); // NOI18N
+        ontologyMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
+        menuBar.add(ontologyMenu);
         menuBar.add(jMenu1);
-
+        
         helpMenu.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ayuda")); // NOI18N
-
         contentsMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Contenidos")); // NOI18N
+        ontologyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ontologyMenuItemActionPerformed(evt);
+            }
+        });
         contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contentsMenuItemActionPerformed(evt);
             }
         });
+        ontologyMenu.add(ontologyMenuItem);
+        ontologyMenu.setEnabled(false);
         helpMenu.add(contentsMenuItem);
 
         aboutMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Acerca_de")); // NOI18N
         helpMenu.add(aboutMenuItem);
 
+        
         menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
@@ -454,6 +467,11 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     }
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
+private void ontologyMenuItemActionPerformed(ActionEvent evt) {
+    OntologyJDialog ontology = new OntologyJDialog(this, false);
+    ontology.setVisible(true);
+}
+    
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
     int aux=0;
@@ -489,7 +507,10 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             instanciasMenu.setEnabled(true);
             testsMenu.setEnabled(true);
             ejecutarMenu.setEnabled(true);
+            jMenuItem1.setEnabled(true);
+            jMenuItem2.setEnabled(true);
             salirMenuItem.setEnabled(true);
+            ontologyMenu.setEnabled(true);
             if(existeProyecto==false){
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 existeProyecto=true;
@@ -501,7 +522,11 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
 // TODO add your handling code here:
-    int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto?", 
+    if(existeProyecto==false){
+        this.dispose();
+        System.exit(0);
+    }else{
+        int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto?", 
                 "Salir",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION){
             this.guardarProyecto(false, null,esNuevo);
@@ -511,6 +536,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             this.dispose();
             System.exit(0);
         }
+    }
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void esMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
@@ -705,7 +731,10 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                     instanciasMenu.setEnabled(true);
                     testsMenu.setEnabled(true);
                     ejecutarMenu.setEnabled(true);
+                    jMenuItem1.setEnabled(true);
+                    jMenuItem2.setEnabled(true);
                     salirMenuItem.setEnabled(true);
+                    ontologyMenu.setEnabled(true);
                     if(existeProyecto==false){
                         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                         ControladorTests.getInstance().inicializarGuardados();

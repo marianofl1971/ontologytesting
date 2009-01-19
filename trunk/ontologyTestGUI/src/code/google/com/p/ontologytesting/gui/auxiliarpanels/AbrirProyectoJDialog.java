@@ -29,6 +29,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
     private FileChooserSelector utils;
     private ProgressControlJDialog progres;
     private Reasoner jena = new Reasoner();
+    private static String ubicFisica;
     
     /** Creates new form AbrirProyectoJDialog */
     public AbrirProyectoJDialog(java.awt.Frame parent, boolean modal) {
@@ -175,6 +176,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
                     progresBar.setIndeterminate(true);
                     loadOnto.execute();
                     getProgres().setVisible(true); 
+                    AbrirProyectoJDialog.setUbicFisica(this.getUbicacionFisica());
                 }
             }
         }catch (InvalidOntologyException ex){
@@ -230,6 +232,14 @@ private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
     public void setProgres(ProgressControlJDialog progres) {
         this.progres = progres;
+    }
+    
+    public static String getUbicFisica() {
+        return ubicFisica;
+    }
+
+    public static void setUbicFisica(String aUbicFisica) {
+        ubicFisica = aUbicFisica;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

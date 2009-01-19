@@ -181,6 +181,7 @@ private void terminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 namespaceOnto = namespaceOnto.concat("#");
             }
             ontology.setUbicOnto(ubicOnto);
+            AbrirProyectoJDialog.setUbicFisica(ubicOnto);
             ontology.setNsOnto(namespaceOnto);
              try{ 
                 LoadOntology loadOnto = new LoadOntology(ubicOnto,namespaceOnto,this,nombreProy,project);
