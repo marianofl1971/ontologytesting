@@ -220,7 +220,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     }
     
     @Override
-    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML){
+    public ArrayList<ExecQuerySparql> testSPARQL(String queryStr){
         Query query=null;
         String expReg = "([\\?]{1}[a-zA-Z]+)";
         ArrayList<String> sel = new ArrayList<String>();
@@ -245,7 +245,6 @@ public class ReasonerImplementation implements InterfaceReasoner{
             QuerySolution binding = results.nextSolution();
             for(int i = 0; i < resultVars.size(); i++) {
                 ExecQuerySparql e = new ExecQuerySparql();
-                
                 String var = (String) resultVars.get(i);
                 RDFNode result = binding.get(var);
                 if(result!=null){
