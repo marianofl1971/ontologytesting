@@ -34,7 +34,7 @@ public interface InterfaceReasoner {
 
     List<String> classification(String ns, String individuo) throws InvalidOntologyException;
     
-    List<ExecQuerySparql> testSPARQL(String queryStr, boolean formatHTML);
+    List<ExecQuerySparql> testSPARQL(String queryStr);
     
     boolean validarSparqlQuery(String query);
 
