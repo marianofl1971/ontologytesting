@@ -58,6 +58,9 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     public AddInstancesClasPropJPanel(Instancias inst){
         initComponents();
         int contI=0,contP=0;
+        classScrollPane.getVerticalScrollBar().setUnitIncrement(7);
+        propScrollPane.getVerticalScrollBar().setUnitIncrement(7);
+        textAreaScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         continuar=true;
         clasPanel.setLayout(new BoxLayout(getClasPanel(), BoxLayout.Y_AXIS));
         propPanel.setLayout(new BoxLayout(getPropPanel(), BoxLayout.Y_AXIS));
@@ -114,6 +117,9 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
         initComponents();
         int contI=0,contP=0;
         continuar=true;
+        classScrollPane.getVerticalScrollBar().setUnitIncrement(7);
+        propScrollPane.getVerticalScrollBar().setUnitIncrement(7);
+        textAreaScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         guardarButton.setEnabled(false);
         guardarButton.setVisible(false);
         setFromTest(true);
