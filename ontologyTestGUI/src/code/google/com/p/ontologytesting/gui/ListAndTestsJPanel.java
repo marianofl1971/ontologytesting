@@ -21,6 +21,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
  
     private ListAndTestsJPanel() {
         initComponents();
+        testsScrollPane.getVerticalScrollBar().setUnitIncrement(5);
         this.listTestPanel.setLayout(new BorderLayout());
         this.splitPane.setDividerLocation(235);
     }

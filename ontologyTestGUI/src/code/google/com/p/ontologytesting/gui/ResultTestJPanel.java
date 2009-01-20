@@ -41,6 +41,7 @@ public class ResultTestJPanel extends javax.swing.JPanel {
     
     
     public void aniadirResultado(JScrollPane result){
+        result.getVerticalScrollBar().setUnitIncrement(5);
         panelResult = new JPanel();
         panelResult.setLayout(new BoxLayout(panelResult, BoxLayout.Y_AXIS));
         getResultsTabbedPane().add(TreeResults.getTestSeleccionado(),panelResult);
