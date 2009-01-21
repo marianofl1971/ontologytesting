@@ -35,7 +35,7 @@ public class NewProjectJDialog extends javax.swing.JDialog {
         initComponents();
         sigButton.requestFocus();
         panelAviso = new AniadirPanelDeAviso();
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Nuevo_Proyecto"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Nuevo_Proyecto"));
         project = new ProjectNameSituJPanel();
         ontology = new OntologyNameSituJPanel();
         contentPanel.setLayout(new BorderLayout());
@@ -70,7 +70,7 @@ public class NewProjectJDialog extends javax.swing.JDialog {
             .addGap(0, 200, Short.MAX_VALUE)
         );
 
-        antButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("<_Anterior")); // NOI18N
+        antButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("<_Anterior")); // NOI18N
         antButton.setEnabled(false);
         antButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,14 +78,14 @@ public class NewProjectJDialog extends javax.swing.JDialog {
             }
         });
 
-        sigButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Siguiente_>")); // NOI18N
+        sigButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Siguiente_>")); // NOI18N
         sigButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sigButtonActionPerformed(evt);
             }
         });
 
-        terminarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Terminar")); // NOI18N
+        terminarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Terminar")); // NOI18N
         terminarButton.setEnabled(false);
         terminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class NewProjectJDialog extends javax.swing.JDialog {
             }
         });
 
-        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Cancelar")); // NOI18N
+        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Cancelar")); // NOI18N
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarButtonActionPerformed(evt);

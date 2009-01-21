@@ -27,7 +27,7 @@ public class OntologyJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         String sCadena;
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ontología"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ontología"));
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         ontologyEditorPane.setEditable(false);
         ontologyEditorPane.setContentType("text/plain");

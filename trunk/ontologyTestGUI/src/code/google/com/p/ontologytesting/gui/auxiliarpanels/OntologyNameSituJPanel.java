@@ -42,14 +42,14 @@ public class OntologyNameSituJPanel extends javax.swing.JPanel {
         examinarButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ontologia:_Localizacion_y_Namespace"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ontologia:_Localizacion_y_Namespace"));
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ubicacion_de_la_Ontologia:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ubicacion_de_la_Ontologia:"));
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Namespace_de_la_Ontologia:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Namespace_de_la_Ontologia:"));
 
         examinarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
-        examinarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Examinar"));
+        examinarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Examinar"));
         examinarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examinarButtonActionPerformed(evt);

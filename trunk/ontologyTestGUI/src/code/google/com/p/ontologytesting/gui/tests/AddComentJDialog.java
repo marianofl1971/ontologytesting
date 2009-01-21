@@ -49,7 +49,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Añada_su_comentario:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Añada_su_comentario:"));
 
         comentTextArea.setColumns(20);
         comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
@@ -57,7 +57,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         jScrollPane.setViewportView(comentTextArea);
 
         añadirButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/accept.png"))); // NOI18N
-        añadirButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Añadir"));
+        añadirButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Añadir"));
         añadirButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 añadirButtonActionPerformed(evt);
@@ -65,7 +65,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         });
 
         cancelarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/delete.png"))); // NOI18N
-        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Cancelar"));
+        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Cancelar"));
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarButtonActionPerformed(evt);
@@ -73,7 +73,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         });
 
         limpiarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/edit-clear.png"))); // NOI18N
-        limpiarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Limpiar"));
+        limpiarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Limpiar"));
         limpiarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 limpiarButtonActionPerformed(evt);

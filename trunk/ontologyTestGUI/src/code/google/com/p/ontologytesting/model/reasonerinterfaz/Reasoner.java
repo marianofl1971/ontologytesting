@@ -19,7 +19,7 @@ public class Reasoner {
     private boolean cargado = false;
     
     public InterfaceReasoner getReasoner(){
-       Properties propiedades = Configuration.getInstance().cargarDriver();
+       Properties propiedades = Configuration.getPropiedades();
         try {
             reasoner = (InterfaceReasoner) Class.forName(propiedades.getProperty("DRIVER")).newInstance();
             this.setCargado(true);

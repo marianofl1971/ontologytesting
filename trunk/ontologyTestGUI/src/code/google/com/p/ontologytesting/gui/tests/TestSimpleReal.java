@@ -121,7 +121,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        labelRealLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("______________________________________CONSULTAS_________________________________________________RESULTADO_ESPERADO"));
+        labelRealLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("______________________________________CONSULTAS_________________________________________________RESULTADO_ESPERADO"));
 
         javax.swing.GroupLayout labelRealPanelLayout = new javax.swing.GroupLayout(labelRealPanel);
         labelRealPanel.setLayout(labelRealPanelLayout);
@@ -180,7 +180,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tabbedPaneReal.addTab(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Formato_ayuda"), opcionAyudaRealPanel);
+        tabbedPaneReal.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Formato_ayuda"), opcionAyudaRealPanel);
 
         javax.swing.GroupLayout opcionTextRealPanelLayout = new javax.swing.GroupLayout(opcionTextRealPanel);
         opcionTextRealPanel.setLayout(opcionTextRealPanelLayout);
@@ -193,7 +193,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             .addGap(0, 325, Short.MAX_VALUE)
         );
 
-        tabbedPaneReal.addTab(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Formato_Texto"), opcionTextRealPanel);
+        tabbedPaneReal.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Formato_Texto"), opcionTextRealPanel);
 
         contentRealTabedPanel.add(tabbedPaneReal, java.awt.BorderLayout.CENTER);
 
@@ -205,7 +205,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
             }
         });
 
-        guardarEjecutarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Guardar_y_Ejecutar"));
+        guardarEjecutarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Guardar_y_Ejecutar"));
         guardarEjecutarButton.setToolTipText("Guardar y Ejecutar");
         guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +222,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         });
 
         addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
-        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Instancias"));
+        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancias"));
         addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInstanciasButtonActionPerformed(evt);

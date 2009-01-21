@@ -74,7 +74,7 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
             }
         });
 
-        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Duplicar"));
+        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Duplicar"));
         duplicarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 duplicarButtonActionPerformed(evt);
