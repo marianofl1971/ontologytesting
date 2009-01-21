@@ -8,7 +8,7 @@ package code.google.com.p.ontologytesting.gui.tests;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
 import java.awt.Color;
-import java.util.StringTokenizer;
+import java.util.Locale;
 
 
 /**
@@ -58,7 +58,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         });
         jScrollPane17.setViewportView(resultadoEsperadoTextArea);
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("_____________________________CONSULTA____________________________________________________RESULTADO_ESPERADO__________________________________COMENTARIO"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("_____________________________CONSULTA____________________________________________________RESULTADO_ESPERADO__________________________________COMENTARIO"));
 
         comentTextArea.setColumns(20);
         comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N

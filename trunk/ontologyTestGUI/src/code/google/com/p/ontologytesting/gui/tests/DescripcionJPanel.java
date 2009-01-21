@@ -10,6 +10,7 @@ import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.FormatTestsJDialog;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
 import java.awt.Frame;
+import java.util.Locale;
 
 /**
  *
@@ -38,11 +39,11 @@ public class DescripcionJPanel extends javax.swing.JPanel {
         descTextArea = new javax.swing.JTextArea();
         formatosButton = new javax.swing.JButton();
 
-        jLabel6.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Nombre_del_test:"));
+        jLabel6.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nombre_del_test:"));
 
         nombreTextField.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
 
-        jLabel7.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Descripción:"));
+        jLabel7.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Descripción:"));
 
         descTextArea.setColumns(20);
         descTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N

@@ -16,6 +16,7 @@ import java.awt.Cursor;
 import java.awt.FlowLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import java.util.Locale;
 
 /**
  *
@@ -35,7 +36,7 @@ public class EjecutarTestJDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(this.getParent());
         contentPanel.setLayout(new FlowLayout());
         contentPanel.add(listarTestInst);
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ejecutar_Tests"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ejecutar_Tests"));
     }
 
     /** This method is called from within the constructor to
@@ -57,9 +58,9 @@ public class EjecutarTestJDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ejecutar_Tests"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ejecutar_Tests"));
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))); // NOI18N
         jLabel2.setText(bundle.getString("Seleccione_los_tests_que_desee_ejecutar:")); // NOI18N
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);

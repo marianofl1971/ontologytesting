@@ -10,6 +10,8 @@ import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame.IOSwingWorker;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.WindowConstants;
 
 /**
@@ -26,6 +28,9 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
     /** Creates new form ProgressControlJDialog */
     public ProgressControlJDialog(ExecuteTest execTest) {
         initComponents();
+        URL image = this.getClass().getResource("images/ontology.jpg"); 
+        this.setIconImage (new ImageIcon(image).getImage());
+        this.validate();
         this.setModal(true);
         this.execTest=execTest;
         this.execSelec=true;

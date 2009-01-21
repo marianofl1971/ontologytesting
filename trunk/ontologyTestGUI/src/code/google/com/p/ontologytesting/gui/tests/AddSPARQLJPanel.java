@@ -21,6 +21,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
+import java.util.Locale;
 
 /**
  *
@@ -107,7 +108,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         guardarJButton = new javax.swing.JButton();
         addInstanciasButton = new javax.swing.JButton();
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Introduzca_la_consulta_en_SPARQL:"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Introduzca_la_consulta_en_SPARQL:"));
 
         nuevaConsultaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
         nuevaConsultaButton.setToolTipText("Nueva consulta");
@@ -125,7 +126,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Introduzca_el_nombre_del_test:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Introduzca_el_nombre_del_test:"));
 
         testNameTextField.setFont(new java.awt.Font("Arial", 1, 11));
         testNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -134,14 +135,14 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Añada_una_descripción_para_el_test:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Añada_una_descripción_para_el_test:"));
 
         testDescTextArea.setColumns(20);
         testDescTextArea.setFont(new java.awt.Font("Arial", 0, 13));
         testDescTextArea.setRows(5);
         jScrollPane2.setViewportView(testDescTextArea);
 
-        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Resultado_esperado:"));
+        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Resultado_esperado:"));
 
         resultTextArea.setFont(new java.awt.Font("Arial", 0, 13));
         resultTextArea.setToolTipText("Resultado Esperado");
@@ -193,7 +194,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
             }
         });
 
-        guardarEjecutarJButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Guardar_y_Ejecutar"));
+        guardarEjecutarJButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_y_Ejecutar"));
         guardarEjecutarJButton.setToolTipText("Guardar y Ejecutar");
         guardarEjecutarJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +219,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         });
 
         addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
-        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancias"));
+        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancias"));
         addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInstanciasButtonActionPerformed(evt);

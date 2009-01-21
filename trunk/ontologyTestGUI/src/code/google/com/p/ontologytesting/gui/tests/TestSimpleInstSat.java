@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
+import java.util.Locale;
 
 /**
  *
@@ -125,7 +126,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        labelInstLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("______________________________________CONSULTAS_________________________________________________RESULTADO_ESPERADO"));
+        labelInstLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("______________________________________CONSULTAS_________________________________________________RESULTADO_ESPERADO"));
 
         javax.swing.GroupLayout labelInstPanelLayout = new javax.swing.GroupLayout(labelInstPanel);
         labelInstPanel.setLayout(labelInstPanelLayout);
@@ -180,10 +181,10 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
                 .addContainerGap())
         );
 
-        tabbedPaneInst.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Formato_ayuda"), opcionAyudaInstPanel);
+        tabbedPaneInst.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Formato_ayuda"), opcionAyudaInstPanel);
 
         opcionTextInstPanel.setLayout(new javax.swing.BoxLayout(opcionTextInstPanel, javax.swing.BoxLayout.X_AXIS));
-        tabbedPaneInst.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Formato_Texto"), opcionTextInstPanel);
+        tabbedPaneInst.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Formato_Texto"), opcionTextInstPanel);
 
         contentInstTabedPanel.add(tabbedPaneInst, java.awt.BorderLayout.CENTER);
 
@@ -203,7 +204,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
             }
         });
 
-        guardarEjecutarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Guardar_y_Ejecutar"));
+        guardarEjecutarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_y_Ejecutar"));
         guardarEjecutarButton.setToolTipText("Guardar y Ejecutar");
         guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +213,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         });
 
         addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
-        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancias"));
+        addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancias"));
         addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInstanciasButtonActionPerformed(evt);

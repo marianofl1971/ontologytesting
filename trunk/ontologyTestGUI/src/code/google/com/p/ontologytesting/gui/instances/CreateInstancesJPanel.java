@@ -10,6 +10,7 @@ import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
+import java.util.Locale;
 
 
 /**
@@ -59,7 +60,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         setName("instances"); // NOI18N
 
         instanciaTextField.setFont(new java.awt.Font("Arial", 0, 11));
-        instanciaTextField.setToolTipText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancia")); // NOI18N
+        instanciaTextField.setToolTipText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancia")); // NOI18N
         instanciaTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 instanciaTextFieldMouseClicked(evt);
@@ -67,7 +68,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         });
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
-        comentarioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Comentario")); // NOI18N
+        comentarioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Comentario")); // NOI18N
         comentarioButton.setToolTipText("Añadir comentario");
         comentarioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +77,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
         });
 
         borrarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/user-trash.png"))); // NOI18N
-        borrarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Borrar")); // NOI18N
+        borrarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Borrar")); // NOI18N
         borrarButton.setToolTipText("Borrar");
         borrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +85,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
             }
         });
 
-        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Duplicar")); // NOI18N
+        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Duplicar")); // NOI18N
         duplicarButton.setToolTipText("Duplicar");
         duplicarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

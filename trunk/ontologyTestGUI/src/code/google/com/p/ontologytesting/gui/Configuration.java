@@ -47,6 +47,7 @@ public class Configuration {
             tmp.setProperty("HOME",home);
             tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
             tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+            tmp.setProperty("LOCALE", "es");
             File directorio_file = new File(home+"/.ontologyTestGUI/");
             try{
                 directorio_file.mkdir();
@@ -65,9 +66,11 @@ public class Configuration {
         return getPropiedades();
     }
     
-    public boolean cambiarIdioma(String idioma){
+    public boolean cambiarIdioma(String idioma,String id){
         getPropiedades().remove("IDIOMA");
+        getPropiedades().remove("LOCALE");
         getPropiedades().setProperty("IDIOMA", idioma);
+        getPropiedades().setProperty("LOCALE", id);
         FileOutputStream out = null;
         try{
             out = new FileOutputStream(archivo);

@@ -10,6 +10,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.util.Locale;
 
 /**
  *
@@ -36,7 +37,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         this.setInstancias(inst);
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.prepararImport(CollectionTest.getInstance().getScenariotest());
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Asociar_Instancias_a_Test"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Asociar_Instancias_a_Test"));
     }
 
     public void prepararImport(List<ScenarioTest> listaTests){   
@@ -65,9 +66,9 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Asociar_Instancias_-_Tests"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Asociar_Instancias_-_Tests"));
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Seleccione_el_test_al_que_desea_importar_las_instancias:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Seleccione_el_test_al_que_desea_importar_las_instancias:"));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -81,7 +82,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         );
 
         verTestButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
-        verTestButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ver_Test_Completo"));
+        verTestButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ver_Test_Completo"));
         verTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verTestButtonActionPerformed(evt);
@@ -89,7 +90,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         });
 
         aceptarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
-        aceptarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Asociar"));
+        aceptarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Asociar"));
         aceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarButtonActionPerformed(evt);
@@ -97,7 +98,7 @@ public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
         });
 
         cancelarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cancel.png"))); // NOI18N
-        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Cancelar"));
+        cancelarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Cancelar"));
         cancelarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarButtonActionPerformed(evt);

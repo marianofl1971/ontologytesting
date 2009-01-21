@@ -13,6 +13,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarclasess.ProgressListener;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import code.google.com.p.ontologytesting.persistence.*;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
@@ -37,7 +38,7 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         initComponents();
         aceptarButton.requestFocus();
         utils = new FileChooserSelector();
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ubicación_de_la_Ontología_y_el_Namespace"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ubicación_de_la_Ontología_y_el_Namespace"));
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     }
@@ -64,30 +65,30 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Datos_del_Proyecto"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Datos_del_Proyecto"));
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Compruebe_que_los_siguientes_datos_son_correctos._En_caso_contrario,_realice_las_modificaciones_oportunas:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Compruebe_que_los_siguientes_datos_son_correctos._En_caso_contrario,_realice_las_modificaciones_oportunas:"));
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ubicación_de_la_ontología_con_la_que_va_a_trabajar:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ubicación_de_la_ontología_con_la_que_va_a_trabajar:"));
 
         examinarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
-        examinarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Examinar"));
+        examinarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Examinar"));
         examinarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examinarButtonActionPerformed(evt);
             }
         });
 
-        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Namespace_de_la_ontologia:"));
+        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Namespace_de_la_ontologia:"));
 
-        cancelButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Cancelar"));
+        cancelButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Cancelar"));
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
 
-        aceptarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Aceptar"));
+        aceptarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Aceptar"));
         aceptarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aceptarButtonActionPerformed(evt);
