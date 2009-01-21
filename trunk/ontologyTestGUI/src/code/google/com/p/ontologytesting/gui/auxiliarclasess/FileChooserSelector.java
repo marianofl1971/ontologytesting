@@ -23,6 +23,7 @@ public class FileChooserSelector {
     private String linea,nsDefecto,nombreProyecto;
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
+    private File pathDirectorioProyecto = null;
 
     public boolean fileChooser(boolean open,boolean onlyFiles, boolean newProject){
         int option,var=0;
@@ -41,6 +42,7 @@ public class FileChooserSelector {
         }
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
+            setPathDirectorioProyecto(selectedFile.getParentFile());
             setNombreProyecto(selectedFile.getName());
             if(newProject==true){
                 BufferedReader bf = null;
@@ -76,6 +78,24 @@ public class FileChooserSelector {
         }
         return ext;
     }
+    
+    public boolean deleteDirectory(File path)
+    {
+        if(path.exists()){
+          File[] files = path.listFiles();
+          for(int i=0; i<files.length; i++) {
+             if(files[i].isDirectory()) {
+               deleteDirectory(files[i]);
+             }
+             else {
+               files[i].delete();
+             }
+          }
+          path.delete();
+          return true;
+        }
+        return false;
+    }
 
     public static String getPathSelected() {
         return pathSelected;
@@ -99,6 +119,14 @@ public class FileChooserSelector {
 
     public void setNombreProyecto(String nombreProyecto) {
         this.nombreProyecto = nombreProyecto;
+    }
+
+    public File getPathDirectorioProyecto() {
+        return pathDirectorioProyecto;
+    }
+
+    public void setPathDirectorioProyecto(File pathDirectorioProyecto) {
+        this.pathDirectorioProyecto = pathDirectorioProyecto;
     }
 
 }

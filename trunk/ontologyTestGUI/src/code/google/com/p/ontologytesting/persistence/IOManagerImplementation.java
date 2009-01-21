@@ -74,10 +74,8 @@ public class IOManagerImplementation{
             return true;
         }else{
             if(this.esNuevo==true){
-                System.out.println("1"+nombreProy);
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy+"/"+nombreProy+".xml")));
             }else{
-                System.out.println("2"+carpetaProy);
                 e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(carpetaProy)));
             }
             e.writeObject(CollectionTest.getInstance());
