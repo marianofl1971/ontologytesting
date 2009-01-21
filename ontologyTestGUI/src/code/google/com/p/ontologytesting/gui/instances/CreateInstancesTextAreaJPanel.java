@@ -34,7 +34,7 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
         jScrollPane17 = new javax.swing.JScrollPane();
         propiedadTextArea = new javax.swing.JTextArea();
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("______________INSTANCIAS_DE_CLASE______________________________________________INSTANCIAS_DE_PROPIEDAD__")); // NOI18N
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("______________INSTANCIAS_DE_CLASE______________________________________________INSTANCIAS_DE_PROPIEDAD__")); // NOI18N
 
         claseTextArea.setColumns(20);
         claseTextArea.setFont(new java.awt.Font("Arial", 0, 13));

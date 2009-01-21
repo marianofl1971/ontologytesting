@@ -44,9 +44,9 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
         carpetaProyectoTextField = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Proyecto:_Nombre_y_Localizacion"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Proyecto:_Nombre_y_Localizacion"));
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Nombre_del_Proyecto:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Nombre_del_Proyecto:"));
 
         nombreProyectoTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -54,17 +54,17 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ubicacion_del_Proyecto:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ubicacion_del_Proyecto:"));
 
         examinarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/folder_explore.png"))); // NOI18N
-        examinarProyecto.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Examinar"));
+        examinarProyecto.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Examinar"));
         examinarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 examinarProyectoActionPerformed(evt);
             }
         });
 
-        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Carpeta_del_Proyecto:"));
+        jLabel4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Carpeta_del_Proyecto:"));
 
         carpetaProyectoTextField.setEnabled(false);
 

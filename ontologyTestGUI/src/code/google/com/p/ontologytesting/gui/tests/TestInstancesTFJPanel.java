@@ -62,9 +62,9 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
             }
         });
 
-        trueRadioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("True"));
+        trueRadioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("True"));
 
-        falseRadioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("False"));
+        falseRadioButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("False"));
 
         comentarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/comment_add.png"))); // NOI18N
         comentarioButton.setToolTipText("Añadir comentario");
@@ -82,7 +82,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
             }
         });
 
-        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Duplicar"));
+        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Duplicar"));
         duplicarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 duplicarButtonActionPerformed(evt);

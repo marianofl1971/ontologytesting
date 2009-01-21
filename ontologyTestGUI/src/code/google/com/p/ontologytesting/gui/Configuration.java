@@ -30,7 +30,7 @@ public class Configuration {
     private synchronized static void createConfiguration() {
         if (config == null) { 
             config = new Configuration();
-            propiedades = new Properties();
+            setPropiedades(new Properties());
         }
     }
  
@@ -58,23 +58,23 @@ public class Configuration {
             out.close();
             }
             FileInputStream in =new FileInputStream(archivo);
-            propiedades.load(in);
+            getPropiedades().load(in);
         }catch (IOException ex) {
             System.out.println("Error durante la configuracion");
         }
-        return propiedades;
+        return getPropiedades();
     }
     
     public boolean cambiarIdioma(String idioma){
-        propiedades.remove("IDIOMA");
-        propiedades.setProperty("IDIOMA", idioma);
+        getPropiedades().remove("IDIOMA");
+        getPropiedades().setProperty("IDIOMA", idioma);
         FileOutputStream out = null;
         try{
             out = new FileOutputStream(archivo);
-            propiedades.store(out, "Configuracion de OntologyTestGUI");
+            getPropiedades().store(out, "Configuracion de OntologyTestGUI");
             out.close();
             FileInputStream in =new FileInputStream(archivo);
-            propiedades.load(in);
+            getPropiedades().load(in);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,17 +83,19 @@ public class Configuration {
     }
     
     public String obtenerIdioma(){
-        return propiedades.getProperty("IDIOMA");
-        /*FileOutputStream out = null;
-        try{
-            out = new FileOutputStream(archivo);
-            propiedades.store(out, "Configuracion de OntologyTestGUI");
-            out.close();
-            FileInputStream in =new FileInputStream(archivo);
-            propiedades.load(in);
-            return true;
-        } catch (IOException ex) {
-            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        return getPropiedades().getProperty("IDIOMA");
     }
+    
+    public static Properties getPropiedades() {
+        if(propiedades==null){
+            propiedades = Configuration.getInstance().cargarDriver();
+        }
+        return propiedades;
+    }
+
+    public static void setPropiedades(Properties aPropiedades) {
+        propiedades = aPropiedades;
+    }
+    
+    
 }

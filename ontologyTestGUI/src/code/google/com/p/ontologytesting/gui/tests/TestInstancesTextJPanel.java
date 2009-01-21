@@ -58,7 +58,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         });
         jScrollPane17.setViewportView(resultadoEsperadoTextArea);
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("_____________________________CONSULTA____________________________________________________RESULTADO_ESPERADO__________________________________COMENTARIO"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("_____________________________CONSULTA____________________________________________________RESULTADO_ESPERADO__________________________________COMENTARIO"));
 
         comentTextArea.setColumns(20);
         comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
