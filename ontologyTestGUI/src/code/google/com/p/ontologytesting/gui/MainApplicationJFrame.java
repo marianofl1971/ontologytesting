@@ -513,8 +513,13 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 }//GEN-LAST:event_guardarProyectoComoMenuItemActionPerformed
 
 private void ontologyMenuItemActionPerformed(ActionEvent evt) {
-    OntologyJDialog ontology = new OntologyJDialog(this, false);
-    ontology.setVisible(true);
+    SwingWorkerOntology ontoSW = new SwingWorkerOntology();
+    progres = new ProgressControlJDialog(ontoSW);
+    JProgressBar progresBar = progres.getProgressBar();
+    ontoSW.addPropertyChangeListener(new ProgressListener(progresBar,progres,false));
+    progresBar.setIndeterminate(true);
+    ontoSW.execute();
+    progres.setVisible(true); 
 }
     
 private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                                      
@@ -937,14 +942,20 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
     }
 }
 
-/*public class SwingWorkerOntology extends SwingWorker<OntologyJDialog, Void>{
+public class SwingWorkerOntology extends SwingWorker<OntologyJDialog, Void>{
     
+    OntologyJDialog onto = null;
+            
     private SwingWorkerOntology() {
     }
 
     @Override
     protected OntologyJDialog doInBackground() throws Exception {
-        OntologyJDialog onto = new OntologyJDialog(MainApplicationJFrame.getInstance(),false);
+        onto = new OntologyJDialog(MainApplicationJFrame.getInstance(),false,this);
+        if(this.isCancelled()==false){
+            onto.setVisible(true);
+        }
+        return onto;
     }
 
     @Override
@@ -959,11 +970,9 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
                 ignore.printStackTrace();
             }
             if(res!=null){
-                panelAviso.confirmAction("Proyecto guardado", MainApplicationJFrame.getInstance());
-                MainApplicationJFrame.getInstance().setProyectoGuardado(true);
                 progres.setVisible(false);
             }else{
-                panelAviso.errorAction("Proyecto no guardado",MainApplicationJFrame.getInstance()); 
+                panelAviso.errorAction("No se pudo mostrar la ontología",MainApplicationJFrame.getInstance()); 
                 progres.setVisible(false);
             }
         }
@@ -971,7 +980,7 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
 
         
     }
-*/
+
 public void importarTestsInstancias(boolean impTest){
     ImportarTestsInstJDialog abrirTests = new ImportarTestsInstJDialog(this,true,impTest);
     abrirTests.setLocationRelativeTo(this);

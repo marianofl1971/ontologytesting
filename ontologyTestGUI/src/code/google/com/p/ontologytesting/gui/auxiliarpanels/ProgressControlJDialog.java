@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame.IOSwingWorker;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame.SwingWorkerOntology;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ExecuteTest;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.LoadOntology;
 import java.net.URL;
@@ -23,7 +24,8 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
     private ExecuteTest execTest;
     private LoadOntology loadOnto;
     private IOSwingWorker sw;
-    private boolean execSelec=false,load=false,save=false;
+    private SwingWorkerOntology ontoSw;
+    private boolean execSelec=false,load=false,save=false,read=false;
     
     /** Creates new form ProgressControlJDialog */
     public ProgressControlJDialog(ExecuteTest execTest) {
@@ -58,6 +60,17 @@ public class ProgressControlJDialog extends javax.swing.JDialog {
         this.save=true;
         this.setTitle("Guardando");
         texto.setText("Guardando el proyecto...");
+        this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
+    
+    public ProgressControlJDialog(SwingWorkerOntology sw) {
+        initComponents();
+        this.setModal(true);
+        this.ontoSw=sw;
+        this.read=true;
+        this.setTitle("Visualizar Ontología");
+        texto.setText("Cargando ontología...");
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -131,6 +144,8 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         this.loadOnto.cancel(true);
     }else if(this.save==true){
         this.sw.cancel(true);
+    }else if(this.read==true){
+        this.ontoSw.cancel(true);
     }
 }
 
@@ -144,6 +159,8 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:even
         this.loadOnto.cancel(true);
     }else if(this.save==true){
         this.sw.cancel(true);
+    }else if(this.read==true){
+        this.ontoSw.cancel(true);
     } 
 }
 
