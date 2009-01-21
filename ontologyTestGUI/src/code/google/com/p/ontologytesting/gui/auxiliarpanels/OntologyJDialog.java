@@ -8,13 +8,13 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
-import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Locale;
 
 /**
  *
@@ -27,13 +27,12 @@ public class OntologyJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         String sCadena;
-        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ontología"));
+        this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ontología"));
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
         ontologyEditorPane.setEditable(false);
         ontologyEditorPane.setContentType("text/plain");
         StringBuffer ontology = new StringBuffer();
         BufferedReader bf;
-        System.out.println(AbrirProyectoJDialog.getUbicFisica());
         try {
             bf = new BufferedReader(new FileReader(AbrirProyectoJDialog.getUbicFisica()));
             try {

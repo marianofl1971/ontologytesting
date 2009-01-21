@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.util.ListIterator;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
+import java.util.Locale;
 
 /**
  *
@@ -214,13 +215,13 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
         nomInstanciasTextField.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
 
-        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Nombre_para_elconjunto_de_instancias:"));
+        jLabel2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nombre_para_elconjunto_de_instancias:"));
 
-        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Descripción:"));
+        jLabel3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Descripción:"));
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Añada_las_instancias_que_quiera_a_su_ontología:"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Añada_las_instancias_que_quiera_a_su_ontología:"));
 
-        guardarAsociarInstButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Guardar_y_Asociar"));
+        guardarAsociarInstButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_y_Asociar"));
         guardarAsociarInstButton.setToolTipText("Guardar y Asociar");
         guardarAsociarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +263,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
         classScrollPane.setViewportView(clasPanel);
 
-        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancias_de_Clase"), classScrollPane);
+        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancias_de_Clase"), classScrollPane);
 
         propScrollPane.setMaximumSize(new java.awt.Dimension(455, 422));
         propScrollPane.setMinimumSize(new java.awt.Dimension(455, 422));
@@ -284,7 +285,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
         propScrollPane.setViewportView(propPanel);
 
-        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Instancias_de_Propiedad"), propScrollPane);
+        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancias_de_Propiedad"), propScrollPane);
 
         javax.swing.GroupLayout clasPropPanelLayout = new javax.swing.GroupLayout(clasPropPanel);
         clasPropPanel.setLayout(clasPropPanelLayout);
@@ -299,7 +300,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
         textAreaScrollPane.setViewportView(clasPropPanel);
 
-        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Introducir_ambas_en_forma_de_texto"), textAreaScrollPane);
+        instancesTabbedPane.addTab(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Introducir_ambas_en_forma_de_texto"), textAreaScrollPane);
 
         formatosButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/information.png"))); // NOI18N
         formatosButton.setToolTipText("Formatos Permitidos");

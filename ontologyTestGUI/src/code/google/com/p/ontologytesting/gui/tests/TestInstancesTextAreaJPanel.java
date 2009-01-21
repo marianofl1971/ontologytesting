@@ -10,6 +10,7 @@ import code.google.com.p.ontologytesting.gui.Configuration;
 import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
+import java.util.Locale;
 
 /**
  *
@@ -81,7 +82,7 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Duplicar"));
+        duplicarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Duplicar"));
         duplicarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 duplicarButtonActionPerformed(evt);

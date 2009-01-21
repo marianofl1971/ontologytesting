@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import java.util.Locale;
 /**
  *
  * @author  sara.garcia
@@ -139,7 +140,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
     public void aniadirTreeResult(JScrollPane treeView){
         panelResultAux = new JPanel();
         panelResultAux.setLayout(new BoxLayout(panelResultAux, BoxLayout.Y_AXIS));
-        tabbedTestsPanel.add(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")).getString("Ejecución:_")+TreeResults.getTestSeleccionado(),panelResultAux);
+        tabbedTestsPanel.add(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ejecución:_")+TreeResults.getTestSeleccionado(),panelResultAux);
         initTabComponent(tabbedTestsPanel.getTabCount()-1);
         panelResultAux.add(treeView);
         tabbedTestsPanel.setSelectedIndex(tabbedTestsPanel.getTabCount()-1);
@@ -235,7 +236,7 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
                 .addComponent(testSimpleListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))); // NOI18N
         tabbedTestsPanel.addTab(bundle.getString("Tests_Simples"), simplesPanel); // NOI18N
 
         testSparqlList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -390,11 +391,13 @@ private void tabbedTestsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
 private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSimplesListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(lista.getSize()!=null && modeloSimples.size()>0){
-        ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
-        if(evt.getClickCount()==2){
-            opMenu.editarTest(scenario);
-            controlador.prepararTest(scenario.getTipoTest().name());
+    if(lista.getSelectedValue()!=null){
+        if(lista.getSize()!=null && modeloSimples.size()>0){
+            ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSimples.get(lista.getLeadSelectionIndex()).toString());
+            if(evt.getClickCount()==2){
+                opMenu.editarTest(scenario);
+                controlador.prepararTest(scenario.getTipoTest().name());
+            }
         }
     }
 }//GEN-LAST:event_testSimplesListMouseClicked
@@ -402,11 +405,13 @@ private void testSimplesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
 private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testSparqlListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(lista.getSize()!=null && modeloSparql.size()>0){
-        ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
-        if(evt.getClickCount()==2){
-            opMenu.editarTest(scenario);
-            controlador.prepararTest(scenario.getTipoTest().name());  
+    if(lista.getSelectedValue()!=null){
+        if(lista.getSize()!=null && modeloSparql.size()>0){
+            ScenarioTest scenario = s.buscarScenario(CollectionTest.getInstance().getScenariotest(), modeloSparql.get(lista.getLeadSelectionIndex()).toString());
+            if(evt.getClickCount()==2){
+                opMenu.editarTest(scenario);
+                controlador.prepararTest(scenario.getTipoTest().name());  
+            }
         }
     }
 }//GEN-LAST:event_testSparqlListMouseClicked
@@ -414,10 +419,12 @@ private void testSparqlListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 private void instanciasListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciasListMouseClicked
 // TODO add your handling code here:
     JList lista = (JList) evt.getSource();
-    if(lista.getSize()!=null && modeloInstancias.size()>0){
-        Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
-        if(evt.getClickCount()==2){
-            MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
+    if(lista.getSelectedValue()!=null){
+        if(lista.getSize()!=null && modeloInstancias.size()>0){
+            Instancias inst = instancias.buscarInstancias(CollectionTest.getInstance().getInstancias(),modeloInstancias.get(lista.getLeadSelectionIndex()).toString());
+            if(evt.getClickCount()==2){
+                MainApplicationJFrame.getInstance().cargarInstancia(inst,inst.getNombre());
+            }
         }
     }
 }//GEN-LAST:event_instanciasListMouseClicked
