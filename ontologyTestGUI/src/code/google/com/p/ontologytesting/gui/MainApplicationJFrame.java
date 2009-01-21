@@ -48,7 +48,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
     private boolean proyectoGuardado=false,existeProyecto=false;
     private static boolean esNuevo=false;
     private AniadirPanelDeAviso panelAviso;
-    private FileChooserSelector utils;
+    private FileChooserSelector utils = new FileChooserSelector();
     private CollectionTest collection;
     private TestSimpleInstSat testInstSat;
     private TestSimpleReal testReal;
@@ -146,16 +146,19 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         group.add(usMenuItem);
         esMenuItem.setSelected(true);
         esMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esMenuItemActionPerformed(evt);
             }
         });
         gbMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gbMenuItemActionPerformed(evt);
             }
         });
         usMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usMenuItemActionPerformed(evt);
             }
@@ -163,6 +166,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -184,6 +188,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Nuevo")); // NOI18N
         nuevoProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoProyectoMenuItemActionPerformed(evt);
             }
@@ -193,6 +198,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         abrirProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-open.png"))); // NOI18N
         abrirProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Abrir")); // NOI18N
         abrirProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirProyectoMenuItemActionPerformed(evt);
             }
@@ -203,6 +209,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Guardar")); // NOI18N
         guardarProyectoMenuItem.setEnabled(false);
         guardarProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarProyectoMenuItemActionPerformed(evt);
             }
@@ -213,6 +220,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoComoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Guardar_Como")); // NOI18N
         guardarProyectoComoMenuItem.setEnabled(false);
         guardarProyectoComoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarProyectoComoMenuItemActionPerformed(evt);
             }
@@ -222,12 +230,25 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         jMenuItem2.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Eliminar")); // NOI18N
         fileMenu.add(jMenuItem2);
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_delete.gif")));
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarProyectoActionPerformed(evt);
+            }
+        });
         jMenuItem1.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Cerrar")); // NOI18N
         fileMenu.add(jMenuItem1);
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarProyectoActionPerformed(evt);
+            }
+        });
         salirMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Salir")); // NOI18N
         salirMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/system-log-out.png")));
         salirMenuItem.setEnabled(true);
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirMenuItemActionPerformed(evt);
             }
@@ -247,6 +268,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoTestInstMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_blue.gif"))); // NOI18N
         nuevoTestInstMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_de_Instanciación"));
         nuevoTestInstMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestInstMenuItemActionPerformed(evt);
             }
@@ -256,6 +278,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoTestRecMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_green.gif"))); // NOI18N
         nuevoTestRecMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_de_Recuperación"));
         nuevoTestRecMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestRecMenuItemActionPerformed(evt);
             }
@@ -265,6 +288,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoTestRealMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_orange.gif"))); // NOI18N
         nuevoTestRealMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_de_Realización"));
         nuevoTestRealMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestRealMenuItemActionPerformed(evt);
             }
@@ -274,6 +298,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoTestSatMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_red.gif"))); // NOI18N
         nuevoTestSatMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_de_Satisfactibilidad")); // NOI18N
         nuevoTestSatMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestSatMenuItemActionPerformed(evt);
             }
@@ -283,6 +308,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoTestClasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/flag_white.gif"))); // NOI18N
         nuevoTestClasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_de_Clasificación"));
         nuevoTestClasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestClasMenuItemActionPerformed(evt);
             }
@@ -293,6 +319,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         nuevoTestSparqlMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Test_Sparql")); // NOI18N
         nuevoTestSparqlMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoTestSparqlMenuItemActionPerformed(evt);
             }
@@ -304,6 +331,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         importarTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/go-jump.png"))); // NOI18N
         importarTestsMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Importar")); // NOI18N
         importarTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importarTestsMenuItemActionPerformed(evt);
             }
@@ -313,6 +341,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         editarTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_edit.png"))); // NOI18N
         editarTestsMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Editar")); // NOI18N
         editarTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarTestsMenuItemActionPerformed(evt);
             }
@@ -322,6 +351,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         verTestsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         verTestsMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ver")); // NOI18N
         verTestsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verTestsMenuItemActionPerformed(evt);
             }
@@ -336,6 +366,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         nuevoInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoInstanciasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Nuevo")); // NOI18N
         nuevoInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoInstanciasMenuItemActionPerformed(evt);
             }
@@ -345,6 +376,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         importarInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/go-jump.png"))); // NOI18N
         importarInstanciasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Importar")); // NOI18N
         importarInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importarInstanciasMenuItemActionPerformed(evt);
             }
@@ -354,6 +386,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         editarInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_edit.png"))); // NOI18N
         editarInstanciasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Editar")); // NOI18N
         editarInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarInstanciasMenuItemActionPerformed(evt);
             }
@@ -363,6 +396,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         verInstanciasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         verInstanciasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ver")); // NOI18N
         verInstanciasMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verInstanciasMenuItemActionPerformed(evt);
             }
@@ -377,6 +411,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         selecTestMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-print-preview.png"))); // NOI18N
         selecTestMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Seleccionar_test")); // NOI18N
         selecTestMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selecTestMenuItemActionPerformed(evt);
             }
@@ -386,6 +421,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         ejecutarTodosMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/applications-system.png"))); // NOI18N
         ejecutarTodosMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Todos_los_Tests")); // NOI18N
         ejecutarTodosMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ejecutarTodosMenuItemActionPerformed(evt);
             }
@@ -414,11 +450,13 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         helpMenu.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Ayuda")); // NOI18N
         contentsMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Contenidos")); // NOI18N
         ontologyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ontologyMenuItemActionPerformed(evt);
             }
         });
         contentsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contentsMenuItemActionPerformed(evt);
             }
@@ -429,7 +467,12 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         aboutMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getInstance().cargarDriver().getProperty("IDIOMA")).getString("Acerca_de")); // NOI18N
         helpMenu.add(aboutMenuItem);
-
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         
         menuBar.add(helpMenu);
 
@@ -457,7 +500,6 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
     if(CollectionTest.getInstance().esVacio()==false){
-        utils = new FileChooserSelector();
         boolean res = utils.fileChooser(false, true, false);
         if(res == true){
             this.guardarProyecto(true, FileChooserSelector.getPathSelected(),esNuevo);
@@ -492,6 +534,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            deshabilitarBotones(false);
             this.validate();
         }
     }
@@ -502,15 +545,7 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
         newProject.setVisible(true);
         if(newProject.getProyectoCreado()==true){
             this.inicializarContadores();
-            guardarProyectoComoMenuItem.setEnabled(true);
-            guardarProyectoMenuItem.setEnabled(true);
-            instanciasMenu.setEnabled(true);
-            testsMenu.setEnabled(true);
-            ejecutarMenu.setEnabled(true);
-            jMenuItem1.setEnabled(true);
-            jMenuItem2.setEnabled(true);
-            salirMenuItem.setEnabled(true);
-            ontologyMenu.setEnabled(true);
+            deshabilitarBotones(true);
             if(existeProyecto==false){
                 contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                 existeProyecto=true;
@@ -518,6 +553,18 @@ private void nuevoProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             }
         }
     }
+}
+
+public void deshabilitarBotones(boolean estado){
+    guardarProyectoComoMenuItem.setEnabled(estado);
+    guardarProyectoMenuItem.setEnabled(estado);
+    instanciasMenu.setEnabled(estado);
+    testsMenu.setEnabled(estado);
+    ejecutarMenu.setEnabled(estado);
+    jMenuItem1.setEnabled(estado);
+    jMenuItem2.setEnabled(estado);
+    salirMenuItem.setEnabled(estado);
+    ontologyMenu.setEnabled(estado);
 }
 
 private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
@@ -532,7 +579,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             this.guardarProyecto(false, null,esNuevo);
             this.dispose();
             System.exit(0);
-        }else{
+        }else if(n == JOptionPane.NO_OPTION){
             this.dispose();
             System.exit(0);
         }
@@ -570,6 +617,60 @@ private void usMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
     }else{
         panelAviso.errorAction("No se pudo cambiar el idioma", this);
     }
+}
+
+private void eliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Seguro que quiere borrar el proyecto?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            boolean res = utils.deleteDirectory(utils.getPathDirectorioProyecto());
+            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+            ListAndTestsJPanel.getInstance().eliminarTests();
+            CollectionTest.getInstance().destroy();
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            deshabilitarBotones(false);
+            this.validate();
+            if(res==true){
+                panelAviso.confirmAction("Proyecto Borrado", this);
+            }else{
+                panelAviso.errorAction("No se pudo borrar el proyecto", this);
+            }
+        }
+}
+
+private void cerrarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+    int aux=0;
+    if(existeProyecto==true && CollectionTest.getInstance().esVacio()==false){
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (n == JOptionPane.YES_OPTION) {
+            this.guardarProyecto(false, null,esNuevo);
+            aux=1;
+        }else if(n == JOptionPane.NO_OPTION){
+            aux=1;
+        }else{
+            aux=2;
+        }
+        if(aux==1){
+            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+            ListAndTestsJPanel.getInstance().eliminarTests();
+            CollectionTest.getInstance().destroy();
+            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            deshabilitarBotones(false);
+            this.validate();
+        }
+    }
+}
+
+private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+// TODO add your handling code here:
+    AboutJDialog about = new AboutJDialog(this, true);
+    about.setLocationRelativeTo(this);
+    about.setVisible(true);
 }
 
 private void nuevoTestInstMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoTestInstMenuItemActionPerformed
@@ -707,13 +808,13 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
             ListAndTestsJPanel.getInstance().eliminarTests();
             CollectionTest.getInstance().destroy();
             contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+            deshabilitarBotones(false);
             this.validate();
         }
     }
     if(aux!=2){
         AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
         try {
-            utils = new FileChooserSelector();
             boolean res = utils.fileChooser(true, true, false);
             if(res == true){
                 esNuevo=false;
@@ -726,15 +827,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
                 abrirP.setVisible(true);
                 if(abrirP.isProyectoCargado()==true){
                     this.inicializarContadores();
-                    guardarProyectoComoMenuItem.setEnabled(true);
-                    guardarProyectoMenuItem.setEnabled(true);
-                    instanciasMenu.setEnabled(true);
-                    testsMenu.setEnabled(true);
-                    ejecutarMenu.setEnabled(true);
-                    jMenuItem1.setEnabled(true);
-                    jMenuItem2.setEnabled(true);
-                    salirMenuItem.setEnabled(true);
-                    ontologyMenu.setEnabled(true);
+                    deshabilitarBotones(true);
                     if(existeProyecto==false){
                         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
                         ControladorTests.getInstance().inicializarGuardados();
