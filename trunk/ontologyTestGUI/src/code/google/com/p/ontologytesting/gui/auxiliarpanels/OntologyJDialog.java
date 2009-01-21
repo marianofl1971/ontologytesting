@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame.SwingWorkerOntology;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,7 +24,7 @@ import java.util.Locale;
 public class OntologyJDialog extends javax.swing.JDialog {
 
     /** Creates new form OntologyJDialog */
-    public OntologyJDialog(java.awt.Frame parent, boolean modal) {
+    public OntologyJDialog(java.awt.Frame parent, boolean modal, SwingWorkerOntology sw) {
         super(parent, modal);
         initComponents();
         String sCadena;
@@ -36,7 +37,7 @@ public class OntologyJDialog extends javax.swing.JDialog {
         try {
             bf = new BufferedReader(new FileReader(AbrirProyectoJDialog.getUbicFisica()));
             try {
-                while ((sCadena = bf.readLine()) != null) {
+                while ((sCadena = bf.readLine()) != null && sw.isCancelled()==false) {
                     ontology.append(sCadena).append("\r\n");
                 }
                 ontologyEditorPane.setText(ontology.toString());
