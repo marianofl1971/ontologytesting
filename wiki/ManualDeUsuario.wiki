@@ -1,6 +1,1 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
 A través de este manual podréis sacar el máximo partido a la herramienta.
-
