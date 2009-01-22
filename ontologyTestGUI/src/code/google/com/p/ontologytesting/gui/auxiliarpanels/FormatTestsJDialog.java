@@ -36,34 +36,37 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
         }
         descripcionEditorPane.setText(formato);
         descripcionEditorPane.setEditable(false);
+        descripcionEditorPane.setCaretPosition(0);
         this.setTitle("Formatos de Tests Permitidos");
     }
 
     private String generarFormatoPermitidoInstanciacion(){
+        this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE INSTANCIACION</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<h><b>Formatos para el Test de Instanciación</h></b><br><br>" +
+                "<b>Consultas</b><br><br>" +
                 "Clase,individuo<br>" +
-                "Clase.individuo<br>" +
                 "Clase(individuo)<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
+                "<b>Resultado Esperado</b><br><br>" +
                 "True/False";
         return formato;
     }
     
     private String generarFormatoPermitidoRetrieval(){
+        this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE RECUPERACION</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<h><b>Formatos para el Test de Recuperación</h></b><br><br>" +
+                "<b>Consultas</b><br><br>" +
                 "Clase<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
-                "Lista de individuos separados por coma o punto";
+                "<b>Resultado Esperado</b><br><br>" +
+                "Lista de individuos separados por coma";
         return formato;
     }
     
     private String generarFormatoPermitidoRealizacion(){
+        this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE REALIZACION</h></b><br><br>" +
+                "<h><b>Formatos para el Test de Realización</h></b><br><br>" +
                 "<b>CONSULTAS</b><br><br>" +
                 "Indiviudo<br><br>" +
                 "<b>RESULTADO ESPERADO</b><br><br>" +
@@ -72,36 +75,37 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     }
     
     private String generarFormatoPermitidoSatisfactibilidad(){
+        this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE SATISFACTIBILIDAD</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<h><b>Formatos para el Test De Satisfactibilidad</h></b><br><br>" +
+                "<b>Consultas</b><br><br>" +
                 "Individuo,Clase<br>" +
-                "Individuo.Clase<br>" +
                 "Individuo(Clase)<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
+                "<b>Resultado Esperado</b><br><br>" +
                 "True/False";
         return formato;
     }
     
     private String generarFormatoPermitidoClasificacion(){
+        this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST DE CLASIFICACION</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<h><b>Formatos para el Test de Clasificación</h></b><br><br>" +
+                "<b>Consultas</b><br><br>" +
                 "Individuo<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
-                "Lista de clases separados por coma o punto";
+                "<b>Resultado Esperado</b><br><br>" +
+                "Lista de clases separados por coma";
         return formato;
     }
     
     private String generarFormatoPermitidoSPARQL(){
-        this.setSize(new Dimension(600,600));
+        this.setSize(new Dimension(600,410));
         String formato="<html>" +
-                "<h><b>FORMATOS PARA EL TEST SPARQL</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<h><b>Formatos para el Test Sparql</h></b><br><br>" +
+                "<b>Consultas</b><br><br>" +
                 "Serán validas aquellas consultas que sean" +
                 "gramaticalmente correctas siguiendo la sintaxis de SPARQL." +
                 "Sólo estan permitidas consultas tipo SELECT.<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
+                "<b>Resultado Esperado</b><br><br>" +
                 "En caso de un SELECT simple, el resultado deberá de ser el sujeto" +
                 "que se indico en el SELECT, seguido de una lista " +
                 "de objetos separados por coma o punto.<br><br>" +
@@ -115,12 +119,12 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "FROM 'ruta a la ontologia' <br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
                 "El resultado se debe de mostrar de la siguient forma:<br><br>" +
-                "subject(a,b,c) | subject(a.b.c) <br>" +
-                "object(a,b,c) | object(a.b.c)"+
+                "subject(a,b,c)<br>" +
+                "object(a,b,c)"+
                 "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados" +
                 "por un salto de linea o por un punto y coma, es decir:" +
-                "subject(a,b.c)" +
-                "object(a.b,c)";    
+                "subject(a,c);" +
+                "object(a,b,c)";    
         return formato;
     }
 
@@ -133,26 +137,51 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcionEditorPane = new javax.swing.JEditorPane();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        descripcionEditorPane.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jScrollPane1.setViewportView(descripcionEditorPane);
+
+        jButton1.setText("Cerrar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(234, 234, 234)
+                        .addComponent(jButton1)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 301, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -161,6 +190,8 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JEditorPane descripcionEditorPane;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 

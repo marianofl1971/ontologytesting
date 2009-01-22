@@ -266,8 +266,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         jMenu3.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo")); // NOI18N
 
         jMenu4.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_Simple")); // NOI18N
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
-        nuevoTestInstMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
+        nuevoTestInstMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
         nuevoTestInstMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_de_Instanciación"));
         nuevoTestInstMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -277,7 +277,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         });
         jMenu4.add(nuevoTestInstMenuItem);
 
-        nuevoTestRecMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
+        nuevoTestRecMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
         nuevoTestRecMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_de_Recuperación"));
         nuevoTestRecMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -287,7 +287,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         });
         jMenu4.add(nuevoTestRecMenuItem);
 
-        nuevoTestRealMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
+        nuevoTestRealMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
         nuevoTestRealMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_de_Realización"));
         nuevoTestRealMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -297,7 +297,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         });
         jMenu4.add(nuevoTestRealMenuItem);
 
-        nuevoTestSatMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
+        nuevoTestSatMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
         nuevoTestSatMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_de_Satisfactibilidad")); // NOI18N
         nuevoTestSatMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -307,7 +307,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         });
         jMenu4.add(nuevoTestSatMenuItem);
 
-        nuevoTestClasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_blue.gif"))); // NOI18N
+        nuevoTestClasMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/unpin.gif"))); // NOI18N
         nuevoTestClasMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_de_Clasificación"));
         nuevoTestClasMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -319,7 +319,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         jMenu3.add(jMenu4);
 
-        nuevoTestSparqlMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/button_purple.gif"))); // NOI18N
+        nuevoTestSparqlMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/pin.gif"))); // NOI18N
         nuevoTestSparqlMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Test_Sparql")); // NOI18N
         nuevoTestSparqlMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
