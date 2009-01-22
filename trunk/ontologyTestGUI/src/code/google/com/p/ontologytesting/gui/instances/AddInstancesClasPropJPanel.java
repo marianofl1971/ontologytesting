@@ -229,7 +229,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             }
         });
 
-        limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/edit-clear.png"))); // NOI18N
+        limpiarInstButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/paintbrush.png"))); // NOI18N
         limpiarInstButton.setToolTipText("Limpiar Selección");
         limpiarInstButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
