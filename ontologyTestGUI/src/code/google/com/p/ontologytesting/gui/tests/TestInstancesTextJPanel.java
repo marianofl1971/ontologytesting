@@ -42,6 +42,7 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         consultaTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         consultaTextArea.setRows(5);
         consultaTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 consultaTextAreaMouseClicked(evt);
             }
@@ -52,13 +53,14 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
         resultadoEsperadoTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         resultadoEsperadoTextArea.setRows(5);
         resultadoEsperadoTextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 resultadoEsperadoTextAreaMouseClicked(evt);
             }
         });
         jScrollPane17.setViewportView(resultadoEsperadoTextArea);
 
-        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("_____________________________CONSULTA____________________________________________________RESULTADO_ESPERADO__________________________________COMENTARIO"));
+        jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("CONSULTA_RESULTADO_ESPERADO_COMENTARIO"));
 
         comentTextArea.setColumns(20);
         comentTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N

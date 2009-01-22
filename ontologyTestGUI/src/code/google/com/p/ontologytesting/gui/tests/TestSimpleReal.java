@@ -78,8 +78,8 @@ public class TestSimpleReal extends javax.swing.JPanel {
             realAyudaPanel.add(panelInstances,cont);
             cont++;
         }
-        if(cont<5){
-            for (int i = cont; i <= 5; i++) {  
+        if(cont<8){
+            for (int i = cont; i <= 8; i++) {  
                 realAyudaPanel.add(new TestInstancesQueryJPanel());   
             }
         }
@@ -116,6 +116,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         contentRealTabedPanel.setLayout(new java.awt.BorderLayout());
 
         tabbedPaneReal.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabbedPaneRealMouseClicked(evt);
             }
@@ -123,7 +124,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
 
         jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        labelRealLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("______________________________________CONSULTAS_________________________________________________RESULTADO_ESPERADO"));
+        labelRealLabel.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("CONSULTASREAL_RESULTADO_ESPERADO"));
 
         javax.swing.GroupLayout labelRealPanelLayout = new javax.swing.GroupLayout(labelRealPanel);
         labelRealPanel.setLayout(labelRealPanelLayout);
@@ -202,6 +203,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         guardarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/disk.png"))); // NOI18N
         guardarButton.setToolTipText("Guardar");
         guardarButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarButtonActionPerformed(evt);
             }
@@ -210,6 +212,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         guardarEjecutarButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_y_Ejecutar"));
         guardarEjecutarButton.setToolTipText("Guardar y Ejecutar");
         guardarEjecutarButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarEjecutarButtonActionPerformed(evt);
             }
@@ -218,6 +221,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         ejecutarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/cog.png"))); // NOI18N
         ejecutarButton.setToolTipText("Ejecutar");
         ejecutarButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ejecutarButtonActionPerformed(evt);
             }
@@ -226,6 +230,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
         addInstanciasButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/add.png"))); // NOI18N
         addInstanciasButton.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Instancias"));
         addInstanciasButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addInstanciasButtonActionPerformed(evt);
             }
