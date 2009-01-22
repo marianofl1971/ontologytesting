@@ -71,7 +71,9 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "En este caso el test no fallaría, ya que todas las clases a las que puede" +
                 " pertenecer 'marry' son las especificadas. <br><br>" +
                 "<h><b>Test Sparl</h></b><br><br>" +
-                "Este test ejecuta una consulta Sparql valida.<br><br>" +
+                "Este test ejecuta una consulta Sparql valida." +
+                "Para más información acerca del lenguaje SPARQL visite:<br>" +
+                "http://www.w3.org/TR/rdf-sparql-query/<br>" +
                 "<br><br>" +
                 "</html>";
         return help;
