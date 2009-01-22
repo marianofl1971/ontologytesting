@@ -99,13 +99,13 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             contP++;
         }
          
-        if(3-contI>0){
-            for (int j = 0; j <= (3-contI); j++) {
+        if(7-contI>0){
+            for (int j = 0; j <= (7-contI); j++) {
                 clasPanel.add(new CreateInstancesJPanel(0));
             }
         }
-        if(3-contP>0){
-            for (int k = 0; k <= (3-contP); k++) {
+        if(7-contP>0){
+            for (int k = 0; k <= (7-contP); k++) {
                 propPanel.add(new CreateInstancesJPanel(1));
             }
         }
@@ -161,13 +161,13 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
             contP++;
         }
          
-        if(3-contI>0){
-            for (int j = 0; j <= (3-contI); j++) {
+        if(7-contI>0){
+            for (int j = 0; j <= (7-contI); j++) {
                 clasPanel.add(new CreateInstancesJPanel(0));
             }
         }
-        if(3-contP>0){
-            for (int k = 0; k <= (3-contP); k++) {
+        if(7-contP>0){
+            for (int k = 0; k <= (7-contP); k++) {
                 propPanel.add(new CreateInstancesJPanel(1));
             }
         }
