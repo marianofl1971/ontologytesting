@@ -52,6 +52,7 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     public TestSimpleRetClas(ScenarioTest s){
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
+        jScrollPane6.getVerticalScrollBar().setUnitIncrement(7);
         TestInstancesTextAreaJPanel.setContadorRetClas(0);
         descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
         descripcionJPanel.add(new DescripcionJPanel());

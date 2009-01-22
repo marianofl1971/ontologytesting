@@ -37,11 +37,13 @@ public class OntologyJDialog extends javax.swing.JDialog {
         try {
             bf = new BufferedReader(new FileReader(AbrirProyectoJDialog.getUbicFisica()));
             try {
-                while ((sCadena = bf.readLine()) != null && sw.isCancelled()==false) {
+                while ((sCadena = bf.readLine())!=null && sw.isCancelled()==false){
                     ontology.append(sCadena).append("\r\n");
                 }
-                ontologyEditorPane.setText(ontology.toString());
-                ontologyEditorPane.setCaretPosition(0);
+                if(sw.isCancelled()==false){
+                    ontologyEditorPane.setText(ontology.toString());
+                    ontologyEditorPane.setCaretPosition(0);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(OntologyJDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
