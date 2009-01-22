@@ -50,6 +50,7 @@ public class TestSimpleReal extends javax.swing.JPanel {
     public TestSimpleReal(ScenarioTest s){
         initComponents();
         panelAviso = new AniadirPanelDeAviso();
+        jScrollPane6.getVerticalScrollBar().setUnitIncrement(7);
         TestInstancesQueryJPanel.setContadorReal(0);
         descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));
         descripcionJPanel.add(new DescripcionJPanel());

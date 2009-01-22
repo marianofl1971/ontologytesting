@@ -51,6 +51,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     public TestSimpleInstSat(ScenarioTest s){
         initComponents();
         TestInstancesTFJPanel.setContadorInstSat(0);
+        jScrollPane6.getVerticalScrollBar().setUnitIncrement(7);
         panelAviso = new AniadirPanelDeAviso();
         controlador = ControladorTests.getInstance();
         descripcionJPanel.setLayout(new BoxLayout(descripcionJPanel, BoxLayout.X_AXIS));

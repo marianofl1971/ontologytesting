@@ -571,7 +571,6 @@ public void deshabilitarBotones(boolean estado){
     ejecutarMenu.setEnabled(estado);
     jMenuItem1.setEnabled(estado);
     jMenuItem2.setEnabled(estado);
-    salirMenuItem.setEnabled(estado);
     ontologyMenu.setEnabled(estado);
 }
 
