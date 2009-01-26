@@ -14,8 +14,6 @@ import java.util.List;
  */
 public interface InterfaceReasoner {
     
-    //void selectReasoner();
-    
     boolean addInstanceClass(String ns,String nameClass, String value);
     
     boolean addInstanceProperty(String ns,String nameProperty, String value);
