@@ -116,7 +116,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     public ArrayList<String> retieval(String ns, String className){
         ArrayList<String> rval = new ArrayList<String>();
         OntClass ontClass = model.getOntClass(ns + className);    
-        if(ontClass==null) return rval=null;
+        if(ontClass==null) return rval;
         try{
             Iterator it = ontClass.listInstances();
             while(it.hasNext())
@@ -187,7 +187,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
         Individual individual = model.getIndividual(ns + individuo);
         String pertenece;
         ArrayList<String> clases = new ArrayList<String>();
-        if(individual==null) return clases = null;
+        if(individual==null) return clases;
         Iterator it = model.listNamedClasses();
         Iterator itaux = model.listObjectProperties();
         ArrayList<String[]> arrayProp = new ArrayList<String[]>();

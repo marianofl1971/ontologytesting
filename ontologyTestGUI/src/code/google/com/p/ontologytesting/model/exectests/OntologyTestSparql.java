@@ -59,30 +59,32 @@ public class OntologyTestSparql extends OntologyTestCase{
                     }
                 }
                 listaResultObtenida = jena.testSPARQL(sparqlQuery);
-                if(listaResultObtenida!=null && listaResultObtenida.size() > 0){
-                    esperado = new ArrayList<String>();
-                    obtenido = new ArrayList<String>();
-                    String contenidoObtenido = "",contenidoEsperado="";
-                    fallo=0;
-                    int tam = listaResultObtenida.get(0).getDatos().size();
-                    int tamBis = listaResultEsperada.get(0).getDatos().size();
-                    if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
-                        for(int n=0;n<tam;n++){
-                            for(int t=0; t<listaResultObtenida.size(); t++){
-                                contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(n);
-                                contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(n);
-                            } 
-                            esperado.add(contenidoEsperado);
-                            obtenido.add(contenidoObtenido);
-                            contenidoObtenido = "";
-                            contenidoEsperado = "";
-                    }
-                    }else{
-                        fallo=1;
-                    }
-                }else if(listaResultObtenida.size()==0){
-                    if((listaResultEsperada.size()!=listaResultObtenida.size())){
-                        fallo=1;
+                if(listaResultObtenida!=null){ 
+                    if(listaResultObtenida.size() > 0){
+                        esperado = new ArrayList<String>();
+                        obtenido = new ArrayList<String>();
+                        String contenidoObtenido = "",contenidoEsperado="";
+                        fallo=0;
+                        int tam = listaResultObtenida.get(0).getDatos().size();
+                        int tamBis = listaResultEsperada.get(0).getDatos().size();
+                        if((listaResultEsperada.size()==listaResultObtenida.size()) && (tam==tamBis)){
+                            for(int n=0;n<tam;n++){
+                                for(int t=0; t<listaResultObtenida.size(); t++){
+                                    contenidoObtenido = contenidoObtenido+listaResultObtenida.get(t).getDatos().get(n);
+                                    contenidoEsperado = contenidoEsperado+listaResultEsperada.get(t).getDatos().get(n);
+                                } 
+                                esperado.add(contenidoEsperado);
+                                obtenido.add(contenidoObtenido);
+                                contenidoObtenido = "";
+                                contenidoEsperado = "";
+                        }
+                        }else{
+                            fallo=1;
+                        }
+                    }else if(listaResultObtenida.size()==0){
+                        if((listaResultEsperada.size()!=listaResultObtenida.size())){
+                            fallo=1;
+                        }
                     }
                 }
                 if(utils.contieneTodosIguales(esperado, obtenido)==false || fallo==1){

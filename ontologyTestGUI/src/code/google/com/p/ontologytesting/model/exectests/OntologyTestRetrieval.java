@@ -43,7 +43,7 @@ public class OntologyTestRetrieval extends OntologyTestCase {
                 for(int k=0;k<queryMod.length;k++){
                     queryRet.add(queryMod[k]);
                 }
-                if(resObtenidoRet==null){
+                if(resObtenidoRet==null || resObtenidoRet.size()==0){
                     testresult.addOntologyFailureQuery(scenario.getNombre(), 
                             qo,"La clase introducida no es una " +
                             "instancia para el modelo",scenario.getTipoTest());
