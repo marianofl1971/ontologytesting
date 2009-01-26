@@ -50,7 +50,7 @@ public class QueryOntology extends SparqlQueryOntology implements Serializable {
     
     @Override
     public boolean equals(Object object){
-        if((object!=null) && (object instanceof SparqlQueryOntology) ) {
+        if((object!=null) && (object instanceof QueryOntology) ) {
             QueryOntology comp = (QueryOntology)object;
             if(this.getQuery().equals(comp.getQuery())){
                if(this.getResultexpected().equals(comp.getResultexpected())){
