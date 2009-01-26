@@ -40,6 +40,7 @@ public class OntologyJDialog extends javax.swing.JDialog {
                 while ((sCadena = bf.readLine())!=null && sw.isCancelled()==false){
                     ontology.append(sCadena).append("\r\n");
                 }
+                bf.close();
                 if(sw.isCancelled()==false){
                     ontologyEditorPane.setText(ontology.toString());
                     ontologyEditorPane.setCaretPosition(0);

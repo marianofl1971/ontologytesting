@@ -44,7 +44,7 @@ public class OntologyTestClassification extends OntologyTestCase{
                     querySat.add(queryMod[k]);
                 }
                 resObtenidoClas = jena.classification(ns, query);
-                if(resObtenidoClas==null){
+                if(resObtenidoClas==null || resObtenidoClas.size()==0){
                     testresult.addOntologyFailureQuery(scenario.getNombre(),qo,"El individuo introducido no es una instancia para el modelo",scenario.getTipoTest());
                 }else{
                     Collections.sort(resObtenidoClas);

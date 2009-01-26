@@ -60,6 +60,7 @@ public class Configuration {
             }
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
+            in.close();
         }catch (IOException ex) {
             System.out.println("Error durante la configuracion");
         }
@@ -78,6 +79,7 @@ public class Configuration {
             out.close();
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
+            in.close();
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);

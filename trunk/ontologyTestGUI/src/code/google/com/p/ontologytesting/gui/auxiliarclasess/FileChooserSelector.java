@@ -48,9 +48,6 @@ public class FileChooserSelector {
                 BufferedReader bf = null;
                 try {
                     bf = new BufferedReader(new FileReader(selectedFile.getAbsolutePath()));
-                } catch (FileNotFoundException ex) {
-                }
-                try {
                     while ((linea = bf.readLine()) != null && var==0) {
                             if(linea.contains("xmlns=\"")) {
                                 int indexBegin = linea.indexOf("xmlns=\"");
@@ -61,7 +58,9 @@ public class FileChooserSelector {
                                 setNsDefecto("http://www.owl-ontologies.com/unnamed.owl");
                             }
                     }
-                } catch (IOException ex) {   
+                    bf.close();
+                } catch (FileNotFoundException ex) {
+                }catch (IOException ex) {   
                 }
             }
             FileChooserSelector.setPathSelected(selectedFile.getAbsolutePath());
@@ -91,8 +90,7 @@ public class FileChooserSelector {
                files[i].delete();
              }
           }
-          path.delete();
-          return true;
+          return path.delete();
         }
         return false;
     }
