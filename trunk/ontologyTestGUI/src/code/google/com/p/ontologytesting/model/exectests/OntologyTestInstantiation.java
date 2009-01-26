@@ -9,7 +9,6 @@ import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -17,10 +16,8 @@ import java.util.ListIterator;
  *
  * @author sara.garcia
  */
-public class OntologyTestInstantiation implements OntologyTest{
+public class OntologyTestInstantiation extends OntologyTestCase{
 
-    private Reasoner jenaInterface = new Reasoner();
-    private InterfaceReasoner jena = jenaInterface.getReasoner();
     private String patron3="[\\(|\\)|,| |.]";
     private String res[],clasF="",indF="",query,resQueryExpected="",resObtenidoInst="";
     private QueryOntology qo = null;
@@ -28,8 +25,7 @@ public class OntologyTestInstantiation implements OntologyTest{
     
     public OntologyTestInstantiation(){}
 
-    @Override
-    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario) throws InvalidOntologyException {
+    public void run(OntologyTestResult testresult, String ns, String ont, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("INST")){
             List<QueryOntology> queryTest = scenario.getQueryTest();
             liQuery = queryTest.listIterator();
@@ -40,6 +36,8 @@ public class OntologyTestInstantiation implements OntologyTest{
                 res = query.split(patron3);
                 clasF = res[0];
                 indF = res[1];
+                System.out.println(ont);
+                jena.addReasoner(ont);
                 resObtenidoInst = jena.instantiation(ns, clasF, indF);
                 if(!resObtenidoInst.equals(resQueryExpected)){
                     testresult.addOntologyFailureQuery(scenario.getNombre(), qo, resObtenidoInst, scenario.getTipoTest());

@@ -9,7 +9,6 @@ import code.google.com.p.ontologytesting.model.QueryOntology;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -17,18 +16,15 @@ import java.util.ListIterator;
  *
  * @author sara.garcia
  */
-public class OntologyTestRealization implements OntologyTest{
+public class OntologyTestRealization extends OntologyTestCase{
 
-    private Reasoner jenaInterface = new Reasoner();
-    private InterfaceReasoner jena = jenaInterface.getReasoner();
     private String query,resQueryExpected="",resObtenidoRealiz="";
     private QueryOntology qo = null;
     private ListIterator liQuery;
     
     public OntologyTestRealization(){}
 
-    @Override
-    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario) throws InvalidOntologyException {
+    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("REAL")){
             List<QueryOntology> queryTest = scenario.getQueryTest();
             liQuery = queryTest.listIterator();

@@ -25,16 +25,11 @@ import java.util.List;
  */
 public class ReasonerImplementation implements InterfaceReasoner{
 
-    private static OntModel model;
+    private final OntModel model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
     private OntClass nameclass;
     private Property nameprop;
     
     public ReasonerImplementation(){}
-    
-    @Override
-    public void selectReasoner() {
-        model = ModelFactory.createOntologyModel( PelletReasonerFactory.THE_SPEC );
-    }
     
     @Override
     public boolean addInstanceClass(String ns, String nameClass, String value) {
@@ -83,7 +78,6 @@ public class ReasonerImplementation implements InterfaceReasoner{
 
     @Override
     public void addReasoner(String ontologia) throws InvalidOntologyException{
-        selectReasoner();
         ontologia = "file:".concat(ontologia);
         try {
             model.read(ontologia);  
