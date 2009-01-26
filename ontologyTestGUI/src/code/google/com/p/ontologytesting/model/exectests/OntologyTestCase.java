@@ -19,24 +19,15 @@ import java.util.ListIterator;
  * @author Saruskas
  */
 public class OntologyTestCase implements OntologyTest{
-    
-    private Reasoner jenaInterface;   
-    private OntologyTestInstantiation testInst = new OntologyTestInstantiation();
-    private OntologyTestRetrieval testRet = new OntologyTestRetrieval();
-    private OntologyTestRealization testRealiz = new OntologyTestRealization();
-    private OntologyTestSatisfactibility testSatis = new OntologyTestSatisfactibility();
-    private OntologyTestClassification testClas = new OntologyTestClassification();
-    private OntologyTestSparql testSparql = new OntologyTestSparql();
-    private InterfaceReasoner jena;
-    private String patron1="",patron2="";
 
-    protected void setUpOntology(ScenarioTest st, String ont, String ns) throws InvalidOntologyException{  
-
+    public InterfaceReasoner setUpOntology(ScenarioTest st, String ont, String ns) throws InvalidOntologyException{  
+        Reasoner jenaInterface;   
+        InterfaceReasoner jena;
         ListIterator liClass;
         ListIterator liProperties;
         String[] ciClas,ciInd,piClas,piInd;
-        patron1 = "[\\(|,|\n| ]";
-        patron2 = "[\n| |\\)]";
+        String patron1 = "[\\(|,|\n| ]";
+        String patron2 = "[\n| |\\)]";
         jenaInterface = new Reasoner();
         jena = jenaInterface.getReasoner();
         if(jenaInterface.isCargado()==true){
@@ -61,22 +52,30 @@ public class OntologyTestCase implements OntologyTest{
                 jena.addInstanceProperty(ns, piClas[0], piInd[0]);
             }       
         }
+        return jena;
     }
     
-    protected void tearDownOntology(){
+    public void tearDownOntology(InterfaceReasoner jena){
         jena.deleteEntries();
     }
     
     @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenariotest) throws InvalidOntologyException{ 
-        setUpOntology(scenariotest, ont, ns);
-        testInst.run(testresult, ns, ont, scenariotest);
-        testRet.run(testresult, ont, ns, scenariotest);
-        testRealiz.run(testresult, ont, ns, scenariotest);
-        testSatis.run(testresult, ont, ns, scenariotest);
-        testClas.run(testresult, ont, ns, scenariotest);
-        testSparql.run(testresult, ont, ns, scenariotest);
-        tearDownOntology(); 
+        OntologyTestInstantiation testInst = new OntologyTestInstantiation();
+        OntologyTestRetrieval testRet = new OntologyTestRetrieval();
+        OntologyTestRealization testRealiz = new OntologyTestRealization();
+        OntologyTestSatisfactibility testSatis = new OntologyTestSatisfactibility();
+        OntologyTestClassification testClas = new OntologyTestClassification();
+        OntologyTestSparql testSparql = new OntologyTestSparql();
+        
+        InterfaceReasoner j = setUpOntology(scenariotest, ont, ns);
+        testInst.run(testresult, ns, ont, scenariotest,j);
+        testRet.run(testresult, ont, ns, scenariotest,j);
+        testRealiz.run(testresult, ont, ns, scenariotest,j);
+        testSatis.run(testresult, ns, ont, scenariotest,j);
+        testClas.run(testresult, ont, ns, scenariotest,j);
+        testSparql.run(testresult, ont, ns, scenariotest,j);
+        tearDownOntology(j); 
     }
 }    
 

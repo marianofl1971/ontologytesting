@@ -9,7 +9,6 @@ import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.SparqlQueryOntology;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InterfaceReasoner;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
-import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -18,10 +17,8 @@ import java.util.ListIterator;
  *
  * @author sara.garcia
  */
-public class OntologyTestSparql implements OntologyTest{
-    
-    private Reasoner jenaInterface = new Reasoner();
-    private InterfaceReasoner jena = jenaInterface.getReasoner();
+public class OntologyTestSparql extends OntologyTestCase{
+
     private List<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
     private List<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
     private String patron5="[\\n|\\v]";
@@ -37,8 +34,7 @@ public class OntologyTestSparql implements OntologyTest{
 
     public OntologyTestSparql(){}
 
-    @Override
-    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario) throws InvalidOntologyException {
+    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("SPARQL")){
             List<SparqlQueryOntology> sparqlTest = scenario.getSparqlQuerys();
             listaResultObtenida = new ArrayList<ExecQuerySparql>();

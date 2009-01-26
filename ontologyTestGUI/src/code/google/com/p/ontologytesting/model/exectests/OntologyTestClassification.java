@@ -19,10 +19,8 @@ import java.util.ListIterator;
  *
  * @author sara.garcia
  */
-public class OntologyTestClassification implements OntologyTest{
-    
-    private Reasoner jenaInterface = new Reasoner();
-    private InterfaceReasoner jena = jenaInterface.getReasoner();
+public class OntologyTestClassification extends OntologyTestCase{
+
     private String patron4="[,|\\n| ]";
     private String query,resQueryExpected="";
     private List<String> resObtenidoClas = new ArrayList<String>();
@@ -32,8 +30,7 @@ public class OntologyTestClassification implements OntologyTest{
     
     public OntologyTestClassification(){}
 
-    @Override
-    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario) throws InvalidOntologyException {
+    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
        if(scenario.getTipoTest().name().equals("CLAS")){
             List<QueryOntology> queryTest = scenario.getQueryTest();
             liQuery = queryTest.listIterator();
