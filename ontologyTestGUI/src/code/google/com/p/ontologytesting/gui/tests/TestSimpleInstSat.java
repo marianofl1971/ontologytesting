@@ -30,8 +30,8 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private ValidarTests validarTests;
     private TestInstancesTFJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoInst,ambosNecesarios,continuarSinInstancias,continuar;
-    private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0;
+    private boolean testSinNombre,validoInst,ambosNecesarios,continuar;
+    private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0,continuarSinInstancias;
     private JPanel panelAyudaInst;
     private List inst;
     private TestInstancesTFJPanel pInst;
@@ -291,9 +291,9 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(false, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -301,16 +301,16 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                      
 // TODO add your handling code here:
-    persist = new IOManagerImplementation();
-    if(getTabbedPaneInst()==0){
-        copiarTestAScenarioDesdeAyuda();
-    }else if(getTabbedPaneInst()==1){
-        copiarTestAScenarioDesdeSinAyuda();
-    }
-    if(continuar==true){
-        if(continuarSinInstancias==true){
+persist = new IOManagerImplementation();
+if(getTabbedPaneInst()==0){
+    copiarTestAScenarioDesdeAyuda();
+}else if(getTabbedPaneInst()==1){
+    copiarTestAScenarioDesdeSinAyuda();
+}
+if(continuar==true){
+        if(continuarSinInstancias==0){
             realizarAccion(true, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -323,9 +323,9 @@ public boolean guardarTest(){
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
            realizarAccion(true, false);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -364,7 +364,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 
 public void inicializarVariables(){
     ambosNecesarios=false;
-    continuarSinInstancias=true;
+    continuarSinInstancias=0;
     testSinNombre=false;
     validoInst=true;
     hayUnaConsulta=0;
@@ -422,7 +422,7 @@ public void copiarTestAScenarioDesdeAyuda(){
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
         continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.getScenario().setDescripcion(descTest);
             this.getScenario().setNombre(nombreTest);
             this.getScenario().setQueryTest(queryTest); 
@@ -432,17 +432,18 @@ public void copiarTestAScenarioDesdeAyuda(){
     }
 }
 
-public boolean preguntarSiContinuarSinInstancias(){
+public int preguntarSiContinuarSinInstancias(){
     if(scenario.tieneInstanciasAsociadas()==false){
         int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
+            return continuarSinInstancias=1;
         }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+            return continuarSinInstancias=0;
+        }else{
+            return continuarSinInstancias=2;
         }
-    }
-    return continuarSinInstancias;
+    }else return continuarSinInstancias=2;
 }
 
 public void copiarTestAScenarioDesdeSinAyuda(){
@@ -527,7 +528,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     if(testSinNombre==false && validoInst==true && ambosNecesarios==false
         && hayUnaConsulta==1){
         continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.getScenario().setDescripcion(descTest);
             this.getScenario().setNombre(nombreTest);
             this.getScenario().setQueryTest(queryTest);

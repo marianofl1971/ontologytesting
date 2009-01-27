@@ -11,6 +11,7 @@ import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDial
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
+import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -27,6 +28,7 @@ import javax.swing.JProgressBar;
 public class PopMenuTests implements ActionListener{
 
     private OpcionesMenu menu = new OpcionesMenu();
+    private IOManagerImplementation iomanager = new IOManagerImplementation();
     private String testSelec="";
     private ScenarioTest s = new ScenarioTest();
     private URL editar,ejecutar,eliminarInst,eliminar,ver;
@@ -45,6 +47,8 @@ public class PopMenuTests implements ActionListener{
                 "Eliminar Instancias Asociadas",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                 if(scenario.eliminarInstancias()==true){
+                    iomanager.replaceScenarioLocally(scenario);
+                    menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
                     JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Instancias Eliminadas",                                                  
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 }
