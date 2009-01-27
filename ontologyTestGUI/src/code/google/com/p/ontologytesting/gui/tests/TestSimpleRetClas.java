@@ -30,8 +30,8 @@ public class TestSimpleRetClas extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesTextAreaJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoRet,ambosNecesarios,continuarSinInstancias,continuar;
-    private int actualSubTabRet=0;
+    private boolean testSinNombre,validoRet,ambosNecesarios,continuar;
+    private int actualSubTabRet=0,continuarSinInstancias;
     private JPanel panelAyudaRet;
     private int totalRet,hayUnaConsulta=0;
     private List ret;
@@ -294,9 +294,9 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(true, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -314,9 +314,9 @@ public boolean guardarTest(){
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(true, false);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -331,9 +331,9 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(false, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -371,7 +371,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 
 public void inicializarVariables(){
     ambosNecesarios=false;
-    continuarSinInstancias=true;
+    continuarSinInstancias=0;
     testSinNombre=false;
     validoRet=true;
     hayUnaConsulta=0;
@@ -430,7 +430,7 @@ public void copiarTestAScenarioDesdeAyuda(){
                 && hayUnaConsulta==1){  
         
         continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -440,17 +440,20 @@ public void copiarTestAScenarioDesdeAyuda(){
     }
 }
 
-    public boolean preguntarSiContinuarSinInstancias(){
+    public int preguntarSiContinuarSinInstancias(){
         if(scenario.tieneInstanciasAsociadas()==false){
             int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                     "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.NO_OPTION){
-                continuarSinInstancias=false;
+                return continuarSinInstancias=1;
             }else if(n == JOptionPane.YES_OPTION){
-                continuarSinInstancias=true;
+                return continuarSinInstancias=0;
+            }else{
+                return continuarSinInstancias=2;
             }
+        }else{
+            return continuarSinInstancias=2;
         }
-        return continuarSinInstancias;
     }
 
 public void copiarTestAScenarioDesdeSinAyuda(){
@@ -536,7 +539,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     if(testSinNombre==false && validoRet==true && ambosNecesarios==false
         && hayUnaConsulta==1){
         continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);

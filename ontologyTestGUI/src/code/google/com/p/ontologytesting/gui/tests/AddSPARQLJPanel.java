@@ -30,10 +30,10 @@ import java.util.Locale;
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
     private boolean testSinNombre,sinConsultas,
-            ambosNecesarios,continuarSinInstancias,queryValida,resultValido,continuar;
+            ambosNecesarios,queryValida,resultValido,continuar;
     private ScenarioTest scenario,scenarioActual;
     private List<SparqlQueryOntology> listaDeConsultas;
-    private int posListQuerysSel;
+    private int posListQuerysSel,continuarSinInstancias;
     private Reasoner jenaInterface;
     private InterfaceReasoner jena;
     private ValidarTests validarTest;
@@ -504,9 +504,9 @@ public boolean guardarTest(){
 
 public void asociarInstancias(boolean a, boolean b){
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(a, b);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
             //MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
         }
@@ -683,8 +683,8 @@ public void prepararGuardar(){
     //}
     if(continuar==true){
         if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
-            boolean res = this.preguntarSiContinuarSinInstancias();
-            if(res==true){
+            int res = this.preguntarSiContinuarSinInstancias();
+            if(res==0){
                 scenario.setDescripcion(descTest);
                 scenario.setNombre(nombreTest);
                 List<SparqlQueryOntology> querys = new ArrayList<SparqlQueryOntology>(this.getListaDeConsultas());
@@ -700,17 +700,20 @@ public void prepararGuardar(){
     }
 }
 
-public boolean preguntarSiContinuarSinInstancias(){
+public int preguntarSiContinuarSinInstancias(){
     if(scenario.tieneInstanciasAsociadas()==false){
         int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                 "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.NO_OPTION){
-            continuarSinInstancias=false;
+            return continuarSinInstancias=1;
         }else if(n == JOptionPane.YES_OPTION){
-            continuarSinInstancias=true;
+            return continuarSinInstancias=0;
+        }else{
+            return continuarSinInstancias=2;
         }
+    }else{
+        return continuarSinInstancias=2;
     }
-    return continuarSinInstancias;
 }
 
 public boolean testVacio(String nombre){
@@ -722,7 +725,7 @@ public boolean testVacio(String nombre){
 }
 
 public void inicializarVariables(){
-    continuarSinInstancias=true;
+    continuarSinInstancias=0;
     resultValido=true;
     queryValida=true;
     testSinNombre=false;

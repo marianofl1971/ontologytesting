@@ -30,9 +30,9 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoReal,ambosNecesarios,continuarSinInstancias,continuar;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuar;
     private JPanel panelAyudaReal;
-    private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
+    private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0,continuarSinInstancias;
     private List real;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
@@ -296,9 +296,9 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(true, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     } 
@@ -312,9 +312,9 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(false, true);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -332,9 +332,9 @@ public boolean guardarTest(){
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             this.realizarAccion(true, false);
-        }else{
+        }else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
         }
     }
@@ -373,7 +373,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 
 public void inicializarVariables(){
     ambosNecesarios=false;
-    continuarSinInstancias=true;
+    continuarSinInstancias=0;
     testSinNombre=false;
     validoReal=true;
     hayUnaConsulta=0;
@@ -430,8 +430,8 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        boolean res = this.preguntarSiContinuarSinInstancias();
-        if(res==true){
+        int res = this.preguntarSiContinuarSinInstancias();
+        if(res==0){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest); 
@@ -441,17 +441,18 @@ public void copiarTestAScenarioDesdeAyuda(){
     }
 }
 
-public boolean preguntarSiContinuarSinInstancias(){
+public int preguntarSiContinuarSinInstancias(){
         if(scenario.tieneInstanciasAsociadas()==false){
             int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                     "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.NO_OPTION){
-                continuarSinInstancias=false;
+                return continuarSinInstancias=1;
             }else if(n == JOptionPane.YES_OPTION){
-                continuarSinInstancias=true;
+                return continuarSinInstancias=0;
+            }else{
+                return continuarSinInstancias=2;
             }
-        }
-    return continuarSinInstancias;
+        }else return continuarSinInstancias=2;
 }
 
 public void copiarTestAScenarioDesdeSinAyuda(){
@@ -537,7 +538,7 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
         && hayUnaConsulta==1){
         continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==true){
+        if(continuarSinInstancias==0){
             scenario.setDescripcion(descTest);
             scenario.setNombre(nombreTest);
             scenario.setQueryTest(queryTest);
