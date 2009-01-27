@@ -36,8 +36,6 @@ public class OntologyTestInstantiation extends OntologyTestCase{
                 res = query.split(patron3);
                 clasF = res[0];
                 indF = res[1];
-                System.out.println(ont);
-                jena.addReasoner(ont);
                 resObtenidoInst = jena.instantiation(ns, clasF, indF);
                 if(!resObtenidoInst.equals(resQueryExpected)){
                     testresult.addOntologyFailureQuery(scenario.getNombre(), qo, resObtenidoInst, scenario.getTipoTest());
