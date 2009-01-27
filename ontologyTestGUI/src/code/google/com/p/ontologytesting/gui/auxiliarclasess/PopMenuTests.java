@@ -47,8 +47,6 @@ public class PopMenuTests implements ActionListener{
                 "Eliminar Instancias Asociadas",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                 if(scenario.eliminarInstancias()==true){
-                    iomanager.replaceScenarioLocally(scenario);
-                    menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
                     JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(),"Instancias Eliminadas",                                                  
                     "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
                 }
