@@ -412,13 +412,11 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     }
 
 private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarAsociarInstButtonActionPerformed
-    boolean asoc = soloAsociar(true);
-    boolean res = false;
+    boolean res = false,asoc=false;
     continuar=true;
-    if(asoc==true){
-        res = prepararInstancias(true);
-    }
-    if(continuar==true){
+    res = prepararInstancias(true);
+    asoc = soloAsociar(res);
+    if(continuar==true && asoc==true){
         if(this.isFromTest()==false){
             if(asociarInst.isIsCancel()==true){
                 continuar=false;
