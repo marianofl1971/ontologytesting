@@ -28,7 +28,6 @@ import javax.swing.JProgressBar;
 public class PopMenuTests implements ActionListener{
 
     private OpcionesMenu menu = new OpcionesMenu();
-    private IOManagerImplementation iomanager = new IOManagerImplementation();
     private String testSelec="";
     private ScenarioTest s = new ScenarioTest();
     private URL editar,ejecutar,eliminarInst,eliminar,ver;
