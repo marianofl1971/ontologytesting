@@ -22,20 +22,20 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle("Ver Test");
-        this.setSize(new Dimension(650,600));
         this.setLocationRelativeTo(this.getParent());
         testDescriptionPane.setContentType("text/html");
         String print = verTest(scenario);
         testDescriptionPane.setText(print);
         testDescriptionPane.setEditable(false);
         testDescriptionPane.setCaretPosition(0);
+        //this.setSize(new Dimension(600,500));
     }
     
     public SeeTestJDialog(JFrame parent, boolean modal, Instancias instancias) {
         super(parent, modal);
         initComponents();
         this.setTitle("Ver Instancias");
-        this.setSize(new Dimension(650,600));
+        //this.setSize(new Dimension(600,500));
         testDescriptionPane.setContentType("text/html");
         String print = verInstancias(instancias);
         testDescriptionPane.setText(print);
@@ -53,8 +53,10 @@ public class SeeTestJDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         testDescriptionPane = new javax.swing.JEditorPane();
+        cerrarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,24 +66,61 @@ public class SeeTestJDialog extends javax.swing.JDialog {
         scrollPane.setHorizontalScrollBar(null);
 
         testDescriptionPane.setContentType("text/html");
-        testDescriptionPane.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        testDescriptionPane.setFont(new java.awt.Font("Arial", 0, 11));
         testDescriptionPane.setAutoscrolls(false);
         scrollPane.setViewportView(testDescriptionPane);
+
+        cerrarButton.setText("Cerrar");
+        cerrarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(cerrarButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cerrarButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+private void cerrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarButtonActionPerformed
+// TODO add your handling code here:
+    this.setVisible(false);//GEN-LAST:event_cerrarButtonActionPerformed
+}
 
     public String verTest(ScenarioTest scenario){
         StringBuffer verTest= new StringBuffer();
@@ -176,6 +215,8 @@ public class SeeTestJDialog extends javax.swing.JDialog {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cerrarButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JEditorPane testDescriptionPane;
     // End of variables declaration//GEN-END:variables
