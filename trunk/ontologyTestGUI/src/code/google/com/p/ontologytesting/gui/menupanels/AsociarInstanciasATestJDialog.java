@@ -2,6 +2,7 @@ package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.*;
 import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
@@ -19,6 +20,7 @@ import java.util.Locale;
 public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
     private ListarTestsInstanciasJPanel listaFicheros;
+    private AniadirPanelDeAviso panelAviso;
     private Instancias instancias = new Instancias();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
@@ -171,8 +173,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         }
         if(asociadas==true){
             if(isGuardar()==false){
-                JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Instancias Asociadas", MainApplicationJFrame.getInstance());                                               
             }
             this.setVisible(false);
             this.setAsociadas(asociadas);
@@ -202,6 +203,30 @@ public List<ScenarioTest> getScenariosSeleccionados() {
 public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados) {
     this.scenariosSeleccionados = scenariosSeleccionados;
 }
+
+public boolean isIsCancel() {
+    return isCancel;
+}
+
+public void setIsCancel(boolean isCancel) {
+    this.isCancel = isCancel;
+}
+
+public boolean isAsociadas() {
+    return asociadas;
+}
+
+public void setAsociadas(boolean asociadas) {
+    this.asociadas = asociadas;
+}
+
+public boolean isGuardar() {
+    return guardar;
+}
+
+public void setGuardar(boolean guardar) {
+    this.guardar = guardar;
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;
@@ -212,29 +237,4 @@ public void setScenariosSeleccionados(List<ScenarioTest> scenariosSeleccionados)
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton verTestButton;
     // End of variables declaration//GEN-END:variables
-
-    public boolean isIsCancel() {
-        return isCancel;
-    }
-
-    public void setIsCancel(boolean isCancel) {
-        this.isCancel = isCancel;
-    }
-
-    public boolean isAsociadas() {
-        return asociadas;
-    }
-
-    public void setAsociadas(boolean asociadas) {
-        this.asociadas = asociadas;
-    }
-
-    public boolean isGuardar() {
-        return guardar;
-    }
-
-    public void setGuardar(boolean guardar) {
-        this.guardar = guardar;
-    }
-
 }
