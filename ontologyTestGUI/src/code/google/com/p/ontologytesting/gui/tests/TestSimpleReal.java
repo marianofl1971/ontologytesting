@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import java.util.Locale;
@@ -30,15 +29,15 @@ public class TestSimpleReal extends javax.swing.JPanel {
     private ValidarTests validarTests;
     private TestInstancesQueryJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoReal,ambosNecesarios,continuar;
+    private boolean testSinNombre,validoReal,ambosNecesarios,continuar,guardado,nombreCambio=false;
     private JPanel panelAyudaReal;
-    private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0,continuarSinInstancias;
+    private int totalReal=0,hayUnaConsulta=0,actualSubTabReal=0;
     private List real;
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private IOManagerImplementation persist = new IOManagerImplementation();
     private ScenarioTest scenarioActual;
-    private String nombreTest = "",descTest = "";
+    private String nombreTest = "",descTest = "",nombreTestBis="";
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
@@ -85,6 +84,12 @@ public class TestSimpleReal extends javax.swing.JPanel {
         }
         menu = new OpcionesMenu();
         setScenario(s);
+        if(s.getNombre().equals("")){
+            this.setGuardado(false);
+        }else{
+            nombreTestBis=s.getNombre();
+            this.setGuardado(true);
+        }
     }
 
 
@@ -285,7 +290,10 @@ private void tabbedPaneRealMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 
 private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
 // TODO add your handling code here:
-    guardarTest();
+    boolean g = guardarTest();
+    if(g==true){
+        setGuardado(true);
+    }
 }//GEN-LAST:event_guardarButtonActionPerformed
 
 private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarEjecutarButtonActionPerformed
@@ -296,11 +304,11 @@ private void guardarEjecutarButtonActionPerformed(java.awt.event.ActionEvent evt
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==0){
+        //if(continuarSinInstancias==0){
             this.realizarAccion(true, true);
-        }else if(continuarSinInstancias==1){
+        /*}else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
-        }
+        }*/
     } 
 }//GEN-LAST:event_guardarEjecutarButtonActionPerformed
 
@@ -312,11 +320,11 @@ private void ejecutarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==0){
+        //if(continuarSinInstancias==0){
             this.realizarAccion(false, true);
-        }else if(continuarSinInstancias==1){
+        /*}else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
-        }
+        }*/
     }
 }//GEN-LAST:event_ejecutarButtonActionPerformed
 
@@ -332,11 +340,11 @@ public boolean guardarTest(){
         copiarTestAScenarioDesdeSinAyuda();
     }
     if(continuar==true){
-        if(continuarSinInstancias==0){
+        //if(continuarSinInstancias==0){
             this.realizarAccion(true, false);
-        }else if(continuarSinInstancias==1){
+        /*}else if(continuarSinInstancias==1){
             menu.editarInstancias(this.getScenario());
-        }
+        }*/
     }
     return continuar;
 }
@@ -350,7 +358,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             persist.saveTestInMemory(getScenario());
             controlador.setTestInstSatGuardado(true);
         }
-        this.setScenarioActual(new ScenarioTest(scenario));
+        this.setScenarioActual(new ScenarioTest(this.getScenario()));
+        this.setGuardado(true);
     }
     if(ejecutar==true){
         try{
@@ -373,7 +382,6 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 
 public void inicializarVariables(){
     ambosNecesarios=false;
-    continuarSinInstancias=0;
     testSinNombre=false;
     validoReal=true;
     hayUnaConsulta=0;
@@ -430,18 +438,21 @@ public void copiarTestAScenarioDesdeAyuda(){
     
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
                 && hayUnaConsulta==1){  
-        int res = this.preguntarSiContinuarSinInstancias();
-        if(res==0){
-            scenario.setDescripcion(descTest);
-            scenario.setNombre(nombreTest);
-            scenario.setQueryTest(queryTest); 
+        //int res = this.preguntarSiContinuarSinInstancias();
+        //if(res==0){
+        this.getScenario().setDescripcion(descTest);
+        if(!nombreTest.equals(nombreTestBis)){
+            nombreCambio=true;
         }
+        this.getScenario().setNombre(nombreTest);
+        this.getScenario().setQueryTest(queryTest); 
+        //}
     }else {
         mostrarErrores(true);
     }
 }
 
-public int preguntarSiContinuarSinInstancias(){
+/*public int preguntarSiContinuarSinInstancias(){
         if(scenario.tieneInstanciasAsociadas()==false){
             int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
                     "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
@@ -453,7 +464,7 @@ public int preguntarSiContinuarSinInstancias(){
                 return continuarSinInstancias=2;
             }
         }else return continuarSinInstancias=2;
-}
+}*/
 
 public void copiarTestAScenarioDesdeSinAyuda(){
       
@@ -537,12 +548,15 @@ public void copiarTestAScenarioDesdeSinAyuda(){
     }
     if(testSinNombre==false && validoReal==true && ambosNecesarios==false
         && hayUnaConsulta==1){
-        continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
-        if(continuarSinInstancias==0){
-            scenario.setDescripcion(descTest);
-            scenario.setNombre(nombreTest);
-            scenario.setQueryTest(queryTest);
+        //continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
+        //if(continuarSinInstancias==0){
+        this.getScenario().setDescripcion(descTest);
+        if(!nombreTest.equals(nombreTestBis)){
+            nombreCambio=true;
         }
+        this.getScenario().setNombre(nombreTest);
+        this.getScenario().setQueryTest(queryTest);
+        //}
     }else {
         mostrarErrores(false);
     }
@@ -723,7 +737,11 @@ public JPanel getOpcionTextRealPanel() {
 }
 
 public ScenarioTest getScenario() {
-    return scenario;
+    if(this.isGuardado()==false || nombreCambio==true){
+        return scenario;
+    }else{
+        return scenario.buscarScenario(CollectionTest.getInstance().getScenariotest(), scenario.getNombre());
+    }
 }
 
 public void setScenario(ScenarioTest aScenarioInst) {
@@ -736,6 +754,22 @@ public  int getTabbedPaneReal() {
 
 public JPanel panelActualReal(){
     return this.getRealAyudaPanel();
+}
+
+public boolean isGuardado() {
+    return guardado;
+}
+
+public void setGuardado(boolean guardado) {
+    this.guardado = guardado;
+}
+
+public ScenarioTest getScenarioActual() {
+    return scenarioActual;
+}
+
+public void setScenarioActual(ScenarioTest scenarioActual) {
+    this.scenarioActual = scenarioActual;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -754,13 +788,4 @@ public JPanel panelActualReal(){
     private javax.swing.JPanel realAyudaPanel;
     private javax.swing.JTabbedPane tabbedPaneReal;
     // End of variables declaration//GEN-END:variables
-
-    public ScenarioTest getScenarioActual() {
-        return scenarioActual;
-    }
-
-    public void setScenarioActual(ScenarioTest scenarioActual) {
-        this.scenarioActual = scenarioActual;
-    }
-
 }

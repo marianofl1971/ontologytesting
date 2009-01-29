@@ -29,7 +29,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private ValidarTests validarTests;
     private TestInstancesTFJPanel test;
     private DescripcionJPanel descPanel = null;
-    private boolean testSinNombre,validoInst,ambosNecesarios,continuar,guardado;
+    private boolean testSinNombre,validoInst,ambosNecesarios,continuar,guardado,nombreCambio=false;
     private int actualSubTabInst=0,totalInst=0,hayUnaConsulta=0;
     private JPanel panelAyudaInst;
     private List inst;
@@ -38,7 +38,7 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
     private TestInstancesTextJPanel texto;
     private ScenarioTest scenario;
     private IOManagerImplementation persist = new IOManagerImplementation();
-    private String nombreTest = "",descTest = "";
+    private String nombreTest = "",descTest = "",nombreTestBis="";
     private ControladorTests controlador;
     private OpcionesMenu menu;
     private ValidarConsultas validarConsultas = new ValidarConsultas();
@@ -90,9 +90,10 @@ public class TestSimpleInstSat extends javax.swing.JPanel{
         menu = new OpcionesMenu();
         setScenario(s);
         if(s.getNombre().equals("")){
-            guardado=false;
+            this.setGuardado(false);
         }else{
-            guardado=true;
+            nombreTestBis=s.getNombre();
+            this.setGuardado(true);
         }
     }
 
@@ -377,7 +378,6 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
 
 public void inicializarVariables(){
     ambosNecesarios=false;
-    //continuarSinInstancias=0;
     testSinNombre=false;
     validoInst=true;
     hayUnaConsulta=0;
@@ -437,6 +437,9 @@ public void copiarTestAScenarioDesdeAyuda(){
         //continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
         //if(continuarSinInstancias==0){
             this.getScenario().setDescripcion(descTest);
+            if(!nombreTest.equals(nombreTestBis)){
+                nombreCambio=true;
+            }
             this.getScenario().setNombre(nombreTest);
             this.getScenario().setQueryTest(queryTest); 
         //}
@@ -543,6 +546,9 @@ public void copiarTestAScenarioDesdeSinAyuda(){
         //continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
         //if(continuarSinInstancias==0){
             this.getScenario().setDescripcion(descTest);
+            if(!nombreTest.equals(nombreTestBis)){
+                nombreCambio=true;
+            }
             this.getScenario().setNombre(nombreTest);
             this.getScenario().setQueryTest(queryTest);
         //}
@@ -744,7 +750,7 @@ public JPanel getOpcionTextInstPanel() {
 }
 
 public ScenarioTest getScenario() {
-    if(this.isGuardado()==false){
+    if(this.isGuardado()==false || nombreCambio==true){
         return scenario;
     }else{
         return scenario.buscarScenario(CollectionTest.getInstance().getScenariotest(), scenario.getNombre());
@@ -757,6 +763,22 @@ public void setScenario(ScenarioTest aScenarioInst) {
 
 public  int getTabbedPaneInst() {
     return tabbedPaneInst.getSelectedIndex();
+}
+
+public ScenarioTest getScenarioActual() {
+    return scenarioActual;
+}
+
+public void setScenarioActual(ScenarioTest scenarioActual) {
+    this.scenarioActual = scenarioActual;
+}
+
+public boolean isGuardado() {
+    return guardado;
+}
+
+public void setGuardado(boolean guardado) {
+    this.guardado = guardado;
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -775,22 +797,4 @@ public  int getTabbedPaneInst() {
     private javax.swing.JPanel opcionTextInstPanel;
     private javax.swing.JTabbedPane tabbedPaneInst;
     // End of variables declaration//GEN-END:variables
-
-    public ScenarioTest getScenarioActual() {
-        return scenarioActual;
-    }
-
-    public void setScenarioActual(ScenarioTest scenarioActual) {
-        this.scenarioActual = scenarioActual;
-    }
-
-    public boolean isGuardado() {
-        return guardado;
-    }
-
-    public void setGuardado(boolean guardado) {
-        this.guardado = guardado;
-    }
-
-    
 }
