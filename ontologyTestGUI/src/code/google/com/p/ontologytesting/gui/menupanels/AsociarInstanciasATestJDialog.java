@@ -10,7 +10,6 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import java.util.Locale;
 
 /**
@@ -20,7 +19,7 @@ import java.util.Locale;
 public class AsociarInstanciasATestJDialog extends javax.swing.JDialog {
 
     private ListarTestsInstanciasJPanel listaFicheros;
-    private AniadirPanelDeAviso panelAviso;
+    private AniadirPanelDeAviso panelAviso = new AniadirPanelDeAviso();
     private Instancias instancias = new Instancias();
     private OpcionesMenu opMenu = new OpcionesMenu();
     private List<ScenarioTest> scenariosSeleccionados = new ArrayList<ScenarioTest>();
