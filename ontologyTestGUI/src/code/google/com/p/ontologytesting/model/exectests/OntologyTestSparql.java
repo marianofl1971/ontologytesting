@@ -34,6 +34,7 @@ public class OntologyTestSparql extends OntologyTestCase{
 
     public OntologyTestSparql(){}
 
+    @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("SPARQL")){
             List<SparqlQueryOntology> sparqlTest = scenario.getSparqlQuerys();

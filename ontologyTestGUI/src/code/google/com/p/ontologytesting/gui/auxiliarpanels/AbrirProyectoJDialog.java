@@ -194,7 +194,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
-    if(utils.fileChooser(true, true, false)==true){
+    if(utils.fileChooser(true, true, false,false)==true){
         this.getUbicacionFisicaTextField().setText(FileChooserSelector.getPathSelected());
     }
 }//GEN-LAST:event_examinarButtonActionPerformed

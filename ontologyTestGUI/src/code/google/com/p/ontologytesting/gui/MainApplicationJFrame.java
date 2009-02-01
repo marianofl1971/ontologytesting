@@ -503,7 +503,7 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
     private void guardarProyectoComoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProyectoComoMenuItemActionPerformed
     if(CollectionTest.getInstance().esVacio()==false){
-        boolean res = utils.fileChooser(false, true, false);
+        boolean res = utils.fileChooser(false, true, false,false);
         if(res == true){
             this.guardarProyecto(true, FileChooserSelector.getPathSelected(),esNuevo);
         }   
@@ -822,7 +822,7 @@ private void abrirProyectoMenuItemActionPerformed(java.awt.event.ActionEvent evt
     if(aux!=2){
         AbrirProyectoJDialog abrirP = new AbrirProyectoJDialog(MainApplicationJFrame.getInstance(), true);
         try {
-            boolean res = utils.fileChooser(true, true, false);
+            boolean res = utils.fileChooser(true, true, false,true);
             if(res == true){
                 esNuevo=false;
                 this.setCarpetaProyecto(FileChooserSelector.getPathSelected());
@@ -873,14 +873,27 @@ private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
     help.setVisible(true);
 }//GEN-LAST:event_contentsMenuItemActionPerformed
 
-private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
 // TODO add your handling code here:
-    int n = JOptionPane.showConfirmDialog(this, "¿Desea abandonar la aplicación?",//GEN-LAST:event_formWindowClosing
-            "Salir",JOptionPane.YES_NO_OPTION);
-    if (n == JOptionPane.YES_OPTION){
-        this.dispose();
-        System.exit(0);
-    } 
+    if(existeProyecto==false){
+        int n = JOptionPane.showConfirmDialog(this, "¿Desea salir de la aplicación?", 
+                "Salir",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            this.dispose();
+            System.exit(0);
+        } 
+    }else{
+        int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto antes de Salir?", 
+                "Salir",JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION){
+            this.guardarProyecto(false, null,esNuevo);
+            this.dispose();
+            System.exit(0);
+        }else if(n == JOptionPane.NO_OPTION){
+            this.dispose();
+            System.exit(0);
+        }
+    }
 }
     
 private void guardarProyecto(boolean como, String fichero,boolean esNuevo){

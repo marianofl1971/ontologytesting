@@ -25,7 +25,8 @@ public class OntologyTestSatisfactibility extends OntologyTestCase{
     
     public OntologyTestSatisfactibility(){}
 
-    public void run(OntologyTestResult testresult, String ns, String ont, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
+    @Override
+    public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("SAT")){
             List<QueryOntology> queryTest = scenario.getQueryTest();
             liQuery = queryTest.listIterator();

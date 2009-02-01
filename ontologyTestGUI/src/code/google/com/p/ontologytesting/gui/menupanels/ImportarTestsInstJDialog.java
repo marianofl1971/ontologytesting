@@ -211,7 +211,7 @@ private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
 // TODO add your handling code here:
-    if(utils.fileChooser(true, true, false)==true){
+    if(utils.fileChooser(true, true, false,false)==true){
         this.getPathProyectoTextField().setText(FileChooserSelector.getPathSelected());
         try{
             decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(this.getPathProyect())));

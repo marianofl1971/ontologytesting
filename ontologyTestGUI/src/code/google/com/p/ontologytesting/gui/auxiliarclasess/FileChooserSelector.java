@@ -25,9 +25,13 @@ public class FileChooserSelector {
     public final static String xml = "xml", owl="owl";
     private File pathDirectorioProyecto = null;
 
-    public boolean fileChooser(boolean open,boolean onlyFiles, boolean newProject){
+    public boolean fileChooser(boolean open,boolean onlyFiles, boolean newProject,boolean primero){
         int option,var=0;
-        filechooser = new JFileChooser(FileChooserSelector.getPathSelected());
+        if(primero==true){
+            filechooser = new JFileChooser(Configuration.getPropiedades().getProperty("ULTIMOPATH"));
+        }else{
+            filechooser = new JFileChooser(FileChooserSelector.getPathSelected());
+        }
         if(onlyFiles==false){
             filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }else{
@@ -42,6 +46,9 @@ public class FileChooserSelector {
         }
         if (option == JFileChooser.APPROVE_OPTION) {
             File selectedFile = filechooser.getSelectedFile();
+            if(primero==true){
+                Configuration.getInstance().cambiarPath(selectedFile.getParent());
+            }
             setPathDirectorioProyecto(selectedFile.getParentFile());
             setNombreProyecto(selectedFile.getName());
             if(newProject==true){
