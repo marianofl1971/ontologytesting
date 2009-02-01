@@ -29,6 +29,7 @@ public class OntologyTestRetrieval extends OntologyTestCase {
     
     public OntologyTestRetrieval(){}
 
+    @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
         if(scenario.getTipoTest().name().equals("RET")){
             List<QueryOntology> queryTest = scenario.getQueryTest();

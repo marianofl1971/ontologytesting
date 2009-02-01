@@ -42,12 +42,13 @@ public class Configuration {
     public Properties cargarDriver(){
         archivo = new File(rutaDelArchivo);
         try {
-            if (!archivo.exists()) {
             Properties tmp = new Properties();
+            if (!archivo.exists()) {
             tmp.setProperty("HOME",home);
             tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
             tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
             tmp.setProperty("LOCALE", "es");
+            tmp.setProperty("ULTIMOPATH", home);
             File directorio_file = new File(home+"/.ontologyTestGUI/");
             try{
                 directorio_file.mkdir();
@@ -58,6 +59,17 @@ public class Configuration {
             tmp.store(out, "Configuracion de OntologyTestGUI");
             out.close();
             }
+            /*}else if(Configuration.getPropiedades().getProperty("HOME").equals("") || Configuration.getPropiedades().getProperty("HOME")==null){
+                tmp.setProperty("HOME",home);
+            }else if(Configuration.getPropiedades().getProperty("DRIVER").equals("") || Configuration.getPropiedades().getProperty("DRIVER")==null){
+                tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
+            }else if(Configuration.getPropiedades().getProperty("IDIOMA").equals("") || Configuration.getPropiedades().getProperty("IDIOMA")==null){
+                tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+            }else if(Configuration.getPropiedades().getProperty("LOCALE").equals("") || Configuration.getPropiedades().getProperty("LOCALE")==null){
+                tmp.setProperty("LOCALE", "es");
+            }else if(Configuration.getPropiedades().getProperty("ULTIMOPATH").equals("") || Configuration.getPropiedades().getProperty("ULTIMOPATH")==null){
+                tmp.setProperty("ULTIMOPATH", home");
+            }*/
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
             in.close();
@@ -72,6 +84,24 @@ public class Configuration {
         getPropiedades().remove("LOCALE");
         getPropiedades().setProperty("IDIOMA", idioma);
         getPropiedades().setProperty("LOCALE", id);
+        FileOutputStream out = null;
+        try{
+            out = new FileOutputStream(archivo);
+            getPropiedades().store(out, "Configuracion de OntologyTestGUI");
+            out.close();
+            FileInputStream in =new FileInputStream(archivo);
+            getPropiedades().load(in);
+            in.close();
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean cambiarPath(String nuevoPath){
+        getPropiedades().remove("ULTIMOPATH");
+        getPropiedades().setProperty("ULTIMOPATH", nuevoPath);
         FileOutputStream out = null;
         try{
             out = new FileOutputStream(archivo);
