@@ -9,6 +9,7 @@
 
 package code.google.com.p.ontologytesting.model;
 
+import code.google.com.p.ontologytesting.model.exectests.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +108,24 @@ public class ScenarioTest implements Serializable{
             }
         }
         return false;
+    }
+    
+    public OntologyTestCase getOntologyTestCase(){
+        OntologyTestCase ontologyTestCase = null;
+        if(this.getTipoTest().name().equals("INST")){
+            ontologyTestCase = new OntologyTestInstantiation();
+        }else if(this.getTipoTest().name().equals("RET")){
+            ontologyTestCase = new OntologyTestRetrieval();   
+        }else if(this.getTipoTest().name().equals("REAL")){
+            ontologyTestCase = new OntologyTestRealization();
+        }else if(this.getTipoTest().name().equals("SAT")){
+            ontologyTestCase = new OntologyTestSatisfactibility();
+        }else if(this.getTipoTest().name().equals("CLAS")){
+            ontologyTestCase = new OntologyTestClassification();
+        }else if(this.getTipoTest().name().equals("SPARQL")){
+            ontologyTestCase = new OntologyTestSparql();
+        }
+        return ontologyTestCase;
     }
 
     public TipoTest getTipoTest() {

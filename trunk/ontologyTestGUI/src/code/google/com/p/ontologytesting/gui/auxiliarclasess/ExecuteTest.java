@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
     
-    private OntologyTestResult testResult;
+    private OntologyTestResult testResult = new OntologyTestResult();
     private List<ScenarioTest> listScenario = null;
     private ScenarioTest scenario = null;
     private String name;
@@ -43,63 +43,33 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
 
     @Override
     protected OntologyTestResult doInBackground() throws Exception {
-        OntologyTestResult treeResult = new OntologyTestResult();
         setProgress(0);
         if(scenario!=null){
-            treeResult = execOneTest(scenario);
+            testResult = execOneTest(scenario,testResult);
             setName(scenario.getNombre());
         }else if(listScenario!=null){
-            treeResult = execBateryTest(listScenario);
+            testResult = execBateryTest(listScenario);
             setName("Batería de Tests");
         } 
         setProgress(100);
-        return treeResult;
+        return testResult;
     }
 
-    private OntologyTestResult execOneTest(ScenarioTest scenario){     
-        testResult = new OntologyTestResult();
+    private OntologyTestResult execOneTest(ScenarioTest scenario, OntologyTestResult testResult){     
         if(this.isCancelled()==false){
             jenaInterface = new Reasoner();
             jena = jenaInterface.getReasoner();
             if(jenaInterface.isCargado()==true){
-                if(scenario.getTipoTest().name().equals("INST")){
-                    f = new OntologyTestInstantiation();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);
-                }else if(scenario.getTipoTest().name().equals("RET")){
-                    f = new OntologyTestRetrieval();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);    
-                }else if(scenario.getTipoTest().name().equals("REAL")){
-                    f = new OntologyTestRealization();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);
-                }else if(scenario.getTipoTest().name().equals("SAT")){
-                    f = new OntologyTestSatisfactibility();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);
-                }else if(scenario.getTipoTest().name().equals("CLAS")){
-                    f = new OntologyTestClassification();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);
-                }else if(scenario.getTipoTest().name().equals("SPARQL")){
-                    f = new OntologyTestSparql();
-                    InterfaceReasoner jenaAux = f.setUpOntology(scenario, ont, ns, jena);
-                    f.run(testResult, ont, ns, scenario, jenaAux);
-                    f.tearDownOntology(jenaAux);
-                }
+                OntologyTestCase ontologyTestCase = scenario.getOntologyTestCase();
+                InterfaceReasoner jenaAux = ontologyTestCase.setUpOntology(scenario, ont, ns, jena);
+                ontologyTestCase.run(testResult, ont, ns, scenario, jenaAux);
+                ontologyTestCase.tearDownOntology(jenaAux);
             }
         }
         return testResult;
     }
     
     private OntologyTestResult execBateryTest(List<ScenarioTest> listScenario){ 
-        testResult = new OntologyTestResult();
         int size = listScenario.size();
         int div = 100/size;
         for(int i=0;i<size;i++){
@@ -108,37 +78,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
                 jenaInterface = new Reasoner();
                 jena = jenaInterface.getReasoner();
                 if(jenaInterface.isCargado()==true){
-                    if(scen.getTipoTest().name().equals("INST")){
-                        f = new OntologyTestInstantiation();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);
-                    }else if(scen.getTipoTest().name().equals("RET")){
-                        f = new OntologyTestRetrieval();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);    
-                    }else if(scen.getTipoTest().name().equals("REAL")){
-                        f = new OntologyTestRealization();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);
-                    }else if(scen.getTipoTest().name().equals("SAT")){
-                        f = new OntologyTestSatisfactibility();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);
-                    }else if(scen.getTipoTest().name().equals("CLAS")){
-                        f = new OntologyTestClassification();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);
-                    }else if(scen.getTipoTest().name().equals("SPARQL")){
-                        f = new OntologyTestSparql();
-                        InterfaceReasoner jenaAux = f.setUpOntology(scen, ont, ns, jena);
-                        f.run(testResult, ont, ns, scen, jenaAux);
-                        f.tearDownOntology(jenaAux);
-                    }
+                    execOneTest(scen,testResult);
                 }
                 setProgress(getProgress()+div);
             }
