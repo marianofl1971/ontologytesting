@@ -31,7 +31,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
@@ -1110,10 +1109,11 @@ public void inicializarContadores(){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
+                /*try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ignore) {
-                }
+                }*/
+                Locale.setDefault(new Locale(Configuration.getPropiedades().getProperty("LOCALE")));
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
                 URL image = this.getClass().getResource("images/ontology.jpg"); 
                 main.setIconImage (new ImageIcon(image).getImage());
