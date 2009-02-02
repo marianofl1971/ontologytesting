@@ -48,7 +48,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
             testResult = execOneTest(scenario,testResult);
             setName(scenario.getNombre());
         }else if(listScenario!=null){
-            testResult = execBateryTest(listScenario);
+            testResult = execBateryTest(listScenario,testResult);
             setName("Batería de Tests");
         } 
         setProgress(100);
@@ -69,17 +69,13 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
         return testResult;
     }
     
-    private OntologyTestResult execBateryTest(List<ScenarioTest> listScenario){ 
+    private OntologyTestResult execBateryTest(List<ScenarioTest> listScenario,OntologyTestResult testResult){ 
         int size = listScenario.size();
         int div = 100/size;
         for(int i=0;i<size;i++){
             ScenarioTest scen = listScenario.get(i);
             if(this.isCancelled()==false){
-                jenaInterface = new Reasoner();
-                jena = jenaInterface.getReasoner();
-                if(jenaInterface.isCargado()==true){
-                    execOneTest(scen,testResult);
-                }
+                execOneTest(scen,testResult);
                 setProgress(getProgress()+div);
             }
         }

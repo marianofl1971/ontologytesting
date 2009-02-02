@@ -59,17 +59,6 @@ public class Configuration {
             tmp.store(out, "Configuracion de OntologyTestGUI");
             out.close();
             }
-            /*}else if(Configuration.getPropiedades().getProperty("HOME").equals("") || Configuration.getPropiedades().getProperty("HOME")==null){
-                tmp.setProperty("HOME",home);
-            }else if(Configuration.getPropiedades().getProperty("DRIVER").equals("") || Configuration.getPropiedades().getProperty("DRIVER")==null){
-                tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
-            }else if(Configuration.getPropiedades().getProperty("IDIOMA").equals("") || Configuration.getPropiedades().getProperty("IDIOMA")==null){
-                tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
-            }else if(Configuration.getPropiedades().getProperty("LOCALE").equals("") || Configuration.getPropiedades().getProperty("LOCALE")==null){
-                tmp.setProperty("LOCALE", "es");
-            }else if(Configuration.getPropiedades().getProperty("ULTIMOPATH").equals("") || Configuration.getPropiedades().getProperty("ULTIMOPATH")==null){
-                tmp.setProperty("ULTIMOPATH", home");
-            }*/
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
             in.close();
