@@ -73,7 +73,8 @@ public class ReasonerImplementation implements InterfaceReasoner{
 
     @Override
     public void deleteEntries() {
-        model.removeAll();
+        model.remove(nameclass.getModel());
+        model.remove(nameprop.getModel());
     }
 
     @Override

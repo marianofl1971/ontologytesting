@@ -138,8 +138,9 @@ private void nombreProyectoTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//G
 
 private void examinarProyectoActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 // TODO add your handling code here:
-     boolean res = utils.fileChooser(true, false, false,false);
+     boolean res = utils.fileChooser(true, false, true,false);
      if(res == true){
+        Configuration.getInstance().cambiarPath(utils.getPathDirectorioProyecto().getParent());
         this.getUbicacionProyectoTextField().setText(FileChooserSelector.getPathSelected());    
         carpetaProyectoTextField.setText(FileChooserSelector.getPathSelected()+"\\"+getNombreProyectoTextField());
      }

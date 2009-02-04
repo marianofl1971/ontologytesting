@@ -83,7 +83,7 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaPropiedad(String query){
-        String regexp1 = "([\\w|_|-]+[(]{1}[\\w|_|-|.|/]+[,]{1}[\\w|_|-|.|/]+[)]{1}){1}";
+        String regexp1 = "([\\w|_|-|/|.]+[(]{1}[\\w|_|-|.|/]+[,]{1}[\\w|_|-|.|/]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();

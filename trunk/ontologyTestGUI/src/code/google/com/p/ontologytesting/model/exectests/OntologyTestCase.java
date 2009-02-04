@@ -26,7 +26,6 @@ public abstract class OntologyTestCase implements OntologyTest{
         String[] ciClas,ciInd,piClas,piInd;
         String patron1 = "[\\(|,|\n| ]";
         String patron2 = "[\n| |\\)]";
-        jena.addReasoner(ont);
         Instancias instancias = st.getInstancias();
         List<ClassInstances> classInstances = instancias.getClassInstances();
         List<PropertyInstances> propertyInstances = instancias.getPropertyInstances();
