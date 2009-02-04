@@ -61,6 +61,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
             jena = jenaInterface.getReasoner();
             if(jenaInterface.isCargado()==true){
                 OntologyTestCase ontologyTestCase = scenario.getOntologyTestCase();
+                jena.addReasoner(ont);
                 InterfaceReasoner jenaAux = ontologyTestCase.setUpOntology(scenario, ont, ns, jena);
                 ontologyTestCase.run(testResult, ont, ns, scenario, jenaAux);
                 ontologyTestCase.tearDownOntology(jenaAux);

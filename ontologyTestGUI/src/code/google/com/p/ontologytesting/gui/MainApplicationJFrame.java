@@ -925,6 +925,9 @@ public class IOSwingWorker extends SwingWorker<Boolean, Void>{
         boolean res=false;
         try {
             res = iomanager.saveProject(iomanager.getComo(), iomanager.getCarpetaProy(), iomanager.getNombreProy(), iomanager.getFichero());
+            if(res==true){
+                Configuration.getInstance().cambiarPath(MainApplicationJFrame.getInstance().getCarpetaProyecto());
+            }
         } catch (FileNotFoundException ex) {
         }
         return res;
