@@ -37,7 +37,6 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         super(parent, modal);
         initComponents();
         aceptarButton.requestFocus();
-        utils = new FileChooserSelector();
         this.setTitle(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Ubicación_de_la_Ontología_y_el_Namespace"));
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(MainApplicationJFrame.getInstance());
@@ -194,6 +193,7 @@ private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void examinarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarButtonActionPerformed
 // TODO add your handling code here:
+    utils = new FileChooserSelector();
     if(utils.fileChooser(true, true, false,false)==true){
         this.getUbicacionFisicaTextField().setText(FileChooserSelector.getPathSelected());
     }

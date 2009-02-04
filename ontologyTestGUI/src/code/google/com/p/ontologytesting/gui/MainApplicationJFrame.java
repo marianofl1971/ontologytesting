@@ -741,7 +741,7 @@ private void verTestsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 private void nuevoInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInstanciasMenuItemActionPerformed
 // TODO add your handling code here:
     Instancias inst = new Instancias();
-    cargarInstancia(inst,"Nueva Instancia");
+    cargarInstancia(inst,java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nueva_Instancia"));
 }//GEN-LAST:event_nuevoInstanciasMenuItemActionPerformed
 
 private void importarInstanciasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importarInstanciasMenuItemActionPerformed
@@ -1061,18 +1061,18 @@ public void cargarTest(int type,ScenarioTest s){
     if(type==0 || type==3){
         testInstSat = new TestSimpleInstSat(s);
         if(s.getNombre().equals("") && type==0){
-            testName="Nuevo Instanciación";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Instanciacion");
         }else if(s.getNombre().equals("") && type==3){
-            testName="Nuevo Satisfactibilidad";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Satisfactibilidad");
         }else testName=s.getNombre();
         testInstSat.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testInstSat,testName);
         setPanelActual(testInstSat);
     }else if(type==1 || type==4){
         if(s.getNombre().equals("") && type==1){
-            testName="Nuevo Recuperación";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Recuperacion");
         }else if(s.getNombre().equals("") && type==4){
-            testName="Nuevo Clasificación";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Clasificacion");
         }else testName=s.getNombre();
         testRetClas = new TestSimpleRetClas(s);
         testRetClas.setScenarioActual(new ScenarioTest(s));
@@ -1080,7 +1080,7 @@ public void cargarTest(int type,ScenarioTest s){
         setPanelActual(testRetClas);
     }else if(type==2){
         if(s.getNombre().equals("")){
-            testName="Nuevo Realización";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Realizacion");
         }else testName=s.getNombre();
          testReal = new TestSimpleReal(s);
          testReal.setScenarioActual(new ScenarioTest(s));
@@ -1088,7 +1088,7 @@ public void cargarTest(int type,ScenarioTest s){
          setPanelActual(testReal);
     }else if(type==5){
         if(s.getNombre().equals("")){
-            testName="Nuevo SPARQL";
+            testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Sparql");
         }else testName=s.getNombre();
         testSparql = new AddSPARQLJPanel(s);
         testSparql.setScenarioActual(new ScenarioTest(s));

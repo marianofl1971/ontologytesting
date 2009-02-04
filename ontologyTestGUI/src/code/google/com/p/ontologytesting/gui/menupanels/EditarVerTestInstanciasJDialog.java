@@ -156,10 +156,10 @@ private void editarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 // TODO add your handling code here:
     if(this.getIsTest()==true){
         opMenu.editarTest(this.getListarTestInst().getScenarioSelect());    
-        panelAviso.confirmAction("Test cargado para su edición", this);
         this.setVisible(false);
     }else{
         MainApplicationJFrame.getInstance().cargarInstancia(this.getListarTestInst().getInstanciaSelect(),this.getListarTestInst().getInstanciaSelect().getNombre());
+        this.setVisible(false);
     }
 }//GEN-LAST:event_editarButtonActionPerformed
 
