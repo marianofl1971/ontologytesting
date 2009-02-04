@@ -43,11 +43,18 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoInstanciacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
+                "Este test consiste en deducir si un individuo " +
+                "pertenece a una clase.<br>" +
+                "Ejemplo:<br>" +
+                "Consulta: Wife,marry <br> Resultado esperado: True<br>" +
+                "En este caso el test no fallaría, ya que el individuo " +
+                "'marry' aparece definido como Wife en el conjunto de instancias " +
+                "de la ontología. <br><br>" +
                 "<h><b>Formatos para el Test de Instanciación</h></b><br><br>" +
-                "<b>Consultas</b><br><br>" +
+                "<b>Consultas</b><br>" +
                 "Clase,individuo<br>" +
                 "Clase(individuo)<br><br>" +
-                "<b>Resultado Esperado</b><br><br>" +
+                "<b>Resultado Esperado</b><br>" +
                 "True/False";
         return formato;
     }
@@ -55,21 +62,37 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoRetrieval(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
+                "Este test deduce, dada una clase, todos los individuos que " +
+                "pertenecen a dicha clase (todos los individuos que son instancias " +
+                "de ese concepto).<br>" +
+                "Ejemplo:<br>" +
+                "Consulta: Wife <br> Resultado esperado: marry,lee<br>" +
+                "En este caso el test no fallaría, ya que para la clase 'Wife'" +
+                " todos los individuos que le pertenecen son los contemplados: " +
+                "'marry,lee'.<br><br>" +
                 "<h><b>Formatos para el Test de Recuperación</h></b><br><br>" +
-                "<b>Consultas</b><br><br>" +
+                "<b>Consultas</b><br>" +
                 "Clase<br><br>" +
-                "<b>Resultado Esperado</b><br><br>" +
-                "Lista de individuos separados por coma";
+                "<b>Resultado Esperado</b><br>" +
+                "Lista de individuos que pertenecen a la clase especificada " +
+                "separados por coma.";
         return formato;
     }
     
     private String generarFormatoPermitidoRealizacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
+                "Este test deduce, dado un individuo, cual es la clase más exacta " +
+                "o específica a la que pertenece (dado un individuo, encuentra el concepto " +
+                "más específico que lo contiene).<br>" +
+                "Ejemplo:<br>" +
+                "Consulta: marry <br> Resultado esperado: Wife<br>" +
+                "En este caso el test no fallaria, ya que la clase mas especifica que" +
+                "contiene al individuo 'marry' es 'Wife'.<br><br>" +
                 "<h><b>Formatos para el Test de Realización</h></b><br><br>" +
-                "<b>CONSULTAS</b><br><br>" +
+                "<b>CONSULTAS</b><br>" +
                 "Indiviudo<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br><br>" +
+                "<b>RESULTADO ESPERADO</b><br>" +
                 "Clase";
         return formato;
     }
@@ -77,11 +100,18 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoSatisfactibilidad(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
+                "Este test consiste en deducir si una nueva clase puede ser añadida a la " +
+                "ontología sin que entre en conflicto con el conjunto de instancias " +
+                "ya definido para esa ontología.<br>" +
+                "Ejemplo:<br>" +
+                "Consulta: sara,Wife <br> Resultado esperado: True<br>" +
+                "En este caso el test no fallaría, ya que el individuo" +
+                " 'sara' no estaba definido aún en la ontologia. <br><br>" +
                 "<h><b>Formatos para el Test De Satisfactibilidad</h></b><br><br>" +
-                "<b>Consultas</b><br><br>" +
+                "<b>Consultas</b><br>" +
                 "Individuo,Clase<br>" +
                 "Individuo(Clase)<br><br>" +
-                "<b>Resultado Esperado</b><br><br>" +
+                "<b>Resultado Esperado</b><br>" +
                 "True/False";
         return formato;
     }
@@ -89,39 +119,47 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoClasificacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
+                "Este test deduce, dado un individuo, todas las clases a las que pertenece.<br>" +
+                "Ejemplo:<br>" +
+                "Consulta: marry <br> Resultado esperado: Wife,Female,Person<br>" +
+                "En este caso el test no fallaría, ya que todas las clases a las que puede" +
+                " pertenecer 'marry' son las especificadas. <br><br>" +
                 "<h><b>Formatos para el Test de Clasificación</h></b><br><br>" +
-                "<b>Consultas</b><br><br>" +
+                "<b>Consultas</b><br>" +
                 "Individuo<br><br>" +
-                "<b>Resultado Esperado</b><br><br>" +
-                "Lista de clases separados por coma";
+                "<b>Resultado Esperado</b><br>" +
+                "Lista de clases a las que pertenece el individuo separados por coma";
         return formato;
     }
     
     private String generarFormatoPermitidoSPARQL(){
         this.setSize(new Dimension(600,410));
         String formato="<html>" +
+                "Este test ejecuta una consulta Sparql válida. " +
+                "Para más información acerca del lenguaje de consultas SPARQL visite:<br>" +
+                "http://www.w3.org/TR/rdf-sparql-query/<br><br>" +
                 "<h><b>Formatos para el Test Sparql</h></b><br><br>" +
                 "<b>Consultas</b><br><br>" +
-                "Serán validas aquellas consultas que sean" +
-                "gramaticalmente correctas siguiendo la sintaxis de SPARQL." +
+                "Serán válidas aquellas consultas que sean " +
+                "gramaticalmente correctas, siguiendo la sintaxis de SPARQL. " +
                 "Sólo estan permitidas consultas tipo SELECT.<br><br>" +
                 "<b>Resultado Esperado</b><br><br>" +
-                "En caso de un SELECT simple, el resultado deberá de ser el sujeto" +
+                "En caso de un SELECT simple, el resultado deberá de ser el sujeto " +
                 "que se indico en el SELECT, seguido de una lista " +
                 "de objetos separados por coma o punto.<br><br>" +
-                "En caso de un SELECT multiple el resultado deberá de especificar" +
-                "en primer lugar el sujeto al que se refiere en SELECT y entre " +
-                "parentesis el resultado o la lista de resultados separados por " +
+                "En caso de un SELECT múltiple, el resultado deberá de especificar " +
+                "en primer lugar el sujeto al que se refiere en SELECT y, entre " +
+                "paréntesis, el resultado o la lista de resultados separados por " +
                 "coma o punto que se espera obtener.<br><br>" +
                 "Por ejemplo, para la consulta:<br><br>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> <br>" +
+                "PREFIX rdfs: \\<http://www.w3.org/2000/01/rdf-schema#> <br>" +
                 "SELECT ?subject ?object <br>" +
                 "FROM 'ruta a la ontologia' <br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
                 "El resultado se debe de mostrar de la siguient forma:<br><br>" +
                 "subject(a,b,c)<br>" +
                 "object(a,b,c)"+
-                "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados" +
+                "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados " +
                 "por un salto de linea o por un punto y coma, es decir:" +
                 "subject(a,c);" +
                 "object(a,b,c)";    

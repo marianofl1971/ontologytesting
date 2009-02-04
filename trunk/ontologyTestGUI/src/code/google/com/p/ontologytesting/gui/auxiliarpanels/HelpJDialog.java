@@ -32,12 +32,12 @@ public class HelpJDialog extends javax.swing.JDialog {
         String help="<html>" +
                 "Los tests que están disponibles en la aplicación se describen a continuación:<br><br>"+
                 "<h><b>Test de Instanciación</h></b><br><br>" +
-                "Este test consiste en deducir si dado un individuo, " +
+                "Este test consiste en deducir si, dado un individuo, " +
                 "éste pertenece a una clase.<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>Wife,marry <br> <b>Resultado esperado: </b>True<br><br>" +
-                "En este caso el test no fallaría, ya que el individuo" +
-                " 'marry' aparece definido como Wife en el conjunto de instancias " +
+                "En este caso el test no fallaría, ya que el individuo " +
+                "'marry' aparece definido como Wife en el conjunto de instancias " +
                 "de la ontología. <br><br>" +
                 "<h><b>Test de Recuperación</h></b><br><br>" +
                 "Este test deduce, dada una clase, todos los individuos que " +
@@ -45,8 +45,8 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "de ese concepto).<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>Wife <br> <b>Resultado esperado: </b>marry,lee<br><br>" +
-                "En este caso el test no fallaría, ya que para la clase 'Wife'" +
-                " todos los individuos que le pertenecen son los contemplados" +
+                "En este caso el test no fallaría, ya que para la clase 'Wife', " +
+                "todos los individuos que le pertenecen son los contemplados: " +
                 "'marry,lee'.<br><br>" +
                 "<h><b>Test de Realización</h></b><br><br>" +
                 "Este test deduce, dado un individuo, cual es la clase más exacta " +
@@ -54,24 +54,24 @@ public class HelpJDialog extends javax.swing.JDialog {
                 "más específico que lo contiene).<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>marry <br> <b>Resultado esperado: </b>Wife<br><br>" +
-                "En este caso el test no fallaria, ya que la clase mas especifica que" +
+                "En este caso el test no fallaría, ya que la clase mas específica que " +
                 "contiene al individuo 'marry' es 'Wife'.<br><br>" +
                 "<h><b>Test de Satisfactibilidad</h></b><br><br>" +
                 "Este test consiste en deducir si una nueva clase puede ser añadida a la " +
-                "ontologia sin que entre en conflicto con el conjunto de instancias" +
-                "ya definido para esa ontologia.<br><br>" +
+                "ontología sin que entre en conflicto con el conjunto de instancias " +
+                "ya definido para esa ontología.<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>sara,Wife <br> <b>Resultado esperado: </b>True<br><br>" +
-                "En este caso el test no fallaría, ya que el individuo" +
-                " 'sara' no estaba aun definido en la ontologia. <br><br>" +
+                "En este caso el test no fallaría, ya que el individuo " +
+                "'sara' no estaba definido aún en la ontología. <br><br>" +
                 "<h><b>Test de clasificación</h></b><br><br>" +
-                "Este test deduce dado un individuo, todas las clases a las que pertenece<br><br>" +
+                "Este test deduce, dado un individuo, todas las clases a las que pertenece.<br><br>" +
                 "Ejemplo:<br>" +
                 "<b>Consulta: </b>marry <br> <b>Resultado esperado: </b>Wife,Female,Person<br><br>" +
-                "En este caso el test no fallaría, ya que todas las clases a las que puede" +
-                " pertenecer 'marry' son las especificadas. <br><br>" +
+                "En este caso el test no fallaría, ya que todas las clases a las que puede " +
+                "pertenecer 'marry' son las especificadas. <br><br>" +
                 "<h><b>Test Sparl</h></b><br><br>" +
-                "Este test ejecuta una consulta Sparql valida." +
+                "Este test ejecuta una consulta Sparql válida. " +
                 "Para más información acerca del lenguaje SPARQL visite:<br>" +
                 "http://www.w3.org/TR/rdf-sparql-query/<br>" +
                 "<br><br>" +
