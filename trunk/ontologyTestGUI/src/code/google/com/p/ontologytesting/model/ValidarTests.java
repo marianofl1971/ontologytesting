@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 public class ValidarTests {
     
     public boolean validarQuery(String query){
-        String regexp1 = "([\\w|-|_]+){1}";
+        String regexp1 = "([\\w|\\-|\\_|.]+){1}";
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
         while (stTexto.hasMoreElements()){
@@ -29,13 +29,14 @@ public class ValidarTests {
     }
     
     public boolean validarResultado(String res){
-        String regexp1 = "[\\w|,|.|\\s|-|_]+";
+        String regexp1 = "[\\[]{1}[\\w|,|.|\\s|\\-|\\_]+[]]{1}";
+        String regexp2 = "[\\w|,|.|\\s|\\-|\\_]+";
         StringTokenizer stTexto = new StringTokenizer(res.trim());
         StringBuffer buf = new StringBuffer();
         while (stTexto.hasMoreElements()){
             buf.append(stTexto.nextElement());
         }
-        if(!buf.toString().matches(regexp1)){
+        if(!buf.toString().matches(regexp1) && !buf.toString().matches(regexp2)){
             return false;
         }else{
             return true;
@@ -51,8 +52,8 @@ public class ValidarTests {
     }
     
     public boolean validarQueryInstSatis(String query){
-        String regexp1 = "([\\w|-|_]+[\\s|,|.]{1}[\\w|_|-]+){1}";
-        String regexp2 = "([\\w|_|-]+[(]{1}[\\w|_|-]+[)]{1}){1}";
+        String regexp1 = "([\\w|\\-|\\_]+[\\s|,|.]{1}[\\w|\\_|\\-]+){1}";
+        String regexp2 = "([\\w|\\_|\\-]+[(]{1}[\\w|\\_|\\-]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
@@ -67,8 +68,8 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaClase(String query){
-        String regexp1 = "[\\w|_|-|/|.]+[,]{1}[\\w|_|-|/|.]+";
-        String regexp2 = "([\\w|_|-|/|.]+[(]{1}[\\w|_|-|/|.]+[)]{1}){1}";
+        String regexp1 = "[\\w|\\_|\\-|/|.]+[,]{1}[\\w|\\_|\\-|/|.]+";
+        String regexp2 = "([\\w|\\_|\\-|/|.]+[(]{1}[\\w|\\_|\\-|/|.]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
@@ -83,7 +84,7 @@ public class ValidarTests {
     }
     
     public boolean validarInstanciaPropiedad(String query){
-        String regexp1 = "([\\w|_|-|/|.]+[(]{1}[\\w|_|-|.|/]+[,]{1}[\\w|_|-|.|/]+[)]{1}){1}";
+        String regexp1 = "([\\w|\\_|\\-|/|.]+[(]{1}[\\w|\\_|\\-|.|/]+[,]{1}[\\w|\\_|\\-|.|/]+[)]{1}){1}";
         
         StringTokenizer stTexto = new StringTokenizer(query.trim());
         StringBuffer buf = new StringBuffer();
@@ -98,10 +99,10 @@ public class ValidarTests {
     }
     
     public boolean validarSparqlResult(String query){
-        String patron = ("[\\;|\\n|\\v]");
-        String[] res = query.split(patron);
+        String patron = ("\\n|\\v]");
+        String[] res = query.trim().split(patron);
         for(int i=0;i<res.length;i++){
-            if(validarQuerySparql(res[i])==false){
+            if(validarQuerySparql(res[i].trim())==false){
                 return false;
             }
         }
@@ -109,13 +110,15 @@ public class ValidarTests {
     }
     
     public boolean validarQuerySparql(String query){
-        String regexp1 = "[\\w|_|-|.|/]+[(]{1}([[\\w|_|-|.|/|\\s]+[,.]])+[)]{1}[;]?";
+        String regexp1 = "[\\w|\\_|\\-|.|/|\\s]+[(|\\[]{1}([[\\w|\\_|\\-|.|/|\\s]+[,|.]])+[)|\\]]{1}";
         
-        if(!query.matches(regexp1)){
-            return false;
-        }else{
-            return true;
-        }   
+        if(!query.equals("")){
+            if(!query.trim().matches(regexp1)){
+                return false;
+            }else{
+                return true;
+            }   
+        }else return true;
     }
     
 }

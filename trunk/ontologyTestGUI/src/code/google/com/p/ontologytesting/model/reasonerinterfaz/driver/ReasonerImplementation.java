@@ -155,7 +155,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     
     //Saber si se puede añadir un concepto
     @Override
-    public String satisfactibility(String ns, String concepto, String clase) 
+    public String satisfactibility(String ns, String clase, String concepto) 
             throws InvalidOntologyException{
        OntClass ontClass = model.getOntClass(ns+clase);
        if(ontClass==null) return "La clase introducida no es una " +

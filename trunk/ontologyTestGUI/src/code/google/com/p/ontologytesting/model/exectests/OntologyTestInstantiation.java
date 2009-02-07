@@ -20,7 +20,7 @@ public class OntologyTestInstantiation extends OntologyTestCase{
 
     @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
-        String patron3="[\\(|\\)|,| |.]";
+        String patron3="[\\(|\\)|,]";
         String res[],clasF="",indF="",query,resQueryExpected="",resObtenidoInst="";
         QueryOntology qo = null;
         ListIterator liQuery;
@@ -30,9 +30,9 @@ public class OntologyTestInstantiation extends OntologyTestCase{
             qo = (QueryOntology) liQuery.next();
             query = qo.getQuery();
             resQueryExpected = qo.getResultexpected();
-            res = query.split(patron3);
-            clasF = res[0];
-            indF = res[1];
+            res = query.trim().split(patron3);
+            clasF = res[0].trim();
+            indF = res[1].trim();
             resObtenidoInst = jena.instantiation(ns, clasF, indF);
             if(!resObtenidoInst.equals(resQueryExpected)){
                 testresult.addOntologyFailureQuery(scenario.getNombre(), qo, resObtenidoInst, scenario.getTipoTest());

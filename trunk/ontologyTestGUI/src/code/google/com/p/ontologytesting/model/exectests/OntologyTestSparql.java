@@ -22,7 +22,8 @@ public class OntologyTestSparql extends OntologyTestCase{
     private List<ExecQuerySparql> listaResultEsperada = new ArrayList<ExecQuerySparql>();
     private List<ExecQuerySparql> listaResultObtenida = new ArrayList<ExecQuerySparql>();
     private String patron5="[\\n|\\v]";
-    private String patron6="[,\\)]";
+    private String patron6="[,|\\)|\\]]";
+    private String patron7="[\\[|\\(]";
     private ArrayList<String> esperado = new ArrayList<String>();
     private ArrayList<String> obtenido = new ArrayList<String>();
     private ListIterator liSparql;
@@ -42,14 +43,14 @@ public class OntologyTestSparql extends OntologyTestCase{
         while(liSparql.hasNext()){    
             listaResultEsperada = new ArrayList<ExecQuerySparql>();
             sparqlquery = (SparqlQueryOntology) liSparql.next();
-            String sparqlQuery = sparqlquery.getQuery();
-            resQueryExpected = sparqlquery.getResultexpected();
+            String sparqlQuery = sparqlquery.getQuery().trim();
+            resQueryExpected = sparqlquery.getResultexpected().trim();
             res = resQueryExpected.split(patron5);
             for(int k=0; k<res.length;k++){
                 if(!res[k].equals(""))
                 {
                     ExecQuerySparql execQuery = new ExecQuerySparql();
-                    String[] select = res[k].trim().split("\\(");
+                    String[] select = res[k].trim().split(patron7);
                     execQuery.setNombreSelect(select[0]); 
                     String[] subRes = select[1].trim().split(patron6);
                     for(int m=0; m<subRes.length;m++){
