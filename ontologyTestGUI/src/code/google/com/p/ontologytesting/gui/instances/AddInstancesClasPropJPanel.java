@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.instances;
 
 import code.google.com.p.ontologytesting.gui.menupanels.AsociarInstanciasATestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.*;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
@@ -54,11 +55,13 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
     private OpcionesMenu menu;
     private Instancias instanciasActuales = new Instancias();
     private AsociarInstanciasATestJDialog asociarInst;
+    private AniadirPanelDeAviso panelAviso;
     
     //Constructor para editar un conjunto de instancias
     public AddInstancesClasPropJPanel(Instancias inst){
         initComponents();
         int contI=0,contP=0;
+        panelAviso=new AniadirPanelDeAviso();
         classScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         propScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         textAreaScrollPane.getVerticalScrollBar().setUnitIncrement(7);
@@ -118,6 +121,7 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
         initComponents();
         int contI=0,contP=0;
         continuar=true;
+        panelAviso=new AniadirPanelDeAviso();
         classScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         propScrollPane.getVerticalScrollBar().setUnitIncrement(7);
         textAreaScrollPane.getVerticalScrollBar().setUnitIncrement(7);
@@ -424,11 +428,9 @@ private void guardarAsociarInstButtonActionPerformed(java.awt.event.ActionEvent 
         }
         if(continuar==true){
             if(res == true){
-                JOptionPane.showMessageDialog(this,"Instancias Guardadas y Asociadas",                                                  
-                    "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Instancias Guardadas y Asociadas",MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(this,"Instancias Asociadas pero No Guardadas",                                                  
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.warningAction("Instancias Asociadas pero No Guardadas",MainApplicationJFrame.getInstance());
             }
         }
     }
@@ -542,15 +544,12 @@ private void soloAsociarButtonActionPerformed(java.awt.event.ActionEvent evt) {/
         boolean resAsoc = soloAsociar(res);
         if(isFromTest()==true){
             if(resAsoc==true){
-                JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+                panelAviso.confirmAction("Instancias Asociadas",MainApplicationJFrame.getInstance());
             }else{
-                JOptionPane.showMessageDialog(this,"Instancias No Asociadas",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+                panelAviso.errorAction("Instancias No Asociadas", MainApplicationJFrame.getInstance());
             }
         }else if(resAsoc==true){
-            JOptionPane.showMessageDialog(this,"Instancias Asociadas",                                                  
-            "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            panelAviso.confirmAction("Instancias Asociadas",MainApplicationJFrame.getInstance());
         }
     }
 }//GEN-LAST:event_soloAsociarButtonActionPerformed
@@ -581,11 +580,9 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     boolean result = prepararInstancias(true);
     if(continuar==true){
         if(result==true){
-            JOptionPane.showMessageDialog(this,"Instancias Guardadas",                                                  
-                "Confirm Message",JOptionPane.INFORMATION_MESSAGE);
+            panelAviso.confirmAction("Instancias Guardadas",MainApplicationJFrame.getInstance());
         }else{
-            JOptionPane.showMessageDialog(this,"Instancias No Guardadas",                                                  
-                "Error Message",JOptionPane.ERROR_MESSAGE);
+            panelAviso.errorAction("Instancias No Guardadas",MainApplicationJFrame.getInstance());
         }
     }
 }
@@ -632,21 +629,27 @@ public boolean prepararInstancias(boolean guardar){
             getInstancias().setNombre(getNomInstanciasTextField());
             if(guardar==true){
                 if(persist.instanciasYaGuardadas(getInstancias())==true){
-                    if(this.isFromTest()==false){
-                        persist.replaceInstanciasLocally(getInstancias());
-                    }else{
+                    //if(this.isFromTest()==false){
+                      //  persist.replaceInstanciasLocally(getInstancias());
+                    //}else{
                         Object[] options = {"Sobreescribir", "Cancelar"};
                         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un conjunto de instancias guardado con ese nombre. ¿Qué desea hacer?", 
                                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (n == JOptionPane.YES_OPTION){
-                            persist.replaceInstanciasLocally(new Instancias(getInstancias()));
+                            if(this.isFromTest()==false){
+                                persist.replaceInstanciasLocally(getInstancias());
+                            }else{
+                                persist.replaceInstanciasLocally(new Instancias(getInstancias()));
+                            }
                         }else continuar=false;
-                    }
+                    //}
                 }else{
-                    if(isFromTest()==true){
-                        persist.saveInstanciasInMemory(new Instancias(getInstancias()));
-                    }else{
-                        persist.saveInstanciasInMemory(getInstancias());
+                    if(persist.instanciasExisten(getInstancias())==false){
+                        if(isFromTest()==true){
+                            persist.saveInstanciasInMemory(new Instancias(getInstancias()));
+                        }else{
+                            persist.saveInstanciasInMemory(getInstancias());
+                        }
                     }
                 }
                 menu.actualizarListaDeInstancias();

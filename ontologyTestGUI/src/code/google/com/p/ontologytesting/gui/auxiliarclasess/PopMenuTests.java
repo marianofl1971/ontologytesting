@@ -11,7 +11,6 @@ import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDial
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
-import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -72,6 +71,7 @@ public class PopMenuTests implements ActionListener{
                 "Eliminar Tests",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                 menu.eliminarTest(scenario);
+                ListAndTestsJPanel.getInstance().borrarTest(scenario.getNombre());
             }
         }
     }

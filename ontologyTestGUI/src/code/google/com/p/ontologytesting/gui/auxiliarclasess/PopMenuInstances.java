@@ -50,6 +50,7 @@ public class PopMenuInstances implements ActionListener{
                 "Eliminar Instancia",JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION){
                 menu.eliminarInstancias(inst);
+                ListAndTestsJPanel.getInstance().borrarInstancias(inst.getNombre());
             }  
         }
     }

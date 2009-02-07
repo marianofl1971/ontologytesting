@@ -94,6 +94,22 @@ public class IOManagerImplementation{
         List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
         for(int i=0; i<instancias.size(); i++){
             if(inst.getNombre().equals(instancias.get(i).getNombre())){
+                if(!inst.getDescripcion().equals(instancias.get(i).getDescripcion()) || 
+                !inst.getClassInstances().equals(instancias.get(i).getClassInstances()) || 
+                !inst.getPropertyInstances().equals(instancias.get(i).getPropertyInstances())){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean instanciasExisten(Instancias inst){
+        List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
+        for(int i=0; i<instancias.size(); i++){
+            if(inst.getNombre().equals(instancias.get(i).getNombre())){
                 return true;
             }
         }
@@ -119,6 +135,24 @@ public class IOManagerImplementation{
     }
 
     public boolean testYaGuardado(ScenarioTest scen){
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
+        for(int i=0; i<scenario.size(); i++){
+            if(scen.getNombre().equals(scenario.get(i).getNombre())){
+                if(!scen.getDescripcion().equals(scenario.get(i).getDescripcion()) ||
+                   //!scen.getTipoTest().equals(scenario.get(i).getTipoTest()) ||
+                   !scen.getInstancias().equals(scenario.get(i).getInstancias()) ||
+                   !scen.getQueryTest().equals(scenario.get(i).getQueryTest()) ||
+                   !scen.getSparqlQuerys().equals(scenario.get(i).getSparqlQuerys())){
+                        return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean testExiste(ScenarioTest scen){
         List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
         for(int i=0; i<scenario.size(); i++){
             if(scen.getNombre().equals(scenario.get(i).getNombre())){
