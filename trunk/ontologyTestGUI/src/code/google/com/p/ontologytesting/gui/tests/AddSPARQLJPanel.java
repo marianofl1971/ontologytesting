@@ -476,7 +476,7 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN FIRST:event_formatosPermitidosActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(null,true,5);
+    FormatTestsJDialog format = new FormatTestsJDialog(null,true,getScenario());
     format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     format.setModal(false);
     format.setVisible(true);
@@ -496,8 +496,10 @@ private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
     boolean g = guardarTest();
     if(g==true){
         setGuardado(true);
+        int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
+        ListAndTestsJPanel.getInstance().aniadirNombre(index,getScenario().getNombre());
     }
-}                                              
+}
 
 public boolean guardarTest(){
     prepararGuardar();
@@ -568,6 +570,8 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }
         this.setScenarioActual(new ScenarioTest(this.getScenario()));
         this.setGuardado(true);
+        int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
+        ListAndTestsJPanel.getInstance().aniadirNombre(index,getScenario().getNombre());
     }
     if(ejecutar==true){
         try{

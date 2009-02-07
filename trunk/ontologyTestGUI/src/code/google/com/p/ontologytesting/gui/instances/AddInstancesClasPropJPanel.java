@@ -654,6 +654,8 @@ public boolean prepararInstancias(boolean guardar){
                 }
                 menu.actualizarListaDeInstancias();
                 setInstanciasActuales(new Instancias(getInstancias()));
+                int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
+                ListAndTestsJPanel.getInstance().aniadirNombre(index,getInstancias().getNombre());
             }
             return true;
         } else if (instanciaSinNombre == true) {

@@ -139,7 +139,7 @@ public class ReasonerImplementation implements InterfaceReasoner{
     //Saber la clase mas exacta a la que pertenece un individuo
     //Dado un individuo, encontrar el concepto más específico que lo contiene
     @Override
-    public String realization(String ns, String individualName){
+    public String realization(String ns, String individualName){                
         Individual individual = model.getIndividual(ns + individualName);
         if(individual==null) return "El individuo introducido no es una instancia " +
                 "para el modelo";

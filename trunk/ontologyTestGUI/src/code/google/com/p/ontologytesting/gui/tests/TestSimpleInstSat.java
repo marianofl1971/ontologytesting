@@ -289,6 +289,7 @@ private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {
     boolean g = guardarTest();
     if(g==true){
         setGuardado(true);
+        ListAndTestsJPanel.getInstance().aniadirNombre(this.getTabbedPaneInst(), getScenario().getNombre());
     }
 }
 
@@ -361,6 +362,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             }
             this.setScenarioActual(new ScenarioTest(this.getScenario()));
             this.setGuardado(true);
+            ListAndTestsJPanel.getInstance().aniadirNombre(this.getTabbedPaneInst(), getScenario().getNombre());
         //}else if(continuarSinInstancias==1){
             //menu.editarInstancias(this.getScenario());
         //}

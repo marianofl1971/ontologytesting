@@ -9,7 +9,10 @@ package code.google.com.p.ontologytesting.gui.tests;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.FormatTestsJDialog;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ControladorTests;
+import code.google.com.p.ontologytesting.model.CollectionTest;
+import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -95,7 +98,10 @@ public class DescripcionJPanel extends javax.swing.JPanel {
 
 private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(MainApplicationJFrame.getInstance(),true,ControladorTests.getInstance().testSeleccionado());
+    String nombreTest = ListAndTestsJPanel.getInstance().obtenerNombre(ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex());
+    ScenarioTest scenario = new ScenarioTest();
+    ScenarioTest scenarioBis = scenario.buscarScenario(CollectionTest.getInstance().getScenariotest(), nombreTest);
+    FormatTestsJDialog format = new FormatTestsJDialog(MainApplicationJFrame.getInstance(),true,scenarioBis);
     format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
