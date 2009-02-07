@@ -195,6 +195,9 @@ public class ScenarioTest implements Serializable{
             if(!this.getInstancias().equals(s2.getInstancias())){
                 return false;
             }
+            if(!this.getTipoTest().equals(s2.getTipoTest())){
+                return false;
+            }
             if(this.getDescripcion().equals(s2.getDescripcion())){
                 if(this.getNombre().equals(s2.getNombre())){
                     return true;

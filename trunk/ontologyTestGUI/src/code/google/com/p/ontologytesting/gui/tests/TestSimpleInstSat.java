@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -345,11 +346,18 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     if(guardar==true){
         //continuarSinInstancias = this.preguntarSiContinuarSinInstancias();
         //if(continuarSinInstancias==0){
-            if(persist.testYaGuardado(getScenario())==true){
-                persist.replaceScenarioLocally(getScenario());
+            if(persist.testYaGuardado(scenario)==true){
+                Object[] options = {"Sobreescribir", "Cancelar"};
+                int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un test guardado con este nombre. ¿Qué desea hacer?", 
+                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                if (n == JOptionPane.YES_OPTION){
+                    persist.replaceScenarioLocally(getScenario());
+                }else continuar=false;
             }else{
-                persist.saveTestInMemory(getScenario());
-                controlador.setTestInstSatGuardado(true);
+                if(persist.testExiste(scenario)==false){
+                    persist.saveTestInMemory(getScenario());
+                    controlador.setTestInstSatGuardado(true);
+                }
             }
             this.setScenarioActual(new ScenarioTest(this.getScenario()));
             this.setGuardado(true);
@@ -370,7 +378,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
     }
-    if(guardar==true && ejecutar==false){
+    if(guardar==true && ejecutar==false && continuar==true){
         panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());

@@ -46,6 +46,30 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         contentTabbedPane.validate();    
     }
     
+    public void borrarTest(String name){
+        int tabCount = contentTabbedPane.getTabCount();
+        for(int i=0;i<tabCount;i++){
+            String title = contentTabbedPane.getTitleAt(i);
+            if(title.equals(name)){
+                contentTabbedPane.remove(i);
+                tabCount--;
+                i--;
+            }
+        }
+    }
+    
+    public void borrarInstancias(String name){
+        int tabCount = contentTabbedPane.getTabCount();
+        for(int i=0;i<tabCount;i++){
+            String title = contentTabbedPane.getTitleAt(i);
+            if(title.equals(name)){
+                contentTabbedPane.remove(i);
+                tabCount--;
+                i--;
+            }
+        }
+    }
+    
     public void eliminarTests(){
         contentTabbedPane.removeAll();
         contentTabbedPane.validate();
