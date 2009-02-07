@@ -38,20 +38,28 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     public void aniadirTest(JPanel panel, String name){
-        contentTabbedPane.add(panel);
-        contentTabbedPane.setTitleAt(contentTabbedPane.getTabCount()-1, name);
-        initTabComponent(contentTabbedPane.getTabCount()-1);
-        contentTabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
-        contentTabbedPane.setSelectedIndex(contentTabbedPane.getTabCount()-1);
-        contentTabbedPane.validate();    
+        getContentTabbedPane().add(panel);
+        getContentTabbedPane().setTitleAt(getContentTabbedPane().getTabCount()-1, name);
+        initTabComponent(getContentTabbedPane().getTabCount()-1);
+        getContentTabbedPane().setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        getContentTabbedPane().setSelectedIndex(getContentTabbedPane().getTabCount()-1);
+        getContentTabbedPane().validate();    
+    }
+    
+    public void aniadirNombre(int tab,String name){
+        getContentTabbedPane().setTitleAt(tab, name);
+    }
+    
+    public String obtenerNombre(int tab){
+        return getContentTabbedPane().getTitleAt(tab);
     }
     
     public void borrarTest(String name){
-        int tabCount = contentTabbedPane.getTabCount();
+        int tabCount = getContentTabbedPane().getTabCount();
         for(int i=0;i<tabCount;i++){
-            String title = contentTabbedPane.getTitleAt(i);
+            String title = getContentTabbedPane().getTitleAt(i);
             if(title.equals(name)){
-                contentTabbedPane.remove(i);
+                getContentTabbedPane().remove(i);
                 tabCount--;
                 i--;
             }
@@ -59,11 +67,11 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     public void borrarInstancias(String name){
-        int tabCount = contentTabbedPane.getTabCount();
+        int tabCount = getContentTabbedPane().getTabCount();
         for(int i=0;i<tabCount;i++){
-            String title = contentTabbedPane.getTitleAt(i);
+            String title = getContentTabbedPane().getTitleAt(i);
             if(title.equals(name)){
-                contentTabbedPane.remove(i);
+                getContentTabbedPane().remove(i);
                 tabCount--;
                 i--;
             }
@@ -71,12 +79,12 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     }
     
     public void eliminarTests(){
-        contentTabbedPane.removeAll();
-        contentTabbedPane.validate();
+        getContentTabbedPane().removeAll();
+        getContentTabbedPane().validate();
     }
     
     private void initTabComponent(int i) {
-        contentTabbedPane.setTabComponentAt(i,new ButtonTabComponent(contentTabbedPane,false,false));
+        getContentTabbedPane().setTabComponentAt(i,new ButtonTabComponent(getContentTabbedPane(),false,false));
     }
     
     public void aniadirLista(ListarTestsJPanel lista){
@@ -134,6 +142,10 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel testsPanel;
     private javax.swing.JScrollPane testsScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JTabbedPane getContentTabbedPane() {
+        return contentTabbedPane;
+    }
 
 
 }

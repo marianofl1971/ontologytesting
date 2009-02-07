@@ -6,6 +6,7 @@
 
 package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
+import code.google.com.p.ontologytesting.model.ScenarioTest;
 import java.awt.Dimension;
 
 /**
@@ -15,23 +16,23 @@ import java.awt.Dimension;
 public class FormatTestsJDialog extends javax.swing.JDialog {
 
     /** Creates new form FormatTestsJDialog */
-    public FormatTestsJDialog(java.awt.Frame parent, boolean modal, int tab) {
+    public FormatTestsJDialog(java.awt.Frame parent, boolean modal, ScenarioTest scenario) {
         super(parent, modal);
         initComponents();
         this.setModal(true);
         String formato="";
         descripcionEditorPane.setContentType("text/html");
-        if(tab==0){
+        if(scenario.getTipoTest().name().equals("INST")){
             formato = generarFormatoPermitidoInstanciacion();
-        }else if(tab==1){
+        }else if(scenario.getTipoTest().name().equals("RET")){
             formato = generarFormatoPermitidoRetrieval();
-        }else if(tab==2){
+        }else if(scenario.getTipoTest().name().equals("REAL")){
             formato = generarFormatoPermitidoRealizacion();
-        }else if(tab==3){
+        }else if(scenario.getTipoTest().name().equals("SAT")){
             formato = generarFormatoPermitidoSatisfactibilidad();
-        }else if(tab==4){
+        }else if(scenario.getTipoTest().name().equals("CLAS")){
             formato = generarFormatoPermitidoClasificacion();
-        }else if(tab==5){
+        }else if(scenario.getTipoTest().name().equals("SPARQL")){
             formato = generarFormatoPermitidoSPARQL();
         }
         descripcionEditorPane.setText(formato);
