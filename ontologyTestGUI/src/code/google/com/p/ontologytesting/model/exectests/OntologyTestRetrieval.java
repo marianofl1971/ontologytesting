@@ -20,7 +20,7 @@ import java.util.ListIterator;
  */
 public class OntologyTestRetrieval extends OntologyTestCase {
 
-    private String patron4="[,|\\n| ]";
+    private String patron4="[,|\\n]";
     private String query,resQueryExpected="";
     private List<String> resObtenidoRet = new ArrayList<String>();
     private QueryOntology qo = null;
@@ -31,31 +31,34 @@ public class OntologyTestRetrieval extends OntologyTestCase {
 
     @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
-        if(scenario.getTipoTest().name().equals("RET")){
-            List<QueryOntology> queryTest = scenario.getQueryTest();
-            liQuery = queryTest.listIterator();
-            while(liQuery.hasNext()){         
-                qo = (QueryOntology) liQuery.next();
-                query = qo.getQuery();
-                resQueryExpected = qo.getResultexpected();
-                resObtenidoRet = jena.retieval(ns, query);
-                String[] queryMod = resQueryExpected.split(patron4);
-                ArrayList<String> queryRet = new ArrayList<String>();
-                for(int k=0;k<queryMod.length;k++){
-                    queryRet.add(queryMod[k]);
-                }
-                if(resObtenidoRet==null || resObtenidoRet.size()==0){
-                    testresult.addOntologyFailureQuery(scenario.getNombre(), 
-                            qo,"La clase introducida no es una " +
-                            "instancia para el modelo",scenario.getTipoTest());
+        List<QueryOntology> queryTest = scenario.getQueryTest();
+        liQuery = queryTest.listIterator();
+        while(liQuery.hasNext()){         
+            qo = (QueryOntology) liQuery.next();
+            query = qo.getQuery().trim();
+            resQueryExpected = qo.getResultexpected().trim();
+            if(resQueryExpected.startsWith("[") && resQueryExpected.endsWith("]")){
+                resQueryExpected = resQueryExpected.substring(1);
+                int tam = resQueryExpected.length();
+                resQueryExpected = resQueryExpected.substring(0, tam-1);
+            }
+            resObtenidoRet = jena.retieval(ns, query);
+            String[] queryMod = resQueryExpected.split(patron4);
+            ArrayList<String> queryRet = new ArrayList<String>();
+            for(int k=0;k<queryMod.length;k++){
+                queryRet.add(queryMod[k].trim());
+            }
+            if(resObtenidoRet==null || resObtenidoRet.size()==0){
+                testresult.addOntologyFailureQuery(scenario.getNombre(), 
+                        qo,"La clase introducida no es una " +
+                        "instancia para el modelo",scenario.getTipoTest());
+            }else{
+                Collections.sort(resObtenidoRet);
+                Collections.sort(queryRet);
+                if(!utils.comparaArray(resObtenidoRet, queryRet)){
+                    testresult.addOntologyFailureQuery(scenario.getNombre(),qo,resObtenidoRet.toString(),scenario.getTipoTest());
                 }else{
-                    Collections.sort(resObtenidoRet);
-                    Collections.sort(queryRet);
-                    if(!utils.comparaArray(resObtenidoRet, queryRet)){
-                        testresult.addOntologyFailureQuery(scenario.getNombre(),qo,resObtenidoRet.toString(),scenario.getTipoTest());
-                    }else{
-                        testresult.addOntologyPassedQuery(scenario.getNombre(), qo,resObtenidoRet.toString(),scenario.getTipoTest());
-                    }
+                    testresult.addOntologyPassedQuery(scenario.getNombre(), qo,resObtenidoRet.toString(),scenario.getTipoTest());
                 }
             }
         }

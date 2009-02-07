@@ -427,12 +427,23 @@ public void copiarTestAScenarioDesdeAyuda(){
                         String coment = comentPane.getComent();
                         hayUnaConsulta=1;
                         testQuery = new QueryOntology(query,resExpT,coment);
-                        if(validarTests.validarQuery(testQuery.getQuery())==true){
+                        if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                validarTests.validarResultado(testQuery.getResultexpected())==true){
                             queryTest.add(testQuery);
                             this.ret.add(i, 0);
                             validarConsultas.setListRet(this.ret);
-                        }else{
+                        }else if(validarTests.validarQuery(testQuery.getQuery())==false &&
+                                validarTests.validarResultado(testQuery.getResultexpected())==true){
                             this.ret.add(i, 1);
+                            validarConsultas.setListRet(this.ret);
+                            validoRet=false;
+                        }else if(validarTests.validarQuery(testQuery.getQuery())==true &&
+                                validarTests.validarResultado(testQuery.getResultexpected())==false){
+                            this.ret.add(i, 2);
+                            validarConsultas.setListRet(this.ret);
+                            validoRet=false;
+                        }else{
+                            this.ret.add(i, 3);
                             validarConsultas.setListRet(this.ret);
                             validoRet=false;
                         }

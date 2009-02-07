@@ -27,24 +27,20 @@ public class OntologyTestSatisfactibility extends OntologyTestCase{
 
     @Override
     public void run(OntologyTestResult testresult, String ont, String ns, ScenarioTest scenario,InterfaceReasoner jena) throws InvalidOntologyException {
-        if(scenario.getTipoTest().name().equals("SAT")){
-            List<QueryOntology> queryTest = scenario.getQueryTest();
-            liQuery = queryTest.listIterator();
-            while(liQuery.hasNext()){  
-                qo = (QueryOntology) liQuery.next();
-                query = qo.getQuery();
-                resQueryExpected = qo.getResultexpected();
-                res = query.trim().split(patron3);
-                concepto = res[0].trim();
-                System.out.println(concepto);
-                loincluye = res[1].trim();
-                System.out.println(loincluye);
-                resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
-                if(!resObtenidoSatisf.equals(resQueryExpected)){
-                    testresult.addOntologyFailureQuery(scenario.getNombre(), qo, resObtenidoSatisf,scenario.getTipoTest());
-                }else{
-                    testresult.addOntologyPassedQuery(scenario.getNombre(), qo,resObtenidoSatisf, scenario.getTipoTest());
-                }
+        List<QueryOntology> queryTest = scenario.getQueryTest();
+        liQuery = queryTest.listIterator();
+        while(liQuery.hasNext()){  
+            qo = (QueryOntology) liQuery.next();
+            query = qo.getQuery();
+            resQueryExpected = qo.getResultexpected();
+            res = query.trim().split(patron3);
+            concepto = res[0].trim();
+            loincluye = res[1].trim();
+            resObtenidoSatisf = jena.satisfactibility(ns, concepto, loincluye);
+            if(!resObtenidoSatisf.equals(resQueryExpected)){
+                testresult.addOntologyFailureQuery(scenario.getNombre(), qo, resObtenidoSatisf,scenario.getTipoTest());
+            }else{
+                testresult.addOntologyPassedQuery(scenario.getNombre(), qo,resObtenidoSatisf, scenario.getTipoTest());
             }
         }
     }
