@@ -23,7 +23,7 @@ public class FileChooserSelector {
     private String linea,nsDefecto,nombreProyecto;
     private static String pathSelected="";
     public final static String xml = "xml", owl="owl";
-    private File pathDirectorioProyecto = null;
+    private static File pathDirectorioProyecto = null;
 
     public boolean fileChooser(boolean open,boolean onlyFiles, boolean newProject,boolean primero){
         int option,var=0;
@@ -49,7 +49,7 @@ public class FileChooserSelector {
             if(primero==true){
                 Configuration.getInstance().cambiarPath(selectedFile.getParent());
             }
-            setPathDirectorioProyecto(selectedFile.getParentFile());
+            FileChooserSelector.setPathDirectorioProyecto(selectedFile.getParentFile());
             setNombreProyecto(selectedFile.getName());
             if(newProject==true){
                 BufferedReader bf = null;
@@ -85,19 +85,26 @@ public class FileChooserSelector {
         return ext;
     }
     
-    public boolean deleteDirectory(File path)
+    public static boolean deleteDirectory(File path,boolean eliminarCarpeta)
     {
         if(path.exists()){
-          File[] files = path.listFiles();
-          for(int i=0; i<files.length; i++) {
-             if(files[i].isDirectory()) {
-               deleteDirectory(files[i]);
-             }
-             else {
-               files[i].delete();
-             }
-          }
-          return path.delete();
+            File[] files = path.listFiles();
+            for(int i=0;i<files.length;i++){
+               if(files[i].isDirectory() && eliminarCarpeta==true){
+                  deleteDirectory(files[i],eliminarCarpeta);
+               }else{
+                  if(!files[i].isDirectory()){
+                      if(files[i].delete()==false){
+                          return false;
+                      }
+                  }
+               }
+            }
+            if(eliminarCarpeta==true){
+                return path.delete();
+            }else{
+                return true;
+            }
         }
         return false;
     }
@@ -126,12 +133,12 @@ public class FileChooserSelector {
         this.nombreProyecto = nombreProyecto;
     }
 
-    public File getPathDirectorioProyecto() {
+    public static File getPathDirectorioProyecto() {
         return pathDirectorioProyecto;
     }
 
-    public void setPathDirectorioProyecto(File pathDirectorioProyecto) {
-        this.pathDirectorioProyecto = pathDirectorioProyecto;
+    public static void setPathDirectorioProyecto(File apathDirectorioProyecto) {
+        pathDirectorioProyecto = apathDirectorioProyecto;
     }
 
 }

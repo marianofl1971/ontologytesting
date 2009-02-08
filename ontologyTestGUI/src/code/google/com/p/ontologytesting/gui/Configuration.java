@@ -23,7 +23,7 @@ public class Configuration {
     private String home = System.getProperty("user.home");
     private String arch = "configuracion.properties";
     private String directorio = "/.ontologyTestGUI/"+arch;
-    private String rutaDelArchivo = home + directorio;
+    private String rutaDelArchivo = getHome() + directorio;
     private static Properties propiedades = null;
     private File archivo;
     
@@ -44,18 +44,18 @@ public class Configuration {
         try {
             Properties tmp = new Properties();
             if (!archivo.exists()) {
-            tmp.setProperty("HOME",home);
+            tmp.setProperty("HOME",getHome());
             tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
             tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
             tmp.setProperty("LOCALE", "es");
-            tmp.setProperty("ULTIMOPATH", home);
-            File directorio_file = new File(home+"/.ontologyTestGUI/");
+            tmp.setProperty("ULTIMOPATH",getHome());
+            File directorio_file = new File(getHome()+"/.ontologyTestGUI/");
             try{
                 directorio_file.mkdir();
             }catch(SecurityException ex){
                 System.out.println("No se pudo crear el directorio");
             }
-            FileOutputStream out = new FileOutputStream(home+"/.ontologyTestGUI/"+arch);
+            FileOutputStream out = new FileOutputStream(getHome()+"/.ontologyTestGUI/"+arch);
             tmp.store(out, "Configuracion de OntologyTestGUI");
             out.close();
             }
@@ -119,6 +119,14 @@ public class Configuration {
 
     public static void setPropiedades(Properties aPropiedades) {
         propiedades = aPropiedades;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
     }
     
     
