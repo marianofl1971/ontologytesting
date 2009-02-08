@@ -140,7 +140,7 @@ private void examinarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
      boolean res = utils.fileChooser(true, false, true,false);
      if(res == true){
-        Configuration.getInstance().cambiarPath(utils.getPathDirectorioProyecto().getParent());
+        Configuration.getInstance().cambiarPath(FileChooserSelector.getPathDirectorioProyecto().getParent());
         this.getUbicacionProyectoTextField().setText(FileChooserSelector.getPathSelected());    
         carpetaProyectoTextField.setText(FileChooserSelector.getPathSelected()+"\\"+getNombreProyectoTextField());
      }

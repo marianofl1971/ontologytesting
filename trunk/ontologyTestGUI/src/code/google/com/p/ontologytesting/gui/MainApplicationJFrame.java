@@ -579,8 +579,9 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         this.dispose();
         System.exit(0);
     }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto?", 
-                "Salir",JOptionPane.YES_NO_OPTION);
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION){
             this.guardarProyecto(false, null,esNuevo);
             this.dispose();
@@ -627,23 +628,16 @@ private void usMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 
 private void eliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
-        Object[] options = {"Si", "No", "Cancelar"};
-        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Seguro que quiere borrar el proyecto?", 
-                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-        if (n == JOptionPane.YES_OPTION) {
-            boolean res = utils.deleteDirectory(utils.getPathDirectorioProyecto());
-            ListarTestsJPanel.getInstance().eliminarDatosGuardados();
-            ListAndTestsJPanel.getInstance().eliminarTests();
-            CollectionTest.getInstance().destroy();
-            contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
-            deshabilitarBotones(false);
-            this.validate();
-            if(res==true){
-                panelAviso.confirmAction("Proyecto Borrado", this);
-            }else{
-                panelAviso.errorAction("No se pudo borrar el proyecto", this);
-            }
-        }
+    BorrarProyectoJDialog borrarProy = new BorrarProyectoJDialog(MainApplicationJFrame.getInstance(), true);
+    borrarProy.setVisible(true);
+    if(borrarProy.isProyectoBorrado()==true){
+        ListarTestsJPanel.getInstance().eliminarDatosGuardados();
+        ListAndTestsJPanel.getInstance().eliminarTests();
+        CollectionTest.getInstance().destroy();
+        contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
+        deshabilitarBotones(false);
+        this.validate();
+    }
 }
 
 private void cerrarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -875,15 +869,17 @@ private void contentsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//
 private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
 // TODO add your handling code here:
     if(existeProyecto==false){
-        int n = JOptionPane.showConfirmDialog(this, "¿Desea salir de la aplicación?", 
-                "Salir",JOptionPane.YES_NO_OPTION);
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Desea salir de la aplicación?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION){
             this.dispose();
             System.exit(0);
         } 
     }else{
-        int n = JOptionPane.showConfirmDialog(this, "¿Guardar el Proyecto antes de Salir?", 
-                "Salir",JOptionPane.YES_NO_OPTION);
+        Object[] options = {"Si", "No", "Cancelar"};
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto antes de salir?", 
+                "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION){
             this.guardarProyecto(false, null,esNuevo);
             this.dispose();

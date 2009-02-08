@@ -95,7 +95,8 @@ public class LoadOntology extends SwingWorker<Boolean, Void>{
                         newProy.setProyectoCreado(true); 
                         newProy.setVisible(false);
                     }else{
-                        panelAviso.errorAction("No se puedo crear un directorio para el proyecto", newProy);
+                        panelAviso.errorAction("No se puedo crear un directorio para el proyecto. Compruebe que el proyecto" +
+                                "no existe en la ruta especificatda.", newProy);
                         newProy.getProgres().setVisible(false);
                     }
                 }else{
