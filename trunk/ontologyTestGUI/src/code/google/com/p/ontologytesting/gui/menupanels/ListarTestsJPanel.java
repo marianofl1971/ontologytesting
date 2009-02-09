@@ -48,9 +48,9 @@ public class ListarTestsJPanel extends javax.swing.JPanel{
         popTest = new PopMenuTests();
         popInst = new PopMenuInstances();    
         tabbedTestsPanel.setSelectedIndex(0);
-        testSimplesList.setSelectedIndex(0);
         testSparqlList.setSelectedIndex(0);
         instanciasList.setSelectedIndex(0);
+        testSimplesList.setSelectedIndex(0);
     }
  
     private synchronized static void createListAndResultPanel() {

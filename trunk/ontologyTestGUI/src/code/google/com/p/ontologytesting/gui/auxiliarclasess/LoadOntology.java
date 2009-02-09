@@ -75,8 +75,8 @@ public class LoadOntology extends SwingWorker<Boolean, Void>{
             if(this.abrir==true){
                 if(res==true){
                     opMenu.actualizarListaDeInstancias();
-                    opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
                     opMenu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+                    opMenu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
                     abrirProy.setProyectoCargado(true);
                     abrirProy.setVisible(false);
                 }else{

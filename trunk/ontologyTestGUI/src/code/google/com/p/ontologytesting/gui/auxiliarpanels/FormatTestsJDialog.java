@@ -76,7 +76,9 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "Clase<br><br>" +
                 "<b>Resultado Esperado</b><br>" +
                 "Lista de individuos que pertenecen a la clase especificada " +
-                "separados por coma.";
+                "separados por coma.<br>" +
+                "Ejemplo: [individuo1,individuo2,...,individuoN]<br>" +
+                "individuo1,individuo2,...,individuoN";
         return formato;
     }
     
@@ -129,7 +131,9 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>Consultas</b><br>" +
                 "Individuo<br><br>" +
                 "<b>Resultado Esperado</b><br>" +
-                "Lista de clases a las que pertenece el individuo separados por coma";
+                "Lista de clases a las que pertenece el individuo separados por coma.<br>" +
+                "Ejemplo: [individuo1,individuo2,...,individuoN]<br>" +
+                "individuo1,individuo2,...,individuoN";
         return formato;
     }
     
@@ -147,23 +151,21 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "<b>Resultado Esperado</b><br><br>" +
                 "En caso de un SELECT simple, el resultado deberá de ser el sujeto " +
                 "que se indico en el SELECT, seguido de una lista " +
-                "de objetos separados por coma o punto.<br><br>" +
+                "de objetos separados por coma encerrados entre paréntesis.<br><br>" +
                 "En caso de un SELECT múltiple, el resultado deberá de especificar " +
                 "en primer lugar el sujeto al que se refiere en SELECT y, entre " +
                 "paréntesis, el resultado o la lista de resultados separados por " +
-                "coma o punto que se espera obtener.<br><br>" +
+                "coma que se espera obtener.<br><br>" +
                 "Por ejemplo, para la consulta:<br><br>" +
-                "PREFIX rdfs: \\<http://www.w3.org/2000/01/rdf-schema#> <br>" +
+                "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> <br>" +
                 "SELECT ?subject ?object <br>" +
-                "FROM 'ruta a la ontologia' <br>" +
+                "FROM 'ruta a la ontologia' (opcional)<br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
-                "El resultado se debe de mostrar de la siguient forma:<br><br>" +
+                "El resultado se debe de mostrar de la siguient forma:<br>" +
                 "subject(a,b,c)<br>" +
-                "object(a,b,c)"+
+                "object(a,b,c)<br>"+
                 "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados " +
-                "por un salto de linea o por un punto y coma, es decir:" +
-                "subject(a,c);" +
-                "object(a,b,c)";    
+                "<b>por un salto de linea).</b>";    
         return formato;
     }
 
