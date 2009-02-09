@@ -657,7 +657,7 @@ public void validarConsulta(String query){
                 continuar=false;
             }
         }catch(Exception ex){
-            panelAviso.warningAction("La consulta SPARQL no es válida.Error producido:", MainApplicationJFrame.getInstance());
+            panelAviso.warningAction("La consulta SPARQL no es válida.", MainApplicationJFrame.getInstance());
             queryValida=false;
             continuar=false;
         }
