@@ -62,8 +62,8 @@ public class OpcionesMenu {
     
     public void eliminarTest(ScenarioTest scenario){
         CollectionTest.getInstance().getScenariotest().remove(scenario);
-        this.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
-        this.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());
+        this.actualizarListaDeTestsSimples();
+        this.actualizarListaDeTestsSparql();
     }
     
     public void eliminarInstancias(Instancias inst){
@@ -85,14 +85,14 @@ public class OpcionesMenu {
         return seeTestCompleted;
     }
     
-    public void actualizarListaDeTestsSimples(List<ScenarioTest> scenario){
+    public void actualizarListaDeTestsSimples(){
         listInst = ListarTestsJPanel.getInstance();
-        listInst.aniadirTestSimple(scenario);
+        listInst.aniadirTestSimple(CollectionTest.getInstance().getScenariotest());
     }
     
-    public void actualizarListaDeTestsSparql(List<ScenarioTest> scenario){
+    public void actualizarListaDeTestsSparql(){
         listInst = ListarTestsJPanel.getInstance();
-        listInst.aniadirTestSparql(scenario);
+        listInst.aniadirTestSparql(CollectionTest.getInstance().getScenariotest());
     }
     
     public void actualizarListaDeInstancias(){

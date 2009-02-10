@@ -7,6 +7,7 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.FileChooserSelector;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -242,12 +244,26 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         List<ScenarioTest> scenImp = listaFicheros.getListaDeScenarios();
         if(scenImp.size()!=0){
             for(int i=0;i<scenImp.size();i++){
-                if(scenImp.get(i).getTipoTest().name().equals("SPARQL")){
-                    scenarioSparql.add(scenImp.get(i));
+                if(persist.testExiste(scenImp.get(i))==true){
+                    Object[] options = {"Sobreescribir", "Cancelar"};
+                    int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un test guardado con este nombre. ¿Qué desea hacer?", 
+                            "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (n == JOptionPane.YES_OPTION){
+                        if(scenImp.get(i).getTipoTest().name().equals("SPARQL")){
+                            scenarioSparql.add(scenImp.get(i));
+                        }else{
+                            scenarioSimple.add(scenImp.get(i));
+                        }
+                        persist.replaceScenarioLocally(scenImp.get(i));
+                    }else{}
                 }else{
-                    scenarioSimple.add(scenImp.get(i));
-                }
-                persist.saveTestInMemory(scenImp.get(i));
+                    if(scenImp.get(i).getTipoTest().name().equals("SPARQL")){
+                        scenarioSparql.add(scenImp.get(i));
+                    }else{
+                        scenarioSimple.add(scenImp.get(i));
+                    }
+                    persist.saveTestInMemory(scenImp.get(i));
+                } 
             }
         }
         if(scenarioSparql.size()>0){
@@ -267,12 +283,24 @@ private void importarButtonActionPerformed(java.awt.event.ActionEvent evt) {
         List<Instancias> instImp = listaFicheros.getListaInstancias();
         if(instImp.size()>0){
             for(int i=0;i<instImp.size();i++){
-                instancias.add(instImp.get(i));
-                persist.saveInstanciasInMemory(instImp.get(i));
+                if(persist.instanciasExisten(instImp.get(i))==true){
+                    Object[] options = {"Sobreescribir", "Cancelar"};
+                    int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un conjunto de instancias guardado con ese nombre. ¿Qué desea hacer?", 
+                        "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (n == JOptionPane.YES_OPTION){
+                        instancias.add(instImp.get(i));
+                        persist.replaceInstanciasLocally(instImp.get(i));
+                    }else {}
+                }else{
+                    instancias.add(instImp.get(i));
+                    persist.saveInstanciasInMemory(instImp.get(i));
+                }
             }
-            listT.aniadirInstancias(instancias);
-            panelAviso.confirmAction("Instancias importadas",this); 
-            this.setVisible(false);
+            if(instancias.size()>0){
+                listT.aniadirInstancias(instancias);
+                panelAviso.confirmAction("Instancias importadas",this); 
+                this.setVisible(false);
+            }
         }
     }
 }
