@@ -385,7 +385,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     if(guardar==true && ejecutar==false && continuar==true){
         panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
-    menu.actualizarListaDeTestsSimples(CollectionTest.getInstance().getScenariotest());
+    menu.actualizarListaDeTestsSimples();
 }
 
 public void inicializarVariables(){

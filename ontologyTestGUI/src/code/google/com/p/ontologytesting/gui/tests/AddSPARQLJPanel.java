@@ -589,7 +589,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
     if(guardar==true && ejecutar==false && continuar==true){
         panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
-    menu.actualizarListaDeTestsSparql(CollectionTest.getInstance().getScenariotest());  
+    menu.actualizarListaDeTestsSparql();  
 }
 
 public void reemplazarConsulta(SparqlQueryOntology query,int pos){

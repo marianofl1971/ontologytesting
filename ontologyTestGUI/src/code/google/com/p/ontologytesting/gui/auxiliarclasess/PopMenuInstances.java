@@ -8,8 +8,10 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 import code.google.com.p.ontologytesting.gui.menupanels.AsociarInstanciasATestJDialog;
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.RenombrarJDialog;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.Instancias;
+import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -29,13 +31,20 @@ public class PopMenuInstances implements ActionListener{
     private OpcionesMenu menu = new OpcionesMenu();
     private Instancias instancias = new Instancias();
     private URL editar,asociar,ver,eliminar;
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem)(e.getSource());
         CollectionTest collection = CollectionTest.getInstance();
         Instancias inst = instancias.buscarInstancias(collection.getInstancias(), this.getInstSelec());
-        if(source.getText().equals("Editar")){   
+        if(source.getText().equals("Renombrar")){   
+            RenombrarJDialog renombrar = new RenombrarJDialog(MainApplicationJFrame.getInstance(),true,inst);
+            renombrar.setVisible(true);
+            menu.actualizarListaDeInstancias();
+            menu.actualizarListaDeTestsSimples();
+            menu.actualizarListaDeTestsSparql();
+        }else if(source.getText().equals("Editar")){   
             MainApplicationJFrame.getInstance().cargarInstancia(inst, inst.getNombre());
         }else if(source.getText().equals("Asociar a un Test")){
             AsociarInstanciasATestJDialog asociarInst = new AsociarInstanciasATestJDialog(null, true, inst,false);
@@ -62,6 +71,10 @@ public class PopMenuInstances implements ActionListener{
         asociar = this.getClass().getResource("images/add.png");
         editar = this.getClass().getResource("images/page_edit.png");
         JPopupMenu popup = new JPopupMenu();
+        menuItem = new JMenuItem("Renombrar");
+        //menuItem.setIcon(new ImageIcon(editar));
+        menuItem.addActionListener(this);
+        popup.add(menuItem);
         menuItem = new JMenuItem("Editar");
         menuItem.setIcon(new ImageIcon(editar));
         menuItem.addActionListener(this);

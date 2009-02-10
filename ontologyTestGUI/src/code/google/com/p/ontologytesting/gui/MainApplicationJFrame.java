@@ -637,6 +637,7 @@ private void eliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
         contentTestsJPanel.add(panelTest,BorderLayout.CENTER);
         deshabilitarBotones(false);
         this.validate();
+        existeProyecto=false;
     }
 }
 
