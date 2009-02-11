@@ -19,6 +19,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Locale;
@@ -29,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
@@ -188,6 +191,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         nuevoProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-new.png"))); // NOI18N
         nuevoProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo")); // NOI18N
+        nuevoProyectoMenuItem.setMnemonic('N');
+        nuevoProyectoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_N,InputEvent.CTRL_MASK ));
         nuevoProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +203,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
 
         abrirProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-open.png"))); // NOI18N
         abrirProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Abrir")); // NOI18N
+        abrirProyectoMenuItem.setMnemonic('O');
+        abrirProyectoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_O,InputEvent.CTRL_MASK ));
         abrirProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +216,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-save.png"))); // NOI18N
         guardarProyectoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar")); // NOI18N
         guardarProyectoMenuItem.setEnabled(false);
+        guardarProyectoMenuItem.setMnemonic('S');
+        guardarProyectoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_S,InputEvent.CTRL_MASK ));
         guardarProyectoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +229,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoComoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-save-as.png"))); // NOI18N
         guardarProyectoComoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_Como")); // NOI18N
         guardarProyectoComoMenuItem.setEnabled(false);
+        guardarProyectoComoMenuItem.setMnemonic('A');
+        guardarProyectoComoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_A,InputEvent.CTRL_MASK ));
         guardarProyectoComoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +242,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         jMenuItem2.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Eliminar")); // NOI18N
         fileMenu.add(jMenuItem2);
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/page_delete.gif")));
+        jMenuItem2.setMnemonic('D');
+        jMenuItem2.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_DELETE,InputEvent.CTRL_MASK ));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,16 +251,20 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
             }
         });
         jMenuItem1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Cerrar")); // NOI18N
-        fileMenu.add(jMenuItem1);
+        jMenuItem1.setMnemonic('C');
+        jMenuItem1.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_C,InputEvent.CTRL_MASK ));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarProyectoActionPerformed(evt);
             }
         });
+        fileMenu.add(jMenuItem1);
         salirMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Salir")); // NOI18N
         salirMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/system-log-out.png")));
         salirMenuItem.setEnabled(true);
+        salirMenuItem.setMnemonic('Q');
+        salirMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_Q,InputEvent.CTRL_MASK ));
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
