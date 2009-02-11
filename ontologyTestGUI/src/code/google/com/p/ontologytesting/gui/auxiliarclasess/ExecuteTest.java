@@ -27,7 +27,6 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
     private String name;
     private Reasoner jenaInterface;   
     private InterfaceReasoner jena;
-    private OntologyTestCase f;
     private String ont = CollectionTest.getInstance().getOntology();
     private String ns = CollectionTest.getInstance().getNamespace();
     
