@@ -663,13 +663,12 @@ public boolean prepararInstancias(boolean guardar){
                     + "es obligatorio.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             continuar=false;
         } else if (instanciaValida == false) {
-            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Las instancias marcadas" + 
-                    "en rojo no se corresponden con la definicion de su ontologia. " 
-                    + "Por favor, reviselas.", "Warning Message", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "Error en las instancias marcadas en rojo. Posibles causas:"+"\r\n"+"1. Las instancias no se corresponden con la definicion de su ontologia. " 
+                    + "\r\n"+"2. La Base de Hechos no es consistente.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             continuar=false;
         } else if (queryValida == false) {
             JOptionPane.showMessageDialog(MainApplicationJFrame.getInstance(), "El formato de las instancias marcadas" 
-                    + "en rojo es incorrecto. Por favor, revise la documentación para ver" 
+                    + "en rojo es incorrecto. "+"\r\n"+"Por favor, revise la documentación para ver" 
                     + "los formatos permitidos.", "Warning Message", JOptionPane.WARNING_MESSAGE);
             continuar=false;
             if (getInstancesTabbedPane() != 2) {

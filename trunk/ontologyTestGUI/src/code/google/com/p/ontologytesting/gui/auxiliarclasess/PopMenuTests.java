@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.auxiliarpanels.ProgressControlJDialog;
+import code.google.com.p.ontologytesting.gui.auxiliarpanels.RenombrarJDialog;
 import code.google.com.p.ontologytesting.model.CollectionTest;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.model.reasonerinterfaz.InvalidOntologyException;
@@ -29,7 +30,7 @@ public class PopMenuTests implements ActionListener{
     private OpcionesMenu menu = new OpcionesMenu();
     private String testSelec="";
     private ScenarioTest s = new ScenarioTest();
-    private URL editar,ejecutar,eliminarInst,eliminar,ver;
+    private URL editar,ejecutar,eliminarInst,eliminar,ver,editarTexto;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -37,7 +38,12 @@ public class PopMenuTests implements ActionListener{
         CollectionTest collection = CollectionTest.getInstance();
         ControladorTests controlador = ControladorTests.getInstance();
         ScenarioTest scenario = s.buscarScenario(collection.getScenariotest(), this.getTestSelec());
-        if(source.getText().equals("Editar")){   
+        if(source.getText().equals("Renombrar")){   
+            RenombrarJDialog renombrar = new RenombrarJDialog(MainApplicationJFrame.getInstance(),true,scenario);
+            renombrar.setVisible(true);
+            menu.actualizarListaDeTestsSimples();
+            menu.actualizarListaDeTestsSparql();
+        }else if(source.getText().equals("Editar")){   
             menu.editarTest(scenario);
             controlador.prepararTest(scenario.getTipoTest().name());
         }else if(source.getText().equals("Eliminar Instancias")){
@@ -78,12 +84,17 @@ public class PopMenuTests implements ActionListener{
     
     public JPopupMenu createPopupMenuForTests() {
         JMenuItem menuItem;  
-        ver = this.getClass().getResource("images/document-print-preview.png");
-        eliminar = this.getClass().getResource("images/eliminar.png");
-        ejecutar = this.getClass().getResource("images/applications-system.png");
-        editar = this.getClass().getResource("images/page_edit.png");
-        eliminarInst = this.getClass().getResource("images/edit-clear.png");
+        ver = PopMenuTests.class.getResource("images/document-print-preview.png");
+        eliminar = PopMenuTests.class.getResource("images/eliminar.png");
+        ejecutar = PopMenuTests.class.getResource("images/applications-system.png");
+        editar = PopMenuTests.class.getResource("images/page_edit.png");
+        eliminarInst = PopMenuTests.class.getResource("images/edit-clear.png");
+        editarTexto = PopMenuTests.class.getResource("images/applications-graphics.png");
         JPopupMenu popup = new JPopupMenu();
+        menuItem = new JMenuItem("Renombrar");
+        menuItem.setIcon(new ImageIcon(editarTexto));
+        menuItem.addActionListener(this);
+        popup.add(menuItem);
         menuItem = new JMenuItem("Editar");
         menuItem.setIcon(new ImageIcon(editar));
         menuItem.addActionListener(this);

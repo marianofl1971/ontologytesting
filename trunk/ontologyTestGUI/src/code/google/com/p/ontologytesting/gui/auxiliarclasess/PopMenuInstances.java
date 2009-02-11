@@ -30,7 +30,7 @@ public class PopMenuInstances implements ActionListener{
     private String instSelec="";
     private OpcionesMenu menu = new OpcionesMenu();
     private Instancias instancias = new Instancias();
-    private URL editar,asociar,ver,eliminar;
+    private URL editar,asociar,ver,eliminar,editarTexto;
     
 
     @Override
@@ -42,8 +42,6 @@ public class PopMenuInstances implements ActionListener{
             RenombrarJDialog renombrar = new RenombrarJDialog(MainApplicationJFrame.getInstance(),true,inst);
             renombrar.setVisible(true);
             menu.actualizarListaDeInstancias();
-            menu.actualizarListaDeTestsSimples();
-            menu.actualizarListaDeTestsSparql();
         }else if(source.getText().equals("Editar")){   
             MainApplicationJFrame.getInstance().cargarInstancia(inst, inst.getNombre());
         }else if(source.getText().equals("Asociar a un Test")){
@@ -66,13 +64,14 @@ public class PopMenuInstances implements ActionListener{
     
     public JPopupMenu createPopupMenuForInstances() {
         JMenuItem menuItem; 
-        ver = this.getClass().getResource("images/document-print-preview.png");
-        eliminar = this.getClass().getResource("images/eliminar.png");
-        asociar = this.getClass().getResource("images/add.png");
-        editar = this.getClass().getResource("images/page_edit.png");
+        ver = PopMenuInstances.class.getResource("images/document-print-preview.png");
+        eliminar = PopMenuInstances.class.getResource("images/eliminar.png");
+        asociar = PopMenuInstances.class.getResource("images/add.png");
+        editar = PopMenuInstances.class.getResource("images/page_edit.png");
+        editarTexto = PopMenuInstances.class.getResource("images/applications-graphics.png");
         JPopupMenu popup = new JPopupMenu();
         menuItem = new JMenuItem("Renombrar");
-        //menuItem.setIcon(new ImageIcon(editar));
+        menuItem.setIcon(new ImageIcon(editarTexto));
         menuItem.addActionListener(this);
         popup.add(menuItem);
         menuItem = new JMenuItem("Editar");

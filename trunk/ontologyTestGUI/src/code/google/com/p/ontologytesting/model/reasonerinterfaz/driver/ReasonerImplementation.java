@@ -45,7 +45,8 @@ public class ReasonerImplementation implements InterfaceReasoner{
         if(clases.contains(nameClass)){
             nameclass = model.createClass(ns + nameClass);
             model.createIndividual(ns + value,nameclass);
-            return true;
+            return model.validate().isValid();
+            //JenaReasoner.printIterator( model.validate().getReports(), "Validation Results" );
         }else{
             return false;
         }
@@ -65,7 +66,8 @@ public class ReasonerImplementation implements InterfaceReasoner{
         if(propiedades.contains(nameProperty)){
             nameprop = model.createProperty(ns + nameProperty);
             model.createIndividual(ns + value,nameprop);
-            return true;
+            return model.validate().isValid();
+            //JenaReasoner.printIterator( model.validate().getReports(), "Validation Results" );
         }else{
             return false;
         }
