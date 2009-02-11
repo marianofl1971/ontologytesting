@@ -7,7 +7,13 @@
 package code.google.com.p.ontologytesting.gui;
 
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.ButtonTabComponent;
+import code.google.com.p.ontologytesting.gui.instances.AddInstancesClasPropJPanel;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
+import code.google.com.p.ontologytesting.gui.tests.AddSPARQLJPanel;
+import code.google.com.p.ontologytesting.gui.tests.TestSimpleInstSat;
+import code.google.com.p.ontologytesting.gui.tests.TestSimpleReal;
+import code.google.com.p.ontologytesting.gui.tests.TestSimpleRetClas;
+import code.google.com.p.ontologytesting.model.Instancias;
 import java.awt.*;
 import javax.swing.*;
 
@@ -46,12 +52,80 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
         getContentTabbedPane().validate();    
     }
     
-    public void aniadirNombre(int tab,String name){
-        getContentTabbedPane().setTitleAt(tab, name);
+    public boolean guardarTodosTests(){
+        boolean continuar=false;
+        if(getContentTabbedPane().getTabCount()>0){
+            for(int i=0;i<getContentTabbedPane().getTabCount();i++){
+                JPanel panel = (JPanel) getContentTabbedPane().getComponentAt(i);
+                if(panel instanceof TestSimpleInstSat){
+                    TestSimpleInstSat testSimpleInstSat = (TestSimpleInstSat)panel;
+                    continuar = testSimpleInstSat.guardarTest();
+                }else if(panel instanceof TestSimpleReal){
+                    TestSimpleReal testSimpleReal = (TestSimpleReal)panel;
+                    continuar = testSimpleReal.guardarTest();
+                }else if(panel instanceof TestSimpleRetClas){
+                    TestSimpleRetClas testSimpleRetClas = (TestSimpleRetClas)panel;
+                    continuar = testSimpleRetClas.guardarTest();
+                }else if(panel instanceof AddSPARQLJPanel){
+                    AddSPARQLJPanel testSparql = (AddSPARQLJPanel)panel;
+                    continuar = testSparql.guardarTest();
+                }else if(panel instanceof AddInstancesClasPropJPanel){
+                    AddInstancesClasPropJPanel instancias = (AddInstancesClasPropJPanel)panel;
+                    continuar = instancias.prepararInstancias(true);
+                }
+            }
+        }else return true;
+        return continuar;
     }
     
-    public String obtenerNombre(int tab){
-        return getContentTabbedPane().getTitleAt(tab);
+    public void actualizarTestsAbiertos(String nombre, Instancias instancias){
+        if(getContentTabbedPane().getTabCount()>0){
+            for(int i=0;i<getContentTabbedPane().getTabCount();i++){
+                JPanel panel = (JPanel) getContentTabbedPane().getComponentAt(i);
+                if(panel instanceof TestSimpleInstSat){
+                    TestSimpleInstSat testSimpleInstSat = (TestSimpleInstSat)panel;
+                    if(testSimpleInstSat.getDescPanel().getNombreTextField().equals(nombre)){
+                        testSimpleInstSat.getScenario().setInstancias(instancias);
+                    }
+                }else if(panel instanceof TestSimpleReal){
+                    TestSimpleReal testSimpleReal = (TestSimpleReal)panel;
+                    if(testSimpleReal.getDescPanel().getNombreTextField().equals(nombre)){
+                        testSimpleReal.getScenario().setInstancias(instancias);
+                    }
+                }else if(panel instanceof TestSimpleRetClas){
+                    TestSimpleRetClas testSimpleRetClas = (TestSimpleRetClas)panel;
+                    if(testSimpleRetClas.getDescPanel().getNombreTextField().equals(nombre)){
+                        testSimpleRetClas.getScenario().setInstancias(instancias);
+                    }
+                }else if(panel instanceof AddSPARQLJPanel){
+                    AddSPARQLJPanel testSparql = (AddSPARQLJPanel)panel;
+                    if(testSparql.getTestNameTextField().equals(nombre)){
+                        testSparql.getScenario().setInstancias(instancias);
+                    }
+                }
+            }
+        }
+    }
+    
+    public void aniadirNombre(String name){
+        getContentTabbedPane().setTitleAt(this.contentTabbedPane.getSelectedIndex(), name);
+    }
+    
+    public String obtenerTipo(int tab){
+        int index = getContentTabbedPane().getSelectedIndex();
+        JPanel panel = (JPanel) getContentTabbedPane().getComponentAt(index);
+        if(panel instanceof TestSimpleInstSat){
+            TestSimpleInstSat testSimpleInstSat = (TestSimpleInstSat)panel;
+            return testSimpleInstSat.getScenario().getTipoTest().name();
+        }else if(panel instanceof TestSimpleReal){
+            TestSimpleReal testSimpleReal = (TestSimpleReal)panel;
+            return testSimpleReal.getScenario().getTipoTest().name();
+        }else if(panel instanceof TestSimpleRetClas){
+            TestSimpleRetClas testSimpleRetClas = (TestSimpleRetClas)panel;
+            return testSimpleRetClas.getScenario().getTipoTest().name();
+        }else{
+            return "";
+        }
     }
     
     public void borrarTest(String name){

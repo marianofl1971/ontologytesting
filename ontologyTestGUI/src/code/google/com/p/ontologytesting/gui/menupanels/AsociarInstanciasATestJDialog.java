@@ -1,6 +1,7 @@
 package code.google.com.p.ontologytesting.gui.menupanels;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
+import code.google.com.p.ontologytesting.gui.ListAndTestsJPanel;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.gui.auxiliarclasess.OpcionesMenu;
@@ -169,6 +170,7 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             Instancias inst = new Instancias(this.getInstancias());
             scenImp.get(i).setInstancias(inst);
             asociadas = persist.replaceScenarioLocally(scenImp.get(i));
+            ListAndTestsJPanel.getInstance().actualizarTestsAbiertos(scenImp.get(i).getNombre(), inst);
         }
         if(asociadas==true){
             if(isGuardar()==false){

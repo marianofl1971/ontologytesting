@@ -98,10 +98,8 @@ public class DescripcionJPanel extends javax.swing.JPanel {
 
 private void formatosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatosButtonActionPerformed
 // TODO add your handling code here:
-    String nombreTest = ListAndTestsJPanel.getInstance().obtenerNombre(ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex());
-    ScenarioTest scenario = new ScenarioTest();
-    ScenarioTest scenarioBis = scenario.buscarScenario(CollectionTest.getInstance().getScenariotest(), nombreTest);
-    FormatTestsJDialog format = new FormatTestsJDialog(MainApplicationJFrame.getInstance(),true,scenarioBis);
+    String nombre = ListAndTestsJPanel.getInstance().obtenerTipo(ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex());
+    FormatTestsJDialog format = new FormatTestsJDialog(MainApplicationJFrame.getInstance(),true,nombre);
     format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     format.setVisible(true);
 }//GEN-LAST:event_formatosButtonActionPerformed
