@@ -40,7 +40,11 @@ public class OntologyJDialog extends javax.swing.JDialog {
                 while ((sCadena = bf.readLine())!=null && sw.isCancelled()==false){
                     ontology.append(sCadena).append("\r\n");
                 }
-                bf.close();
+                try{
+                    bf.close();
+                }catch (IOException ex){
+                    System.out.println("No se pudo cerrar el fichero");
+                }
                 if(sw.isCancelled()==false){
                     ontologyEditorPane.setText(ontology.toString());
                     ontologyEditorPane.setCaretPosition(0);

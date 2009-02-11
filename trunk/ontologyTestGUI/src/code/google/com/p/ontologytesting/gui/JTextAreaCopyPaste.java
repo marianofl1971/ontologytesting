@@ -19,15 +19,13 @@ public class JTextAreaCopyPaste extends JTextArea{
   DBTextDataBinder dBTextDataBinder1 = new DBTextDataBinder();
     public JTextAreaCopyPaste(){
         super();
-        IntlSwingSupport intlSwingSupport1 = new IntlSwingSupport(
-               new Locale("en","US"));
-    dBTextDataBinder1.setJTextComponent(this);
-    dBTextDataBinder1.setEnableFileLoading(false);
-    dBTextDataBinder1.setEnableFileSaving(false);
-    dBTextDataBinder1.setEnableColorChange(false);
-    dBTextDataBinder1.setEnableFontChange(false);
-    dBTextDataBinder1.setEnableURLLoading(false);
-    dBTextDataBinder1.setEnableURLAutoCache(false);
-
+        IntlSwingSupport intlSwingSupport1 = new IntlSwingSupport(new Locale("en","US"));
+        dBTextDataBinder1.setJTextComponent(this);
+        dBTextDataBinder1.setEnableFileLoading(false);
+        dBTextDataBinder1.setEnableFileSaving(false);
+        dBTextDataBinder1.setEnableColorChange(false);
+        dBTextDataBinder1.setEnableFontChange(false);
+        dBTextDataBinder1.setEnableURLLoading(false);
+        dBTextDataBinder1.setEnableURLAutoCache(false);
     }
 }

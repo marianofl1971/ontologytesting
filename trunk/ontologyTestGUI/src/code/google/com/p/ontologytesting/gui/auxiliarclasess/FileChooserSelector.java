@@ -65,7 +65,11 @@ public class FileChooserSelector {
                                 setNsDefecto("http://www.owl-ontologies.com/unnamed.owl");
                             }
                     }
-                    bf.close();
+                    try{
+                        bf.close();
+                    }catch (IOException ex){
+                        System.out.println("No se pudo cerrar el fichero");
+                    }
                 } catch (FileNotFoundException ex) {
                 }catch (IOException ex) {   
                 }

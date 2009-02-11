@@ -44,20 +44,24 @@ public class Configuration {
         try {
             Properties tmp = new Properties();
             if (!archivo.exists()) {
-            tmp.setProperty("HOME",getHome());
-            tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
-            tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
-            tmp.setProperty("LOCALE", "es");
-            tmp.setProperty("ULTIMOPATH",getHome());
-            File directorio_file = new File(getHome()+"/.ontologyTestGUI/");
-            try{
-                directorio_file.mkdir();
-            }catch(SecurityException ex){
-                System.out.println("No se pudo crear el directorio");
-            }
-            FileOutputStream out = new FileOutputStream(getHome()+"/.ontologyTestGUI/"+arch);
-            tmp.store(out, "Configuracion de OntologyTestGUI");
-            out.close();
+                tmp.setProperty("HOME",getHome());
+                tmp.setProperty("DRIVER", "code.google.com.p.ontologytesting.model.reasonerinterfaz.driver.ReasonerImplementation");
+                tmp.setProperty("IDIOMA", "code.google.com.p.ontologytesting.gui.internacionalization.Spanish");
+                tmp.setProperty("LOCALE", "es");
+                tmp.setProperty("ULTIMOPATH",getHome());
+                File directorio_file = new File(getHome()+"/.ontologyTestGUI/");
+                try{
+                    directorio_file.mkdir();
+                }catch(SecurityException ex){
+                    System.out.println("No se pudo crear el directorio");
+                }
+                FileOutputStream out = new FileOutputStream(getHome()+"/.ontologyTestGUI/"+arch);
+                tmp.store(out, "Configuracion de OntologyTestGUI");
+                try{
+                    out.close();
+                }catch (IOException ex){
+                    System.out.println("No se pudo cerrar el fichero");
+                }
             }
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
@@ -80,7 +84,11 @@ public class Configuration {
             out.close();
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
-            in.close();
+            try{
+                in.close();
+            }catch (IOException ex){
+                System.out.println("No se pudo cerrar el fichero");
+            }
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,7 +106,11 @@ public class Configuration {
             out.close();
             FileInputStream in =new FileInputStream(archivo);
             getPropiedades().load(in);
-            in.close();
+            try{
+                in.close();
+            }catch (IOException ex){
+                System.out.println("No se pudo cerrar el fichero");
+            }
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
