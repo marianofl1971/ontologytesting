@@ -573,7 +573,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
         ListAndTestsJPanel.getInstance().aniadirNombre(index,getScenario().getNombre());
     }
-    if(ejecutar==true){
+    if(ejecutar==true && continuar==true){
         try{
             ExecuteTest execTest = new ExecuteTest(getScenario());
             progres = new ProgressControlJDialog(execTest);

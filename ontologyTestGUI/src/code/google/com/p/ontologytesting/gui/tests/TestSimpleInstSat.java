@@ -367,7 +367,7 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
             //menu.editarInstancias(this.getScenario());
         //}
     }
-    if(ejecutar==true){
+    if(ejecutar==true && continuar==true){
         try{
             ExecuteTest execTest = new ExecuteTest(getScenario());
             progres = new ProgressControlJDialog(execTest);
