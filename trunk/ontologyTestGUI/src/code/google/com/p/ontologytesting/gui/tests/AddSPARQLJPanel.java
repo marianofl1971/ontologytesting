@@ -29,10 +29,7 @@ import java.util.Locale;
  */
 public class AddSPARQLJPanel extends javax.swing.JPanel {
 
-    private boolean testSinNombre,sinConsultas,
-            ambosNecesarios,queryValida,resultValido,continuar,guardado,nombreCambio=false;
-    private String nombreTestBis="";
-    private ScenarioTest scenario,scenarioActual;
+    private boolean testSinNombre,sinConsultas,ambosNecesarios,queryValida,resultValido,continuar;
     private List<SparqlQueryOntology> listaDeConsultas;
     private int posListQuerysSel;
     private Reasoner jenaInterface;
@@ -43,6 +40,7 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
     private OpcionesMenu menu;
     private AniadirPanelDeAviso panelAviso;
     private ProgressControlJDialog progres;
+    private ScenarioTest scenario;
     
     public AddSPARQLJPanel(ScenarioTest s) {
         initComponents();
@@ -74,14 +72,8 @@ public class AddSPARQLJPanel extends javax.swing.JPanel {
         }
         this.inicializarVariables();
         menu = new OpcionesMenu();
-        setScenario(s);
+        setScenario(new ScenarioTest(s));
         setPosListQuerysSel(0);
-        if(s.getNombre().equals("")){
-            this.setGuardado(false);
-        }else{
-            nombreTestBis=s.getNombre();
-            this.setGuardado(true);
-        }
     }
 
     /** This method is called from within the constructor to
@@ -476,7 +468,7 @@ private void borrarConsultaJButtonActionPerformed(java.awt.event.ActionEvent evt
 
 private void formatosPermitidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN FIRST:event_formatosPermitidosActionPerformed
 // TODO add your handling code here:
-    FormatTestsJDialog format = new FormatTestsJDialog(null,true,getScenario());
+    FormatTestsJDialog format = new FormatTestsJDialog(null,true,getScenario().getTipoTest().name());
     format.setLocationRelativeTo(MainApplicationJFrame.getInstance());
     format.setModal(false);
     format.setVisible(true);
@@ -495,33 +487,20 @@ private void guardarJButtonActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
     boolean g = guardarTest();
     if(g==true){
-        setGuardado(true);
-        int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
-        ListAndTestsJPanel.getInstance().aniadirNombre(index,getScenario().getNombre());
+        ListAndTestsJPanel.getInstance().aniadirNombre(getScenario().getNombre());
+        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
 }
 
 public boolean guardarTest(){
     prepararGuardar();
     asociarInstancias(true,false);
-    /*if(continuar==true){
-        if(continuarSinInstancias==true){
-            this.realizarAccion(true, false);
-        }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
-        }
-    }*/
     return continuar;
 }
 
 public void asociarInstancias(boolean a, boolean b){
     if(continuar==true){
-        //if(continuarSinInstancias==0){
-            this.realizarAccion(a, b);
-        /*}else if(continuarSinInstancias==1){
-            menu.editarInstancias(this.getScenario());
-            //MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
-        }*/
+        this.realizarAccion(a, b);
     }
 }
 
@@ -529,49 +508,33 @@ private void guardarEjecutarJButtonActionPerformed(java.awt.event.ActionEvent ev
 // TODO add your handling code here:
     prepararGuardar();
     asociarInstancias(true,true);
-    /*
-    if(continuar==true){
-        if(continuarSinInstancias==true){
-            this.realizarAccion(true, true);
-        }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
-        }
-    }*/
+    ListAndTestsJPanel.getInstance().aniadirNombre(getScenario().getNombre());
 }                                                      
 
 private void ejecutarJButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
 // TODO add your handling code here:
     prepararGuardar();
     asociarInstancias(false,true);
-    /*if(continuar==true){
-        if(continuarSinInstancias==true){
-            this.realizarAccion(false, true);
-        }else{
-            MainApplicationJFrame.getInstance().cargarInstancia(this.getScenario().getInstancias(),"Asociar Instancias a Test");
-        }
-    }*/
 }                                               
 
 public void realizarAccion(boolean guardar, boolean ejecutar){
     persist = new IOManagerImplementation();
     if(guardar==true){
-        if(persist.testYaGuardado(scenario)==true){
+        if(persist.testYaGuardado(getScenario())==true){
             Object[] options = {"Sobreescribir", "Cancelar"};
-            int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "Ya existe un test guardado con este nombre. ¿Qué desea hacer?", 
+            int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "El test '"+getScenario().getNombre()+"' ya existe. ¿Qué desea hacer?", 
                     "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             if (n == JOptionPane.YES_OPTION){
                 persist.replaceScenarioLocally(getScenario());
+                this.setScenario(new ScenarioTest(this.getScenario()));
             }else continuar=false;
         }else{
-            if(persist.testExiste(scenario)==false){
+            if(persist.testExiste(getScenario())==false){
                 persist.saveTestInMemory(getScenario());
                 controlador.setTestSparqlGuardado(true);
+                this.setScenario(new ScenarioTest(this.getScenario()));
             }
         }
-        this.setScenarioActual(new ScenarioTest(this.getScenario()));
-        this.setGuardado(true);
-        int index = ListAndTestsJPanel.getInstance().getContentTabbedPane().getSelectedIndex();
-        ListAndTestsJPanel.getInstance().aniadirNombre(index,getScenario().getNombre());
     }
     if(ejecutar==true && continuar==true){
         try{
@@ -585,9 +548,6 @@ public void realizarAccion(boolean guardar, boolean ejecutar){
         }catch (InvalidOntologyException ex){
             panelAviso.errorAction("No se pudo ejecutar el test. Ontología no válida", MainApplicationJFrame.getInstance());
         }
-    }
-    if(guardar==true && ejecutar==false && continuar==true){
-        panelAviso.confirmAction("Test Guardado", MainApplicationJFrame.getInstance());
     }
     menu.actualizarListaDeTestsSparql();  
 }
@@ -705,16 +665,10 @@ public void prepararGuardar(){
     //}
     if(continuar==true){
         if(testSinNombre==false && listaDeConsultas.size()>0 && continuar==true){  
-            //int res = this.preguntarSiContinuarSinInstancias();
-            //if(res==0){
             this.getScenario().setDescripcion(descTest);
-            if(!nombreTest.equals(nombreTestBis)){
-                nombreCambio=true;
-            }
             this.getScenario().setNombre(nombreTest);
             List<SparqlQueryOntology> querys = new ArrayList<SparqlQueryOntology>(this.getListaDeConsultas());
             this.getScenario().setSparqlQuerys(querys); 
-            //}
         }else if(testSinNombre==true){
                 panelAviso.warningAction("El nombre del test es obligatorio", MainApplicationJFrame.getInstance());
                 continuar=false;
@@ -724,22 +678,6 @@ public void prepararGuardar(){
         }
     }
 }
-
-/*public int preguntarSiContinuarSinInstancias(){
-    if(scenario.tieneInstanciasAsociadas()==false){
-        int n = JOptionPane.showConfirmDialog(MainApplicationJFrame.getInstance(), "El test no tiene instancias asociadas. " +
-                "¿Desea continuar?", "Warning Message",JOptionPane.YES_NO_OPTION);
-        if (n == JOptionPane.NO_OPTION){
-            return continuarSinInstancias=1;
-        }else if(n == JOptionPane.YES_OPTION){
-            return continuarSinInstancias=0;
-        }else{
-            return continuarSinInstancias=2;
-        }
-    }else{
-        return continuarSinInstancias=2;
-    }
-}*/
 
 public boolean testVacio(String nombre){
     if(nombre.equals("")){
@@ -819,30 +757,10 @@ public void inicializarVariables(){
     }
 
     public ScenarioTest getScenario() {
-        if(this.isGuardado()==false || nombreCambio==true){
-            return scenario;
-        }else{
-            return scenario.buscarScenario(CollectionTest.getInstance().getScenariotest(), scenario.getNombre());
-        }
+        return scenario;
     }
     public void setScenario(ScenarioTest scenario) {
         this.scenario = scenario;
-    }
-    
-    public ScenarioTest getScenarioActual() {
-        return scenarioActual;
-    }
-
-    public void setScenarioActual(ScenarioTest scenarioActual) {
-        this.scenarioActual = scenarioActual;
-    }
-    
-    public boolean isGuardado() {
-        return guardado;
-    }
-
-    public void setGuardado(boolean guardado) {
-        this.guardado = guardado;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,23 +16,23 @@ import java.awt.Dimension;
 public class FormatTestsJDialog extends javax.swing.JDialog {
 
     /** Creates new form FormatTestsJDialog */
-    public FormatTestsJDialog(java.awt.Frame parent, boolean modal, ScenarioTest scenario) {
+    public FormatTestsJDialog(java.awt.Frame parent, boolean modal, String tipo) {
         super(parent, modal);
         initComponents();
         this.setModal(true);
         String formato="";
         descripcionEditorPane.setContentType("text/html");
-        if(scenario.getTipoTest().name().equals("INST")){
+        if(tipo.equals("INST")){
             formato = generarFormatoPermitidoInstanciacion();
-        }else if(scenario.getTipoTest().name().equals("RET")){
+        }else if(tipo.equals("RET")){
             formato = generarFormatoPermitidoRetrieval();
-        }else if(scenario.getTipoTest().name().equals("REAL")){
+        }else if(tipo.equals("REAL")){
             formato = generarFormatoPermitidoRealizacion();
-        }else if(scenario.getTipoTest().name().equals("SAT")){
+        }else if(tipo.equals("SAT")){
             formato = generarFormatoPermitidoSatisfactibilidad();
-        }else if(scenario.getTipoTest().name().equals("CLAS")){
+        }else if(tipo.equals("CLAS")){
             formato = generarFormatoPermitidoClasificacion();
-        }else if(scenario.getTipoTest().name().equals("SPARQL")){
+        }else if(tipo.equals("SPARQL")){
             formato = generarFormatoPermitidoSPARQL();
         }
         descripcionEditorPane.setText(formato);

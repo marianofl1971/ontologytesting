@@ -34,6 +34,7 @@ import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
@@ -899,9 +900,12 @@ private void formWindowClosing(java.awt.event.WindowEvent evt) {
         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto antes de salir?", 
                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION){
-            this.guardarProyecto(false, null,esNuevo);
-            this.dispose();
-            System.exit(0);
+            ListAndTestsJPanel listAndTests = panelTest.getTestsPanel();
+            if(listAndTests.guardarTodosTests()==true){
+                this.guardarProyecto(false, null,esNuevo);
+                this.dispose();
+                System.exit(0);
+            }
         }else if(n == JOptionPane.NO_OPTION){
             this.dispose();
             System.exit(0);
@@ -1079,7 +1083,6 @@ public void cargarTest(int type,ScenarioTest s){
         }else if(s.getNombre().equals("") && type==3){
             testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Satisfactibilidad");
         }else testName=s.getNombre();
-        testInstSat.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testInstSat,testName);
         setPanelActual(testInstSat);
     }else if(type==1 || type==4){
@@ -1089,7 +1092,6 @@ public void cargarTest(int type,ScenarioTest s){
             testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Clasificacion");
         }else testName=s.getNombre();
         testRetClas = new TestSimpleRetClas(s);
-        testRetClas.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testRetClas,testName);
         setPanelActual(testRetClas);
     }else if(type==2){
@@ -1097,7 +1099,6 @@ public void cargarTest(int type,ScenarioTest s){
             testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Realizacion");
         }else testName=s.getNombre();
          testReal = new TestSimpleReal(s);
-         testReal.setScenarioActual(new ScenarioTest(s));
          panelTest.getTestsPanel().aniadirTest(testReal,testName);
          setPanelActual(testReal);
     }else if(type==5){
@@ -1105,7 +1106,6 @@ public void cargarTest(int type,ScenarioTest s){
             testName=java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nuevo_Sparql");
         }else testName=s.getNombre();
         testSparql = new AddSPARQLJPanel(s);
-        testSparql.setScenarioActual(new ScenarioTest(s));
         panelTest.getTestsPanel().aniadirTest(testSparql,testName);
         setPanelActual(testSparql);
     }
@@ -1126,13 +1126,13 @@ public void inicializarContadores(){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                /*try {
+                try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ignore) {
-                }*/
+                }
                 Locale.setDefault(new Locale(Configuration.getPropiedades().getProperty("LOCALE")));
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
-                URL image = this.getClass().getResource("images/ontology.jpg"); 
+                URL image = MainApplicationJFrame.class.getResource("images/ontology.jpg"); 
                 main.setIconImage (new ImageIcon(image).getImage());
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);

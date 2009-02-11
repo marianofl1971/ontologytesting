@@ -141,7 +141,6 @@ private void añadirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
 // TODO add your handling code here:
-    this.setComent("");
     this.setVisible(false);
 }//GEN-LAST:event_cancelarButtonActionPerformed
 
