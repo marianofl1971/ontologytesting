@@ -13,7 +13,6 @@ import code.google.com.p.ontologytesting.gui.menupanels.SeeTestJDialog;
 import code.google.com.p.ontologytesting.gui.*;
 import code.google.com.p.ontologytesting.gui.menupanels.ListarTestsJPanel;
 import code.google.com.p.ontologytesting.model.*;
-import java.util.List;
 import javax.swing.WindowConstants;
 
 /**
@@ -39,16 +38,6 @@ public class OpcionesMenu {
             MainApplicationJFrame.getInstance().cargarTest(5, scenarioAEditar);
         }   
     }
-    
-    /*public void editarInstancias(Instancias inst){
-        String nombre = "";
-        if(!inst.getNombre().equals("")){
-            nombre = inst.getNombre();
-        }else{
-            nombre = "Editar instancias";
-        }
-        MainApplicationJFrame.getInstance().cargarInstancia(inst,nombre);
-    }*/
     
     public void editarInstancias(ScenarioTest scenario){
         String nombre = "";

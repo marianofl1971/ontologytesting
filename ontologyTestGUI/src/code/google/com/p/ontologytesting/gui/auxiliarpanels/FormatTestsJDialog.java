@@ -90,7 +90,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "más específico que lo contiene).<br>" +
                 "Ejemplo:<br>" +
                 "Consulta: marry <br> Resultado esperado: Wife<br>" +
-                "En este caso el test no fallaria, ya que la clase mas especifica que" +
+                "En este caso el test no fallaria, ya que la clase mas especifica que " +
                 "contiene al individuo 'marry' es 'Wife'.<br><br>" +
                 "<h><b>Formatos para el Test de Realización</h></b><br><br>" +
                 "<b>CONSULTAS</b><br>" +
@@ -132,8 +132,8 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "Individuo<br><br>" +
                 "<b>Resultado Esperado</b><br>" +
                 "Lista de clases a las que pertenece el individuo separados por coma.<br>" +
-                "Ejemplo: [individuo1,individuo2,...,individuoN]<br>" +
-                "individuo1,individuo2,...,individuoN";
+                "Ejemplo1: [individuo1,individuo2,...,individuoN]<br>" +
+                "Ejemplo2: individuo1,individuo2,...,individuoN";
         return formato;
     }
     
@@ -149,11 +149,11 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "gramaticalmente correctas, siguiendo la sintaxis de SPARQL. " +
                 "Sólo estan permitidas consultas tipo SELECT.<br><br>" +
                 "<b>Resultado Esperado</b><br><br>" +
-                "En caso de un SELECT simple, el resultado deberá de ser el sujeto " +
-                "que se indico en el SELECT, seguido de una lista " +
-                "de objetos separados por coma encerrados entre paréntesis.<br><br>" +
+                "En caso de un SELECT simple, el resultado deberá ser el sujeto " +
+                "que se indicó en el SELECT, seguido de una lista " +
+                "de objetos separados por coma y encerrados todos ellos entre paréntesis.<br><br>" +
                 "En caso de un SELECT múltiple, el resultado deberá de especificar " +
-                "en primer lugar el sujeto al que se refiere en SELECT y, entre " +
+                "en primer lugar el sujeto al que se refiere en el SELECT y, entre " +
                 "paréntesis, el resultado o la lista de resultados separados por " +
                 "coma que se espera obtener.<br><br>" +
                 "Por ejemplo, para la consulta:<br><br>" +
@@ -161,7 +161,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "SELECT ?subject ?object <br>" +
                 "FROM 'ruta a la ontologia' (opcional)<br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
-                "El resultado se debe de mostrar de la siguient forma:<br>" +
+                "El resultado se debe de mostrar de la siguiente forma:<br>" +
                 "subject(a,b,c)<br>" +
                 "object(a,b,c)<br>"+
                 "Los distintos SELECTS que se indicaron deben de aparecer en fila (separados " +
