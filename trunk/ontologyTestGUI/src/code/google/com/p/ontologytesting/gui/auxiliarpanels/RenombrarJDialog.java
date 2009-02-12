@@ -6,6 +6,8 @@
 
 package code.google.com.p.ontologytesting.gui.auxiliarpanels;
 
+import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
+import code.google.com.p.ontologytesting.gui.auxiliarclasess.AniadirPanelDeAviso;
 import code.google.com.p.ontologytesting.model.Instancias;
 import code.google.com.p.ontologytesting.model.ScenarioTest;
 import code.google.com.p.ontologytesting.persistence.IOManagerImplementation;
@@ -20,6 +22,7 @@ public class RenombrarJDialog extends javax.swing.JDialog {
     private IOManagerImplementation persist = new IOManagerImplementation();
     private Instancias inst = new Instancias();
     private ScenarioTest scenario = new ScenarioTest();
+    private AniadirPanelDeAviso aviso = new AniadirPanelDeAviso();
     
     /** Creates new form RenombrarJDialog */
     public RenombrarJDialog(java.awt.Frame parent, boolean modal, Instancias inst) {
@@ -114,13 +117,22 @@ private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 // TODO add your handling code here:
     String nuevoNombre = nombreTextField.getText();
     if(var==1){
-        getInst().setNombre(nuevoNombre);
-        persist.replaceInstanciasLocally(getInst());
+        if(persist.nombreInstanciasExiste(nuevoNombre)==false || getInst().getNombre().equals(nuevoNombre)){
+            getInst().setNombre(nuevoNombre);
+            persist.replaceInstanciasLocally(getInst());
+            this.setVisible(false);
+        }else{
+            aviso.errorAction("Ya existe un conjunto de instancias guardado con ese nombre", MainApplicationJFrame.getInstance());
+        }
     }else if(var==2){
-        getScenario().setNombre(nuevoNombre);
-        persist.replaceScenarioLocally(getScenario());
+        if(persist.nombreTestExiste(nuevoNombre)==false || getScenario().getNombre().equals(nuevoNombre)){
+            getScenario().setNombre(nuevoNombre);
+            persist.replaceScenarioLocally(getScenario());
+            this.setVisible(false);
+        }else{
+            aviso.errorAction("Ya existe un test guardado con ese nombre", MainApplicationJFrame.getInstance());
+        }
     }
-    this.setVisible(false);
 }//GEN-LAST:event_aceptarButtonActionPerformed
 
 private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed

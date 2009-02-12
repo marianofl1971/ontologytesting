@@ -161,6 +161,26 @@ public class IOManagerImplementation{
         }
         return false;
     }
+    
+    public boolean nombreTestExiste(String nombre){
+        List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
+        for(int i=0; i<scenario.size(); i++){
+            if(nombre.equals(scenario.get(i).getNombre())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean nombreInstanciasExiste(String nombre){
+        List<Instancias> instancias = CollectionTest.getInstance().getInstancias();
+        for(int i=0; i<instancias.size(); i++){
+            if(nombre.equals(instancias.get(i).getNombre())){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean replaceScenarioLocally(ScenarioTest scen){
         List<ScenarioTest> scenario = CollectionTest.getInstance().getScenariotest();
