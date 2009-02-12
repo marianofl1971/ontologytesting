@@ -598,12 +598,15 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         System.exit(0);
     }else{
         Object[] options = {"Si", "No", "Cancelar"};
-        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
+        int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto antes de salir?", 
                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION){
-            this.guardarProyecto(false, null,esNuevo);
-            this.dispose();
-            System.exit(0);
+            ListAndTestsJPanel listAndTests = panelTest.getTestsPanel();
+            if(listAndTests.guardarTodosTests()==true){
+                this.guardarProyecto(false, null,esNuevo);
+                this.dispose();
+                System.exit(0);
+            }
         }else if(n == JOptionPane.NO_OPTION){
             this.dispose();
             System.exit(0);
@@ -667,8 +670,13 @@ private void cerrarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
         int n = JOptionPane.showOptionDialog(MainApplicationJFrame.getInstance(), "¿Guardar el proyecto actual?", 
                 "Question", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (n == JOptionPane.YES_OPTION) {
-            this.guardarProyecto(false, null,esNuevo);
-            aux=1;
+            ListAndTestsJPanel listAndTests = panelTest.getTestsPanel();
+            if(listAndTests.guardarTodosTests()==true){
+                this.guardarProyecto(false, null,esNuevo);
+                this.dispose();
+                System.exit(0);
+                aux=1;
+            }
         }else if(n == JOptionPane.NO_OPTION){
             aux=1;
         }else{
@@ -682,7 +690,7 @@ private void cerrarProyectoActionPerformed(java.awt.event.ActionEvent evt) {
             deshabilitarBotones(false);
             this.validate();
         }
-    }
+    } 
 }
 
 private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
