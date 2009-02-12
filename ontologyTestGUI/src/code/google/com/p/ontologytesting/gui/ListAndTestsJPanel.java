@@ -124,7 +124,7 @@ public class ListAndTestsJPanel extends javax.swing.JPanel {
             TestSimpleRetClas testSimpleRetClas = (TestSimpleRetClas)panel;
             return testSimpleRetClas.getScenario().getTipoTest().name();
         }else{
-            return "";
+            return "Sin Nombre";
         }
     }
     
