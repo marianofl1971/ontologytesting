@@ -1126,10 +1126,10 @@ public void inicializarContadores(){
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
+                /*try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception ignore) {
-                }
+                }*/
                 Locale.setDefault(new Locale(Configuration.getPropiedades().getProperty("LOCALE")));
                 MainApplicationJFrame main = MainApplicationJFrame.getInstance();
                 URL image = MainApplicationJFrame.class.getResource("images/ontology.jpg"); 
