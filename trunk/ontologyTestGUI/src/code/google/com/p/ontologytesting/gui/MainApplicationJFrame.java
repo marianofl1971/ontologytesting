@@ -230,8 +230,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         guardarProyectoComoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/document-save-as.png"))); // NOI18N
         guardarProyectoComoMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Guardar_Como")); // NOI18N
         guardarProyectoComoMenuItem.setEnabled(false);
-        guardarProyectoComoMenuItem.setMnemonic('A');
-        guardarProyectoComoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_A,InputEvent.CTRL_MASK ));
+        guardarProyectoComoMenuItem.setMnemonic('G');
+        guardarProyectoComoMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_G,InputEvent.CTRL_MASK ));
         guardarProyectoComoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,8 +264,8 @@ public class MainApplicationJFrame extends javax.swing.JFrame{
         salirMenuItem.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Salir")); // NOI18N
         salirMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/code/google/com/p/ontologytesting/images/system-log-out.png")));
         salirMenuItem.setEnabled(true);
-        salirMenuItem.setMnemonic('Q');
-        salirMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_Q,InputEvent.CTRL_MASK ));
+        salirMenuItem.setMnemonic('E');
+        salirMenuItem.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_E,InputEvent.CTRL_MASK ));
         salirMenuItem.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
