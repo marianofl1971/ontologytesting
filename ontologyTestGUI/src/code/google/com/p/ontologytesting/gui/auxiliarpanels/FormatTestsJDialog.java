@@ -44,14 +44,14 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoInstanciacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "Este test consiste en deducir si un individuo " +
+                "<b>TEST DE INSTANCIACIÓN</b><br><br>Este test consiste en deducir si un individuo " +
                 "pertenece a una clase.<br>" +
                 "Ejemplo:<br>" +
                 "Consulta: Wife,marry <br> Resultado esperado: True<br>" +
                 "En este caso el test no fallaría, ya que el individuo " +
                 "'marry' aparece definido como Wife en el conjunto de instancias " +
                 "de la ontología. <br><br>" +
-                "<h><b>Formatos para el Test de Instanciación</h></b><br><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
                 "<b>Consultas</b><br>" +
                 "Clase,individuo<br>" +
                 "Clase(individuo)<br><br>" +
@@ -63,7 +63,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoRetrieval(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "Este test deduce, dada una clase, todos los individuos que " +
+                "<b>TEST DE RECUPERACIÓN</b><br><br>Este test deduce, dada una clase, todos los individuos que " +
                 "pertenecen a dicha clase (todos los individuos que son instancias " +
                 "de ese concepto).<br>" +
                 "Ejemplo:<br>" +
@@ -71,31 +71,31 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "En este caso el test no fallaría, ya que para la clase 'Wife'" +
                 " todos los individuos que le pertenecen son los contemplados: " +
                 "'marry,lee'.<br><br>" +
-                "<h><b>Formatos para el Test de Recuperación</h></b><br><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
                 "<b>Consultas</b><br>" +
                 "Clase<br><br>" +
                 "<b>Resultado Esperado</b><br>" +
                 "Lista de individuos que pertenecen a la clase especificada " +
                 "separados por coma.<br>" +
                 "Ejemplo: [individuo1,individuo2,...,individuoN]<br>" +
-                "individuo1,individuo2,...,individuoN";
+                "Ejemplo2: individuo1,individuo2,...,individuoN";
         return formato;
     }
     
     private String generarFormatoPermitidoRealizacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "Este test deduce, dado un individuo, cual es la clase más exacta " +
+                "<b>TEST DE REALIZACIÓN</b><br><br>Este test deduce, dado un individuo, cual es la clase más exacta " +
                 "o específica a la que pertenece (dado un individuo, encuentra el concepto " +
                 "más específico que lo contiene).<br>" +
                 "Ejemplo:<br>" +
                 "Consulta: marry <br> Resultado esperado: Wife<br>" +
                 "En este caso el test no fallaria, ya que la clase mas especifica que " +
                 "contiene al individuo 'marry' es 'Wife'.<br><br>" +
-                "<h><b>Formatos para el Test de Realización</h></b><br><br>" +
-                "<b>CONSULTAS</b><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
+                "<b>Consultas</b><br>" +
                 "Indiviudo<br><br>" +
-                "<b>RESULTADO ESPERADO</b><br>" +
+                "<b>Resultado Esperado</b><br>" +
                 "Clase";
         return formato;
     }
@@ -103,14 +103,14 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoSatisfactibilidad(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "Este test consiste en deducir si una nueva clase puede ser añadida a la " +
+                "<b>TEST DE SATISFACTIBILIDAD</b><br><br>Este test consiste en deducir si una nueva clase puede ser añadida a la " +
                 "ontología sin que entre en conflicto con el conjunto de instancias " +
                 "ya definido para esa ontología.<br>" +
                 "Ejemplo:<br>" +
                 "Consulta: sara,Wife <br> Resultado esperado: True<br>" +
                 "En este caso el test no fallaría, ya que el individuo" +
                 " 'sara' no estaba definido aún en la ontologia. <br><br>" +
-                "<h><b>Formatos para el Test De Satisfactibilidad</h></b><br><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
                 "<b>Consultas</b><br>" +
                 "Individuo,Clase<br>" +
                 "Individuo(Clase)<br><br>" +
@@ -122,12 +122,12 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoClasificacion(){
         this.setSize(new Dimension(500,410));
         String formato="<html>" +
-                "Este test deduce, dado un individuo, todas las clases a las que pertenece.<br>" +
+                "<b>TEST DE CLASIFICACIÓN</b><br><br>Este test deduce, dado un individuo, todas las clases a las que pertenece.<br>" +
                 "Ejemplo:<br>" +
                 "Consulta: marry <br> Resultado esperado: Wife,Female,Person<br>" +
                 "En este caso el test no fallaría, ya que todas las clases a las que puede" +
                 " pertenecer 'marry' son las especificadas. <br><br>" +
-                "<h><b>Formatos para el Test de Clasificación</h></b><br><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
                 "<b>Consultas</b><br>" +
                 "Individuo<br><br>" +
                 "<b>Resultado Esperado</b><br>" +
@@ -140,10 +140,10 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
     private String generarFormatoPermitidoSPARQL(){
         this.setSize(new Dimension(600,410));
         String formato="<html>" +
-                "Este test ejecuta una consulta Sparql válida. " +
+                "<b>TEST SPARQL</b><br><br>Este test ejecuta una consulta Sparql válida. " +
                 "Para más información acerca del lenguaje de consultas SPARQL visite:<br>" +
                 "http://www.w3.org/TR/rdf-sparql-query/<br><br>" +
-                "<h><b>Formatos para el Test Sparql</h></b><br><br>" +
+                "<h><b>Formatos Permitidos</h></b><br><br>" +
                 "<b>Consultas</b><br><br>" +
                 "Serán válidas aquellas consultas que sean " +
                 "gramaticalmente correctas, siguiendo la sintaxis de SPARQL. " +
