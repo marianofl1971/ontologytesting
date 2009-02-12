@@ -135,7 +135,7 @@ public class ValidarConsultas {
     
     public boolean comprovarErrorQuerysInst(JPanel panelInst){
         int var=0;
-        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelInst.getComponent(0); 
+        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelInst; 
         for(int j=0;j<getListInst().size();j++){
             if(getListInst().get(j).equals(1)){
                 test.getConsultaTextArea().setForeground(Color.RED);
@@ -158,7 +158,7 @@ public class ValidarConsultas {
     
     public boolean comprovarErrorQuerysRet(JPanel panelRet){
         int var=0;
-        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelRet.getComponent(0);
+        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelRet;
         for(int j=0;j<getListRet().size();j++){
             if(getListRet().get(j).equals(1)){
                 test.getConsultaTextArea().setForeground(Color.RED);
@@ -181,7 +181,7 @@ public class ValidarConsultas {
     
     public boolean comprovarErrorQuerysReal(JPanel panelReal){
         int var=0;
-        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelReal.getComponent(0);
+        TestInstancesTextJPanel test = (TestInstancesTextJPanel) panelReal;
         for(int j=0;j<getListReal().size();j++){   
             if(getListReal().get(j).equals(1)){
                 test.getConsultaTextArea().setForeground(Color.RED);

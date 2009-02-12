@@ -472,26 +472,26 @@ public void copiarTestAScenarioDesdeSinAyuda(){
             int tamR = cResult.length;
             if(tamQ==tamR){
                 for(int i=0; i<tamQ;i++){
-                    if(texto.consultaCompletaEnSinAyuda(cQuery[i], cResult[i])==true){
+                    if(texto.consultaCompletaEnSinAyuda(cQuery[i].trim(), cResult[i].trim())==true){
                         if(continuar=true){
                             hayUnaConsulta=1;
-                            if(validarTests.validarQuery(cQuery[i])==true &&
-                                    validarTests.validarQuery(cResult[i])==true){
+                            if(validarTests.validarQuery(cQuery[i].trim())==true &&
+                                    validarTests.validarQuery(cResult[i].trim())==true){
                                 if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim(),cComent[i]);
                                 }else{
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim());
                                 }
                                 queryTest.add(testQuery);
                                 this.real.add(i, 0);
                                 validarConsultas.setListReal(this.real);
-                            }else if(validarTests.validarQuery(cQuery[i])==false &&
-                                    validarTests.validarQuery(cResult[i])==true){
+                            }else if(validarTests.validarQuery(cQuery[i].trim())==false &&
+                                    validarTests.validarQuery(cResult[i].trim())==true){
                                 this.real.add(i, 1);
                                 validarConsultas.setListReal(this.real);
                                 validoReal=false;
-                            }else if(validarTests.validarQuery(cQuery[i])==true &&
-                                    validarTests.validarQuery(cResult[i])==false){
+                            }else if(validarTests.validarQuery(cQuery[i].trim())==true &&
+                                    validarTests.validarQuery(cResult[i].trim())==false){
                                 this.real.add(i, 2);
                                 validarConsultas.setListReal(this.real);
                                 validoReal=false;

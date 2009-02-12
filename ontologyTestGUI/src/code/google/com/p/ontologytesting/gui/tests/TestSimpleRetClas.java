@@ -481,26 +481,26 @@ public void copiarTestAScenarioDesdeSinAyuda(){
             int tamR = cResult.length;
             if(tamQ==tamR){
                 for(int i=0; i<tamQ;i++){
-                    if(texto.consultaCompletaEnSinAyuda(cQuery[i], cResult[i])==true){
+                    if(texto.consultaCompletaEnSinAyuda(cQuery[i].trim(), cResult[i].trim())==true){
                         if(continuar=true){
                             hayUnaConsulta=1;
-                            if(validarTests.validarQuery(cQuery[i])==true &&
-                                    validarTests.validarResultado(cResult[i])==true){
+                            if(validarTests.validarQuery(cQuery[i].trim())==true &&
+                                    validarTests.validarResultado(cResult[i].trim())==true){
                                 if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim(),cComent[i]);
                                 }else{
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim());
                                 }
                                 queryTest.add(testQuery);
                                 this.ret.add(i, 0);
                                 validarConsultas.setListRet(this.ret);
-                            }else if(validarTests.validarQuery(cQuery[i])==false &&
-                                    validarTests.validarResultado(cResult[i])==true){
+                            }else if(validarTests.validarQuery(cQuery[i].trim())==false &&
+                                    validarTests.validarResultado(cResult[i].trim())==true){
                                 this.ret.add(i, 1);
                                 validarConsultas.setListRet(this.ret);
                                 validoRet=false;
-                            }else if(validarTests.validarQuery(cQuery[i])==true &&
-                                    validarTests.validarResultado(cResult[i])==false){
+                            }else if(validarTests.validarQuery(cQuery[i].trim())==true &&
+                                    validarTests.validarResultado(cResult[i].trim())==false){
                                 this.ret.add(i, 2);
                                 validarConsultas.setListRet(this.ret);
                                 validoRet=false;

@@ -461,26 +461,26 @@ public void copiarTestAScenarioDesdeSinAyuda(){
             int tamR = cResult.length;
             if(tamQ==tamR){
                 for(int i=0; i<tamQ;i++){
-                    if(texto.consultaCompletaEnSinAyuda(cQuery[i], cResult[i])==true){
+                    if(texto.consultaCompletaEnSinAyuda(cQuery[i].trim(), cResult[i].trim())==true){
                         if(continuar=true){
                             hayUnaConsulta=1;
-                            if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
+                            if(validarTests.validarQueryInstSatis(cQuery[i].trim())==true &&
+                                    validarTests.validarResultadoInstSatis(cResult[i].trim())==true){
                                 if(cComent.length!=0 && i!=cComent.length && i<=cComent.length){
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i],cComent[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim(),cComent[i]);
                                 }else{
-                                    testQuery = new QueryOntology(cQuery[i],cResult[i]);
+                                    testQuery = new QueryOntology(cQuery[i].trim(),cResult[i].trim());
                                 }
                                 queryTest.add(testQuery);
                                 this.inst.add(i, 0);
                                 validarConsultas.setListInst(this.inst);
-                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==false &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==true){
+                            }else if(validarTests.validarQueryInstSatis(cQuery[i].trim())==false &&
+                                    validarTests.validarResultadoInstSatis(cResult[i].trim())==true){
                                 this.inst.add(i, 1);
                                 validarConsultas.setListInst(this.inst);
                                 validoInst=false;
-                            }else if(validarTests.validarQueryInstSatis(cQuery[i])==true &&
-                                    validarTests.validarResultadoInstSatis(cResult[i])==false){
+                            }else if(validarTests.validarQueryInstSatis(cQuery[i].trim())==true &&
+                                    validarTests.validarResultadoInstSatis(cResult[i].trim())==false){
                                 this.inst.add(i, 2);
                                 validarConsultas.setListInst(this.inst);
                                 validoInst=false;

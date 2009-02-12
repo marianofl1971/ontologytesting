@@ -8,6 +8,7 @@ package code.google.com.p.ontologytesting.gui.instances;
 
 import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.tests.AddComentJDialog;
+import java.awt.Color;
 import java.awt.Frame;
 import javax.swing.WindowConstants;
 import java.util.Locale;
@@ -213,6 +214,7 @@ private void duplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void instanciaTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_instanciaTextFieldMouseClicked
 // TODO add your handling code here:
+    getInstanciaTextField().setForeground(Color.BLACK);   
     int pos = this.getPosicion();
     int tamClas = this.getParent().getComponentCount();
     int tamProp = this.getParent().getComponentCount();
