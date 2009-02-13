@@ -77,7 +77,7 @@ public class ImportarTestsInstJDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        pathProyectoTextField = new javax.swing.JTextField();
+        pathProyectoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         examinarButton = new javax.swing.JButton();
         importarButton = new javax.swing.JButton();
 

@@ -5,6 +5,7 @@
 
 package code.google.com.p.ontologytesting.gui.auxiliarclasess;
 
+import code.google.com.p.ontologytesting.gui.Configuration;
 import code.google.com.p.ontologytesting.gui.MainApplicationJFrame;
 import code.google.com.p.ontologytesting.model.exectests.*;
 import code.google.com.p.ontologytesting.model.*;
@@ -13,6 +14,7 @@ import code.google.com.p.ontologytesting.model.reasonerinterfaz.Reasoner;
 import java.awt.Toolkit;
 import javax.swing.SwingWorker;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,7 +50,7 @@ public class ExecuteTest extends SwingWorker<OntologyTestResult, Void>{
             setName(scenario.getNombre());
         }else if(listScenario!=null){
             testResult = execBateryTest(listScenario,testResult);
-            setName("Batería de Tests");
+            setName(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Bateria_de_Tests"));
         } 
         setProgress(100);
         return testResult;

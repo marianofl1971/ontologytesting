@@ -253,7 +253,7 @@ public class ListarTestsInstanciasJPanel extends javax.swing.JPanel implements L
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         descScrollPane = new javax.swing.JScrollPane();
-        descripcion = new javax.swing.JTextArea();
+        descripcion = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         listScrollPane = new javax.swing.JScrollPane();
         list = new javax.swing.JList();
 

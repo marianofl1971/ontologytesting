@@ -31,9 +31,9 @@ public class CreateInstancesTextAreaJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
-        claseTextArea = new javax.swing.JTextArea();
+        claseTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         jScrollPane17 = new javax.swing.JScrollPane();
-        propiedadTextArea = new javax.swing.JTextArea();
+        propiedadTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
 
         jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("INSTANCIAS_DE_CLASE_INSTANCIAS_DE_PROPIEDAD")); // NOI18N
 

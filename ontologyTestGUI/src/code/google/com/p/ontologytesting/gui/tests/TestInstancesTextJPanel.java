@@ -31,12 +31,12 @@ public class TestInstancesTextJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane16 = new javax.swing.JScrollPane();
-        consultaTextArea = new javax.swing.JTextArea();
+        consultaTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         jScrollPane17 = new javax.swing.JScrollPane();
-        resultadoEsperadoTextArea = new javax.swing.JTextArea();
+        resultadoEsperadoTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane18 = new javax.swing.JScrollPane();
-        comentTextArea = new javax.swing.JTextArea();
+        comentTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
 
         consultaTextArea.setColumns(20);
         consultaTextArea.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N

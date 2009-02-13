@@ -585,6 +585,7 @@ public void copiarDeAyudaATexto(){
                         conjuntoResExpRet.append(conjFinal[0]);
                     }else{
                         for(int j=0;j<conjFinal.length;j++){
+                            if(!conjFinal[j].equals("")){
                             if(conjuntoResExpRet.toString().equals("")){
                                 conjuntoResExpRet.append(conjFinal[j]).append(",");
                             }else{
@@ -593,6 +594,7 @@ public void copiarDeAyudaATexto(){
                                 }else{
                                     conjuntoResExpRet.append(conjFinal[j]).append(",");
                                 }
+                            }
                             }
                         } 
                     }

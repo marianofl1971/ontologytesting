@@ -36,10 +36,10 @@ public class DescripcionJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        nombreTextField = new javax.swing.JTextField();
+        nombreTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descTextArea = new javax.swing.JTextArea();
+        descTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         formatosButton = new javax.swing.JButton();
 
         jLabel6.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Nombre_del_test:"));

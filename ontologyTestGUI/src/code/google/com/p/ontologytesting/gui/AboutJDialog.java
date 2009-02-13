@@ -35,7 +35,7 @@ public class AboutJDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         closeButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        aboutEditorPane = new javax.swing.JEditorPane();
+        aboutEditorPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

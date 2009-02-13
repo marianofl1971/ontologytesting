@@ -45,11 +45,11 @@ public class TestInstancesQueryJPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        queryTextField = new javax.swing.JTextField();
+        queryTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();
-        resultTextField = new javax.swing.JTextField();
+        resultTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
 
         queryTextField.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         queryTextField.setToolTipText("Consulta");

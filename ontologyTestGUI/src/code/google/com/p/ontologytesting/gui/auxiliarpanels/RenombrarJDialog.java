@@ -55,7 +55,7 @@ public class RenombrarJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        nombreTextField = new javax.swing.JTextField();
+        nombreTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         aceptarButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
 

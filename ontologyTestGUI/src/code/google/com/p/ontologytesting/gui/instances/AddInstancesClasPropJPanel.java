@@ -189,8 +189,8 @@ public class AddInstancesClasPropJPanel extends javax.swing.JPanel{
 
         contentDescPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descInstanciasTextArea = new javax.swing.JTextArea();
-        nomInstanciasTextField = new javax.swing.JTextField();
+        descInstanciasTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
+        nomInstanciasTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();

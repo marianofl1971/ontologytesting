@@ -157,7 +157,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
                 "paréntesis, el resultado o la lista de resultados separados por " +
                 "coma que se espera obtener.<br><br>" +
                 "Por ejemplo, para la consulta:<br><br>" +
-                "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> <br>" +
+                "PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#> <br>" +
                 "SELECT ?subject ?object <br>" +
                 "FROM 'ruta a la ontologia' (opcional)<br>" +
                 "WHERE {?subject rdfs:subClassOf ?object } <br><br>" +
@@ -180,7 +180,7 @@ public class FormatTestsJDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descripcionEditorPane = new javax.swing.JEditorPane();
+        descripcionEditorPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
         cerrarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);

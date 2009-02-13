@@ -54,10 +54,10 @@ public class AbrirProyectoJDialog extends javax.swing.JDialog{
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ubicacionFisicaTextField = new javax.swing.JTextField();
+        ubicacionFisicaTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         examinarButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        namespaceTextField = new javax.swing.JTextField();
+        namespaceTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         cancelButton = new javax.swing.JButton();
         aceptarButton = new javax.swing.JButton();
 

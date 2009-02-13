@@ -43,7 +43,7 @@ public class AddComentJDialog extends javax.swing.JDialog {
         contentPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
-        comentTextArea = new javax.swing.JTextArea();
+        comentTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         añadirButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
         limpiarButton = new javax.swing.JButton();
