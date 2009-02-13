@@ -37,12 +37,12 @@ public class ProjectNameSituJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        nombreProyectoTextField = new javax.swing.JTextField();
+        nombreProyectoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         jLabel3 = new javax.swing.JLabel();
-        ubicacionProyectoTextField = new javax.swing.JTextField();
+        ubicacionProyectoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         examinarProyecto = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        carpetaProyectoTextField = new javax.swing.JTextField();
+        carpetaProyectoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel1.setText(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Proyecto:_Nombre_y_Localizacion"));

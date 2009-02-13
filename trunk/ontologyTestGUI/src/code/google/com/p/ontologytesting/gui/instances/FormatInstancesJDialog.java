@@ -51,7 +51,7 @@ public class FormatInstancesJDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        instancesFormatEditorPane = new javax.swing.JEditorPane();
+        instancesFormatEditorPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
         jButton2 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");

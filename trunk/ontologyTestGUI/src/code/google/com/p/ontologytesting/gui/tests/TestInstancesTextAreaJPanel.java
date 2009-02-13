@@ -42,9 +42,9 @@ public class TestInstancesTextAreaJPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        queryTextField = new javax.swing.JTextField();
+        queryTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         jScrollPane1 = new javax.swing.JScrollPane();
-        resultTextArea = new javax.swing.JTextArea();
+        resultTextArea = new code.google.com.p.ontologytesting.gui.JTextAreaCopypaste();
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();

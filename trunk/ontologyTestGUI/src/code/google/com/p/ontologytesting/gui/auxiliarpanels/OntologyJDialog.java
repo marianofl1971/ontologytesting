@@ -68,7 +68,7 @@ public class OntologyJDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ontologyEditorPane = new javax.swing.JEditorPane();
+        ontologyEditorPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

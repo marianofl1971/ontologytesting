@@ -38,8 +38,8 @@ public class OntologyNameSituJPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        ubicacionOntoTextField = new javax.swing.JTextField();
-        namespaceOntoTextField = new javax.swing.JTextField();
+        ubicacionOntoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
+        namespaceOntoTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         examinarButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));

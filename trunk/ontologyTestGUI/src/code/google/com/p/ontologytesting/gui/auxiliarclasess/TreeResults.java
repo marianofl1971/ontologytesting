@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -49,7 +50,7 @@ public class TreeResults extends JPanel {
     
     public TreeResults(final OntologyTestResult testResult, String testName) {
         int aux=0;
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Resultado de sus Tests");
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Resultado_de_sus_Tests"));
         createNodes(top,testResult);
         listT = ListarTestsJPanel.getInstance();
         JTree tree = new JTree(top);
@@ -152,7 +153,7 @@ public class TreeResults extends JPanel {
             editor = displaySimpleTest(testName, testResult);
         }
         treeView = new JScrollPane(tree);
-        editor.setEditable(false);
+        editor.setEditable(true);
         resultsView = new JScrollPane(editor);
         editor.setCaretPosition(0);
 
@@ -311,7 +312,7 @@ public class TreeResults extends JPanel {
             if(otf.getTipoTest().name().equals("INST")){
                 if(var_inst==0){
                     var_inst=1;
-                    inst = new DefaultMutableTreeNode("Tests de Instanciación");
+                    inst = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Instanciación"));
                     contador++;
                     top.add(inst);
                     inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -333,7 +334,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("RET")){
                 if(var_ret==0){
                     var_ret=1;
-                    ret = new DefaultMutableTreeNode("Tests de Recuperación");
+                    ret = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Recuperación"));
                     contador++;
                     top.add(ret);
                     ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -353,7 +354,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("REAL")){
                 if(var_real==0){
                     var_real=1;
-                    real = new DefaultMutableTreeNode("Tests de Realización");
+                    real = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Realización"));
                     contador++;
                     top.add(real);
                     real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -373,7 +374,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("CLAS")){
                 if(var_clas==0){
                     var_clas=1;
-                    clas = new DefaultMutableTreeNode("Tests de Clasificación");
+                    clas = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Clasificación"));
                     contador++;
                     top.add(clas);
                     clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -393,7 +394,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("SAT")){
                 if(var_sat==0){
                     var_sat=1;
-                    sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
+                    sat = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Satisfactibilidad"));
                     contador++;
                     top.add(sat);
                     sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -418,7 +419,7 @@ public class TreeResults extends JPanel {
             if(otf.getTipoTest().name().equals("INST")){
                 if(var_inst==0){
                     var_inst=1;
-                    inst = new DefaultMutableTreeNode("Tests de Instanciación");
+                    inst = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Instanciación"));
                     contador++;
                     top.add(inst);
                     inst_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
@@ -439,7 +440,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("RET")){
                 if(var_ret==0){
                     var_ret=1;
-                    ret = new DefaultMutableTreeNode("Tests de Recuperación");
+                    ret = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Recuperación"));
                     contador++;
                     top.add(ret);
                     ret_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
@@ -458,7 +459,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("REAL")){
                 if(var_real==0){
                     var_real=1;
-                    real = new DefaultMutableTreeNode("Tests de Realización");
+                    real = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Realización"));
                     contador++;
                     top.add(real);
                     real_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
@@ -477,7 +478,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("CLAS")){
                 if(var_clas==0){
                     var_clas=1;
-                    clas = new DefaultMutableTreeNode("Tests de Clasificación");
+                    clas = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Clasificación"));
                     contador++;
                     top.add(clas);
                     clas_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
@@ -496,7 +497,7 @@ public class TreeResults extends JPanel {
             }else if(otf.getTipoTest().name().equals("SAT")){
                 if(var_sat==0){
                     var_sat=1;
-                    sat = new DefaultMutableTreeNode("Tests de Satisfactibilidad");
+                    sat = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_de_Satisfactibilidad"));
                     contador++;
                     top.add(sat);
                     sat_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));
@@ -522,7 +523,7 @@ public class TreeResults extends JPanel {
 
             if(var_sparql==0){
                 var_sparql=1;
-                sparql = new DefaultMutableTreeNode("Tests SPARQL");
+                sparql = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_SPARQL"));
                 contador++;
                 top.add(sparql);
                 sparql_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (failed)"));
@@ -548,7 +549,7 @@ public class TreeResults extends JPanel {
             OntologyTestPassed otf = (OntologyTestPassed) liPassedSparql.next();
             if(var_sparql==0){
                 var_sparql=1;
-                sparql = new DefaultMutableTreeNode("Tests SPARQL");
+                sparql = new DefaultMutableTreeNode(java.util.ResourceBundle.getBundle(Configuration.getPropiedades().getProperty("IDIOMA"),new Locale(Configuration.getPropiedades().getProperty("LOCALE"))).getString("Tests_SPARQL"));
                 contador++;
                 top.add(sparql);
                 sparql_hijo = new DefaultMutableTreeNode(otf.getTestNameUsuario().concat(" (passed)"));

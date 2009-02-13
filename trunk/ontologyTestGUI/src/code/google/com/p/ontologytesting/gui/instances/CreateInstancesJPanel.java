@@ -52,7 +52,7 @@ public class CreateInstancesJPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        instanciaTextField = new javax.swing.JTextField();
+        instanciaTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         comentarioButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
         duplicarButton = new javax.swing.JButton();

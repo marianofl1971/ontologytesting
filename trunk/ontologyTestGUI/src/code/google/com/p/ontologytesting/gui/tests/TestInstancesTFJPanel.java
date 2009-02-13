@@ -48,7 +48,7 @@ public class TestInstancesTFJPanel extends javax.swing.JPanel{
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        queryTextField = new javax.swing.JTextField();
+        queryTextField = new code.google.com.p.ontologytesting.gui.JTextFieldCopyPaste();
         trueRadioButton = new javax.swing.JRadioButton();
         falseRadioButton = new javax.swing.JRadioButton();
         comentarioButton = new javax.swing.JButton();

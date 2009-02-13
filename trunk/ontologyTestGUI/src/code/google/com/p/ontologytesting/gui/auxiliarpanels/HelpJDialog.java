@@ -90,7 +90,7 @@ public class HelpJDialog extends javax.swing.JDialog {
 
         contentPane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        helpEditorPane = new javax.swing.JEditorPane();
+        helpEditorPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
         closeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);

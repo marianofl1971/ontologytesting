@@ -55,7 +55,7 @@ public class SeeTestJDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
-        testDescriptionPane = new javax.swing.JEditorPane();
+        testDescriptionPane = new code.google.com.p.ontologytesting.gui.JEditorPaneCopyPaste();
         cerrarButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
