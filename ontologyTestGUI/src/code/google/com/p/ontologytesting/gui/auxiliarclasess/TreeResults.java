@@ -153,7 +153,7 @@ public class TreeResults extends JPanel {
             editor = displaySimpleTest(testName, testResult);
         }
         treeView = new JScrollPane(tree);
-        editor.setEditable(true);
+        editor.setEditable(false);
         resultsView = new JScrollPane(editor);
         editor.setCaretPosition(0);
 
