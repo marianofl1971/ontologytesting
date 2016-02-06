@@ -1,0 +1,1 @@
+Software que permite que un usuario evalúe una ontología mediante  pruebas de tipo resultado esperado/obtenido.
